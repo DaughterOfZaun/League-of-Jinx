@@ -1,0 +1,375 @@
+[gd_scene load_steps=39 format=3 uid="uid://ca3peumqju718"]
+
+[ext_resource type="Script" path="res://FPSCounter.gd" id="1_yr04n"]
+[ext_resource type="Script" path="res://InputManager.gd" id="2_cjt7f"]
+[ext_resource type="Script" path="res://Camera.gd" id="3_1mc6a"]
+[ext_resource type="Script" path="res://Ground.gd" id="4_483yw"]
+[ext_resource type="Script" path="res://Character.gd" id="5_sd7fs"]
+[ext_resource type="Script" path="res://Stats.gd" id="6_1kswo"]
+[ext_resource type="Script" path="res://BuffManager.gd" id="7_xjave"]
+[ext_resource type="Script" path="res://Data/CharVars.gd" id="8_tppkf"]
+[ext_resource type="Script" path="res://Data/Characters/Ahri/Passive/CharScript.gd" id="9_dinfn"]
+[ext_resource type="Script" path="res://Data/AI/Hero.gd" id="10_adshq"]
+[ext_resource type="Script" path="res://Range.gd" id="11_711gw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hikii"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_qx0xm"]
+sky_material = SubResource("ProceduralSkyMaterial_hikii")
+
+[sub_resource type="Environment" id="Environment_jeear"]
+background_mode = 2
+sky = SubResource("Sky_qx0xm")
+tonemap_mode = 2
+sdfgi_enabled = true
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_duw6b"]
+vertices = PackedVector3Array(-99.5, 0.5, -99.5, -99.5, 0.5, 99.5, 99.5, 0.5, 99.5, 99.5, 0.5, -99.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_s5yvi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_emr77"]
+size = Vector3(200, 1, 200)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6tu4o"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bsvi6"]
+flip_faces = true
+bottom_radius = 0.0
+height = 0.5
+radial_segments = 8
+rings = 1
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kcwqd"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2wqtw"]
+radial_segments = 16
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kyuck"]
+radius = 0.929
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yeru4"]
+radius = 1.429
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kojn6"]
+transparency = 1
+albedo_color = Color(0, 0, 1, 0.25)
+
+[sub_resource type="SphereMesh" id="SphereMesh_n5wfu"]
+material = SubResource("StandardMaterial3D_kojn6")
+radius = 1.429
+height = 2.858
+radial_segments = 32
+rings = 16
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dbnvw"]
+radius = 7.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qnmfq"]
+transparency = 1
+albedo_color = Color(0, 1, 0, 0.25)
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7wotx"]
+material = SubResource("StandardMaterial3D_qnmfq")
+top_radius = 7.5
+bottom_radius = 7.5
+height = 0.001
+cap_bottom = false
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_72bnn"]
+radius = 7.857
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ammhy"]
+transparency = 1
+albedo_color = Color(1, 1, 0, 0.25)
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dedlc"]
+material = SubResource("StandardMaterial3D_ammhy")
+top_radius = 7.857
+bottom_radius = 7.857
+height = 0.001
+cap_bottom = false
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jaas1"]
+radius = 8.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wg8xu"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.25)
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ebw3h"]
+material = SubResource("StandardMaterial3D_wg8xu")
+top_radius = 8.214
+bottom_radius = 8.0
+height = 0.001
+cap_bottom = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fm0nh"]
+transparency = 1
+albedo_color = Color(1, 0, 1, 0.25098)
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mxs0s"]
+material = SubResource("StandardMaterial3D_fm0nh")
+top_radius = 14.286
+bottom_radius = 14.286
+height = 0.001
+cap_bottom = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_inavy"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.490196)
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mr1kl"]
+material = SubResource("StandardMaterial3D_inavy")
+top_radius = 0.929
+bottom_radius = 0.929
+height = 0.001
+cap_bottom = false
+
+[node name="Scene" type="Node3D"]
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -19.0
+offset_bottom = 23.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "60"
+script = ExtResource("1_yr04n")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jeear")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="InputManager" type="Node3D" parent="." node_paths=PackedStringArray("main_hero")]
+unique_name_in_owner = true
+script = ExtResource("2_cjt7f")
+main_hero = NodePath("../MainCharacter")
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+transform = Transform3D(1, 0, 0, 0, 0.406737, 0.913545, 0, -0.913545, 0.406737, 0, 15, 11.25)
+script = ExtResource("3_1mc6a")
+lerp_speed = 2.0
+target = NodePath("../MainCharacter")
+offset = Vector3(0, 15, 11.25)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_duw6b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("PlaneMesh_s5yvi")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+collision_layer = 5
+script = ExtResource("4_483yw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_emr77")
+
+[node name="Cursor" type="Node3D" parent="NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D/Cursor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+material_override = SubResource("StandardMaterial3D_6tu4o")
+cast_shadow = 0
+gi_mode = 0
+mesh = SubResource("CylinderMesh_bsvi6")
+skeleton = NodePath("../../../..")
+
+[node name="MainCharacter" type="CharacterBody3D" parent="."]
+script = ExtResource("5_sd7fs")
+
+[node name="CapsuleShape3D" type="CollisionShape3D" parent="MainCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_kcwqd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_2wqtw")
+
+[node name="Stats" type="Node" parent="MainCharacter"]
+script = ExtResource("6_1kswo")
+
+[node name="Buffs" type="Node" parent="MainCharacter"]
+script = ExtResource("7_xjave")
+
+[node name="CharVars" type="Node" parent="MainCharacter"]
+script = ExtResource("8_tppkf")
+
+[node name="CharScript" type="Node" parent="MainCharacter"]
+script = ExtResource("9_dinfn")
+
+[node name="AIScript" type="Node" parent="MainCharacter" node_paths=PackedStringArray("cursor")]
+script = ExtResource("10_adshq")
+movement_speed = 4.714
+cursor = NodePath("../../NavigationRegion3D/StaticBody3D/Cursor")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="MainCharacter"]
+target_desired_distance = 0.1
+avoidance_enabled = true
+height = 2.0
+max_speed = 5.0
+
+[node name="GameplayRange" type="Area3D" parent="MainCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2
+collision_mask = 0
+input_ray_pickable = false
+monitoring = false
+script = ExtResource("11_711gw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainCharacter/GameplayRange"]
+shape = SubResource("SphereShape3D_kyuck")
+
+[node name="SelectionRange" type="Area3D" parent="MainCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("11_711gw")
+enabled = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainCharacter/SelectionRange"]
+shape = SubResource("SphereShape3D_yeru4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainCharacter/SelectionRange"]
+mesh = SubResource("SphereMesh_n5wfu")
+
+[node name="AcquisitionRange" type="Area3D" parent="MainCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 0
+collision_mask = 2
+input_ray_pickable = false
+monitorable = false
+script = ExtResource("11_711gw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainCharacter/AcquisitionRange"]
+shape = SubResource("SphereShape3D_dbnvw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainCharacter/AcquisitionRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.85, 0)
+mesh = SubResource("CylinderMesh_7wotx")
+
+[node name="AttackRange" type="Area3D" parent="MainCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 0
+collision_mask = 2
+input_ray_pickable = false
+monitorable = false
+script = ExtResource("11_711gw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainCharacter/AttackRange"]
+shape = SubResource("SphereShape3D_72bnn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainCharacter/AttackRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+mesh = SubResource("CylinderMesh_dedlc")
+skeleton = NodePath("../../AcquisitionRange")
+
+[node name="CancelAttackRange" type="Area3D" parent="MainCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 0
+collision_mask = 2
+input_ray_pickable = false
+monitorable = false
+script = ExtResource("11_711gw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainCharacter/CancelAttackRange"]
+shape = SubResource("SphereShape3D_jaas1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainCharacter/CancelAttackRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, 0)
+mesh = SubResource("CylinderMesh_ebw3h")
+skeleton = NodePath("../../AcquisitionRange")
+
+[node name="VisionRange" type="Area3D" parent="MainCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 0
+collision_mask = 0
+input_ray_pickable = false
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainCharacter/VisionRange"]
+shape = SubResource("SphereShape3D_jaas1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MainCharacter/VisionRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.99, 0)
+mesh = SubResource("CylinderMesh_mxs0s")
+skeleton = NodePath("../../AcquisitionRange")
+
+[node name="DummyCharacter" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+script = ExtResource("5_sd7fs")
+team = 2
+
+[node name="Stats" type="Node" parent="DummyCharacter"]
+script = ExtResource("6_1kswo")
+
+[node name="Buffs" type="Node" parent="DummyCharacter"]
+script = ExtResource("7_xjave")
+
+[node name="CapsuleShape3D" type="CollisionShape3D" parent="DummyCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_kcwqd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DummyCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_2wqtw")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="DummyCharacter"]
+radius = 0.5
+height = 2.0
+
+[node name="GameplayRange" type="Area3D" parent="DummyCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2
+collision_mask = 0
+input_ray_pickable = false
+monitoring = false
+script = ExtResource("11_711gw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DummyCharacter/GameplayRange"]
+shape = SubResource("SphereShape3D_kyuck")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DummyCharacter/GameplayRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+mesh = SubResource("CylinderMesh_mr1kl")
+
+[node name="SelectionRange" type="Area3D" parent="DummyCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("11_711gw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DummyCharacter/SelectionRange"]
+shape = SubResource("SphereShape3D_yeru4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DummyCharacter/SelectionRange"]
+mesh = SubResource("SphereMesh_n5wfu")
