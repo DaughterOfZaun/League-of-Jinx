@@ -1,6 +1,9 @@
 class_name Buffs
 extends Node
 
+#TODO: Signals
+#TODO: Remove empty slots
+
 const DUPLICATE_ALL := \
 	Node.DUPLICATE_SIGNALS |\
 	Node.DUPLICATE_GROUPS |\
@@ -9,73 +12,123 @@ const DUPLICATE_ALL := \
 
 class Slot:
 	
+	var mngr: Buffs
 	var stacks: Array[Buff] = []
+	var time_remaining := 0.0
 	
-	func clear():
-		stacks.clear()
+	func _init(buffs: Buffs):
+		self.mngr = buffs
+	
+	func clear() -> Slot:
+		self.stacks.clear()
 		return self
 		
-	func add(buff: Buff, count := 1, continious := false):
+	func add(buff: Buff, count := 1, continious := false) -> Slot:
+		#var time_remaining := 0.0
+		#if continious:
+			#for stack: Buff in self.stacks:
+				#time_remaining = max(time_remaining, stack.time_remaining)
 		for i in range(count):
-			stacks.append(buff if i == 0 else buff.duplicate(DUPLICATE_ALL))
+			var duplicate := buff if i == 0 else buff.duplicate(DUPLICATE_ALL)
+			if continious:
+				duplicate.delay_remaining = time_remaining
+				time_remaining += duplicate.duration_remaining
+			self.stacks.append(duplicate)
+			self.mngr.add_child(buff) #TODO: Protect stacks from modification during iteration
 		return self
+		
+	func sort_stacks() -> void:
+		stacks.sort_custom(func (a: Buff, b: Buff): return a.duration_remain > b.duration_remain)
 	
-	func remove_stacks(count := 0):
-		if count == 0 || count == len(stacks):
+	func remove_stacks(count := 0) -> Slot:
+		if len(stacks) == 0 || count <= -len(stacks):
+			return self
+		if count == 0 || count >= len(stacks):
 			return clear()
 		if count < 0:
 			count += len(stacks)
-		if count > 0:
-			var final_len := len(stacks) - count
-			stacks.sort_custom(func (a: Buff, b: Buff): a.duration_remain > b.duration_remain)
-			stacks.resize(final_len)
+		var final_len := len(stacks) - count
+		sort_stacks()
+		for i: int in range(len(stacks), final_len):
+			var buff := stacks[i]
+			self.post_removal(buff)
+			buff.remove_internal_1() #TODO: Protect stacks from modification during iteration
+		stacks.resize(final_len)
 		return self
-		
-signal slot_added(slot: Slot)
+	
+	## Can be called by scripts.
+	func remove(buff: Buff) -> void:
+		post_removal(buff)
+		self.stacks.erase(buff)
+	
+	func post_removal(buff: Buff):
+		for stack: Buff in self.stacks:
+			if stack.delay_remaining >= buff.delay_remaining:
+				stack.delay_remaining -= buff.delay_remaining
+		self.time_remaining -= buff.buff.delay_remaining
+	
+	func renew(reset_duration: float) -> Slot:
+		for buff: Buff in self.stacks:
+			buff.renew(reset_duration)
+		return self
 
 @onready var me := get_parent() as Character
 func _ready():
 	me.buffs = self
 
 var slots := {}
-func get_slot(type: Script, attacker: Character, create := false) -> Slot:
+func get_slot(script, attacker: Character, create := false) -> Slot:
 	var slot: Slot
-	var slots_of_type: Dictionary = slots.get(type, null)
-	if slots_of_type == null:
+	var slots_with_script = slots.get(script, null)
+	if slots_with_script == null:
 		if create:
-			slots_of_type = {}
-			slots[type] = slots_of_type
+			slots_with_script = {}
+			slots[script] = slots_with_script
 		else:
 			return null
 	else:
-		slot = slots_of_type.get(attacker, null)
+		slot = slots_with_script.get(null, slots_with_script.get(attacker, null))
+		
+		if len(slots_with_script.keys()) > 1 && (attacker == null || slots_with_script.has(null)):
+			var warn := ".stacks_exclusive value is inconsistent. " +\
+				"Either set it to false or pass the attacker to all methods that require it."
+			push_warning(script, warn)
 
 	if slot == null:
 		if create:
-			slot = Slot.new()
-			slots_of_type[attacker] = slot
+			slot = Slot.new(self)
+			slots_with_script[attacker] = slot
 		else:
 			return null
 	
-	if (attacker == null && len(slots_of_type.keys()) > 1)\
-	|| (attacker != null && slots_of_type.has(null)):
-		push_warning(type, ".stacks_exclusive value is inconsistent")
-	
 	return slot
 
+## Adds the passed buff.[br]
+## If the number of stacks is more than one, duplicates it.[br]
+## If stacks_exclusive = false, considers the attacker parameter equal to null.[br]
 func add(
 	attacker: Character,
 	buff: Buff,
-	max_stack := 1,
+	max_stack := 0,
 	number_of_stacks := 1,
-	duration := 25000.0,
-	add_type := Enums.BuffAddType.REPLACE_EXISTING,
-	type := Enums.BuffType.INTERNAL,
+	duration := 0,
+	add_type := Enums.BuffAddType.UNDEFINED,
+	type := Enums.BuffType.UNDEFINED,
 	tick_rate := 0.0,
-	stacks_exclusive := true,
-	can_mitigate_duration := false,
-	is_hidden_on_client := false
-):
+	stacks_exclusive = null,
+	can_mitigate_duration = null,
+	is_hidden_on_client = null
+) -> void:
+	
+	if max_stack == 0: max_stack = buff.max_stack
+	if duration == 0: duration = buff.duration
+	if add_type == Enums.BuffAddType.UNDEFINED: add_type = buff.add_type
+	if type == Enums.BuffType.UNDEFINED: type = buff.type
+	if tick_rate == 0: tick_rate = buff.tick_rate
+	if stacks_exclusive == null: stacks_exclusive = buff.stacks_exclusive
+	if can_mitigate_duration == null: can_mitigate_duration = buff.can_mitigate_duration
+	if is_hidden_on_client == null: is_hidden_on_client = buff.is_hidden_on_client
+	
 	number_of_stacks = min(max_stack, number_of_stacks)
 	match add_type:
 		Enums.BuffAddType.REPLACE_EXISTING,\
@@ -83,6 +136,13 @@ func add(
 		when number_of_stacks > 1 or max_stack > 1:
 			push_warning()
 	
+	if stacks_exclusive && attacker == null:
+		push_warning()
+	
+	var script: Script = buff.get_script()
+	var slot := get_slot(script, attacker if stacks_exclusive else null, true)
+	
+	buff.slot = slot
 	buff.attacker = attacker
 	buff.caster = attacker
 	buff.target = me
@@ -95,42 +155,60 @@ func add(
 	buff.stacks_exclusive = stacks_exclusive
 	buff.can_mitigate_duration = can_mitigate_duration
 	buff.is_hidden_on_client = is_hidden_on_client
-	
-	var script: Script = buff.get_script()
-	var slot := get_slot(script, attacker, true)
+
+	var min_count_to_rem := maxi(0, maxi(len(slot.stacks), number_of_stacks) - max_stack)
+	var max_count_to_rem := maxi(0, len(slot.stacks) + number_of_stacks - max_stack)
+	var min_count_to_add := maxi(0, number_of_stacks - len(slot.stacks))
+	var max_count_to_add := number_of_stacks
+
 	match add_type:
-		Enums.BuffAddType.REPLACE_EXISTING:
-			slot.clear().add(buff, number_of_stacks)
-		Enums.BuffAddType.RENEW_EXISTING:
-			slot.remove_stacks(-max_stack).renew(duration)
-		Enums.BuffAddType.STACKS_AND_RENEWS:
-			slot.renew(duration).add(buff, number_of_stacks)
+		Enums.BuffAddType.RENEW_EXISTING, Enums.BuffAddType.STACKS_AND_RENEWS:
+			slot.add(buff, min_count_to_add).remove_stacks(min_count_to_rem).renew(duration)
+		Enums.BuffAddType.REPLACE_EXISTING, Enums.BuffAddType.STACKS_AND_OVERLAPS:
+			slot.add(buff, max_count_to_add).remove_stacks(max_count_to_rem)
 		Enums.BuffAddType.STACKS_AND_CONTINUE:
-			slot.add(buff, number_of_stacks, true) #TODO
-		Enums.BuffAddType.STACKS_AND_OVERLAPS:
-			slot.add(buff, number_of_stacks)
+			slot.add(buff, max_count_to_add, true).remove_stacks(max_count_to_rem) #TODO
+		
 
-func dispell_negative():
-	pass
+## Removes all debuffs, regardless of the attacker who applied them.
+func dispell_negative() -> void:
+	remove_by_type(Enums.BuffType.NEGATIVE)
 
-func clear(type):
-	pass
+## Removes all buffs with the specified script, regardless of the attacker who applied them.
+func clear(script) -> void:
+	for slot: Slot in slots.get(script, []):
+		slot.clear()
 
-func remove_and_renew(type, reset_duration: float, attacker: Character = null):
-	remove(type, attacker);
-	renew(type, reset_duration);
+func remove_and_renew(script, reset_duration: float, attacker: Character = null) -> void:
+	remove(script, attacker); renew(script, reset_duration, attacker)
 
-func renew(type, reset_duration: float):
-	pass
+func renew(script, reset_duration: float, attacker: Character = null) -> void:
+	get_slot(script, attacker).renew(reset_duration)
 
-func remove_stacks(type, num_stacks: int, attacker: Character = null):
-	pass
+func remove_stacks(script, num_stacks: int, attacker: Character = null) -> void:
+	get_slot(script, attacker).remove_stacks(num_stacks)
 
-func remove(type, attacker: Character = null):
-	pass
+func remove(type_or_script, attacker: Character = null) -> void:
+	if type_or_script is Enums.BuffType:
+		remove_by_type(type_or_script)
+	else:
+		remove_by_script(type_or_script, attacker)
 
-func has(type) -> bool:
+## Removes one stack of buff with the specified script
+func remove_by_script(script, attacker: Character = null) -> void:
+	get_slot(script, attacker).remove_stacks(1)
+
+## Removes all buffs with the specified type, regardless of the attacker who applied them.
+func remove_by_type(type: Enums.BuffType) -> void:
+	for buff: Buff in get_children():
+		if (type & buff.type) != 0:
+			buff.remove()
+
+func has(type: Enums.BuffType) -> bool:
+	for buff: Buff in get_children():
+		if (type & buff.type) != 0:
+			return true
 	return false
 
-func count(type, caster: Character = null) -> int:
-	return 0
+func count(script, caster: Character = null) -> int:
+	return len(get_slot(script, caster).stacks)
