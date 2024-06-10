@@ -1,12 +1,12 @@
 class_name InputManager
 extends Node3D
 
-@export var main_hero: Character
+@export var main_hero: Unit
 @onready var nav_map_rid := get_world_3d().navigation_map
 
-signal order(type: Enums.OrderType, unit: Character, pos: Vector3)
+signal order(type: Enums.OrderType, unit: Unit, pos: Vector3)
 
-func on_unit_clicked(char: Character, button: MouseButton):
+func on_unit_clicked(char: Unit, button: MouseButton):
 	if char.team != main_hero.team:
 		order.emit(Enums.OrderType.ATTACK_TO, char, char.global_position)
 	

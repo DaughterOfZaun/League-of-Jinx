@@ -31,5 +31,5 @@ class TimeTracker:
 		time = 0
 
 
-static func get_point_by_unit_facing_offset(unit: Character, distance: float, offsetAngle: float) -> Vector3:
+static func get_point_by_unit_facing_offset(unit: Unit, distance: float, offsetAngle: float) -> Vector3:
 	return Vector3.ZERO

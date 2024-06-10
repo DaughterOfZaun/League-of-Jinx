@@ -4,14 +4,14 @@ extends Node
 
 var metadata := SpellMetadata.new()
 
-var attacker: Character
-var caster: Character
-var host: Character
+var attacker: Unit
+var caster: Unit
+var host: Unit
 var spell := self
 
 
-var target: Character
-var offset_target: Character
+var target: Unit
+var offset_target: Unit
 var target_position := Vector3.INF
 var drag_end_position: Vector3
 var targets_hit: int
@@ -56,7 +56,7 @@ func on_update_actions():
 		channeling_update_actions()
 
 func self_execute(): pass
-func target_execute(_target: Character, _missile: Missile): pass
+func target_execute(_target: Unit, _missile: Missile): pass
 func adjust_cast_info(): pass
 func adjust_cooldown():
 	return NAN
@@ -92,7 +92,7 @@ func set_tool_tip_var(index: int, value: float) -> void:
 	pass
 
 func cast(
-	target: Character,
+	target: Unit,
 	pos: Vector3,
 	end_pos: Vector3,
 	override_force_level := 0,

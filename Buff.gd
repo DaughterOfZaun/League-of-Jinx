@@ -4,10 +4,10 @@ extends Timer
 var metadata := BuffMetadata.new()
 
 var slot: BuffSlot
-var attacker: Character
-var caster: Character
-var target: Character
-var host: Character
+var attacker: Unit
+var caster: Unit
+var target: Unit
+var host: Unit
 var max_stack := 1
 var duration := 25000.0
 var add_type := Enums.BuffAddType.REPLACE_EXISTING

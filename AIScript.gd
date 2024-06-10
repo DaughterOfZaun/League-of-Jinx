@@ -1,7 +1,7 @@
 class_name AIScript
 extends Node
 
-@onready var me := get_parent() as Character
+@onready var me := get_parent() as Unit
 @onready var acquisition_range := me.find_child('AcquisitionRange') as Area3D
 @onready var attack_range := me.find_child('AttackRange') as Area3D
 @onready var cancel_attack_range := me.find_child('CancelAttackRange') as Area3D
@@ -31,18 +31,18 @@ func set_movement_allowed(to: bool):
 		if cursor != null:
 			cursor.visible = false
 
-var target: Character = null
+var target: Unit = null
 var target_position := Vector3.ZERO
 var target_position_reached := false
-func get_target() -> Character: return target
-func get_target_or_find_target_in_ac_r() -> Character:
+func get_target() -> Unit: return target
+func get_target_or_find_target_in_ac_r() -> Unit:
 	return target if target != null else find_target_in_ac_r()
-func find_target_in_ac_r() -> Character:
+func find_target_in_ac_r() -> Unit:
 	var areas := acquisition_range.get_overlapping_areas()
 	var min_dist := INF;
-	var best_match: Character = null;
+	var best_match: Unit = null;
 	for area in areas:
-		var char := area.get_parent() as Character
+		var char := area.get_parent() as Unit
 		var dist := me.global_position.distance_squared_to(char.global_position)
 		if dist < min_dist:
 			min_dist = dist
@@ -53,11 +53,11 @@ func target_in_attack_range() -> bool:
 	return target.find_child('GameplayRange').overlaps_area(attack_range)
 func target_in_cancel_attack_range() -> bool:
 	return target.find_child('GameplayRange').overlaps_area(cancel_attack_range)
-func get_taunt_target() -> Character:
+func get_taunt_target() -> Unit:
 	return null
 func is_target_lost() -> bool:
 	return false
-func get_lost_target_if_visible() -> Character:
+func get_lost_target_if_visible() -> Unit:
 	return null
 
 #var pos := Vector3.INF
@@ -72,13 +72,13 @@ func set_state(to: Enums.AIState) -> void:
 		print("set_state", ' ', Enums.AIState.keys()[to])
 		state = to
 
-func set_state_and_close_to_target(state: Enums.AIState, target: Character) -> void:
+func set_state_and_close_to_target(state: Enums.AIState, target: Unit) -> void:
 	set_state_and_move_internal(state, target)
 func set_state_and_move_in_pos(state: Enums.AIState, position: Vector3) -> void:
 	set_state_and_move_internal(state, null, position)
 func set_state_and_move(state: Enums.AIState, position: Vector3) -> void:
 	set_state_and_move_internal(state, null, position)
-func set_state_and_move_internal(state: Enums.AIState, target: Character, position: Vector3 = Vector3.ZERO):
+func set_state_and_move_internal(state: Enums.AIState, target: Unit, position: Vector3 = Vector3.ZERO):
 	set_state(state)
 	self.target = target
 	if target != null:
@@ -119,15 +119,15 @@ func _on_navigation_finished():
 		pass
 
 var last_order := Enums.OrderType.NONE
-func _on_order(order_type: Enums.OrderType, target_unit: Character, target_position: Vector3):
+func _on_order(order_type: Enums.OrderType, target_unit: Unit, target_position: Vector3):
 	if order_type != last_order || target_unit != self.target || target_position != self.target_position:
 		print("on_order", ' ', Enums.OrderType.keys()[order_type], ' ', target_unit.name if target_unit else null, ' ', target_position)
 		on_order(order_type, target_unit, target_position)
 		last_order = order_type
 
 func on_init() -> bool: return false
-func on_order(order_type: Enums.OrderType, target_unit: Character, target_position: Vector3) -> bool: return false
-func on_target_lost(reason: Enums.ReasonForTargetLoss, lost_target: Character) -> void: pass
+func on_order(order_type: Enums.OrderType, target_unit: Unit, target_position: Vector3) -> bool: return false
+func on_target_lost(reason: Enums.ReasonForTargetLoss, lost_target: Unit) -> void: pass
 func on_taunt_begin() -> void: pass
 func on_taunt_end() -> void: pass
 func on_fear_begin() -> void: pass
@@ -160,7 +160,7 @@ func reset_and_start_timer(callback: Callable) -> void:
 	if timer != null: timer.start()
 
 var is_autoattack_enabled := false
-func turn_on_auto_attack(target: Character) -> void:
+func turn_on_auto_attack(target: Unit) -> void:
 	if !is_autoattack_enabled:
 		is_autoattack_enabled = true
 		print("turn_on_auto_attack", ' ', target.name if target else null)
@@ -182,9 +182,9 @@ func make_wander_point(leash_point: Vector3, distance: float) -> Vector3:
 	return Vector3.ZERO
 
 
-func can_see_me(target: Character) -> bool:
+func can_see_me(target: Unit) -> bool:
 	return true
-func spell_buff_remove_type(target: Character, type: Enums.BuffType) -> void:
+func spell_buff_remove_type(target: Unit, type: Enums.BuffType) -> void:
 	target.buffs.remove(type)
 
 func is_moving() -> bool:

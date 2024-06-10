@@ -1,7 +1,7 @@
 class_name CharVars
 extends Node
 
-@onready var me := get_parent() as Character
+@onready var me := get_parent() as Unit
 func _ready():
 	me.char_vars = self
 

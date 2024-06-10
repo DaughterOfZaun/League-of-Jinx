@@ -10,18 +10,18 @@ func flags(flags := 0) -> Particle:
 func specific(
 	specific_team_only := Enums.TeamID.UNKNOWN,
 	specific_team_only_override := Enums.TeamID.UNKNOWN,
-	specific_unit_only: Character = null,
+	specific_unit_only: Unit = null,
 	use_specific_unit := false
 ) -> Particle:
 	return self
 func bind(
-	bind_object: Character = null,
+	bind_object: Unit = null,
 	bone_name := "",
 	pos := Vector3.INF,
 ) -> Particle:
 	return self
 func target(
-	target_object: Character = null,
+	target_object: Unit = null,
 	target_bone_name := "",
 	target_pos := Vector3.INF,
 ) -> Particle:
@@ -34,7 +34,7 @@ func more_flags(
 	faces_target := false,
 ) -> Particle:
 	return self
-func orient(orient_towards: Character = null) -> Particle:
+func orient(orient_towards: Unit = null) -> Particle:
 	return self
 
 func remove() -> void:

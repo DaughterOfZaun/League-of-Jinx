@@ -4,12 +4,12 @@ extends Node
 #TODO: Signals
 #TODO: Remove empty slots
 
-@onready var me := get_parent() as Character
+@onready var me := get_parent() as Unit
 func _ready():
 	me.buffs = self
 
 var slots := {}
-func get_slot(script, attacker: Character, create := false) -> BuffSlot:
+func get_slot(script, attacker: Unit, create := false) -> BuffSlot:
 	var slot: BuffSlot
 	var slots_with_script = slots.get(script, null)
 	if slots_with_script == null:
@@ -39,7 +39,7 @@ func get_slot(script, attacker: Character, create := false) -> BuffSlot:
 ## If the number of stacks is more than one, duplicates it.[br]
 ## If stacks_exclusive = false, considers the attacker parameter equal to null.[br]
 func add(
-	attacker: Character,
+	attacker: Unit,
 	buff: Buff,
 	max_stack := 0,
 	number_of_stacks := 1,
@@ -109,27 +109,27 @@ func dispell_negative() -> void:
 ## Removes all buffs with the specified script, regardless of the attacker who applied them.
 func clear(script) -> void:
 	var slots_by_attacker: Dictionary = slots.get(script, [])
-	for attacker: Character in slots_by_attacker:
+	for attacker: Unit in slots_by_attacker:
 		var slot: BuffSlot = slots_by_attacker[attacker]
 		slot.clear()
 
-func remove_and_renew(script, reset_duration: float, attacker: Character = null) -> void:
+func remove_and_renew(script, reset_duration: float, attacker: Unit = null) -> void:
 	remove(script, attacker); renew(script, reset_duration, attacker)
 
-func renew(script, reset_duration: float, attacker: Character = null) -> void:
+func renew(script, reset_duration: float, attacker: Unit = null) -> void:
 	get_slot(script, attacker).renew(reset_duration)
 
-func remove_stacks(script, num_stacks: int, attacker: Character = null) -> void:
+func remove_stacks(script, num_stacks: int, attacker: Unit = null) -> void:
 	get_slot(script, attacker).remove_stacks(num_stacks)
 
-func remove(type_or_script, attacker: Character = null) -> void:
+func remove(type_or_script, attacker: Unit = null) -> void:
 	if type_or_script is Enums.BuffType:
 		remove_by_type(type_or_script)
 	else:
 		remove_by_script(type_or_script, attacker)
 
 ## Removes one stack of buff with the specified script
-func remove_by_script(script, attacker: Character = null) -> void:
+func remove_by_script(script, attacker: Unit = null) -> void:
 	get_slot(script, attacker).remove_stacks(1)
 
 ## Removes all buffs with the specified type, regardless of the attacker who applied them.
@@ -144,5 +144,5 @@ func has(type: Enums.BuffType) -> bool:
 			return true
 	return false
 
-func count(script, caster: Character = null) -> int:
+func count(script, caster: Unit = null) -> int:
 	return len(get_slot(script, caster).stacks)

@@ -1,7 +1,7 @@
 extends Area3D
 
 @export var enabled := true
-@onready var char := get_parent() as Character
+@onready var char := get_parent() as Unit
 
 func _ready():
 	monitoring = false

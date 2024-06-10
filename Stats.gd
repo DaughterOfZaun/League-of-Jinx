@@ -1,7 +1,7 @@
 class_name Stats
 extends Node
 
-@onready var me := get_parent() as Character
+@onready var me := get_parent() as Unit
 func _ready():
 	me.stats = self
 
