@@ -1,7 +1,9 @@
 class_name Buff
 extends Timer
 
-var slot: Buffs.Slot
+var metadata := BuffMetadata.new()
+
+var slot: BuffSlot
 var attacker: Character
 var caster: Character
 var target: Character
@@ -41,6 +43,7 @@ func _init():
 	timeout.connect(remove_internal_0.bind(true))
 
 func _ready():
+	host.connect_all(self)
 	start(self.delay + self.duration)
 
 ## Can be called by scripts.
@@ -60,5 +63,4 @@ func remove_internal_1(expired := false) -> void:
 	if !can_mitigate_duration:
 		queue_free()
 
-func on_deactivate(expired: bool):
-	pass
+func on_deactivate(_expired: bool): pass

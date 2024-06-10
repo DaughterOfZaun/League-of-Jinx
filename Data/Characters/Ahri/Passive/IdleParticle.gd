@@ -8,9 +8,6 @@ class B extends Buff:
 	})
 	var particle: Particle
 	func on_activate():
-		particle = Particle.new("Ahri_Orb.troy").bind(owner, "BUFFBONE_GLB_WEAPON_1").target(owner)
+		particle = Particle.create("Ahri_Orb.troy").bind(owner, "BUFFBONE_GLB_WEAPON_1").target(owner)
 	func on_deactivate(expired: bool):
 		particle.Remove()
-
-class S extends Spell:
-	pass

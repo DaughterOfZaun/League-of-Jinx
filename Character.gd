@@ -5,12 +5,23 @@ extends CharacterBody3D
 @export_range(1, 31, 1, "hide_slider") var team := 1
 var stats: Stats #@onready var stats := find_child("Stats") as Stats
 var buffs: Buffs #@onready var buffs := find_child("Buffs") as Buffs
+var spells: Spells #@onready var spells := find_child("Spells") as Spells
 var char_vars: CharVars #@onready var char_vars := find_child("CharVars") as CharVars
 
 @onready var input_manager := get_node("%InputManager") as InputManager
 signal order(type: Enums.OrderType, unit: Character, pos: Vector3)
 func _ready():
 	input_manager.order.connect(func (type, unit = null, pos = Vector3.ZERO): order.emit(type, unit, pos))
+	get_tree().physics_frame.connect(_pre_physics_process)
+
+var on_update_stats_time_tracker := API.TimeTracker.new(0.25, true)
+func _pre_physics_process():
+	if on_update_stats_time_tracker.execute():
+		update_stats.emit()
+
+var on_update_time_tracker := API.TimeTracker.new(0.25, true)
+func _physics_process(_delta):
+	update_actions.emit()
 
 func connect_all(to):
 	var signals = get_signal_list()

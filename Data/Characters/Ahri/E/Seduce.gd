@@ -1,7 +1,7 @@
 class_name AhriSeduce
 
-class B extends Buff:
+class S extends Spell:
 	pass
 
-class S extends Spell:
+class B extends Buff:
 	pass
