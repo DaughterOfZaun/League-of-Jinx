@@ -31,8 +31,8 @@ class Slot:
 		for i in range(count):
 			var duplicate := buff if i == 0 else buff.duplicate(DUPLICATE_ALL)
 			if continious:
-				duplicate.delay_remaining = time_remaining
-				time_remaining += duplicate.duration_remaining
+				duplicate.delay = time_remaining
+				time_remaining += duplicate.duration
 			self.stacks.append(duplicate)
 			self.mngr.add_child(buff) #TODO: Protect stacks from modification during iteration
 		return self
@@ -62,6 +62,7 @@ class Slot:
 		self.stacks.erase(buff)
 	
 	func post_removal(buff: Buff):
+		if buff.delay_remaining == 0: return
 		for stack: Buff in self.stacks:
 			if stack.delay_remaining >= buff.delay_remaining:
 				stack.delay_remaining -= buff.delay_remaining
@@ -111,7 +112,7 @@ func add(
 	buff: Buff,
 	max_stack := 0,
 	number_of_stacks := 1,
-	duration := 0,
+	duration := 0.0,
 	add_type := Enums.BuffAddType.UNDEFINED,
 	type := Enums.BuffType.UNDEFINED,
 	tick_rate := 0.0,
@@ -121,10 +122,10 @@ func add(
 ) -> void:
 	
 	if max_stack == 0: max_stack = buff.max_stack
-	if duration == 0: duration = buff.duration
+	if duration == 0.0: duration = buff.duration
 	if add_type == Enums.BuffAddType.UNDEFINED: add_type = buff.add_type
 	if type == Enums.BuffType.UNDEFINED: type = buff.type
-	if tick_rate == 0: tick_rate = buff.tick_rate
+	if tick_rate == 0.0: tick_rate = buff.tick_rate
 	if stacks_exclusive == null: stacks_exclusive = buff.stacks_exclusive
 	if can_mitigate_duration == null: can_mitigate_duration = buff.can_mitigate_duration
 	if is_hidden_on_client == null: is_hidden_on_client = buff.is_hidden_on_client
@@ -176,7 +177,9 @@ func dispell_negative() -> void:
 
 ## Removes all buffs with the specified script, regardless of the attacker who applied them.
 func clear(script) -> void:
-	for slot: Slot in slots.get(script, []):
+	var slots_by_attacker: Dictionary = slots.get(script, [])
+	for attacker: Character in slots_by_attacker:
+		var slot: Slot = slots_by_attacker[attacker]
 		slot.clear()
 
 func remove_and_renew(script, reset_duration: float, attacker: Character = null) -> void:

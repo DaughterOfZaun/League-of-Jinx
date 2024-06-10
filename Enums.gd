@@ -75,39 +75,39 @@ enum BuffAddType
 }
 
 enum BuffType {
-	UNDEFINED,
-	INTERNAL = 1 << 1,
-	AURA = 1 << 2,
-	COMBAT_ENCHANCER = 1 << 3,
-	COMBAT_DEHANCER = 1 << 4,
-	#SPELL_SHIELD = 1 << 5,
-	STUN = 1 << 6,
-	INVISIBILITY = 1 << 7,
-	SILENCE = 1 << 8,
-	TAUNT = 1 << 9,
-	POLYMORPH = 1 << 10,
-	SLOW = 1 << 11,
-	SNARE = 1 << 12,
-	DAMAGE = 1 << 13,
-	HEAL = 1 << 14,
-	HASTE = 1 << 15,
-	SPELL_IMMUNITY = 1 << 16,
-	PHYSICAL_IMMUNITY = 1 << 17,
-	INVULNERABILITY = 1 << 18,
-	SLEEP = 1 << 19,
-	#NEAR_SIGHT = 1 << 20,
-	#FRENZY = 1 << 21,
-	FEAR = 1 << 22,
-	CHARM = 1 << 23,
-	POISON = 1 << 24,
-	SUPPRESSION = 1 << 25,
-	BLIND = 1 << 26,
-	COUNTER = 1 << 27,
-	SHRED = 1 << 28,
-	#FLEE = 1 << 29,
-	#KNOCKUP = 1 << 30,
-	#KNOCKBACK = 1 << 31,
-	#DISARM = 1 << 32,
+	UNDEFINED = 0,
+	INTERNAL = 1 << 0,
+	AURA = 1 << 1,
+	COMBAT_ENCHANCER = 1 << 2,
+	COMBAT_DEHANCER = 1 << 3,
+	#SPELL_SHIELD = 1 << 4,
+	STUN = 1 << 5,
+	INVISIBILITY = 1 << 6,
+	SILENCE = 1 << 7,
+	TAUNT = 1 << 8,
+	POLYMORPH = 1 << 9,
+	SLOW = 1 << 10,
+	SNARE = 1 << 11,
+	DAMAGE = 1 << 12,
+	HEAL = 1 << 13,
+	HASTE = 1 << 14,
+	SPELL_IMMUNITY = 1 << 15,
+	PHYSICAL_IMMUNITY = 1 << 16,
+	INVULNERABILITY = 1 << 17,
+	SLEEP = 1 << 18,
+	#NEAR_SIGHT = 1 << 19,
+	#FRENZY = 1 << 20,
+	FEAR = 1 << 21,
+	CHARM = 1 << 22,
+	POISON = 1 << 23,
+	SUPPRESSION = 1 << 24,
+	BLIND = 1 << 25,
+	COUNTER = 1 << 26,
+	SHRED = 1 << 27,
+	#FLEE = 1 << 28,
+	#KNOCKUP = 1 << 29,
+	#KNOCKBACK = 1 << 30,
+	#DISARM = 1 << 31,
 	
 	NEGATIVE = \
 		INTERNAL |\
@@ -174,4 +174,18 @@ enum HitResult
 	CRITICAL,
 	DODGE,
 	MISS,
+}
+
+enum EffCreate
+{
+	NONE,
+	UPDATE_ORIENTATION
+}
+
+enum TeamID
+{
+	UNKNOWN = 0,
+	ORDER = 1 << 0,
+	CHAOS = 1 << 1,
+	NEUTRAL = 1 << 2,
 }
