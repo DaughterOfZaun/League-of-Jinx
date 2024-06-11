@@ -1,8 +1,8 @@
 class_name Spell
-extends Node
+extends SpellData
 
 
-var metadata := SpellMetadata.new()
+#var metadata := SpellMetadata.new()
 
 var attacker: Unit
 var caster: Unit

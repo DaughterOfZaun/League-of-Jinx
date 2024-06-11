@@ -1,7 +1,7 @@
 class_name Buff
 extends Timer
 
-var metadata := BuffMetadata.new()
+#var metadata := BuffMetadata.new()
 
 var slot: BuffSlot
 var attacker: Unit

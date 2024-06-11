@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://ca3peumqju718"]
+[gd_scene load_steps=41 format=3 uid="uid://ca3peumqju718"]
 
 [ext_resource type="Script" path="res://FPSCounter.gd" id="1_yr04n"]
 [ext_resource type="Script" path="res://InputManager.gd" id="2_cjt7f"]
@@ -6,8 +6,10 @@
 [ext_resource type="Script" path="res://Ground.gd" id="4_483yw"]
 [ext_resource type="Script" path="res://Character.gd" id="5_sd7fs"]
 [ext_resource type="Script" path="res://Stats.gd" id="6_1kswo"]
-[ext_resource type="Script" path="res://BuffManager.gd" id="7_xjave"]
+[ext_resource type="Script" path="res://Buffs/BuffManager.gd" id="7_xjave"]
 [ext_resource type="Script" path="res://Data/CharVars.gd" id="8_tppkf"]
+[ext_resource type="Script" path="res://Spells/SpellManager.gd" id="8_w31m0"]
+[ext_resource type="Script" path="res://Spells/Spell.gd" id="9_4k0e2"]
 [ext_resource type="Script" path="res://Data/Characters/Ahri/Passive/CharScript.gd" id="9_dinfn"]
 [ext_resource type="Script" path="res://Data/AI/Hero.gd" id="10_adshq"]
 [ext_resource type="Script" path="res://Range.gd" id="11_711gw"]
@@ -233,6 +235,12 @@ script = ExtResource("6_1kswo")
 
 [node name="Buffs" type="Node" parent="MainCharacter"]
 script = ExtResource("7_xjave")
+
+[node name="Spells" type="Node" parent="MainCharacter"]
+script = ExtResource("8_w31m0")
+
+[node name="Q" type="Node" parent="MainCharacter/Spells"]
+script = ExtResource("9_4k0e2")
 
 [node name="CharVars" type="Node" parent="MainCharacter"]
 script = ExtResource("8_tppkf")

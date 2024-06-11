@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 project/assembly_name="MOBA_A2"
 
+[internationalization]
+
+rendering/text_driver="ICU / HarfBuzz / Graphite (Built-in)"
+
 [physics]
 
 2d/run_on_separate_thread=true
