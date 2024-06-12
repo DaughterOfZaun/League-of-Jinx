@@ -1,7 +1,5 @@
 class_name Buff
-extends Timer
-
-#var metadata := BuffMetadata.new()
+extends BuffData
 
 var slot: BuffSlot
 var attacker: Unit
@@ -40,11 +38,11 @@ var time_remaining: float :
 func _init():
 	autostart = false
 	one_shot = !can_mitigate_duration
-	timeout.connect(remove_internal_0.bind(true))
 
 func _ready():
-	host.connect_all(self)
+	timeout.connect(remove_internal_0.bind(true))
 	start(self.delay + self.duration)
+	host.connect_all(self)
 
 ## Can be called by scripts.
 func remove() -> void:

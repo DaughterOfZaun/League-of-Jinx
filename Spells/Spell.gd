@@ -1,14 +1,10 @@
 class_name Spell
 extends SpellData
 
-
-#var metadata := SpellMetadata.new()
-
 var attacker: Unit
 var caster: Unit
 var host: Unit
 var spell := self
-
 
 var target: Unit
 var offset_target: Unit
@@ -43,8 +39,11 @@ enum State {
 }
 
 func _ready():
-	host.update_stats.connect(on_update_stats)
+	host = (get_parent() as Spells).get_parent() as Unit #HACK
 	host.update_actions.connect(on_update_actions)
+	host.update_stats.connect(on_update_stats)
+	attacker = host
+	caster = host
 
 func on_update_stats():
 	if state == State.CHANNELING:
@@ -91,6 +90,9 @@ func set_cooldown(src: float, broadcast_event := false) -> void:
 func set_tool_tip_var(index: int, value: float) -> void:
 	pass
 
+func replace_with(script) -> void:
+	pass
+
 func cast(
 	target: Unit,
 	pos: Vector3,
@@ -104,7 +106,4 @@ func cast(
 	override_cast_position := false,
 	override_cast_pos: Vector3 = Vector3.INF
 ) -> void:
-	pass
-
-func replace_with(script) -> void:
 	pass

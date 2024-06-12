@@ -7,11 +7,15 @@ var buffs: Buffs #@onready var buffs := find_child("Buffs") as Buffs
 var spells: Spells #@onready var spells := find_child("Spells") as Spells
 var char_vars: CharVars #@onready var char_vars := find_child("CharVars") as CharVars
 
-@onready var input_manager := get_node("%InputManager") as InputManager
-signal order(type: Enums.OrderType, unit: Unit, pos: Vector3)
+signal order(type: Enums.OrderType, pos: Vector3, unit: Unit)
 func _ready():
-	input_manager.order.connect(func (type, unit = null, pos = Vector3.ZERO): order.emit(type, unit, pos))
 	get_tree().physics_frame.connect(_pre_physics_process)
+
+func on_order(type: Enums.OrderType, pos: Vector3, unit: Unit):
+	order.emit(type, pos, unit)
+
+func on_cast(letter: String, pos: Vector3, unit: Unit):
+	(spells[letter] as Spell).cast(unit, pos, pos)
 
 var on_update_stats_time_tracker := API.TimeTracker.new(0.25, true)
 func _pre_physics_process():

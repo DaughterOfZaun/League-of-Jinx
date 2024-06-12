@@ -1,18 +1,22 @@
-[gd_scene load_steps=41 format=3 uid="uid://ca3peumqju718"]
+[gd_scene load_steps=47 format=3 uid="uid://ca3peumqju718"]
 
+[ext_resource type="Texture2D" uid="uid://c2gfkld33bpww" path="res://Data/Maps/1/Summoners_Rift_Minimap.webp" id="1_gcfpn"]
 [ext_resource type="Script" path="res://FPSCounter.gd" id="1_yr04n"]
 [ext_resource type="Script" path="res://InputManager.gd" id="2_cjt7f"]
+[ext_resource type="Texture2D" uid="uid://cr313d2onrdn2" path="res://Data/UI/HUD_Overlay_12.2.png" id="2_thwps"]
 [ext_resource type="Script" path="res://Camera.gd" id="3_1mc6a"]
 [ext_resource type="Script" path="res://Ground.gd" id="4_483yw"]
-[ext_resource type="Script" path="res://Character.gd" id="5_sd7fs"]
 [ext_resource type="Script" path="res://Stats.gd" id="6_1kswo"]
+[ext_resource type="PackedScene" uid="uid://bk5q5uqy1pokg" path="res://Data/Maps/1/Summoners_Rift.gltf" id="6_24eo1"]
 [ext_resource type="Script" path="res://Buffs/BuffManager.gd" id="7_xjave"]
 [ext_resource type="Script" path="res://Data/CharVars.gd" id="8_tppkf"]
 [ext_resource type="Script" path="res://Spells/SpellManager.gd" id="8_w31m0"]
-[ext_resource type="Script" path="res://Spells/Spell.gd" id="9_4k0e2"]
+[ext_resource type="Script" path="res://Data/Characters/Ahri/Q/OrbOfDeception.gd" id="9_7q5ox"]
 [ext_resource type="Script" path="res://Data/Characters/Ahri/Passive/CharScript.gd" id="9_dinfn"]
 [ext_resource type="Script" path="res://Data/AI/Hero.gd" id="10_adshq"]
 [ext_resource type="Script" path="res://Range.gd" id="11_711gw"]
+[ext_resource type="Texture2D" uid="uid://dfujtucm6vw5k" path="res://Data/AOE.webp" id="14_yurim"]
+[ext_resource type="Script" path="res://Character.gd" id="15_s5x6v"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hikii"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -24,9 +28,10 @@ sky_material = SubResource("ProceduralSkyMaterial_hikii")
 [sub_resource type="Environment" id="Environment_jeear"]
 background_mode = 2
 sky = SubResource("Sky_qx0xm")
-tonemap_mode = 2
+tonemap_mode = 3
 sdfgi_enabled = true
-glow_enabled = true
+adjustment_enabled = true
+adjustment_contrast = 1.1
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_duw6b"]
 vertices = PackedVector3Array(-99.5, 0.5, -99.5, -99.5, 0.5, 99.5, 99.5, 0.5, 99.5, 99.5, 0.5, -99.5)
@@ -140,6 +145,15 @@ bottom_radius = 0.929
 height = 0.001
 cap_bottom = false
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_meyed"]
+transparency = 1
+albedo_texture = ExtResource("14_yurim")
+
+[sub_resource type="QuadMesh" id="QuadMesh_rfcjt"]
+material = SubResource("StandardMaterial3D_meyed")
+size = Vector2(5, 5)
+orientation = 1
+
 [node name="Scene" type="Node3D"]
 
 [node name="Control" type="Control" parent="."]
@@ -149,29 +163,53 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Minimap" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -161.0
+offset_right = -6.0
+offset_bottom = -7.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("1_gcfpn")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Overlay" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_thwps")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FPS" type="Label" parent="Control"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -19.0
-offset_bottom = 23.0
+offset_left = -20.0
+offset_top = 20.0
+offset_right = -1.0
+offset_bottom = 43.0
 grow_horizontal = 0
 size_flags_horizontal = 4
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 text = "60"
 script = ExtResource("1_yr04n")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_jeear")
@@ -195,8 +233,14 @@ offset = Vector3(0, 15, 11.25)
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_duw6b")
 
+[node name="Node3D" type="Node3D" parent="NavigationRegion3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -4.6, -86, -4.6)
+
+[node name="Summoners_Rift" parent="NavigationRegion3D/Node3D" instance=ExtResource("6_24eo1")]
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+visible = false
 mesh = SubResource("PlaneMesh_s5yvi")
 skeleton = NodePath("../..")
 
@@ -220,7 +264,7 @@ mesh = SubResource("CylinderMesh_bsvi6")
 skeleton = NodePath("../../../..")
 
 [node name="MainCharacter" type="CharacterBody3D" parent="."]
-script = ExtResource("5_sd7fs")
+script = ExtResource("15_s5x6v")
 
 [node name="CapsuleShape3D" type="CollisionShape3D" parent="MainCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -240,7 +284,8 @@ script = ExtResource("7_xjave")
 script = ExtResource("8_w31m0")
 
 [node name="Q" type="Node" parent="MainCharacter/Spells"]
-script = ExtResource("9_4k0e2")
+script = ExtResource("9_7q5ox")
+selection_preference = 1
 
 [node name="CharVars" type="Node" parent="MainCharacter"]
 script = ExtResource("8_tppkf")
@@ -283,6 +328,7 @@ enabled = false
 shape = SubResource("SphereShape3D_yeru4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MainCharacter/SelectionRange"]
+visible = false
 mesh = SubResource("SphereMesh_n5wfu")
 
 [node name="AcquisitionRange" type="Area3D" parent="MainCharacter"]
@@ -298,6 +344,7 @@ shape = SubResource("SphereShape3D_dbnvw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MainCharacter/AcquisitionRange"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.85, 0)
+visible = false
 mesh = SubResource("CylinderMesh_7wotx")
 
 [node name="AttackRange" type="Area3D" parent="MainCharacter"]
@@ -313,6 +360,7 @@ shape = SubResource("SphereShape3D_72bnn")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MainCharacter/AttackRange"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+visible = false
 mesh = SubResource("CylinderMesh_dedlc")
 skeleton = NodePath("../../AcquisitionRange")
 
@@ -329,6 +377,7 @@ shape = SubResource("SphereShape3D_jaas1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MainCharacter/CancelAttackRange"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, 0)
+visible = false
 mesh = SubResource("CylinderMesh_ebw3h")
 skeleton = NodePath("../../AcquisitionRange")
 
@@ -345,12 +394,13 @@ shape = SubResource("SphereShape3D_jaas1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MainCharacter/VisionRange"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.99, 0)
+visible = false
 mesh = SubResource("CylinderMesh_mxs0s")
 skeleton = NodePath("../../AcquisitionRange")
 
 [node name="DummyCharacter" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
-script = ExtResource("5_sd7fs")
+script = ExtResource("15_s5x6v")
 team = 2
 
 [node name="Stats" type="Node" parent="DummyCharacter"]
@@ -384,6 +434,7 @@ shape = SubResource("SphereShape3D_kyuck")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DummyCharacter/GameplayRange"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+visible = false
 mesh = SubResource("CylinderMesh_mr1kl")
 
 [node name="SelectionRange" type="Area3D" parent="DummyCharacter"]
@@ -398,4 +449,8 @@ script = ExtResource("11_711gw")
 shape = SubResource("SphereShape3D_yeru4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DummyCharacter/SelectionRange"]
+visible = false
 mesh = SubResource("SphereMesh_n5wfu")
+
+[node name="AOE" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_rfcjt")

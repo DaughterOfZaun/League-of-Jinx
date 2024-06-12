@@ -30,3 +30,5 @@ func _ready():
 func _input_event(camera, event, position, normal, shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 		input_manager.on_unit_clicked(char, event.button_index)
+	elif event is InputEventMouseMotion:
+		input_manager.on_unit_hovered(char)

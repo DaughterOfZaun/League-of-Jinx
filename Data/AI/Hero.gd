@@ -12,7 +12,7 @@ func on_init() -> bool:
 	stop_timer(timer_feared)
 	return false
 
-func on_order(order_type: Enums.OrderType, target: Unit, position: Vector3):
+func on_order(order_type: Enums.OrderType, position: Vector3, target: Unit):
 	if get_state() in [
 		Enums.AIState.HALTED,
 		Enums.AIState.TAUNTED,

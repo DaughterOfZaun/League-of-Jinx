@@ -119,14 +119,14 @@ func _on_navigation_finished():
 		pass
 
 var last_order := Enums.OrderType.NONE
-func _on_order(order_type: Enums.OrderType, target_unit: Unit, target_position: Vector3):
+func _on_order(order_type: Enums.OrderType, target_position: Vector3, target_unit: Unit):
 	if order_type != last_order || target_unit != self.target || target_position != self.target_position:
-		print("on_order", ' ', Enums.OrderType.keys()[order_type], ' ', target_unit.name if target_unit else null, ' ', target_position)
-		on_order(order_type, target_unit, target_position)
+		print("on_order", ' ', Enums.OrderType.keys()[order_type], ' ', target_position, ' ', target_unit.name if target_unit else null)
+		on_order(order_type, target_position, target_unit)
 		last_order = order_type
 
 func on_init() -> bool: return false
-func on_order(order_type: Enums.OrderType, target_unit: Unit, target_position: Vector3) -> bool: return false
+func on_order(order_type: Enums.OrderType, target_position: Vector3, target_unit: Unit) -> bool: return false
 func on_target_lost(reason: Enums.ReasonForTargetLoss, lost_target: Unit) -> void: pass
 func on_taunt_begin() -> void: pass
 func on_taunt_end() -> void: pass

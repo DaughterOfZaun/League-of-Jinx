@@ -1,2 +1,10 @@
 # Godot 4+ specific ignores
 .godot/
+
+*.csv
+*.import
+*.translation
+*.webp
+*.bin
+*.gltf
+*.png

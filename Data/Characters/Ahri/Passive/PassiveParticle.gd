@@ -1,7 +1,2 @@
-class_name AhriPassiveParticle
-
-class B extends Buff:
-	pass
-
-class S extends Spell:
-	pass
+class_name AhriPassiveParticleBuff
+extends Buff
