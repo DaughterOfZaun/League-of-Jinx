@@ -11,10 +11,10 @@
 [ext_resource type="Script" path="res://Buffs/BuffManager.gd" id="7_xjave"]
 [ext_resource type="Script" path="res://Data/CharVars.gd" id="8_tppkf"]
 [ext_resource type="Script" path="res://Spells/SpellManager.gd" id="8_w31m0"]
-[ext_resource type="Script" path="res://Data/Characters/Ahri/Q/OrbOfDeception.gd" id="9_7q5ox"]
 [ext_resource type="Script" path="res://Data/Characters/Ahri/Passive/CharScript.gd" id="9_dinfn"]
 [ext_resource type="Script" path="res://Data/AI/Hero.gd" id="10_adshq"]
 [ext_resource type="Script" path="res://Range.gd" id="11_711gw"]
+[ext_resource type="PackedScene" uid="uid://deob53ygp6ucl" path="res://Data/Characters/Ahri/Q/OrbOfDeception.tscn" id="12_rx3ai"]
 [ext_resource type="Texture2D" uid="uid://dfujtucm6vw5k" path="res://Data/AOE.webp" id="14_yurim"]
 [ext_resource type="Script" path="res://Character.gd" id="15_s5x6v"]
 
@@ -283,9 +283,7 @@ script = ExtResource("7_xjave")
 [node name="Spells" type="Node" parent="MainCharacter"]
 script = ExtResource("8_w31m0")
 
-[node name="Q" type="Node" parent="MainCharacter/Spells"]
-script = ExtResource("9_7q5ox")
-selection_preference = 1
+[node name="Q" parent="MainCharacter/Spells" instance=ExtResource("12_rx3ai")]
 
 [node name="CharVars" type="Node" parent="MainCharacter"]
 script = ExtResource("8_tppkf")

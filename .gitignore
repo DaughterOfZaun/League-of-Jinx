@@ -8,3 +8,6 @@
 *.bin
 *.gltf
 *.png
+
+node_modules/
+pnpm-lock.yaml

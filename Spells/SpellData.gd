@@ -1,86 +1,91 @@
 class_name SpellData
 extends Node
 
-@export var inventory_icon: Array[Texture2D] = []
-@export var spell_name := ""
-@export var display_name := ""
-@export var alternate_name := ""
-@export var description := ""
-@export var level_desc: Array[String] = [ "Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6" ]
+@export var inventory_icon: Array[Texture2D] #=[]
+@export var spell_name: String
+@export var display_name: String
+@export var alternate_name: String
+@export var description: String
+@export var level_desc: Array[String] #= [ "Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6" ]
 
 #region Tooltip
 @export_group("Tooltip")
-@export var dynamic_tooltip := ""
-@export var dynamic_extended := ""
-@export var float_statics_decimals: Array[int] = [ 2, 2, 2, 2, 2, 2 ]
-@export var float_vars_decimals: Array[int] = [ 2, 2, 2, 2, 2, 2 ]
-@export var effect_level_amount: Array[Array] = [
-	[ 0, 0, 0, 0, 0, 0, 0 ],
-	[ 0, 0, 0, 0, 0, 0, 0 ],
-	[ 0, 0, 0, 0, 0, 0, 0 ],
-	[ 0, 0, 0, 0, 0, 0, 0 ],
-	[ 0, 0, 0, 0, 0, 0, 0 ],
-	[ 0, 0, 0, 0, 0, 0, 0 ],
-]
+@export var dynamic_tooltip: String
+@export var dynamic_extended: String
+@export var float_statics_decimals: Array[int] #= [ 2, 2, 2, 2, 2, 2 ]
+@export var float_vars_decimals: Array[int] #= [ 2, 2, 2, 2, 2, 2 ]
+@export var effect_level_amount: Array[Array] #= [
+#	[ 0, 0, 0, 0, 0, 0, 0 ],
+#	[ 0, 0, 0, 0, 0, 0, 0 ],
+#	[ 0, 0, 0, 0, 0, 0, 0 ],
+#	[ 0, 0, 0, 0, 0, 0, 0 ],
+#	[ 0, 0, 0, 0, 0, 0, 0 ],
+#	[ 0, 0, 0, 0, 0, 0, 0 ],
+#]
 @export_group("")
 #endregion
 
-@export var cast_time := 0.0
-@export var override_cast_time := 0.0
-@export var channel_duration := 0.0
-@export var channel_duration_by_level: Array[float] = [ 0, 0, 0, 0, 0, 0, 0 ]
-@export var mana_cost_by_level: Array[float] = [ 0, 0, 0, 0, 0, 0, 0 ]
+@export var cast_time: float
+@export var override_cast_time: float
+@export var channel_duration: float
+@export var channel_duration_by_level: Array[float] #= [ 0, 0, 0, 0, 0, 0, 0 ]
+@export var mana_cost: float
+@export var mana_cost_by_level: Array[float] #= [ 0, 0, 0, 0, 0, 0, 0 ]
 
 #region Cooldown
 @export_subgroup("Cooldown")
-@export var start_cooldown := 0.0
-@export var cooldown_by_level: Array[float] = [ 0, 0, 0, 0, 0, 0, 0 ]
+@export var cooldown: float # renamed from start_cooldown
+@export var cooldown_by_level: Array[float] #= [ 0, 0, 0, 0, 0, 0, 0 ]
 var auto_cooldown_by_level: Array[float]:
 	get:
 		return cooldown_by_level
 	set(value):
 		cooldown_by_level = value
-@export var subject_to_global_cooldown := true
-@export var triggers_global_cooldown := true
+@export var subject_to_global_cooldown: bool #= true
+@export var triggers_global_cooldown: bool #= true
 #endregion
 
 #region Animation
 @export_group("Animation")
-@export var cast_frame := 7.5
-@export var animation_name := ""
-@export var animation_loop_name := ""
-@export var animation_winddown_name := ""
-@export var use_animator_framerate := false
+@export var cast_frame: float #= 7.5
+@export var animation_name: String
+@export var animation_loop_name: String
+@export var animation_winddown_name: String
+@export var use_animator_framerate: bool
 @export_group("")
 #endregion
 
 #region Targetting
 @export_group("Targetting")
-@export var targetting_type := Enums.TargetingType.TARGET
-@export var selection_preference := Enums.SpellSelectPref.NONE
-@export var cast_target_additional_units_radius := 0.0
-@export var location_targetting_width: Array[float] = [ 0, 0, 0, 0, 0, 0 ] #_by_level?
-@export var location_targetting_length: Array[float] = [ 0, 0, 0, 0, 0, 0 ] #_by_level?
-@export var use_minimap_targeting := false
+@export var targetting_type: Enums.TargetingType #= Enums.TargetingType.TARGET
+@export var selection_preference: Enums.SpellSelectPref #= Enums.SpellSelectPref.NONE
+@export var cast_target_additional_units_radius: float
+@export var location_targetting_width: float
+@export var location_targetting_width_by_level: Array[float] #= [ 0, 0, 0, 0, 0, 0 ]
+@export var location_targetting_length: float
+@export var location_targetting_length_by_level: Array[float] #= [ 0, 0, 0, 0, 0, 0 ]
+@export var use_minimap_targeting: bool
 #region Cast Cone
 @export_subgroup("Cast Cone")
-@export var cast_cone_angle := 45.0
-@export var cast_cone_distance := 100.0
-@export var lock_cone_to_player := false
+@export var cast_cone_angle: float #= 45.0
+@export var cast_cone_distance: float #= 100.0
+@export var lock_cone_to_player: bool
 #endregion
 #region Cast Radius
 @export_subgroup("Cast Radius", "cast_radius_")
-@export var cast_radius_primary := 100.0 # renamed from cast_radius
+@export var cast_radius_primary: float #= 100.0 # renamed from cast_radius
 @export var cast_radius_texture: Texture2D
-@export var cast_radius_secondary := 0.0
+@export var cast_radius_secondary: float
 @export var cast_radius_secondary_texture: Texture2D
 #endregion
 #region Cast Range
 @export_subgroup("Cast Range", "cast_range_")
-@export var cast_range_by_level: Array[float] = [ 0, 0, 0, 0, 0, 0, 0 ]
-@export var cast_range_display_override_by_level: Array[float] = [ 0, 0, 0, 0, 0, 0 ]
-@export var cast_range_use_bounding_boxes := false
-@export var cast_range_use_map_scaling := false
+@export var cast_range: float
+@export var cast_range_by_level: Array[float] #= [ 0, 0, 0, 0, 0, 0, 0 ]
+@export var cast_range_display_override: float
+@export var cast_range_display_override_by_level: Array[float] #= [ 0, 0, 0, 0, 0, 0 ]
+@export var cast_range_use_bounding_boxes: bool
+@export var cast_range_use_map_scaling: bool
 @export var cast_range_indicator_texture: Texture2D # renamed from range_indicator_texture_name
 #endregion
 #region Flags
@@ -117,122 +122,123 @@ var auto_cooldown_by_level: Array[float]:
 	"IGNORE_ENEMY_MINION:536870912",
 	"IGNORE_LANE_MINION:1073741824",
 	"IGNORE_CLONES:2147483648"
-) var flags: int = Enums.SpellFlags.DEFAULT
+) var flags: int #= Enums.SpellFlags.DEFAULT
 #endregion
 @export_group("")
 #endregion
 
 #region Effects
 @export_group("Effects")
-@export var have_after_effect := false
-@export var after_effect_name := ""
+@export var have_after_effect: bool
+@export var after_effect_name: String
 
-@export var have_hit_bone := false
-@export var hit_bone_name := ""
+@export var have_hit_bone: bool
+@export var hit_bone_name: String
 
-@export var have_hit_effect := false
-@export var hit_effect_name := ""
+@export var have_hit_effect: bool
+@export var hit_effect_name: String
 
-@export var have_point_effect := false
-@export var point_effect_name := ""
+@export var have_point_effect: bool
+@export var point_effect_name: String
 
-@export var particle_start_offset := Vector3.ZERO
-@export var sound_cast_name := "none.wav"
-@export var sound_hit_name := "none.wav"
+@export var particle_start_offset: Vector3
+@export var sound_cast_name: String #= "none.wav"
+@export var sound_hit_name: String  #= "none.wav"
 
-@export var spell_fx_override_skins: Array[String] = []
-@export var spell_vo_override_skins: Array[String] = []
+@export var spell_fx_override_skins: Array[String] #=[]
+@export var spell_vo_override_skins: Array[String] #=[]
 @export_group("")
 #endregion
 
 #region Cast
 @export_group("Cast")
-@export var cast_type := Enums.CastType.INSTANT
+@export var cast_type: Enums.CastType #= Enums.CastType.INSTANT
 #region Overrides
 @export_subgroup("Overrides")
-@export var override_force_spell_cancel := false
-@export var override_force_spell_animation := false
+@export var override_force_spell_cancel: bool
+@export var override_force_spell_animation: bool
 @export_subgroup("")
 #endregion
-@export var delay_cast_offset_percent := -0.5
-@export var delay_total_time_percent := 0.0
+@export var delay_cast_offset_percent: float #= -0.5
+@export var delay_total_time_percent: float
 #region Flags
 @export_subgroup("Flags")
-@export var always_snap_facing := false
-@export var spell_reveals_champion := true
-@export var can_cast_while_disabled := false
-@export var cannot_be_suppressed := false
-@export var can_only_cast_while_dead := false
-@export var cant_cancel_while_channeling := false
-@export var cant_cancel_while_winding_up := true
-@export var cant_cast_while_rooted := false
-@export var is_disabled_while_dead := true
-@export var is_toggle_spell := false
+@export var always_snap_facing: bool
+@export var spell_reveals_champion: bool #= true
+@export var can_cast_while_disabled: bool
+@export var cannot_be_suppressed: bool
+@export var can_only_cast_while_dead: bool
+@export var cant_cancel_while_channeling: bool
+@export var cant_cancel_while_winding_up: bool #= true
+@export var cant_cast_while_rooted: bool
+@export var is_disabled_while_dead: bool #= true
+@export var is_toggle_spell: bool
 #endregion
 #region Missile
 @export_subgroup("Missile", "missile_")
-@export var missile_accel := 0.0
-@export var missile_bone_name := ""
-@export var missile_effect := ""
-@export var missile_fixed_travel_time := 0.0
-@export var missile_gravity := 0.0
-@export var missile_lifetime := 0.0
-@export var missile_max_speed := 0.0
-@export var missile_min_speed := 0.0
-@export var missile_perception_bubble_radius := 0.0
-@export var missile_perception_bubble_reveals_stealth := false
-@export var missile_speed := 0.0
-@export var missile_target_height_augment := 100.0
-@export var missile_update_distance_interval := 0.0
+@export var missile_accel: float
+@export var missile_bone_name: String
+@export var missile_effect: String
+@export var missile_fixed_travel_time: float
+@export var missile_gravity: float
+@export var missile_lifetime: float
+@export var missile_max_speed: float
+@export var missile_min_speed: float
+@export var missile_perception_bubble_radius: float
+@export var missile_perception_bubble_reveals_stealth: bool
+@export var missile_speed: float
+@export var missile_target_height_augment: float #= 100.0
+@export var missile_update_distance_interval: float
 #endregion
 #region Line Missile
 @export_subgroup("Line Missile", "line_missile_")
-@export var line_missile_bounces := false
-@export var line_missile_bounce_radius := 450.0 # renamed from bounce_radius
-@export var line_missile_collision_from_start_point := false
-@export var line_missile_delay_destroy_at_end_seconds := false #?
-@export var line_missile_ends_at_target_point := false
-@export var line_missile_target_height_augment := 0.0
-@export var line_missile_time_pulse_between_collision_spell_hits := false #?
-@export var line_missile_track_units := false
-@export var line_width := 0.0
-@export var line_drag_length := 0.0
+@export var line_missile_bounces: bool
+@export var line_missile_bounce_radius: float #= 450.0 # renamed from bounce_radius
+@export var line_missile_collision_from_start_point: bool
+@export var line_missile_delay_destroy_at_end_seconds: bool #?
+@export var line_missile_ends_at_target_point: bool
+@export var line_missile_target_height_augment: float
+@export var line_missile_time_pulse_between_collision_spell_hits: bool #?
+@export var line_missile_track_units: bool
+@export var line_width: float
+@export var line_drag_length: float
 #endregion
 #region Circle Missile
 @export_subgroup("Circle Missile", "circle_missile_")
-@export var circle_missile_angular_velocity := 0.0
-@export var circle_missile_radial_velocity := 0.0
+@export var circle_missile_angular_velocity: float
+@export var circle_missile_radial_velocity: float
 #endregion
 #region Chain Missile
 @export_subgroup("Chain Missile", "chain_missile_")
-@export var chain_missile_can_hit_caster := false
-@export var chain_missile_can_hit_enemies := false
-@export var chain_missile_can_hit_friends := false
-@export var chain_missile_can_hit_same_target := false
-@export var chain_missile_can_hit_same_target_consecutively := false
-@export var chain_missile_maximum_hits := 0
-@export var chain_missile_maximum_hits_by_level: Array[int] = [ 0, 0, 0, 0, 0 ]
+@export var chain_missile_can_hit_caster: bool
+@export var chain_missile_can_hit_enemies: bool
+@export var chain_missile_can_hit_friends: bool
+@export var chain_missile_can_hit_same_target: bool
+@export var chain_missile_can_hit_same_target_consecutively: bool
+@export var chain_missile_maximum_hits: int
+@export var chain_missile_maximum_hits_by_level: Array[int] #= [ 0, 0, 0, 0, 0 ]
 #endregion
 @export_group("")
 #endregion
 
 #region Damage
 @export_subgroup("Damage")
-@export var apply_attack_damage := false
-@export var auto_target_damage_by_level: Array[float] = [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
-@export var physical_damage_ratio := 0.0
-@export var spell_damage_ratio := 0.0
-@export var death_recap_priority := 0.0
+@export var apply_attack_damage: bool
+@export var auto_target_damage: float
+@export var auto_target_damage_by_level: Array[float] #= [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
+@export var physical_damage_ratio: float
+@export var spell_damage_ratio: float
+@export var death_recap_priority: float
 @export_subgroup("")
 #endregion
 
 #region Metadata
 @export_subgroup("Metadata")
-@export var casting_breaks_stealth := false
-@export var doesnt_break_shields := false
-@export var is_damaging_spell := false
-@export var not_single_target_spell := false
-@export var triggers_spell_casts := false
+@export var casting_breaks_stealth: bool
+@export var doesnt_break_shields: bool
+@export var is_damaging_spell: bool
+@export var not_single_target_spell: bool
+@export var triggers_spell_casts: bool
 var doesnt_trigger_spell_casts: bool:
 	get:
 		return !triggers_spell_casts
@@ -243,11 +249,11 @@ var doesnt_trigger_spell_casts: bool:
 
 #region Other
 @export_group("Other")
-@export var ranks := 1
-@export var version := 1
-@export var belongs_to_avatar := false
-@export var platform_enabled := false #?
-@export var coefficient: Array[float] = [ 0, 0 ]
-@export var x: Array[float] = [ 0, 0, 0, 0, 0 ] #?
+@export var ranks: int #= 1
+@export var version: int #= 1
+@export var belongs_to_avatar: bool
+@export var platform_enabled: bool #?
+@export var coefficient: Array[float] #= [ 0, 0 ]
+@export var x: Array[float] #= [ 0, 0, 0, 0, 0 ] #?
 @export_group("")
 #endregion
