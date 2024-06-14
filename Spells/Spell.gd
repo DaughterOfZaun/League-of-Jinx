@@ -25,9 +25,9 @@ var level_plus_one:
 	get:
 		return level + 1
 
-var cost: float
-var cooldown: float # <- current
-var cast_range: float
+var current_cost: float
+var current_cooldown: float
+var current_cast_range: float
 var is_attack_override: bool
 
 var state := State.READY
