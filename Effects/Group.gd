@@ -1,6 +1,6 @@
 @tool
-#class_name Particle
-extends GPUParticles3D
+class_name Group
+extends Effect
 
 enum ColorLookupType { CONSTANT = 0, LIFETIME = 1, VELOCITY = 2, BIRTH_RANDOM = 3, COUNT = 4, }
 enum BlendMode { ADD, UNKNOWN_1, UNKNOWN_2, UNKNOWN_3, UNKNOWN_4, }
@@ -44,7 +44,7 @@ enum BeamMode { Default = 0, Arbitary = 1 }
 @export var emitter_rotation_angles: Array[float]
 @export var emitter_rotation_axes: Array[Vector3]
 @export var emitter_rotation_probs: Array[Curve]
-@export var emitter_birth_rotational_acceleration: Vector3
+@export var emitter_rotational_acceleration: Vector3
 @export_subgroup("")
 
 @export_subgroup("Trail", "emitter_trail_")
@@ -52,19 +52,17 @@ enum BeamMode { Default = 0, Arbitary = 1 }
 @export var emitter_trail_tile_size_y_prob: Curve
 @export var emitter_trail_cutoff: float
 @export_subgroup("UV", "emitter_")
-@export var emitter_birth_uv_offset: Vector2
-@export var emitter_birth_uv_offset_x_prob: Curve
-@export var emitter_birth_uv_offset_y_prob: Curve
+@export var emitter_uv_offset: Vector2
+@export var emitter_uv_offset_x_prob: Curve
+@export var emitter_uv_offset_y_prob: Curve
 @export var emitter_uv_scroll: Vector2
 @export_subgroup("")
 
-@export var emitter_birth_color: Color
+@export var emitter_color: Color
 @export var emitter_color_over_lifetime: Gradient
 @export var emitter_alpha_ref: int
 
 @export var emitter_beam_segments: int
-
-@export var exclude_attachment_type: String
 
 @export_group("Particle", "particle_")
 @export var particle_lifetime: float:
@@ -114,25 +112,25 @@ enum BeamMode { Default = 0, Arbitary = 1 }
 @export var particle_emit_offset_z_prob: Curve #p-offsetZPN
 @export var particle_scale_emit_offset_by_bound_object_size: float
 
-@export var particle_birth_translation: Vector3 #p-postoffset
-@export var particle_birth_translation_over_lifetime: Curve3D
-@export var particle_birth_translation_x_prob: Curve
-@export var particle_birth_translation_y_prob: Curve
-@export var particle_birth_translation_z_prob: Curve
+@export var particle_translation: Vector3 #p-postoffset
+@export var particle_translation_over_lifetime: Curve3D
+@export var particle_translation_x_prob: Curve
+@export var particle_translation_y_prob: Curve
+@export var particle_translation_z_prob: Curve
 
-@export var particle_birth_velocity: Vector3 #p-vel
+@export var particle_velocity: Vector3 #p-vel
 @export var particle_velocity_over_lifetime: Curve3D #p-velN
 @export var particle_velocity_x_prob: Curve #p-velXPN
 @export var particle_velocity_y_prob: Curve #p-velYPN
 @export var particle_velocity_z_prob: Curve #p-velZPN
 
-@export var particle_birth_acceleration: Vector3
-@export var particle_birth_acceleration_over_lifetime: Curve3D
-@export var particle_birth_acceleration_x_prob: Curve
-@export var particle_birth_acceleration_y_prob: Curve
-@export var particle_birth_acceleration_z_prob: Curve
+@export var particle_acceleration: Vector3
+@export var particle_acceleration_over_lifetime: Curve3D
+@export var particle_acceleration_x_prob: Curve
+@export var particle_acceleration_y_prob: Curve
+@export var particle_acceleration_z_prob: Curve
 
-@export var particle_birth_drag: Vector3 #p-drag
+@export var particle_drag: Vector3 #p-drag
 @export var particle_drag_over_lifetime: Curve3D
 @export var particle_drag_x_prob: Curve
 @export var particle_drag_y_prob: Curve
@@ -149,12 +147,12 @@ enum BeamMode { Default = 0, Arbitary = 1 }
 @export var particle_xrotation: Vector3
 @export var particle_xrotation_over_lifetime: Curve3D
 @export var particle_xrotation_x_prob: Curve
-@export var particle_birth_rotation: Vector3 #p-quadrot
+@export var particle_rotation: Vector3 #p-quadrot
 @export var particle_rotation_over_lifetime: Curve3D #p-quadrotN
 @export var particle_rotation_x_prob: Curve #p-quadrotXPN / p-quadrotPN
 @export var particle_rotation_y_prob: Curve #p-quadrotYPN
 @export var particle_rotation_z_prob: Curve #p-quadrotZPN
-@export var particle_birth_rotational_velocity: Vector3 #p-rotvel
+@export var particle_rotational_velocity: Vector3 #p-rotvel
 @export var particle_rotational_velocity_over_lifetime: Curve3D #p-rotvelN
 @export var particle_rotational_velocity_x_prob: Curve #p-rotvelXPN / p-rotvelPN
 @export var particle_rotational_velocity_y_prob: Curve #p-rotvelYPN
@@ -164,23 +162,23 @@ enum BeamMode { Default = 0, Arbitary = 1 }
 @export_subgroup("Orbit", "particle_")
 @export var particle_has_fixed_orbit: bool
 @export var particle_fixed_orbit_type: FixedOrbitType
-@export var particle_birth_orbit_velocity: Vector3
-@export var particle_birth_orbit_velocity_over_lifetime: Curve3D
-@export var particle_birth_orbit_velocity_y_prob: Curve
+@export var particle_orbit_velocity: Vector3
+@export var particle_orbit_velocity_over_lifetime: Curve3D
+@export var particle_orbit_velocity_y_prob: Curve
 @export_subgroup("")
 
 @export_subgroup("Scale", "particle_")
-@export var particle_xscale: Vector3
-@export var particle_birth_scale: Vector3 #p-scale
+@export var particle_scale: Vector3 #p-scale
 @export var particle_scale_bias: Vector2
 @export var particle_scale_over_lifetime: Curve3D #p-scaleN
 @export var particle_scale_x_prob: Curve
 @export var particle_scale_y_prob: Curve
 @export var particle_scale_z_prob: Curve
+@export var particle_xscale: Vector3
 @export var particle_xscale_over_lifetime: Curve3D
 @export var particle_xscale_x_prob: Curve #p-xscaleXPN / p-xscalePN
 @export var particle_scale_up_from_origin: bool
-@export var particle_scale_birth_scale_by_bound_object_size: float
+@export var particle_scale_scale_by_bound_object_size: float
 @export_subgroup("")
 
 @export_subgroup("Mesh", "particle_")
@@ -223,33 +221,28 @@ enum BeamMode { Default = 0, Arbitary = 1 }
 @export var team_color_correction: bool
 @export var in_uniform_scale: bool
 
-@export_group("System")
-@export var sound_on_create: String
-@export var sound_persistent: String
-@export var voice_over_on_create: String
-@export var voice_over_persistent: String
-
-@export var persist_thru_death: bool
-
-@export var simulate_every_frame: bool
-@export var simulate_once_per_frame: bool
-@export var simulate_while_off_screen: bool
-@export var sounds_play_while_off_screen: bool
-
-@export var build_up_time: float
-
 @export var _pass: int
-@export_group("")
+
+@export var exclude_attachment_type: String
+@export var keywords_included: String
+@export var keywords_excluded: String
+@export var keywords_required: String
 
 #func _set(_property, _value):
 #    update_fields()
 
 var particle_color_lookup_type: Vector2
 
+@export var p: GPUParticles3D
 var updating_fields := false
 func update_fields():
     if updating_fields: return
     else: updating_fields = true
+
+    if !p:
+        #p = GPUParticles3D.new()
+        #add_child(p, true)
+        return
 
     print('update_fields')
 
@@ -259,25 +252,25 @@ func update_fields():
     if emitter_life_is_infinite || emitter_lifetime < 0:
         emitter_life_is_infinite = true
         total_emitter_life = 1
-        one_shot = false
+        p.one_shot = false
     else:
         total_emitter_life = emitter_lifetime + emitter_linger
-        one_shot = true
+        p.one_shot = true
         if total_emitter_life == 0:
             emitter_enabled = false
     
-    emitting = emitter_enabled
+    p.emitting = emitter_enabled
 
-    lifetime = total_emitter_life
+    p.lifetime = total_emitter_life
     # OR
     #var total_particle_life := particle_lifetime + particle_linger
     #lifetime = total_emitter_life + total_particle_life
     #explosiveness = total_particle_life / lifetime
     
-    amount = round(total_emitter_life * emitter_rate)
+    p.amount = round(total_emitter_life * emitter_rate)
 
-    var m = process_material as ShaderMaterial
-    m.set_shader_parameter('amount', amount)
+    var m = p.process_material as ShaderMaterial
+    m.set_shader_parameter('amount', p.amount)
     m.set_shader_parameter('p_life', particle_lifetime)
     m.set_shader_parameter('p_linger', particle_linger)
     m.set_shader_parameter('p_colortype', Vector2i(particle_color_lookup_type_x, particle_color_lookup_type_y))
@@ -285,7 +278,7 @@ func update_fields():
     m.set_shader_parameter('p_coloroffset', particle_color_lookup_offset)
     m.set_shader_parameter('p_colorscale', particle_color_lookup_scale)
 
-    m = material_override as StandardMaterial3D    
+    m = p.material_override as StandardMaterial3D
     m.transparency = true
     m.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
     m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
@@ -298,29 +291,10 @@ func update_fields():
 func _ready():
     update_fields()
 
-func tex_parse(from: String) -> Texture2D: return null
-func vec3_parse(from: String) -> Vector3: return Vector3.ZERO
-func vec2_parse(from: String) -> Vector2: return Vector2.ZERO
-func ivec2_parse(from: String) -> Vector2i: return Vector2i.ZERO
-func string_parse(from: String) -> String: return ""
-func float_parse(from: String) -> float: return 0
-func bool_parse(from: String) -> bool: return false
-func int_parse(from: String) -> int: return 0
-func uint_parse(from: String) -> int: return 0
-func color_parse(from: String) -> Color: return Color.BLACK
-
-func curve_set(curve: Curve, from: String) -> Curve: return null
-func curve3d_set(curve: Curve3D, from: String) -> Curve3D: return null
-func gradient_set(curve: Gradient, from: String) -> Gradient: return null
-
-func array_get(a: Array, i: int): return a[i]
-func array_set(a: Array, i: int, v): a[i] = v
-
 func set_from_ini(d: Dictionary):
     var key_array := []
     var value = ""
     match key_array:
-        ["build-up-time"]: build_up_time = float_parse(value)
         ["e-active"]: emitter_time_active_during_period = float_parse(value)
         ["e-alpharef"]: emitter_alpha_ref = int_parse(value)
         ["e-beam-segments"]: emitter_beam_segments = int_parse(value)
@@ -337,7 +311,7 @@ func set_from_ini(d: Dictionary):
         ["e-ratebyvel"]: emitter_rate_by_velocity = vec2_parse(value)
         ["e-rateP", var i]: emitter_rate_prob = curve_set(emitter_rate_prob, value)
         ["e-rgba", var i]: emitter_color_over_lifetime = gradient_set(emitter_color_over_lifetime, value)
-        ["e-rgba"]: emitter_birth_color = color_parse(value)
+        ["e-rgba"]: emitter_color = color_parse(value)
         ["e-rotation", var i]: array_set(emitter_rotation_angles, i, float_parse(value))
         ["e-rotation", var i, "-axis"]: array_set(emitter_rotation_axes, i, vec3_parse(value))
         ["e-rotation", var i, "P", var j]: array_set(emitter_rotation_probs, i, curve_set(array_get(emitter_rotation_probs, i), value))
@@ -348,13 +322,13 @@ func set_from_ini(d: Dictionary):
         ["e-trail-cutoff"]: emitter_trail_cutoff = float_parse(value)
         #2 ["e-uvoffset_flex", var i]: pass
         #2 ["e-uvoffset", var i]: pass
-        ["e-uvoffset"]: emitter_birth_uv_offset = vec2_parse(value)
-        ["e-uvoffsetXP", var i]: emitter_birth_uv_offset_x_prob = curve_set(emitter_birth_uv_offset_x_prob, value)
-        #["e-uvoffsetYP", var i]: emitter_birth_uv_offset_y_prob = curve_set(emitter_birth_uv_offset_y_prob, value)
+        ["e-uvoffset"]: emitter_uv_offset = vec2_parse(value)
+        ["e-uvoffsetXP", var i]: emitter_uv_offset_x_prob = curve_set(emitter_uv_offset_x_prob, value)
+        #["e-uvoffsetYP", var i]: emitter_uv_offset_y_prob = curve_set(emitter_uv_offset_y_prob, value)
         ["e-uvscroll"]: emitter_uv_scroll = vec2_parse(value)
-        ["Emitter-BirthRotationalAcceleration"]: emitter_birth_rotational_acceleration = vec3_parse(value) # always v3.zero
+        ["Emitter-BirthRotationalAcceleration"]: emitter_rotational_acceleration = vec3_parse(value) # always v3.zero
         ["ExcludeAttachmentType"]: exclude_attachment_type = string_parse(value)
-        #region F
+        #region Fields
         ["f-accel"]: pass
         ["f-accelXP", var i]: pass
         ["f-accelYP", var i]: pass
@@ -395,24 +369,14 @@ func set_from_ini(d: Dictionary):
         ["flag-disable-z"]: pass
         ["flag-projected"]: pass
         ["fluid-params"]: pass
-        ["group-vis"]: pass
-        ["GroupPart", var i, "Importance"]: pass
-        ["GroupPart", var i, "Type"]: pass
-        ["GroupPart", var i]: pass
-        ["KeepOrientationAfterSpellCast"]: pass
-        ["KeywordsExcluded"]: pass
-        ["KeywordsIncluded"]: pass
-        ["KeywordsRequired"]: pass
-        ["MaterialOverride", var i, "BlendMode"]: pass
-        ["MaterialOverride", var i, "Priority"]: pass
-        ["MaterialOverride", var i, "SubMesh"]: pass
-        ["MaterialOverride", var i, "Texture"]: pass
-        ["MaterialOverrideTransMap"]: pass
+        ["KeywordsExcluded"]: keywords_excluded = string_parse(value)
+        ["KeywordsIncluded"]: keywords_included = string_parse(value)
+        ["KeywordsRequired"]: keywords_required = string_parse(value)
         #6 ["p-accel", var i]: pass
-        ["p-accel"]: particle_birth_acceleration = vec3_parse(value)
-        ["p-accelXP", var i]: particle_birth_acceleration_x_prob = curve_set(particle_birth_acceleration_x_prob, value)
-        ["p-accelYP", var i]: particle_birth_acceleration_y_prob = curve_set(particle_birth_acceleration_y_prob, value)
-        ["p-accelZP", var i]: particle_birth_acceleration_z_prob = curve_set(particle_birth_acceleration_z_prob, value)
+        ["p-accel"]: particle_acceleration = vec3_parse(value)
+        ["p-accelXP", var i]: particle_acceleration_x_prob = curve_set(particle_acceleration_x_prob, value)
+        ["p-accelYP", var i]: particle_acceleration_y_prob = curve_set(particle_acceleration_y_prob, value)
+        ["p-accelZP", var i]: particle_acceleration_z_prob = curve_set(particle_acceleration_z_prob, value)
         ["p-alphaslicerange"]: particle_alpha_slice_range = float_parse(value)
         ["p-animation"]: particle_mesh_animation = string_parse(value)
         ["p-backfaceon"]: particle_mesh_disable_backface_cull = int_parse(value) !=0
@@ -426,7 +390,7 @@ func set_from_ini(d: Dictionary):
         ["p-distortion-mode"]: particle_distortion_mode = uint_parse(value)
         ["p-distortion-power"]: particle_distortion = float_parse(value)
         ["p-drag", var i]: particle_drag_over_lifetime = curve3d_set(particle_drag_over_lifetime, value)
-        ["p-drag"]: particle_birth_drag = vec3_parse(value)
+        ["p-drag"]: particle_drag = vec3_parse(value)
         ["p-dragXP", var i]: particle_drag_x_prob = curve_set(particle_drag_x_prob, value)
         ["p-dragYP", var i]: particle_drag_y_prob = curve_set(particle_drag_y_prob, value)
         ["p-dragZP", var i]: particle_drag_z_prob = curve_set(particle_drag_z_prob, value)
@@ -434,7 +398,7 @@ func set_from_ini(d: Dictionary):
         ["p-fixedorbit"]: particle_has_fixed_orbit = bool_parse(value)
         ["p-fixedorbittype"]: particle_fixed_orbit_type = uint_parse(value) as FixedOrbitType
         ["p-flexoffset"]: particle_scale_emit_offset_by_bound_object_size = float_parse(value)
-        ["p-flexscale"]: particle_scale_birth_scale_by_bound_object_size = float_parse(value)
+        ["p-flexscale"]: particle_scale_scale_by_bound_object_size = float_parse(value)
         #0 ["p-followterrain"]: particle_is_following_terrain = bool_parse(value)
         ["p-frameRate"]: particle_frame_rate = float_parse(value)
         #2 ["p-life_flex", var i]: pass
@@ -457,24 +421,24 @@ func set_from_ini(d: Dictionary):
         ["p-offsetXP", var i]: particle_emit_offset_x_prob = curve_set(particle_emit_offset_x_prob, value)
         ["p-offsetYP", var i]: particle_emit_offset_y_prob = curve_set(particle_emit_offset_y_prob, value)
         ["p-offsetZP", var i]: particle_emit_offset_z_prob = curve_set(particle_emit_offset_z_prob, value)
-        ["p-orbitvel", var i]: particle_birth_orbit_velocity_over_lifetime = curve3d_set(particle_birth_orbit_velocity_over_lifetime, value)
-        ["p-orbitvel"]: particle_birth_orbit_velocity = vec3_parse(value)
-        ["p-orbitvelYP", var i]: particle_birth_orbit_velocity_y_prob = curve_set(particle_birth_orbit_velocity_y_prob, value)
+        ["p-orbitvel", var i]: particle_orbit_velocity_over_lifetime = curve3d_set(particle_orbit_velocity_over_lifetime, value)
+        ["p-orbitvel"]: particle_orbit_velocity = vec3_parse(value)
+        ["p-orbitvelYP", var i]: particle_orbit_velocity_y_prob = curve_set(particle_orbit_velocity_y_prob, value)
         ["p-orientation"]: particle_orientation = vec3_parse(value)
-        #0 ["p-ostoffset"]: particle_birth_translation = vec3_parse(value)
+        #0 ["p-ostoffset"]: particle_translation = vec3_parse(value)
         #2 ["p-postoffset_flex", var i]: pass
-        ["p-postoffset", var i]: particle_birth_translation_over_lifetime = curve3d_set(particle_birth_translation_over_lifetime, value)
-        ["p-postoffset"]: particle_birth_translation = vec3_parse(value)
-        ["p-postoffsetXP", var i]: particle_birth_translation_x_prob = curve_set(particle_birth_translation_x_prob, value)
+        ["p-postoffset", var i]: particle_translation_over_lifetime = curve3d_set(particle_translation_over_lifetime, value)
+        ["p-postoffset"]: particle_translation = vec3_parse(value)
+        ["p-postoffsetXP", var i]: particle_translation_x_prob = curve_set(particle_translation_x_prob, value)
         #3 ["p-postoffsetXP"]: pass
-        ["p-postoffsetYP", var i]: particle_birth_translation_y_prob = curve_set(particle_birth_translation_y_prob, value)
+        ["p-postoffsetYP", var i]: particle_translation_y_prob = curve_set(particle_translation_y_prob, value)
         #3 ["p-postoffsetYP"]: pass
-        ["p-postoffsetZP", var i]: particle_birth_translation_z_prob = curve_set(particle_birth_translation_z_prob, value)
+        ["p-postoffsetZP", var i]: particle_translation_z_prob = curve_set(particle_translation_z_prob, value)
         #3 ["p-postoffsetZP"]: pass
         ["p-projection-fading"]: particle_projection_fading = float_parse(value)
         ["p-projection-y-range"]: particle_projection_y_range = float_parse(value)
         ["p-quadrot", var i]: particle_rotation_over_lifetime = curve3d_set(particle_rotation_over_lifetime, value)
-        ["p-quadrot"]: particle_birth_rotation = vec3_parse(value) # float in simple
+        ["p-quadrot"]: particle_rotation = vec3_parse(value) # float in simple
         ["p-quadrotP", var i]: particle_rotation_x_prob = curve_set(particle_rotation_x_prob, value)
         ["p-quadrotXP", var i]: particle_rotation_x_prob = curve_set(particle_rotation_x_prob, value)
         ["p-quadrotYP", var i]: particle_rotation_y_prob = curve_set(particle_rotation_y_prob, value)
@@ -483,17 +447,17 @@ func set_from_ini(d: Dictionary):
         ["p-rgba"]: particle_color_lookup_texture = tex_parse(value)
         #2 ["p-rotvel_flex", var i]: pass
         ["p-rotvel", var i]: particle_rotational_velocity_over_lifetime = curve3d_set(particle_rotational_velocity_over_lifetime, value)
-        ["p-rotvel"]: particle_birth_rotational_velocity = vec3_parse(value) # float in simple
+        ["p-rotvel"]: particle_rotational_velocity = vec3_parse(value) # float in simple
         ["p-rotvelP", var i]: particle_rotational_velocity_x_prob = curve_set(particle_rotational_velocity_x_prob, value)
         ["p-rotvelXP", var i]: particle_rotational_velocity_x_prob = curve_set(particle_rotational_velocity_x_prob, value)
         ["p-rotvelYP", var i]: particle_rotational_velocity_y_prob = curve_set(particle_rotational_velocity_y_prob, value)
         ["p-rotvelZP", var i]: particle_rotational_velocity_z_prob = curve_set(particle_rotational_velocity_z_prob, value)
         #4 ["p-scale_flex", var i]: pass
         ["p-scale", var i]: particle_scale_over_lifetime = curve3d_set(particle_scale_over_lifetime, value)
-        ["p-scale"]: particle_birth_scale = vec3_parse(value) # float in simple
+        ["p-scale"]: particle_scale = vec3_parse(value) # float in simple
         ["p-scalebias"]: particle_scale_bias = vec2_parse(value)
-        #0 ["p-scalebyheight"]: particle_scale_birth_scale_by_bound_object_height = float_parse(value)
-        #0 ["p-scalebyradius"]: particle_scale_birth_scale_by_bound_object_radius = float_parse(value)
+        #0 ["p-scalebyheight"]: particle_scale_scale_by_bound_object_height = float_parse(value)
+        #0 ["p-scalebyradius"]: particle_scale_scale_by_bound_object_radius = float_parse(value)
         #2 ["p-scaleEmitOffset_flex", var i]: pass
         ["p-scaleupfromorigin"]: particle_scale_up_from_origin = bool_parse(value)
         ["p-scaleP", var i]: particle_scale_x_prob = curve_set(particle_scale_x_prob, value)
@@ -518,7 +482,7 @@ func set_from_ini(d: Dictionary):
         ["p-vecalign"]: particle_is_direction_oriented = bool_parse(value)
         #2 ["p-vel_flex", var i]: pass
         ["p-vel", var i]: particle_velocity_over_lifetime = curve3d_set(particle_velocity_over_lifetime, value)
-        ["p-vel"]: particle_birth_velocity = vec3_parse(value)
+        ["p-vel"]: particle_velocity = vec3_parse(value)
         ["p-velXP", var i]: particle_velocity_x_prob = curve_set(particle_velocity_x_prob, value)
         ["p-velYP", var i]: particle_velocity_y_prob = curve_set(particle_velocity_y_prob, value)
         ["p-velZP", var i]: particle_velocity_z_prob = curve_set(particle_velocity_z_prob, value)
@@ -534,27 +498,17 @@ func set_from_ini(d: Dictionary):
         ["p-xscale", var i]: particle_xscale_over_lifetime = curve3d_set(particle_xscale_over_lifetime, value)
         ["p-xscale"]: particle_xscale = vec3_parse(value) # float in simple
         ["p-xscaleP", var i]: particle_xscale_x_prob = curve_set(particle_xscale_x_prob, value)
-        ["Particle-Acceleration", var i]: particle_birth_acceleration_over_lifetime = curve3d_set(particle_birth_acceleration_over_lifetime, value)
-        ["Particle-Acceleration"]: particle_birth_acceleration = vec3_parse(value)
-        ["Particle-AccelerationXP", var i]: particle_birth_acceleration_x_prob = curve_set(particle_birth_acceleration_x_prob, value)
-        ["Particle-AccelerationYP", var i]: particle_birth_acceleration_y_prob = curve_set(particle_birth_acceleration_y_prob, value)
-        ["Particle-AccelerationZP", var i]: particle_birth_acceleration_z_prob = curve_set(particle_birth_acceleration_z_prob, value)
-        ["Particle-Drag"]: particle_birth_drag = vec3_parse(value)
+        ["Particle-Acceleration", var i]: particle_acceleration_over_lifetime = curve3d_set(particle_acceleration_over_lifetime, value)
+        ["Particle-Acceleration"]: particle_acceleration = vec3_parse(value)
+        ["Particle-AccelerationXP", var i]: particle_acceleration_x_prob = curve_set(particle_acceleration_x_prob, value)
+        ["Particle-AccelerationYP", var i]: particle_acceleration_y_prob = curve_set(particle_acceleration_y_prob, value)
+        ["Particle-AccelerationZP", var i]: particle_acceleration_z_prob = curve_set(particle_acceleration_z_prob, value)
+        ["Particle-Drag"]: particle_drag = vec3_parse(value)
         #0 ["Particle-ScaleAlongMovementVector"]: scale_along_movement_vector = float_parse(value)
         ["Particle-Velocity", var i]: particle_velocity_over_lifetime = curve3d_set(particle_velocity_over_lifetime, value)
-        ["Particle-Velocity"]: particle_birth_velocity = vec3_parse(value)
+        ["Particle-Velocity"]: particle_velocity = vec3_parse(value)
         ["pass"]: _pass = int_parse(value)
-        ["PersistThruDeath"]: persist_thru_death = bool_parse(value)
         ["rendermode"]: blend_mode = int_parse(value) as BlendMode
-        #1 ["SelfIllumination"]: self_illumination = float_parse(value) # bool?
-        ["SimulateEveryFrame"]: simulate_every_frame = bool_parse(value)
-        ["SimulateOncePerFrame"]: simulate_once_per_frame = bool_parse(value)
-        ["SimulateWhileOffScreen"]: simulate_while_off_screen = bool_parse(value)
         ["single-particle"]: emitter_emit_single_particle = int_parse(value)
-        ["SoundOnCreate"]: sound_on_create = string_parse(value)
-        ["SoundPersistent"]: sound_persistent = string_parse(value)
-        ["SoundsPlayWhileOffScreen"]: sounds_play_while_off_screen = bool_parse(value)
         ["teamcolor-correction"]: team_color_correction = bool_parse(value)
         ["uniformscale"]: in_uniform_scale = int_parse(value) != 0
-        ["VoiceOverOnCreate"]: voice_over_on_create = string_parse(value)
-        ["VoiceOverPersistent"]: voice_over_persistent = string_parse(value)

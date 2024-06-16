@@ -1,6 +1,5 @@
-[gd_scene load_steps=14 format=3 uid="uid://df4f36r1g3i50"]
+[gd_scene load_steps=8 format=3 uid="uid://df4f36r1g3i50"]
 
-[ext_resource type="Shader" path="res://new_shader.gdshader" id="1_5dvhb"]
 [ext_resource type="Texture2D" uid="uid://dikq8wg2d5b1b" path="res://Data/Characters/Ahri/Q/Particles/OrbGlow.webp" id="1_gdxgc"]
 [ext_resource type="Script" path="res://Emitter.gd" id="2_s1ijm"]
 [ext_resource type="Texture2D" uid="uid://cyc8c12ov0igm" path="res://Data/Characters/Ahri/Q/Particles/color-nexus-gem-glow.webp" id="5_ypob2"]
@@ -18,37 +17,6 @@ glow_enabled = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_mfen8"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q31bu"]
-transparency = 1
-blend_mode = 1
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("1_gdxgc")
-billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ql7c"]
-shader = ExtResource("1_5dvhb")
-shader_parameter/amount = 8
-shader_parameter/p_life = 0.5
-shader_parameter/p_linger = 0.2
-shader_parameter/p_colortype = Vector2i(0, 0)
-shader_parameter/p_coloroffset = Vector2(0, 0)
-shader_parameter/p_colorscale = Vector2(1, 1)
-
-[sub_resource type="QuadMesh" id="QuadMesh_kchsa"]
-
-[sub_resource type="Curve" id="Curve_txu3g"]
-min_value = -2.0
-max_value = 2.0
-_data = [Vector2(0, -2), 0.0, 2.0, 0, 1, Vector2(0.5, -1), 2.0, 0.0, 1, 0, Vector2(0.5, 1), inf_neg, 2.0, 1, 1, Vector2(1, 2), 2.0, nan, 1, 1]
-point_count = 4
-
-[sub_resource type="CurveTexture" id="CurveTexture_8ma8d"]
-texture_mode = 1
-
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -62,25 +30,19 @@ shadow_enabled = true
 mesh = SubResource("QuadMesh_mfen8")
 skeleton = NodePath("../GPUParticles3D")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-material_override = SubResource("StandardMaterial3D_q31bu")
-emitting = false
-lifetime = 0.8
-one_shot = true
-local_coords = true
-process_material = SubResource("ShaderMaterial_7ql7c")
-draw_pass_1 = SubResource("QuadMesh_kchsa")
+[node name="GPUParticles3D" type="Node3D" parent="." node_paths=PackedStringArray("p")]
 script = ExtResource("2_s1ijm")
 emitter_lifetime = 0.8
 emitter_rate = 10.0
-emitter_framerate_probability = SubResource("Curve_txu3g")
 particle_lifetime = 0.5
-particle_life_curve = SubResource("CurveTexture_8ma8d")
 particle_linger = 0.2
 particle_texture = ExtResource("1_gdxgc")
 particle_color_lookup_texture = ExtResource("5_ypob2")
 particle_color_lookup_type_x = 1
 particle_color_lookup_type_y = 3
+p = NodePath("GPUParticles3D")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="GPUParticles3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.01548)
