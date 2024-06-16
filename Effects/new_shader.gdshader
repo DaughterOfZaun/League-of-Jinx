@@ -1,14 +1,14 @@
 shader_type particles;
 //render_mode disable_velocity;
 
-uniform uint amount;
-uniform float p_life;
+uniform uint amount = 8;
+uniform float p_life = 1;
 uniform sampler2D p_life_p;
-uniform float p_linger;
+uniform float p_linger = 0;
 uniform sampler2D p_rgba;
 uniform ivec2 p_colortype;
 uniform vec2 p_coloroffset;
-uniform vec2 p_colorscale;
+uniform vec2 p_colorscale = vec2(1, 1);
 //const int COLOR_LOOKUP_TYPE_CONSTANT = 0;
 const int COLOR_LOOKUP_TYPE_LIFETIME = 1;
 const int COLOR_LOOKUP_TYPE_VELOCITY = 2;
@@ -17,8 +17,8 @@ const int COLOR_LOOKUP_TYPE_COUNT = 4;
 
 #define AMOUNT amount
 #define BASE_NUMBER NUMBER
-#define TIME_PASSED CUSTOM.x
-#define P_LIFE CUSTOM.y
+#define TIME_PASSED CUSTOM.y
+#define P_LIFE CUSTOM.w
 #define MAX_VELOCITY 1.0 // Temporary hack
 
 float rand_from_seed(inout uint seed) {
@@ -64,14 +64,16 @@ void start() {
 
 	uint alt_seed = hash(BASE_NUMBER + uint(1) + RANDOM_SEED);
 
-	P_LIFE = p_life * texture(p_life_p, vec2(rand_from_seed(alt_seed), 1.0)).r + p_linger;
+	//P_LIFE = p_life * texture(p_life_p, vec2(rand_from_seed(alt_seed), 1.0)).r + p_linger;
+	P_LIFE = p_life;
 }
 
 // Called every frame on existing particles (according to the Fixed FPS property).
 void process() {
 
 	TIME_PASSED += DELTA;
-	ACTIVE = TIME_PASSED < P_LIFE;
+	if(TIME_PASSED >= P_LIFE)
+		ACTIVE = false;
 
 	uint alt_seed = hash(BASE_NUMBER + uint(1) + RANDOM_SEED);
 
@@ -84,5 +86,6 @@ void process() {
 	coords.y += float(p_colortype.y == COLOR_LOOKUP_BIRTH_RANDOM && RESTART) * rand_from_seed(alt_seed);
 	coords += COMPARE_IVEC2_WITH_INT_AND_RETURN_VEC2(p_colortype, COLOR_LOOKUP_TYPE_VELOCITY) * (length(VELOCITY) / MAX_VELOCITY);
 	coords += COMPARE_IVEC2_WITH_INT_AND_RETURN_VEC2(p_colortype, COLOR_LOOKUP_TYPE_COUNT) * (float(INDEX) / float(AMOUNT));
-	COLOR = texture(p_rgba, p_coloroffset + (coords * p_colorscale));
+	//COLOR = texture(p_rgba, p_coloroffset + (coords * p_colorscale));
+	COLOR = texture(p_rgba, coords);
 }
