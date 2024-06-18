@@ -72,7 +72,6 @@ func recreate_groups(ini: Dictionary):
         if len(info) > 2: group.group_importance = info[2]
         group.set_from_ini_section(ini[group.name])
         add_child(group, true)
-        print('System ', self, ' owner ', owner)
         group.owner = owner
 
         group.updating_fields -= 1

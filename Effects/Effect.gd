@@ -2,6 +2,8 @@
 class_name Effect
 extends Node3D
 
+const HW2GD := 1. / 70. #0.014285714
+
 enum ColorLookupType { CONSTANT = 0, LIFETIME = 1, VELOCITY = 2, BIRTH_RANDOM = 3, COUNT = 4, }
 enum BlendMode { ADD, UNKNOWN_1, UNKNOWN_2, UNKNOWN_3, UNKNOWN_4, }
 enum TrailMode { DEFAULT = 0, WAKE = 1, }
@@ -21,25 +23,35 @@ enum GroupType { INVALID = -1, SIMPLE = 0, COMPLEX = 1, }
 func string_parse(from: String) -> String:
     return from
 
-var tex_cache = null
-const tex_format := ".webp"
-func tex_parse(from: String) -> Texture2D:
-    from = string_parse(from)
-    var path := "res://Data/Particles"
-
-    if tex_cache == null:
-        tex_cache = {}
-        var dir = DirAccess.open(path)
+var res_path := "res://Data/Particles"
+var res_cache = null
+func get_from_cache(key: String) -> String:
+    if res_cache == null:
+        res_cache = {}
+        var dir = DirAccess.open(res_path)
         dir.list_dir_begin()
         while true:
             var fname = dir.get_next()
             if fname == "": break
             if dir.current_is_dir(): continue
             var fname_lc := fname.to_lower()
-            if fname_lc.ends_with(tex_format):
-                tex_cache[fname_lc] = fname
-    
-    return load(path + "/" + tex_cache[from.to_lower().replace(".tga", tex_format)])
+            if fname_lc.ends_with(tex_ext)\
+            || fname_lc.ends_with(mesh_ext):
+                res_cache[fname_lc] = fname
+    return res_cache[key]
+
+const tex_ext := ".webp"
+func tex_parse(from: String) -> Texture2D:
+    return res_parse(from, ".dds", ".tga", tex_ext) as Texture2D
+
+const mesh_ext := ".obj"
+func mesh_parse(from: String) -> Mesh:
+    return res_parse(from, ".scb", ".sco", mesh_ext) as Mesh
+
+func res_parse(from: String, bin_ext: String, txt_ext: String, out_ext: String) -> Resource:
+    from = string_parse(from)
+    from = from.to_lower().replace(bin_ext, out_ext).replace(txt_ext, out_ext)
+    return load(res_path + "/" + get_from_cache(from))
 
 enum VectorUsage { UNDEFINED, SCALE, ROTATION }
 func vec3_parse(from: String, u := VectorUsage.UNDEFINED) -> Vector3:
@@ -197,3 +209,10 @@ func ini_load(import_path: String) -> Dictionary:
         section.append([key_array, value])
     
     return result
+
+func curve_is_invalid_or_is_always_equal_to_one(c: Curve) -> bool:
+    if c && c.point_count > 0:
+        for i in range(c.point_count):
+            if c.get_point_position(i).y != 1:
+                return false
+    return true
