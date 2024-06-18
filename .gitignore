@@ -8,6 +8,9 @@
 *.bin
 *.gltf
 *.png
+*.obj
+*.mtl
+*.troy
 
 node_modules/
 pnpm-lock.yaml

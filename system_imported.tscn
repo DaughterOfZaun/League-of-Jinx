@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://c2fexclhq6y02"]
+[gd_scene load_steps=102 format=3 uid="uid://c2fexclhq6y02"]
 
 [ext_resource type="Script" path="res://Effects/System.gd" id="1_cckcp"]
 [ext_resource type="QuadMesh" uid="uid://bn2eqo6iw7ho8" path="res://Effects/new_quad_mesh.tres" id="4_41g6w"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dfyib8ftnbpgp" path="res://Data/Particles/color-bellcurve2.webp" id="8_2xggw"]
 [ext_resource type="ArrayMesh" uid="uid://dy8ojuur3v68w" path="res://Data/Particles/magicBall.obj" id="8_oln1k"]
 [ext_resource type="Texture2D" uid="uid://df66tt0sav1sh" path="res://Data/Particles/color-bellcurve5.webp" id="9_n5647"]
+[ext_resource type="SphereMesh" uid="uid://cepkqgvart1mh" path="res://Effects/new_sphere_mesh.tres" id="10_1w23u"]
 [ext_resource type="Texture2D" uid="uid://bm4haoynmbcy" path="res://Data/Particles/AhriOrb.webp" id="10_x4tiu"]
 [ext_resource type="Texture2D" uid="uid://j4a38pt73s2f" path="res://Data/Particles/Ahri_OrbSwirl.webp" id="11_p3tj8"]
 [ext_resource type="Texture2D" uid="uid://dikq8wg2d5b1b" path="res://Data/Particles/OrbGlow.webp" id="12_7007d"]
@@ -89,10 +90,7 @@ blend_mode = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("10_x4tiu")
-billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
+billboard_keep_scale = true
 
 [sub_resource type="CurveTexture" id="CurveTexture_0q88s"]
 texture_mode = 1
@@ -105,7 +103,7 @@ shader = ExtResource("5_sidxf")
 shader_parameter/amount = 6
 shader_parameter/p_life_i = 1.0
 shader_parameter/p_linger = 0.2
-shader_parameter/p_colortype = Vector2i(0, 0)
+shader_parameter/p_colortype = Vector2i(1, 0)
 shader_parameter/p_coloroffset = Vector2(0, 0)
 shader_parameter/p_colorscale = Vector2(1, 1)
 shader_parameter/p_bindweight = 1.0
@@ -205,6 +203,7 @@ shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("12_7007d")
 billboard_mode = 3
+billboard_keep_scale = true
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
@@ -429,7 +428,7 @@ _data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_x7v6g"]
-offsets = PackedFloat32Array(0, 1, 0, 1)
+offsets = PackedFloat32Array(0, 0, 1, 1)
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bniv7"]
@@ -487,10 +486,8 @@ particle_scale = Vector3(50, 50, 50)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="System/Inner_Light"]
 material_override = SubResource("StandardMaterial3D_420eg")
-emitting = false
 amount = 4
 lifetime = 0.8
-one_shot = true
 process_material = SubResource("ShaderMaterial_4fy2k")
 draw_pass_1 = ExtResource("4_41g6w")
 
@@ -519,12 +516,10 @@ particle_uv_scroll_rate = Vector2(1.7, 0)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="System/Orb"]
 material_override = SubResource("StandardMaterial3D_3ogya")
-emitting = false
 amount = 6
 lifetime = 0.8
-one_shot = true
 process_material = SubResource("ShaderMaterial_r4otu")
-draw_pass_1 = ExtResource("8_oln1k")
+draw_pass_1 = ExtResource("10_1w23u")
 
 [node name="Swirl" type="Node3D" parent="System"]
 script = ExtResource("6_mdr2n")
@@ -550,10 +545,8 @@ particle_uv_scroll_rate = Vector2(3.7, 0)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="System/Swirl"]
 material_override = SubResource("StandardMaterial3D_hr71u")
-emitting = false
 amount = 6
 lifetime = 0.8
-one_shot = true
 process_material = SubResource("ShaderMaterial_xrhlo")
 draw_pass_1 = ExtResource("8_oln1k")
 
@@ -574,11 +567,10 @@ particle_rotational_velocity_z_prob = SubResource("Curve_v1lcn")
 particle_scale = Vector3(60, 60, 60)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="System/Rays"]
+visible = false
 material_override = SubResource("StandardMaterial3D_y3qm0")
-emitting = false
 amount = 4
 lifetime = 0.8
-one_shot = true
 process_material = SubResource("ShaderMaterial_l6qlk")
 draw_pass_1 = ExtResource("4_41g6w")
 
@@ -599,17 +591,15 @@ particle_scale = Vector3(85, 85, 85)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="System/Glow"]
 material_override = SubResource("StandardMaterial3D_1bnvv")
-emitting = false
 lifetime = 0.8
-one_shot = true
 process_material = SubResource("ShaderMaterial_52sbh")
 draw_pass_1 = ExtResource("4_41g6w")
 
 [node name="ProjectedLight" type="Node3D" parent="System"]
 script = ExtResource("6_mdr2n")
 emitter_lifetime = 1.0
-emitter_rate = 3.0
 emitter_emit_single_particle = true
+emitter_rate = 3.0
 particle_lifetime = 1.0
 particle_texture = ExtResource("15_qg1gu")
 particle_color_lookup_texture = ExtResource("16_pbcgf")
@@ -620,18 +610,17 @@ particle_simple_orientation = 2
 particle_scale = Vector3(200, 200, 200)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="System/ProjectedLight"]
+visible = false
 material_override = SubResource("StandardMaterial3D_6qk64")
-emitting = false
 amount = 3
-one_shot = true
 process_material = SubResource("ShaderMaterial_m84wa")
 draw_pass_1 = ExtResource("4_41g6w")
 
 [node name="Smoke" type="Node3D" parent="System"]
 script = ExtResource("6_mdr2n")
 emitter_lifetime = 1.0
-emitter_rate = 100.0
 emitter_emit_single_particle = true
+emitter_rate = 100.0
 emitter_is_local_orientation = true
 emitter_rotation_angles = Array[float]([0.0, 3.0, 1.0])
 emitter_rotation_axes = Array[Vector3]([Vector3(0, 0, 0), Vector3(0, 0, 1), Vector3(0, 1, 0)])
@@ -664,10 +653,9 @@ particle_uv_scroll_rate = Vector2(0, -0.8)
 blend_mode = 1
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="System/Smoke"]
+visible = false
 material_override = SubResource("StandardMaterial3D_arh6f")
-emitting = false
 amount = 100
-one_shot = true
 process_material = SubResource("ShaderMaterial_aby12")
 draw_pass_1 = ExtResource("19_1su63")
 
@@ -699,19 +687,18 @@ particle_xscale_over_lifetime = SubResource("Gradient_dfenu")
 particle_trail_mode = 1
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="System/RibbonTrail"]
+visible = false
 material_override = SubResource("StandardMaterial3D_xe7wx")
-emitting = false
 amount = 140
 lifetime = 0.7
-one_shot = true
 process_material = SubResource("ShaderMaterial_ibfl2")
 draw_pass_1 = ExtResource("4_41g6w")
 
 [node name="Sparkle" type="Node3D" parent="System"]
 script = ExtResource("6_mdr2n")
 emitter_lifetime = 1.0
-emitter_rate = 150.0
 emitter_emit_single_particle = true
+emitter_rate = 150.0
 emitter_is_local_orientation = true
 particle_lifetime = 1.7
 particle_lifetime_over_lifetime = SubResource("Curve_t5tpk")
@@ -739,9 +726,8 @@ particle_xscale = Vector3(1, 1, 1)
 particle_xscale_over_lifetime = SubResource("Gradient_x7v6g")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="System/Sparkle"]
+visible = false
 material_override = SubResource("StandardMaterial3D_bniv7")
-emitting = false
 amount = 150
-one_shot = true
 process_material = SubResource("ShaderMaterial_q7frn")
 draw_pass_1 = ExtResource("4_41g6w")

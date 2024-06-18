@@ -27,6 +27,8 @@ extends Effect
 @export var emitter_linger: float: #e-linger
     set(value): emitter_linger = value; update_fields()
 
+@export var emitter_emit_single_particle: bool: #single-particle
+    set(value): emitter_emit_single_particle = value; update_fields()
 @export var emitter_rate: float: #e-rate
     set(value): emitter_rate = value; update_fields()
 @export var emitter_rate_prob: Curve:
@@ -35,8 +37,6 @@ extends Effect
     set(value): emitter_rate_over_lifetime = value; update_fields()
 @export var emitter_rate_by_velocity: Vector2:
     set(value): emitter_rate_by_velocity = value; update_fields()
-@export var emitter_emit_single_particle: bool: #single-particle
-    set(value): emitter_emit_single_particle = value; update_fields()
 
 @export var emitter_framerate: float:
     set(value): emitter_framerate = value; update_fields()
@@ -451,6 +451,7 @@ func update_fields():
     m.vertex_color_use_as_albedo = true
     m.albedo_texture = particle_mesh_texture if particle_mesh else particle_texture
     m.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+    m.billboard_keep_scale = true
 
     updating_fields -= 1
 

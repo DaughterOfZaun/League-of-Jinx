@@ -50,20 +50,9 @@ uint hash(uint x) {
 	return x;
 }
 
-struct Params {
-	float life;
-	vec3 scale;
-};
-
-void calculate_initial_dynamics_params(in uint number, in uint seed, inout uint alt_seed, inout Params p) {
-	alt_seed = hash(number + uint(1) + seed);
-	p.life = p_life_i * texture(p_life_p, vec2(rand_from_seed(alt_seed), 1.0)).r;
-	p.scale = p_scale_i * texture(p_scale_p, vec2(rand_from_seed(alt_seed), 1.0)).r;
-    p.scale = clamp(p.scale, -0.01, 0.01);
-}
-
 // Called when a particle is spawned.
 void start() {
+
 	if (RESTART_CUSTOM){
 		CUSTOM = vec4(0.);
 	}
@@ -82,28 +71,24 @@ void start() {
 	if (RESTART_VELOCITY){
 		VELOCITY = vec3(0.);
 	}
-
-    Params p;
-    uint alt_seed;
-	calculate_initial_dynamics_params(NUMBER, RANDOM_SEED, alt_seed, p);
-    
 }
 
 // Called every frame on existing particles (according to the Fixed FPS property).
 void process() {
 
-	Params p;
-	uint alt_seed;
-    calculate_initial_dynamics_params(NUMBER, RANDOM_SEED, alt_seed, p);
+	uint alt_seed = hash(NUMBER + uint(1) + RANDOM_SEED);
+	float p_life = p_life_i * texture(p_life_p, vec2(rand_from_seed(alt_seed), 1.0)).r;
+	vec3 p_scale = p_scale_i; // * texture(p_scale_p, vec2(rand_from_seed(alt_seed), 1.0)).r;
+    	 //p_scale = clamp(p_scale, -0.01, 0.01);
 
 	TIME_PASSED += DELTA;
-	if(TIME_PASSED >= p.life)
+	if(TIME_PASSED >= p_life)
 		ACTIVE = false;
 
 	vec2 coords = vec2(0, 0);
 	#define COMPARE_IVEC2_WITH_INT_AND_RETURN_VEC2(v, w) vec2(float(v.x == w), float(v.y == w))
 	//coords += COMPARE_IVEC2_WITH_INT_AND_RETURN_VEC2(p_colortype, COLOR_LOOKUP_TYPE_CONSTANT) * (0.0);
-	coords += COMPARE_IVEC2_WITH_INT_AND_RETURN_VEC2(p_colortype, COLOR_LOOKUP_TYPE_LIFETIME) * (TIME_PASSED / p.life);
+	coords += COMPARE_IVEC2_WITH_INT_AND_RETURN_VEC2(p_colortype, COLOR_LOOKUP_TYPE_LIFETIME) * (TIME_PASSED / p_life);
 	coords += COMPARE_IVEC2_WITH_INT_AND_RETURN_VEC2(p_colortype, COLOR_LOOKUP_TYPE_VELOCITY) * (length(VELOCITY) / MAX_VELOCITY);
 	coords.x += float(p_colortype.x == COLOR_LOOKUP_BIRTH_RANDOM && RESTART) * rand_from_seed(alt_seed);
 	coords.y += float(p_colortype.y == COLOR_LOOKUP_BIRTH_RANDOM && RESTART) * rand_from_seed(alt_seed);
@@ -113,7 +98,10 @@ void process() {
 
 	VELOCITY = (EMISSION_TRANSFORM[3].xyz - TRANSFORM[3].xyz) * (p_bindweight / DELTA);
 
-	TRANSFORM[0].xyz *= p.scale.x;
-	TRANSFORM[1].xyz *= p.scale.y;
-	TRANSFORM[2].xyz *= p.scale.z;
+   	TRANSFORM[0].xyz = normalize(TRANSFORM[0].xyz);
+	TRANSFORM[1].xyz = normalize(TRANSFORM[1].xyz);
+	TRANSFORM[2].xyz = normalize(TRANSFORM[2].xyz);
+	TRANSFORM[0].xyz *= p_scale.x;
+	TRANSFORM[1].xyz *= p_scale.y;
+	TRANSFORM[2].xyz *= p_scale.z;
 }
