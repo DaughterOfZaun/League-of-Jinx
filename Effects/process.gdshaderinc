@@ -78,8 +78,12 @@ void process() {
 
 	uint alt_seed = hash(NUMBER + uint(1) + RANDOM_SEED);
 	float p_life = p_life_i * texture(p_life_p, vec2(rand_from_seed(alt_seed), 1.0)).r;
-	vec3 p_scale = p_scale_i; // * texture(p_scale_p, vec2(rand_from_seed(alt_seed), 1.0)).r;
-    	 //p_scale = clamp(p_scale, -0.01, 0.01);
+	vec3 p_scale = p_scale_i * vec3(
+        texture(p_scale_p, vec2(rand_from_seed(alt_seed), 1.0)).r,
+        texture(p_scale_p, vec2(rand_from_seed(alt_seed), 1.0)).g,
+        texture(p_scale_p, vec2(rand_from_seed(alt_seed), 1.0)).b
+    );
+    p_scale = sign(p_scale) * max(abs(p_scale), 0.01);
 
 	TIME_PASSED += DELTA;
 	if(TIME_PASSED >= p_life)
@@ -98,10 +102,7 @@ void process() {
 
 	VELOCITY = (EMISSION_TRANSFORM[3].xyz - TRANSFORM[3].xyz) * (p_bindweight / DELTA);
 
-   	TRANSFORM[0].xyz = normalize(TRANSFORM[0].xyz);
-	TRANSFORM[1].xyz = normalize(TRANSFORM[1].xyz);
-	TRANSFORM[2].xyz = normalize(TRANSFORM[2].xyz);
-	TRANSFORM[0].xyz *= p_scale.x;
-	TRANSFORM[1].xyz *= p_scale.y;
-	TRANSFORM[2].xyz *= p_scale.z;
+	TRANSFORM[0].xyz = normalize(TRANSFORM[0].xyz) * p_scale.x;
+	TRANSFORM[1].xyz = normalize(TRANSFORM[1].xyz) * p_scale.y;
+	TRANSFORM[2].xyz = normalize(TRANSFORM[2].xyz) * p_scale.z;
 }

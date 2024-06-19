@@ -2,6 +2,15 @@
 class_name Group
 extends Effect
 
+var Curve_ONE := new_one()
+func new_one() -> Curve:
+    var c := Curve.new()
+    c.add_point(Vector2(0, 1))
+    c.add_point(Vector2(1, 1))
+    return c
+func or_one(c: Curve) -> Curve:
+    return c if c else Curve_ONE
+
 @export var group_type: GroupType:
     set(value): group_type = value; update_fields()
 @export var group_importance: GroupImportance:
@@ -406,54 +415,128 @@ func update_fields():
     
     p.amount = round(total_emitter_life * emitter_rate)
     
-    p.draw_pass_1 = particle_mesh if particle_mesh else preload("res://Effects/new_quad_mesh.tres")
-
-    var m = p.process_material as ShaderMaterial
-    if !m:
-        m = ShaderMaterial.new()
-        m.shader = preload("res://Effects/new_shader.gdshader")
-        p.process_material = m
-    m.set_shader_parameter('amount', p.amount)
+    #p.draw_pass_1 = particle_mesh if particle_mesh else preload("res://Effects/new_quad_mesh.tres")
+    p.draw_pass_1 = preload("res://Effects/new_sphere_mesh.tres") as Mesh if particle_mesh \
+               else preload("res://Effects/new_quad_mesh.tres") as Mesh
 
     if true:
-        m.set_shader_parameter('p_life_i', particle_lifetime)
-        var t := m.get_shader_parameter('p_life_p') as CurveTexture
-        if !t: t = CurveTexture.new()
-        t.curve = particle_lifetime_prob
-        t.texture_mode = CurveTexture.TEXTURE_MODE_RED
-        m.set_shader_parameter('p_life_p', t)
-    
-    m.set_shader_parameter('p_linger', particle_linger)
-    
-    m.set_shader_parameter('p_rgba', particle_color_lookup_texture)
-    m.set_shader_parameter('p_colortype', particle_color_lookup_type)
-    m.set_shader_parameter('p_colorscale', particle_color_lookup_scale)
-    m.set_shader_parameter('p_coloroffset', particle_color_lookup_offset)
+        var m := p.process_material as ShaderMaterial
+        if !m:
+            m = ShaderMaterial.new()
+            p.process_material = m
 
-    m.set_shader_parameter('p_bindweight', particle_bind_weight)
+        var s := process_shader
+        # SET process_shader PARAMS HERE
+        m.shader = s.get_shader()
+        
+        m.set_shader_parameter('amount', p.amount)
+
+        if true:
+            m.set_shader_parameter('p_life_i', particle_lifetime)
+            var t := m.get_shader_parameter('p_life_p') as CurveTexture
+            if !t: t = CurveTexture.new()
+            t.curve = or_one(particle_lifetime_prob)
+            t.texture_mode = CurveTexture.TEXTURE_MODE_RED
+            m.set_shader_parameter('p_life_p', t)
+        
+        m.set_shader_parameter('p_linger', particle_linger)
+        
+        m.set_shader_parameter('p_rgba', particle_color_lookup_texture)
+        m.set_shader_parameter('p_colortype', particle_color_lookup_type)
+        m.set_shader_parameter('p_colorscale', particle_color_lookup_scale)
+        m.set_shader_parameter('p_coloroffset', particle_color_lookup_offset)
+
+        m.set_shader_parameter('p_bindweight', particle_bind_weight)
+
+        if true:
+            m.set_shader_parameter('p_scale_i', particle_scale * HW2GD)
+            var t := m.get_shader_parameter('p_scale_p') as CurveXYZTexture
+            if !t: t = CurveXYZTexture.new()
+            t.curve_x = or_one(particle_scale_x_prob)
+            t.curve_y = or_one(particle_scale_y_prob)
+            t.curve_z = or_one(particle_scale_z_prob)
+            m.set_shader_parameter('p_scale_p', t)
 
     if true:
-        m.set_shader_parameter('p_scale_i', particle_scale * HW2GD)
-        var t := m.get_shader_parameter('p_scale_p') as CurveXYZTexture
-        if !t: t = CurveXYZTexture.new()
-        t.curve_x = particle_scale_x_prob
-        t.curve_y = particle_scale_y_prob
-        t.curve_z = particle_scale_z_prob
-        m.set_shader_parameter('p_scale_p', t)
+        var m := p.material_override as ShaderMaterial
+        if !m:
+            m = ShaderMaterial.new()
+            p.material_override = m
 
-    m = p.material_override as StandardMaterial3D
-    if !m:
-        m = StandardMaterial3D.new()
-        p.material_override = m
-    m.transparency = true
-    m.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
-    m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-    m.vertex_color_use_as_albedo = true
-    m.albedo_texture = particle_mesh_texture if particle_mesh else particle_texture
-    m.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
-    m.billboard_keep_scale = true
+        var s := material_shader
+        # SET material_shader PARAMS HERE
+        m.shader = s.get_shader()
+
+        #TODO:
+        #m.transparency = true
+        #m.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+        #m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+        #m.vertex_color_use_as_albedo = true
+        #m.albedo_texture = particle_mesh_texture if particle_mesh else particle_texture
+        #m.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+        #m.billboard_keep_scale = true
 
     updating_fields -= 1
+
+class MyShader:
+
+    static var cache: Dictionary = {}
+    var entry: ShaderAndUsage
+    class ShaderAndUsage:
+        var shader: Shader = null
+        var users: int = 1
+        var hash: int = 0
+    var code: String
+    var hash: int
+    
+    func gen_code() -> String: return ""
+    func define(k: String, v: String) -> String:
+        return '#define ' + k + ' ' + v + '\n'
+    func include(p: String) -> String:
+        return '#include "' + p + '"\n'
+    
+    func _init():
+        gen_code_hash()
+        get_entry()
+
+    func gen_code_hash():
+        code = gen_code()
+        hash = code.hash()
+    
+    func get_shader() -> Shader:
+        gen_code_hash()
+        if entry.hash != hash:
+            entry.users -= 1
+            if entry.users == 0:
+                cache.erase(entry.hash)
+            get_entry()
+        return entry.shader
+    
+    func get_entry() -> void:
+        entry = cache.get(hash)
+        if entry:
+            entry.users += 1
+        else:
+            entry = ShaderAndUsage.new()
+            entry.shader = Shader.new()
+            entry.shader.code = code
+            entry.users = 1
+            entry.hash = hash
+            cache[hash] = entry
+
+var material_shader := MaterialShader.new()
+class MaterialShader extends MyShader:
+    var blend_mode: String = 'blend_add'
+    func gen_code():
+        return\
+        define('BLEND_MODE', blend_mode) +\
+        include('res://Effects/material.gdshaderinc')
+
+var process_shader := ProcessShader.new()
+class ProcessShader extends MyShader:
+    func gen_code():
+        return\
+        include('res://Effects/process.gdshaderinc')
 
 func set_from_ini_section(section: Array):
     updating_fields += 1
