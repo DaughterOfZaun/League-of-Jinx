@@ -11,6 +11,14 @@ func new_one() -> Curve:
 func or_one(c: Curve) -> Curve:
     return c if c else Curve_ONE
 
+func set_shader_parameter_curve(m: ShaderMaterial, key: String, value_x: Curve, value_y: Curve = null, value_z: Curve = null):
+    var t := m.get_shader_parameter(key) as CurveXYZTexture
+    if !t: t = CurveXYZTexture.new()
+    t.curve_x = or_one(value_x)
+    t.curve_y = or_one(value_y)
+    t.curve_z = or_one(value_z)
+    m.set_shader_parameter(key, t)
+
 @export var group_type: GroupType:
     set(value): group_type = value; update_fields()
 @export var group_importance: GroupImportance:
@@ -84,7 +92,7 @@ func or_one(c: Curve) -> Curve:
     set(value): emitter_uv_scroll = value; update_fields()
 @export_subgroup("")
 
-@export var emitter_color: Color:
+@export var emitter_color: Color = Color.WHITE:
     set(value): emitter_color = value; update_fields()
 @export var emitter_color_over_lifetime: Gradient:
     set(value): emitter_color_over_lifetime = value; update_fields()
@@ -114,7 +122,7 @@ func or_one(c: Curve) -> Curve:
 @export_subgroup("Animation", "particle_")
 @export var particle_texture_division: Vector2 = Vector2.ONE: #p-texdiv
     set(value): particle_texture_division = value; update_fields()
-@export var particle_start_frame: int = 1: #p-startframe
+@export var particle_start_frame: int = 0: #p-startframe
     set(value): particle_start_frame = value; update_fields()
 @export var particle_number_of_frames: int = 1: #p-numframes
     set(value): particle_number_of_frames = value; update_fields()
@@ -125,7 +133,7 @@ func or_one(c: Curve) -> Curve:
 @export_subgroup("")
 
 @export_subgroup("Color", "particle_color_")
-@export var particle_color: Color:
+@export var particle_color: Color = Color.WHITE:
     set(value): particle_color = value; update_fields()
 @export var particle_color_over_lifetime: Gradient:
     set(value): particle_color_over_lifetime = value; update_fields()
@@ -231,8 +239,6 @@ var particle_color_lookup_type: Vector2i:
     set(value): particle_xrotation = value; update_fields()
 @export var particle_xrotation_over_lifetime: Gradient: #Curve3D
     set(value): particle_xrotation_over_lifetime = value; update_fields()
-@export var particle_xrotation_x_prob: Curve:
-    set(value): particle_xrotation_x_prob = value; update_fields()
 @export var particle_xrotation_z_prob: Curve:
     set(value): particle_xrotation_z_prob = value; update_fields()
 @export var particle_rotation: Vector3: #p-quadrot
@@ -277,6 +283,8 @@ var particle_color_lookup_type: Vector2i:
     set(value): particle_scale_bias = value; update_fields()
 @export var particle_scale_over_lifetime: Gradient: #Curve3D #p-scaleN
     set(value): particle_scale_over_lifetime = value; update_fields()
+@export var particle_scale_prob: Curve:
+    set(value): particle_scale_prob = value; update_fields()
 @export var particle_scale_x_prob: Curve:
     set(value): particle_scale_x_prob = value; update_fields()
 @export var particle_scale_y_prob: Curve:
@@ -287,8 +295,8 @@ var particle_color_lookup_type: Vector2i:
     set(value): particle_xscale = value; update_fields()
 @export var particle_xscale_over_lifetime: Gradient: #Curve3D
     set(value): particle_xscale_over_lifetime = value; update_fields()
-@export var particle_xscale_x_prob: Curve: #p-xscaleXPN / p-xscalePN
-    set(value): particle_xscale_x_prob = value; update_fields()
+@export var particle_xscale_prob: Curve: #p-xscalePN
+    set(value): particle_xscale_prob = value; update_fields()
 @export var particle_scale_up_from_origin: bool:
     set(value): particle_scale_up_from_origin = value; update_fields()
 @export var particle_scale_scale_by_bound_object_size: float:
@@ -413,11 +421,13 @@ func update_fields():
     #lifetime = total_emitter_life + total_particle_life
     #explosiveness = total_particle_life / lifetime
     
-    p.amount = round(total_emitter_life * emitter_rate)
+    p.amount = 1 if emitter_emit_single_particle else round(total_emitter_life * emitter_rate)
     
     #p.draw_pass_1 = particle_mesh if particle_mesh else preload("res://Effects/new_quad_mesh.tres")
     p.draw_pass_1 = preload("res://Effects/new_sphere_mesh.tres") as Mesh if particle_mesh \
                else preload("res://Effects/new_quad_mesh.tres") as Mesh
+
+    p.cast_shadow = int(particle_does_cast_shadow) as GeometryInstance3D.ShadowCastingSetting;
 
     if true:
         var m := p.process_material as ShaderMaterial
@@ -431,13 +441,8 @@ func update_fields():
         
         m.set_shader_parameter('amount', p.amount)
 
-        if true:
-            m.set_shader_parameter('p_life_i', particle_lifetime)
-            var t := m.get_shader_parameter('p_life_p') as CurveTexture
-            if !t: t = CurveTexture.new()
-            t.curve = or_one(particle_lifetime_prob)
-            t.texture_mode = CurveTexture.TEXTURE_MODE_RED
-            m.set_shader_parameter('p_life_p', t)
+        m.set_shader_parameter('p_life_i', particle_lifetime)
+        set_shader_parameter_curve(m, 'p_life_p', particle_lifetime_prob)
         
         m.set_shader_parameter('p_linger', particle_linger)
         
@@ -448,14 +453,9 @@ func update_fields():
 
         m.set_shader_parameter('p_bindweight', particle_bind_weight)
 
-        if true:
-            m.set_shader_parameter('p_scale_i', particle_scale * HW2GD)
-            var t := m.get_shader_parameter('p_scale_p') as CurveXYZTexture
-            if !t: t = CurveXYZTexture.new()
-            t.curve_x = or_one(particle_scale_x_prob)
-            t.curve_y = or_one(particle_scale_y_prob)
-            t.curve_z = or_one(particle_scale_z_prob)
-            m.set_shader_parameter('p_scale_p', t)
+        m.set_shader_parameter('p_scale_i', particle_scale * HW2GD)
+        set_shader_parameter_curve(m, 'p_scale_p', particle_scale_prob)
+        set_shader_parameter_curve(m, 'p_scale_a_p', particle_scale_x_prob, particle_scale_y_prob, particle_scale_z_prob)
 
     if true:
         var m := p.material_override as ShaderMaterial
@@ -465,16 +465,28 @@ func update_fields():
 
         var s := material_shader
         # SET material_shader PARAMS HERE
+        s.blend_mode = blend_mode
+        s.billboard_enabled = particle_mesh == null
         m.shader = s.get_shader()
+
+        m.set_shader_parameter('albedo', particle_color)
+        m.set_shader_parameter('texture_albedo',
+            particle_mesh_texture if particle_mesh and particle_mesh_texture
+            else particle_texture if particle_texture
+            else particle_mesh_texture #?
+        )
+        m.set_shader_parameter('texdiv', particle_texture_division)
+        m.set_shader_parameter('random_start_frame', particle_start_frame_is_random)
+        m.set_shader_parameter('start_frame', particle_start_frame)
+        m.set_shader_parameter('num_frames', particle_number_of_frames)
+        m.set_shader_parameter('frame_rate', particle_frame_rate)
+
+        # UV-offset is probably set once for all particles
+        #set_shader_parameter_curve(m, 'uv_offset_a_p', emitter_uv_offset_x_prob, emitter_uv_offset_y_prob)
 
         #TODO:
         #m.transparency = true
-        #m.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
         #m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-        #m.vertex_color_use_as_albedo = true
-        #m.albedo_texture = particle_mesh_texture if particle_mesh else particle_texture
-        #m.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
-        #m.billboard_keep_scale = true
 
     updating_fields -= 1
 
@@ -490,14 +502,14 @@ class MyShader:
     var hash: int
     
     func gen_code() -> String: return ""
-    func define(k: String, v: String) -> String:
-        return '#define ' + k + ' ' + v + '\n'
+    func define(k: String, v: String = '') -> String:
+        return '#define ' + k + ((' ' + v) if v else '') + '\n'
     func include(p: String) -> String:
         return '#include "' + p + '"\n'
     
-    func _init():
-        gen_code_hash()
-        get_entry()
+    #func _init():
+    #    gen_code_hash()
+    #    get_entry()
 
     func gen_code_hash():
         code = gen_code()
@@ -505,7 +517,9 @@ class MyShader:
     
     func get_shader() -> Shader:
         gen_code_hash()
-        if entry.hash != hash:
+        if !entry:
+            get_entry()
+        elif entry.hash != hash:
             entry.users -= 1
             if entry.users == 0:
                 cache.erase(entry.hash)
@@ -526,16 +540,39 @@ class MyShader:
 
 var material_shader := MaterialShader.new()
 class MaterialShader extends MyShader:
-    var blend_mode: String = 'blend_add'
+    var blend_mode: BlendMode
+    var billboard_enabled: bool
     func gen_code():
-        return\
-        define('BLEND_MODE', blend_mode) +\
+        var render_mode: Array[String] = []
+
+        var bm: String;
+        match blend_mode:
+            BlendMode.ADD: bm = "blend_add"
+            BlendMode.UNKNOWN_1: bm = "blend_mix"
+            BlendMode.UNKNOWN_2: pass
+            BlendMode.UNKNOWN_3: pass
+            BlendMode.UNKNOWN_4: pass
+        if bm: render_mode.append(bm)
+
+        render_mode.append("depth_draw_opaque")
+        render_mode.append("cull_back")
+        render_mode.append("diffuse_burley")
+        render_mode.append("unshaded")
+        render_mode.append("specular_disabled")
+        render_mode.append("ambient_light_disabled")
+        render_mode.append("fog_disabled")
+
+        return \
+        "shader_type spatial;\n" +\
+        "render_mode " + ",".join(render_mode) + ";\n" +\
+        (define('BILLBOARD') if billboard_enabled else '') +\
         include('res://Effects/material.gdshaderinc')
 
 var process_shader := ProcessShader.new()
 class ProcessShader extends MyShader:
     func gen_code():
-        return\
+        return \
+        "shader_type particles;\n" +\
         include('res://Effects/process.gdshaderinc')
 
 func set_from_ini_section(section: Array):
@@ -677,7 +714,6 @@ func set_from_ini_entry(key_array: Array, value: String):
         ["p-orbitvel"]: particle_orbit_velocity = vec3_parse(value)
         ["p-orbitvelYP", var i]: particle_orbit_velocity_y_prob = curve_set(particle_orbit_velocity_y_prob, i, value)
         ["p-orientation"]: particle_orientation = vec3_parse(value)
-        #0 ["p-ostoffset"]: particle_translation = vec3_parse(value)
         #2 ["p-postoffset_flex", var i]: pass
         ["p-postoffset", var i]: particle_translation_over_lifetime = curve3d_set(particle_translation_over_lifetime, i, value)
         ["p-postoffset"]: particle_translation = vec3_parse(value)
@@ -712,7 +748,7 @@ func set_from_ini_entry(key_array: Array, value: String):
         #0 ["p-scalebyradius"]: particle_scale_scale_by_bound_object_radius = float_parse(value)
         #2 ["p-scaleEmitOffset_flex", var i]: pass
         ["p-scaleupfromorigin"]: particle_scale_up_from_origin = bool_parse(value)
-        ["p-scaleP", var i]: particle_scale_x_prob = curve_set(particle_scale_x_prob, i, value)
+        ["p-scaleP", var i]: particle_scale_prob = curve_set(particle_scale_prob, i, value)
         ["p-scaleXP", var i]: particle_scale_x_prob = curve_set(particle_scale_x_prob, i, value)
         ["p-scaleYP", var i]: particle_scale_y_prob = curve_set(particle_scale_y_prob, i, value)
         ["p-scaleZP", var i]: particle_scale_z_prob = curve_set(particle_scale_z_prob, i, value)
@@ -744,12 +780,12 @@ func set_from_ini_entry(key_array: Array, value: String):
         ["p-xquadrot-on"]: particle_xrotation_is_enabled = bool_parse(value)
         ["p-xquadrot", var i]: particle_xrotation_over_lifetime = curve3d_set(particle_xrotation_over_lifetime, i, value, VectorUsage.SCALE)
         ["p-xquadrot"]: particle_xrotation = vec3_parse(value, VectorUsage.SCALE) # float in simple
-        ["p-xquadrotP", var i]: particle_xrotation_x_prob = curve_set(particle_xrotation_x_prob, i, value)
+        ["p-xquadrotP", var i]: particle_xrotation_z_prob = curve_set(particle_xrotation_z_prob, i, value)
         ["p-xrgba", var i]: particle_color_over_lifetime = gradient_set(particle_color_over_lifetime, i, value)
         ["p-xrgba"]: particle_color = color_parse(value)
         ["p-xscale", var i]: particle_xscale_over_lifetime = curve3d_set(particle_xscale_over_lifetime, i, value, VectorUsage.SCALE)
         ["p-xscale"]: particle_xscale = vec3_parse(value, VectorUsage.SCALE) # float in simple
-        ["p-xscaleP", var i]: particle_xscale_x_prob = curve_set(particle_xscale_x_prob, i, value)
+        ["p-xscaleP", var i]: particle_xscale_prob = curve_set(particle_xscale_prob, i, value)
         ["Particle-Acceleration", var i]: particle_acceleration_over_lifetime = curve3d_set(particle_acceleration_over_lifetime, i, value)
         ["Particle-Acceleration"]: particle_acceleration = vec3_parse(value)
         ["Particle-AccelerationXP", var i]: particle_acceleration_x_prob = curve_set(particle_acceleration_x_prob, i, value)
