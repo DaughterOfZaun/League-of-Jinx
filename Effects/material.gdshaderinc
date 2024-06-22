@@ -6,14 +6,16 @@ uniform vec4 albedo : source_color = vec4(1, 1, 1, 1);
 uniform sampler2D texture_albedo : source_color,hint_default_white,filter_linear_mipmap,repeat_enable;
 
 uniform vec2 uv_scale = vec2(1, 1);
-uniform vec2 uv_offset;
+uniform vec2 uv_offset = vec2(0, 0);
 //uniform sampler2D uv_offset_a_p : hint_default_white,filter_nearest;
 
 uniform vec2 texdiv = vec2(1, 1);
-uniform bool random_start_frame;
+uniform bool random_start_frame = false;
 uniform float start_frame = 0;
 uniform float num_frames = 1;
-uniform float frame_rate;
+uniform float frame_rate = 0;
+
+uniform vec2 uv_scroll = vec2(0, 0);
 
 #define ROTATION_Z INSTANCE_CUSTOM.x
 #define TIME_PASSED INSTANCE_CUSTOM.y
@@ -22,7 +24,7 @@ uniform float frame_rate;
 #include "res://Effects/random.gdshaderinc"
 
 void vertex() {
-    UV = UV * uv_scale.xy + uv_offset.xy;
+    UV = UV * uv_scale + uv_offset + uv_scroll * TIME_PASSED;
     
     #ifdef BILLBOARD
     // Billboard Mode: Particles
@@ -57,4 +59,5 @@ void fragment() {
     vec4 albedo_tex = texture(texture_albedo, base_uv);
     albedo_tex *= COLOR;
     ALBEDO = albedo.rgb * albedo_tex.rgb;
+    ALPHA *= albedo.a * albedo_tex.a;
 }

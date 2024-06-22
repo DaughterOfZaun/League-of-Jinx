@@ -457,6 +457,11 @@ func update_fields():
         set_shader_parameter_curve(m, 'p_scale_p', particle_scale_prob)
         set_shader_parameter_curve(m, 'p_scale_a_p', particle_scale_x_prob, particle_scale_y_prob, particle_scale_z_prob)
 
+        m.set_shader_parameter('p_quadrot_i', particle_rotation)
+        set_shader_parameter_curve(m, 'p_quadrot_a_p', particle_rotation_x_prob, particle_rotation_y_prob, particle_rotation_z_prob)
+        m.set_shader_parameter('p_rotvel_i', particle_rotational_velocity)
+        set_shader_parameter_curve(m, 'p_rotvel_a_p', particle_rotational_velocity_x_prob, particle_rotational_velocity_y_prob, particle_rotational_velocity_z_prob)
+
     if true:
         var m := p.material_override as ShaderMaterial
         if !m:
@@ -480,6 +485,8 @@ func update_fields():
         m.set_shader_parameter('start_frame', particle_start_frame)
         m.set_shader_parameter('num_frames', particle_number_of_frames)
         m.set_shader_parameter('frame_rate', particle_frame_rate)
+        
+        m.set_shader_parameter('uv_scroll', particle_uv_scroll_rate)
 
         # UV-offset is probably set once for all particles
         #set_shader_parameter_curve(m, 'uv_offset_a_p', emitter_uv_offset_x_prob, emitter_uv_offset_y_prob)
