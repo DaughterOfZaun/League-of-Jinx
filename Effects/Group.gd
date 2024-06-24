@@ -398,7 +398,7 @@ func update_fields():
     if !p:
         p = GPUParticles3D.new()
         add_child(p, true)
-        p.owner = owner
+        p.owner = owner if owner else self
 
     print('update_fields')
 
@@ -482,8 +482,8 @@ func update_fields():
         )
         m.set_shader_parameter('texdiv', particle_texture_division)
         m.set_shader_parameter('random_start_frame', particle_start_frame_is_random)
-        m.set_shader_parameter('start_frame', particle_start_frame)
-        m.set_shader_parameter('num_frames', particle_number_of_frames)
+        m.set_shader_parameter('start_frame', float(particle_start_frame))
+        m.set_shader_parameter('num_frames', float(particle_number_of_frames))
         m.set_shader_parameter('frame_rate', particle_frame_rate)
         
         m.set_shader_parameter('uv_scroll', particle_uv_scroll_rate)

@@ -13,6 +13,7 @@ config_version=5
 config/name="MOBA_A2"
 run/main_scene="res://empty_scene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/max_fps=120
 config/icon="res://icon.svg"
 
 [debug]
@@ -25,6 +26,11 @@ gdscript/warnings/unused_signal=0
 gdscript/warnings/shadowed_variable=0
 gdscript/warnings/shadowed_variable_base_class=0
 gdscript/warnings/shadowed_global_identifier=0
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=0
 
 [dotnet]
 

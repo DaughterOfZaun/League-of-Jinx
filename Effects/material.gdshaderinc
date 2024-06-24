@@ -48,7 +48,10 @@ void vertex() {
     MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
     #endif
     
-    float frame = (num_frames == 0.) ? 0. : floor(mod(((frame_rate == 0.) ? 0. : (TIME_PASSED / frame_rate)) + start_frame, num_frames));
+    float real_num_frames = texdiv.x * texdiv.y;
+    float frame = (frame_rate == 0.) ? 0. : (TIME_PASSED / frame_rate);
+          frame = (num_frames == 0.) ? 0. : (mod(frame, num_frames) + start_frame);
+          frame = (real_num_frames == 0.) ? 0. : floor(mod(frame, real_num_frames));
     
     UV /= vec2(texdiv.x, texdiv.y);
     UV += vec2(mod(frame, texdiv.x) / texdiv.x, floor((frame + 0.5) / texdiv.x) / texdiv.y);

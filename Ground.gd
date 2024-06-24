@@ -3,10 +3,10 @@ extends CollisionObject3D
 @onready var input_manager := get_node("%InputManager") as InputManager;
 
 func _ready():
-	Input.use_accumulated_input = false
+    Input.use_accumulated_input = false
 
 func _input_event(camera, event, position, normal, shape_idx):
-	if event is InputEventMouseButton and event.pressed:
-		input_manager.on_ground_clicked(position, event.button_index)
-	elif event is InputEventMouseMotion:
-		input_manager.on_ground_hovered(position)
+    if event is InputEventMouseButton and event.pressed:
+        input_manager.on_ground_clicked(position, event.button_index)
+    elif event is InputEventMouseMotion:
+        input_manager.on_ground_hovered(position)

@@ -9,29 +9,29 @@ var char_vars: CharVars #@onready var char_vars := find_child("CharVars") as Cha
 
 signal order(type: Enums.OrderType, pos: Vector3, unit: Unit)
 func _ready():
-	get_tree().physics_frame.connect(_pre_physics_process)
+    get_tree().physics_frame.connect(_pre_physics_process)
 
 func on_order(type: Enums.OrderType, pos: Vector3, unit: Unit):
-	order.emit(type, pos, unit)
+    order.emit(type, pos, unit)
 
 func on_cast(letter: String, pos: Vector3, unit: Unit):
-	(spells[letter] as Spell).cast(unit, pos, pos)
+    (spells[letter] as Spell).cast(unit, pos, pos)
 
 var on_update_stats_time_tracker := API.TimeTracker.new(0.25, true)
 func _pre_physics_process():
-	if on_update_stats_time_tracker.execute():
-		update_stats.emit()
+    if on_update_stats_time_tracker.execute():
+        update_stats.emit()
 
 var on_update_time_tracker := API.TimeTracker.new(0.25, true)
 func _physics_process(_delta):
-	update_actions.emit()
+    update_actions.emit()
 
 func connect_all(to):
-	var signals = get_signal_list()
-	for s in signals:
-		var sname: String = s.name
-		if sname != 'order' and ('on_' + sname) in to:
-			connect(sname, Callable(to, sname))
+    var signals = get_signal_list()
+    for s in signals:
+        var sname: String = s.name
+        if sname != 'order' and ('on_' + sname) in to:
+            connect(sname, Callable(to, sname))
 
 signal allow_add(attacker: Unit, buff: Buff)
 

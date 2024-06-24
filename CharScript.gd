@@ -9,6 +9,6 @@ extends Node
 @onready var char_vars := me.char_vars
 
 func _ready():
-	on_activate()
+    on_activate()
 
 func on_activate(): pass

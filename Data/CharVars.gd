@@ -3,7 +3,7 @@ extends Node
 
 @onready var me := get_parent() as Unit
 func _ready():
-	me.char_vars = self
+    me.char_vars = self
 
 @export var orb_of_deception_is_active: int
 @export var fox_fire_is_active: int

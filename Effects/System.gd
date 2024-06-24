@@ -26,18 +26,11 @@ extends Effect
         if value && !import:
             import = true
             var ini = ini_load(import_path)
-            set_from_ini(ini)
+            set_from_ini_section(ini["System"])
             recreate_groups(ini)
             import = false
 
 var groups := []
-func set_from_ini(ini: Dictionary):
-    set_from_ini_section(ini["System"])
-
-func set_from_ini_section(section: Array):
-    for entry in section:
-        self.set_from_ini_entry(entry[0], entry[1])
-
 func set_from_ini_entry(key_array: Array, value: String):
     super.set_from_ini_entry(key_array, value)
     match key_array:
@@ -72,7 +65,7 @@ func recreate_groups(ini: Dictionary):
         if len(info) > 2: group.group_importance = info[2]
         group.set_from_ini_section(ini[group.name])
         add_child(group, true)
-        group.owner = owner
+        group.owner = owner if owner else self
 
         group.updating_fields -= 1
         group.update_fields()

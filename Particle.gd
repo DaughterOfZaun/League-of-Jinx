@@ -2,40 +2,40 @@ class_name Particle
 extends GPUParticles2D
 
 static func create(effect_name := "", effect_name_for_other_team := ""):
-	pass
+    pass
 func fow(fow_team := Enums.TeamID.UNKNOWN, fow_visibility_radius := 0.0) -> Particle:
-	return self
+    return self
 func flags(flags := 0) -> Particle:
-	return self
+    return self
 func specific(
-	specific_team_only := Enums.TeamID.UNKNOWN,
-	specific_team_only_override := Enums.TeamID.UNKNOWN,
-	specific_unit_only: Unit = null,
-	use_specific_unit := false
+    specific_team_only := Enums.TeamID.UNKNOWN,
+    specific_team_only_override := Enums.TeamID.UNKNOWN,
+    specific_unit_only: Unit = null,
+    use_specific_unit := false
 ) -> Particle:
-	return self
+    return self
 func bind(
-	bind_object: Unit = null,
-	bone_name := "",
-	pos := Vector3.INF,
+    bind_object: Unit = null,
+    bone_name := "",
+    pos := Vector3.INF,
 ) -> Particle:
-	return self
+    return self
 func target(
-	target_object: Unit = null,
-	target_bone_name := "",
-	target_pos := Vector3.INF,
+    target_object: Unit = null,
+    target_bone_name := "",
+    target_pos := Vector3.INF,
 ) -> Particle:
-	return self
+    return self
 func more_flags(
-	send_if_on_screen_or_discard := false,
-	persists_through_reconnect := false,
-	bind_flex_to_owner_par := false,
-	follows_ground_tilt := false,
-	faces_target := false,
+    send_if_on_screen_or_discard := false,
+    persists_through_reconnect := false,
+    bind_flex_to_owner_par := false,
+    follows_ground_tilt := false,
+    faces_target := false,
 ) -> Particle:
-	return self
+    return self
 func orient(orient_towards: Unit = null) -> Particle:
-	return self
+    return self
 
 func remove() -> void:
-	pass
+    pass
