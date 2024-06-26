@@ -100,7 +100,7 @@ for await (let p of walk(iniDir)){
 
     //TODO: Name and AlternateName?
 
-    var csf = csFiles[n]
+    var csf = csFiles[n] || csFiles['charscript' + n]
     if(csf) f.use(csf)
     //else console.log('No matching CS file found for', op)
 
@@ -209,6 +209,17 @@ for(let f of v){
 
 console.log('Saving...')
 
+let files_v = [csFiles, iniFiles, troyFiles, binFiles].flatMap(fs => Object.values(fs))
+for(let f of files_v){
+    delete f.content;
+    delete f.contentStr;
+    delete (f as any).saved;
+    (f as any).usedBy = [...f.usedBy].map(f => { let i = files_v.indexOf(f); console.assert(i != -1); return i; });
+    (f as any).uses = [...f.uses].map(f => { let i = files_v.indexOf(f); console.assert(i != -1); return i; });
+}
+await fs.writeFile('out.json', JSON.stringify(files_v), 'utf8')
+
+/*
 let str = '@startuml\n'
     str += 'left to right direction\n'
 
@@ -225,3 +236,4 @@ draw(iniFiles['ahri'])
 str += '@enduml\n'
 
 await fs.writeFile('out.puml', str, 'utf8')
+*/
