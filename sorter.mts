@@ -197,10 +197,12 @@ for(let f of v){
         if(f.contentStr.indexOf(`"${k}.${u.ext}"`) !== -1){
             f.use(u); sm++
         }
+    /*
     for(let [k, u] of ini_kv)
         if(f.contentStr.indexOf(`"${k}"`) !== -1){
             f.use(u); sm++
         }
+    */
     for(let [k, u] of cs_names_kv){
         let kn = k.split('.')
         heavyMatch(f, kn[0], u, kn[1])
@@ -217,7 +219,7 @@ for(let f of files_v){
     (f as any).usedBy = [...f.usedBy].map(f => { let i = files_v.indexOf(f); console.assert(i != -1); return i; });
     (f as any).uses = [...f.uses].map(f => { let i = files_v.indexOf(f); console.assert(i != -1); return i; });
 }
-await fs.writeFile('out.json', JSON.stringify(files_v), 'utf8')
+await fs.writeFile('out.json', JSON.stringify(files_v, undefined, 4), 'utf8')
 
 /*
 let str = '@startuml\n'
