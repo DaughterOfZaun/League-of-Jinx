@@ -15,8 +15,9 @@ async function* walk(dir: string): any {
 
 console.log('Building a file list...')
 
+let id = 0
 class File {
-    isItem = false
+    id = id++
     usedBy: Set<File> = new Set()
     uses: Set<File> = new Set()
     content: undefined|string[] = undefined
@@ -67,7 +68,8 @@ for await (let p of walk(csDir)){
 
     let f = new File(op, n, e)
     let c = (await fs.readFile(op, 'utf8'))
-    f.content = c.split(/\b/g)
+    //f.content = c.split(/\b/g)
+    f.content = c.split(/(?<!\.)\b(?!\.)/g)
     f.contentStr = c.toLowerCase()
 
     let ms = c.matchAll(/class (\w+) ?: ?(Buff|Spell|Item|Talent|Char)Script/g)
@@ -96,7 +98,6 @@ for await (let p of walk(iniDir)){
 
     let f = new File(op, n, e)
     f.content = await getIniContent(op)
-    f.isItem = /^\d+$/.test(n)
 
     //TODO: Name and AlternateName?
 
@@ -142,14 +143,15 @@ const logProcess = (i: number, v: any[], t: string, sm: number) => {
 
 let sm = 0
 const simpleMatch = (f: File, k: string, u: File) => {
-    if(u.isItem || f === u) return;
+    if(/^\d+$/.test(k) || f === u) return;
     if(f.content && f.content.indexOf(k) !== -1){
         f.use(u); sm++
     }
 }
+/*
 const heavyMatch = (f: File, k1: string, u: File, k2: string) => {
     let t = 0
-    if(u.isItem || f === u) return;
+    if(/^\d+$/.test(k) || f === u) return;
     while((t = f.content!.indexOf(k1, t)) !== -1){
         if(k2 === undefined || (f.content![t + 1] === '.' && f.content![t + 2] === k2)){
             f.use(u); sm++
@@ -157,7 +159,7 @@ const heavyMatch = (f: File, k1: string, u: File, k2: string) => {
         t++
     }
 }
-
+*/
 let i = 0
 let v = Object.values(iniFiles)
 
@@ -204,8 +206,9 @@ for(let f of v){
         }
     */
     for(let [k, u] of cs_names_kv){
-        let kn = k.split('.')
-        heavyMatch(f, kn[0], u, kn[1])
+        //let kn = k.split('.')
+        //heavyMatch(f, kn[0], u, kn[1])
+        simpleMatch(f, k, u)
     }
 }
 
@@ -213,13 +216,14 @@ console.log('Saving...')
 
 let files_v = [csFiles, iniFiles, troyFiles, binFiles].flatMap(fs => Object.values(fs))
 for(let f of files_v){
-    delete f.content;
-    delete f.contentStr;
-    delete (f as any).saved;
-    (f as any).usedBy = [...f.usedBy].map(f => { let i = files_v.indexOf(f); console.assert(i != -1); return i; });
-    (f as any).uses = [...f.uses].map(f => { let i = files_v.indexOf(f); console.assert(i != -1); return i; });
+    let fa = f as any
+    delete fa.content;
+    delete fa.contentStr;
+    delete fa.saved;
+    fa.usedBy = [...f.usedBy].map(f => f.id);
+    fa.uses = [...f.uses].map(f => f.id);
 }
-await fs.writeFile('out.json', JSON.stringify(files_v, undefined, 4), 'utf8')
+await fs.writeFile('./tools/files.deps.json', JSON.stringify(files_v, undefined, 4), 'utf8')
 
 /*
 let str = '@startuml\n'

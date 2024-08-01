@@ -296,14 +296,6 @@ for(let c of characters){
 /*/
 root.use(files['ahri.ini'])
 /*/
-
-/*
-for(let i = filesArray.length - 1; i >= 0; i--){
-    let f = filesArray[i]
-    if(f.usedBy.size === 0 && f.name !== 'Ahri.ini')
-        filesArray.splice(i, 1)
-}
-*/
    
 for(let f of filesArray){
     f.usedBy.delete(f)
@@ -428,7 +420,6 @@ for(let f of filesArray){
             rating = [ rating.sort((a, b) => unify(a[1].name).length - unify(b[1].name).length)[0] ]
         
         let users = rating.map(e => e[1]) as File[]
-        
 
         let user = lca(f, users)
         users = user ? [ user ] : [] //[ (root.uses.add(f), root) ]
