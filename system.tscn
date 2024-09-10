@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsfyu475kiow4"]
-
-[ext_resource type="Script" path="res://Effects/System.gd" id="1_bguoj"]
-
-[node name="System" type="Node3D"]
-script = ExtResource("1_bguoj")
-import_path = "res://Data/Particles/Ahri_Orb_mis.troy"

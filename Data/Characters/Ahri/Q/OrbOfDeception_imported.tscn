@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmj3cgvigrahd"]
-
-[ext_resource type="Script" path="res://Spells/SpellData.gd" id="1_pviva"]
-
-[node name="AhriOrbOfDeceptionSpell" type="Node3D"]
-script = ExtResource("1_pviva")
-import_path = "res://Data/Characters/Ahri/Q/AhriOrbofDeception.inibin.ini"
-import = true

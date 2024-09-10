@@ -1,20 +1,3 @@
 # Godot 4+ specific ignores
 .godot/
-
-*.csv
-*.import
-*.translation
-*.webp
-*.bin
-*.gltf
-*.png
-*.obj
-*.mtl
-*.troy
-
-node_modules/
-pnpm-lock.yaml
-
-.vscode/
-
-*.mjs
+/android/
