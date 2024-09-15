@@ -1,13 +1,52 @@
 class_name Unit
-extends UnitData
+extends Node3D
 
 @export_range(1, 31, 1, "hide_slider") var team := 1
-var stats: Stats
-var buffs: Buffs
-var spells: Spells
-var passive: Passive
-var vars: Vars
-var ai: AI
+@export var data: UnitData
+
+var stats: Stats:
+	get:
+		if !stats:
+			stats = Stats.new()
+			add_child(stats)
+		return stats
+var buffs: Buffs:
+	get:
+		if !buffs:
+			buffs = Buffs.new()
+			add_child(buffs)
+		return buffs
+var spells: Spells:
+	get:
+		if !spells:
+			#spells = find_child("Spells")
+			if !spells:
+				spells = Spells.new()
+				add_child(spells)
+				spells.name = "Spells"
+				#if Engine.is_editor_hint():
+				#	spells.owner = EditorInterface.get_edited_scene_root()
+		return spells
+	set(value):
+		spells = value
+var passive: Passive:
+	get:
+		if !passive:
+			passive = Passive.new()
+			add_child(passive)
+		return passive
+var vars: Vars:
+	get:
+		if !vars:
+			vars = Vars.new()
+			add_child(vars)
+		return vars
+var ai: AI:
+	get:
+		if !ai:
+			ai = AI.new()
+			add_child(ai)
+		return ai
 
 func on_order(type: Enums.OrderType, pos: Vector3, unit: Unit):
 	ai.order(type, pos, unit)
@@ -21,6 +60,8 @@ var target_frame: int = max(2, floor(physics_fps * tick_rate))
 var should_update_stats := false
 var should_update_actions := false
 func _physics_process(_delta):
+	if Engine.is_editor_hint(): return
+	
 	var frame: int = Engine.get_physics_frames() % target_frame
 	should_update_stats = frame == 0
 	should_update_actions = frame == 1

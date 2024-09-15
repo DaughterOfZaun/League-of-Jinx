@@ -5,6 +5,8 @@ extends Area3D
 @onready var char := get_parent() as Unit
 
 func _ready():
+	if Engine.is_editor_hint(): return
+	
 	monitoring = false
 	monitorable = false
 	input_ray_pickable = false

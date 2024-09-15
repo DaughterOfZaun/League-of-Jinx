@@ -1,5 +1,7 @@
 class_name Spell
-extends SpellData
+extends Node
+
+@export var data: SpellData
 
 var attacker: Unit
 var caster: Unit
@@ -39,12 +41,13 @@ enum State {
 }
 
 func _ready():
-	if !Engine.is_editor_hint():
-		host = (get_parent() as Spells).get_parent() as Unit #HACK
-		attacker = host
-		caster = host
+	if Engine.is_editor_hint(): return
+	host = (get_parent() as Spells).get_parent() as Unit #HACK
+	attacker = host
+	caster = host
 
 func _physics_process(_delta):
+	if Engine.is_editor_hint(): return
 	if host.should_update_actions:
 		on_update_actions()
 	if host.should_update_stats:

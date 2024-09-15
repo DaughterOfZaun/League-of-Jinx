@@ -1,0 +1,2 @@
+class_name AhriTumbleSpell
+extends Spell

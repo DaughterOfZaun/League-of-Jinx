@@ -1,0 +1,144 @@
+[gd_scene load_steps=18 format=3 uid="uid://blexfq3sx4oo4"]
+
+[ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_gmd4b"]
+[ext_resource type="Script" path="res://engine/game/ground.gd" id="2_gx125"]
+[ext_resource type="Script" path="res://engine/unit/unit.gd" id="3_pto0q"]
+[ext_resource type="Script" path="res://engine/unit/unit_data_importer.gd" id="4_8hud3"]
+[ext_resource type="Script" path="res://engine/ai.gd" id="5_7guo6"]
+[ext_resource type="Script" path="res://engine/stats.gd" id="6_7f84m"]
+[ext_resource type="Script" path="res://engine/passive/passive.gd" id="7_axqw5"]
+[ext_resource type="Script" path="res://engine/spells/spell_manager.gd" id="8_bncmk"]
+[ext_resource type="Script" path="res://engine/buffs/buff_manager.gd" id="9_v166v"]
+[ext_resource type="Script" path="res://engine/vars.gd" id="10_oa0hj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ovldq"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_x66o3"]
+sky_material = SubResource("ProceduralSkyMaterial_ovldq")
+
+[sub_resource type="Environment" id="Environment_fu4g7"]
+background_mode = 2
+sky = SubResource("Sky_x66o3")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6m1or"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_soa18"]
+size = Vector2(16, 16)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0dxjb"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gl51m"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fu4g7")
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="InputManager" type="Node3D" parent="." node_paths=PackedStringArray("main_hero")]
+unique_name_in_owner = true
+script = ExtResource("1_gmd4b")
+main_hero = NodePath("../Unit")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+projection = 1
+size = 16.0
+
+[node name="Ground" type="StaticBody3D" parent="."]
+script = ExtResource("2_gx125")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("WorldBoundaryShape3D_6m1or")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_soa18")
+skeleton = NodePath("../..")
+
+[node name="Unit" type="CharacterBody3D" parent="."]
+script = ExtResource("3_pto0q")
+champion_id = 103
+champion_name = "game_character_displayname_Ahri"
+description = "game_character_description_Ahri"
+lore = "game_character_lore_Ahri"
+tips = "game_character_opposing_tips_Ahri"
+search_tags = 15
+magic_rank = 8
+attack_rank = 3
+defense_rank = 4
+difficulty_rank = 8
+attack_range = 550.0
+chasing_attack_range_percent = 0.8
+acquisition_range = 525.0
+pathfinding_collision_radius = 38.0
+selection_radius = 100.0
+selection_height = 135.0
+armor = 11.0
+armor_per_level = 3.5
+spell_block = 30.0
+attack_speed_per_level = 2.0
+base_damage = 50.0
+damage_per_level = 3.0
+crit_damage_bonus = 2.0
+level_spell_effectiveness = 3.0
+base_hp = 380.0
+hp_per_level = 80.0
+hp_regen_per_level = 0.12
+base_static_hp_regen = 1.1
+base_mp = 230.0
+mp_per_level = 50.0
+mp_regen_per_level = 0.12
+base_static_mp_regen = 1.25
+move_speed = 305.0
+weapon_material = "AhriBasicAttack"
+base_attack_probability = 0.5
+attack_delay_cast_offset_percent = -0.099465
+attack_delay_offset_percent = -0.065
+crit_attack = "AhriCritAttack"
+crit_attack_attack_cast_delay_offset_percent = -0.099465
+crit_attack_attack_delay_offset_percent = -0.065
+passive_desc = "Increases all friendly Champions' critical strike chance"
+passive_icon = "Ahri_SoulEater.dds"
+passive_name = "game_character_passiveName_Ahri"
+passive_lua_name = "AhriSoulCrusherNumbers"
+platform_enabled = true
+
+[node name="Importer" type="Node" parent="Unit" node_paths=PackedStringArray("target")]
+script = ExtResource("4_8hud3")
+target = NodePath("..")
+import_path = "res://data/characters/Ahri/Ahri.ini"
+
+[node name="AI" type="Node" parent="Unit"]
+script = ExtResource("5_7guo6")
+
+[node name="Stats" type="Node" parent="Unit"]
+script = ExtResource("6_7f84m")
+
+[node name="Passive" type="Node" parent="Unit"]
+script = ExtResource("7_axqw5")
+
+[node name="Spells" type="Node" parent="Unit"]
+script = ExtResource("8_bncmk")
+
+[node name="Buffs" type="Node" parent="Unit"]
+script = ExtResource("9_v166v")
+
+[node name="Vars" type="Node" parent="Unit"]
+script = ExtResource("10_oa0hj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Unit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_0dxjb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Unit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_gl51m")
+
+[node name="Ranges" type="Node" parent="Unit"]

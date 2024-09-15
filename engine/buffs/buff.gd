@@ -40,6 +40,7 @@ func _init():
 	one_shot = !can_mitigate_duration
 
 func _ready():
+	if Engine.is_editor_hint(): return
 	timeout.connect(remove_internal_0.bind(true))
 	start(self.delay + self.duration)
 	host.connect_all(self)

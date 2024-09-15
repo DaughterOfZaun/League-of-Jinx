@@ -1,0 +1,129 @@
+[Glow]
+e-life=-1
+e-linger=0
+e-local-orient=0
+e-rate=6
+p-bindtoemitter=1 1
+p-colorscale=1 1
+p-colortype=1 3
+p-life=0.5
+p-lifeP1=0 0.3
+p-lifeP2=1 1
+p-linger=0
+p-postoffset=0 10 0
+p-rgba=color-AhriOrbPassive.tga
+p-scale=62
+p-texture=orbglow.tga
+p-type=0
+rendermode=0
+
+[Inner_Light]
+e-life=-1
+e-linger=0
+e-local-orient=0
+e-rate=4
+p-bindtoemitter=1 1
+p-colorscale=1 1
+p-colortype=1 3
+p-life=0.5
+p-lifeP1=0 0.7
+p-lifeP2=1 1
+p-linger=0
+p-postoffset=0 10 0
+p-rgba=color-bellcurve2.tga
+p-scale=35
+p-texture=fuzzyshadow.tga
+p-type=0
+rendermode=0
+
+[Orb]
+e-life=-1
+e-local-orient=0
+e-rate=4
+e-uvoffset=1 1
+e-uvoffsetXP1=0 0
+e-uvoffsetXP2=1 1
+e-uvoffsetYP1=0 0
+e-uvoffsetYP2=1 1
+p-backfaceon=0
+p-bindtoemitter=1 1
+p-life=1
+p-lifeP1=0 0.3
+p-lifeP2=1 1.1
+p-linger=0
+p-mesh=magicball.sco
+p-meshtex=ahriorb_passive.tga
+p-postoffset=0 10 0
+p-quadrot=360 360 360
+p-quadrotXP1=0 0
+p-quadrotXP2=1 1
+p-quadrotYP1=0 0
+p-quadrotYP2=1 1
+p-quadrotZP1=0 0
+p-quadrotZP2=1 1
+p-rgba=color-bellcurve.tga
+p-scale=2.2 2.2 2.2
+p-shadow=1
+p-type=3
+p-uvscroll-rgb=2 0
+rendermode=0
+
+[Rays]
+e-life=-1
+e-local-orient=0
+e-rate=3
+p-bindtoemitter=1 1
+p-life=0.5
+p-linger=0
+p-postoffset=0 10 0
+p-quadrot=360
+p-quadrotP1=0 0
+p-quadrotP2=1 1
+p-rgba=color-bellcurve.tga
+p-rotvel=50
+p-rotvelP1=0 -1
+p-rotvelP2=1 1
+p-scale=40
+p-texture=bigradialhalo.tga
+p-type=0
+rendermode=0
+
+[Swirl]
+e-active=1
+e-life=-1
+e-local-orient=0
+e-period=1.3
+e-rate=4
+p-backfaceon=1
+p-bindtoemitter=1 1
+p-colortype=1 3
+p-life=0.7
+p-linger=0
+p-mesh=magicball.sco
+p-meshtex=Ahri_OrbSwirl.tga
+p-postoffset=0 10 0
+p-quadrot=360 360 360
+p-quadrotXP1=0 0
+p-quadrotXP2=1 1
+p-quadrotYP1=0 0
+p-quadrotYP2=1 1
+p-quadrotZP1=0 0
+p-quadrotZP2=1 1
+p-rgba=color-bellcurve5.tga
+p-scale=2.6 2.6 2.6
+p-type=3
+p-uvscroll-rgb=2 0
+rendermode=0
+
+[System]
+GroupPart1=Inner_Light
+GroupPart1Type=Simple
+GroupPart2=Orb
+GroupPart3=Swirl
+GroupPart4=Rays
+GroupPart4Type=Simple
+GroupPart5=Glow
+GroupPart5Type=Simple
+SimulateEveryFrame=1
+SoundPersistent=LoL_Audio/Spells/AhriSoulCrusher/buffactivate
+

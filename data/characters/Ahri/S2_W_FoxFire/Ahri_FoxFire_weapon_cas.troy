@@ -1,0 +1,43 @@
+[Bubble]
+e-life=1
+e-local-orient=1
+e-rate=1
+p-bindtoemitter=1 1
+p-life=0.2
+p-linger=0.2
+p-offset=0 10 20
+p-rgba=color-rampdown.tga
+p-scale=100
+p-texture=shenshield.tga
+p-type=0
+p-xscale1=0 0
+p-xscale2=0.3 0.8
+p-xscale3=1 1
+rendermode=0
+single-particle=1
+
+[Light]
+e-life=1
+e-local-orient=1
+e-rate=1
+p-bindtoemitter=1 1
+p-life=0.3
+p-linger=0.3
+p-offset=0 10 20
+p-rgba=color-hold.tga
+p-scale=130
+p-texture=flare-rainbow_blue_03.tga
+p-type=0
+p-xscale1=0 0
+p-xscale2=0.1 1
+p-xscale3=1 0.5
+rendermode=0
+single-particle=1
+
+[System]
+GroupPart1=Bubble
+GroupPart1Type=Simple
+GroupPart2=Light
+GroupPart2Type=Simple
+SimulateEveryFrame=1
+

@@ -92,12 +92,15 @@ func set_state_and_move_internal(state: Enums.AIState, target: Unit, position: V
 		set_movement_allowed(true)
 
 func _ready():
+	if Engine.is_editor_hint(): return
 	me.ai = self
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
 	navigation_agent.navigation_finished.connect(_on_navigation_finished)
 	on_init()
 
 func _physics_process(delta: float):
+	if Engine.is_editor_hint(): return
+	
 	if is_movement_allowed: #and !navigation_agent.is_navigation_finished():
 		var next_path_position := navigation_agent.get_next_path_position()
 		var dir := me.global_position.direction_to(next_path_position)

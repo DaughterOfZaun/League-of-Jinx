@@ -3,6 +3,7 @@ extends Node
 
 @onready var me := get_parent() as Unit
 func _ready():
+	if Engine.is_editor_hint(): return
 	me.vars = self
 
 @export var orb_of_deception_is_active: int

@@ -5,6 +5,7 @@ extends Node
 
 @onready var me := get_parent() as Unit
 func _ready():
+	if Engine.is_editor_hint(): return
 	me.stats = self
 
 @export_group('Scale', 'scale_')

@@ -1,5 +1,5 @@
 class_name Data
-extends Node3D
+extends Node
 
 const HW2GD := 1. / 70. #0.014285714
 
@@ -46,7 +46,7 @@ enum VectorUsage { UNDEFINED, SCALE, ROTATION }
 func vec3_parse(from: String, u := VectorUsage.UNDEFINED) -> Vector3:
 	from = string_parse(from)
 	var v := from.split(' ')
-	assert(len(v) == 3 || (len(v) == 1 && u != VectorUsage.UNDEFINED))
+	assert(len(v) == 3 || (len(v) == 1 && u != VectorUsage.UNDEFINED), from)
 	if len(v) == 1: match u:
 		VectorUsage.SCALE:
 			return Vector3.ONE * float_parse(v[0])
@@ -57,41 +57,52 @@ func vec3_parse(from: String, u := VectorUsage.UNDEFINED) -> Vector3:
 func vec2_parse(from: String) -> Vector2:
 	from = string_parse(from)
 	var v := from.split(' ')
-	assert(len(v) == 2)
+	assert(len(v) == 2, from)
 	return Vector2(float_parse(v[0]), float_parse(v[1]))
 
 func ivec2_parse(from: String) -> Vector2i:
 	from = string_parse(from)
 	var v := from.split(' ')
-	assert(len(v) == 2)
+	assert(len(v) == 2, from)
 	return Vector2i(int_parse(v[0]), int_parse(v[1]))
 
 var regex_float = RegEx.create_from_string(r'^[+-]?[0-9.]*$')
 func float_parse(from: String) -> float:
 	from = string_parse(from)
-	assert(regex_float.search(from))
+	assert(regex_float.search(from), from)
 	return float(from)
 
 func bool_parse(from: String) -> bool:
-	from = string_parse(from)
-	return int_parse(from) != 0
+	from = string_parse(from).to_lower()
+	if from == "yes": return true
+	elif from == "no": return false
+	else:
+		var i := int_parse(from)
+		assert(i == 0 || i == 1, from)
+		return i == 1
 
-var regex_int = RegEx.create_from_string(r'^[+-]?[0-9]*$')
+#var regex_int = RegEx.create_from_string(r'^[+-]?[0-9]*$')
 func int_parse(from: String) -> int:
-	from = string_parse(from)
-	assert(regex_int.search(from))
-	return int(from)
+	var f := float_parse(from)
+	assert(fmod(f, 1) == 0)
+	return int(f)
+	#from = string_parse(from)
+	#assert(regex_int.search(from), from)
+	#return int(from)
 
-var regex_uint = RegEx.create_from_string(r'^[+]?[0-9]*$')
+#var regex_uint = RegEx.create_from_string(r'^[+]?[0-9]*$')
 func uint_parse(from: String) -> int:
-	from = string_parse(from)
-	assert(regex_uint.search(from))
-	return int(from)
+	var i := int_parse(from)
+	assert(i >= 0)
+	return i
+	#from = string_parse(from)
+	#assert(regex_uint.search(from), from)
+	#return int(from)
 
 func color_parse(from: String) -> Color:
 	from = string_parse(from)
 	var v := from.split(' ')
-	assert(len(v) == 4)
+	assert(len(v) == 4, from)
 	var c: Array[float] = []; c.resize(4); for i in range(4): c[i] = float_parse(v[i])
 	for e in c:
 		if e > 1:
@@ -112,7 +123,7 @@ func curve3d_set(curve: Gradient, i: int, from: String, u := VectorUsage.UNDEFIN
 	from = string_parse(from)
 	if !curve: curve = Gradient.new()
 	var s := from.split(' ', false, 1)
-	assert(len(s) == 2)
+	assert(len(s) == 2, from)
 	curve.add_point(float_parse(s[0]), vec3_to_color(vec3_parse(s[1], u)))
 	return curve
 
@@ -120,7 +131,7 @@ func gradient_set(grad: Gradient, i: int, from: String) -> Gradient:
 	from = string_parse(from)
 	if !grad: grad = Gradient.new()
 	var s := from.split(' ', false, 1)
-	assert(len(s) == 2)
+	assert(len(s) == 2, from)
 	grad.add_point(float_parse(s[0]), color_parse(s[1]))
 	return grad
 
@@ -143,7 +154,7 @@ func array_get(a: Array, i: int, f := return_null):
 		a[i] = res
 	return res
 
-func array_set(a: Array, i: int, v, f := return_null):
+func array_set(a, i: int, v, f := return_null):
 	assert(i >= 0)
 	if a == null: a = []
 	array_resize_to_fit(a, i, f)
@@ -208,3 +219,16 @@ func curve_is_invalid_or_is_always_equal_to_one(c: Curve) -> bool:
 			if c.get_point_position(i).y != 1:
 				return false
 	return true
+
+func enum_parse(dict: Dictionary, from: String) -> int:
+	from = string_parse(from)
+	var d: Dictionary[String, int] = {}
+	for key: String in dict.keys():
+		d[key.to_lower()] = dict[key]
+	var result := 0
+	for key in from.split(",", false):
+		key = key.to_lower()
+		assert(key in d, 'Expected one of ["' + '", "'.join(d.keys()) + '"], got "' + key + '"')
+		result = result | d[key]
+	return result
+	

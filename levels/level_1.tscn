@@ -1,0 +1,809 @@
+[gd_scene load_steps=19 format=3 uid="uid://c1voud1rbq3sf"]
+
+[ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_104n6"]
+[ext_resource type="Script" path="res://engine/game/ground.gd" id="2_y4ri1"]
+[ext_resource type="Script" path="res://engine/unit/unit.gd" id="3_wwbt7"]
+[ext_resource type="Script" path="res://engine/unit/unit_data.gd" id="4_4y8lh"]
+[ext_resource type="Script" path="res://engine/spells/spell_manager.gd" id="5_gep23"]
+[ext_resource type="Script" path="res://engine/spells/attacks/basic_attack.gd" id="6_p5bn8"]
+[ext_resource type="Script" path="res://engine/spells/attacks/basic_attack_data.gd" id="7_876sy"]
+[ext_resource type="Script" path="res://engine/spells/attacks/crit_attack.gd" id="8_os5gn"]
+[ext_resource type="Script" path="res://engine/spells/attacks/crit_attack_data.gd" id="9_cwmut"]
+[ext_resource type="Script" path="res://engine/spells/spell.gd" id="10_vhavm"]
+[ext_resource type="Script" path="res://engine/spells/spell_data.gd" id="11_eotle"]
+[ext_resource type="Script" path="res://engine/passive/passive.gd" id="12_133kh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ovldq"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_x66o3"]
+sky_material = SubResource("ProceduralSkyMaterial_ovldq")
+
+[sub_resource type="Environment" id="Environment_fu4g7"]
+background_mode = 2
+sky = SubResource("Sky_x66o3")
+tonemap_mode = 2
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+glow_enabled = true
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_6m1or"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_soa18"]
+size = Vector2(16, 16)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gl51m"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fu4g7")
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="InputManager" type="Node3D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_104n6")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+current = true
+size = 0.1
+
+[node name="Ground" type="StaticBody3D" parent="."]
+script = ExtResource("2_y4ri1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("WorldBoundaryShape3D_6m1or")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_soa18")
+skeleton = NodePath("../..")
+
+[node name="Unit" type="Node3D" parent="." node_paths=PackedStringArray("data")]
+script = ExtResource("3_wwbt7")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit"]
+script = ExtResource("4_4y8lh")
+champion_id = 103
+champion_name = "game_character_displayname_Ahri"
+description = "game_character_description_Ahri"
+lore = "game_character_lore_Ahri"
+tips = "game_character_opposing_tips_Ahri"
+search_tags = 15
+magic_rank = 8
+attack_rank = 3
+defense_rank = 4
+difficulty_rank = 8
+attack_range = 550.0
+chasing_attack_range_percent = 0.8
+acquisition_range = 525.0
+pathfinding_collision_radius = 38.0
+selection_radius = 100.0
+selection_height = 135.0
+armor = 11.0
+armor_per_level = 3.5
+spell_block = 30.0
+attack_speed_per_level = 2.0
+base_damage = 50.0
+damage_per_level = 3.0
+crit_damage_bonus = 2.0
+level_spell_effectiveness = 3.0
+base_hp = 380.0
+hp_per_level = 80.0
+hp_regen_per_level = 0.12
+base_static_hp_regen = 1.1
+base_mp = 230.0
+mp_per_level = 50.0
+mp_regen_per_level = 0.12
+base_static_mp_regen = 1.25
+move_speed = 305.0
+platform_enabled = true
+import_path = "res://data/characters/Ahri/Ahri.ini"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Unit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_gl51m")
+
+[node name="Spells" type="Node" parent="Unit"]
+script = ExtResource("5_gep23")
+
+[node name="Attacks" type="Node" parent="Unit/Spells"]
+
+[node name="Basic" type="Node" parent="Unit/Spells/Attacks"]
+
+[node name="AA" type="Node" parent="Unit/Spells/Attacks/Basic" node_paths=PackedStringArray("data")]
+script = ExtResource("6_p5bn8")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/Attacks/Basic/AA"]
+script = ExtResource("7_876sy")
+probability = 0.5
+inventory_icon = Array[Texture2D]([null])
+inventory_icon_name = Array[String]([""])
+spell_name = "AhriBasicAttack"
+display_name = "game_spell_displayname_CardMasterBasicAttack"
+description = "game_spell_description_CardMasterBasicAttack"
+level_desc = Array[String](["NONE", "NONE", "NONE", "NONE", "NONE"])
+dynamic_tooltip = "game_spell_tooltip_CardMasterBasicAttack"
+dynamic_extended = "game_spell_levelup_CardMasterBasicAttack"
+float_vars_decimals = Array[int]([2, 2, 2])
+effect_level_amount = Array[Array]([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+version = 1
+cooldown_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+subject_to_global_cooldown = true
+triggers_global_cooldown = true
+cast_frame = 9.0
+animation_name = "Attack1"
+targetting_type = 1
+location_targetting_width_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+cast_cone_angle = 45.0
+cast_cone_distance = 100.0
+cast_radius_primary = 100.0
+cast_range = 550.0
+cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+flags = 232448
+after_effect_name = "BowGlow.troy"
+hit_effect_name = "Ahri_BasicAttack_tar.troy"
+sound_cast_name = "CardM_Exp_Card_Impact.wav"
+sound_hit_name = "CardM_Power_Card_Cast_3.wav"
+cast_type = 1
+mana_cost_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+delay_cast_offset_percent = -0.2358
+is_disabled_while_dead = true
+missile_bone_name = "R_hand"
+missile_effect = "Ahri_BasicAttack_mis.troy"
+missile_speed = 1750.0
+line_missile_bounce_radius = 450.0
+apply_attack_damage = true
+death_recap_priority = 6.0
+coefficient = Array[float]([0.0])
+import_path = "res://data/characters/Ahri/Attacks/AhriBasicAttack.ini"
+
+[node name="A1" type="Node" parent="Unit/Spells/Attacks/Basic" node_paths=PackedStringArray("data")]
+script = ExtResource("6_p5bn8")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/Attacks/Basic/A1"]
+script = ExtResource("7_876sy")
+probability = 0.5
+inventory_icon = Array[Texture2D]([null])
+inventory_icon_name = Array[String]([""])
+spell_name = "AhriBasicAttack2"
+display_name = "game_spell_displayname_CardMasterBasicAttack"
+description = "game_spell_description_CardMasterBasicAttack"
+level_desc = Array[String](["NONE", "NONE", "NONE", "NONE", "NONE"])
+dynamic_tooltip = "game_spell_tooltip_CardMasterBasicAttack"
+dynamic_extended = "game_spell_levelup_CardMasterBasicAttack"
+float_vars_decimals = Array[int]([2, 2, 2])
+effect_level_amount = Array[Array]([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+version = 1
+cooldown_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+subject_to_global_cooldown = true
+triggers_global_cooldown = true
+cast_frame = 9.0
+animation_name = "Attack2"
+targetting_type = 1
+location_targetting_width_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+cast_cone_angle = 45.0
+cast_cone_distance = 100.0
+cast_radius_primary = 100.0
+cast_range = 550.0
+cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+flags = 232448
+after_effect_name = "globalhit_physical.troy"
+hit_effect_name = "Ahri_BasicAttack_tar.troy"
+sound_cast_name = "CardM_Exp_Card_Impact.wav"
+sound_hit_name = "CardM_Power_Card_Cast_3.wav"
+cast_type = 1
+mana_cost_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+delay_cast_offset_percent = -0.2358
+is_disabled_while_dead = true
+missile_bone_name = "R_hand"
+missile_effect = "Ahri_BasicAttack_mis.troy"
+missile_speed = 1750.0
+line_missile_bounce_radius = 450.0
+apply_attack_damage = true
+death_recap_priority = 6.0
+coefficient = Array[float]([0.0])
+import_path = "res://data/characters/Ahri/Attacks/AhriBasicAttack2.ini"
+
+[node name="AC" type="Node" parent="Unit/Spells/Attacks" node_paths=PackedStringArray("data")]
+script = ExtResource("8_os5gn")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/Attacks/AC"]
+script = ExtResource("9_cwmut")
+inventory_icon = Array[Texture2D]([null])
+inventory_icon_name = Array[String]([""])
+spell_name = "AhriCritAttack"
+display_name = "game_spell_displayname_CardMasterBasicAttack"
+description = "game_spell_description_CardMasterBasicAttack"
+level_desc = Array[String](["NONE", "NONE", "NONE", "NONE", "NONE"])
+dynamic_tooltip = "game_spell_tooltip_CardMasterBasicAttack"
+dynamic_extended = "game_spell_levelup_CardMasterBasicAttack"
+float_vars_decimals = Array[int]([2, 2, 2])
+effect_level_amount = Array[Array]([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+version = 1
+cooldown_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+subject_to_global_cooldown = true
+triggers_global_cooldown = true
+cast_frame = 10.0
+animation_name = "Crit"
+targetting_type = 1
+location_targetting_width_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+cast_cone_angle = 45.0
+cast_cone_distance = 100.0
+cast_radius_primary = 100.0
+cast_range = 550.0
+cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+flags = 232448
+after_effect_name = "globalhit_physical.troy"
+hit_effect_name = "Ahri_BasicAttack_tar.troy"
+sound_cast_name = "CardM_Exp_Card_Impact.wav"
+sound_hit_name = "CardM_Power_Card_Cast_3.wav"
+cast_type = 1
+mana_cost_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+delay_cast_offset_percent = -0.2358
+is_disabled_while_dead = true
+missile_bone_name = "R_hand"
+missile_effect = "Ahri_BasicAttack_mis.troy"
+missile_speed = 1750.0
+line_missile_bounce_radius = 450.0
+apply_attack_damage = true
+death_recap_priority = 6.0
+coefficient = Array[float]([0.0])
+import_path = "res://data/characters/Ahri/Attacks/AhriCritAttack.ini"
+
+[node name="Q" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
+script = ExtResource("10_vhavm")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/Q"]
+script = ExtResource("11_eotle")
+inventory_icon = Array[Texture2D]([null, null, null])
+inventory_icon_name = Array[String](["Ahri_OrbofDeception.dds", "", ""])
+spell_name = "AhriOrbofDeception"
+display_name = "game_spell_displayname_AhriOrbofDeception"
+alternate_name = "AhriOrbofDeception"
+description = "game_spell_description_AhriOrbofDeception"
+level_desc = Array[String](["Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"])
+dynamic_tooltip = "game_spell_tooltip_AhriOrbofDeception"
+dynamic_extended = "game_spell_levelup_AhriOrbofDeception"
+float_statics_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+float_vars_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+effect_level_amount = Array[Array]([[0.0, 40.0, 65.0, 90.0, 115.0, 140.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+version = 1
+cooldown_by_level = Array[float]([7.0, 7.0, 7.0, 7.0, 7.0, 11.0])
+subject_to_global_cooldown = true
+triggers_global_cooldown = true
+animation_name = "Spell1"
+use_animator_framerate = true
+targetting_type = 6
+selection_preference = 1
+location_targetting_width_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+cast_cone_angle = 45.0
+cast_cone_distance = 100.0
+cast_radius_primary = 275.0
+cast_radius_texture_name = "AOE.tga"
+cast_range = 10000.0
+cast_range_by_level = Array[float]([25000.0, 25000.0, 25000.0, 25000.0, 25000.0, 25000.0])
+cast_range_display_override = 880.0
+cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+flags = 347136
+after_effect_name = "Disintegrate_tar.troy"
+hit_effect_name = "LuxLightstrike_mis.troy"
+sound_cast_name = "ability_disintegrate_cast.wav"
+sound_hit_name = "ability_disintegrate_hit.wav"
+override_cast_time = 0.25
+mana_cost_by_level = Array[float]([70.0, 75.0, 80.0, 85.0, 90.0, 0.0])
+delay_cast_offset_percent = -0.5
+delay_total_time_percent = -0.5
+spell_reveals_champion = true
+cant_cancel_while_winding_up = true
+is_disabled_while_dead = true
+line_width = 100.0
+missile_bone_name = "R_hand"
+missile_effect = "LuxLightstrike_mis.troy"
+missile_max_speed = 1100.0
+missile_min_speed = 1100.0
+missile_speed = 1100.0
+line_missile_bounce_radius = 450.0
+death_recap_priority = 6.0
+coefficient = Array[float]([0.325, 0.325])
+x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+import_path = "res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbofDeception.ini"
+
+[node name="W" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
+script = ExtResource("10_vhavm")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/W"]
+script = ExtResource("11_eotle")
+spell_name = "AhriFoxFire"
+import_path = "res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFire.ini"
+import = true
+
+[node name="E" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
+script = ExtResource("10_vhavm")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/E"]
+script = ExtResource("11_eotle")
+inventory_icon = Array[Texture2D]([null, null, null])
+inventory_icon_name = Array[String](["Ahri_Charm.dds", "", ""])
+display_name = "game_spell_displayname_AhriSeduce"
+alternate_name = "AhriSeduce"
+description = "game_spell_description_AhriSeduce"
+level_desc = Array[String](["Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"])
+dynamic_tooltip = "game_spell_tooltip_AhriSeduce"
+dynamic_extended = "game_spell_levelup_AhriSeduce"
+float_statics_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+float_vars_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+effect_level_amount = Array[Array]([[0.0, 60.0, 90.0, 120.0, 150.0, 180.0, 0.0], [0.0, 1.0, 1.25, 1.5, 1.75, 2.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+version = 1
+cooldown_by_level = Array[float]([12.0, 12.0, 12.0, 12.0, 12.0, 10.0])
+subject_to_global_cooldown = true
+triggers_global_cooldown = true
+animation_name = "Spell3"
+use_animator_framerate = true
+targetting_type = 6
+selection_preference = 2
+location_targetting_width_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+cast_cone_angle = 45.0
+cast_cone_distance = 100.0
+cast_radius_primary = 210.0
+cast_radius_texture_name = "AOE.tga"
+cast_range = 10000.0
+cast_range_by_level = Array[float]([10000.0, 10000.0, 10000.0, 10000.0, 10000.0, 10000.0])
+cast_range_display_override = 975.0
+cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+flags = 347136
+after_effect_name = "ChronoClockFast_tar.troy"
+hit_bone_name = "head"
+hit_effect_name = "rhyzebasicattack2_mis.troy"
+override_cast_time = 0.25
+mana_cost_by_level = Array[float]([50.0, 65.0, 80.0, 95.0, 110.0, 0.0])
+delay_cast_offset_percent = -0.5
+delay_total_time_percent = -0.5
+spell_reveals_champion = true
+cant_cancel_while_winding_up = true
+is_disabled_while_dead = true
+line_width = 60.0
+missile_bone_name = "R_hand"
+missile_effect = "DarkBinding_mis.troy"
+missile_max_speed = 1200.0
+missile_min_speed = 1200.0
+missile_speed = 1200.0
+missile_target_height_augment = 100.0
+line_missile_bounce_radius = 450.0
+death_recap_priority = 13.0
+coefficient = Array[float]([0.35, 0.0])
+x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+import_path = "res://data/characters/Ahri/S3_E_Seduce/AhriSeduce.ini"
+
+[node name="R" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
+script = ExtResource("10_vhavm")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/R"]
+script = ExtResource("11_eotle")
+inventory_icon = Array[Texture2D]([null, null, null])
+inventory_icon_name = Array[String](["Ahri_SpiritRush.dds", "", ""])
+spell_name = "AhriTumble"
+display_name = "game_spell_displayname_AhriTumble"
+alternate_name = "AhriTumble"
+description = "game_spell_description_AhriTumble"
+level_desc = Array[String](["Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"])
+dynamic_tooltip = "game_spell_tooltip_AhriTumble"
+dynamic_extended = "game_spell_levelup_AhriTumble"
+float_statics_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+float_vars_decimals = Array[int]([1, 1, 1, 2, 2, 2])
+effect_level_amount = Array[Array]([[0.0, 100.0, 140.0, 180.0, 0.0, 0.0, 0.0], [0.0, 10.0, 20.0, 30.0, 50.0, 60.0, 0.0], [0.0, 28.0, 23.0, 18.0, 0.0, 0.0, 0.0], [0.0, 2.0, 2.0, 2.0, 0.0, 0.0, 0.0], [0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0]])
+cooldown_by_level = Array[float]([90.0, 80.0, 70.0, 1.5, 1.5, 9.0])
+subject_to_global_cooldown = true
+triggers_global_cooldown = true
+cast_frame = 15.0
+animation_name = "Spell4"
+targetting_type = 6
+selection_preference = 1
+location_targetting_width_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+use_minimap_targeting = true
+cast_cone_angle = 45.0
+cast_cone_distance = 100.0
+cast_radius_primary = 300.0
+cast_radius_texture_name = "AOE.tga"
+cast_range = 25000.0
+cast_range_by_level = Array[float]([25000.0, 25000.0, 25000.0, 25000.0, 25000.0, 800.0])
+cast_range_display_override = 450.0
+flags = 115748
+after_effect_name = "missing_instant.troy"
+hit_effect_name = "akali_shadowDance_tar.troy"
+mana_cost_by_level = Array[float]([100.0, 100.0, 100.0, 0.0, 0.0, 0.0])
+spell_reveals_champion = true
+cant_cancel_while_winding_up = true
+cant_cast_while_rooted = true
+is_disabled_while_dead = true
+missile_bone_name = "root"
+missile_effect = "AlphaStrike_mis.troy"
+missile_max_speed = 2200.0
+missile_min_speed = 2200.0
+missile_speed = 2200.0
+missile_target_height_augment = 100.0
+line_missile_bounce_radius = 600.0
+coefficient = Array[float]([0.3, 0.0])
+x = Array[float]([0.0])
+import_path = "res://data/characters/Ahri/S4_R_Tumble/AhriTumble.ini"
+
+[node name="Extra" type="Node" parent="Unit/Spells"]
+
+[node name="E0" type="Node" parent="Unit/Spells/Extra" node_paths=PackedStringArray("data")]
+script = ExtResource("10_vhavm")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/Extra/E0"]
+script = ExtResource("11_eotle")
+inventory_icon = Array[Texture2D]([null, null, null])
+inventory_icon_name = Array[String](["Ahri_OrbofDeception.dds", "LuxLightStrikeKugel.dds", ""])
+spell_name = "AhriOrbMissile"
+display_name = "game_spell_displayname_AhriOrbofDeception"
+alternate_name = "AhriOrbofDeception"
+description = "game_spell_description_AhriOrbofDeception"
+level_desc = Array[String](["Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"])
+dynamic_tooltip = "game_spell_tooltip_AhriOrbofDeception"
+dynamic_extended = "game_spell_levelup_AhriOrbofDeception"
+float_statics_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+float_vars_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+effect_level_amount = Array[Array]([[0.0, 50.0, 80.0, 110.0, 140.0, 170.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+version = 1
+cooldown_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 11.0])
+subject_to_global_cooldown = true
+triggers_global_cooldown = true
+cast_frame = 7.5
+animation_name = "Spell1"
+targetting_type = 6
+selection_preference = 1
+location_targetting_width_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+cast_cone_angle = 45.0
+cast_cone_distance = 100.0
+cast_radius_primary = 275.0
+cast_radius_texture_name = "AOE.tga"
+cast_range = 1000.0
+cast_range_by_level = Array[float]([1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0])
+cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+flags = 115712
+after_effect_name = "Disintegrate_tar.troy"
+hit_effect_name = "LuxLightstrike_mis.troy"
+sound_cast_name = "ability_disintegrate_cast.wav"
+sound_hit_name = "ability_disintegrate_hit.wav"
+cast_type = 3
+mana_cost_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+delay_cast_offset_percent = -0.5
+delay_total_time_percent = -0.5
+spell_reveals_champion = true
+cant_cancel_while_winding_up = true
+is_disabled_while_dead = true
+line_width = 100.0
+missile_accel = -3200.0
+missile_bone_name = "R_hand"
+missile_effect = "Ahri_Orb_mis.troy"
+missile_max_speed = 2500.0
+missile_min_speed = 400.0
+missile_speed = 2500.0
+line_missile_bounce_radius = 450.0
+line_missile_ends_at_target_point = true
+death_recap_priority = 6.0
+coefficient = Array[float]([0.4, 0.0])
+x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+import_path = "res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbMissile/AhriOrbMissile.ini"
+
+[node name="E1" type="Node" parent="Unit/Spells/Extra" node_paths=PackedStringArray("data")]
+script = ExtResource("10_vhavm")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/Extra/E1"]
+script = ExtResource("11_eotle")
+inventory_icon = Array[Texture2D]([null, null, null])
+inventory_icon_name = Array[String](["Ahri_OrbofDeception.dds", "LuxLightStrikeKugel.dds", ""])
+spell_name = "AhriOrbReturn"
+display_name = "game_spell_displayname_LuxLightStrikeKugel"
+alternate_name = "AhriOrbofDeception"
+description = "game_spell_description_LuxLightStrikeKugel"
+level_desc = Array[String](["Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"])
+dynamic_tooltip = "game_spell_tooltip_LuxLightStrikeKugel"
+dynamic_extended = "game_spell_levelup_LuxLightStrikeKugel"
+float_statics_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+float_vars_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+effect_level_amount = Array[Array]([[0.0, 55.0, 75.0, 95.0, 115.0, 135.0, 0.0], [0.0, 1.5, 1.5, 1.5, 1.5, 1.5, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+version = 1
+cooldown_by_level = Array[float]([11.0, 11.0, 11.0, 11.0, 11.0, 11.0])
+subject_to_global_cooldown = true
+triggers_global_cooldown = true
+cast_frame = 7.5
+animation_name = "Spell3"
+targetting_type = 1
+selection_preference = 1
+location_targetting_width_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+cast_cone_angle = 45.0
+cast_cone_distance = 100.0
+cast_radius_primary = 275.0
+cast_radius_texture_name = "AOE.tga"
+cast_range = 25000.0
+cast_range_by_level = Array[float]([25000.0, 25000.0, 25000.0, 25000.0, 25000.0, 25000.0])
+cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+flags = 377856
+after_effect_name = "Disintegrate_tar.troy"
+hit_effect_name = "LuxLightstrike_mis.troy"
+sound_cast_name = "ability_disintegrate_cast.wav"
+sound_hit_name = "ability_disintegrate_hit.wav"
+cast_type = 3
+mana_cost_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+delay_cast_offset_percent = -0.5
+delay_total_time_percent = -0.5
+spell_reveals_champion = true
+cant_cancel_while_winding_up = true
+is_disabled_while_dead = true
+line_width = 100.0
+missile_accel = 1900.0
+missile_bone_name = "root"
+missile_effect = "Ahri_Orb_mis_02.troy"
+missile_max_speed = 2600.0
+missile_min_speed = 60.0
+missile_speed = 60.0
+line_missile_bounce_radius = 450.0
+line_missile_track_units = true
+death_recap_priority = 6.0
+coefficient = Array[float]([0.6, 0.0])
+x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+import_path = "res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbReturn/AhriOrbReturn.ini"
+
+[node name="E2" type="Node" parent="Unit/Spells/Extra" node_paths=PackedStringArray("data")]
+script = ExtResource("10_vhavm")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/Extra/E2"]
+script = ExtResource("11_eotle")
+inventory_icon = Array[Texture2D]([null, null, null])
+inventory_icon_name = Array[String](["Ahri_FoxFire.dds", "Annie_Disintegrate.dds", ""])
+spell_name = "AhriFoxFireMissile"
+display_name = "game_spell_displayname_BrandConflagration"
+alternate_name = "AhriFoxFire"
+description = "game_spell_description_BrandConflagration"
+level_desc = Array[String](["Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"])
+dynamic_tooltip = "game_spell_tooltip_BrandConflagration"
+dynamic_extended = "game_spell_levelup_BrandConflagration"
+float_statics_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+float_vars_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+effect_level_amount = Array[Array]([[0.0, 90.0, 140.0, 190.0, 240.0, 290.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+cooldown_by_level = Array[float]([9.0, 8.0, 7.0, 6.0, 5.0, 4.0])
+subject_to_global_cooldown = true
+triggers_global_cooldown = true
+cast_frame = 7.5
+animation_name = "Spell3"
+use_animator_framerate = true
+targetting_type = 1
+selection_preference = 1
+location_targetting_width_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+cast_cone_angle = 45.0
+cast_cone_distance = 100.0
+cast_radius_primary = 710.0
+cast_radius_texture_name = "AOE.tga"
+cast_range = 300.0
+cast_range_by_level = Array[float]([300.0, 300.0, 300.0, 300.0, 300.0, 675.0])
+flags = 4312068
+after_effect_name = "missing_lingering.troy"
+hit_bone_name = "spine"
+hit_effect_name = "BrandConflagration_tar.troy"
+cast_type = 4
+mana_cost_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+delay_cast_offset_percent = -0.5
+delay_total_time_percent = -0.5
+spell_reveals_champion = true
+cant_cancel_while_winding_up = true
+is_disabled_while_dead = true
+missile_bone_name = "chest"
+missile_effect = "Ahri_FoxFire_mis.troy"
+missile_lifetime = 5.0
+missile_max_speed = 1400.0
+missile_min_speed = 1400.0
+missile_speed = 900.0
+missile_target_height_augment = 100.0
+missile_update_distance_interval = 75.0
+line_missile_bounce_radius = 450.0
+circle_missile_angular_velocity = -2.0
+coefficient = Array[float]([0.7, 0.0])
+x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+import_path = "res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/AhriFoxFireMissile.ini"
+
+[node name="E3" type="Node" parent="Unit/Spells/Extra" node_paths=PackedStringArray("data")]
+script = ExtResource("10_vhavm")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/Extra/E3"]
+script = ExtResource("11_eotle")
+inventory_icon = Array[Texture2D]([null, null, null])
+inventory_icon_name = Array[String](["Ahri_FoxFire.dds", "Annie_Disintegrate.dds", ""])
+spell_name = "AhriFoxFireMissileTwo"
+display_name = "game_spell_displayname_BrandConflagration"
+alternate_name = "AhriFoxFire"
+description = "game_spell_description_BrandConflagration"
+level_desc = Array[String](["Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"])
+dynamic_tooltip = "game_spell_tooltip_BrandConflagration"
+dynamic_extended = "game_spell_levelup_BrandConflagration"
+float_statics_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+float_vars_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+effect_level_amount = Array[Array]([[0.0, 90.0, 140.0, 190.0, 240.0, 290.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+cooldown_by_level = Array[float]([10.0, 9.0, 8.0, 7.0, 6.0, 4.0])
+subject_to_global_cooldown = true
+triggers_global_cooldown = true
+cast_frame = 7.5
+animation_name = "Spell3"
+use_animator_framerate = true
+targetting_type = 1
+selection_preference = 1
+location_targetting_width_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+cast_cone_angle = 45.0
+cast_cone_distance = 100.0
+cast_radius_primary = 710.0
+cast_radius_texture_name = "AOE.tga"
+cast_range = 725.0
+cast_range_by_level = Array[float]([725.0, 725.0, 725.0, 725.0, 725.0, 675.0])
+flags = 115716
+hit_bone_name = "spine"
+hit_effect_name = "Ahri_FoxFire_tar.troy"
+cast_type = 1
+override_cast_time = 0.25
+mana_cost_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+delay_cast_offset_percent = -0.5
+delay_total_time_percent = -0.5
+spell_reveals_champion = true
+cant_cancel_while_winding_up = true
+is_disabled_while_dead = true
+missile_bone_name = "chest"
+missile_effect = "Ahri_FoxFire_mis_02.troy"
+missile_max_speed = 1400.0
+missile_min_speed = 1400.0
+missile_speed = 1400.0
+missile_target_height_augment = 100.0
+line_missile_bounce_radius = 450.0
+coefficient = Array[float]([0.7, 0.0])
+x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+import_path = "res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissileTwo/AhriFoxFireMissileTwo.ini"
+
+[node name="E4" type="Node" parent="Unit/Spells/Extra" node_paths=PackedStringArray("data")]
+script = ExtResource("10_vhavm")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/Extra/E4"]
+script = ExtResource("11_eotle")
+inventory_icon = Array[Texture2D]([null, null, null])
+inventory_icon_name = Array[String](["Ahri_Charm.dds", "FallenAngel_DarkBinding.dds", ""])
+spell_name = "AhriSeduceMissile"
+display_name = "game_spell_displayname_DarkBindingMissile"
+alternate_name = "AhriSeduce"
+description = "game_spell_description_DarkBindingMissile"
+level_desc = Array[String](["Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"])
+dynamic_tooltip = "game_spell_tooltip_DarkBindingMissile"
+dynamic_extended = "game_spell_levelup_DarkBindingMissile"
+float_statics_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+float_vars_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+effect_level_amount = Array[Array]([[0.0, 80.0, 135.0, 190.0, 245.0, 300.0, 0.0], [0.0, 2.0, 2.25, 2.5, 2.75, 3.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+version = 1
+cooldown_by_level = Array[float]([12.0, 12.0, 12.0, 12.0, 12.0, 12.0])
+subject_to_global_cooldown = true
+triggers_global_cooldown = true
+cast_frame = 7.5
+animation_name = "Spell3"
+targetting_type = 7
+selection_preference = 2
+location_targetting_width_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+cast_cone_angle = 45.0
+cast_cone_distance = 100.0
+cast_radius_primary = 210.0
+cast_radius_texture_name = "AOE.tga"
+cast_range = 1000.0
+cast_range_by_level = Array[float]([1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0])
+cast_range_display_override = 1175.0
+cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+flags = 115712
+hit_bone_name = "head"
+cast_type = 3
+mana_cost_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+delay_cast_offset_percent = -0.5
+delay_total_time_percent = -0.5
+spell_reveals_champion = true
+cant_cancel_while_winding_up = true
+is_disabled_while_dead = true
+line_width = 60.0
+missile_bone_name = "BUFFBONE_CSTM_WEAPON_1"
+missile_effect = "Ahri_Charm_mis.troy"
+missile_max_speed = 1500.0
+missile_min_speed = 1500.0
+missile_speed = 1550.0
+missile_target_height_augment = 100.0
+line_missile_bounce_radius = 450.0
+death_recap_priority = 6.0
+coefficient = Array[float]([0.9, 0.0])
+x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+import_path = "res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/AhriSeduceMissile.ini"
+
+[node name="E5" type="Node" parent="Unit/Spells/Extra" node_paths=PackedStringArray("data")]
+script = ExtResource("10_vhavm")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/Extra/E5"]
+script = ExtResource("11_eotle")
+inventory_icon = Array[Texture2D]([null, null, null])
+inventory_icon_name = Array[String](["Ahri_SpiritRush.dds", "Annie_Disintegrate.dds", ""])
+spell_name = "AhriTumbleMissile"
+display_name = "game_spell_displayname_BrandConflagration"
+alternate_name = "AhriTumble"
+description = "game_spell_description_BrandConflagration"
+level_desc = Array[String](["Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6"])
+dynamic_tooltip = "game_spell_tooltip_BrandConflagration"
+dynamic_extended = "game_spell_levelup_BrandConflagration"
+float_statics_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+float_vars_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+effect_level_amount = Array[Array]([[0.0, 90.0, 140.0, 190.0, 240.0, 290.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+cooldown_by_level = Array[float]([10.0, 9.0, 8.0, 7.0, 6.0, 4.0])
+subject_to_global_cooldown = true
+triggers_global_cooldown = true
+cast_frame = 7.5
+animation_name = "Spell3"
+use_animator_framerate = true
+targetting_type = 1
+selection_preference = 1
+location_targetting_width_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+cast_cone_angle = 45.0
+cast_cone_distance = 100.0
+cast_radius_primary = 710.0
+cast_radius_texture_name = "AOE.tga"
+cast_range = 800.0
+cast_range_by_level = Array[float]([800.0, 800.0, 800.0, 800.0, 800.0, 800.0])
+flags = 115716
+after_effect_name = "missing_lingering.troy"
+hit_bone_name = "spine"
+hit_effect_name = "Ahri_SpiritRush_tar.troy"
+cast_type = 1
+mana_cost_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+delay_cast_offset_percent = -0.5
+delay_total_time_percent = -0.5
+spell_reveals_champion = true
+cant_cancel_while_winding_up = true
+is_disabled_while_dead = true
+missile_bone_name = "chest"
+missile_effect = "Ahri_SpiritRush_mis_02.troy"
+missile_max_speed = 1400.0
+missile_min_speed = 1400.0
+missile_speed = 1400.0
+missile_target_height_augment = 100.0
+line_missile_bounce_radius = 450.0
+coefficient = Array[float]([0.7, 0.0])
+x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+import_path = "res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/AhriTumbleMissile.ini"
+
+[node name="Items" type="Node" parent="Unit/Spells"]
+
+[node name="Passive" type="Node" parent="Unit"]
+script = ExtResource("12_133kh")
+icon = "Ahri_SoulEater.dds"
+_name = "game_character_passiveName_Ahri"
+lua_name = "AhriSoulCrusherNumbers"
+desc = "game_character_passiveDescription_Ahri"
