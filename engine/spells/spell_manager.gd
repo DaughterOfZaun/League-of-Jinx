@@ -1,30 +1,22 @@
 class_name Spells
 extends Node
 
-var q: Spell
-var w: Spell
-var e: Spell
-var r: Spell
-var d: Spell
-var f: Spell
-var b: Spell
-var extra: Array[Spell] = []
+@export var q: Spell
+@export var w: Spell
+@export var e: Spell
+@export var r: Spell
+@export var d: Spell
+@export var f: Spell
+@export var b: Spell
+@export var extra: Array[Spell] = []
 
-var basic: Array[BasicAttack] = []
-var crit: CritAttack
+@export var crit: CritAttack
+@export var basic: Array[BasicAttack] = []
 
 @onready var me: Unit = get_parent()
 func _ready():
 	if Engine.is_editor_hint(): return
-	
 	me.spells = self
-	q = find_child("Q"); 
-	w = find_child("W"); if w == null: w = Spell.new()
-	e = find_child("E"); if e == null: e = Spell.new()
-	r = find_child("R"); if r == null: r = Spell.new()
-	d = find_child("D"); if d == null: d = Spell.new()
-	f = find_child("F"); if f == null: f = Spell.new()
-	b = find_child("B"); if b == null: b = Spell.new()
 
 func get_by_script(script) -> Spell:
 	return Spell.new()
@@ -50,10 +42,10 @@ func array_set(a: Array, i: int, v):
 	if a.size() <= i:
 		a.resize(i + 1)
 	a[i] = v
-	
+
 func num_to_letter(i: int) -> String:
 	return ['q', 'w', 'e', 'r'][i]
-	
+
 func assign_name(spell: Spell, name: String):
 	if spell.data.spell_name.is_empty()\
 	or spell.data.spell_name == "BaseSpell":
@@ -87,7 +79,7 @@ func get_basic(i: int, name: String = "BaseSpell") -> Spell:
 		array_set(basic, i, spell)
 	assign_name(spell, name)
 	return spell
-	
+
 func get_crit(name: String = "BaseSpell") -> Spell:
 	var spell := crit
 	if !spell:

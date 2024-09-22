@@ -1,17 +1,15 @@
-class_name Range_
+class_name Radius
 extends Area3D
 
-@export var enabled := true
 @onready var char := get_parent() as Unit
 
 func _ready():
 	if Engine.is_editor_hint(): return
-	
+
 	monitoring = false
 	monitorable = false
 	input_ray_pickable = false
-	if !enabled: return
-	
+
 	match name:
 		'GameplayRange':
 			monitorable = true
@@ -19,10 +17,10 @@ func _ready():
 			input_ray_pickable = true
 		'AcquisitionRange', 'AttackRange', 'CancelAttackRange':
 			monitoring = true
-	
+
 	monitoring = true
 	monitorable = true
-	
+
 	var team_mask := 1 << char.team
 	collision_mask = ~(team_mask | 1) if monitoring else 0
 	collision_layer = team_mask if monitorable else 0

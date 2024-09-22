@@ -4,55 +4,18 @@ extends Node3D
 @export_range(1, 31, 1, "hide_slider") var team := 1
 @export var data: UnitData
 
-var stats: Stats:
-	get:
-		if !stats:
-			stats = Stats.new()
-			add_child(stats)
-		return stats
-var buffs: Buffs:
-	get:
-		if !buffs:
-			buffs = Buffs.new()
-			add_child(buffs)
-		return buffs
-var spells: Spells:
-	get:
-		if !spells:
-			#spells = find_child("Spells")
-			if !spells:
-				spells = Spells.new()
-				add_child(spells)
-				spells.name = "Spells"
-				#if Engine.is_editor_hint():
-				#	spells.owner = EditorInterface.get_edited_scene_root()
-		return spells
-	set(value):
-		spells = value
-var passive: Passive:
-	get:
-		if !passive:
-			passive = Passive.new()
-			add_child(passive)
-		return passive
-var vars: Vars:
-	get:
-		if !vars:
-			vars = Vars.new()
-			add_child(vars)
-		return vars
-var ai: AI:
-	get:
-		if !ai:
-			ai = AI.new()
-			add_child(ai)
-		return ai
+var stats: Stats
+var buffs: Buffs
+var spells: Spells
+var passive: Passive
+var vars: Vars
+var ai: AI
 
 func on_order(type: Enums.OrderType, pos: Vector3, unit: Unit):
 	ai.order(type, pos, unit)
 
 func on_cast(letter: String, pos: Vector3, unit: Unit):
-	(spells[letter] as Spell).cast(unit, pos, pos)
+	(spells[letter] as Spell).try_cast(unit, pos)
 
 var tick_rate: float = 0.25
 var physics_fps: int = Engine.physics_ticks_per_second
@@ -61,7 +24,7 @@ var should_update_stats := false
 var should_update_actions := false
 func _physics_process(_delta):
 	if Engine.is_editor_hint(): return
-	
+
 	var frame: int = Engine.get_physics_frames() % target_frame
 	should_update_stats = frame == 0
 	should_update_actions = frame == 1

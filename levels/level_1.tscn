@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://c1voud1rbq3sf"]
+[gd_scene load_steps=26 format=3 uid="uid://c1voud1rbq3sf"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_104n6"]
 [ext_resource type="Script" path="res://engine/game/ground.gd" id="2_y4ri1"]
 [ext_resource type="Script" path="res://engine/unit/unit.gd" id="3_wwbt7"]
 [ext_resource type="Script" path="res://engine/unit/unit_data.gd" id="4_4y8lh"]
+[ext_resource type="Script" path="res://engine/ai.gd" id="4_qg8un"]
 [ext_resource type="Script" path="res://engine/spells/spell_manager.gd" id="5_gep23"]
 [ext_resource type="Script" path="res://engine/spells/attacks/basic_attack.gd" id="6_p5bn8"]
 [ext_resource type="Script" path="res://engine/spells/attacks/basic_attack_data.gd" id="7_876sy"]
@@ -12,6 +13,7 @@
 [ext_resource type="Script" path="res://engine/spells/spell.gd" id="10_vhavm"]
 [ext_resource type="Script" path="res://engine/spells/spell_data.gd" id="11_eotle"]
 [ext_resource type="Script" path="res://engine/passive/passive.gd" id="12_133kh"]
+[ext_resource type="Script" path="res://engine/game/range.gd" id="14_t8bj3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ovldq"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -36,6 +38,21 @@ size = Vector2(16, 16)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gl51m"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_2lapu"]
+radius = 0.929
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_okgtt"]
+radius = 1.429
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fjou7"]
+radius = 7.857
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qw37p"]
+radius = 7.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hvbg6"]
+radius = 7.5
+
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -45,9 +62,10 @@ environment = SubResource("Environment_fu4g7")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="InputManager" type="Node3D" parent="."]
+[node name="InputManager" type="Node3D" parent="." node_paths=PackedStringArray("main_hero")]
 unique_name_in_owner = true
 script = ExtResource("1_104n6")
+main_hero = NodePath("../Unit")
 
 [node name="Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
@@ -67,6 +85,14 @@ skeleton = NodePath("../..")
 [node name="Unit" type="Node3D" parent="." node_paths=PackedStringArray("data")]
 script = ExtResource("3_wwbt7")
 data = NodePath("Data")
+
+[node name="AI" type="Node" parent="Unit"]
+script = ExtResource("4_qg8un")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="Unit"]
+avoidance_enabled = true
+height = 2.0
+radius = 0.54
 
 [node name="Data" type="Node" parent="Unit"]
 script = ExtResource("4_4y8lh")
@@ -106,22 +132,80 @@ move_speed = 305.0
 platform_enabled = true
 import_path = "res://data/characters/Ahri/Ahri.ini"
 
+[node name="Passive" type="Node" parent="Unit"]
+script = ExtResource("12_133kh")
+icon = "Ahri_SoulEater.dds"
+_name = "game_character_passiveName_Ahri"
+lua_name = "AhriSoulCrusherNumbers"
+desc = "game_character_passiveDescription_Ahri"
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Unit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_gl51m")
 
-[node name="Spells" type="Node" parent="Unit"]
+[node name="Spells" type="Node" parent="Unit" node_paths=PackedStringArray("q", "w", "e", "r", "extra", "crit", "basic")]
 script = ExtResource("5_gep23")
+q = NodePath("Q_OrbOfDeception")
+w = NodePath("W_FoxFire")
+e = NodePath("E_Seduce")
+r = NodePath("R_Tumble")
+extra = [NodePath("E0_OrbMissile"), NodePath("E1_OrbReturn"), NodePath("E2_FoxFireMissile"), NodePath("E3_FoxFireMissileTwo"), NodePath("E4_SeduceMissile"), NodePath("E5_TumbleMissile")]
+crit = NodePath("CritAttack")
+basic = [NodePath("BasicAttack1"), NodePath("BasicAttack2")]
 
-[node name="Attacks" type="Node" parent="Unit/Spells"]
+[node name="CritAttack" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
+script = ExtResource("8_os5gn")
+data = NodePath("Data")
 
-[node name="Basic" type="Node" parent="Unit/Spells/Attacks"]
+[node name="Data" type="Node" parent="Unit/Spells/CritAttack"]
+script = ExtResource("9_cwmut")
+inventory_icon = Array[Texture2D]([null])
+inventory_icon_name = Array[String]([""])
+spell_name = "AhriCritAttack"
+display_name = "game_spell_displayname_CardMasterBasicAttack"
+description = "game_spell_description_CardMasterBasicAttack"
+level_desc = Array[String](["NONE", "NONE", "NONE", "NONE", "NONE"])
+dynamic_tooltip = "game_spell_tooltip_CardMasterBasicAttack"
+dynamic_extended = "game_spell_levelup_CardMasterBasicAttack"
+float_vars_decimals = Array[int]([2, 2, 2])
+effect_level_amount = Array[Array]([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+version = 1
+cooldown_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+subject_to_global_cooldown = true
+triggers_global_cooldown = true
+cast_frame = 10.0
+animation_name = "Crit"
+targetting_type = 1
+location_targetting_width_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+cast_cone_angle = 45.0
+cast_cone_distance = 100.0
+cast_radius_primary = 100.0
+cast_range = 550.0
+cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+flags = 232448
+after_effect_name = "globalhit_physical.troy"
+hit_effect_name = "Ahri_BasicAttack_tar.troy"
+sound_cast_name = "CardM_Exp_Card_Impact.wav"
+sound_hit_name = "CardM_Power_Card_Cast_3.wav"
+cast_type = 1
+mana_cost_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+delay_cast_offset_percent = -0.2358
+is_disabled_while_dead = true
+missile_bone_name = "R_hand"
+missile_effect = "Ahri_BasicAttack_mis.troy"
+missile_speed = 1750.0
+line_missile_bounce_radius = 450.0
+apply_attack_damage = true
+death_recap_priority = 6.0
+coefficient = Array[float]([0.0])
+import_path = "res://data/characters/Ahri/Attacks/AhriCritAttack.ini"
 
-[node name="AA" type="Node" parent="Unit/Spells/Attacks/Basic" node_paths=PackedStringArray("data")]
+[node name="BasicAttack1" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
 script = ExtResource("6_p5bn8")
 data = NodePath("Data")
 
-[node name="Data" type="Node" parent="Unit/Spells/Attacks/Basic/AA"]
+[node name="Data" type="Node" parent="Unit/Spells/BasicAttack1"]
 script = ExtResource("7_876sy")
 probability = 0.5
 inventory_icon = Array[Texture2D]([null])
@@ -166,11 +250,11 @@ death_recap_priority = 6.0
 coefficient = Array[float]([0.0])
 import_path = "res://data/characters/Ahri/Attacks/AhriBasicAttack.ini"
 
-[node name="A1" type="Node" parent="Unit/Spells/Attacks/Basic" node_paths=PackedStringArray("data")]
+[node name="BasicAttack2" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
 script = ExtResource("6_p5bn8")
 data = NodePath("Data")
 
-[node name="Data" type="Node" parent="Unit/Spells/Attacks/Basic/A1"]
+[node name="Data" type="Node" parent="Unit/Spells/BasicAttack2"]
 script = ExtResource("7_876sy")
 probability = 0.5
 inventory_icon = Array[Texture2D]([null])
@@ -215,59 +299,11 @@ death_recap_priority = 6.0
 coefficient = Array[float]([0.0])
 import_path = "res://data/characters/Ahri/Attacks/AhriBasicAttack2.ini"
 
-[node name="AC" type="Node" parent="Unit/Spells/Attacks" node_paths=PackedStringArray("data")]
-script = ExtResource("8_os5gn")
-data = NodePath("Data")
-
-[node name="Data" type="Node" parent="Unit/Spells/Attacks/AC"]
-script = ExtResource("9_cwmut")
-inventory_icon = Array[Texture2D]([null])
-inventory_icon_name = Array[String]([""])
-spell_name = "AhriCritAttack"
-display_name = "game_spell_displayname_CardMasterBasicAttack"
-description = "game_spell_description_CardMasterBasicAttack"
-level_desc = Array[String](["NONE", "NONE", "NONE", "NONE", "NONE"])
-dynamic_tooltip = "game_spell_tooltip_CardMasterBasicAttack"
-dynamic_extended = "game_spell_levelup_CardMasterBasicAttack"
-float_vars_decimals = Array[int]([2, 2, 2])
-effect_level_amount = Array[Array]([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
-version = 1
-cooldown_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
-subject_to_global_cooldown = true
-triggers_global_cooldown = true
-cast_frame = 10.0
-animation_name = "Crit"
-targetting_type = 1
-location_targetting_width_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
-location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
-cast_cone_angle = 45.0
-cast_cone_distance = 100.0
-cast_radius_primary = 100.0
-cast_range = 550.0
-cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
-flags = 232448
-after_effect_name = "globalhit_physical.troy"
-hit_effect_name = "Ahri_BasicAttack_tar.troy"
-sound_cast_name = "CardM_Exp_Card_Impact.wav"
-sound_hit_name = "CardM_Power_Card_Cast_3.wav"
-cast_type = 1
-mana_cost_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
-delay_cast_offset_percent = -0.2358
-is_disabled_while_dead = true
-missile_bone_name = "R_hand"
-missile_effect = "Ahri_BasicAttack_mis.troy"
-missile_speed = 1750.0
-line_missile_bounce_radius = 450.0
-apply_attack_damage = true
-death_recap_priority = 6.0
-coefficient = Array[float]([0.0])
-import_path = "res://data/characters/Ahri/Attacks/AhriCritAttack.ini"
-
-[node name="Q" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
+[node name="Q_OrbOfDeception" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
 script = ExtResource("10_vhavm")
 data = NodePath("Data")
 
-[node name="Data" type="Node" parent="Unit/Spells/Q"]
+[node name="Data" type="Node" parent="Unit/Spells/Q_OrbOfDeception"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([null, null, null])
 inventory_icon_name = Array[String](["Ahri_OrbofDeception.dds", "", ""])
@@ -323,21 +359,20 @@ coefficient = Array[float]([0.325, 0.325])
 x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbofDeception.ini"
 
-[node name="W" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
+[node name="W_FoxFire" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
 script = ExtResource("10_vhavm")
 data = NodePath("Data")
 
-[node name="Data" type="Node" parent="Unit/Spells/W"]
+[node name="Data" type="Node" parent="Unit/Spells/W_FoxFire"]
 script = ExtResource("11_eotle")
 spell_name = "AhriFoxFire"
 import_path = "res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFire.ini"
-import = true
 
-[node name="E" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
+[node name="E_Seduce" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
 script = ExtResource("10_vhavm")
 data = NodePath("Data")
 
-[node name="Data" type="Node" parent="Unit/Spells/E"]
+[node name="Data" type="Node" parent="Unit/Spells/E_Seduce"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([null, null, null])
 inventory_icon_name = Array[String](["Ahri_Charm.dds", "", ""])
@@ -392,11 +427,11 @@ coefficient = Array[float]([0.35, 0.0])
 x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S3_E_Seduce/AhriSeduce.ini"
 
-[node name="R" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
+[node name="R_Tumble" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
 script = ExtResource("10_vhavm")
 data = NodePath("Data")
 
-[node name="Data" type="Node" parent="Unit/Spells/R"]
+[node name="Data" type="Node" parent="Unit/Spells/R_Tumble"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([null, null, null])
 inventory_icon_name = Array[String](["Ahri_SpiritRush.dds", "", ""])
@@ -446,13 +481,11 @@ coefficient = Array[float]([0.3, 0.0])
 x = Array[float]([0.0])
 import_path = "res://data/characters/Ahri/S4_R_Tumble/AhriTumble.ini"
 
-[node name="Extra" type="Node" parent="Unit/Spells"]
-
-[node name="E0" type="Node" parent="Unit/Spells/Extra" node_paths=PackedStringArray("data")]
+[node name="E0_OrbMissile" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
 script = ExtResource("10_vhavm")
 data = NodePath("Data")
 
-[node name="Data" type="Node" parent="Unit/Spells/Extra/E0"]
+[node name="Data" type="Node" parent="Unit/Spells/E0_OrbMissile"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([null, null, null])
 inventory_icon_name = Array[String](["Ahri_OrbofDeception.dds", "LuxLightStrikeKugel.dds", ""])
@@ -509,11 +542,11 @@ coefficient = Array[float]([0.4, 0.0])
 x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbMissile/AhriOrbMissile.ini"
 
-[node name="E1" type="Node" parent="Unit/Spells/Extra" node_paths=PackedStringArray("data")]
+[node name="E1_OrbReturn" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
 script = ExtResource("10_vhavm")
 data = NodePath("Data")
 
-[node name="Data" type="Node" parent="Unit/Spells/Extra/E1"]
+[node name="Data" type="Node" parent="Unit/Spells/E1_OrbReturn"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([null, null, null])
 inventory_icon_name = Array[String](["Ahri_OrbofDeception.dds", "LuxLightStrikeKugel.dds", ""])
@@ -570,11 +603,11 @@ coefficient = Array[float]([0.6, 0.0])
 x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbReturn/AhriOrbReturn.ini"
 
-[node name="E2" type="Node" parent="Unit/Spells/Extra" node_paths=PackedStringArray("data")]
+[node name="E2_FoxFireMissile" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
 script = ExtResource("10_vhavm")
 data = NodePath("Data")
 
-[node name="Data" type="Node" parent="Unit/Spells/Extra/E2"]
+[node name="Data" type="Node" parent="Unit/Spells/E2_FoxFireMissile"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([null, null, null])
 inventory_icon_name = Array[String](["Ahri_FoxFire.dds", "Annie_Disintegrate.dds", ""])
@@ -629,11 +662,11 @@ coefficient = Array[float]([0.7, 0.0])
 x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/AhriFoxFireMissile.ini"
 
-[node name="E3" type="Node" parent="Unit/Spells/Extra" node_paths=PackedStringArray("data")]
+[node name="E3_FoxFireMissileTwo" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
 script = ExtResource("10_vhavm")
 data = NodePath("Data")
 
-[node name="Data" type="Node" parent="Unit/Spells/Extra/E3"]
+[node name="Data" type="Node" parent="Unit/Spells/E3_FoxFireMissileTwo"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([null, null, null])
 inventory_icon_name = Array[String](["Ahri_FoxFire.dds", "Annie_Disintegrate.dds", ""])
@@ -685,11 +718,11 @@ coefficient = Array[float]([0.7, 0.0])
 x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissileTwo/AhriFoxFireMissileTwo.ini"
 
-[node name="E4" type="Node" parent="Unit/Spells/Extra" node_paths=PackedStringArray("data")]
+[node name="E4_SeduceMissile" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
 script = ExtResource("10_vhavm")
 data = NodePath("Data")
 
-[node name="Data" type="Node" parent="Unit/Spells/Extra/E4"]
+[node name="Data" type="Node" parent="Unit/Spells/E4_SeduceMissile"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([null, null, null])
 inventory_icon_name = Array[String](["Ahri_Charm.dds", "FallenAngel_DarkBinding.dds", ""])
@@ -743,11 +776,11 @@ coefficient = Array[float]([0.9, 0.0])
 x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/AhriSeduceMissile.ini"
 
-[node name="E5" type="Node" parent="Unit/Spells/Extra" node_paths=PackedStringArray("data")]
+[node name="E5_TumbleMissile" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
 script = ExtResource("10_vhavm")
 data = NodePath("Data")
 
-[node name="Data" type="Node" parent="Unit/Spells/Extra/E5"]
+[node name="Data" type="Node" parent="Unit/Spells/E5_TumbleMissile"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([null, null, null])
 inventory_icon_name = Array[String](["Ahri_SpiritRush.dds", "Annie_Disintegrate.dds", ""])
@@ -799,11 +832,37 @@ coefficient = Array[float]([0.7, 0.0])
 x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/AhriTumbleMissile.ini"
 
-[node name="Items" type="Node" parent="Unit/Spells"]
+[node name="GameplayRange" type="Area3D" parent="Unit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("14_t8bj3")
 
-[node name="Passive" type="Node" parent="Unit"]
-script = ExtResource("12_133kh")
-icon = "Ahri_SoulEater.dds"
-_name = "game_character_passiveName_Ahri"
-lua_name = "AhriSoulCrusherNumbers"
-desc = "game_character_passiveDescription_Ahri"
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Unit/GameplayRange"]
+shape = SubResource("SphereShape3D_2lapu")
+
+[node name="SelectionRange" type="Area3D" parent="Unit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("14_t8bj3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Unit/SelectionRange"]
+shape = SubResource("SphereShape3D_okgtt")
+
+[node name="AcquisitionRange" type="Area3D" parent="Unit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("14_t8bj3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Unit/AcquisitionRange"]
+shape = SubResource("SphereShape3D_fjou7")
+
+[node name="AttackRange" type="Area3D" parent="Unit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("14_t8bj3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Unit/AttackRange"]
+shape = SubResource("SphereShape3D_qw37p")
+
+[node name="CancelAttackRange" type="Area3D" parent="Unit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("14_t8bj3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Unit/CancelAttackRange"]
+shape = SubResource("SphereShape3D_hvbg6")
