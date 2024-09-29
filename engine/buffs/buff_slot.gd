@@ -10,13 +10,13 @@ var mngr: Buffs
 var stacks: Array[Buff] = []
 var time_remaining := 0.0
 
-func _init(buffs: Buffs):
+func _init(buffs: Buffs) -> void:
     self.mngr = buffs
 
 func clear() -> BuffSlot:
     self.stacks.clear()
     return self
-    
+
 func add(buff: Buff, count := 1, continious := false) -> BuffSlot:
     #var time_remaining := 0.0
     #if continious:
@@ -30,7 +30,7 @@ func add(buff: Buff, count := 1, continious := false) -> BuffSlot:
         self.stacks.append(duplicate)
         self.mngr.add_child(buff) #TODO: Protect stacks from modification during iteration
     return self
-    
+
 func sort_stacks() -> void:
     stacks.sort_custom(func (a: Buff, b: Buff): return a.duration_remain > b.duration_remain)
 
@@ -55,7 +55,7 @@ func remove(buff: Buff) -> void:
     post_removal(buff)
     self.stacks.erase(buff)
 
-func post_removal(buff: Buff):
+func post_removal(buff: Buff) -> void:
     if buff.delay_remaining == 0: return
     for stack: Buff in self.stacks:
         if stack.delay_remaining >= buff.delay_remaining:

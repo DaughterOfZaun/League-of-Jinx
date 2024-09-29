@@ -1,20 +1,21 @@
 class_name Data
 extends Node
 
-const HW2GD := 1. / 70. #0.014285714
+static var HW2GD := 1. / 70. #0.014285714
 
 func string_parse(from: String) -> String:
 	return from
 
 var res_path := "res://Data/Particles"
-var res_cache = null
+var res_cache: Dictionary = {}
+var res_cache_is_null := true
 func get_from_cache(key: String) -> String:
-	if res_cache == null:
-		res_cache = {}
-		var dir = DirAccess.open(res_path)
+	if res_cache_is_null:
+		res_cache_is_null = false
+		var dir := DirAccess.open(res_path)
 		dir.list_dir_begin()
 		while true:
-			var fname = dir.get_next()
+			var fname := dir.get_next()
 			if fname == "": break
 			if dir.current_is_dir(): continue
 			var fname_lc := fname.to_lower()
@@ -66,7 +67,7 @@ func ivec2_parse(from: String) -> Vector2i:
 	assert(len(v) == 2, from)
 	return Vector2i(int_parse(v[0]), int_parse(v[1]))
 
-var regex_float = RegEx.create_from_string(r'^[+-]?[0-9.]*$')
+var regex_float := RegEx.create_from_string(r'^[+-]?[0-9.]*$')
 func float_parse(from: String) -> float:
 	from = string_parse(from)
 	assert(regex_float.search(from), from)
@@ -138,37 +139,37 @@ func gradient_set(grad: Gradient, i: int, from: String) -> Gradient:
 var return_null := func(): return null
 var return_array := func(): return []
 
-func array_resize_to_fit(a: Array, i: int, f: Callable):
+func array_resize_to_fit(a: Array, i: int, f: Callable) -> void:
 	var len_a := len(a)
 	if len_a <= i:
 		a.resize(i + 1)
 		if f != return_null:
 			for j in range(len_a, i + 1): a[j] = f.call()
 
-func array_get(a: Array, i: int, f := return_null):
+func array_get(a: Array[Variant], i: int, f := return_null) -> Variant:
 	assert(a != null)
 	array_resize_to_fit(a, i, f)
-	var res = a[i]
+	var res: Variant = a[i]
 	if res == null: #&& f != return_null:
 		res = f.call()
 		a[i] = res
 	return res
 
-func array_set(a, i: int, v, f := return_null):
+func array_set(a: Array, i: int, v: Variant, f := return_null) -> Array:
 	assert(i >= 0)
 	if a == null: a = []
 	array_resize_to_fit(a, i, f)
 	a[i] = v
 	return a
 
-func set_from_ini(ini: Dictionary):
+func set_from_ini(ini: Dictionary) -> void:
 	pass
 
-func set_from_ini_section(section: Array):
-	for entry in section:
+func set_from_ini_section(section: Array) -> void:
+	for entry: Array in section:
 		self.set_from_ini_entry(entry[0], entry[1])
 
-func set_from_ini_entry(key_array: Array, value: String):
+func set_from_ini_entry(key_array: Array, value: String) -> void:
 	pass
 
 func ini_load(import_path: String) -> Dictionary:
@@ -184,7 +185,7 @@ func ini_load(import_path: String) -> Dictionary:
 
 		if line.begins_with("'"):
 			continue
-		
+
 		var m: RegExMatch
 		m = regex_section.search(line)
 		if m:
@@ -192,10 +193,10 @@ func ini_load(import_path: String) -> Dictionary:
 			section_name = m.strings[1]
 			result[section_name] = section
 			continue
-		
+
 		if regex_unk.search(line):
 			continue
-		
+
 		m = regex_entry.search(line)
 		assert(m != null)
 		var key := m.strings[1]
@@ -206,11 +207,12 @@ func ini_load(import_path: String) -> Dictionary:
 		var key_array := []
 		for i in range(1, len(m.strings)):
 			if m.strings[i]:
-				var t; if i % 2: t = m.strings[i]
+				var t: Variant;
+				if i % 2: t = m.strings[i]
 				else: t = int(m.strings[i])
 				key_array.append(t)
 		section.append([key_array, value])
-	
+
 	return result
 
 func curve_is_invalid_or_is_always_equal_to_one(c: Curve) -> bool:
@@ -231,4 +233,3 @@ func enum_parse(dict: Dictionary, from: String) -> int:
 		assert(key in d, 'Expected one of ["' + '", "'.join(d.keys()) + '"], got "' + key + '"')
 		result = result | d[key]
 	return result
-	

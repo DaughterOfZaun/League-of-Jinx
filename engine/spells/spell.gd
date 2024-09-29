@@ -8,22 +8,22 @@ var caster: Unit
 var host: Unit
 var spell := self
 
-# var target: Unit
-# var offset_target: Unit
-# var target_position := Vector3.INF
-# var drag_end_position: Vector3
+var target: Unit
+var offset_target: Unit
+var target_position := Vector3.INF
+var drag_end_position: Vector3
 # var targets_hit: int
-# var targets_hit_plus_one:
-# 	get:
-# 		return targets_hit + 1
-# var targeting_type: Enums.TargetingType
+var targets_hit_plus_one: int:
+	get:
+		return targets_hit + 1
+var targeting_type: Enums.TargetingType
 
 var slot: SpellSlot
 var is_sealed := false
 var icon_index := 0
 
 var level := 0
-var level_plus_one:
+var level_plus_one: int:
 	get:
 		return level + 1
 
@@ -44,7 +44,7 @@ var timer: Timer
 var cancelled: bool
 signal timeout_or_canceled()
 
-func _ready():
+func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	host = (get_parent() as Spells).get_parent() as Unit #HACK
 	attacker = host
@@ -53,7 +53,7 @@ func _ready():
 	timer.timeout.connect(func(): timeout_or_canceled.emit())
 	add_child(timer)
 
-func _physics_process(_delta):
+func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 
 	if host.should_update_actions:
@@ -61,16 +61,16 @@ func _physics_process(_delta):
 	if host.should_update_stats:
 		on_update_stats()
 
-func on_update_stats():
+func on_update_stats() -> void:
 	if state == State.CHANNELING:
 		channeling_update_stats()
 		update_tooltip(slot)
 
-func on_update_actions():
+func on_update_actions() -> void:
 	if state == State.CHANNELING:
 		channeling_update_actions()
 
-func try_cast(target: Unit, pos: Vector3):
+func try_cast(target: Unit, pos: Vector3) -> void:
 	cast(target, pos, pos)
 
 func get_cast_time() -> float:
@@ -139,7 +139,7 @@ func cast(
 			Enums.CastType.CIRCLE_MISSILE: m = SpellCircleMissile.new(self, target);
 			Enums.CastType.ARC_MISSILE: m = SpellLineMissile.new(self, pos);
 			_: assert(false)
-		get_tree().add_child(m)
+		get_tree().current_scene.add_child(m)
 	else:
 		var targets: Array[Unit] = []
 		var cast_range := get_cast_range()
@@ -154,29 +154,29 @@ func cast(
 			_target_execute(subtarget, null)
 
 var targets_hit := 0
-func _target_execute(target: Unit, missile: Missile):
+func _target_execute(target: Unit, missile: Missile) -> void:
 	targets_hit = targets_hit + 1
 	caster.spell_hit.emit(target, spell)
 	target.being_spell_hit.emit(caster, spell)
 	target_execute(target, missile)
 
-func self_execute(): pass
-func target_execute(_target: Unit, _missile: Missile): pass
-func adjust_cast_info(): pass
-func adjust_cooldown():
+func self_execute() -> void: pass
+func target_execute(_target: Unit, _missile: Missile) -> void: pass
+func adjust_cast_info() -> void: pass
+func adjust_cooldown() -> float:
 	return NAN
-func can_cast():
+func can_cast() -> bool:
 	return true
-func channeling_start(): pass
-func channeling_cancel_stop(): pass
-func channeling_success_stop(): pass
-func channeling_stop(): pass
-func channeling_update_stats(): pass
-func channeling_update_actions(): pass
-func update_tooltip(_slot: SpellSlot): pass
+func channeling_start() -> void: pass
+func channeling_cancel_stop() -> void: pass
+func channeling_success_stop() -> void: pass
+func channeling_stop() -> void: pass
+func channeling_update_stats() -> void: pass
+func channeling_update_actions() -> void: pass
+func update_tooltip(_slot: SpellSlot) -> void: pass
 
-func on_missile_update(_missile: Missile): pass
-func on_missile_end(_missile: Missile): pass
+func on_missile_update(_missile: Missile) -> void: pass
+func on_missile_end(_missile: Missile) -> void: pass
 
 func get_cost_inc(par_type: Enums.PARType) -> float:
 	return 0
@@ -196,5 +196,5 @@ func set_cooldown(src: float, broadcast_event := false) -> void:
 func set_tool_tip_var(index: int, value: float) -> void:
 	pass
 
-func replace_with(script) -> void:
+func replace_with(script: Spell) -> void:
 	pass

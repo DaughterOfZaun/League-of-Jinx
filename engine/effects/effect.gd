@@ -17,7 +17,7 @@ enum GroupType { INVALID = -1, SIMPLE = 0, COMPLEX = 1, }
 @export var MaterialOverridePriority: Texture2D
 @export var MaterialOverrideBlendMode: BlendMode
 
-func set_from_ini_entry(key_array: Array, value: String):
+func set_from_ini_entry(key_array: Array, value: String) -> void:
 	match key_array:
 		["MaterialOverride", var i, "BlendMode"]: pass
 		["MaterialOverride", var i, "Priority"]: pass

@@ -1,4 +1,4 @@
-#class_name Hero
+class_name Hero
 extends AI
 
 var FEAR_WANDER_DISTANCE := 500
@@ -12,7 +12,7 @@ func on_init() -> bool:
     stop_timer(timer_feared)
     return false
 
-func on_order(order_type: Enums.OrderType, position: Vector3, target: Unit):
+func on_order(order_type: Enums.OrderType, position: Vector3, target: Unit) -> bool:
     if get_state() in [
         Enums.AIState.HALTED,
         Enums.AIState.TAUNTED,
@@ -96,7 +96,7 @@ func on_fear_end() -> void:
     timer_distance_scan()
     timer_check_attack()
 
-func timer_feared(): # -> bool?
+func timer_feared() -> Variant: # -> bool?
     if get_state() == Enums.AIState.HALTED: return null
 
     var wander_point := make_wander_point(get_fear_leash_point(), FEAR_WANDER_DISTANCE)
@@ -122,7 +122,7 @@ func on_stop_move() -> void:
 
     clear_target_pos_in_pos()
 
-func timer_check_attack(): # -> bool?
+func timer_check_attack() -> Variant: # -> bool?
     #var state := get_state()
     if state == Enums.AIState.HALTED: return null
 
@@ -159,7 +159,7 @@ func timer_check_attack(): # -> bool?
     init_timer(timer_check_attack, 0.1, true)
     return null
 
-func timer_distance_scan(): # -> bool?
+func timer_distance_scan() -> Variant: # -> bool?
     match get_state():
         Enums.AIState.HALTED, Enums.AIState.HARDIDLE:
             return null

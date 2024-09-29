@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="League of Jinx"
+run/main_scene="res://levels/level_1.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,6 +22,12 @@ gdscript/warnings/unused_local_constant=0
 gdscript/warnings/unused_private_class_variable=0
 gdscript/warnings/unused_parameter=0
 gdscript/warnings/unused_signal=0
+gdscript/warnings/untyped_declaration=1
+gdscript/warnings/unsafe_property_access=1
+gdscript/warnings/unsafe_method_access=1
+gdscript/warnings/unsafe_cast=1
+gdscript/warnings/unsafe_call_argument=1
+gdscript/warnings/return_value_discarded=1
 
 [input]
 

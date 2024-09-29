@@ -273,7 +273,7 @@ var doesnt_trigger_spell_casts: bool:
 #endregion
 
 #region Import
-var target: Node
+var target: Spell
 @export_group("Import")
 @export_file("*.ini") var import_path: String
 @export var import: bool:
@@ -283,14 +283,15 @@ var target: Node
 			print("importing...")
 			target = get_parent()
 			target.data = self
-			var ini = ini_load(import_path)
-			set_from_ini_section(ini["SpellData"])
+			var ini := ini_load(import_path)
+			var spell_data := ini["SpellData"] as Array
+			set_from_ini_section(spell_data)
 			print("imported")
 			import = false
 @export_group("")
 #endregion
 
-func set_from_ini_entry(key_array: Array, value: String):
+func set_from_ini_entry(key_array: Array, value: String) -> void:
 	match key_array:
 		["AfterEffectName"]:
 			after_effect_name = string_parse(value)
@@ -344,7 +345,7 @@ func set_from_ini_entry(key_array: Array, value: String):
 		["DynamicExtended"]: dynamic_extended = string_parse(value)
 		["DynamicTooltip"]: dynamic_tooltip = string_parse(value)
 		["Effect", var i, "Level", var j, "Amount"]:
-			var a = array_set(array_get(effect_level_amount, i - 1), j, float_parse(value))
+			var a := array_set(array_get(effect_level_amount, i - 1), j, float_parse(value))
 			effect_level_amount = array_set(effect_level_amount, i - 1, a)
 		["Flags"]: flags = int_parse(value) as Enums.SpellFlags
 		["FloatStaticsDecimals", var i]: float_statics_decimals = array_set(float_statics_decimals, i - 1, int_parse(value))

@@ -7,7 +7,7 @@ var metadata := BuffMetadata.from({
     persists_through_death = true,
 })
 var particle: Particle
-func on_activate():
+func on_activate() -> void:
     particle = Particle.create("Ahri_Orb.troy").bind(owner, "BUFFBONE_GLB_WEAPON_1").target(owner)
-func on_deactivate(expired: bool):
-    particle.Remove()
+func on_deactivate(expired: bool) -> void:
+    particle.remove()

@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://con62c2o0mymw"]
+
+[ext_resource type="Texture2D" uid="uid://dx1nf4wnfwie" path="res://data/characters/Ahri/Skins/Base/Ahri_base_TX_CM.webp" id="1_rsn3o"]
+
+[resource]
+albedo_texture = ExtResource("1_rsn3o")

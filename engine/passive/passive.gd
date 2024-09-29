@@ -14,8 +14,8 @@ var caster: Unit:
 var vars: Vars:
 	get: return me.vars
 
-func _ready():
+func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	on_activate()
 
-func on_activate(): pass
+func on_activate() -> void: pass

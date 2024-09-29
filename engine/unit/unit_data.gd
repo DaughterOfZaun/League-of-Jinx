@@ -209,7 +209,7 @@ enum PARType {
 @export_group("")
 
 @export_group("Import")
-var target: Node
+var target: Unit
 @export_file("*.ini") var import_path: String
 @export var import: bool:
 	set(value):
@@ -218,14 +218,14 @@ var target: Node
 			print("importing...")
 			target = get_parent()
 			target.data = self
-			var ini = ini_load(import_path)
+			var ini := ini_load(import_path)
 			set_from_ini_section(ini["Data"])
 			print("imported")
 			import = false
 @export_group("")
 
-func get_target_child(type, name: String):
-	var child = target.find_child(name)
+func get_target_child(type: GDScript, name: String) -> Variant:
+	var child := target.find_child(name)
 	if !child:
 		child = type.new()
 		target.add_child(child)
@@ -240,7 +240,7 @@ func get_target_spells() -> Spells:
 func get_target_passive() -> Passive:
 	return get_target_child(Passive, "Passive")
 
-func set_from_ini_entry(key_array: Array, value: String):
+func set_from_ini_entry(key_array: Array, value: String) -> void:
 	var ignored := false
 	match key_array:
 		["AbilityPowerIncPerLevel"]: ability_power_inc_per_level = int_parse(value)
@@ -398,5 +398,5 @@ func set_from_ini_entry(key_array: Array, value: String):
 		["WeaponMaterial"]:
 			#weapon_material = string_parse(value)
 			get_target_spells().get_basic(0, string_parse(value))
-		
+
 		var key: print("ignored" if ignored else "unmatched", " ", key, " : ", value)

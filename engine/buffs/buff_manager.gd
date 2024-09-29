@@ -5,12 +5,12 @@ extends Node
 #TODO: Remove empty slots
 
 @onready var me := get_parent() as Unit
-func _ready():
+func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	me.buffs = self
 
-var slots := {}
-func get_slot(script, attacker: Unit, create := false) -> BuffSlot:
+var slots: Dictionary[GDScript, Dictionary] = {}
+func get_slot(script: GDScript, attacker: Unit, create := false) -> BuffSlot:
 	var slot: BuffSlot
 	var slots_with_script = slots.get(script, null)
 	if slots_with_script == null:
@@ -21,7 +21,7 @@ func get_slot(script, attacker: Unit, create := false) -> BuffSlot:
 			return null
 	else:
 		slot = slots_with_script.get(null, slots_with_script.get(attacker, null))
-		
+
 		if len(slots_with_script.keys()) > 1 && (attacker == null || slots_with_script.has(null)):
 			var warn := ".stacks_exclusive value is inconsistent. " +\
 				"Either set it to false or pass the attacker to all methods that require it."
@@ -33,7 +33,7 @@ func get_slot(script, attacker: Unit, create := false) -> BuffSlot:
 			slots_with_script[attacker] = slot
 		else:
 			return null
-	
+
 	return slot
 
 ## Adds the passed buff.[br]
@@ -52,7 +52,7 @@ func add(
 	can_mitigate_duration = null,
 	is_hidden_on_client = null
 ) -> void:
-	
+
 	if max_stack == 0: max_stack = buff.max_stack
 	if duration == 0.0: duration = buff.duration
 	if add_type == Enums.BuffAddType.UNDEFINED: add_type = buff.add_type
@@ -61,20 +61,20 @@ func add(
 	if stacks_exclusive == null: stacks_exclusive = buff.stacks_exclusive
 	if can_mitigate_duration == null: can_mitigate_duration = buff.can_mitigate_duration
 	if is_hidden_on_client == null: is_hidden_on_client = buff.is_hidden_on_client
-	
+
 	number_of_stacks = min(max_stack, number_of_stacks)
 	match add_type:
 		Enums.BuffAddType.REPLACE_EXISTING,\
 		Enums.BuffAddType.RENEW_EXISTING\
 		when number_of_stacks > 1 or max_stack > 1:
 			push_warning()
-	
+
 	if stacks_exclusive && attacker == null:
 		push_warning()
-	
+
 	var script: Script = buff.get_script()
 	var slot := get_slot(script, attacker if stacks_exclusive else null, true)
-	
+
 	buff.slot = slot
 	buff.attacker = attacker
 	buff.caster = attacker
@@ -101,7 +101,7 @@ func add(
 			slot.add(buff, max_count_to_add).remove_stacks(max_count_to_rem)
 		Enums.BuffAddType.STACKS_AND_CONTINUE:
 			slot.add(buff, max_count_to_add, true).remove_stacks(max_count_to_rem) #TODO
-		
+
 
 ## Removes all debuffs, regardless of the attacker who applied them.
 func dispell_negative() -> void:

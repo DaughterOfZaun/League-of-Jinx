@@ -33,7 +33,7 @@ extends Effect
 @export_group("")
 
 var groups := []
-func set_from_ini_entry(key_array: Array, value: String):
+func set_from_ini_entry(key_array: Array, value: String) -> void:
 	super.set_from_ini_entry(key_array, value)
 	match key_array:
 		["build-up-time"]: build_up_time = float_parse(value)
@@ -53,15 +53,15 @@ func set_from_ini_entry(key_array: Array, value: String):
 		["VoiceOverOnCreate"]: voice_over_on_create = string_parse(value)
 		["VoiceOverPersistent"]: voice_over_persistent = string_parse(value)
 
-func recreate_groups(ini: Dictionary):
+func recreate_groups(ini: Dictionary) -> void:
 	for child in get_children():
 		child.queue_free()
 	for info in groups:
 		if len(info) == 0: continue
-		
+
 		var group := Group.new()
 		group.updating_fields += 1
-		
+
 		group.name = info[0]
 		if len(info) > 1: group.group_type = info[1]
 		if len(info) > 2: group.group_importance = info[2]

@@ -32,14 +32,14 @@ var duration_remaining := 0.0:
 		start(self.delay + self.duration)
 
 var time_remaining: float :
-	get: 
+	get:
 		return self.delay_remaining + self.duration_remaining
 
-func _init():
+func _init() -> void:
 	autostart = false
 	one_shot = !can_mitigate_duration
 
-func _ready():
+func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	timeout.connect(remove_internal_0.bind(true))
 	start(self.delay + self.duration)
@@ -62,4 +62,4 @@ func remove_internal_1(expired := false) -> void:
 	if !can_mitigate_duration:
 		queue_free()
 
-func on_deactivate(_expired: bool): pass
+func on_deactivate(_expired: bool) -> void: pass

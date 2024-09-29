@@ -11,10 +11,10 @@ var passive: Passive
 var vars: Vars
 var ai: AI
 
-func on_order(type: Enums.OrderType, pos: Vector3, unit: Unit):
+func on_order(type: Enums.OrderType, pos: Vector3, unit: Unit) -> void:
 	ai.order(type, pos, unit)
 
-func on_cast(letter: String, pos: Vector3, unit: Unit):
+func on_cast(letter: String, pos: Vector3, unit: Unit) -> void:
 	(spells[letter] as Spell).try_cast(unit, pos)
 
 var tick_rate: float = 0.25
@@ -22,7 +22,7 @@ var physics_fps: int = Engine.physics_ticks_per_second
 var target_frame: int = max(2, floor(physics_fps * tick_rate))
 var should_update_stats := false
 var should_update_actions := false
-func _physics_process(_delta):
+func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 
 	var frame: int = Engine.get_physics_frames() % target_frame
@@ -33,7 +33,7 @@ func _physics_process(_delta):
 	if should_update_actions:
 		update_actions()
 
-func connect_all(to):
+func connect_all(to: Node) -> void:
 	var signals := get_signal_list()
 	for s in signals:
 		var sname: String = s.name
@@ -45,9 +45,9 @@ signal allow_add(attacker: Unit, buff: Buff)
 
 # UPDATE
 #signal update_stats()
-func update_stats(): pass
+func update_stats() -> void: pass
 #signal update_actions()
-func update_actions(): pass
+func update_actions() -> void: pass
 
 signal dodge(attacker: Unit)
 signal being_dodged(target: Unit)

@@ -2,7 +2,7 @@ class_name Vars
 extends Node
 
 @onready var me := get_parent() as Unit
-func _ready():
+func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	me.vars = self
 

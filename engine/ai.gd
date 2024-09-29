@@ -7,11 +7,8 @@ extends Node
 @onready var cancel_attack_range := me.find_child('CancelAttackRange') as Area3D
 @onready var navigation_agent := me.find_child("NavigationAgent3D") as NavigationAgent3D
 
-@export var movement_speed := 330 #TODO: Move to Stats
-@export var cursor: Node3D #TODO: Move to InputManager
-
 var is_movement_allowed := false
-func set_movement_allowed(to: bool):
+func set_movement_allowed(to: bool) -> void:
 	#if is_movement_allowed == to: return
 	if to:
 		if target != null:
@@ -21,15 +18,10 @@ func set_movement_allowed(to: bool):
 			navigation_agent.target_position = target_position
 			navigation_agent.avoidance_priority = 0
 			is_movement_allowed = true
-			if target == null && cursor != null:
-				cursor.global_position = target_position
-				cursor.visible = true
 	elif !to:
 		navigation_agent.set_velocity(Vector3.ZERO)
 		navigation_agent.avoidance_priority = 1
 		is_movement_allowed = false
-		if cursor != null:
-			cursor.visible = false
 
 var target: Unit = null
 var target_position := Vector3.ZERO
@@ -50,9 +42,9 @@ func find_target_in_ac_r() -> Unit:
 	return best_match
 
 func target_in_attack_range() -> bool:
-	return target.find_child('GameplayRange').overlaps_area(attack_range)
+	return (target.find_child('GameplayRange') as Radius).overlaps_area(attack_range)
 func target_in_cancel_attack_range() -> bool:
-	return target.find_child('GameplayRange').overlaps_area(cancel_attack_range)
+	return (target.find_child('GameplayRange') as Radius).overlaps_area(cancel_attack_range)
 func get_taunt_target() -> Unit:
 	return null
 func is_target_lost() -> bool:
@@ -78,7 +70,7 @@ func set_state_and_move_in_pos(state: Enums.AIState, position: Vector3) -> void:
 	set_state_and_move_internal(state, null, position)
 func set_state_and_move(state: Enums.AIState, position: Vector3) -> void:
 	set_state_and_move_internal(state, null, position)
-func set_state_and_move_internal(state: Enums.AIState, target: Unit, position: Vector3 = Vector3.ZERO):
+func set_state_and_move_internal(state: Enums.AIState, target: Unit, position: Vector3 = Vector3.ZERO) -> void:
 	set_state(state)
 	self.target = target
 	if target != null:
@@ -91,32 +83,32 @@ func set_state_and_move_internal(state: Enums.AIState, target: Unit, position: V
 		#else:
 		set_movement_allowed(true)
 
-func _ready():
+func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	me.ai = self
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
 	navigation_agent.navigation_finished.connect(_on_navigation_finished)
 	on_init()
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
-	
+
 	if is_movement_allowed: #and !navigation_agent.is_navigation_finished():
 		var next_path_position := navigation_agent.get_next_path_position()
 		var dir := me.global_position.direction_to(next_path_position)
-		var new_velocity := dir * movement_speed * (1./70.) #* delta
+		var new_velocity := dir * me.stats.get_movement_speed() * Data.HW2GD #* delta
 		if navigation_agent.avoidance_enabled:
 			navigation_agent.set_velocity(new_velocity)
 		else:
 			_on_velocity_computed(new_velocity)
 
-func _on_velocity_computed(safe_velocity: Vector3):
+func _on_velocity_computed(safe_velocity: Vector3) -> void:
 	if is_movement_allowed:
 		me.look_at(me.global_position + me.velocity.normalized())
 		me.velocity = safe_velocity
 		me.move_and_slide()
 
-func _on_navigation_finished():
+func _on_navigation_finished() -> void:
 	if is_movement_allowed:
 		set_movement_allowed(false)
 		on_reached_destination_for_going_to_last_location()
@@ -124,7 +116,7 @@ func _on_navigation_finished():
 		pass
 
 var last_order := Enums.OrderType.NONE
-func order(order_type: Enums.OrderType, target_position: Vector3, target_unit: Unit):
+func order(order_type: Enums.OrderType, target_position: Vector3, target_unit: Unit) -> void:
 	if order_type != last_order || target_unit != self.target || target_position != self.target_position:
 		print("on_order", ' ', Enums.OrderType.keys()[order_type], ' ', target_position, ' ', target_unit.name if target_unit else null)
 		on_order(order_type, target_position, target_unit)
@@ -169,13 +161,13 @@ func turn_on_auto_attack(target: Unit) -> void:
 	if !is_autoattack_enabled:
 		is_autoattack_enabled = true
 		print("turn_on_auto_attack", ' ', target.name if target else null)
-		set_movement_allowed(false)
+		#set_movement_allowed(false)
 		self.target = target
 func turn_off_auto_attack(reason: Enums.ReasonToTurnOffAA) -> void:
 	if is_autoattack_enabled:
 		is_autoattack_enabled = false
 		print("turn_off_auto_attack", ' ', Enums.ReasonToTurnOffAA.keys()[reason])
-		set_movement_allowed(true)
+		#set_movement_allowed(true)
 func last_auto_attack_finished() -> bool:
 	return true
 

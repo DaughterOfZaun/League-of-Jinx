@@ -11,7 +11,7 @@ func new_one() -> Curve:
 func or_one(c: Curve) -> Curve:
 	return c if c else Curve_ONE
 
-func set_shader_parameter_curve(m: ShaderMaterial, key: String, value_x: Curve, value_y: Curve = null, value_z: Curve = null):
+func set_shader_parameter_curve(m: ShaderMaterial, key: String, value_x: Curve, value_y: Curve = null, value_z: Curve = null) -> void:
 	var t := m.get_shader_parameter(key) as CurveXYZTexture
 	if !t: t = CurveXYZTexture.new()
 	t.curve_x = or_one(value_x)
@@ -388,12 +388,12 @@ var particle_color_lookup_type: Vector2i:
 #    update_fields()
 
 var updating_fields := 1
-func _ready():
+func _ready() -> void:
 	updating_fields -= 1
 	#update_fields()
 
 var p: GPUParticles3D
-func update_fields():
+func update_fields() -> void:
 	if updating_fields: return
 	else: updating_fields += 1
 
@@ -416,7 +416,7 @@ func update_fields():
 		p.one_shot = true
 		if total_emitter_life == 0:
 			emitter_enabled = false
-	
+
 	p.emitting = emitter_enabled
 
 	p.lifetime = total_emitter_life
@@ -424,9 +424,9 @@ func update_fields():
 	#var total_particle_life := particle_lifetime + particle_linger
 	#lifetime = total_emitter_life + total_particle_life
 	#explosiveness = total_particle_life / lifetime
-	
+
 	p.amount = 1 if emitter_emit_single_particle else round(total_emitter_life * emitter_rate)
-	
+
 	#TODO:
 	#p.draw_pass_1 = particle_mesh if particle_mesh else preload("res://Effects/new_quad_mesh.tres")
 	#p.draw_pass_1 = preload("res://Effects/new_sphere_mesh.tres") as Mesh if particle_mesh \
@@ -443,14 +443,14 @@ func update_fields():
 		var s := process_shader
 		# SET process_shader PARAMS HERE
 		m.shader = s.get_shader()
-		
+
 		m.set_shader_parameter('amount', p.amount)
 
 		m.set_shader_parameter('p_life_i', particle_lifetime)
 		set_shader_parameter_curve(m, 'p_life_p', particle_lifetime_prob)
-		
+
 		m.set_shader_parameter('p_linger', particle_linger)
-		
+
 		m.set_shader_parameter('p_rgba', particle_color_lookup_texture)
 		m.set_shader_parameter('p_colortype', particle_color_lookup_type)
 		m.set_shader_parameter('p_colorscale', particle_color_lookup_scale)
@@ -490,7 +490,7 @@ func update_fields():
 		m.set_shader_parameter('start_frame', float(particle_start_frame))
 		m.set_shader_parameter('num_frames', float(particle_number_of_frames))
 		m.set_shader_parameter('frame_rate', particle_frame_rate)
-		
+
 		m.set_shader_parameter('uv_scroll', particle_uv_scroll_rate)
 
 		# UV-offset is probably set once for all particles
@@ -512,13 +512,13 @@ class MyShader:
 		var hash: int = 0
 	var code: String
 	var hash: int
-	
+
 	func gen_code() -> String: return ""
 	func define(k: String, v: String = '') -> String:
 		return '#define ' + k + ((' ' + v) if v else '') + '\n'
 	func include(p: String) -> String:
 		return '#include "' + p + '"\n'
-	
+
 	#func _init():
 	#    gen_code_hash()
 	#    get_entry()
@@ -526,7 +526,7 @@ class MyShader:
 	func gen_code_hash():
 		code = gen_code()
 		hash = code.hash()
-	
+
 	func get_shader() -> Shader:
 		gen_code_hash()
 		if !entry:
@@ -537,7 +537,7 @@ class MyShader:
 				cache.erase(entry.hash)
 			get_entry()
 		return entry.shader
-	
+
 	func get_entry() -> void:
 		entry = cache.get(hash)
 		if entry:
@@ -587,13 +587,13 @@ class ProcessShader extends MyShader:
 		"shader_type particles;\n" +\
 		include('res://Effects/process.gdshaderinc')
 
-func set_from_ini_section(section: Array):
+func set_from_ini_section(section: Array) -> void:
 	updating_fields += 1
 	for entry in section:
 		self.set_from_ini_entry(entry[0], entry[1])
 	updating_fields -= 1
 
-func set_from_ini_entry(key_array: Array, value: String):
+func set_from_ini_entry(key_array: Array, value: String) -> void:
 	super.set_from_ini_entry(key_array, value)
 	match key_array:
 		["e-active"]: emitter_time_active_during_period = float_parse(value)
@@ -780,7 +780,7 @@ func set_from_ini_entry(key_array: Array, value: String):
 			particle_texture_name = string_parse(value)
 			particle_texture = tex_parse(value)
 		["p-trailmode"]: particle_trail_mode = uint_parse(value) as TrailMode
-		["p-trans-sample"]: particle_trans_sample = uint_parse(value) 
+		["p-trans-sample"]: particle_trans_sample = uint_parse(value)
 		["p-type"]: particle_quad_type = int_parse(value)
 		["p-uvmode"]: particle_uv_mode = uint_parse(value) as UVMode
 		["p-uvscroll-no-alpha"]: particle_uv_scroll_no_alpha = bool_parse(value)

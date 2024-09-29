@@ -3,7 +3,7 @@ extends Area3D
 
 @onready var char := get_parent() as Unit
 
-func _ready():
+func _ready() -> void:
 	if Engine.is_editor_hint(): return
 
 	monitoring = false
@@ -28,7 +28,7 @@ func _ready():
 		collision_layer = 1
 
 @onready var input_manager := get_node("%InputManager") as InputManager;
-func _input_event(camera, event, position, normal, shape_idx):
+func _input_event(camera, event, position, normal, shape_idx) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		input_manager.on_unit_clicked(char, event.button_index)
 	elif event is InputEventMouseMotion:

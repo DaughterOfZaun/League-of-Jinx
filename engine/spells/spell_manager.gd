@@ -14,7 +14,7 @@ extends Node
 @export var basic: Array[BasicAttack] = []
 
 @onready var me: Unit = get_parent()
-func _ready():
+func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	me.spells = self
 
@@ -33,12 +33,12 @@ func append_node(target: Node, node: Node, node_name: String) -> Node:
 		node.owner = EditorInterface.get_edited_scene_root()
 	return node
 
-func array_get(a: Array, i: int):
+func array_get(a: Array[Variant], i: int) -> Variant:
 	if a.size() <= i:
 		return null
 	return a[i]
 
-func array_set(a: Array, i: int, v):
+func array_set(a: Array[Variant], i: int, v: Variant) -> void:
 	if a.size() <= i:
 		a.resize(i + 1)
 	a[i] = v
@@ -46,7 +46,7 @@ func array_set(a: Array, i: int, v):
 func num_to_letter(i: int) -> String:
 	return ['q', 'w', 'e', 'r'][i]
 
-func assign_name(spell: Spell, name: String):
+func assign_name(spell: Spell, name: String) -> void:
 	if spell.data.spell_name.is_empty()\
 	or spell.data.spell_name == "BaseSpell":
 		spell.data.spell_name = name
