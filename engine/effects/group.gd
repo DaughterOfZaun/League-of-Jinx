@@ -504,7 +504,7 @@ func update_fields() -> void:
 
 class MyShader:
 
-	static var cache: Dictionary = {}
+	static var cache: Dictionary[int, ShaderAndUsage] = {}
 	var entry: ShaderAndUsage
 	class ShaderAndUsage:
 		var shader: Shader = null
@@ -523,7 +523,7 @@ class MyShader:
 	#    gen_code_hash()
 	#    get_entry()
 
-	func gen_code_hash():
+	func gen_code_hash() -> void:
 		code = gen_code()
 		hash = code.hash()
 
@@ -554,7 +554,7 @@ var material_shader := MaterialShader.new()
 class MaterialShader extends MyShader:
 	var blend_mode: BlendMode
 	var billboard_enabled: bool
-	func gen_code():
+	func gen_code() -> String:
 		var render_mode: Array[String] = []
 
 		var bm: String;
@@ -582,14 +582,14 @@ class MaterialShader extends MyShader:
 
 var process_shader := ProcessShader.new()
 class ProcessShader extends MyShader:
-	func gen_code():
+	func gen_code() -> String:
 		return \
 		"shader_type particles;\n" +\
 		include('res://Effects/process.gdshaderinc')
 
 func set_from_ini_section(section: Array) -> void:
 	updating_fields += 1
-	for entry in section:
+	for entry: Array in section:
 		self.set_from_ini_entry(entry[0], entry[1])
 	updating_fields -= 1
 

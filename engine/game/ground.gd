@@ -11,6 +11,6 @@ func _input_event(camera: Camera3D, event: InputEvent, event_position: Vector3, 
 	var iemb := event as InputEventMouseButton
 	var iemm := event as InputEventMouseMotion
 	if iemb and iemb.pressed:
-		input_manager.on_ground_clicked(event_position, event.button_index)
+		input_manager.on_ground_clicked(event_position, iemb.button_index)
 	elif iemm:
 		input_manager.on_ground_hovered(event_position)

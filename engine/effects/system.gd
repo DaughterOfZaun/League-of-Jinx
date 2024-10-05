@@ -26,13 +26,13 @@ extends Effect
 	set(value):
 		if value && !import:
 			import = true
-			var ini = ini_load(import_path)
+			var ini := ini_load(import_path)
 			set_from_ini_section(ini["System"])
 			recreate_groups(ini)
 			import = false
 @export_group("")
 
-var groups := []
+var groups: Array[Array] = []
 func set_from_ini_entry(key_array: Array, value: String) -> void:
 	super.set_from_ini_entry(key_array, value)
 	match key_array:
@@ -53,10 +53,10 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["VoiceOverOnCreate"]: voice_over_on_create = string_parse(value)
 		["VoiceOverPersistent"]: voice_over_persistent = string_parse(value)
 
-func recreate_groups(ini: Dictionary) -> void:
+func recreate_groups(ini: Dictionary[String, Array]) -> void:
 	for child in get_children():
 		child.queue_free()
-	for info in groups:
+	for info: Array in groups:
 		if len(info) == 0: continue
 
 		var group := Group.new()

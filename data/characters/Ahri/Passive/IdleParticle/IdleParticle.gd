@@ -8,6 +8,6 @@ var metadata := BuffMetadata.from({
 })
 var particle: Particle
 func on_activate() -> void:
-    particle = Particle.create("Ahri_Orb.troy").bind(owner, "BUFFBONE_GLB_WEAPON_1").target(owner)
+    particle = Particle.create("Ahri_Orb.troy").bind(host, "BUFFBONE_GLB_WEAPON_1").target(host)
 func on_deactivate(expired: bool) -> void:
     particle.remove()

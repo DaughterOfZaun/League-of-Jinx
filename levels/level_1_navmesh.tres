@@ -1,0 +1,7 @@
+[gd_resource type="NavigationMesh" format=3 uid="uid://ge2fbbbp2qa5"]
+
+[resource]
+vertices = PackedVector3Array(-7.5, 0.02, -7.5, -7.5, 0.02, 7.5, 7.5, 0.02, 7.5, 7.5, 0.02, -7.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+cell_size = 0.01
+cell_height = 0.01

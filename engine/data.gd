@@ -7,7 +7,7 @@ func string_parse(from: String) -> String:
 	return from
 
 var res_path := "res://Data/Particles"
-var res_cache: Dictionary = {}
+var res_cache: Dictionary[String, String] = {}
 var res_cache_is_null := true
 func get_from_cache(key: String) -> String:
 	if res_cache_is_null:
@@ -136,8 +136,8 @@ func gradient_set(grad: Gradient, i: int, from: String) -> Gradient:
 	grad.add_point(float_parse(s[0]), color_parse(s[1]))
 	return grad
 
-var return_null := func(): return null
-var return_array := func(): return []
+var return_null := func() -> Object: return null
+var return_array := func() -> Array: return []
 
 func array_resize_to_fit(a: Array, i: int, f: Callable) -> void:
 	var len_a := len(a)
@@ -162,7 +162,7 @@ func array_set(a: Array, i: int, v: Variant, f := return_null) -> Array:
 	a[i] = v
 	return a
 
-func set_from_ini(ini: Dictionary) -> void:
+func set_from_ini(ini: Dictionary[String, Array]) -> void:
 	pass
 
 func set_from_ini_section(section: Array) -> void:
@@ -172,7 +172,7 @@ func set_from_ini_section(section: Array) -> void:
 func set_from_ini_entry(key_array: Array, value: String) -> void:
 	pass
 
-func ini_load(import_path: String) -> Dictionary:
+func ini_load(import_path: String) -> Dictionary[String, Array]:
 	var result := {}
 	var section: Array[Array]
 	var section_name: String

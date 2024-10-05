@@ -79,7 +79,7 @@ func set_state_and_move_internal(state: Enums.AIState, target: Unit, position: V
 		target_position = position
 		target_position_reached = false
 		#if is_autoattack_enabled:
-		turn_off_auto_attack(Enums.ReasonToTurnOffAA.MOVING)
+		#turn_off_auto_attack(Enums.ReasonToTurnOffAA.MOVING)
 		#else:
 		set_movement_allowed(true)
 
@@ -136,9 +136,9 @@ func on_AI_command() -> void: pass
 func on_reached_destination_for_going_to_last_location() -> void: pass
 func halt_AI() -> void: pass
 
-var timers := {}
+var timers: Dictionary[Callable, Timer] = {}
 func init_timer(callback: Callable, time: float, oneshot: bool) -> void:
-	var timer := timers.get(callback, null) as Timer
+	var timer: Timer = timers.get(callback, null)
 	if timer == null:
 		timer = Timer.new()
 		timer.name = callback.get_method()
@@ -149,11 +149,11 @@ func init_timer(callback: Callable, time: float, oneshot: bool) -> void:
 	timer.start(time)
 
 func stop_timer(callback: Callable) -> void:
-	var timer := timers.get(callback) as Timer
+	var timer: Timer = timers.get(callback)
 	if timer != null: timer.stop()
 
 func reset_and_start_timer(callback: Callable) -> void:
-	var timer := timers.get(callback) as Timer
+	var timer: Timer = timers.get(callback)
 	if timer != null: timer.start()
 
 var is_autoattack_enabled := false
@@ -182,7 +182,7 @@ func make_wander_point(leash_point: Vector3, distance: float) -> Vector3:
 func can_see_me(target: Unit) -> bool:
 	return true
 func spell_buff_remove_type(target: Unit, type: Enums.BuffType) -> void:
-	target.buffs.remove(type)
+	target.buffs.remove_by_type(type)
 
 func is_moving() -> bool:
 	return is_movement_allowed
@@ -190,4 +190,4 @@ func is_movement_stopped() -> bool:
 	return !is_movement_allowed
 
 func distance_between_object_and_target_pos_sq(obj: Node3D) -> float:
-	return target_position.distance_squared_to(obj.global_position)
+	return target_position.distance_squared_to(obj.global_position) * Data.HW2GD

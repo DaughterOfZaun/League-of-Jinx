@@ -9,8 +9,9 @@ func on_unit_clicked(char: Unit, button: MouseButton) -> void:
 	if char.team != main_hero.team:
 		main_hero.on_order(Enums.OrderType.ATTACK_TO, char.global_position, char)
 
-func on_ground_clicked(pos: Vector3, button: MouseButton) -> void:
+func on_ground_clicked(pos: Vector3, button_index: MouseButton) -> void:
 	#if main_hero == null: return
+	if button_index != MOUSE_BUTTON_RIGHT: return
 	var nearest_reachable_point := NavigationServer3D.map_get_closest_point(nav_map_rid, pos)
 	main_hero.on_order(Enums.OrderType.MOVE_TO, nearest_reachable_point, null)
 

@@ -23,7 +23,7 @@ func add(buff: Buff, count := 1, continious := false) -> BuffSlot:
         #for stack: Buff in self.stacks:
             #time_remaining = max(time_remaining, stack.time_remaining)
     for i in range(count):
-        var duplicate := buff if i == 0 else buff.duplicate(DUPLICATE_ALL)
+        var duplicate: Buff = buff if i == 0 else buff.duplicate(DUPLICATE_ALL)
         if continious:
             duplicate.delay = time_remaining
             time_remaining += duplicate.duration
@@ -32,7 +32,7 @@ func add(buff: Buff, count := 1, continious := false) -> BuffSlot:
     return self
 
 func sort_stacks() -> void:
-    stacks.sort_custom(func (a: Buff, b: Buff): return a.duration_remain > b.duration_remain)
+    stacks.sort_custom(func (a: Buff, b: Buff) -> bool: return a.duration_remaining > b.duration_remaining)
 
 func remove_stacks(count := 0) -> BuffSlot:
     if len(stacks) == 0 || count <= -len(stacks):
@@ -60,7 +60,7 @@ func post_removal(buff: Buff) -> void:
     for stack: Buff in self.stacks:
         if stack.delay_remaining >= buff.delay_remaining:
             stack.delay_remaining -= buff.delay_remaining
-    self.time_remaining -= buff.buff.delay_remaining
+    self.time_remaining -= buff.delay_remaining
 
 func renew(reset_duration: float) -> BuffSlot:
     for buff: Buff in self.stacks:

@@ -28,8 +28,10 @@ func _ready() -> void:
 		collision_layer = 1
 
 @onready var input_manager := get_node("%InputManager") as InputManager;
-func _input_event(camera, event, position, normal, shape_idx) -> void:
-	if event is InputEventMouseButton and event.pressed:
-		input_manager.on_unit_clicked(char, event.button_index)
-	elif event is InputEventMouseMotion:
+func _input_event(camera: Camera3D, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	var iemb := event as InputEventMouseButton
+	var iemm := event as InputEventMouseMotion
+	if iemb and iemb.pressed:
+		input_manager.on_unit_clicked(char, iemb.button_index)
+	elif iemm:
 		input_manager.on_unit_hovered(char)

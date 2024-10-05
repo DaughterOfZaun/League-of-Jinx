@@ -101,3 +101,6 @@ signal spell_cast(spell: Spell)
 #signal set_vars_by_level() #TODO: Specific to char_script and talent_script
 #signal update_ammo() #TODO: Specific to buff_script
 #signal update_buffs() #TODO: Specific to buff_script
+
+func face_direction(dir: Vector3) -> void:
+	pass #TODO:

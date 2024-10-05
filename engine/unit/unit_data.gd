@@ -262,7 +262,7 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["BaseAbilityPower"]: base_ability_power = float_parse(value)
 		["BaseAttack_Probability"]:
 			#base_attack_probability = float_parse(value)
-			get_target_spells().get_basic(0).data.probability = float_parse(value)
+			(get_target_spells().get_basic(0).data as BasicAttackData).probability = float_parse(value)
 		["BaseCritChance"]: base_crit_chance = float_parse(value)
 		["BaseDamage"]: base_damage = float_parse(value)
 		["BaseDodge"]: base_dodge = float_parse(value)
@@ -304,7 +304,7 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["ExpGivenOnDeath"]: exp_given_on_death = float_parse(value)
 		["ExtraAttack", var i, "_Probability"] when i > 0:
 			#extra_attack_probability = array_set(extra_attack_probability, i - 1, float_parse(value))
-			get_target_spells().get_basic(i).data.probability = float_parse(value)
+			(get_target_spells().get_basic(i).data as BasicAttackData).probability = float_parse(value)
 		["ExtraAttack", var i] when i > 0:
 			#extra_attack = array_set(extra_attack, i - 1, string_parse(value))
 			get_target_spells().get_basic(i, string_parse(value))

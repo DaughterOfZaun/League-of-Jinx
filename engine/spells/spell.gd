@@ -5,7 +5,7 @@ extends Node
 
 var attacker: Unit
 var caster: Unit
-var host: Unit
+var host: Unit # owner -> host
 var spell := self
 
 var target: Unit
@@ -50,7 +50,7 @@ func _ready() -> void:
 	attacker = host
 	caster = host
 	timer = Timer.new()
-	timer.timeout.connect(func(): timeout_or_canceled.emit())
+	timer.timeout.connect(func() -> void: timeout_or_canceled.emit())
 	add_child(timer)
 
 func _physics_process(delta: float) -> void:

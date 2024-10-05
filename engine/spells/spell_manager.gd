@@ -18,7 +18,7 @@ func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	me.spells = self
 
-func get_by_script(script) -> Spell:
+func get_by_script(script: GDScript) -> Spell:
 	return Spell.new()
 
 func append_spell(spell: Spell, data: Data, node_name: String) -> Spell:
