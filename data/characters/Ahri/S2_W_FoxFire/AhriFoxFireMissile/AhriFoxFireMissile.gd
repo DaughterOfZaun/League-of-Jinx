@@ -1,1 +1,2 @@
-
+class_name AhriFoxFireMissileSpell
+extends Spell

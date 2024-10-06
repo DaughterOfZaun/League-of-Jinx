@@ -7,13 +7,13 @@ extends Node3D
 func on_unit_clicked(char: Unit, button: MouseButton) -> void:
 	#if main_hero == null: return
 	if char.team != main_hero.team:
-		main_hero.on_order(Enums.OrderType.ATTACK_TO, char.global_position, char)
+		main_hero.order(Enums.OrderType.ATTACK_TO, char.global_position, char)
 
 func on_ground_clicked(pos: Vector3, button_index: MouseButton) -> void:
 	#if main_hero == null: return
 	if button_index != MOUSE_BUTTON_RIGHT: return
 	var nearest_reachable_point := NavigationServer3D.map_get_closest_point(nav_map_rid, pos)
-	main_hero.on_order(Enums.OrderType.MOVE_TO, nearest_reachable_point, null)
+	main_hero.order(Enums.OrderType.MOVE_TO, nearest_reachable_point, null)
 
 var hovered_unit: Unit = null
 var hovered_pos := Vector3.ZERO
@@ -28,4 +28,4 @@ func _input(event: InputEvent) -> void:
 	#if main_hero == null: return
 	for letter in "qwerdfb":
 		if event.is_action_pressed(letter.to_upper()):
-			main_hero.on_cast(letter, hovered_pos, hovered_unit)
+			main_hero.cast(letter, hovered_pos, hovered_unit)

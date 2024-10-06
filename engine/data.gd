@@ -39,9 +39,9 @@ func effect_parse(from: String) -> PackedScene:
 
 func res_parse(from: String, bin_ext: String, txt_ext: String, out_ext: String) -> Resource:
 	return null #TODO:
-	from = string_parse(from)
-	from = from.to_lower().replace(bin_ext, out_ext).replace(txt_ext, out_ext)
-	return load(res_path + "/" + get_from_cache(from))
+	# from = string_parse(from)
+	# from = from.to_lower().replace(bin_ext, out_ext).replace(txt_ext, out_ext)
+	# return load(res_path + "/" + get_from_cache(from))
 
 enum VectorUsage { UNDEFINED, SCALE, ROTATION }
 func vec3_parse(from: String, u := VectorUsage.UNDEFINED) -> Vector3:
@@ -104,14 +104,17 @@ func color_parse(from: String) -> Color:
 	from = string_parse(from)
 	var v := from.split(' ')
 	assert(len(v) == 4, from)
-	var c: Array[float] = []; c.resize(4); for i in range(4): c[i] = float_parse(v[i])
+	var c: Array[float] = [ 0, 1, 2, 3 ];
+	for i in c:
+		c[i] = float_parse(v[i])
 	for e in c:
 		if e > 1:
 			for i in range(4): c[i] /= 255
 			break
 	return Color(c[0], c[1], c[2], c[3])
 
-func curve_set(curve: Curve, i: int, from: String) -> Curve:
+func curve_set(curve: Curve, i: Variant, from: String) -> Curve:
+	assert(typeof(i) == TYPE_INT)
 	from = string_parse(from)
 	if !curve: curve = Curve.new()
 	curve.add_point(vec2_parse(from))
@@ -120,7 +123,8 @@ func curve_set(curve: Curve, i: int, from: String) -> Curve:
 func vec3_to_color(v: Vector3) -> Color:
 	return Color(v.x, v.y, v.z)
 
-func curve3d_set(curve: Gradient, i: int, from: String, u := VectorUsage.UNDEFINED) -> Gradient:
+func curve3d_set(curve: Gradient, i: Variant, from: String, u := VectorUsage.UNDEFINED) -> Gradient:
+	assert(typeof(i) == TYPE_INT)
 	from = string_parse(from)
 	if !curve: curve = Gradient.new()
 	var s := from.split(' ', false, 1)
@@ -128,7 +132,8 @@ func curve3d_set(curve: Gradient, i: int, from: String, u := VectorUsage.UNDEFIN
 	curve.add_point(float_parse(s[0]), vec3_to_color(vec3_parse(s[1], u)))
 	return curve
 
-func gradient_set(grad: Gradient, i: int, from: String) -> Gradient:
+func gradient_set(grad: Gradient, i: Variant, from: String) -> Gradient:
+	assert(typeof(i) == TYPE_INT)
 	from = string_parse(from)
 	if !grad: grad = Gradient.new()
 	var s := from.split(' ', false, 1)
@@ -139,15 +144,17 @@ func gradient_set(grad: Gradient, i: int, from: String) -> Gradient:
 var return_null := func() -> Object: return null
 var return_array := func() -> Array: return []
 
-func array_resize_to_fit(a: Array, i: int, f: Callable) -> void:
+func array_resize_to_fit(a: Array, i: Variant, f: Callable) -> void:
+	assert(typeof(i) == TYPE_INT)
 	var len_a := len(a)
 	if len_a <= i:
 		a.resize(i + 1)
 		if f != return_null:
 			for j in range(len_a, i + 1): a[j] = f.call()
 
-func array_get(a: Array[Variant], i: int, f := return_null) -> Variant:
+func array_get(a: Array[Variant], i: Variant, f := return_null) -> Variant:
 	assert(a != null)
+	assert(typeof(i) == TYPE_INT)
 	array_resize_to_fit(a, i, f)
 	var res: Variant = a[i]
 	if res == null: #&& f != return_null:
@@ -155,8 +162,9 @@ func array_get(a: Array[Variant], i: int, f := return_null) -> Variant:
 		a[i] = res
 	return res
 
-func array_set(a: Array, i: int, v: Variant, f := return_null) -> Array:
+func array_set(a: Array, i: Variant, v: Variant, f := return_null) -> Array:
 	assert(i >= 0)
+	assert(typeof(i) == TYPE_INT)
 	if a == null: a = []
 	array_resize_to_fit(a, i, f)
 	a[i] = v

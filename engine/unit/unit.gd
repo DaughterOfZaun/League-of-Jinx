@@ -5,17 +5,18 @@ extends Node3D
 @export var data: UnitData
 
 var stats: Stats
+var status: Status
 var buffs: Buffs
 var spells: Spells
 var passive: Passive
 var vars: Vars
 var ai: AI
 
-func on_order(type: Enums.OrderType, pos: Vector3, unit: Unit) -> void:
+func order(type: Enums.OrderType, pos: Vector3, unit: Unit) -> void:
 	ai.order(type, pos, unit)
 
-func on_cast(letter: String, pos: Vector3, unit: Unit) -> void:
-	(spells[letter] as Spell).try_cast(unit, pos)
+func cast(letter: String, pos: Vector3, unit: Unit) -> void:
+	ai.cast(letter, pos, unit)
 
 var tick_rate: float = 0.25
 var physics_fps: int = Engine.physics_ticks_per_second
@@ -102,5 +103,16 @@ signal spell_cast(spell: Spell)
 #signal update_ammo() #TODO: Specific to buff_script
 #signal update_buffs() #TODO: Specific to buff_script
 
-func face_direction(dir: Vector3) -> void:
-	pass #TODO:
+var direction := Vector3.FORWARD
+var direction_angle := 0.
+func face_direction(pos: Vector3) -> void:
+	face_dir(pos - self.global_position)
+func face_dir(dir: Vector3) -> void:
+	dir = dir.normalized()
+	direction = dir
+	direction_angle = Vector2(dir.z, dir.x).angle()
+
+func _process(delta: float) -> void:
+	var rot_delta := angle_difference(rotation.y, direction_angle)
+	var rot_speed := deg_to_rad(180. / ((0.08 + (0.01/3.))))
+	rotation.y += sign(rot_delta) * min(abs(rot_delta), rot_speed * delta)

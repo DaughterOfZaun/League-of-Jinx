@@ -246,7 +246,7 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["AbilityPowerIncPerLevel"]: ability_power_inc_per_level = int_parse(value)
 		["AcquisitionRange"]: acquisition_range = float_parse(value)
 		["Armor"]: armor = float_parse(value)
-		["ArmorMaterial"]: armor_material = enum_parse(UnitData.ArmorMaterial, value)
+		["ArmorMaterial"]: armor_material = enum_parse(UnitData.ArmorMaterial, value) as UnitData.ArmorMaterial
 		["ArmorPerLevel"]: armor_per_level = float_parse(value)
 		["AssetCategory"]: ignored = true #asset_category = string_parse(value)
 		["AttackDelayCastOffsetPercent"]:
@@ -277,7 +277,7 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["BotEnabledMM"]: bot_enabled_mm = bool_parse(value)
 		["ChampionId"]: champion_id = int_parse(value)
 		["ChasingAttackRangePercent"]: chasing_attack_range_percent = float_parse(value)
-		["Classification"]: classification = enum_parse(UnitData.Classification, value)
+		["Classification"]: classification = enum_parse(UnitData.Classification, value) as UnitData.Classification
 		["CritAttack_AttackCastDelayOffsetPercent"]:
 			#crit_attack_attack_cast_delay_offset_percent = float_parse(value)
 			get_target_spells().get_crit().data.delay_cast_offset_percent = float_parse(value)
@@ -339,7 +339,7 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["PARIncrements"]: par_increments = float_parse(value)
 		["PARMaxSegments"]: par_max_segments = int_parse(value)
 		["PARNameString"]: par_name_string = string_parse(value)
-		["PARType"]: par_type = enum_parse(UnitData.PARType, value)
+		["PARType"]: par_type = enum_parse(UnitData.PARType, value) as UnitData.PARType
 		#["Passive", 1, "Desc"]: passive_desc = string_parse(value) # PassLev1Desc1 is used instead
 		["Passive", var i, "Desc"]: ignored = true
 		#["Passive", 1, "Effect", var j]: passive_effect = array_set(passive_effect, j - 1, float_parse(value))
@@ -372,8 +372,8 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["PerceptionBubbleRadius"]: perception_bubble_radius = float_parse(value)
 		["PlatformEnabled"]: platform_enabled = bool_parse(value)
 		["PostAttackMoveDelay"]: post_attack_move_delay = float_parse(value)
-		["Roles"]: roles = enum_parse(UnitData.Roles, value)
-		["SearchTags"]: search_tags = enum_parse(UnitData.SearchTags, value)
+		["Roles"]: roles = enum_parse(UnitData.Roles, value) as UnitData.Roles
+		["SearchTags"]: search_tags = enum_parse(UnitData.SearchTags, value) as UnitData.SearchTags
 		["SelectionHeight"]: selection_height = float_parse(value)
 		["SelectionRadius"]: selection_radius = float_parse(value)
 		["ServerOnly"]: server_only = bool_parse(value)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c1voud1rbq3sf"]
+[gd_scene load_steps=41 format=3 uid="uid://c1voud1rbq3sf"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_104n6"]
 [ext_resource type="NavigationMesh" uid="uid://ge2fbbbp2qa5" path="res://levels/level_1_navmesh.tres" id="2_jq8ly"]
@@ -11,13 +11,23 @@
 [ext_resource type="Script" path="res://engine/spells/attacks/basic_attack.gd" id="6_p5bn8"]
 [ext_resource type="PackedScene" uid="uid://brt0fmysxvs5g" path="res://data/characters/Ahri/Skins/Base/Ahri.glb" id="7_45sau"]
 [ext_resource type="Script" path="res://engine/spells/attacks/basic_attack_data.gd" id="7_876sy"]
+[ext_resource type="Script" path="res://engine/status.gd" id="7_ywlur"]
 [ext_resource type="Script" path="res://engine/spells/attacks/crit_attack.gd" id="8_os5gn"]
 [ext_resource type="Script" path="res://engine/spells/attacks/crit_attack_data.gd" id="9_cwmut"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bj5tpjmt4q2fk" path="res://data/characters/Ahri/Skins/Base/Animations.tres" id="9_e1mwo"]
-[ext_resource type="Script" path="res://engine/spells/spell.gd" id="10_vhavm"]
 [ext_resource type="Script" path="res://engine/spells/spell_data.gd" id="11_eotle"]
 [ext_resource type="Script" path="res://engine/passive/passive.gd" id="12_133kh"]
 [ext_resource type="Script" path="res://engine/game/range.gd" id="14_t8bj3"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbofDeception.gd" id="16_d8o62"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFire.gd" id="18_8y1v6"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduce.gd" id="19_djd32"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumble.gd" id="20_vbf6b"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbMissile/AhriOrbMissile.gd" id="21_l71pd"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbReturn/AhriOrbReturn.gd" id="22_lixky"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/AhriFoxFireMissile.gd" id="23_2f34q"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissileTwo/AhriFoxFireMissileTwo.gd" id="24_dkrri"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/AhriSeduceMissile.gd" id="25_ivfqq"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/AhriTumbleMissile.gd" id="26_q6kjr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ovldq"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -108,6 +118,9 @@ script = ExtResource("4_e8jju")
 script = ExtResource("5_3vawb")
 movement_speed_flat = 305.0
 
+[node name="Status" type="Node" parent="Unit"]
+script = ExtResource("7_ywlur")
+
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Unit"]
 avoidance_enabled = true
 height = 2.0
@@ -168,19 +181,19 @@ mesh = SubResource("CapsuleMesh_gl51m")
 skeleton = NodePath("../..")
 
 [node name="SkinnedMesh" parent="Unit" instance=ExtResource("7_45sau")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="Unit"]
 root_node = NodePath("../SkinnedMesh")
 tree_root = ExtResource("9_e1mwo")
 anim_player = NodePath("../SkinnedMesh/AnimationPlayer")
 
-[node name="Spells" type="Node" parent="Unit" node_paths=PackedStringArray("q", "w", "e", "r", "crit")]
+[node name="Spells" type="Node" parent="Unit" node_paths=PackedStringArray("q", "w", "e", "r", "extra", "crit")]
 script = ExtResource("5_gep23")
 q = NodePath("Q_OrbOfDeception")
 w = NodePath("W_FoxFire")
 e = NodePath("E_Seduce")
 r = NodePath("R_Tumble")
+extra = [NodePath("E0_OrbMissile"), NodePath("E1_OrbReturn"), NodePath("E2_FoxFireMissile"), NodePath("E3_FoxFireMissileTwo"), NodePath("E4_SeduceMissile"), NodePath("E5_TumbleMissile")]
 crit = NodePath("CritAttack")
 
 [node name="CritAttack" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
@@ -330,7 +343,7 @@ coefficient = Array[float]([0.0])
 import_path = "res://data/characters/Ahri/Attacks/AhriBasicAttack2.ini"
 
 [node name="Q_OrbOfDeception" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("10_vhavm")
+script = ExtResource("16_d8o62")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/Q_OrbOfDeception"]
@@ -390,7 +403,7 @@ x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbofDeception.ini"
 
 [node name="W_FoxFire" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("10_vhavm")
+script = ExtResource("18_8y1v6")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/W_FoxFire"]
@@ -399,7 +412,7 @@ spell_name = "AhriFoxFire"
 import_path = "res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFire.ini"
 
 [node name="E_Seduce" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("10_vhavm")
+script = ExtResource("19_djd32")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/E_Seduce"]
@@ -458,7 +471,7 @@ x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S3_E_Seduce/AhriSeduce.ini"
 
 [node name="R_Tumble" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("10_vhavm")
+script = ExtResource("20_vbf6b")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/R_Tumble"]
@@ -512,7 +525,7 @@ x = Array[float]([0.0])
 import_path = "res://data/characters/Ahri/S4_R_Tumble/AhriTumble.ini"
 
 [node name="E0_OrbMissile" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("10_vhavm")
+script = ExtResource("21_l71pd")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/E0_OrbMissile"]
@@ -573,7 +586,7 @@ x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbMissile/AhriOrbMissile.ini"
 
 [node name="E1_OrbReturn" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("10_vhavm")
+script = ExtResource("22_lixky")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/E1_OrbReturn"]
@@ -634,7 +647,7 @@ x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbReturn/AhriOrbReturn.ini"
 
 [node name="E2_FoxFireMissile" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("10_vhavm")
+script = ExtResource("23_2f34q")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/E2_FoxFireMissile"]
@@ -693,7 +706,7 @@ x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/AhriFoxFireMissile.ini"
 
 [node name="E3_FoxFireMissileTwo" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("10_vhavm")
+script = ExtResource("24_dkrri")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/E3_FoxFireMissileTwo"]
@@ -749,7 +762,7 @@ x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissileTwo/AhriFoxFireMissileTwo.ini"
 
 [node name="E4_SeduceMissile" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("10_vhavm")
+script = ExtResource("25_ivfqq")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/E4_SeduceMissile"]
@@ -807,7 +820,7 @@ x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/AhriSeduceMissile.ini"
 
 [node name="E5_TumbleMissile" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("10_vhavm")
+script = ExtResource("26_q6kjr")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/E5_TumbleMissile"]

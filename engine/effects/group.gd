@@ -385,7 +385,7 @@ var particle_color_lookup_type: Vector2i:
 	set(value): keywords_required = value; update_fields()
 
 #func _set(_property, _value):
-#    update_fields()
+#	update_fields()
 
 var updating_fields := 1
 func _ready() -> void:
@@ -520,8 +520,8 @@ class MyShader:
 		return '#include "' + p + '"\n'
 
 	#func _init():
-	#    gen_code_hash()
-	#    get_entry()
+	#	gen_code_hash()
+	#	get_entry()
 
 	func gen_code_hash() -> void:
 		code = gen_code()
@@ -613,9 +613,9 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["e-rateP", var i]: emitter_rate_prob = curve_set(emitter_rate_prob, i, value)
 		["e-rgba", var i]: emitter_color_over_lifetime = gradient_set(emitter_color_over_lifetime, i, value)
 		["e-rgba"]: emitter_color = color_parse(value)
-		["e-rotation", var i]: array_set(emitter_rotation_angles, i, float_parse(value))
-		["e-rotation", var i, "-axis"]: array_set(emitter_rotation_axes, i, vec3_parse(value))
-		["e-rotation", var i, "P", var j]: array_set(emitter_rotation_probs, i, curve_set(array_get(emitter_rotation_probs, i), j, value))
+		["e-rotation", var i]: emitter_rotation_angles = array_set(emitter_rotation_angles, i, float_parse(value))
+		["e-rotation", var i, "-axis"]: emitter_rotation_axes = array_set(emitter_rotation_axes, i, vec3_parse(value))
+		["e-rotation", var i, "P", var j]: emitter_rotation_probs = array_set(emitter_rotation_probs, i, curve_set(array_get(emitter_rotation_probs, i), j, value))
 		#1 ["e-rotation", var i, "P"]: pass
 		["e-tilesize"]: emitter_trail_tile_size = vec3_parse(value)
 		["e-tilesizeYP", var i]: emitter_trail_tile_size_y_prob = curve_set(emitter_trail_tile_size_y_prob, i, value)

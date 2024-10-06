@@ -63,3 +63,8 @@ func remove_internal_1(expired := false) -> void:
 		queue_free()
 
 func on_deactivate(_expired: bool) -> void: pass
+
+func renew(reset_duration: float) -> void:
+	self.delay = 0
+	self.duration = reset_duration
+	self.start(reset_duration)

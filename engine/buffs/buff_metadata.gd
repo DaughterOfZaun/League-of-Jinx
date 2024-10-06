@@ -22,7 +22,7 @@ var on_pre_damage_priority := 0
 var do_on_pre_damage_in_expiration_order := false
 
 static func from(dict: Dictionary[String, Variant]) -> BuffMetadata:
-    var inst := new()
-    for key in dict:
-        inst.set(key, dict[key])
-    return inst
+	var inst := new()
+	for key in dict:
+		inst.set(key, dict[key])
+	return inst

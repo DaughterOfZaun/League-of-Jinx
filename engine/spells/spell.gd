@@ -3,15 +3,24 @@ extends Node
 
 @export var data: SpellData
 
-var attacker: Unit
-var caster: Unit
-var host: Unit # owner -> host
+@onready var me := (
+	get_parent() #as Spells
+).get_parent() as Unit #HACK:
+@onready var animation_tree := me.find_child("AnimationTree") as AnimationTree
+@onready var animation_root_playback := animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+@onready var animation_cast_playback := animation_tree.get("parameters/Cast/playback") as AnimationNodeStateMachinePlayback
+@onready var animation_spell_playback := animation_tree.get("parameters/Cast/Spell/playback") as AnimationNodeStateMachinePlayback
+
+@onready var attacker := me
+@onready var caster := me
+@onready var host := me # owner -> host
 var spell := self
 
 var target: Unit
-var offset_target: Unit
+#var offset_target: Unit
+var cast_position := Vector3.INF
 var target_position := Vector3.INF
-var drag_end_position: Vector3
+var drag_end_position := Vector3.INF
 # var targets_hit: int
 var targets_hit_plus_one: int:
 	get:
@@ -46,9 +55,6 @@ signal timeout_or_canceled()
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
-	host = (get_parent() as Spells).get_parent() as Unit #HACK
-	attacker = host
-	caster = host
 	timer = Timer.new()
 	timer.timeout.connect(func() -> void: timeout_or_canceled.emit())
 	add_child(timer)
@@ -89,9 +95,9 @@ class CastInfo:
 	var missile: Missile
 
 func cast(
-	target: Unit,
-	pos: Vector3,
-	end_pos: Vector3,
+	target: Unit = null,
+	pos := Vector3.INF,
+	end_pos := Vector3.INF,
 	override_force_level := 0,
 	override_cool_down_check := false,
 	fire_without_casting := false,
@@ -99,10 +105,41 @@ func cast(
 	force_casting_or_channelling := false,
 	update_auto_attack_timer := false,
 	override_cast_position := false,
-	override_cast_pos: Vector3 = Vector3.INF
+	override_cast_pos := Vector3.INF
 ) -> void:
 
-	cancelled = false
+	#region process params
+	match data.targetting_type:
+		Enums.TargetingType.SELF,\
+		Enums.TargetingType.SELF_AOE:
+			target = caster
+			pos = target.global_position
+		Enums.TargetingType.TARGET:
+			assert(target != null)
+			pos = target.global_position
+		Enums.TargetingType.AREA,\
+		Enums.TargetingType.CONE,\
+		Enums.TargetingType.LOCATION,\
+		Enums.TargetingType.DIRECTION,\
+		Enums.TargetingType.DRAG_DIRECTION:
+			assert(pos.is_finite())
+			assert(data.cast_type not in [
+				Enums.CastType.TARGET_MISSILE,
+				Enums.CastType.CHAIN_MISSILE,
+			])
+			target = null
+	if data.targetting_type == Enums.TargetingType.DRAG_DIRECTION:
+		assert(end_pos.is_finite())
+	else:
+		end_pos = Vector3.INF
+	var cast_pos := override_cast_pos if override_cast_position else pos
+	#endregion
+
+	self.target = target
+	self.target_position = pos
+	self.cast_position = cast_pos
+	self.drag_end_position = end_pos
+	self.targets_hit = 0
 
 	var cast_time := get_cast_time()
 	var channel_duration := get_channel_duration()
@@ -112,6 +149,17 @@ func cast(
 	var has_cast := !instant_cast && cast_time >= 0
 	var has_channel := !instant_cast && channel_duration >= 0
 	instant_cast = instant_cast || (!has_cast && !has_channel)
+	var has_missile := data.cast_type != Enums.CastType.INSTANT
+
+	if (has_cast || has_channel || has_missile) && target_position != me.global_position:
+		me.face_direction(target_position)
+
+	if !data.animation_name.is_empty():
+		animation_root_playback.travel("Cast")
+		animation_cast_playback.travel("Spell")
+		animation_spell_playback.travel(data.animation_name)
+
+	cancelled = false
 
 	if !cancelled && has_cast:
 		state = State.CASTING
@@ -128,10 +176,9 @@ func cast(
 		channeling_stop()
 
 	state = State.READY
-	targets_hit = 0
 	self_execute()
 
-	if data.cast_type != Enums.CastType.INSTANT:
+	if has_missile:
 		var m: Missile
 		match data.cast_type:
 			Enums.CastType.TARGET_MISSILE: m = SpellTargetMissile.new(self, target);

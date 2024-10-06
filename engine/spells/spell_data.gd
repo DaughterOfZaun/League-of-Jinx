@@ -19,12 +19,12 @@ extends Data
 @export var float_statics_decimals: Array[int] #= [ 2, 2, 2, 2, 2, 2 ]
 @export var float_vars_decimals: Array[int] #= [ 2, 2, 2, 2, 2, 2 ]
 @export var effect_level_amount: Array[Array] #= [
-#    [ 0, 0, 0, 0, 0, 0, 0 ],
-#    [ 0, 0, 0, 0, 0, 0, 0 ],
-#    [ 0, 0, 0, 0, 0, 0, 0 ],
-#    [ 0, 0, 0, 0, 0, 0, 0 ],
-#    [ 0, 0, 0, 0, 0, 0, 0 ],
-#    [ 0, 0, 0, 0, 0, 0, 0 ],
+#	[ 0, 0, 0, 0, 0, 0, 0 ],
+#	[ 0, 0, 0, 0, 0, 0, 0 ],
+#	[ 0, 0, 0, 0, 0, 0, 0 ],
+#	[ 0, 0, 0, 0, 0, 0, 0 ],
+#	[ 0, 0, 0, 0, 0, 0, 0 ],
+#	[ 0, 0, 0, 0, 0, 0, 0 ],
 #]
 @export_subgroup("")
 #endregion
@@ -407,7 +407,7 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 			cast_range_indicator_texture_name = string_parse(value)
 			cast_range_indicator_texture = tex_parse(value)
 		["Ranks"]: ranks = int_parse(value)
-		["SelectionPreference"]: selection_preference = enum_parse(Enums.SpellSelectPref, value)
+		["SelectionPreference"]: selection_preference = enum_parse(Enums.SpellSelectPref, value) as Enums.SpellSelectPref
 		["Sound_CastName"]: sound_cast_name = string_parse(value)
 		["Sound_HitName"]: sound_hit_name = string_parse(value)
 		["SpellRevealsChampion"]: spell_reveals_champion = bool_parse(value)

@@ -1,1 +1,2 @@
-
+class_name AhriOrbReturnSpell
+extends Spell

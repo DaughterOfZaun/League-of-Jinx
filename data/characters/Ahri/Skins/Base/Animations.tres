@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=78 format=3 uid="uid://bj5tpjmt4q2fk"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=76 format=3 uid="uid://bj5tpjmt4q2fk"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j0rlx"]
 animation = &"Ahri_attack1"
@@ -92,7 +92,7 @@ states/Spell4/node = SubResource("AnimationNodeAnimation_xyl31")
 states/Spell4/position = Vector2(363.316, 305.579)
 states/Start/position = Vector2(218.947, 201.053)
 transitions = ["Start", "Spell1", SubResource("AnimationNodeStateMachineTransition_8v86l"), "Start", "Spell2", SubResource("AnimationNodeStateMachineTransition_w6ocf"), "Start", "Spell3", SubResource("AnimationNodeStateMachineTransition_lr3b7"), "Start", "Spell4", SubResource("AnimationNodeStateMachineTransition_jjh8f"), "Spell1", "End", SubResource("AnimationNodeStateMachineTransition_mshqo"), "Spell2", "End", SubResource("AnimationNodeStateMachineTransition_xlf10"), "Spell3", "End", SubResource("AnimationNodeStateMachineTransition_38xsu"), "Spell4", "End", SubResource("AnimationNodeStateMachineTransition_dyd1n")]
-graph_offset = Vector2(-79, 74)
+graph_offset = Vector2(-146, 64)
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3vcv4"]
 xfade_time = 0.2
@@ -120,7 +120,7 @@ xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_v7t3a"]
 states/Attack/node = SubResource("AnimationNodeStateMachine_3lu3g")
-states/Attack/position = Vector2(203.053, 313.892)
+states/Attack/position = Vector2(205.281, 313.842)
 states/Channel/node = SubResource("AnimationNodeAnimation_dgh74")
 states/Channel/position = Vector2(76.9418, 313.84)
 states/Channel_windup/node = SubResource("AnimationNodeAnimation_lfp0j")
@@ -130,7 +130,7 @@ states/Spell/node = SubResource("AnimationNodeStateMachine_4lf14")
 states/Spell/position = Vector2(314.632, 313.839)
 states/Start/position = Vector2(202.898, 202.105)
 transitions = ["Start", "Channel", SubResource("AnimationNodeStateMachineTransition_3vcv4"), "Start", "Channel_windup", SubResource("AnimationNodeStateMachineTransition_u722f"), "Channel", "End", SubResource("AnimationNodeStateMachineTransition_v0706"), "Channel_windup", "Spell", SubResource("AnimationNodeStateMachineTransition_ksyfc"), "Start", "Spell", SubResource("AnimationNodeStateMachineTransition_sfin4"), "Attack", "End", SubResource("AnimationNodeStateMachineTransition_kw8vu"), "Spell", "End", SubResource("AnimationNodeStateMachineTransition_48q5n"), "Start", "Attack", SubResource("AnimationNodeStateMachineTransition_6o2os")]
-graph_offset = Vector2(-202, 166)
+graph_offset = Vector2(-217, 135)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7o3n5"]
 animation = &"Ahri_death"
@@ -162,14 +162,6 @@ animation = &"Ahri_laugh"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dwflc"]
 animation = &"Ahri_taunt"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qamag"]
-xfade_time = 0.2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fu3g2"]
-xfade_time = 0.2
-switch_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l2mgk"]
 xfade_time = 0.2
 
@@ -194,69 +186,53 @@ xfade_time = 0.2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ir0ns"]
 xfade_time = 0.2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8yrvw"]
-xfade_time = 0.2
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5unmn"]
-xfade_time = 0.2
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fhhw0"]
-xfade_time = 0.2
-switch_mode = 2
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0j3us"]
 xfade_time = 0.2
-switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o31mw"]
 xfade_time = 0.2
-switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3kr0t"]
 xfade_time = 0.2
-switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o5d7o"]
 xfade_time = 0.2
-switch_mode = 2
-advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t8t38"]
-xfade_time = 0.2
-switch_mode = 2
-advance_mode = 2
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_avvtx"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a3iqt"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6sqia"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yeh3r"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hl8pl"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qgkou"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_yqhbr"]
-states/Ahri_dance/node = SubResource("AnimationNodeAnimation_thhqs")
-states/Ahri_dance/position = Vector2(390.211, -22.9685)
-states/Ahri_idle1/node = SubResource("AnimationNodeAnimation_fx4sr")
-states/Ahri_idle1/position = Vector2(330.737, 97.1168)
-states/Ahri_idle2/node = SubResource("AnimationNodeAnimation_dpaqs")
-states/Ahri_idle2/position = Vector2(197.222, 54.0554)
-states/Ahri_idle3/node = SubResource("AnimationNodeAnimation_8cvoy")
-states/Ahri_idle3/position = Vector2(248.381, -23.033)
-states/Ahri_idle4/node = SubResource("AnimationNodeAnimation_ucsi7")
-states/Ahri_idle4/position = Vector2(197.116, 161.273)
-states/Ahri_idle5/node = SubResource("AnimationNodeAnimation_v0s0x")
-states/Ahri_idle5/position = Vector2(248.563, 246.475)
-states/Ahri_joke/node = SubResource("AnimationNodeAnimation_ksb6v")
-states/Ahri_joke/position = Vector2(396.582, 246.641)
-states/Ahri_laugh/node = SubResource("AnimationNodeAnimation_sxovr")
-states/Ahri_laugh/position = Vector2(468.105, 54.0555)
-states/Ahri_taunt/node = SubResource("AnimationNodeAnimation_dwflc")
-states/Ahri_taunt/position = Vector2(468.006, 168.789)
+states/Dance/node = SubResource("AnimationNodeAnimation_thhqs")
+states/Dance/position = Vector2(390.211, -22.9685)
 states/End/position = Vector2(733.684, 100.98)
+states/Idle1/node = SubResource("AnimationNodeAnimation_fx4sr")
+states/Idle1/position = Vector2(330.737, 97.1168)
+states/Idle2/node = SubResource("AnimationNodeAnimation_dpaqs")
+states/Idle2/position = Vector2(197.222, 54.0554)
+states/Idle3/node = SubResource("AnimationNodeAnimation_8cvoy")
+states/Idle3/position = Vector2(248.381, -23.033)
+states/Idle4/node = SubResource("AnimationNodeAnimation_ucsi7")
+states/Idle4/position = Vector2(197.116, 161.273)
+states/Idle5/node = SubResource("AnimationNodeAnimation_v0s0x")
+states/Idle5/position = Vector2(248.563, 246.475)
+states/Joke/node = SubResource("AnimationNodeAnimation_ksb6v")
+states/Joke/position = Vector2(396.582, 246.641)
+states/Laugh/node = SubResource("AnimationNodeAnimation_sxovr")
+states/Laugh/position = Vector2(468.105, 54.0555)
 states/Start/position = Vector2(-22.1053, 102.022)
-transitions = ["Start", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_qamag"), "Ahri_idle1", "End", SubResource("AnimationNodeStateMachineTransition_fu3g2"), "Ahri_idle1", "Ahri_idle2", SubResource("AnimationNodeStateMachineTransition_l2mgk"), "Ahri_idle1", "Ahri_idle3", SubResource("AnimationNodeStateMachineTransition_k3fp4"), "Ahri_idle1", "Ahri_dance", SubResource("AnimationNodeStateMachineTransition_rkfdx"), "Ahri_idle1", "Ahri_laugh", SubResource("AnimationNodeStateMachineTransition_0128p"), "Ahri_idle1", "Ahri_taunt", SubResource("AnimationNodeStateMachineTransition_bey74"), "Ahri_idle1", "Ahri_idle4", SubResource("AnimationNodeStateMachineTransition_vr81o"), "Ahri_idle1", "Ahri_idle5", SubResource("AnimationNodeStateMachineTransition_b6x2m"), "Ahri_idle1", "Ahri_joke", SubResource("AnimationNodeStateMachineTransition_ir0ns"), "Ahri_idle5", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_8yrvw"), "Ahri_joke", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_5unmn"), "Ahri_taunt", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_fhhw0"), "Ahri_laugh", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_0j3us"), "Ahri_dance", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_o31mw"), "Ahri_idle3", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_3kr0t"), "Ahri_idle2", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_o5d7o"), "Ahri_idle4", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_t8t38")]
-graph_offset = Vector2(-173, -209)
+states/Taunt/node = SubResource("AnimationNodeAnimation_dwflc")
+states/Taunt/position = Vector2(468.006, 168.789)
+transitions = ["Idle1", "Idle2", SubResource("AnimationNodeStateMachineTransition_l2mgk"), "Idle1", "Idle3", SubResource("AnimationNodeStateMachineTransition_k3fp4"), "Idle1", "Dance", SubResource("AnimationNodeStateMachineTransition_rkfdx"), "Idle1", "Laugh", SubResource("AnimationNodeStateMachineTransition_0128p"), "Idle1", "Taunt", SubResource("AnimationNodeStateMachineTransition_bey74"), "Idle1", "Idle4", SubResource("AnimationNodeStateMachineTransition_vr81o"), "Idle1", "Idle5", SubResource("AnimationNodeStateMachineTransition_b6x2m"), "Idle1", "Joke", SubResource("AnimationNodeStateMachineTransition_ir0ns"), "Laugh", "Idle1", SubResource("AnimationNodeStateMachineTransition_0j3us"), "Dance", "Idle1", SubResource("AnimationNodeStateMachineTransition_o31mw"), "Idle3", "Idle1", SubResource("AnimationNodeStateMachineTransition_3kr0t"), "Idle2", "Idle1", SubResource("AnimationNodeStateMachineTransition_o5d7o"), "Idle4", "Idle1", SubResource("AnimationNodeStateMachineTransition_avvtx"), "Idle5", "Idle1", SubResource("AnimationNodeStateMachineTransition_a3iqt"), "Joke", "Idle1", SubResource("AnimationNodeStateMachineTransition_6sqia"), "Taunt", "Idle1", SubResource("AnimationNodeStateMachineTransition_yeh3r"), "Start", "Idle1", SubResource("AnimationNodeStateMachineTransition_hl8pl"), "Idle1", "End", SubResource("AnimationNodeStateMachineTransition_qgkou")]
+graph_offset = Vector2(-104, -56)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rre16"]
 animation = &"Ahri_run"
@@ -286,20 +262,13 @@ xfade_time = 0.2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t7jxv"]
 xfade_time = 0.2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mfd0p"]
-xfade_time = 0.2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jl3yf"]
 xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vyu7h"]
 xfade_time = 0.2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7yfkm"]
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8atxt"]
-xfade_time = 0.2
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lomgy"]
 
 [resource]
 states/Cast/node = SubResource("AnimationNodeStateMachine_v7t3a")
@@ -308,9 +277,9 @@ states/Death/node = SubResource("AnimationNodeAnimation_7o3n5")
 states/Death/position = Vector2(548.795, 11.8085)
 states/End/position = Vector2(746.316, 102.643)
 states/Idle/node = SubResource("AnimationNodeStateMachine_yqhbr")
-states/Idle/position = Vector2(461.368, 100.176)
+states/Idle/position = Vector2(463.473, 102.715)
 states/Run/node = SubResource("AnimationNodeAnimation_rre16")
 states/Run/position = Vector2(639.263, 100.121)
 states/Start/position = Vector2(344.211, 100.055)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_7v3qs"), "Death", "Idle", SubResource("AnimationNodeStateMachineTransition_p1jql"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_86rl2"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_6xl15"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_vppnh"), "Cast", "Death", SubResource("AnimationNodeStateMachineTransition_khntd"), "Run", "Cast", SubResource("AnimationNodeStateMachineTransition_veywj"), "Cast", "Idle", SubResource("AnimationNodeStateMachineTransition_t7jxv"), "Cast", "Run", SubResource("AnimationNodeStateMachineTransition_mfd0p"), "Idle", "Cast", SubResource("AnimationNodeStateMachineTransition_jl3yf"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_vyu7h"), "Death", "Run", SubResource("AnimationNodeStateMachineTransition_7yfkm"), "Death", "Cast", SubResource("AnimationNodeStateMachineTransition_8atxt")]
-graph_offset = Vector2(45, -49.981)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_7v3qs"), "Death", "Idle", SubResource("AnimationNodeStateMachineTransition_p1jql"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_86rl2"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_6xl15"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_vppnh"), "Cast", "Death", SubResource("AnimationNodeStateMachineTransition_khntd"), "Run", "Cast", SubResource("AnimationNodeStateMachineTransition_veywj"), "Cast", "Idle", SubResource("AnimationNodeStateMachineTransition_t7jxv"), "Idle", "Cast", SubResource("AnimationNodeStateMachineTransition_jl3yf"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_vyu7h"), "Death", "Cast", SubResource("AnimationNodeStateMachineTransition_lomgy")]
+graph_offset = Vector2(43, -19.981)
