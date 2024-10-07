@@ -1,5 +1,5 @@
 class_name AIRunState
-extends Node
+extends AIState
 
 @onready var ai := get_parent() as AI
 @onready var me := ai.get_parent() as Unit
@@ -54,7 +54,7 @@ var is_running := false
 func enter() -> void:
 	if target != null:
 		target_position = target.global_position
-	if target_position != Vector3.ZERO and \
+	if target_position.is_finite() and \
 		target_position != navigation_agent.target_position:
 		navigation_agent.target_position = target_position
 		navigation_agent.avoidance_priority = 0

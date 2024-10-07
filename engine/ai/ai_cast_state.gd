@@ -1,5 +1,5 @@
 class_name AICastState
-extends Node
+extends AIState
 
 @onready var ai := get_parent() as AI
 @onready var me := ai.get_parent() as Unit

@@ -16,7 +16,7 @@ func on_ground_clicked(pos: Vector3, button_index: MouseButton) -> void:
 	main_hero.order(Enums.OrderType.MOVE_TO, nearest_reachable_point, null)
 
 var hovered_unit: Unit = null
-var hovered_pos := Vector3.ZERO
+var hovered_pos := Vector3.INF
 func on_unit_hovered(unit: Unit) -> void:
 	hovered_pos = unit.global_position
 	hovered_unit = unit

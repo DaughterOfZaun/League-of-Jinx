@@ -1,5 +1,5 @@
 class_name AIIdleState
-extends Node
+extends AIState
 
 var is_running := false
 func enter() -> void:

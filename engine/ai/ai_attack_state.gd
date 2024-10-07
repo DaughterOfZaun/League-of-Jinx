@@ -1,5 +1,5 @@
 class_name AIAttackState
-extends Node
+extends AIState
 
 var is_running := false
 func enter() -> void:

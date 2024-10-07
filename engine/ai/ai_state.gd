@@ -1,8 +1,8 @@
-class_name AIDeathState
+class_name AIState
 extends Node
 
-var is_running := false
 func enter() -> void:
 	pass
+
 func exit() -> void:
 	pass
