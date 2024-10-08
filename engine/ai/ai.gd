@@ -2,17 +2,27 @@ class_name AI
 extends Node
 
 @onready var me := get_parent() as Unit
+
+@onready var animation_tree := me.find_child("AnimationTree") as AnimationTree
+@onready var animation_root_playback := animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+
 @onready var acquisition_range := me.find_child('AcquisitionRange') as Area3D
 @onready var attack_range := me.find_child('AttackRange') as Area3D
 @onready var cancel_attack_range := me.find_child('CancelAttackRange') as Area3D
-@onready var navigation_agent := me.find_child("NavigationAgent3D") as NavigationAgent3D
 
 var target: Unit = null
 var target_position := Vector3.INF:
-	get: return target.global_position if target != null else target_position
+	get:
+		if target != null: return target.global_position
+		else: return target_position
 	set(to):
 		target_position = to
-		
+		target = null
+func set_target_and_target_position(target: Unit, target_position: Vector3) -> void:
+	assert(target != null || target_position.is_finite())
+	if target != null: self.target = target
+	else: self.target_position = target_position
+
 func get_target() -> Unit: return target
 func get_target_or_find_target_in_ac_r() -> Unit:
 	return target if target != null else find_target_in_ac_r()
@@ -59,17 +69,21 @@ func set_state_and_move(state: Enums.AIState, position: Vector3) -> void:
 	set_state_and_move_internal(state, null, position)
 func set_state_and_move_internal(state: Enums.AIState, target: Unit, target_position: Vector3 = Vector3.INF) -> void:
 	set_state(state)
-	self.target = target
-	if target != null:
-		target_position = target.global_position
-	if !self.target_position == target_position:
-		self.target_position = target_position
-		run_state.enter()
+	set_target_and_target_position(target, target_position)
+	switch_to(run_state)
 
 @onready var run_state := find_child("AIRunState") as AIRunState
 @onready var idle_state := find_child("AIIdleState") as AIIdleState
 @onready var cast_state := find_child("AICastState") as AICastState
 @onready var attack_state := find_child("AIAttackState") as AIAttackState
+@onready var current_state := idle_state
+@onready var previous_state := idle_state
+#var deffered_state: AIState = null
+func switch_to(state: AIState) -> void:
+	previous_state = current_state
+	current_state.exit()
+	current_state = state
+	current_state.enter()
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
@@ -91,8 +105,7 @@ func cast(letter: String, target_position: Vector3, target_unit: Unit) -> void:
 	var spell: Spell = me.spells[letter]
 	var target_unit_name := str(target_unit.name) if target_unit else "null"
 	print("on_cast", ' ', letter.to_upper(), ' ', target_position, ' ', target_unit_name)
-	#run_state.exit_run_state()
-	#turn_off_auto_attack()
+	switch_to(cast_state)
 
 func on_init() -> bool: return false
 func on_order(order_type: Enums.OrderType, target_position: Vector3, target_unit: Unit) -> bool: return false
@@ -128,16 +141,17 @@ func reset_and_start_timer(callback: Callable) -> void:
 	var timer: Timer = timers.get(callback)
 	if timer != null: timer.start()
 
-func turn_on_auto_attack(target: Unit = null) -> void:
+func turn_on_auto_attack(target: Unit) -> void:
 	var target_name := str(target.name) if target else "null"
 	print("turn_on_auto_attack", ' ', target_name)
-	if target != null: self.target = target
-	else: target = self.target
-	attack_state.enter()
+	switch_to(attack_state)
 
 func turn_off_auto_attack(reason := Enums.ReasonToTurnOffAA.IMMEDIATELY) -> void:
 	print("turn_off_auto_attack", ' ', Enums.ReasonToTurnOffAA.keys()[reason])
-	attack_state.exit()
+	if previous_state == run_state:
+		switch_to(run_state)
+	else: #if previous_state == idle_state
+		switch_to(idle_state)
 
 func last_auto_attack_finished() -> bool:
 	return true

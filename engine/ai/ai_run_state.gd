@@ -1,12 +1,8 @@
 class_name AIRunState
 extends AIState
 
-@onready var ai := get_parent() as AI
-@onready var me := ai.get_parent() as Unit
 @onready var character_body := ai.get_parent() as CharacterBody3D
 @onready var navigation_agent := me.find_child("NavigationAgent3D") as NavigationAgent3D
-@onready var animation_tree := me.find_child("AnimationTree") as AnimationTree
-@onready var animation_root_playback := animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
@@ -33,35 +29,18 @@ func _on_velocity_computed(safe_velocity: Vector3) -> void:
 
 func _on_navigation_finished() -> void:
 	if is_running:
-		exit()
+		exit() #TODO: switch_to idle/cast
 		on_reached_destination_for_going_to_last_location()
 		on_stop_move()
-
-# ai.gd stub
-var target: Unit:
-	get: return ai.target
-	set(v): ai.target = v
-var target_position: Vector3:
-	get: return ai.target_position
-	set(v): ai.target_position = v
-func on_reached_destination_for_going_to_last_location() -> void:
-	ai.on_reached_destination_for_going_to_last_location()
-func on_stop_move() -> void:
-	ai.on_stop_move()
 
 # Running is the only state where voluntary movement is allowed
 var is_running := false
 func enter() -> void:
-	if target != null:
-		target_position = target.global_position
-	if target_position.is_finite() and \
-		target_position != navigation_agent.target_position:
-		navigation_agent.target_position = target_position
-		navigation_agent.avoidance_priority = 0
-		animation_root_playback.travel("Run")
-		is_running = true
+	navigation_agent.target_position = target_position
+	navigation_agent.avoidance_priority = 0
+	animation_root_playback.travel("Run")
+	is_running = true
 func exit() -> void:
 	navigation_agent.set_velocity(Vector3.ZERO)
 	navigation_agent.avoidance_priority = 1
-	animation_root_playback.travel("Idle")
 	is_running = false
