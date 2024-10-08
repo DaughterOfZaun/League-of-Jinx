@@ -8,8 +8,11 @@ extends Node
 @onready var navigation_agent := me.find_child("NavigationAgent3D") as NavigationAgent3D
 
 var target: Unit = null
-var target_position := Vector3.INF
-var target_position_reached := false
+var target_position := Vector3.INF:
+	get: return target.global_position if target != null else target_position
+	set(to):
+		target_position = to
+		
 func get_target() -> Unit: return target
 func get_target_or_find_target_in_ac_r() -> Unit:
 	return target if target != null else find_target_in_ac_r()
@@ -59,18 +62,14 @@ func set_state_and_move_internal(state: Enums.AIState, target: Unit, target_posi
 	self.target = target
 	if target != null:
 		target_position = target.global_position
-	if !(self.target_position == target_position && self.target_position_reached):
+	if !self.target_position == target_position:
 		self.target_position = target_position
-		self.target_position_reached = false
 		run_state.enter()
 
 @onready var run_state := find_child("AIRunState") as AIRunState
 @onready var idle_state := find_child("AIIdleState") as AIIdleState
 @onready var cast_state := find_child("AICastState") as AICastState
 @onready var attack_state := find_child("AIAttackState") as AIAttackState
-@onready var current_state := self.idle_state
-func switch_to(state: AIState) -> void:
-	pass
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return

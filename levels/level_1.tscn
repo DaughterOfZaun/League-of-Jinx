@@ -1,6 +1,7 @@
 [gd_scene load_steps=46 format=3 uid="uid://c1voud1rbq3sf"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_104n6"]
+[ext_resource type="Script" path="res://engine/game/camera.gd" id="2_7jrbs"]
 [ext_resource type="NavigationMesh" uid="uid://ge2fbbbp2qa5" path="res://levels/level_1_navmesh.tres" id="2_jq8ly"]
 [ext_resource type="Script" path="res://engine/game/ground.gd" id="2_y4ri1"]
 [ext_resource type="Script" path="res://engine/unit/unit.gd" id="3_wwbt7"]
@@ -19,7 +20,6 @@
 [ext_resource type="Script" path="res://engine/ai/ai_attack_state.gd" id="8_r48vj"]
 [ext_resource type="Script" path="res://engine/spells/attacks/crit_attack_data.gd" id="9_cwmut"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bj5tpjmt4q2fk" path="res://data/characters/Ahri/Skins/Base/Animations.tres" id="9_e1mwo"]
-[ext_resource type="Script" path="res://engine/ai/ai_death_state.gd" id="10_74frt"]
 [ext_resource type="Script" path="res://engine/spells/spell_data.gd" id="11_eotle"]
 [ext_resource type="Script" path="res://engine/passive/passive.gd" id="12_133kh"]
 [ext_resource type="Script" path="res://engine/game/range.gd" id="14_t8bj3"]
@@ -93,11 +93,13 @@ unique_name_in_owner = true
 script = ExtResource("1_104n6")
 main_hero = NodePath("../Unit")
 
-[node name="Camera" type="Camera3D" parent="."]
+[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, -13, 20, 13)
 current = true
 fov = 31.9848
 size = 0.1
+script = ExtResource("2_7jrbs")
+target = NodePath("../Unit")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = ExtResource("2_jq8ly")
@@ -130,9 +132,6 @@ script = ExtResource("7_eqh1v")
 
 [node name="AIAttackState" type="Node" parent="Unit/AI"]
 script = ExtResource("8_r48vj")
-
-[node name="AIDeathState" type="Node" parent="Unit/AI"]
-script = ExtResource("10_74frt")
 
 [node name="Stats" type="Node" parent="Unit"]
 script = ExtResource("5_3vawb")
