@@ -15,8 +15,8 @@ func on_reached_destination_for_going_to_last_location() -> void:
 	ai.on_reached_destination_for_going_to_last_location()
 func on_stop_move() -> void:
 	ai.on_stop_move()
-func switch_to(state: AIState) -> void:
-	ai.switch_to(state)
+func switch_to_deffered_state() -> void:
+	ai.switch_to_deffered_state()
 
 func enter() -> void:
 	pass

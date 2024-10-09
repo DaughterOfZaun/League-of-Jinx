@@ -76,14 +76,15 @@ func set_state_and_move_internal(state: Enums.AIState, target: Unit, target_posi
 @onready var idle_state := find_child("AIIdleState") as AIIdleState
 @onready var cast_state := find_child("AICastState") as AICastState
 @onready var attack_state := find_child("AIAttackState") as AIAttackState
-@onready var current_state := idle_state
-@onready var previous_state := idle_state
-#var deffered_state: AIState = null
+@onready var current_state: AIState = idle_state
+@onready var deffered_state: AIState = idle_state
 func switch_to(state: AIState) -> void:
-	previous_state = current_state
 	current_state.exit()
 	current_state = state
 	current_state.enter()
+func switch_to_deffered_state() -> void:
+	switch_to(deffered_state)
+	deffered_state = idle_state
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
@@ -144,14 +145,13 @@ func reset_and_start_timer(callback: Callable) -> void:
 func turn_on_auto_attack(target: Unit) -> void:
 	var target_name := str(target.name) if target else "null"
 	print("turn_on_auto_attack", ' ', target_name)
+	if current_state == run_state:
+		deffered_state = run_state
 	switch_to(attack_state)
 
 func turn_off_auto_attack(reason := Enums.ReasonToTurnOffAA.IMMEDIATELY) -> void:
 	print("turn_off_auto_attack", ' ', Enums.ReasonToTurnOffAA.keys()[reason])
-	if previous_state == run_state:
-		switch_to(run_state)
-	else: #if previous_state == idle_state
-		switch_to(idle_state)
+	switch_to_deffered_state()
 
 func last_auto_attack_finished() -> bool:
 	return true
