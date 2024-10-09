@@ -6,11 +6,6 @@ extends Node
 @onready var me := (
 	get_parent() #as Spells
 ).get_parent() as Unit #HACK:
-@onready var animation_tree := me.find_child("AnimationTree") as AnimationTree
-@onready var animation_root_playback := animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
-@onready var animation_cast_playback := animation_tree.get("parameters/Cast/playback") as AnimationNodeStateMachinePlayback
-@onready var animation_spell_playback := animation_tree.get("parameters/Cast/Spell/playback") as AnimationNodeStateMachinePlayback
-
 @onready var attacker := me
 @onready var caster := me
 @onready var host := me # owner -> host
@@ -45,19 +40,10 @@ var state := State.READY
 enum State {
 	READY,
 	CASTING,
-	COOLDOWN,
 	CHANNELING,
+	EXECUTING,
+	COOLDOWN,
 }
-
-var timer: Timer
-var cancelled: bool
-signal timeout_or_canceled()
-
-func _ready() -> void:
-	if Engine.is_editor_hint(): return
-	timer = Timer.new()
-	timer.timeout.connect(func() -> void: timeout_or_canceled.emit())
-	add_child(timer)
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
@@ -76,8 +62,20 @@ func on_update_actions() -> void:
 	if state == State.CHANNELING:
 		channeling_update_actions()
 
-func try_cast(target: Unit, pos: Vector3) -> void:
-	cast(target, pos, pos)
+func get_cooldown() -> float:
+	return data.cooldown
+
+func get_location_targetting_width() -> float:
+	return data.location_targetting_width
+
+func get_location_targetting_length() -> float:
+	return data.location_targetting_length
+
+func get_cast_range() -> float:
+	return data.cast_range
+
+func get_cast_range_display_override() -> float:
+	return data.cast_range_display_override
 
 func get_cast_time() -> float:
 	return data.cast_time
@@ -85,14 +83,27 @@ func get_cast_time() -> float:
 func get_channel_duration() -> float:
 	return data.channel_duration
 
-func get_cast_range() -> float:
-	return data.cast_range
+func get_mana_cost() -> float:
+	return data.mana_cost
+
+func get_chain_missile_maximum_hits() -> float:
+	return data.chain_missile_maximum_hits
 
 class CastInfo:
 	var target: Unit
 	var target_pos: Vector3
 	var targets_hit: int
 	var missile: Missile
+
+var has_missile: bool:
+	get:
+		match data.cast_type:
+			Enums.CastType.INSTANT:
+				return false
+			Enums.CastType.TARGET_MISSILE,\
+			Enums.CastType.CHAIN_MISSILE:
+				return target != me
+		return true
 
 func cast(
 	target: Unit = null,
@@ -140,40 +151,6 @@ func cast(
 	self.cast_position = cast_pos
 	self.drag_end_position = end_pos
 	self.targets_hit = 0
-
-	var cast_time := get_cast_time()
-	var channel_duration := get_channel_duration()
-
-	var instant_cast_flag := (data.flags & Enums.SpellFlags.INSTANT_CAST) != 0
-	var instant_cast := (instant_cast_flag || fire_without_casting) && !force_casting_or_channelling
-	var has_cast := !instant_cast && cast_time >= 0
-	var has_channel := !instant_cast && channel_duration >= 0
-	instant_cast = instant_cast || (!has_cast && !has_channel)
-	var has_missile := data.cast_type != Enums.CastType.INSTANT
-
-	if (has_cast || has_channel || has_missile) && target_position != me.global_position:
-		me.face_direction(target_position)
-
-	if !data.animation_name.is_empty():
-		animation_root_playback.travel("Cast")
-		animation_cast_playback.travel("Spell")
-		animation_spell_playback.travel(data.animation_name)
-
-	cancelled = false
-
-	if !cancelled && has_cast:
-		state = State.CASTING
-		timer.start(cast_time)
-		await timeout_or_canceled
-
-	if !cancelled && has_channel:
-		state = State.CHANNELING
-		timer.start(channel_duration)
-		channeling_start()
-		await timeout_or_canceled
-		if cancelled: channeling_cancel_stop()
-		else: channeling_success_stop()
-		channeling_stop()
 
 	state = State.READY
 	self_execute()

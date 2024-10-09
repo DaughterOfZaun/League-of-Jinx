@@ -42,3 +42,16 @@ func _ready() -> void:
 @export var is_zombie: bool
 @export var is_clone: bool
 @export var is_moving: bool
+
+var disabled: bool:
+	get:
+		var status := self
+		return false\
+		|| status.charmed\
+		|| status.feared\
+		|| status.pacified\
+		|| status.silenced\
+		|| status.sleep\
+		|| status.stunned\
+		|| status.suppressed\
+		|| status.taunted

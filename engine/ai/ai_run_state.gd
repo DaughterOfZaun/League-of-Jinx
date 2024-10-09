@@ -31,16 +31,13 @@ func _on_navigation_finished() -> void:
 	if is_running:
 		on_stop_move()
 		on_reached_destination_for_going_to_last_location() #TODO: check
-		switch_to_deffered_state()
 
 # Running is the only state where voluntary movement is allowed
 var is_running := false
 func enter() -> void:
-	is_running = true
+	animation_root_playback.travel("Run")
 	navigation_agent.target_position = target_position
 	navigation_agent.avoidance_priority = 0
-	animation_root_playback.travel("Run")
 func exit() -> void:
-	is_running = false
 	navigation_agent.set_velocity(Vector3.ZERO)
 	navigation_agent.avoidance_priority = 1

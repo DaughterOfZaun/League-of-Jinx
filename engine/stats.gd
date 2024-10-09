@@ -83,8 +83,9 @@ var health_percent_temp: float
 func get_health() -> float:
 	return (health_flat + health_flat_temp)\
 		 * (1 + health_percent + health_percent_temp)
-var health_current_temp: float
-var health_current_percent_temp: float
+var health_current: float
+var health_current_percent: float:
+	get: return health_current / get_health()
 @export var health_regen_flat: float
 var health_regen_flat_temp: float
 @export var health_regen_percent: float
@@ -92,6 +93,24 @@ var health_regen_percent_temp: float
 func get_health_regen() -> float:
 	return (health_regen_flat + health_regen_flat_temp)\
 		 * (1 + health_regen_percent + health_regen_percent_temp)
+@export_group('Mana', 'mana_')
+@export var mana_flat: float
+var mana_flat_temp: float
+@export var mana_percent: float
+var mana_percent_temp: float
+func get_mana() -> float:
+	return (mana_flat + mana_flat_temp)\
+		 * (1 + mana_percent + mana_percent_temp)
+var mana_current: float
+var mana_current_percent: float:
+	get: return mana_current / get_mana()
+@export var mana_regen_flat: float
+var mana_regen_flat_temp: float
+@export var mana_regen_percent: float
+var mana_regen_percent_temp: float
+func get_mana_regen() -> float:
+	return (mana_regen_flat + mana_regen_flat_temp)\
+		 * (1 + mana_regen_percent + mana_regen_percent_temp)
 @export_group('Life steal', 'life_steal_')
 @export var life_steal_percent: float
 var life_steal_percent_temp: float

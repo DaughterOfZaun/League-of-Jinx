@@ -5,6 +5,8 @@ extends Node
 
 @onready var animation_tree := me.find_child("AnimationTree") as AnimationTree
 @onready var animation_root_playback := animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+@onready var animation_cast_playback := animation_tree.get("parameters/Cast/playback") as AnimationNodeStateMachinePlayback
+@onready var animation_spell_playback := animation_tree.get("parameters/Cast/Spell/playback") as AnimationNodeStateMachinePlayback
 
 @onready var acquisition_range := me.find_child('AcquisitionRange') as Area3D
 @onready var attack_range := me.find_child('AttackRange') as Area3D
@@ -70,29 +72,18 @@ func set_state_and_move(state: Enums.AIState, position: Vector3) -> void:
 func set_state_and_move_internal(state: Enums.AIState, target: Unit, target_position: Vector3 = Vector3.INF) -> void:
 	set_state(state)
 	set_target_and_target_position(target, target_position)
-	switch_to(run_state)
+	run_state.enter()
 
 @onready var run_state := find_child("AIRunState") as AIRunState
 @onready var idle_state := find_child("AIIdleState") as AIIdleState
 @onready var cast_state := find_child("AICastState") as AICastState
 @onready var attack_state := find_child("AIAttackState") as AIAttackState
 @onready var current_state: AIState = idle_state
-@onready var deffered_state: AIState = idle_state
-func switch_to(state: AIState) -> void:
-	current_state.exit()
-	current_state = state
-	current_state.enter()
-func switch_to_deffered_state() -> void:
-	switch_to(deffered_state)
-	deffered_state = idle_state
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	me.ai = self
 	on_init()
-
-func _physics_process(delta: float) -> void:
-	if Engine.is_editor_hint(): return
 
 var last_order := Enums.OrderType.NONE
 func order(order_type: Enums.OrderType, target_position: Vector3, target_unit: Unit) -> void:
@@ -106,7 +97,7 @@ func cast(letter: String, target_position: Vector3, target_unit: Unit) -> void:
 	var spell: Spell = me.spells[letter]
 	var target_unit_name := str(target_unit.name) if target_unit else "null"
 	print("on_cast", ' ', letter.to_upper(), ' ', target_position, ' ', target_unit_name)
-	switch_to(cast_state)
+	cast_state.enter(spell, target_position, target_unit)
 
 func on_init() -> bool: return false
 func on_order(order_type: Enums.OrderType, target_position: Vector3, target_unit: Unit) -> bool: return false
@@ -145,13 +136,11 @@ func reset_and_start_timer(callback: Callable) -> void:
 func turn_on_auto_attack(target: Unit) -> void:
 	var target_name := str(target.name) if target else "null"
 	print("turn_on_auto_attack", ' ', target_name)
-	if current_state == run_state:
-		deffered_state = run_state
-	switch_to(attack_state)
+	attack_state.enter()
 
 func turn_off_auto_attack(reason := Enums.ReasonToTurnOffAA.IMMEDIATELY) -> void:
 	print("turn_off_auto_attack", ' ', Enums.ReasonToTurnOffAA.keys()[reason])
-	switch_to_deffered_state()
+	attack_state.exit()
 
 func last_auto_attack_finished() -> bool:
 	return true
