@@ -1,7 +1,8 @@
 class_name AIIdleState
 extends AIState
 
-func enter() -> void:
+func try_enter() -> void:
+	switch_to_self()
 	animation_root_playback.travel("Idle")
 
 func exit() -> void:

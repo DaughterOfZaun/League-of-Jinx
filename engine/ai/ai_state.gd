@@ -15,7 +15,20 @@ var animation_cast_playback: AnimationNodeStateMachinePlayback:
 	get: return ai.animation_cast_playback
 var animation_spell_playback: AnimationNodeStateMachinePlayback:
 	get: return ai.animation_spell_playback
+var idle_state: AIIdleState:
+	get: return ai.idle_state
+var attack_state: AIAttackState:
+	get: return ai.attack_state
+var run_state: AIRunState:
+	get: return ai.run_state
+var current_state: AIState:
+	get: return ai.current_state
 func on_reached_destination_for_going_to_last_location() -> void:
 	ai.on_reached_destination_for_going_to_last_location()
 func on_stop_move() -> void:
 	ai.on_stop_move()
+func switch_to_self() -> void:
+	ai.switch_to(self)
+
+func exit() -> void:
+	pass

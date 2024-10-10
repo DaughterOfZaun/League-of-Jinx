@@ -42,6 +42,7 @@ enum State {
 	CASTING,
 	CHANNELING,
 	EXECUTING,
+	WINDDOWN,
 	COOLDOWN,
 }
 
@@ -62,32 +63,35 @@ func on_update_actions() -> void:
 	if state == State.CHANNELING:
 		channeling_update_actions()
 
+func get_by_level(a: Array) -> float:
+	return 0. if len(a) == 0 else a[clampi(0, len(a) - 1, level)]
+
 func get_cooldown() -> float:
-	return data.cooldown
+	return data.cooldown + get_by_level(data.cooldown_by_level)
 
 func get_location_targetting_width() -> float:
-	return data.location_targetting_width
+	return data.location_targetting_width + get_by_level(data.location_targetting_width_by_level)
 
 func get_location_targetting_length() -> float:
-	return data.location_targetting_length
+	return data.location_targetting_length + get_by_level(data.location_targetting_length_by_level)
 
 func get_cast_range() -> float:
-	return data.cast_range
+	return data.cast_range + get_by_level(data.cast_range_by_level)
 
 func get_cast_range_display_override() -> float:
-	return data.cast_range_display_override
+	return data.cast_range_display_override + get_by_level(data.cast_range_display_override_by_level)
 
 func get_cast_time() -> float:
-	return data.cast_time
+	return data.override_cast_time if data.override_cast_time > 0 else data.cast_time
 
 func get_channel_duration() -> float:
-	return data.channel_duration
+	return data.channel_duration + get_by_level(data.channel_duration_by_level)
 
 func get_mana_cost() -> float:
-	return data.mana_cost
+	return data.mana_cost + get_by_level(data.mana_cost_by_level)
 
 func get_chain_missile_maximum_hits() -> float:
-	return data.chain_missile_maximum_hits
+	return data.chain_missile_maximum_hits + get_by_level(data.chain_missile_maximum_hits_by_level)
 
 class CastInfo:
 	var target: Unit
@@ -183,6 +187,11 @@ func _target_execute(target: Unit, missile: Missile) -> void:
 	caster.spell_hit.emit(target, spell)
 	target.being_spell_hit.emit(caster, spell)
 	target_execute(target, missile)
+
+func put_on_cooldown() -> void:
+	state = State.COOLDOWN
+	#TODO:
+	state = State.READY
 
 func self_execute() -> void: pass
 func target_execute(_target: Unit, _missile: Missile) -> void: pass

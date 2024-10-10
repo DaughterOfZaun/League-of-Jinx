@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=76 format=3 uid="uid://bj5tpjmt4q2fk"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=78 format=3 uid="uid://bj5tpjmt4q2fk"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j0rlx"]
 animation = &"Ahri_attack1"
@@ -271,6 +271,12 @@ xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lomgy"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rc1py"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bf61c"]
+xfade_time = 0.2
+
 [resource]
 states/Cast/node = SubResource("AnimationNodeStateMachine_v7t3a")
 states/Cast/position = Vector2(548.737, 192.44)
@@ -282,5 +288,5 @@ states/Idle/position = Vector2(463.473, 102.715)
 states/Run/node = SubResource("AnimationNodeAnimation_rre16")
 states/Run/position = Vector2(639.263, 100.121)
 states/Start/position = Vector2(344.211, 100.055)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_7v3qs"), "Death", "Idle", SubResource("AnimationNodeStateMachineTransition_p1jql"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_86rl2"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_6xl15"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_vppnh"), "Cast", "Death", SubResource("AnimationNodeStateMachineTransition_khntd"), "Run", "Cast", SubResource("AnimationNodeStateMachineTransition_veywj"), "Cast", "Idle", SubResource("AnimationNodeStateMachineTransition_t7jxv"), "Idle", "Cast", SubResource("AnimationNodeStateMachineTransition_jl3yf"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_vyu7h"), "Death", "Cast", SubResource("AnimationNodeStateMachineTransition_lomgy")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_7v3qs"), "Death", "Idle", SubResource("AnimationNodeStateMachineTransition_p1jql"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_86rl2"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_6xl15"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_vppnh"), "Cast", "Death", SubResource("AnimationNodeStateMachineTransition_khntd"), "Run", "Cast", SubResource("AnimationNodeStateMachineTransition_veywj"), "Cast", "Idle", SubResource("AnimationNodeStateMachineTransition_t7jxv"), "Idle", "Cast", SubResource("AnimationNodeStateMachineTransition_jl3yf"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_vyu7h"), "Death", "Cast", SubResource("AnimationNodeStateMachineTransition_lomgy"), "Cast", "Run", SubResource("AnimationNodeStateMachineTransition_rc1py"), "Death", "Run", SubResource("AnimationNodeStateMachineTransition_bf61c")]
 graph_offset = Vector2(43, -19.981)

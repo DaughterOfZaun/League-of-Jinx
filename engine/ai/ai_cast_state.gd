@@ -1,19 +1,15 @@
 class_name AICastState
 extends AIState
 
-var spell: Spell = null
-var data: SpellData:
-	get: return spell.data
-func get_cast_time() -> float: return spell.get_cast_time()
-func get_channel_duration() -> float: return spell.get_channel_duration()
-func channeling_start() -> void: spell.channeling_start()
-func channeling_cancel_stop() -> void: spell.channeling_cancel_stop()
-func channeling_success_stop() -> void: spell.channeling_success_stop()
-func channeling_stop() -> void: spell.channeling_stop()
+var current_spell: Spell = null
 
 var timer: Timer
-var cancelled: bool
+var cancelled := false
 signal timeout_or_canceled()
+func timeout_or_canceled_emit(cancelled: bool) -> void:
+	self.cancelled = cancelled
+	timeout_or_canceled.emit()
+	cancelled = false
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
@@ -21,40 +17,45 @@ func _ready() -> void:
 	timer.timeout.connect(func() -> void: timeout_or_canceled.emit())
 	add_child(timer)
 
-func enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
-	var cast_time := get_cast_time()
-	var channel_duration := get_channel_duration()
+func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
+	var cast_time := spell.get_cast_time()
+	var channel_duration := spell.get_channel_duration()
 
-	var instant_cast := (data.flags & Enums.SpellFlags.INSTANT_CAST) != 0
-	var has_cast := !instant_cast && cast_time >= 0
-	var has_channel := !instant_cast && channel_duration >= 0
+	var instant_cast := (spell.data.flags & Enums.SpellFlags.INSTANT_CAST) != 0
+	var has_cast := !instant_cast && cast_time > 0
+	var has_channel := !instant_cast && channel_duration > 0
 	instant_cast = instant_cast || (!has_cast && !has_channel)
 	var has_animation := false\
-	|| !data.animation_name.is_empty()\
-	|| !data.animation_loop_name.is_empty()\
-	|| !data.animation_winddown_name.is_empty()\
-	|| data.override_force_spell_animation
+	|| !spell.data.animation_name.is_empty()\
+	|| !spell.data.animation_loop_name.is_empty()\
+	|| !spell.data.animation_winddown_name.is_empty()\
+	|| spell.data.override_force_spell_animation
 	var should_cancel := has_cast || has_channel\
-	|| data.override_force_spell_cancel
+	|| spell.data.override_force_spell_cancel
 
 	#TODO: check range and move into range
-	if !can_cast(spell, target, should_cancel): return
+	if (should_cancel && !can_cancel()) || !can_cast(spell, target): return
 
 	me.stats.mana_current = me.stats.mana_current - spell.get_mana_cost()
 
+	var deffered_state: AIState = idle_state
+	if current_state in [run_state, attack_state]:
+		deffered_state = current_state
+
 	if should_cancel:
-		#TODO: cancel & switch state
-		self.spell = spell
+		switch_to_self()
+		if current_spell != null:
+			timeout_or_canceled_emit(true)
+			current_spell.put_on_cooldown()
+		current_spell = spell
 
 	if should_cancel && target_position != me.global_position:
 		me.face_direction(target_position)
 
-	if !data.animation_name.is_empty():
+	if !spell.data.animation_name.is_empty():
 		animation_root_playback.travel("Cast")
 		animation_cast_playback.travel("Spell")
-		animation_spell_playback.travel(data.animation_name)
-
-	var cancelled := false
+		animation_spell_playback.travel(spell.data.animation_name)
 
 	if !cancelled && has_cast:
 		spell.state = Spell.State.CASTING
@@ -64,38 +65,54 @@ func enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 	if !cancelled && has_channel:
 		spell.state = Spell.State.CHANNELING
 		timer.start(channel_duration)
-		channeling_start()
+		spell.channeling_start()
 		await timeout_or_canceled
-		if cancelled: channeling_cancel_stop()
-		else: channeling_success_stop()
-		channeling_stop()
+		if cancelled: spell.channeling_cancel_stop()
+		else: spell.channeling_success_stop()
+		spell.channeling_stop()
+
+	spell.state = Spell.State.WINDDOWN
+	timer.start(0.75)
+	await timeout_or_canceled
 
 	if !cancelled:
 		spell.state = Spell.State.EXECUTING
 		spell.cast(target, target_position)
+		if should_cancel:
+			current_spell.put_on_cooldown()
+			current_spell = null
+			match deffered_state:
+				run_state: run_state.try_enter()
+				idle_state: idle_state.try_enter()
+				attack_state: attack_state.try_enter()
+			deffered_state = null
 
-func can_cast(spell: Spell, target: Unit = null, should_cancel := false) -> bool:
+func can_cancel() -> bool:
+	return (
+		current_spell == null ||
+		(current_spell.state == Spell.State.CASTING && !current_spell.data.cant_cancel_while_winding_up) ||
+		(current_spell.state == Spell.State.CHANNELING && !current_spell.data.cant_cancel_while_channeling)
+	)
+
+func can_cast(spell: Spell, target: Unit = null) -> bool:
 	var status := me.status
 	var data := spell.data
-	return (
-		(target == null || !target.status.is_dead) &&
-		(!status.rooted || !data.cant_cast_while_rooted) &&
-		(!status.suppressed || data.cannot_be_suppressed) &&
 
-		(!status.disabled || data.can_cast_while_disabled) && #FUTURE: can_only_cast_while_disabled
-		(!status.is_dead || !data.is_disabled_while_dead || data.can_only_cast_while_dead) &&
-		(!data.can_only_cast_while_dead || status.is_dead) &&
+	if !(target == null || !target.status.is_dead): return false
+	if !(!status.rooted || !data.cant_cast_while_rooted): return false
+	if !(!status.suppressed || data.cannot_be_suppressed): return false
 
-		#(!status.disarmed && status.can_attack) if is_auto_attack_or_override else
-		(!status.silenced && status.can_cast) &&
+	if !(!status.disabled || data.can_cast_while_disabled): return false #FUTURE: can_only_cast_while_disabled
+	if !(!status.is_dead || !data.is_disabled_while_dead || data.can_only_cast_while_dead): return false
+	if !(!data.can_only_cast_while_dead || status.is_dead): return false
 
-		!spell.is_sealed &&
-		spell.state == Spell.State.READY &&
-		me.stats.mana_current >= spell.get_mana_cost() && (
-			self.spell == null || !should_cancel ||
-			(self.spell.state == Spell.State.CASTING && !data.cant_cancel_while_winding_up) ||
-			(self.spell.state == Spell.State.CHANNELING && !data.cant_cancel_while_channeling)
-		) &&
+	#if !(!status.disarmed && status.can_attack): return false if is_auto_attack_or_override else
+	if !(!status.silenced && status.can_cast): return false
 
-		spell.can_cast()
-	)
+	if !!spell.is_sealed: return false
+	if !spell.state == Spell.State.READY: return false
+	if !me.stats.mana_current >= spell.get_mana_cost(): return false
+
+	if !spell.can_cast(): return false
+
+	return true

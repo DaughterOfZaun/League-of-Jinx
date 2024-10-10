@@ -72,13 +72,16 @@ func set_state_and_move(state: Enums.AIState, position: Vector3) -> void:
 func set_state_and_move_internal(state: Enums.AIState, target: Unit, target_position: Vector3 = Vector3.INF) -> void:
 	set_state(state)
 	set_target_and_target_position(target, target_position)
-	run_state.enter()
+	run_state.try_enter()
 
 @onready var run_state := find_child("AIRunState") as AIRunState
 @onready var idle_state := find_child("AIIdleState") as AIIdleState
 @onready var cast_state := find_child("AICastState") as AICastState
 @onready var attack_state := find_child("AIAttackState") as AIAttackState
 @onready var current_state: AIState = idle_state
+func switch_to(state: AIState) -> void:
+	current_state.exit()
+	current_state = state
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
@@ -97,7 +100,7 @@ func cast(letter: String, target_position: Vector3, target_unit: Unit) -> void:
 	var spell: Spell = me.spells[letter]
 	var target_unit_name := str(target_unit.name) if target_unit else "null"
 	print("on_cast", ' ', letter.to_upper(), ' ', target_position, ' ', target_unit_name)
-	cast_state.enter(spell, target_position, target_unit)
+	cast_state.try_enter(spell, target_position, target_unit)
 
 func on_init() -> bool: return false
 func on_order(order_type: Enums.OrderType, target_position: Vector3, target_unit: Unit) -> bool: return false
@@ -136,7 +139,7 @@ func reset_and_start_timer(callback: Callable) -> void:
 func turn_on_auto_attack(target: Unit) -> void:
 	var target_name := str(target.name) if target else "null"
 	print("turn_on_auto_attack", ' ', target_name)
-	attack_state.enter()
+	attack_state.try_enter()
 
 func turn_off_auto_attack(reason := Enums.ReasonToTurnOffAA.IMMEDIATELY) -> void:
 	print("turn_off_auto_attack", ' ', Enums.ReasonToTurnOffAA.keys()[reason])

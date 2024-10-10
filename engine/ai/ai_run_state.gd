@@ -29,15 +29,19 @@ func _on_velocity_computed(safe_velocity: Vector3) -> void:
 
 func _on_navigation_finished() -> void:
 	if is_running:
-		on_stop_move()
+		idle_state.try_enter()
 		on_reached_destination_for_going_to_last_location() #TODO: check
+		on_stop_move()
 
 # Running is the only state where voluntary movement is allowed
 var is_running := false
-func enter() -> void:
+func try_enter() -> void:
+	switch_to_self()
+	is_running = true
 	animation_root_playback.travel("Run")
 	navigation_agent.target_position = target_position
 	navigation_agent.avoidance_priority = 0
 func exit() -> void:
+	is_running = false
 	navigation_agent.set_velocity(Vector3.ZERO)
 	navigation_agent.avoidance_priority = 1

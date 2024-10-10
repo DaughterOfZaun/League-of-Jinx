@@ -1,7 +1,7 @@
 class_name AIAttackState
 extends AIState
 
-func enter() -> void:
+func try_enter() -> void:
 	pass
 func exit() -> void:
 	pass

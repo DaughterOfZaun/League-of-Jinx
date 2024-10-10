@@ -139,6 +139,11 @@ movement_speed_flat = 305.0
 
 [node name="Status" type="Node" parent="Unit"]
 script = ExtResource("7_ywlur")
+can_attack = true
+can_cast = true
+can_move = true
+can_move_ever = true
+targetable = true
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="Unit"]
 avoidance_enabled = true
