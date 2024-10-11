@@ -36,12 +36,13 @@ func _on_navigation_finished() -> void:
 # Running is the only state where voluntary movement is allowed
 var is_running := false
 func try_enter() -> void:
+	if !current_state.can_cancel(): return
 	switch_to_self()
 	is_running = true
-	animation_root_playback.travel("Run")
+	animation_playback.travel("Run")
 	navigation_agent.target_position = target_position
 	navigation_agent.avoidance_priority = 0
-func exit() -> void:
+func on_exit() -> void:
 	is_running = false
 	navigation_agent.set_velocity(Vector3.ZERO)
 	navigation_agent.avoidance_priority = 1

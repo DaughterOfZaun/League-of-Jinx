@@ -34,7 +34,8 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 	|| spell.data.override_force_spell_cancel
 
 	#TODO: check range and move into range
-	if (should_cancel && !can_cancel()) || !can_cast(spell, target): return
+	if should_cancel && !current_state.can_cancel(): return
+	if !can_cast(spell, target): return
 
 	me.stats.mana_current = me.stats.mana_current - spell.get_mana_cost()
 
@@ -53,9 +54,7 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 		me.face_direction(target_position)
 
 	if !spell.data.animation_name.is_empty():
-		animation_root_playback.travel("Cast")
-		animation_cast_playback.travel("Spell")
-		animation_spell_playback.travel(spell.data.animation_name)
+		animation_playback.travel(spell.data.animation_name)
 
 	if !cancelled && has_cast:
 		spell.state = Spell.State.CASTING
@@ -70,10 +69,6 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 		if cancelled: spell.channeling_cancel_stop()
 		else: spell.channeling_success_stop()
 		spell.channeling_stop()
-
-	spell.state = Spell.State.WINDDOWN
-	timer.start(0.75)
-	await timeout_or_canceled
 
 	if !cancelled:
 		spell.state = Spell.State.EXECUTING

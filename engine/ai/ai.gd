@@ -4,9 +4,7 @@ extends Node
 @onready var me := get_parent() as Unit
 
 @onready var animation_tree := me.find_child("AnimationTree") as AnimationTree
-@onready var animation_root_playback := animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
-@onready var animation_cast_playback := animation_tree.get("parameters/Cast/playback") as AnimationNodeStateMachinePlayback
-@onready var animation_spell_playback := animation_tree.get("parameters/Cast/Spell/playback") as AnimationNodeStateMachinePlayback
+@onready var animation_playback := animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
 
 @onready var acquisition_range := me.find_child('AcquisitionRange') as Area3D
 @onready var attack_range := me.find_child('AttackRange') as Area3D
@@ -80,7 +78,7 @@ func set_state_and_move_internal(state: Enums.AIState, target: Unit, target_posi
 @onready var attack_state := find_child("AIAttackState") as AIAttackState
 @onready var current_state: AIState = idle_state
 func switch_to(state: AIState) -> void:
-	current_state.exit()
+	current_state.on_exit()
 	current_state = state
 
 func _ready() -> void:
@@ -143,7 +141,7 @@ func turn_on_auto_attack(target: Unit) -> void:
 
 func turn_off_auto_attack(reason := Enums.ReasonToTurnOffAA.IMMEDIATELY) -> void:
 	print("turn_off_auto_attack", ' ', Enums.ReasonToTurnOffAA.keys()[reason])
-	attack_state.exit()
+	idle_state.try_enter() #TODO: deffered.try_enter()
 
 func last_auto_attack_finished() -> bool:
 	return true

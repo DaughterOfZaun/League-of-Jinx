@@ -9,16 +9,14 @@ var target: Unit:
 	get: return ai.target
 var target_position: Vector3:
 	get: return ai.target_position
-var animation_root_playback: AnimationNodeStateMachinePlayback:
-	get: return ai.animation_root_playback
-var animation_cast_playback: AnimationNodeStateMachinePlayback:
-	get: return ai.animation_cast_playback
-var animation_spell_playback: AnimationNodeStateMachinePlayback:
-	get: return ai.animation_spell_playback
+var animation_playback: AnimationNodeStateMachinePlayback:
+	get: return ai.animation_playback
 var idle_state: AIIdleState:
 	get: return ai.idle_state
 var attack_state: AIAttackState:
 	get: return ai.attack_state
+var cast_state: AICastState:
+	get: return ai.cast_state
 var run_state: AIRunState:
 	get: return ai.run_state
 var current_state: AIState:
@@ -30,5 +28,8 @@ func on_stop_move() -> void:
 func switch_to_self() -> void:
 	ai.switch_to(self)
 
-func exit() -> void:
+func can_cancel() -> bool:
+	return true
+
+func on_exit() -> void:
 	pass

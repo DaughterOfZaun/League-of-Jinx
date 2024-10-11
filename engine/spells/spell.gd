@@ -42,7 +42,6 @@ enum State {
 	CASTING,
 	CHANNELING,
 	EXECUTING,
-	WINDDOWN,
 	COOLDOWN,
 }
 
