@@ -14,9 +14,9 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	#if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED: return
-	if event.is_action_pressed("zoom_in"):
+	if event.is_action_pressed("ZoomIn"):
 		zoom -= zoom_speed
-	if event.is_action_pressed("zoom_out"):
+	if event.is_action_pressed("ZoomOut"):
 		zoom += zoom_speed
 	zoom = clamp(zoom, min_zoom, max_zoom)
 

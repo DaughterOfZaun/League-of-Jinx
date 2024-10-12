@@ -1,25 +1,37 @@
-[gd_scene load_steps=46 format=3 uid="uid://c1voud1rbq3sf"]
+[gd_scene load_steps=58 format=3 uid="uid://c1voud1rbq3sf"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_104n6"]
+[ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.png" id="1_wl0tf"]
 [ext_resource type="Script" path="res://engine/game/camera.gd" id="2_7jrbs"]
 [ext_resource type="NavigationMesh" uid="uid://ge2fbbbp2qa5" path="res://levels/level_1_navmesh.tres" id="2_jq8ly"]
+[ext_resource type="Texture2D" uid="uid://cyle4h1k1iu36" path="res://data/ui/160.png" id="2_nvcxi"]
+[ext_resource type="Texture2D" uid="uid://w7g1bytpvupe" path="res://data/characters/Ahri/Passive/Ahri_SoulEater.webp" id="2_w53q8"]
 [ext_resource type="Script" path="res://engine/game/ground.gd" id="2_y4ri1"]
+[ext_resource type="Texture2D" uid="uid://biguinhuraht0" path="res://data/ui/bars/141.png" id="3_7aovb"]
 [ext_resource type="Script" path="res://engine/unit/unit.gd" id="3_wwbt7"]
 [ext_resource type="Script" path="res://engine/unit/unit_data.gd" id="4_4y8lh"]
 [ext_resource type="Script" path="res://data/ai/hero.gd" id="4_e8jju"]
+[ext_resource type="Texture2D" uid="uid://orjbh2tsqi23" path="res://data/ui/bars/20.png" id="4_vddi6"]
 [ext_resource type="Script" path="res://engine/stats.gd" id="5_3vawb"]
 [ext_resource type="Script" path="res://engine/spells/spell_manager.gd" id="5_gep23"]
+[ext_resource type="Texture2D" uid="uid://bmblqfb85gtl1" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/Ahri_OrbofDeception.webp" id="5_hwalt"]
 [ext_resource type="Script" path="res://engine/ai/ai_run_state.gd" id="6_3jjc0"]
+[ext_resource type="Texture2D" uid="uid://grnrkvvxiyoj" path="res://data/characters/Ahri/S2_W_FoxFire/Ahri_FoxFire.webp" id="6_leh2g"]
 [ext_resource type="Script" path="res://engine/spells/attacks/basic_attack.gd" id="6_p5bn8"]
 [ext_resource type="Script" path="res://engine/ai/ai_idle_state.gd" id="6_ut4ak"]
 [ext_resource type="PackedScene" uid="uid://brt0fmysxvs5g" path="res://data/characters/Ahri/Skins/Base/Ahri.glb" id="7_45sau"]
+[ext_resource type="Texture2D" uid="uid://djn0h2uutu5f1" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/Ahri_Charm.webp" id="7_61g1a"]
 [ext_resource type="Script" path="res://engine/spells/attacks/basic_attack_data.gd" id="7_876sy"]
+[ext_resource type="Texture2D" uid="uid://i8r5uocv7r3f" path="res://data/spells/flash/Summoner_flash.webp" id="7_1361x"]
 [ext_resource type="Script" path="res://engine/ai/ai_cast_state.gd" id="7_eqh1v"]
 [ext_resource type="Script" path="res://engine/status.gd" id="7_ywlur"]
+[ext_resource type="Texture2D" uid="uid://bvs00ndscuup" path="res://data/spells/heal/Summoner_heal.webp" id="8_fm6dr"]
+[ext_resource type="Texture2D" uid="uid://uitpm427k4kg" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/Ahri_SpiritRush.webp" id="8_ks8cb"]
 [ext_resource type="Script" path="res://engine/spells/attacks/crit_attack.gd" id="8_os5gn"]
 [ext_resource type="Script" path="res://engine/ai/ai_attack_state.gd" id="8_r48vj"]
 [ext_resource type="Script" path="res://engine/spells/attacks/crit_attack_data.gd" id="9_cwmut"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bj5tpjmt4q2fk" path="res://data/characters/Ahri/Skins/Base/Animations.tres" id="9_e1mwo"]
+[ext_resource type="Texture2D" uid="uid://bikauucv6yvbc" path="res://data/spells/recall/RecallHome.webp" id="9_rud0d"]
 [ext_resource type="Script" path="res://engine/spells/spell_data.gd" id="11_eotle"]
 [ext_resource type="Script" path="res://engine/passive/passive.gd" id="12_133kh"]
 [ext_resource type="Script" path="res://engine/game/range.gd" id="14_t8bj3"]
@@ -79,6 +91,382 @@ radius = 7.5
 radius = 7.5
 
 [node name="Node3D" type="Node3D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Screenshot" type="TextureRect" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_wl0tf")
+expand_mode = 2
+
+[node name="Control" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Passive" type="TextureRect" parent="Control/Control"]
+layout_mode = 2
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -126.0
+offset_top = -66.0
+offset_right = -100.0
+offset_bottom = -40.0
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_w53q8")
+expand_mode = 2
+
+[node name="ChampionSpells" type="HBoxContainer" parent="Control/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -89.0
+offset_top = -71.0
+offset_right = 24.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 3
+
+[node name="TextureRect1" type="TextureRect" parent="Control/Control/ChampionSpells"]
+layout_mode = 2
+texture = ExtResource("5_hwalt")
+expand_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/Control/ChampionSpells/TextureRect1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 57.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_under = ExtResource("5_hwalt")
+texture_progress = ExtResource("5_hwalt")
+tint_under = Color(0.00784314, 0, 0.305882, 1)
+tint_progress = Color(0.313726, 0.254902, 0.952941, 1)
+
+[node name="Label" type="Label" parent="Control/Control/ChampionSpells/TextureRect1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 17.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.7)
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Control/Control/ChampionSpells"]
+layout_mode = 2
+texture = ExtResource("6_leh2g")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="Control/Control/ChampionSpells"]
+layout_mode = 2
+texture = ExtResource("7_61g1a")
+expand_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="Control/Control/ChampionSpells"]
+layout_mode = 2
+texture = ExtResource("8_ks8cb")
+expand_mode = 2
+
+[node name="SummonerSpells" type="HBoxContainer" parent="Control/Control"]
+layout_mode = 2
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_top = -71.0
+offset_right = 91.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 3
+
+[node name="TextureRect1" type="TextureRect" parent="Control/Control/SummonerSpells"]
+layout_mode = 2
+texture = ExtResource("7_1361x")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="Control/Control/SummonerSpells"]
+layout_mode = 2
+texture = ExtResource("8_fm6dr")
+expand_mode = 2
+
+[node name="Recall" type="TextureRect" parent="Control/Control"]
+layout_mode = 2
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 108.0
+offset_top = -66.0
+offset_right = 134.0
+offset_bottom = -40.0
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("9_rud0d")
+expand_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -7.0
+offset_right = 111.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.0627451, 0.0941176, 0.0980392, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Control/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -333.0
+offset_top = -167.0
+offset_right = 335.0
+offset_bottom = 3.05176e-05
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.52, 0.52)
+pivot_offset = Vector2(334, 167)
+texture = ExtResource("2_nvcxi")
+expand_mode = 1
+
+[node name="Healthbar" type="Control" parent="Control/Control"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -131.0
+offset_top = -35.0
+offset_right = 132.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/Control/Healthbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -0.111969
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("3_7aovb")
+
+[node name="Label" type="Label" parent="Control/Control/Healthbar"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.414
+anchor_right = 0.5
+anchor_bottom = 0.414
+offset_left = -119.5
+offset_top = -6.14
+offset_right = 109.5
+offset_bottom = 16.86
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.534)
+text = "2512"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/Control/Healthbar"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.414
+anchor_right = 0.5
+anchor_bottom = 0.414
+offset_left = -3.5
+offset_top = -6.14
+offset_right = 6.5
+offset_bottom = 16.86
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.6, 0.534)
+text = "/"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Control/Control/Healthbar"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.414
+anchor_right = 0.5
+anchor_bottom = 0.414
+offset_left = 2.5
+offset_top = -6.14
+offset_right = 236.5
+offset_bottom = 16.86
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.534)
+text = "2527"
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Control/Control/Healthbar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_right = 235.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.534)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+text = "2512 / 2527"
+horizontal_alignment = 1
+
+[node name="Manabar" type="Control" parent="Control/Control"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -131.0
+offset_top = -21.0
+offset_right = 132.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/Control/Manabar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -0.111969
+grow_horizontal = 2
+grow_vertical = 2
+value = 55.0
+nine_patch_stretch = true
+texture_progress = ExtResource("4_vddi6")
+
+[node name="Label" type="Label" parent="Control/Control/Manabar"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.414
+anchor_right = 0.5
+anchor_bottom = 0.414
+offset_left = -119.5
+offset_top = -6.14
+offset_right = 109.5
+offset_bottom = 16.86
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.534)
+text = "609"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/Control/Manabar"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.414
+anchor_right = 0.5
+anchor_bottom = 0.414
+offset_left = -3.5
+offset_top = -6.14
+offset_right = 6.5
+offset_bottom = 16.86
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.6, 0.534)
+text = "/"
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Control/Control/Manabar"]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.414
+anchor_right = 0.5
+anchor_bottom = 0.414
+offset_left = 2.5
+offset_top = -6.14
+offset_right = 236.5
+offset_bottom = 16.86
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.534)
+text = "1110
+"
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Control/Control/Manabar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_right = 235.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.534)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+text = "609 / 1110"
+horizontal_alignment = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fu4g7")

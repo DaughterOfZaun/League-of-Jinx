@@ -1,4 +1,4 @@
-class_name AhriOrbDamageBuff
+class_name AhriOrbDamageSilenceBuff
 extends Buff
 
 var orb_of_deception_is_active: int

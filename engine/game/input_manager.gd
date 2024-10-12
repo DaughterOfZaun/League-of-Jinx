@@ -27,5 +27,10 @@ func on_ground_hovered(pos: Vector3) -> void:
 func _input(event: InputEvent) -> void:
 	#if main_hero == null: return
 	for letter in "qwerdfb":
-		if event.is_action_pressed(letter.to_upper()):
+		if event.is_action_released(letter.to_upper()):
 			main_hero.cast(letter, hovered_pos, hovered_unit)
+	for emote_index: int in Enums.EmoteType.values():
+		if emote_index == Enums.EmoteType.NONE: continue
+		var emote_name := Enums.EmoteType_to_string(emote_index)
+		if event.is_action_pressed("Emote" + emote_name):
+			main_hero.emote(emote_index)

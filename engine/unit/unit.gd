@@ -14,9 +14,10 @@ var ai: AI
 
 func order(type: Enums.OrderType, pos: Vector3, unit: Unit) -> void:
 	ai.order(type, pos, unit)
-
 func cast(letter: String, pos: Vector3, unit: Unit) -> void:
 	ai.cast(letter, pos, unit)
+func emote(type: Enums.EmoteType) -> void:
+	ai.emote(type)
 
 var tick_rate: float = 0.25
 var physics_fps: int = Engine.physics_ticks_per_second
@@ -114,5 +115,9 @@ func face_dir(dir: Vector3) -> void:
 
 func _process(delta: float) -> void:
 	var rot_delta := angle_difference(rotation.y, direction_angle)
-	var rot_speed := deg_to_rad(180. / ((0.08 + (0.01/3.))))
+	#var rot_speed := deg_to_rad(180. / ((0.08 + (0.01/3.))))
+	var rot_speed := deg_to_rad(180 / 0.2)
 	rotation.y += sign(rot_delta) * min(abs(rot_delta), rot_speed * delta)
+
+func break_spell_shields() -> void:
+	pass

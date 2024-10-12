@@ -9,6 +9,7 @@ extends Node
 @onready var attacker := me
 @onready var caster := me
 @onready var host := me # owner -> host
+@onready var vars := me.vars
 var spell := self
 
 var target: Unit

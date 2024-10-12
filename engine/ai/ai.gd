@@ -4,6 +4,7 @@ extends Node
 @onready var me := get_parent() as Unit
 
 @onready var animation_tree := me.find_child("AnimationTree") as AnimationTree
+@onready var animation_player := animation_tree.get_node(animation_tree.anim_player) as AnimationPlayer
 @onready var animation_playback := animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
 
 @onready var acquisition_range := me.find_child('AcquisitionRange') as Area3D
@@ -83,6 +84,7 @@ func switch_to(state: AIState) -> void:
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
+	#animation_player.playback_default_blend_time = 0.2
 	me.ai = self
 	on_init()
 
@@ -90,15 +92,19 @@ var last_order := Enums.OrderType.NONE
 func order(order_type: Enums.OrderType, target_position: Vector3, target_unit: Unit) -> void:
 	if order_type != last_order || target_unit != self.target || target_position != self.target_position:
 		var target_unit_name := str(target_unit.name) if target_unit else "null"
-		print("on_order", ' ', Enums.OrderType.keys()[order_type], ' ', target_position, ' ', target_unit_name)
+		print("order", ' ', Enums.OrderType.keys()[order_type], ' ', target_position, ' ', target_unit_name)
 		on_order(order_type, target_position, target_unit)
 		last_order = order_type
 
 func cast(letter: String, target_position: Vector3, target_unit: Unit) -> void:
 	var spell: Spell = me.spells[letter]
 	var target_unit_name := str(target_unit.name) if target_unit else "null"
-	print("on_cast", ' ', letter.to_upper(), ' ', target_position, ' ', target_unit_name)
+	print("cast", ' ', letter.to_upper(), ' ', target_position, ' ', target_unit_name)
 	cast_state.try_enter(spell, target_position, target_unit)
+
+func emote(type: Enums.EmoteType) -> void:
+	print("emote", ' ', Enums.EmoteType.keys()[type])
+	idle_state.try_enter(type)
 
 func on_init() -> bool: return false
 func on_order(order_type: Enums.OrderType, target_position: Vector3, target_unit: Unit) -> bool: return false
@@ -152,7 +158,6 @@ func make_flee_point() -> Vector3:
 	return Vector3.ZERO
 func make_wander_point(leash_point: Vector3, distance: float) -> Vector3:
 	return Vector3.ZERO
-
 
 func can_see_me(target: Unit) -> bool:
 	return true

@@ -39,6 +39,7 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 
 	me.stats.mana_current = me.stats.mana_current - spell.get_mana_cost()
 
+	var deffered_animation := animation_playback.get_current_node()
 	var deffered_state: AIState = idle_state
 	if current_state in [run_state, attack_state]:
 		deffered_state = current_state
@@ -53,8 +54,10 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 	if should_cancel && target_position != me.global_position:
 		me.face_direction(target_position)
 
+	var animation_changed := false
 	if !spell.data.animation_name.is_empty():
 		animation_playback.travel(spell.data.animation_name)
+		animation_changed = true
 
 	if !cancelled && has_cast:
 		spell.state = Spell.State.CASTING
@@ -76,11 +79,13 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 		if should_cancel:
 			current_spell.put_on_cooldown()
 			current_spell = null
-			match deffered_state:
+			match deffered_state: #TODO: try_enter_again
 				run_state: run_state.try_enter()
 				idle_state: idle_state.try_enter()
 				attack_state: attack_state.try_enter()
 			deffered_state = null
+		elif animation_changed:
+			animation_playback.travel(deffered_animation)
 
 func can_cancel() -> bool:
 	return (

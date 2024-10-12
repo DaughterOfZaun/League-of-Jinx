@@ -108,7 +108,7 @@ enum BuffType {
 	#KNOCKUP = 1 << 29,
 	#KNOCKBACK = 1 << 30,
 	#DISARM = 1 << 31,
-	
+
 	NEGATIVE = \
 		INTERNAL |\
 		#AURA |\
@@ -217,6 +217,7 @@ enum CastType
 
 enum SpellFlags
 {
+	NONE = 0,
 	AUTO_CAST = 1 << 1,
 	INSTANT_CAST = 1 << 2,
 	PERSIST_THROUGH_DEATH = 1 << 3,
@@ -273,5 +274,10 @@ enum PARType
 	BLOODWELL,
 	WIND,
 	OTHER,
-	COUNT,
 }
+
+enum EmoteType {
+	NONE, JOKE, TAUNT, DANCE, LAUGH
+}
+static func EmoteType_to_string(i: int) -> String:
+	return str(EmoteType.keys()[i]).to_pascal_case()
