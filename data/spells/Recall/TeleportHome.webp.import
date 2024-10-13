@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://i8r5uocv7r3f"
-path="res://.godot/imported/Summoner_flash.webp-f07cf2ab4424c99feec5bbaf844adf5e.ctex"
+uid="uid://c8xp3k3d1v7c"
+path="res://.godot/imported/TeleportHome.webp-c3e02da1e7824b67560232304739a4d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/spells/flash/Summoner_flash.webp"
-dest_files=["res://.godot/imported/Summoner_flash.webp-f07cf2ab4424c99feec5bbaf844adf5e.ctex"]
+source_file="res://data/spells/Recall/TeleportHome.webp"
+dest_files=["res://.godot/imported/TeleportHome.webp-c3e02da1e7824b67560232304739a4d2.ctex"]
 
 [params]
 

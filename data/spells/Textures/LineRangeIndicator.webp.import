@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8xp3k3d1v7c"
-path="res://.godot/imported/TeleportHome.webp-905bb100042b7b5bdeb856c19d69338d.ctex"
+uid="uid://bvgu6nn4othad"
+path="res://.godot/imported/LineRangeIndicator.webp-eadb35bfb4e1888fbc9921768c9d2849.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/spells/recall/TeleportHome.webp"
-dest_files=["res://.godot/imported/TeleportHome.webp-905bb100042b7b5bdeb856c19d69338d.ctex"]
+source_file="res://data/spells/Textures/LineRangeIndicator.webp"
+dest_files=["res://.godot/imported/LineRangeIndicator.webp-eadb35bfb4e1888fbc9921768c9d2849.ctex"]
 
 [params]
 

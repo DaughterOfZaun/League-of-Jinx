@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bikauucv6yvbc"
-path="res://.godot/imported/RecallHome.webp-9c759ac443e360291b59ddb9078f6a60.ctex"
+uid="uid://clc4s2v1c8c0b"
+path="res://.godot/imported/LocalLineMissileBase.webp-0705ff5da3b53fee3b01abfc84372256.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/spells/recall/RecallHome.webp"
-dest_files=["res://.godot/imported/RecallHome.webp-9c759ac443e360291b59ddb9078f6a60.ctex"]
+source_file="res://data/spells/Textures/LocalLineMissileBase.webp"
+dest_files=["res://.godot/imported/LocalLineMissileBase.webp-0705ff5da3b53fee3b01abfc84372256.ctex"]
 
 [params]
 
