@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://c75a7ire7fgcd"]
+
+[ext_resource type="Texture2D" uid="uid://biguinhuraht0" path="res://data/ui/bars/141.png" id="1_y5xmu"]
+
+[node name="Healthbar" type="Control"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -131.0
+offset_top = -36.0
+offset_right = 132.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -0.111969
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("1_y5xmu")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -6.5
+offset_right = 263.0
+offset_bottom = 19.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.534)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+text = "2512 / 2527"
+horizontal_alignment = 1
