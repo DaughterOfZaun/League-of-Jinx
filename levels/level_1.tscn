@@ -1,7 +1,6 @@
-[gd_scene load_steps=58 format=3 uid="uid://c1voud1rbq3sf"]
+[gd_scene load_steps=57 format=3 uid="uid://c1voud1rbq3sf"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_104n6"]
-[ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.png" id="1_wl0tf"]
 [ext_resource type="Script" path="res://engine/game/camera.gd" id="2_7jrbs"]
 [ext_resource type="NavigationMesh" uid="uid://ge2fbbbp2qa5" path="res://levels/level_1_navmesh.tres" id="2_jq8ly"]
 [ext_resource type="Texture2D" uid="uid://cyle4h1k1iu36" path="res://data/ui/160.png" id="2_nvcxi"]
@@ -22,16 +21,16 @@
 [ext_resource type="PackedScene" uid="uid://brt0fmysxvs5g" path="res://data/characters/Ahri/Skins/Base/Ahri.glb" id="7_45sau"]
 [ext_resource type="Texture2D" uid="uid://djn0h2uutu5f1" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/Ahri_Charm.webp" id="7_61g1a"]
 [ext_resource type="Script" path="res://engine/spells/attacks/basic_attack_data.gd" id="7_876sy"]
-[ext_resource type="Texture2D" uid="uid://i8r5uocv7r3f" path="res://data/spells/flash/Summoner_flash.webp" id="7_1361x"]
+[ext_resource type="Texture2D" uid="uid://i8r5uocv7r3f" path="res://data/spells/Flash/Summoner_flash.webp" id="7_1361x"]
 [ext_resource type="Script" path="res://engine/ai/ai_cast_state.gd" id="7_eqh1v"]
 [ext_resource type="Script" path="res://engine/status.gd" id="7_ywlur"]
-[ext_resource type="Texture2D" uid="uid://bvs00ndscuup" path="res://data/spells/heal/Summoner_heal.webp" id="8_fm6dr"]
+[ext_resource type="Texture2D" uid="uid://bvs00ndscuup" path="res://data/spells/Heal/Summoner_heal.webp" id="8_fm6dr"]
+[ext_resource type="Texture2D" uid="uid://c8xp3k3d1v7c" path="res://data/spells/Recall/TeleportHome.webp" id="8_koioe"]
 [ext_resource type="Texture2D" uid="uid://uitpm427k4kg" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/Ahri_SpiritRush.webp" id="8_ks8cb"]
 [ext_resource type="Script" path="res://engine/spells/attacks/crit_attack.gd" id="8_os5gn"]
 [ext_resource type="Script" path="res://engine/ai/ai_attack_state.gd" id="8_r48vj"]
 [ext_resource type="Script" path="res://engine/spells/attacks/crit_attack_data.gd" id="9_cwmut"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bj5tpjmt4q2fk" path="res://data/characters/Ahri/Skins/Base/Animations.tres" id="9_e1mwo"]
-[ext_resource type="Texture2D" uid="uid://bikauucv6yvbc" path="res://data/spells/recall/RecallHome.webp" id="9_rud0d"]
 [ext_resource type="Script" path="res://engine/spells/spell_data.gd" id="11_eotle"]
 [ext_resource type="Script" path="res://engine/passive/passive.gd" id="12_133kh"]
 [ext_resource type="Script" path="res://engine/game/range.gd" id="14_t8bj3"]
@@ -92,7 +91,20 @@ radius = 7.5
 
 [node name="Node3D" type="Node3D"]
 
-[node name="Control" type="Control" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fu4g7")
+
+[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_angular_distance = 0.5
+shadow_enabled = true
+
+[node name="InputManager" type="Node3D" parent="." node_paths=PackedStringArray("main_hero")]
+unique_name_in_owner = true
+script = ExtResource("1_104n6")
+main_hero = NodePath("../Unit")
+
+[node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -101,8 +113,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="Screenshot" type="TextureRect" parent="Control"]
-visible = false
+[node name="Screenshot" type="TextureRect" parent="UI"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,10 +121,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("1_wl0tf")
 expand_mode = 2
 
-[node name="Control" type="Control" parent="Control"]
+[node name="Control" type="Control" parent="UI"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -126,7 +136,7 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Passive" type="TextureRect" parent="Control/Control"]
+[node name="Passive" type="TextureRect" parent="UI/Control"]
 layout_mode = 2
 anchor_left = 0.5
 anchor_top = 1.0
@@ -140,7 +150,7 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_w53q8")
 expand_mode = 2
 
-[node name="ChampionSpells" type="HBoxContainer" parent="Control/Control"]
+[node name="ChampionSpells" type="HBoxContainer" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -155,12 +165,12 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 3
 
-[node name="TextureRect1" type="TextureRect" parent="Control/Control/ChampionSpells"]
+[node name="TextureRect1" type="TextureRect" parent="UI/Control/ChampionSpells"]
 layout_mode = 2
 texture = ExtResource("5_hwalt")
 expand_mode = 2
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/Control/ChampionSpells/TextureRect1"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/Control/ChampionSpells/TextureRect1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -175,7 +185,7 @@ texture_progress = ExtResource("5_hwalt")
 tint_under = Color(0.00784314, 0, 0.305882, 1)
 tint_progress = Color(0.313726, 0.254902, 0.952941, 1)
 
-[node name="Label" type="Label" parent="Control/Control/ChampionSpells/TextureRect1"]
+[node name="Label" type="Label" parent="UI/Control/ChampionSpells/TextureRect1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -189,22 +199,22 @@ text = "4"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="Control/Control/ChampionSpells"]
+[node name="TextureRect2" type="TextureRect" parent="UI/Control/ChampionSpells"]
 layout_mode = 2
 texture = ExtResource("6_leh2g")
 expand_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="Control/Control/ChampionSpells"]
+[node name="TextureRect3" type="TextureRect" parent="UI/Control/ChampionSpells"]
 layout_mode = 2
 texture = ExtResource("7_61g1a")
 expand_mode = 2
 
-[node name="TextureRect4" type="TextureRect" parent="Control/Control/ChampionSpells"]
+[node name="TextureRect4" type="TextureRect" parent="UI/Control/ChampionSpells"]
 layout_mode = 2
 texture = ExtResource("8_ks8cb")
 expand_mode = 2
 
-[node name="SummonerSpells" type="HBoxContainer" parent="Control/Control"]
+[node name="SummonerSpells" type="HBoxContainer" parent="UI/Control"]
 layout_mode = 2
 anchor_left = 0.5
 anchor_top = 1.0
@@ -218,17 +228,17 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 3
 
-[node name="TextureRect1" type="TextureRect" parent="Control/Control/SummonerSpells"]
+[node name="TextureRect1" type="TextureRect" parent="UI/Control/SummonerSpells"]
 layout_mode = 2
 texture = ExtResource("7_1361x")
 expand_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="Control/Control/SummonerSpells"]
+[node name="TextureRect2" type="TextureRect" parent="UI/Control/SummonerSpells"]
 layout_mode = 2
 texture = ExtResource("8_fm6dr")
 expand_mode = 2
 
-[node name="Recall" type="TextureRect" parent="Control/Control"]
+[node name="Recall" type="TextureRect" parent="UI/Control"]
 layout_mode = 2
 anchor_left = 0.5
 anchor_top = 1.0
@@ -239,10 +249,10 @@ offset_top = -66.0
 offset_right = 134.0
 offset_bottom = -40.0
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("9_rud0d")
+texture = ExtResource("8_koioe")
 expand_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="Control/Control"]
+[node name="ColorRect" type="ColorRect" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -257,7 +267,7 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.0627451, 0.0941176, 0.0980392, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Control/Control"]
+[node name="TextureRect" type="TextureRect" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -275,7 +285,7 @@ pivot_offset = Vector2(334, 167)
 texture = ExtResource("2_nvcxi")
 expand_mode = 1
 
-[node name="Healthbar" type="Control" parent="Control/Control"]
+[node name="Healthbar" type="Control" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -289,7 +299,7 @@ offset_bottom = -26.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/Control/Healthbar"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/Control/Healthbar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -301,7 +311,7 @@ value = 100.0
 nine_patch_stretch = true
 texture_progress = ExtResource("3_7aovb")
 
-[node name="Label" type="Label" parent="Control/Control/Healthbar"]
+[node name="Label" type="Label" parent="UI/Control/Healthbar"]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -320,7 +330,7 @@ text = "2512"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="Control/Control/Healthbar"]
+[node name="Label2" type="Label" parent="UI/Control/Healthbar"]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -338,7 +348,7 @@ scale = Vector2(0.6, 0.534)
 text = "/"
 vertical_alignment = 1
 
-[node name="Label3" type="Label" parent="Control/Control/Healthbar"]
+[node name="Label3" type="Label" parent="UI/Control/Healthbar"]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -356,7 +366,7 @@ scale = Vector2(0.5, 0.534)
 text = "2527"
 vertical_alignment = 1
 
-[node name="Label4" type="Label" parent="Control/Control/Healthbar"]
+[node name="Label4" type="Label" parent="UI/Control/Healthbar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -372,7 +382,7 @@ theme_override_constants/outline_size = 10
 text = "2512 / 2527"
 horizontal_alignment = 1
 
-[node name="Manabar" type="Control" parent="Control/Control"]
+[node name="Manabar" type="Control" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -386,7 +396,7 @@ offset_bottom = -12.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/Control/Manabar"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/Control/Manabar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -398,7 +408,7 @@ value = 55.0
 nine_patch_stretch = true
 texture_progress = ExtResource("4_vddi6")
 
-[node name="Label" type="Label" parent="Control/Control/Manabar"]
+[node name="Label" type="Label" parent="UI/Control/Manabar"]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -417,7 +427,7 @@ text = "609"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="Control/Control/Manabar"]
+[node name="Label2" type="Label" parent="UI/Control/Manabar"]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -435,7 +445,7 @@ scale = Vector2(0.6, 0.534)
 text = "/"
 vertical_alignment = 1
 
-[node name="Label3" type="Label" parent="Control/Control/Manabar"]
+[node name="Label3" type="Label" parent="UI/Control/Manabar"]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -454,7 +464,7 @@ text = "1110
 "
 vertical_alignment = 1
 
-[node name="Label4" type="Label" parent="Control/Control/Manabar"]
+[node name="Label4" type="Label" parent="UI/Control/Manabar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -469,19 +479,6 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 text = "609 / 1110"
 horizontal_alignment = 1
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_fu4g7")
-
-[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
-light_angular_distance = 0.5
-shadow_enabled = true
-
-[node name="InputManager" type="Node3D" parent="." node_paths=PackedStringArray("main_hero")]
-unique_name_in_owner = true
-script = ExtResource("1_104n6")
-main_hero = NodePath("../Unit")
 
 [node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, -13, 20, 13)
