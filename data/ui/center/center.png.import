@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cefst6pinhr1h"
-path="res://.godot/imported/League of Legends.png-1bdc6da1052ccb73e0fe275c08792414.ctex"
+uid="uid://cyle4h1k1iu36"
+path="res://.godot/imported/center.png-9134454e2e48778097aec136b43c0c1a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/screenshots/League of Legends.png"
-dest_files=["res://.godot/imported/League of Legends.png-1bdc6da1052ccb73e0fe275c08792414.ctex"]
+source_file="res://data/ui/center/center.png"
+dest_files=["res://.godot/imported/center.png-9134454e2e48778097aec136b43c0c1a.ctex"]
 
 [params]
 
@@ -25,7 +25,7 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
