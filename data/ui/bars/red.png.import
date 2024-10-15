@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://biguinhuraht0"
-path="res://.godot/imported/141.png-00e6990b56f7a314e8d1860b1e9db1bc.ctex"
+uid="uid://3t7htbw76wq5"
+path="res://.godot/imported/red.png-4aff0b0b3d38704b3581fa75449444b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/ui/bars/141.png"
-dest_files=["res://.godot/imported/141.png-00e6990b56f7a314e8d1860b1e9db1bc.ctex"]
+source_file="res://data/ui/bars/red.png"
+dest_files=["res://.godot/imported/red.png-4aff0b0b3d38704b3581fa75449444b9.ctex"]
 
 [params]
 

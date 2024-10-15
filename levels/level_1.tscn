@@ -1,10 +1,10 @@
-[gd_scene load_steps=52 format=3 uid="uid://c1voud1rbq3sf"]
+[gd_scene load_steps=53 format=3 uid="uid://c1voud1rbq3sf"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_104n6"]
 [ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.png" id="2_0jsjb"]
 [ext_resource type="Script" path="res://engine/game/camera.gd" id="2_7jrbs"]
 [ext_resource type="NavigationMesh" uid="uid://ge2fbbbp2qa5" path="res://levels/level_1_navmesh.tres" id="2_jq8ly"]
-[ext_resource type="Texture2D" uid="uid://cyle4h1k1iu36" path="res://data/ui/160.png" id="2_nvcxi"]
+[ext_resource type="Texture2D" uid="uid://cyle4h1k1iu36" path="res://data/ui/center.png" id="2_nvcxi"]
 [ext_resource type="Texture2D" uid="uid://w7g1bytpvupe" path="res://data/characters/Ahri/Passive/Ahri_SoulEater.webp" id="2_w53q8"]
 [ext_resource type="Script" path="res://engine/game/ground.gd" id="2_y4ri1"]
 [ext_resource type="PackedScene" uid="uid://demalxnr8x6to" path="res://engine/game/ui/spell.tscn" id="3_aqb5h"]
@@ -17,10 +17,11 @@
 [ext_resource type="PackedScene" uid="uid://c75a7ire7fgcd" path="res://engine/game/ui/bar.tscn" id="6_gj7h8"]
 [ext_resource type="Script" path="res://engine/spells/attacks/basic_attack.gd" id="6_p5bn8"]
 [ext_resource type="Script" path="res://engine/ai/ai_idle_state.gd" id="6_ut4ak"]
-[ext_resource type="Texture2D" uid="uid://d4acgjwdw05ud" path="res://data/ui/58.png" id="7_6oks2"]
+[ext_resource type="Texture2D" uid="uid://d4acgjwdw05ud" path="res://data/ui/left.png" id="7_6oks2"]
 [ext_resource type="PackedScene" uid="uid://brt0fmysxvs5g" path="res://data/characters/Ahri/Skins/Base/Ahri.glb" id="7_45sau"]
 [ext_resource type="Script" path="res://engine/spells/attacks/basic_attack_data.gd" id="7_876sy"]
 [ext_resource type="Script" path="res://engine/ai/ai_cast_state.gd" id="7_eqh1v"]
+[ext_resource type="Texture2D" uid="uid://cc1iubdmpd1kv" path="res://data/characters/Ahri/Ahri_Square.webp" id="7_h4cmg"]
 [ext_resource type="Script" path="res://engine/status.gd" id="7_ywlur"]
 [ext_resource type="Script" path="res://engine/spells/attacks/crit_attack.gd" id="8_os5gn"]
 [ext_resource type="Script" path="res://engine/ai/ai_attack_state.gd" id="8_r48vj"]
@@ -134,6 +135,35 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="BackgroundColor" type="ColorRect" parent="UI/Center"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -161.0
+offset_top = -81.0
+offset_right = 161.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="UI/Center"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -7.0
+offset_right = 111.0
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.0627451, 0.0941176, 0.0980392, 1)
+
 [node name="Passive" type="TextureRect" parent="UI/Center"]
 layout_mode = 2
 anchor_left = 0.5
@@ -207,7 +237,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = 108.0
-offset_top = -67.0
+offset_top = -66.0
 offset_right = 128.0
 offset_bottom = -37.0
 grow_horizontal = 2
@@ -216,21 +246,6 @@ grow_vertical = 0
 [node name="LevelLabel" parent="UI/Center/Recall" index="1"]
 offset_left = -7.0
 offset_right = 10.0
-
-[node name="ColorRect" type="ColorRect" parent="UI/Center"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -110.0
-offset_top = -7.0
-offset_right = 111.0
-offset_bottom = -3.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.0627451, 0.0941176, 0.0980392, 1)
 
 [node name="TextureRect" type="TextureRect" parent="UI/Center"]
 layout_mode = 1
@@ -257,7 +272,7 @@ layout_mode = 1
 offset_top = -22.0
 offset_bottom = -11.0
 
-[node name="Control" type="Control" parent="UI"]
+[node name="Left" type="Control" parent="UI"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -266,7 +281,31 @@ offset_top = -40.0
 offset_right = 40.0
 grow_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="UI/Control"]
+[node name="BackgroundColor" type="ColorRect" parent="UI/Left"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -84.0
+offset_right = 209.0
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="SquareRect" type="TextureRect" parent="UI/Left"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -74.0
+offset_right = 64.0
+offset_bottom = -14.0
+grow_vertical = 0
+texture = ExtResource("7_h4cmg")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="UI/Left"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -278,6 +317,96 @@ offset_bottom = 87.0
 grow_vertical = 0
 scale = Vector2(0.52, 0.52)
 texture = ExtResource("7_6oks2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Left"]
+layout_mode = 0
+offset_left = 90.0
+offset_top = -38.0
+offset_right = 130.0
+offset_bottom = 30.0
+scale = Vector2(0.8, 0.97)
+theme_override_constants/separation = -2
+
+[node name="Label1" type="Label" parent="UI/Left/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.109804, 0.470588, 0.0666667, 1)
+theme_override_font_sizes/font_size = 9
+text = "273"
+
+[node name="Label2" type="Label" parent="UI/Left/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.109804, 0.470588, 0.0666667, 1)
+theme_override_font_sizes/font_size = 9
+text = "70"
+
+[node name="Label3" type="Label" parent="UI/Left/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.109804, 0.470588, 0.0666667, 1)
+theme_override_font_sizes/font_size = 9
+text = "1.387"
+
+[node name="Label4" type="Label" parent="UI/Left/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.109804, 0.470588, 0.0666667, 1)
+theme_override_font_sizes/font_size = 9
+text = "437"
+
+[node name="Label5" type="Label" parent="UI/Left/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.109804, 0.470588, 0.0666667, 1)
+theme_override_font_sizes/font_size = 9
+text = "151"
+
+[node name="Label6" type="Label" parent="UI/Left/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.109804, 0.470588, 0.0666667, 1)
+theme_override_font_sizes/font_size = 9
+text = "139"
+
+[node name="MoneyLabel" type="Label" parent="UI/Left"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 138.0
+offset_top = -26.0
+offset_right = 178.0
+offset_bottom = -12.0
+grow_vertical = 0
+scale = Vector2(0.9, 0.9)
+theme_override_font_sizes/font_size = 10
+text = "3004"
+horizontal_alignment = 1
+
+[node name="NameLabel" type="Label" parent="UI/Left"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -13.0
+offset_right = 244.0
+grow_vertical = 0
+scale = Vector2(0.815, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 9
+text = "Jax"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="UI/Left"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 52.0
+offset_top = -25.0
+offset_right = 64.0
+offset_bottom = -11.0
+grow_vertical = 0
+scale = Vector2(0.8, 0.9)
+theme_override_font_sizes/font_size = 10
+text = "18"
+horizontal_alignment = 1
 
 [node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, -13, 20, 13)
