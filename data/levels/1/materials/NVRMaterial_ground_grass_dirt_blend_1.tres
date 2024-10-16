@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b74h33gb8i54i"]
+
+[ext_resource type="Texture2D" uid="uid://i85wat2tcacl" path="res://data/levels/1/textures/room_grass_dirt_blend_1.png" id="1_thntw"]
+
+[resource]
+resource_name = "NVRMaterial_ground_grass_dirt_blend_1"
+albedo_texture = ExtResource("1_thntw")
+metadata/extras = {
+"name": "NVRMaterial_ground_grass_dirt_blend_1"
+}

@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c2wnfkdccj1uo"]
+
+[ext_resource type="Texture2D" uid="uid://b4d7c1dcwjgfo" path="res://data/levels/1/textures/room_base_chasm3.png" id="1_auogg"]
+
+[resource]
+resource_name = "NVRMaterial_base_chasm3_"
+albedo_texture = ExtResource("1_auogg")
+metadata/extras = {
+"name": "NVRMaterial_base_chasm3_"
+}

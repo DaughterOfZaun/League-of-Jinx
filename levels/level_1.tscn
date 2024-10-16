@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://c1voud1rbq3sf"]
+[gd_scene load_steps=74 format=3 uid="uid://c1voud1rbq3sf"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_104n6"]
 [ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.png" id="2_0jsjb"]
@@ -60,6 +60,7 @@
 [ext_resource type="Texture2D" uid="uid://i8r5uocv7r3f" path="res://data/spells/Flash/Summoner_flash.webp" id="57_m5pxd"]
 [ext_resource type="Texture2D" uid="uid://bvs00ndscuup" path="res://data/spells/Heal/Summoner_heal.webp" id="58_pw432"]
 [ext_resource type="Texture2D" uid="uid://c8xp3k3d1v7c" path="res://data/spells/Recall/TeleportHome.webp" id="59_isoa0"]
+[ext_resource type="PackedScene" uid="uid://cdumkeec24u7k" path="res://data/levels/1/map.tscn" id="61_wdqa8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ovldq"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -111,7 +112,7 @@ radius = 7.5
 environment = SubResource("Environment_fu4g7")
 
 [node name="DirectionalLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.866025, 0.433013, -0.25, 0, 0.5, 0.866026, 0.5, 0.75, -0.433013, 0, 0, 0)
 light_angular_distance = 0.5
 shadow_enabled = true
 
@@ -733,7 +734,7 @@ theme_override_font_sizes/font_size = 6
 text = "FPS: 45"
 
 [node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
-transform = Transform3D(0.707107, 0.5, -0.5, 0, 0.707107, 0.707107, 0.707107, -0.5, 0.5, -13, 20, 13)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 20, 20)
 current = true
 fov = 31.9848
 size = 0.1
@@ -750,6 +751,7 @@ script = ExtResource("2_y4ri1")
 shape = SubResource("WorldBoundaryShape3D_6m1or")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Ground/CollisionShape3D"]
+visible = false
 mesh = SubResource("PlaneMesh_soa18")
 skeleton = NodePath("../../../..")
 
@@ -1602,6 +1604,9 @@ script = ExtResource("14_t8bj3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Unit/CancelAttackRange"]
 shape = SubResource("SphereShape3D_hvbg6")
+
+[node name="map" parent="." instance=ExtResource("61_wdqa8")]
+transform = Transform3D(1, 8.74228e-08, 0, -8.74228e-08, 1, 0, 0, 0, -1, -0.504432, -2.436, 3.78158)
 
 [editable path="UI/Center/SummonerSpells/Spell1"]
 [editable path="UI/Center/SummonerSpells/Spell2"]

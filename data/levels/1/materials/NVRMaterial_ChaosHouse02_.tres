@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dfjlwxtkhhfup"]
+
+[ext_resource type="Texture2D" uid="uid://cv4mief10kn7b" path="res://data/levels/1/textures/room_ChaosHouse02.png" id="1_b0ieb"]
+
+[resource]
+resource_name = "NVRMaterial_ChaosHouse02_"
+albedo_texture = ExtResource("1_b0ieb")
+metadata/extras = {
+"name": "NVRMaterial_ChaosHouse02_"
+}

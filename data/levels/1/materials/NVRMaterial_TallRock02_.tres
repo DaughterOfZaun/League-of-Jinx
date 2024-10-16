@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dypcwspds5nwb"]
+
+[ext_resource type="Texture2D" uid="uid://ckj6n57yens8u" path="res://data/levels/1/textures/room_TallRock02.png" id="1_w52gh"]
+
+[resource]
+resource_name = "NVRMaterial_TallRock02_"
+albedo_texture = ExtResource("1_w52gh")
+metadata/extras = {
+"name": "NVRMaterial_TallRock02_"
+}

@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c8mjamkk7pwfa"]
+
+[ext_resource type="Texture2D" uid="uid://ksc8u1d5jb6f" path="res://data/levels/1/textures/room_blueTower_decal.png" id="1_owtwg"]
+
+[resource]
+resource_name = "NVRMaterial_lambert138"
+albedo_texture = ExtResource("1_owtwg")
+metadata/extras = {
+"name": "NVRMaterial_lambert138"
+}

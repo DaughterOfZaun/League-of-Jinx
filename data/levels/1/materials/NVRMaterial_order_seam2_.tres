@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ltrrumubkj3j"]
+
+[ext_resource type="Texture2D" uid="uid://cx1xtafoekvw2" path="res://data/levels/1/textures/room_order_seam2.png" id="1_71w8g"]
+
+[resource]
+resource_name = "NVRMaterial_order_seam2_"
+albedo_texture = ExtResource("1_71w8g")
+metadata/extras = {
+"name": "NVRMaterial_order_seam2_"
+}

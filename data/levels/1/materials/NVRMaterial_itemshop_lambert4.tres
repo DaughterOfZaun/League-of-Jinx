@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://l2nrq4o0guat"]
+
+[ext_resource type="Texture2D" uid="uid://bjs18a5lmr4ke" path="res://data/levels/1/textures/room_shop_trol_prop.png" id="1_a5wp4"]
+
+[resource]
+resource_name = "NVRMaterial_itemshop:lambert4"
+albedo_texture = ExtResource("1_a5wp4")
+metadata/extras = {
+"name": "NVRMaterial_itemshop:lambert4"
+}

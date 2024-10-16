@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://codwvl5r3k1x8"]
+
+[ext_resource type="Texture2D" uid="uid://n18efimnevmd" path="res://data/levels/1/textures/room_order_tile_floor_border.png" id="1_qs7a4"]
+
+[resource]
+resource_name = "NVRMaterial_order_tile_floor_border_"
+albedo_texture = ExtResource("1_qs7a4")
+metadata/extras = {
+"name": "NVRMaterial_order_tile_floor_border_"
+}
