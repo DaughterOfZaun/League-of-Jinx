@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://demalxnr8x6to"]
+[gd_scene load_steps=3 format=3 uid="uid://demalxnr8x6to"]
 
+[ext_resource type="Script" path="res://engine/game/ui/ui_spell.gd" id="1_6unfi"]
 [ext_resource type="Texture2D" uid="uid://bmblqfb85gtl1" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/Ahri_OrbofDeception.webp" id="1_wtlgq"]
 
 [node name="Spell" type="Control"]
@@ -8,6 +9,7 @@ anchors_preset = 0
 offset_right = 17.0
 offset_bottom = 34.0
 size_flags_horizontal = 3
+script = ExtResource("1_6unfi")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 layout_mode = 1
@@ -18,12 +20,14 @@ grow_horizontal = 2
 alignment_vertical = 0
 
 [node name="IconTexture" type="TextureRect" parent="AspectRatioContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("1_wtlgq")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="CooldownBar" type="TextureProgressBar" parent="AspectRatioContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 value = 50.0
 fill_mode = 4
@@ -33,10 +37,8 @@ texture_progress = ExtResource("1_wtlgq")
 tint_under = Color(0.00784314, 0, 0.305882, 1)
 tint_progress = Color(0.313726, 0.254902, 0.952941, 1)
 
-[node name="Control" type="Control" parent="AspectRatioContainer"]
-layout_mode = 2
-
-[node name="CooldownLabel" type="Label" parent="AspectRatioContainer/Control"]
+[node name="CooldownLabel" type="Label" parent="AspectRatioContainer/CooldownBar"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,6 +52,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LevelLabel" type="Label" parent="."]
+unique_name_in_owner = true
 z_index = 1
 layout_mode = 1
 anchors_preset = 7

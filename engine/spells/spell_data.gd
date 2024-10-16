@@ -274,20 +274,16 @@ var doesnt_trigger_spell_casts: bool:
 
 #region Import
 var target: Spell
-@export_group("Import")
+@export_group("Import", "import_")
 @export_file("*.ini") var import_path: String
-@export var import: bool:
-	set(value):
-		if value && !import:
-			import = true
-			print("importing...")
-			target = get_parent()
-			target.data = self
-			var ini := ini_load(import_path)
-			var spell_data := ini["SpellData"] as Array
-			set_from_ini_section(spell_data)
-			print("imported")
-			import = false
+@export_tool_button("Import") var import := func() -> void:
+	print("importing...")
+	target = get_parent()
+	target.data = self
+	var ini := ini_load(import_path)
+	var spell_data := ini["SpellData"] as Array
+	set_from_ini_section(spell_data)
+	print("imported")
 @export_group("")
 #endregion
 

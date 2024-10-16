@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=3 uid="uid://c1voud1rbq3sf"]
+[gd_scene load_steps=73 format=3 uid="uid://c1voud1rbq3sf"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_104n6"]
 [ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.png" id="2_0jsjb"]
@@ -52,82 +52,14 @@
 [ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissileTwo/AhriFoxFireMissileTwo.gd" id="24_dkrri"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/AhriSeduceMissile.gd" id="25_ivfqq"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/AhriTumbleMissile.gd" id="26_q6kjr"]
-[ext_resource type="ArrayMesh" uid="uid://dbhlssx7fnelh" path="res://data/levels/1/objs/0 ground_grass_ground_new_dark_ comp.obj" id="53_6weu8"]
-[ext_resource type="ArrayMesh" uid="uid://b6a2u6obfa2uv" path="res://data/levels/1/objs/1 OrderShrine_Mat comp.obj" id="54_atlqw"]
-[ext_resource type="ArrayMesh" uid="uid://bfugpebr854bn" path="res://data/levels/1/objs/2 ChaosShrine_Mat comp.obj" id="55_qo2xj"]
-[ext_resource type="ArrayMesh" uid="uid://xlj3keplr32" path="res://data/levels/1/objs/3 Nexus:lambert4 comp.obj" id="56_rcyev"]
-[ext_resource type="ArrayMesh" uid="uid://dv6a44wqrwhat" path="res://data/levels/1/objs/4 ground_Chaos_dirt_ comp.obj" id="57_yqev8"]
-[ext_resource type="ArrayMesh" uid="uid://dvnqalhtwo4xd" path="res://data/levels/1/objs/5 ground_RiverBed_cliff_blend_ comp.obj" id="58_6fdxc"]
-[ext_resource type="ArrayMesh" uid="uid://bl5q38ayxubxe" path="res://data/levels/1/objs/6 ground_Chaos_dirt_grass_blend_ comp.obj" id="59_q5rvv"]
-[ext_resource type="ArrayMesh" uid="uid://bsbk3wv34hsfr" path="res://data/levels/1/objs/7 ground_grass_dirt_blend_1 comp.obj" id="60_u7kcr"]
-[ext_resource type="ArrayMesh" uid="uid://b2b0bsxs5s4c1" path="res://data/levels/1/objs/8 ground_order_dirt_ comp.obj" id="61_chl3k"]
-[ext_resource type="ArrayMesh" uid="uid://c3mupduo16kmq" path="res://data/levels/1/objs/9 ground_order_tile_floor_ comp.obj" id="62_mruvc"]
-[ext_resource type="ArrayMesh" uid="uid://cstbeeiqik2r2" path="res://data/levels/1/objs/10 Tree01_md_ comp.obj" id="63_dex7b"]
-[ext_resource type="ArrayMesh" uid="uid://dw64hbgi8hofb" path="res://data/levels/1/objs/11 Tree02_ comp.obj" id="64_wsgjl"]
-[ext_resource type="ArrayMesh" uid="uid://fgeqc3y2eee2" path="res://data/levels/1/objs/12 Tree01_Burned_ comp.obj" id="65_n71mk"]
-[ext_resource type="ArrayMesh" uid="uid://b1c7pfogcrbce" path="res://data/levels/1/objs/13 SwampTree_01_ comp.obj" id="66_vu20v"]
-[ext_resource type="ArrayMesh" uid="uid://bck4lc0rd35tb" path="res://data/levels/1/objs/14 TreeLogFallen03_ comp.obj" id="67_qdnhs"]
-[ext_resource type="ArrayMesh" uid="uid://cy0vgdn4bsx4v" path="res://data/levels/1/objs/15 Fence01_ comp.obj" id="68_1c6iy"]
-[ext_resource type="ArrayMesh" uid="uid://dxxs4q5108erb" path="res://data/levels/1/objs/16 Wheel01_ comp.obj" id="69_58151"]
-[ext_resource type="ArrayMesh" uid="uid://bml06htc8to7y" path="res://data/levels/1/objs/17 chaosGate_ comp.obj" id="70_3q1u5"]
-[ext_resource type="ArrayMesh" uid="uid://ckfub3ffl1tgg" path="res://data/levels/1/objs/18 GoodStatue01_ comp.obj" id="71_a6tre"]
-[ext_resource type="ArrayMesh" uid="uid://x0a6b7v503hx" path="res://data/levels/1/objs/19 TorchSet01_ comp.obj" id="72_1mces"]
-[ext_resource type="ArrayMesh" uid="uid://biv6ueagumwfx" path="res://data/levels/1/objs/20 OrderGate_ comp.obj" id="73_cx6sa"]
-[ext_resource type="ArrayMesh" uid="uid://cm2bnjodsxmig" path="res://data/levels/1/objs/21 river_corner_ comp.obj" id="74_tf4lr"]
-[ext_resource type="ArrayMesh" uid="uid://q6rmfu550rph" path="res://data/levels/1/objs/22 Btown_Brown_ comp.obj" id="75_317hm"]
-[ext_resource type="ArrayMesh" uid="uid://4rx383b4dxn1" path="res://data/levels/1/objs/23 lambert150 comp.obj" id="76_o48sl"]
-[ext_resource type="ArrayMesh" uid="uid://cu0x564hs3udq" path="res://data/levels/1/objs/24 itemshop:lambert4 comp.obj" id="77_t78w0"]
-[ext_resource type="ArrayMesh" uid="uid://dkojttvbh741m" path="res://data/levels/1/objs/25 shop_base_ comp.obj" id="78_g2srk"]
-[ext_resource type="ArrayMesh" uid="uid://csjsdmkprakl" path="res://data/levels/1/objs/26 TallRock02_ comp.obj" id="79_cbryr"]
-[ext_resource type="ArrayMesh" uid="uid://tbklydhd5kds" path="res://data/levels/1/objs/27 OrderPantheon_ comp.obj" id="80_cw0mb"]
-[ext_resource type="ArrayMesh" uid="uid://c7x5r7imtdeag" path="res://data/levels/1/objs/28 TreeStump02_ comp.obj" id="81_c5p0m"]
-[ext_resource type="ArrayMesh" uid="uid://82gjg1ugf2wt" path="res://data/levels/1/objs/29 stonehenge_ comp.obj" id="82_imiad"]
-[ext_resource type="ArrayMesh" uid="uid://b1n8qw3dvanaq" path="res://data/levels/1/objs/30 stoneFace1_ comp.obj" id="83_s1kan"]
-[ext_resource type="ArrayMesh" uid="uid://desj6yb1ihval" path="res://data/levels/1/objs/31 rocks_ comp.obj" id="84_q40jl"]
-[ext_resource type="ArrayMesh" uid="uid://bcu87076b6sx0" path="res://data/levels/1/objs/32 OrderPantheonDestroyed_ comp.obj" id="85_2j5rh"]
-[ext_resource type="ArrayMesh" uid="uid://c3uh7d4cgi4jq" path="res://data/levels/1/objs/33 ChaosHouse02_ comp.obj" id="86_cebt3"]
-[ext_resource type="ArrayMesh" uid="uid://bynkqhtad1no6" path="res://data/levels/1/objs/34 Bcolumn_blue_vine_ comp.obj" id="87_1nppb"]
-[ext_resource type="ArrayMesh" uid="uid://bjilpt83dnp5a" path="res://data/levels/1/objs/35 lambert98 comp.obj" id="88_y8bb3"]
-[ext_resource type="ArrayMesh" uid="uid://buxjlxmypg6cx" path="res://data/levels/1/objs/36 lambert2 comp.obj" id="89_dspqs"]
-[ext_resource type="ArrayMesh" uid="uid://bv0oh5q6ke31b" path="res://data/levels/1/objs/37 wizard_sculpture_ comp.obj" id="90_h20bv"]
-[ext_resource type="ArrayMesh" uid="uid://cq6dclus6jrfj" path="res://data/levels/1/objs/38 lambert138 comp.obj" id="91_buro0"]
-[ext_resource type="ArrayMesh" uid="uid://hhek7bv8xuhv" path="res://data/levels/1/objs/39 order_tile_floor_mark1_ comp.obj" id="92_0u3kv"]
-[ext_resource type="ArrayMesh" uid="uid://bfbsssudkjdms" path="res://data/levels/1/objs/40 base_chasm3_ comp.obj" id="93_slawo"]
-[ext_resource type="ArrayMesh" uid="uid://cnyukmxtd2a8v" path="res://data/levels/1/objs/41 base_chasm1_ comp.obj" id="94_n036d"]
-[ext_resource type="ArrayMesh" uid="uid://cr57hygrggovy" path="res://data/levels/1/objs/42 base_chasm2_ comp.obj" id="95_o3tn7"]
-[ext_resource type="ArrayMesh" uid="uid://wosxer6sbvn1" path="res://data/levels/1/objs/43 order_ground_moss_patch1_ comp.obj" id="96_4ycmf"]
-[ext_resource type="ArrayMesh" uid="uid://bnvhaxgtmd8es" path="res://data/levels/1/objs/44 order_ground_mix2_ comp.obj" id="97_b74vb"]
-[ext_resource type="ArrayMesh" uid="uid://dwgpy0x0at2gm" path="res://data/levels/1/objs/45 base_moss_patch1_ comp.obj" id="98_essco"]
-[ext_resource type="ArrayMesh" uid="uid://cm3cug0qv4bnl" path="res://data/levels/1/objs/46 Order_seam_ comp.obj" id="99_qgu4w"]
-[ext_resource type="ArrayMesh" uid="uid://cuymr5ls0h3j2" path="res://data/levels/1/objs/47 order_base_decal__mid_ comp.obj" id="100_2sdk0"]
-[ext_resource type="ArrayMesh" uid="uid://d1scayfjag2og" path="res://data/levels/1/objs/48 v comp.obj" id="101_ekdqn"]
-[ext_resource type="ArrayMesh" uid="uid://nyhvxuag0fuk" path="res://data/levels/1/objs/49 new_stone_road_ comp.obj" id="102_vgdy0"]
-[ext_resource type="ArrayMesh" uid="uid://cfnls1g72bpe2" path="res://data/levels/1/objs/50 river_center_b_ comp.obj" id="103_iaf3m"]
-[ext_resource type="ArrayMesh" uid="uid://ictf7udi3hh2" path="res://data/levels/1/objs/51 order_seam2_ comp.obj" id="104_h8y6b"]
-[ext_resource type="ArrayMesh" uid="uid://3ip0n8prqfq" path="res://data/levels/1/objs/52 turret_stoneBase_hq_ comp.obj" id="105_8mquy"]
-[ext_resource type="ArrayMesh" uid="uid://2jtyhg5kn4xl" path="res://data/levels/1/objs/53 turret_stoneBase_ comp.obj" id="106_3cyip"]
-[ext_resource type="ArrayMesh" uid="uid://bscmmefgtvgyd" path="res://data/levels/1/objs/54 base_center_mark2_ comp.obj" id="107_dddf5"]
-[ext_resource type="ArrayMesh" uid="uid://wlnveui128gl" path="res://data/levels/1/objs/55 nexus_stoneBase_ comp.obj" id="108_2b58w"]
-[ext_resource type="ArrayMesh" uid="uid://3106ttix3h75" path="res://data/levels/1/objs/56 lambert144 comp.obj" id="109_ufklh"]
-[ext_resource type="ArrayMesh" uid="uid://drfn6o2bycodn" path="res://data/levels/1/objs/57 order_tile_floor_border_ comp.obj" id="110_kb4jd"]
-[ext_resource type="ArrayMesh" uid="uid://btii7umwlkbx4" path="res://data/levels/1/objs/58 Sign01_ comp.obj" id="111_3dvn1"]
-[ext_resource type="ArrayMesh" uid="uid://dmgtc2bmgijbf" path="res://data/levels/1/objs/59 OrderTorch01_ comp.obj" id="112_h3t6v"]
-[ext_resource type="ArrayMesh" uid="uid://bsx6u8d1yr8a3" path="res://data/levels/1/objs/60 Plant01_ comp.obj" id="113_gd5hi"]
-[ext_resource type="ArrayMesh" uid="uid://lk6rcfxmmxhp" path="res://data/levels/1/objs/61 DryBush01_ comp.obj" id="114_xux2c"]
-[ext_resource type="ArrayMesh" uid="uid://d1tekck1krd2b" path="res://data/levels/1/objs/62 shrineVine_ comp.obj" id="115_cme0f"]
-[ext_resource type="ArrayMesh" uid="uid://cwdeykuu546tg" path="res://data/levels/1/objs/63 MushroomPatch02_ comp.obj" id="116_pd4uw"]
-[ext_resource type="ArrayMesh" uid="uid://miadnn4ku5bx" path="res://data/levels/1/objs/64 SwampLog01_1 comp.obj" id="117_d5b5a"]
-[ext_resource type="ArrayMesh" uid="uid://cticxbyc77o1a" path="res://data/levels/1/objs/65 Rock04_ comp.obj" id="118_2tocs"]
-[ext_resource type="ArrayMesh" uid="uid://kslsxrwwdps8" path="res://data/levels/1/objs/66 ChaosFlag02_ comp.obj" id="119_2kt62"]
-[ext_resource type="ArrayMesh" uid="uid://cjat1bf5ludkn" path="res://data/levels/1/objs/67 TombStone01_TombStone01_ comp.obj" id="120_mx8sj"]
-[ext_resource type="ArrayMesh" uid="uid://0smhb1p02k2y" path="res://data/levels/1/objs/68 ChaosSwampLog01_ comp.obj" id="121_236th"]
-[ext_resource type="ArrayMesh" uid="uid://b4layl8hot75" path="res://data/levels/1/objs/69 Flower012_ comp.obj" id="122_gaayi"]
-[ext_resource type="ArrayMesh" uid="uid://drmyb2kj7tor6" path="res://data/levels/1/objs/70 Chaos_stones_ comp.obj" id="123_ygo00"]
-[ext_resource type="ArrayMesh" uid="uid://df3r6i64bw4gw" path="res://data/levels/1/objs/71 MossRock01_ comp.obj" id="124_1w7gv"]
-[ext_resource type="ArrayMesh" uid="uid://bc008jxbnk0hc" path="res://data/levels/1/objs/72 ChaosGate01_ comp.obj" id="125_ccpxy"]
-[ext_resource type="ArrayMesh" uid="uid://dcmu4omju5rl8" path="res://data/levels/1/objs/73 ChaosShrineWall02_ comp.obj" id="126_amer1"]
-[ext_resource type="ArrayMesh" uid="uid://crysh3iwyxmdc" path="res://data/levels/1/objs/74 ChaosShrineWall01_ comp.obj" id="127_2l3h7"]
-[ext_resource type="ArrayMesh" uid="uid://d38ym2uf0nxq3" path="res://data/levels/1/objs/75 Wall_of_Grass comp.obj" id="128_e36j8"]
+[ext_resource type="Texture2D" uid="uid://bmblqfb85gtl1" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/Ahri_OrbofDeception.webp" id="43_2dprh"]
+[ext_resource type="Texture2D" uid="uid://grnrkvvxiyoj" path="res://data/characters/Ahri/S2_W_FoxFire/Ahri_FoxFire.webp" id="45_hfybr"]
+[ext_resource type="Texture2D" uid="uid://djn0h2uutu5f1" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/Ahri_Charm.webp" id="47_xivfr"]
+[ext_resource type="Texture2D" uid="uid://uitpm427k4kg" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/Ahri_SpiritRush.webp" id="49_yoxlj"]
+[ext_resource type="Script" path="res://engine/spells/spell.gd" id="52_ey0iw"]
+[ext_resource type="Texture2D" uid="uid://i8r5uocv7r3f" path="res://data/spells/Flash/Summoner_flash.webp" id="57_m5pxd"]
+[ext_resource type="Texture2D" uid="uid://bvs00ndscuup" path="res://data/spells/Heal/Summoner_heal.webp" id="58_pw432"]
+[ext_resource type="Texture2D" uid="uid://c8xp3k3d1v7c" path="res://data/spells/Recall/TeleportHome.webp" id="59_isoa0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ovldq"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -172,8 +104,6 @@ radius = 7.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hvbg6"]
 radius = 7.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x8t33"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -920,14 +850,18 @@ root_node = NodePath("../SkinnedMesh")
 tree_root = ExtResource("9_e1mwo")
 anim_player = NodePath("../SkinnedMesh/AnimationPlayer")
 
-[node name="Spells" type="Node" parent="Unit" node_paths=PackedStringArray("q", "w", "e", "r", "extra", "crit")]
+[node name="Spells" type="Node" parent="Unit" node_paths=PackedStringArray("q", "w", "e", "r", "d", "f", "b", "extra", "crit", "basic")]
 script = ExtResource("5_gep23")
 q = NodePath("Q_OrbOfDeception")
 w = NodePath("W_FoxFire")
 e = NodePath("E_Seduce")
 r = NodePath("R_Tumble")
+d = NodePath("D_Flash")
+f = NodePath("F_Heal")
+b = NodePath("B_Recall")
 extra = [NodePath("E0_OrbMissile"), NodePath("E1_OrbReturn"), NodePath("E2_FoxFireMissile"), NodePath("E3_FoxFireMissileTwo"), NodePath("E4_SeduceMissile"), NodePath("E5_TumbleMissile")]
 crit = NodePath("CritAttack")
+basic = [NodePath("BasicAttack1"), NodePath("BasicAttack2")]
 
 [node name="CritAttack" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
 script = ExtResource("8_os5gn")
@@ -1081,7 +1015,7 @@ data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/Q_OrbOfDeception"]
 script = ExtResource("11_eotle")
-inventory_icon = Array[Texture2D]([null, null, null])
+inventory_icon = Array[Texture2D]([ExtResource("43_2dprh"), null, null])
 inventory_icon_name = Array[String](["Ahri_OrbofDeception.dds", "", ""])
 spell_name = "AhriOrbofDeception"
 display_name = "game_spell_displayname_AhriOrbofDeception"
@@ -1141,6 +1075,7 @@ data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/W_FoxFire"]
 script = ExtResource("11_eotle")
+inventory_icon = Array[Texture2D]([ExtResource("45_hfybr")])
 spell_name = "AhriFoxFire"
 import_path = "res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFire.ini"
 
@@ -1150,7 +1085,7 @@ data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/E_Seduce"]
 script = ExtResource("11_eotle")
-inventory_icon = Array[Texture2D]([null, null, null])
+inventory_icon = Array[Texture2D]([ExtResource("47_xivfr"), null, null])
 inventory_icon_name = Array[String](["Ahri_Charm.dds", "", ""])
 display_name = "game_spell_displayname_AhriSeduce"
 alternate_name = "AhriSeduce"
@@ -1209,7 +1144,7 @@ data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/R_Tumble"]
 script = ExtResource("11_eotle")
-inventory_icon = Array[Texture2D]([null, null, null])
+inventory_icon = Array[Texture2D]([ExtResource("49_yoxlj"), null, null])
 inventory_icon_name = Array[String](["Ahri_SpiritRush.dds", "", ""])
 spell_name = "AhriTumble"
 display_name = "game_spell_displayname_AhriTumble"
@@ -1608,6 +1543,30 @@ coefficient = Array[float]([0.7, 0.0])
 x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/AhriTumbleMissile.ini"
 
+[node name="D_Flash" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
+script = ExtResource("52_ey0iw")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/D_Flash"]
+script = ExtResource("11_eotle")
+inventory_icon = Array[Texture2D]([ExtResource("57_m5pxd")])
+
+[node name="F_Heal" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
+script = ExtResource("52_ey0iw")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/F_Heal"]
+script = ExtResource("11_eotle")
+inventory_icon = Array[Texture2D]([ExtResource("58_pw432")])
+
+[node name="B_Recall" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
+script = ExtResource("52_ey0iw")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Unit/Spells/B_Recall"]
+script = ExtResource("11_eotle")
+inventory_icon = Array[Texture2D]([ExtResource("59_isoa0")])
+
 [node name="GameplayRange" type="Area3D" parent="Unit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("14_t8bj3")
@@ -1643,313 +1602,6 @@ script = ExtResource("14_t8bj3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Unit/CancelAttackRange"]
 shape = SubResource("SphereShape3D_hvbg6")
-
-[node name="Node3D" type="Node3D" parent="."]
-
-[node name="0GroundGrassGroundNewDarkComp" type="MeshInstance3D" parent="Node3D"]
-material_override = SubResource("StandardMaterial3D_x8t33")
-mesh = ExtResource("53_6weu8")
-skeleton = NodePath("../..")
-
-[node name="1OrderShrineMatComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("54_atlqw")
-skeleton = NodePath("../..")
-
-[node name="2ChaosShrineMatComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("55_qo2xj")
-skeleton = NodePath("../..")
-
-[node name="3Nexus_lambert4Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("56_rcyev")
-skeleton = NodePath("../..")
-
-[node name="4GroundChaosDirtComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("57_yqev8")
-skeleton = NodePath("../..")
-
-[node name="5GroundRiverBedCliffBlendComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("58_6fdxc")
-skeleton = NodePath("../..")
-
-[node name="6GroundChaosDirtGrassBlendComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("59_q5rvv")
-skeleton = NodePath("../..")
-
-[node name="7GroundGrassDirtBlend1Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("60_u7kcr")
-skeleton = NodePath("../..")
-
-[node name="8GroundOrderDirtComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("61_chl3k")
-skeleton = NodePath("../..")
-
-[node name="9GroundOrderTileFloorComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("62_mruvc")
-skeleton = NodePath("../..")
-
-[node name="10Tree01MdComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("63_dex7b")
-skeleton = NodePath("../..")
-
-[node name="11Tree02Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("64_wsgjl")
-skeleton = NodePath("../..")
-
-[node name="12Tree01BurnedComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("65_n71mk")
-skeleton = NodePath("../..")
-
-[node name="13SwampTree01Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("66_vu20v")
-skeleton = NodePath("../..")
-
-[node name="14TreeLogFallen03Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("67_qdnhs")
-skeleton = NodePath("../..")
-
-[node name="15Fence01Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("68_1c6iy")
-skeleton = NodePath("../..")
-
-[node name="16Wheel01Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("69_58151")
-skeleton = NodePath("../..")
-
-[node name="17ChaosGateComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("70_3q1u5")
-skeleton = NodePath("../..")
-
-[node name="18GoodStatue01Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("71_a6tre")
-skeleton = NodePath("../..")
-
-[node name="19TorchSet01Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("72_1mces")
-skeleton = NodePath("../..")
-
-[node name="20OrderGateComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("73_cx6sa")
-skeleton = NodePath("../..")
-
-[node name="21RiverCornerComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("74_tf4lr")
-skeleton = NodePath("../..")
-
-[node name="22BtownBrownComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("75_317hm")
-skeleton = NodePath("../..")
-
-[node name="23Lambert150Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("76_o48sl")
-skeleton = NodePath("../..")
-
-[node name="24Itemshop_lambert4Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("77_t78w0")
-skeleton = NodePath("../..")
-
-[node name="25ShopBaseComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("78_g2srk")
-skeleton = NodePath("../..")
-
-[node name="26TallRock02Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("79_cbryr")
-skeleton = NodePath("../..")
-
-[node name="27OrderPantheonComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("80_cw0mb")
-skeleton = NodePath("../..")
-
-[node name="28TreeStump02Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("81_c5p0m")
-skeleton = NodePath("../..")
-
-[node name="29StonehengeComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("82_imiad")
-skeleton = NodePath("../..")
-
-[node name="30StoneFace1Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("83_s1kan")
-skeleton = NodePath("../..")
-
-[node name="31RocksComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("84_q40jl")
-skeleton = NodePath("../..")
-
-[node name="32OrderPantheonDestroyedComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("85_2j5rh")
-skeleton = NodePath("../..")
-
-[node name="33ChaosHouse02Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("86_cebt3")
-skeleton = NodePath("../..")
-
-[node name="34BcolumnBlueVineComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("87_1nppb")
-skeleton = NodePath("../..")
-
-[node name="35Lambert98Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("88_y8bb3")
-skeleton = NodePath("../..")
-
-[node name="36Lambert2Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("89_dspqs")
-skeleton = NodePath("../..")
-
-[node name="37WizardSculptureComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("90_h20bv")
-skeleton = NodePath("../..")
-
-[node name="38Lambert138Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("91_buro0")
-skeleton = NodePath("../..")
-
-[node name="39OrderTileFloorMark1Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("92_0u3kv")
-skeleton = NodePath("../..")
-
-[node name="40BaseChasm3Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("93_slawo")
-skeleton = NodePath("../..")
-
-[node name="41BaseChasm1Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("94_n036d")
-skeleton = NodePath("../..")
-
-[node name="42BaseChasm2Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("95_o3tn7")
-skeleton = NodePath("../..")
-
-[node name="43OrderGroundMossPatch1Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("96_4ycmf")
-skeleton = NodePath("../..")
-
-[node name="44OrderGroundMix2Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("97_b74vb")
-skeleton = NodePath("../..")
-
-[node name="45BaseMossPatch1Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("98_essco")
-skeleton = NodePath("../..")
-
-[node name="46OrderSeamComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("99_qgu4w")
-skeleton = NodePath("../..")
-
-[node name="47OrderBaseDecalMidComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("100_2sdk0")
-skeleton = NodePath("../..")
-
-[node name="48VComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("101_ekdqn")
-skeleton = NodePath("../..")
-
-[node name="49NewStoneRoadComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("102_vgdy0")
-skeleton = NodePath("../..")
-
-[node name="50RiverCenterBComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("103_iaf3m")
-skeleton = NodePath("../..")
-
-[node name="51OrderSeam2Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("104_h8y6b")
-skeleton = NodePath("../..")
-
-[node name="52TurretStoneBaseHqComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("105_8mquy")
-skeleton = NodePath("../..")
-
-[node name="53TurretStoneBaseComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("106_3cyip")
-skeleton = NodePath("../..")
-
-[node name="54BaseCenterMark2Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("107_dddf5")
-skeleton = NodePath("../..")
-
-[node name="55NexusStoneBaseComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("108_2b58w")
-skeleton = NodePath("../..")
-
-[node name="56Lambert144Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("109_ufklh")
-skeleton = NodePath("../..")
-
-[node name="57OrderTileFloorBorderComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("110_kb4jd")
-skeleton = NodePath("../..")
-
-[node name="58Sign01Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("111_3dvn1")
-skeleton = NodePath("../..")
-
-[node name="59OrderTorch01Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("112_h3t6v")
-skeleton = NodePath("../..")
-
-[node name="60Plant01Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("113_gd5hi")
-skeleton = NodePath("../..")
-
-[node name="61DryBush01Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("114_xux2c")
-skeleton = NodePath("../..")
-
-[node name="62ShrineVineComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("115_cme0f")
-skeleton = NodePath("../..")
-
-[node name="63MushroomPatch02Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("116_pd4uw")
-skeleton = NodePath("../..")
-
-[node name="64SwampLog011Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("117_d5b5a")
-skeleton = NodePath("../..")
-
-[node name="65Rock04Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("118_2tocs")
-skeleton = NodePath("../..")
-
-[node name="66ChaosFlag02Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("119_2kt62")
-skeleton = NodePath("../..")
-
-[node name="67TombStone01TombStone01Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("120_mx8sj")
-skeleton = NodePath("../..")
-
-[node name="68ChaosSwampLog01Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("121_236th")
-skeleton = NodePath("../..")
-
-[node name="69Flower012Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("122_gaayi")
-skeleton = NodePath("../..")
-
-[node name="70ChaosStonesComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("123_ygo00")
-skeleton = NodePath("../..")
-
-[node name="71MossRock01Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("124_1w7gv")
-skeleton = NodePath("../..")
-
-[node name="72ChaosGate01Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("125_ccpxy")
-skeleton = NodePath("../..")
-
-[node name="73ChaosShrineWall02Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("126_amer1")
-skeleton = NodePath("../..")
-
-[node name="74ChaosShrineWall01Comp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("127_2l3h7")
-skeleton = NodePath("../..")
-
-[node name="75WallOfGrassComp" type="MeshInstance3D" parent="Node3D"]
-mesh = ExtResource("128_e36j8")
-skeleton = NodePath("../..")
 
 [editable path="UI/Center/SummonerSpells/Spell1"]
 [editable path="UI/Center/SummonerSpells/Spell2"]

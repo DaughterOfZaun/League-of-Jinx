@@ -20,16 +20,12 @@ extends Effect
 @export var persist_thru_death: bool
 
 #region Import
-@export_group("Import")
+@export_group("Import", "import_")
 @export_file("*.troy") var import_path: String
-@export var import: bool:
-	set(value):
-		if value && !import:
-			import = true
-			var ini := ini_load(import_path)
-			set_from_ini_section(ini["System"])
-			recreate_groups(ini)
-			import = false
+@export_tool_button("Import") var import := func() -> void:
+	var ini := ini_load(import_path)
+	set_from_ini_section(ini["System"])
+	recreate_groups(ini)
 @export_group("")
 
 var groups: Array[Array] = []

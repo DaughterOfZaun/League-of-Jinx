@@ -26,15 +26,23 @@ var targeting_type: Enums.TargetingType
 var slot: SpellSlot
 var is_sealed := false
 var icon_index := 0
+var icon: Texture2D:
+	get:
+		#if icon_index < len(data.inventory_icon):
+		return data.inventory_icon[icon_index]
+		#else: return null
 
 var level := 0
 var level_plus_one: int:
 	get:
 		return level + 1
 
-var current_cost: float
-var current_cooldown: float
-var current_cast_range: float
+var cost: float
+var cooldown_wait_time: float:
+	get: return timer.wait_time if state == State.COOLDOWN else 0
+var cooldown_time_left: float:
+	get: return timer.time_left if state == State.COOLDOWN else 0
+var cast_range: float
 var is_attack_override: bool
 
 var state := State.READY
@@ -45,6 +53,12 @@ enum State {
 	EXECUTING,
 	COOLDOWN,
 }
+
+var timer := Timer.new()
+signal timeout_or_canceled()
+func _ready() -> void:
+	timer.timeout.connect(func() -> void: timeout_or_canceled.emit())
+	add_child(timer)
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
@@ -190,7 +204,8 @@ func _target_execute(target: Unit, missile: Missile) -> void:
 
 func put_on_cooldown() -> void:
 	state = State.COOLDOWN
-	#TODO:
+	timer.start(get_cooldown())
+	await timeout_or_canceled
 	state = State.READY
 
 func self_execute() -> void: pass

@@ -208,20 +208,16 @@ enum PARType {
 @export var should_face_target: bool
 @export_group("")
 
-@export_group("Import")
+@export_group("Import", "import_")
 var target: Unit
 @export_file("*.ini") var import_path: String
-@export var import: bool:
-	set(value):
-		if value && !import:
-			import = true
-			print("importing...")
-			target = get_parent()
-			target.data = self
-			var ini := ini_load(import_path)
-			set_from_ini_section(ini["Data"])
-			print("imported")
-			import = false
+@export_tool_button("Import") var import := func() -> void:
+	print("importing...")
+	target = get_parent()
+	target.data = self
+	var ini := ini_load(import_path)
+	set_from_ini_section(ini["Data"])
+	print("imported")
 @export_group("")
 
 func get_target_child(type: GDScript, name: String) -> Variant:

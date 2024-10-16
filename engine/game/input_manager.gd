@@ -34,3 +34,17 @@ func _input(event: InputEvent) -> void:
 		var emote_name := Enums.EmoteType_to_string(emote_index)
 		if event.is_action_pressed("Emote" + emote_name):
 			main_hero.emote(emote_index)
+
+func _ready() -> void:
+	var spells: Dictionary[String, UISpell] = {
+		"q": get_node("%UI/Center/ChampionSpells/Spell1"),
+		"w": get_node("%UI/Center/ChampionSpells/Spell2"),
+		"e": get_node("%UI/Center/ChampionSpells/Spell3"),
+		"r": get_node("%UI/Center/ChampionSpells/Spell4"),
+		"d": get_node("%UI/Center/SummonerSpells/Spell1"),
+		"f": get_node("%UI/Center/SummonerSpells/Spell2"),
+		"b": get_node("%UI/Center/Recall"),
+	}
+	await main_hero.ready
+	for letter in spells:
+		spells[letter].bind_to(main_hero.spells[letter])
