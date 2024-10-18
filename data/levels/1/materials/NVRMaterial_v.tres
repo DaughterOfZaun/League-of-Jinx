@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bs2ly4qrumux1"]
 
-[ext_resource type="Texture2D" uid="uid://cpommd5my6fjj" path="res://data/levels/1/textures/room_chaos_root_base_decal_mid.png" id="1_e6vcr"]
+[ext_resource type="Texture2D" uid="uid://b5hf6525j4s7c" path="res://data/levels/1/textures/room_chaos_root_base_decal_mid.png" id="1_e6vcr"]
 
 [resource]
 resource_name = "NVRMaterial_v"

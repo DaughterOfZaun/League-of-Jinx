@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dmmr00h504hec"]
 
-[ext_resource type="Texture2D" uid="uid://cityhbcgt6pei" path="res://data/levels/1/textures/room_Rock04.png" id="1_v6fkd"]
+[ext_resource type="Texture2D" uid="uid://ch8lmxfrbgvbg" path="res://data/levels/1/textures/room_Rock04.png" id="1_v6fkd"]
 
 [resource]
 resource_name = "NVRMaterial_Rock04_"

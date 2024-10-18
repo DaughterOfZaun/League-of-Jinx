@@ -3,9 +3,32 @@ extends Node3D
 
 @export var decals: Array[Texture2D] = []
 
+@export_tool_button("Disable Decals") var disable_decals := func() -> void:
+	for child in get_children(true):
+		var mi := child as MeshInstance3D
+		if mi == null: continue
+		assert(mi.mesh.get_surface_count() == 1)
+		var m := mi.mesh.surface_get_material(0) as StandardMaterial3D
+		var is_decal := m.albedo_texture in decals
+		mi.visible = !is_decal
+
+@export_tool_button("Fix Decals") var fix_decals := func() -> void:
+	var i := 0
+	for child in get_children(true):
+		var mi := child as MeshInstance3D
+		if mi == null: continue
+		assert(mi.mesh.get_surface_count() == 1)
+		var m := mi.mesh.surface_get_material(0) as StandardMaterial3D
+		var is_decal := m.albedo_texture in decals
+		if is_decal:
+			mi.position.y += 0.001 * i
+			m.texture_repeat = false
+			mi.visible = true
+			i += 1
+
 const mi_dir := "res://data/levels/1/meshes"
 
-@export_tool_button("Save Meshes") var save_mi := func() -> void:
+@export_tool_button("Save Meshes") var save_meshes := func() -> void:
 	for child in get_children(true):
 		var mi := child as MeshInstance3D
 		if mi == null: continue
@@ -14,14 +37,7 @@ const mi_dir := "res://data/levels/1/meshes"
 		file.store_var(mi.mesh)
 		mi.mesh.take_over_path(path)
 
-@export_tool_button("Disable Decals") var disable_mi := func() -> void:
-	for child in get_children(true):
-		var mi := child as MeshInstance3D
-		if mi == null: continue
-		assert(mi.mesh.get_surface_count() == 1)
-		mi.visible = (mi.mesh.surface_get_material(0) as StandardMaterial3D).albedo_texture not in decals
-
-@export_tool_button("Instantiate Meshes") var spawn_mi := func() -> void:
+@export_tool_button("Instantiate Meshes") var spawn_meshes := func() -> void:
 	for file_name in DirAccess.get_files_at(mi_dir):
 		if !file_name.ends_with(".tres"): continue
 		var mi_name := file_name.replace(".tres", "")

@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c1psib3fnl0fo"]
 
-[ext_resource type="Texture2D" uid="uid://b8b0vyn508jjl" path="res://data/levels/1/textures/room_MossRock01.png" id="1_ghj61"]
+[ext_resource type="Texture2D" uid="uid://bfo1u6ub3bp2s" path="res://data/levels/1/textures/room_MossRock01.png" id="1_ghj61"]
 
 [resource]
 resource_name = "NVRMaterial_MossRock01_"

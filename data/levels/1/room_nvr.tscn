@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bf60npalj0tgt"]
-
-[ext_resource type="PackedScene" uid="uid://cbcmyfke3tvem" path="res://data/levels/1/room.nvr.glb" id="1_o2g36"]
-
-[node name="room_nvr" instance=ExtResource("1_o2g36")]

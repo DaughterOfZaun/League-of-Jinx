@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c755bx1j5m6f0"]
 
-[ext_resource type="Texture2D" uid="uid://bbous2w6tgmu" path="res://data/levels/1/textures/room_SwampTree_01.png" id="1_3fl8n"]
+[ext_resource type="Texture2D" uid="uid://cdkbnme42o7c2" path="res://data/levels/1/textures/room_SwampTree_01.png" id="1_3fl8n"]
 
 [resource]
 resource_name = "NVRMaterial_SwampTree_01_"

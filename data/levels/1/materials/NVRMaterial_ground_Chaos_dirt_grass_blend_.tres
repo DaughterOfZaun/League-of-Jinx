@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dkfsb4kyjspir"]
 
-[ext_resource type="Texture2D" uid="uid://c6ic70grqvljh" path="res://data/levels/1/textures/room_Chaos_dirt_grass_blend.png" id="1_soxjq"]
+[ext_resource type="Texture2D" uid="uid://dlx36geqql3xg" path="res://data/levels/1/textures/room_Chaos_dirt_grass_blend.png" id="1_soxjq"]
 
 [resource]
 resource_name = "NVRMaterial_ground_Chaos_dirt_grass_blend_"

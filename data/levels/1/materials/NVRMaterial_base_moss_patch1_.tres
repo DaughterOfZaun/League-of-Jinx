@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://engihehgmafl"]
 
-[ext_resource type="Texture2D" uid="uid://xp1hv1qhe1j4" path="res://data/levels/1/textures/room_base__moss_patch1.png" id="1_tifdb"]
+[ext_resource type="Texture2D" uid="uid://csibq48lyq1vy" path="res://data/levels/1/textures/room_base__moss_patch1.png" id="1_tifdb"]
 
 [resource]
 resource_name = "NVRMaterial_base_moss_patch1_"

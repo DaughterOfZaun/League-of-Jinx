@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dypcwspds5nwb"]
 
-[ext_resource type="Texture2D" uid="uid://xtnj53vgnn0w" path="res://data/levels/1/textures/room_TallRock02.png" id="1_w52gh"]
+[ext_resource type="Texture2D" uid="uid://yohhpfbh4pen" path="res://data/levels/1/textures/room_TallRock02.png" id="1_w52gh"]
 
 [resource]
 resource_name = "NVRMaterial_TallRock02_"

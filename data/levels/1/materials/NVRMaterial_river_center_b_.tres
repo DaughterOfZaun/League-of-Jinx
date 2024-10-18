@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dnqnovth6x6ah"]
 
-[ext_resource type="Texture2D" uid="uid://kemadodg1xy4" path="res://data/levels/1/textures/room_river_center_c.png" id="1_yjuwm"]
+[ext_resource type="Texture2D" uid="uid://da3qi4h4fb0lv" path="res://data/levels/1/textures/room_river_center_c.png" id="1_yjuwm"]
 
 [resource]
 resource_name = "NVRMaterial_river_center_b_"

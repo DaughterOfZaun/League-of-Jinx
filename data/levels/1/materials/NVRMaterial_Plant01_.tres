@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://3shdyiyxaxay"]
 
-[ext_resource type="Texture2D" uid="uid://dq45msho55608" path="res://data/levels/1/textures/room_Plant01.png" id="1_vpww5"]
+[ext_resource type="Texture2D" uid="uid://0yq2pxkghevl" path="res://data/levels/1/textures/room_Plant01.png" id="1_vpww5"]
 
 [resource]
 resource_name = "NVRMaterial_Plant01_"

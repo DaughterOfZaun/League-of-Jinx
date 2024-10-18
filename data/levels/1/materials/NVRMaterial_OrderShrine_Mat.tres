@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dolk7h6jdkuyg"]
 
-[ext_resource type="Texture2D" uid="uid://bskhfsgu4pkq1" path="res://data/levels/1/textures/room_Shrine.png" id="1_m05yd"]
+[ext_resource type="Texture2D" uid="uid://15q64bfwiooc" path="res://data/levels/1/textures/room_Shrine.png" id="1_m05yd"]
 
 [resource]
 resource_name = "NVRMaterial_OrderShrine_Mat"
