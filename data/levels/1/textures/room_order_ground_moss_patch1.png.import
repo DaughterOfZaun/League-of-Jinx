@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsktq7kpe5l52"
+uid="uid://gohhf8bgifn6"
 path.s3tc="res://.godot/imported/room_order_ground_moss_patch1.png-8c6123005459154d3ec0a6e9d765c781.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "2b3a8923d6fe3afb5deaa4be8fcc6efe"
 }
 
 [deps]

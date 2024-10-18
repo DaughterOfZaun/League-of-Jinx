@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b42nwgalt0u4a"
+uid="uid://drqameh8dggpy"
 path.s3tc="res://.godot/imported/room_stoneFace1.png-df1237941bf0c9416b9afc3f3058da83.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "6a52977546f01c415747518795ad2556"
 }
 
 [deps]

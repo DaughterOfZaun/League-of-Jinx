@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xtnj53vgnn0w"
+uid="uid://yohhpfbh4pen"
 path.s3tc="res://.godot/imported/room_TallRock02.png-2d8a559b8e9163e2f7ff4a023d063038.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "e48f71ee8500d6db916585bcb0c768cd"
 }
 
 [deps]

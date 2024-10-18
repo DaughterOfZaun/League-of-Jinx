@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lbe6ecb6ohu6"
+uid="uid://xngek5aaio3r"
 path.s3tc="res://.godot/imported/room_order_ground_mix2.png-5fda520d797ce349a44312795be69041.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "1479d334690ae181fd8b0392b8f7330f"
 }
 
 [deps]

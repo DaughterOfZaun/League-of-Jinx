@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnjl6ad5j3n7"
+uid="uid://ce4lwke06l0gv"
 path.s3tc="res://.godot/imported/room_Fence01.png-2115754f1e7308375213b9bdf5a7cec1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "bd21be2b19bbc29800fae9374690d500"
 }
 
 [deps]

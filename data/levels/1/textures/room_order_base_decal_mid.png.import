@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0kx6oxvxoc0"
+uid="uid://cqbw57iuf3yps"
 path.s3tc="res://.godot/imported/room_order_base_decal_mid.png-223f6a8afc7dd96097319489ff70889c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "b6020800e65dbc1a266d6a883082c26b"
 }
 
 [deps]

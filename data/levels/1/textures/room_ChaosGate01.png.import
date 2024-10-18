@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dujvr1dekjsp8"
+uid="uid://b17jeryvc66wm"
 path.s3tc="res://.godot/imported/room_ChaosGate01.png-8fec23e291b149542e3d9a075cea053a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "ff5a2ccb564de6334372db5b16c95ea1"
 }
 
 [deps]

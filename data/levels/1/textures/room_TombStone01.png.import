@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfysb5qtd64ak"
+uid="uid://1tgwt0oh7xpa"
 path.s3tc="res://.godot/imported/room_TombStone01.png-b78513abd77a07bebb73e2e767d4b40a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "d5059a617cd49781fe02382b0ac7b46b"
 }
 
 [deps]

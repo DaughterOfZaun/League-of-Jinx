@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://do34n4a12qb8o"
+uid="uid://dsgq61d0pp55a"
 path.s3tc="res://.godot/imported/room_shop_diffuse.png-15a8481fdc60cbcc9152d3b369607e7d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "7f6be2c3933937254cd7eb33bda0203e"
 }
 
 [deps]

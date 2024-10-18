@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kemadodg1xy4"
+uid="uid://da3qi4h4fb0lv"
 path.s3tc="res://.godot/imported/room_river_center_c.png-d792fa4bcd6a8dd22ee6ac1eb1a42c2c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "5559186ffb12064b245ecc46237d6ce3"
 }
 
 [deps]

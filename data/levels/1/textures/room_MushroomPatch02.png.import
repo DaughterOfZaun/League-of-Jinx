@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3w5ommsjv75x"
+uid="uid://bw84qefg7kjmt"
 path.s3tc="res://.godot/imported/room_MushroomPatch02.png-5c8a596a9e2ee652191b71f5010c2da0.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "90cdcd47eb695f4fcb467793ae0d2ab5"
 }
 
 [deps]

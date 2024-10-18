@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhybtte54obhw"
+uid="uid://dvb2mlhn4uklx"
 path.s3tc="res://.godot/imported/room_ChaosPantheon01.png-d7fa56e56884d8c273efa072651b175f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "9e620ee4d74f8fb7166ae75eb3e8efe0"
 }
 
 [deps]

@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ds3j0mny33qvd"
+uid="uid://b4fjtrpkg2dsu"
 path.s3tc="res://.godot/imported/room_TreeStump02.png-0c1d2a534b60537c7ad665e0ce66014a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "ce134fdbb59bb94d4c95bf3dc572b16e"
 }
 
 [deps]

@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdx7x55uxb54q"
+uid="uid://dvfta870b0iep"
 path.s3tc="res://.godot/imported/room_turret_stoneBase_hq.png-ee23f4c3367cec791acdc4ec8d97bfdc.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "bd74f521d63614e32fff77b913ed80ed"
 }
 
 [deps]

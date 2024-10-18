@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boenwcms5fcx2"
+uid="uid://bpy5xo1oqpo1l"
 path.s3tc="res://.godot/imported/room_base_chasm1.png-8c65b43e6418d93d23d1667f3e51c199.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "663a643dc05a45c997f8a538b52136be"
 }
 
 [deps]

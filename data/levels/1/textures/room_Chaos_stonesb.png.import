@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cf2bx81oyijqt"
+uid="uid://x11jaldk04sy"
 path.s3tc="res://.godot/imported/room_Chaos_stonesb.png-af8c42aafe9695ccd8fab4ce1b15930c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "ee25843dabf151549aa093ddde81facd"
 }
 
 [deps]

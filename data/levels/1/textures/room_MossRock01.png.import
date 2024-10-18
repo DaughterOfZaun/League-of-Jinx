@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8b0vyn508jjl"
+uid="uid://bfo1u6ub3bp2s"
 path.s3tc="res://.godot/imported/room_MossRock01.png-637e472c3d904262354a36caab92329c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "871afca7fc5ce8740244f8b5595af9f6"
 }
 
 [deps]

@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caquuicaoeuga"
+uid="uid://dtm8va4j5dwij"
 path.s3tc="res://.godot/imported/room_stonehenge.png-0180eeb980067a0bcee1756f83fa43c8.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "0246861ecf789abee034ae19a8422c20"
 }
 
 [deps]

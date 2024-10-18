@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btecqv6a3bw48"
+uid="uid://bd2yd8u30k8ya"
 path.s3tc="res://.godot/imported/room_Btown_Brown.png-019391097520d90eb0945b5f8565f84f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "e8a6726c424a38387ec8bb9048837e70"
 }
 
 [deps]

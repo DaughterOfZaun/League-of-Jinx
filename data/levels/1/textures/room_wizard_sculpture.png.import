@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnwp7q8dm1flu"
+uid="uid://wdfmbjw6pbrg"
 path.s3tc="res://.godot/imported/room_wizard_sculpture.png-e641199eabe1a95ab24e774a4ca1e7fb.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "5dac623d8de6217a4de7998cf1293ac0"
 }
 
 [deps]

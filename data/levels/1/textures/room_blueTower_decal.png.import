@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drn46qf8lf61m"
+uid="uid://cdym3an0khu1x"
 path.s3tc="res://.godot/imported/room_blueTower_decal.png-b472ac68de42137e6d65159a99c92e93.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "a7e5057f00ce6e41026377813b866ee7"
 }
 
 [deps]

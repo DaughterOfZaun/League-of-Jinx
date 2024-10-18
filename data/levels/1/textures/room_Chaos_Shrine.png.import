@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyvbr23vgm23w"
+uid="uid://d0mk0e5h5kaly"
 path.s3tc="res://.godot/imported/room_Chaos_Shrine.png-bf1d8772273a84498696392ff6def3e7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "546a799a15b79973f318abf28e405171"
 }
 
 [deps]

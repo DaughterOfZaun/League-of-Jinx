@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wijeu3i085fy"
+uid="uid://csn5vhdkes7d2"
 path.s3tc="res://.godot/imported/room_Wheel01.png-7bf5523609f7b973c690cbf98afd3b0f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "b5110b0cf555f10aa7052637b8c1a587"
 }
 
 [deps]

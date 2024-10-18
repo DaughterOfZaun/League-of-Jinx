@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vjgrnnxl076j"
+uid="uid://b4itasoion4ep"
 path.s3tc="res://.godot/imported/room_OrderTorch01.png-cca41c77f0fa7310b19ff10db5a773cc.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "6793fdf6776f0dfd90a9e1811f5b4092"
 }
 
 [deps]

@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmjbjnrby7nxf"
+uid="uid://bfne235h2ruof"
 path.s3tc="res://.godot/imported/room_Tree01_Burned.png-ae59505ad8b36fc95b535d031c0e693e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "136c15b6670aa3ead4ee7aaed4671c1f"
 }
 
 [deps]

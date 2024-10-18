@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t7f6eyb5gf11"
+uid="uid://cu1wafkgicj7u"
 path.s3tc="res://.godot/imported/room_rocks.png-137f057a4495cb9e536bd2f5e41fe065.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "4f58a6af0f811a09e096b35d6db996de"
 }
 
 [deps]

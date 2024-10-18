@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cliiwo7mporiv"
+uid="uid://dxevnif7idrma"
 path.s3tc="res://.godot/imported/room_nexus_stoneBase.png-3fd513fd1a8e14d6e087524327462161.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "49a465923c6f58e99320c1ae7391485d"
 }
 
 [deps]

@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7ph2b3hq0uvo"
+uid="uid://dkvcwvnj1qlnm"
 path.s3tc="res://.godot/imported/room_Sign01.png-b45da68e7fe39e73c976072a20d968d7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "1fd68a73cd5fd0b1e666645a130c4f15"
 }
 
 [deps]

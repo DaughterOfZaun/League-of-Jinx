@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bj0pym8ugmhn4"
+uid="uid://cuiarllq0hr0g"
 path.s3tc="res://.godot/imported/room_OrderGate.png-2ec9e6afd9a614bd23ef0aa3f3a255b3.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "47cc920bde945876b02d47b84b5c4500"
 }
 
 [deps]

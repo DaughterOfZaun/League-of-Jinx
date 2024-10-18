@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bts7ekv36kmsr"
+uid="uid://cb8uk2tdqpvmf"
 path.s3tc="res://.godot/imported/room_Nexus_diff.png-730562b071a423ea7b1fbe7af0e0399c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "b1730303b86d92384aa3eeea7a79553b"
 }
 
 [deps]

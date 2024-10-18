@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhkhk17ajxog3"
+uid="uid://wq1g682vxrd7"
 path.s3tc="res://.godot/imported/room_grass_ground_new_dark.png-9c205c53ab68cd8938b0eac7ab0f2b74.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "10c7d081c0c6af7d25cb58a4d13da6c0"
 }
 
 [deps]

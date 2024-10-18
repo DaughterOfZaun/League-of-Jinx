@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c05xdbe4lcimd"
+uid="uid://b6pn4ih7jlv0r"
 path.s3tc="res://.godot/imported/room_shrineVine.png-1f0a7f77e0fcc7b5af6d189c20153ada.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "7f494d1012bde51c9d24b3b2f46f7c3c"
 }
 
 [deps]

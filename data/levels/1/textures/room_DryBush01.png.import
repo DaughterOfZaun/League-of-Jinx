@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfcyqarxr5op6"
+uid="uid://bxoiwdtutcw57"
 path.s3tc="res://.godot/imported/room_DryBush01.png-d99d6953442ea71a60098d55d903fe5b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "54dcd4596d227dc859f6f4851c284063"
 }
 
 [deps]

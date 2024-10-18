@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3e0n04sbyoe2"
+uid="uid://cul768geokfhd"
 path.s3tc="res://.godot/imported/room_order_tile_floor_mark2.png-221f7739068af5fa7b5486cc6f8ff03f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "29e1933618f3a19875c5c95993d386c9"
 }
 
 [deps]

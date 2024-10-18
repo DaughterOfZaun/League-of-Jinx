@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbous2w6tgmu"
+uid="uid://cdkbnme42o7c2"
 path.s3tc="res://.godot/imported/room_SwampTree_01.png-a4b66f5783413500beb825b9ff0f1ede.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "8e612f5ff3b1226c13668efdbbb276d4"
 }
 
 [deps]

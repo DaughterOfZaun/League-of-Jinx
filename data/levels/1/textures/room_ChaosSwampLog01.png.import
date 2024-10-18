@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy7adifhhtx3r"
+uid="uid://bg5w3p6bp7dhj"
 path.s3tc="res://.godot/imported/room_ChaosSwampLog01.png-08f9b2599918ce33365c0187ef4eda1f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "b04cd33624aa56a799e60e351af37a04"
 }
 
 [deps]

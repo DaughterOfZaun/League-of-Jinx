@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://do40kbuju8in2"
+uid="uid://bj1i6cms4xj63"
 path.s3tc="res://.godot/imported/room_order_seam2.png-e80dfc0f057ea235f440a709c786249b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "203ba473031f4d4244a12be9d0559bd5"
 }
 
 [deps]

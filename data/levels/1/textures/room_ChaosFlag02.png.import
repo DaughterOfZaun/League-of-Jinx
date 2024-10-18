@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgqr4eeut5e58"
+uid="uid://bnb6yf2pq1wsv"
 path.s3tc="res://.godot/imported/room_ChaosFlag02.png-d7835dd171bbd552e9f31d45c0cf424f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "d68980fea0b555d02aa2cbb13509444c"
 }
 
 [deps]

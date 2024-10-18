@@ -60,7 +60,7 @@
 [ext_resource type="Texture2D" uid="uid://i8r5uocv7r3f" path="res://data/spells/Flash/Summoner_flash.webp" id="57_m5pxd"]
 [ext_resource type="Texture2D" uid="uid://bvs00ndscuup" path="res://data/spells/Heal/Summoner_heal.webp" id="58_pw432"]
 [ext_resource type="Texture2D" uid="uid://c8xp3k3d1v7c" path="res://data/spells/Recall/TeleportHome.webp" id="59_isoa0"]
-[ext_resource type="PackedScene" uid="uid://cdumkeec24u7k" path="res://data/levels/1/map.tscn" id="61_wdqa8"]
+[ext_resource type="PackedScene" uid="uid://bf60npalj0tgt" path="res://data/levels/1/room_nvr.tscn" id="61_h5nwt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ovldq"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -1605,8 +1605,8 @@ script = ExtResource("14_t8bj3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Unit/CancelAttackRange"]
 shape = SubResource("SphereShape3D_hvbg6")
 
-[node name="map" parent="." instance=ExtResource("61_wdqa8")]
-transform = Transform3D(1, 8.74228e-08, 0, -8.74228e-08, 1, 0, 0, 0, -1, -0.504432, -2.436, 3.78158)
+[node name="room_nvr" parent="." instance=ExtResource("61_h5nwt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 
 [editable path="UI/Center/SummonerSpells/Spell1"]
 [editable path="UI/Center/SummonerSpells/Spell2"]

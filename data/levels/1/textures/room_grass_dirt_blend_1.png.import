@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwrff62t4ul4u"
+uid="uid://dda06jojl41su"
 path.s3tc="res://.godot/imported/room_grass_dirt_blend_1.png-9a454a1eb0e3266fa9dcf8247705d3bb.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "e658b8a58f88110d6f8093f997c5da3d"
 }
 
 [deps]
