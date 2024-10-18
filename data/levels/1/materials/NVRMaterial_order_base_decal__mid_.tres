@@ -1,9 +1,12 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ombt1p5cmiyy"]
 
-[ext_resource type="Texture2D" uid="uid://dpeviqtts5qnv" path="res://data/levels/1/textures/room_order_base_decal_mid.png" id="1_8kosw"]
+[ext_resource type="Texture2D" uid="uid://c0kx6oxvxoc0" path="res://data/levels/1/textures/room_order_base_decal_mid.png" id="1_8kosw"]
 
 [resource]
 resource_name = "NVRMaterial_order_base_decal__mid_"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_8kosw")
 metadata/extras = {
 "name": "NVRMaterial_order_base_decal__mid_"

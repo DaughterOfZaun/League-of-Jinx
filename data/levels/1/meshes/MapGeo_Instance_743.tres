@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://bxuv7rsriblk6"]
+
+[ext_resource type="Material" uid="uid://dmmr00h504hec" path="res://data/levels/1/materials/NVRMaterial_Rock04_.tres" id="1_u7pyg"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_cbug6"]
+_surfaces = [{
+"aabb": AABB(43.6359, 0.61211, 70.1552, 13.5027, 2.79466, 4.55506),
+"format": 34896613377,
+"index_count": 99,
+"index_data": PackedByteArray("LAArAC4AAwAAAAEAAgADAAEABwAEAAUABgAHAAUACwAIAAkACgALAAkADwAMAA0ADgAPAA0AEwAQABEAEgATABEAFwAUABUAFgAXABUAHgAbABwAHQAeABwAIgAfACAAIQAiACAAJgAjACQAJQAmACQAKgAnACgAKQAqACgALwAtADIAMAAvADIAMwAxADYANAAzADYANwA1ADoAOAA3ADoAOwA5AD4APAA7AD4APwA9AEIAQAA/AEIAGgBBABkAGAAaABkA"),
+"name": "NVRMaterial_Rock04_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 67,
+"vertex_data": PackedByteArray("d9Mdq8n8AABY1Iyrx+8AAJ7YvKc68gAAvtdNpzz/AACtxyX+0tsAAInG///c0QAA18mM/UDOAAD6yrL7NtgAAJrU0/U75wAAgdho8fbzAAA+1Ofz//8AAFfQUvhD8wAAtc3j93TRAABpzjv4C8cAANXRL/UByQAAItHW9GrTAACuy6H78PcAAIrKe/367QAA2M0I+13qAAD7zi75U/QAAIjUbemc0gAAKtYU5qHoAADgzrnr7e0AAD7NEu/o1wAAu+Q9BzQgAAAb5UIHBDMAADbrOwd0HwAA6MpW+GzqAACEygP6a9sAAHjP+/X+2QAA3M9N9ADpAACb4gAAFmIAAHbhAACEUQAA5eYAABtOAAAL6AAArV4AAELl0QLHTAAA3+PNAgAwAACv7c8CIisAABLv1ALpRwAAqAhRCFUfAADPAlIIyScAAAAASgj3FgAA2AVJCIMOAAB/CoIIlhgAAPIShwiZHAAAhAJoCPwqAAAIDHgIAAAAAAALcwhPPwAAKBJsCFQmAAD459wEinYAAKsJYAgBEgAA7OgsAmlqAAC55HoCbmcAAM3zXDHEgQAAxeMqBY9zAAAX8o4uOXIAAMPsrTDqdgAARu3ULpWBAAB57nszdYYAAPvs4SvZcgAA6OcaLW9zAADX/CIHlEQAADPoDjArggAA//8gByc5AAAh/CEHZS8AAJXrQAdFMgAA+vgjB9I6AAA=")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_743"
+_surfaces = [{
+"aabb": AABB(43.6359, 0.61211, 70.1552, 13.5027, 2.79466, 4.55506),
+"attribute_data": PackedByteArray("6/YAAay62evr9gABrPnZ6+j1AAGs+dqs6PUAAay62qz1+wABrLrZ6/b7AAGs+dnr9PsAAaz52qzz+gABrLrarO33AAGs+dnr6vYAAaz52qzt9wABrLrarO/4AAGsutnr8vkAAay62evy+gABrPnZ6/D5AAGs+dqs8PkAAay62qzy+gABrLrZ6/P6AAGs+dnr8fkAAaz52qzw+QABrLrarO33AAGs+dnr6/YAAaz52qzw+QABrLrarPH5AAGsutnr8fkAAaz52qzz+gABrPnZ6/P6AAGsutqs8voAAay62evz+gABrPnZ6/D5AAGs+dqs8PgAAay62qzz+gABrLrZ6/P6AAGs+dnr8/oAAaz52qzy+gABrLrarPP6AAGs+dnr8/oAAaz52qzz+gABrLrarPL6AAGsutnr9vsAAay62ev0+wABrPnZ6/X7AAGs+dqs9/wAAay62qz3/AABrPnZ6/n9AAGsutnr9PoAAaz52ev6/QABrPnarPT7AAGsutnr+PwAAay62qzx+QABrLrZ6/f8AAGs+dqs8vkAAay62qzy+gABrPnarOv2AAGsutnr8voAAaz52evs9wABrLrarO33AAGs+dqs7PcAAay62evr9gABrPnZ6+33AAGsutqs7vgAAaz52qzx+QABrLrZ6+33AAGs+dnr8voAAay62qzz+gABrPnarPP6AAGsutnr8voAAaz52es="),
+"format": 34896613407,
+"index_count": 99,
+"index_data": PackedByteArray("LAArAC4AAwAAAAEAAgADAAEABwAEAAUABgAHAAUACwAIAAkACgALAAkADwAMAA0ADgAPAA0AEwAQABEAEgATABEAFwAUABUAFgAXABUAHgAbABwAHQAeABwAIgAfACAAIQAiACAAJgAjACQAJQAmACQAKgAnACgAKQAqACgALwAtADIAMAAvADIAMwAxADYANAAzADYANwA1ADoAOAA3ADoAOwA5AD4APAA7AD4APwA9AEIAQAA/AEIAGgBBABkAGAAaABkA"),
+"material": ExtResource("1_u7pyg"),
+"name": "NVRMaterial_Rock04_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 67,
+"vertex_data": PackedByteArray("d9Mdq8n8LzRY1Iyrx+8vNJ7YvKc68i80vtdNpzz/LzStxyX+0tvBJ4nG///c0cEn18mM/UDOwSf6yrL7NtjBJ5rU0/U7550+gdho8fbznT4+1Ofz//+dPlfQUvhD850+tc3j93TRMDRpzjv4C8cvNNXRL/UByS80ItHW9GrTLzSuy6H78PfBJ4rKe/367cEn2M0I+13qwSf7zi75U/TBJ4jUbemc0ilCKtYU5qHoKULgzrnr7e0pQj7NEu/o1ylCu+Q9BzQgHwEb5UIHBDMfATbrOwd0Hx8B6MpW+Gzq9y2EygP6a9v3LXjP+/X+2fct3M9N9ADp9y2b4gAAFmLAJXbhAACEUcAl5eYAABtOwCUL6AAArV7AJULl0QLHTMYE3+PNAgAwxgSv7c8CIivGBBLv1ALpR8YEqAhRCFUfAQ3PAlIIyScBDQAASgj3FgEN2AVJCIMOAQ1/CoIIlhiSBPIShwiZHJIEhAJoCPwqYBMIDHgIAACSBAALcwhPP2ATKBJsCFQmYBP459wEinaWB6sJYAgBEmAT7OgsAmlqlge55HoCbmeWB83zXDHEgZgGxeMqBY9zlgcX8o4uOXKYBsPsrTDqdpgGRu3ULpWBKAB57nszdYaYBvvs4SvZcigA6OcaLW9zKADX/CIHlEQaFDPoDjArgigA//8gByc5GhQh/CEHZS8aFJXrQAdFMh8B+vgjB9I6GhR401steNNbLXjTWy1401stM82/HTPNvx0zzb8dM82/HSHdakUh3WpFId1qRSHdakV501wteNNcLXjTWy1401wtNM2/HTTNvx00zb8dNM2/HZjq8maY6vJmmOrzZpjq8mY7gWW/O4FlvzuBZb8Q0N4kENDeJBDQ3iQQ0N4kiNITJYnSEyWJ0hMlidITJRqFcb0ahXG9GoVxvRqFcb0/jWa5P41muT+NZrk/jWa5a8LnBGvC5wSWyTwTa8LnBJbJOxOWyTsTJ789BpbJOxMnvz0GJ789BoWKNb4nvz0GhYo1voWKNb56Qs4ChYo1vnpCzgJ6Qs4C8cnkE3pCzgLxyeQT8cnkEzuBZb/xyeQT")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_cbug6")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_743",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

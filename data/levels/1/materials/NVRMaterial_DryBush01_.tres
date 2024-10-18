@@ -1,9 +1,12 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bjir5eexct0oe"]
 
-[ext_resource type="Texture2D" uid="uid://rmv4wpnqn2c0" path="res://data/levels/1/textures/room_DryBush01.png" id="1_u8k3f"]
+[ext_resource type="Texture2D" uid="uid://cfcyqarxr5op6" path="res://data/levels/1/textures/room_DryBush01.png" id="1_u8k3f"]
 
 [resource]
 resource_name = "NVRMaterial_DryBush01_"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_u8k3f")
 metadata/extras = {
 "name": "NVRMaterial_DryBush01_"

@@ -1,9 +1,12 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dtd2847ue0cog"]
 
-[ext_resource type="Texture2D" uid="uid://dlebotswjpwpm" path="res://data/levels/1/textures/room_Flower012.png" id="1_cddmh"]
+[ext_resource type="Texture2D" uid="uid://cpy8w48x1f5uw" path="res://data/levels/1/textures/room_Flower012.png" id="1_cddmh"]
 
 [resource]
 resource_name = "NVRMaterial_Flower012_"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_cddmh")
 metadata/extras = {
 "name": "NVRMaterial_Flower012_"

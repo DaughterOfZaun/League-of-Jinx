@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://b0auup082bpsh"]
+
+[ext_resource type="Material" uid="uid://bdpi00mobhm3e" path="res://data/levels/1/materials/NVRMaterial_ground_grass_ground_new_dark_.tres" id="1_h2nbm"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vfxho"]
+_surfaces = [{
+"aabb": AABB(22.6405, -0.20946, 194.176, 16.4623, 0.698626, 12.6346),
+"format": 34896613377,
+"index_count": 9,
+"index_data": PackedByteArray(0, 0, 3, 0, 4, 0, 0, 0, 4, 0, 2, 0, 4, 0, 1, 0, 2, 0),
+"name": "NVRMaterial_ground_grass_ground_new_dark_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(153, 49, 255, 255, 217, 199, 0, 0, 255, 255, 223, 121, 63, 77, 0, 0, 146, 234, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 166, 66, 74, 126, 206, 66, 0, 0)
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_1415"
+_surfaces = [{
+"aabb": AABB(22.6405, -0.20946, 194.176, 16.4623, 0.698626, 12.6346),
+"attribute_data": PackedByteArray(0, 255, 228, 1, 0, 0, 91, 40, 0, 0, 0, 1, 191, 14, 127, 20, 0, 0, 0, 1, 219, 5, 0, 0, 244, 0, 219, 1, 160, 5, 67, 73, 0, 254, 186, 1, 236, 5, 28, 53),
+"format": 34896613407,
+"index_count": 9,
+"index_data": PackedByteArray(0, 0, 3, 0, 4, 0, 0, 0, 4, 0, 2, 0, 4, 0, 1, 0, 2, 0),
+"material": ExtResource("1_h2nbm"),
+"name": "NVRMaterial_ground_grass_ground_new_dark_",
+"primitive": 3,
+"uv_scale": Vector4(75.1992, 20.3717, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(153, 49, 255, 255, 217, 199, 28, 55, 255, 255, 223, 121, 63, 77, 31, 58, 146, 234, 255, 255, 255, 255, 174, 56, 0, 0, 0, 0, 0, 0, 55, 56, 166, 66, 74, 126, 206, 66, 205, 55, 61, 225, 75, 67, 152, 227, 132, 71, 107, 226, 80, 70, 42, 226, 188, 66, 45, 226, 234, 67)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_vfxho")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_1415",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

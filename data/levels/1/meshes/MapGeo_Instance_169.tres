@@ -1,0 +1,46 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://pme7ocycpgfu"]
+
+[ext_resource type="Material" uid="uid://buuxpy258p7pn" path="res://data/levels/1/materials/NVRMaterial_base_chasm1_.tres" id="1_rxojq"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2tw3f"]
+_surfaces = [{
+"aabb": AABB(17.5455, 1.28282, -1.27244, 19.1289, 0.0162376, 20.4967),
+"format": 34896613377,
+"index_count": 39,
+"index_data": PackedByteArray("AgALAAoACgALAAMAAgAAAAsAAQADAAsAAwABAAUABQABAAYAAQAHAAYACAAHAAEAAAAEAAsABAABAAsABAAIAAEABAAAAAkACAAEAAkA"),
+"lods": [0.0102945, PackedByteArray("AgADAAoAAgAAAAMAAwAAAAkACAADAAkACAAHAAMAAwAHAAYABQADAAYA")],
+"name": "NVRMaterial_base_chasm1_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("0v0dCUJ/AAD4ZBygZ4wAAMz9erGeYgAA7E3Oq9VjAABmuBygsoUAAEkC/v+SoQAAAAD+/97ZAADqZP////8AAGW4/v+y/AAA//8AAC77AABmtgjIAAAAAOC3kqqsYgAA")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_169"
+_surfaces = [{
+"aabb": AABB(17.5455, 1.28282, -1.27244, 19.1289, 0.0162376, 20.4967),
+"attribute_data": PackedByteArray("AAAAAUj+oq0AAAAB6IUgpfn9AAFD/izAAAAAAcJzYr8AAAABnMd3qQAAAAEwOG2XAAAAAWM2/nIAAAAB3YVRWgAAAAGbx3RcAAAAAf//b10AAAABCcb//wAAAAEzxyLA"),
+"format": 34896613407,
+"index_count": 39,
+"index_data": PackedByteArray("AgALAAoACgALAAMAAgAAAAsAAQADAAsAAwABAAUABQABAAYAAQAHAAYACAAHAAEAAAAEAAsABAABAAsABAAIAAEABAAAAAkACAAEAAkA"),
+"lods": [0.0102945, PackedByteArray("AgADAAoAAgAAAAMAAwAAAAkACAADAAkACAAHAAMAAwAHAAYABQADAAYA")],
+"material": ExtResource("1_rxojq"),
+"name": "NVRMaterial_base_chasm1_",
+"primitive": 3,
+"uv_scale": Vector4(2.79275, 3.94663, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("0v0dCUJ/D0D4ZBygZ4z8P8z9erGeYhhA7E3Oq9Vj/z9muBygsoX9P0kC/v+Sof8/AAD+/97Z/D/qZP/////4P2W4/v+y/Pk///8AAC77/D9mtgjIAAD/P+C3kqqsYgdA1v/rf/f/+3////9/9v/7f9L/6X/k//J/8f/4f////3/e/+9/r//Xf////3/0//p/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_2tw3f")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_169",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

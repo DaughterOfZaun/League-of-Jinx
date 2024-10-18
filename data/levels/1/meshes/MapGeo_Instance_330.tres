@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://doh553pj6dny1"]
+
+[ext_resource type="Material" uid="uid://bhfi7kjxe1xog" path="res://data/levels/1/materials/NVRMaterial_new_stone_road_.tres" id="1_e6g80"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_m2dtt"]
+_surfaces = [{
+"aabb": AABB(-0.513546, 0.442971, 86.1639, 17.6329, 0.136581, 11.0989),
+"format": 34896613377,
+"index_count": 9,
+"index_data": PackedByteArray(1, 0, 2, 0, 0, 0, 2, 0, 1, 0, 4, 0, 3, 0, 2, 0, 4, 0),
+"name": "NVRMaterial_new_stone_road_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(0, 0, 255, 255, 165, 18, 0, 0, 255, 98, 241, 251, 84, 0, 0, 0, 32, 95, 0, 0, 247, 255, 0, 0, 255, 255, 89, 1, 255, 255, 0, 0, 77, 236, 234, 251, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_330"
+_surfaces = [{
+"aabb": AABB(-0.513546, 0.442971, 86.1639, 17.6329, 0.136581, 11.0989),
+"attribute_data": PackedByteArray(0, 0, 0, 1, 255, 255, 45, 167, 0, 0, 0, 1, 170, 201, 76, 159, 0, 0, 0, 1, 151, 202, 255, 255, 0, 0, 0, 1, 42, 114, 116, 254, 0, 0, 0, 1, 50, 126, 218, 157),
+"format": 34896613407,
+"index_count": 9,
+"index_data": PackedByteArray(1, 0, 2, 0, 0, 0, 2, 0, 1, 0, 4, 0, 3, 0, 2, 0, 4, 0),
+"material": ExtResource("1_e6g80"),
+"name": "NVRMaterial_new_stone_road_",
+"primitive": 3,
+"uv_scale": Vector4(3.42889, 2.88766, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(0, 0, 255, 255, 165, 18, 125, 0, 255, 98, 241, 251, 84, 0, 121, 0, 32, 95, 0, 0, 247, 255, 123, 0, 255, 255, 89, 1, 255, 255, 119, 0, 77, 236, 234, 251, 0, 0, 119, 0, 116, 192, 123, 0, 117, 192, 126, 0, 160, 192, 125, 0, 162, 192, 130, 0, 117, 192, 128, 0)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_m2dtt")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_330",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

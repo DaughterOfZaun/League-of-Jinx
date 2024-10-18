@@ -1,9 +1,12 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dss2hwqrxyc86"]
 
-[ext_resource type="Texture2D" uid="uid://dtg00vlq5xs4d" path="res://data/levels/1/textures/room_base_chasm2.png" id="1_lwcyl"]
+[ext_resource type="Texture2D" uid="uid://b7mebvcqwrqr6" path="res://data/levels/1/textures/room_base_chasm2.png" id="1_lwcyl"]
 
 [resource]
 resource_name = "NVRMaterial_base_chasm2_"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_lwcyl")
 metadata/extras = {
 "name": "NVRMaterial_base_chasm2_"

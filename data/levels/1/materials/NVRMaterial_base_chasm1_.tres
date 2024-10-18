@@ -1,9 +1,12 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://buuxpy258p7pn"]
 
-[ext_resource type="Texture2D" uid="uid://cvn7sfaaebphc" path="res://data/levels/1/textures/room_base_chasm1.png" id="1_jcqxo"]
+[ext_resource type="Texture2D" uid="uid://boenwcms5fcx2" path="res://data/levels/1/textures/room_base_chasm1.png" id="1_jcqxo"]
 
 [resource]
 resource_name = "NVRMaterial_base_chasm1_"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_jcqxo")
 metadata/extras = {
 "name": "NVRMaterial_base_chasm1_"

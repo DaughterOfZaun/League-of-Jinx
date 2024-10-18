@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://7belmvhgwaai"]
+
+[ext_resource type="Material" uid="uid://dujol4xdnxt4l" path="res://data/levels/1/materials/NVRMaterial_ground_RiverBed_cliff_blend_.tres" id="1_3eels"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_biuv7"]
+_surfaces = [{
+"aabb": AABB(25.2441, -1.0752, 154.113, 6.1018, 1.66866, 5.75763),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAADAAIAAgADAAEAAAAJAAMACQAIAAMACQAEAAgABAAHAAgABwAEAAUABgAHAAUA"),
+"name": "NVRMaterial_ground_RiverBed_cliff_blend_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("uB7r5oeOAACAMJTi//8AAAAAoeIZ1QAACWgAADPNAAAyqv//hyEAAELf//8AAAAA//8AAKQvAADCywAAxVQAAAmlAACCfwAAGl7//3VJAAA=")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_1346"
+_surfaces = [{
+"aabb": AABB(25.2441, -1.0752, 154.113, 6.1018, 1.66866, 5.75763),
+"attribute_data": PackedByteArray("1O8AAf9/9ZLM6wAB//+kjNLuAAEiyv9/7PgAAV2t///28OEB////fwDtzAFlpv9/APjpAWWm/v8A+e0B///+//j59QH/f/7/7PgAAf///v/U7wAB////f+Py+QH/f/9/+Pn1Af///v8A+e0B/3/+//bw4QH/f/9/4/L5Af///38="),
+"format": 34896613407,
+"index_count": 24,
+"index_data": PackedByteArray("AAADAAIAAgADAAEABwAEAAUABgAHAAUACwAIAAkACgALAAkADgANAAwADwAOAAwA"),
+"material": ExtResource("1_3eels"),
+"name": "NVRMaterial_ground_RiverBed_cliff_blend_",
+"primitive": 3,
+"uv_scale": Vector4(2, 2, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("uB7r5oeOVCSAMJTi///DLAAAoeIZ1fAqCWgAADPNRSYyqv//hyGJC0Lf//8AAHMJ//8AAKQv1AbCywAAxVQCBwmlAACCf30PCWgAADPNwg24Huvmh45uFBpe//91SZYVCaUAAIJ/mAnCywAAxVSBDDKq//+HIX8MGl7//3VJ2Ql3peimUsjOmDayCqRSs22X4ZJQrBiWu6URmt+akpizm2icGp1ToVulx5jsrcmYLKu5mSufuJrpmYCT96uikJ+v")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_biuv7")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_1346",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

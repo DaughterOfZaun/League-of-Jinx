@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://dtxtbyp676uah"]
+
+[ext_resource type="Material" uid="uid://ombt1p5cmiyy" path="res://data/levels/1/materials/NVRMaterial_order_base_decal__mid_.tres" id="1_nl4r5"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_spooc"]
+_surfaces = [{
+"aabb": AABB(153.329, 0.578752, 101.436, 11.6526, 0.0401149, 19.4104),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AwACAAEAAgAAAAEABQACAAMAAgAFAAQAAgAHAAAABgACAAQAAgAGAAcABgAIAAcA"),
+"name": "NVRMaterial_order_base_decal__mid_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 9,
+"vertex_data": PackedByteArray("4v/fXRE5AAD//7ZO4J4AALPq313zhgAAQ+7aXS7nAABSCwAAC80AAGneOSL//wAAAx9rfpeJAADa4P//AAAAAAAAsIGIFAAA")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_3519"
+_surfaces = [{
+"aabb": AABB(153.329, 0.578752, 101.436, 11.6526, 0.0401149, 19.4104),
+"attribute_data": PackedByteArray("AOzRAQV124YAAAABFoCwxQAAAAEqiOW1AOzRAQV124YA8uYB45Bz8QD//wH//1jWAPLlAeOQc/EA+PABjpv////58wG97qytAP36AV9+JGLy7eYBh/HwYwAAAAEqiOW1"),
+"format": 34896613407,
+"index_count": 24,
+"index_data": PackedByteArray("BgACAAEAAgADAAEABwALAAQACwAHAAUACAALAAUACwAIAAkACAAKAAkACwAJAAAA"),
+"material": ExtResource("1_nl4r5"),
+"name": "NVRMaterial_order_base_decal__mid_",
+"primitive": 3,
+"uv_scale": Vector4(2.82454, 3.86329, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("4v/fXRE5ZQP//7ZO4J6sA7Pq313zhqwD4v/fXRE5rwND7tpdLucXBFILAAALzb8DQ+7aXS7nqgNp3jki///tAwMfa36Xib8D2uD//wAAowMAALCBiBTLA7Pq313zhr4DYYS4vRiE8b0YhPG9FYTzvaiDMb4EhOm9GoTwvdSDFL4EhOu9IYTgvfiDA74GhO29")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_spooc")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_3519",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

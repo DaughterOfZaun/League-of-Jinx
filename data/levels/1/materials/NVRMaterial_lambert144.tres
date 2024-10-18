@@ -1,9 +1,12 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dnevdbf4dfuox"]
 
-[ext_resource type="Texture2D" uid="uid://b5y1l5e2gjr5u" path="res://data/levels/1/textures/room_inhibitor_stoneBase.png" id="1_ncyn4"]
+[ext_resource type="Texture2D" uid="uid://c3tce66oh2eec" path="res://data/levels/1/textures/room_inhibitor_stoneBase.png" id="1_ncyn4"]
 
 [resource]
 resource_name = "NVRMaterial_lambert144"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_ncyn4")
 metadata/extras = {
 "name": "NVRMaterial_lambert144"

@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://dgdn4hjg7kec2"]
+
+[ext_resource type="Material" uid="uid://dujol4xdnxt4l" path="res://data/levels/1/materials/NVRMaterial_ground_RiverBed_cliff_blend_.tres" id="1_mj5h1"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dp60i"]
+_surfaces = [{
+"aabb": AABB(153.566, -1.0752, 56.9231, 9.62914, 1.66866, 16.5257),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray("CwAFAAQABQAGAAQABgADAAQACgADAAYACQAKAAYACgAJAAAAAQAKAAAAAAACAAEAAgAHAAEABwACAAgA"),
+"name": "NVRMaterial_ground_RiverBed_cliff_blend_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("rSUAABGpAACnM/7/lawAAMHUAAD0OgAAxRL+/3vYAADoEPjzSOoAABMFv5qU7gAALgPPX2bcAADl4P7/T0AAAP///v8AAAAAAAB0IMXJAACDFv7/vscAAPIV/////wAA")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_2741"
+_surfaces = [{
+"aabb": AABB(153.566, -1.0752, 56.9231, 9.62914, 1.66866, 16.5257),
+"attribute_data": PackedByteArray("//XqAQAA///s7+4BAAD/fwDo0AH6//7/3+fqAf9//3/q9PsB+v//f/n8/wH6//7/9e/lAf9//v8A6dAB/3//fwD58gH6//9/AOjQAf9//v/f5+oB+v//f/Xv5QH6//7/+ubNAf9//v/hzrEB/3//f/rmzQH6//7///XqAf9//v/s7+4B/3//f+HOsQH6//9/+fz/AS3/8P/1+wABMn/xfwDp0AH6//9/6vT7AS3/8X8="),
+"format": 34896613407,
+"index_count": 30,
+"index_data": PackedByteArray("EwASABUABwAJAAgABgADAAQABQAGAAQADQAKAAsADAANAAsAEQAOAA8AEAARAA8AAgAUAAEAAAACAAEA"),
+"material": ExtResource("1_mj5h1"),
+"name": "NVRMaterial_ground_RiverBed_cliff_blend_",
+"primitive": 3,
+"uv_scale": Vector4(2.00027, 2, 0, 0),
+"vertex_count": 22,
+"vertex_data": PackedByteArray("rSUAABGpIyWnM/7/layFI8HUAAD0OoUhxRL+/3vYKszoEPjzSOpGyRMFv5qU7kXBLgPPX2bcAM7l4P7/T0CwJP///v8AAKgewdQAAPQ6PRrFEv7/e9idzC4Dz19m3MLMAAB0IMXJBtCDFv7/vseGzgAAdCDFyVHYrSUAABGp7N2nM/7/laxN3oMW/v++xwvXEwW/mpTuLhbyFf/////oHOXg/v9PQEkt6BD480jqAxnr7rJLbO9pTA/zHEsgnzq9LaVSu0Col75JonjDaOGcOQTpRTuf6KQ/U55xve2lYcIjrAbDxKX6wA6T2svdlazFUpVXx++SDsdX5RovadzZLCbsrkil4M4u")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_dp60i")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_2741",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

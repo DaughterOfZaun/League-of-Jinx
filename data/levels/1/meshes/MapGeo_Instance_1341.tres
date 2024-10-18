@@ -1,0 +1,46 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://c23gnqup20dmy"]
+
+[ext_resource type="Material" uid="uid://bs2ly4qrumux1" path="res://data/levels/1/materials/NVRMaterial_v.tres" id="1_1lgjw"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_tk5p0"]
+_surfaces = [{
+"aabb": AABB(19.4324, -1.0752, 149.433, 8.29146, 1.5052, 11.7189),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAAJAAcACwAAAAcAAAALAAgABQAAAAgACAALAAIAAQAFAAgAAgAGAAgABgABAAgAAgAEAAYAAQAGAAMABgAEAAoABgAKAAMA"),
+"lods": [0.425647, PackedByteArray("AAAJAAcACwAAAAcAAAALAAEABQAAAAEAAQALAAIAAQACAAMAAgAKAAMAAgAEAAoA")],
+"name": "NVRMaterial_v",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("zRa86wdmAABGbqbqftUAAArK//9CrAAABpam6v//AAD//wAADcsAAN4qvOunkAAAbrM9++/OAAAZskr7AAAAAB1xvPr5lwAAAAC861YQAAAg1y/7AuQAAF+rSvtqZAAA")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_1341"
+_surfaces = [{
+"aabb": AABB(19.4324, -1.0752, 149.433, 8.29146, 1.5052, 11.7189),
+"attribute_data": PackedByteArray("AAAAAaz/7Z/w+gABkswi5dXvAAGocrHU6vcAAXuz///t+QABbEoC6gAAAAHe92i50u4AAXCOi+YAAAABGmDycfb8AAH3u7XCAAAAAf//AG7M6wAB/HML9f3/AAENffup"),
+"format": 34896613407,
+"index_count": 36,
+"index_data": PackedByteArray("AAAJAAcACwAAAAcAAAALAAgABQAAAAgACAALAAIAAQAFAAgAAgAGAAgABgABAAgAAgAEAAYAAQAGAAMABgAEAAoABgAKAAMA"),
+"lods": [0.425647, PackedByteArray("AAAJAAcACwAAAAcAAAALAAEABQAAAAEAAQALAAIAAQACAAMAAgAKAAMAAgAEAAoA")],
+"material": ExtResource("1_1lgjw"),
+"name": "NVRMaterial_v",
+"primitive": 3,
+"uv_scale": Vector4(1.14908, 2.19283, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("zRa86wdmnAVGbqbqftXmBQrK//9CrEIABpam6v//+QX//wAADcvnCd4qvOunkOgFbrM9++/OEwEZskr7AADFBR1xvPr5lxkGAAC861YQgAUg1y/7AuSGAF+rSvtqZLQFRYVjvf+EE73gif237IT+vGo4LBT8hDO9vomDuxuFdb3GhFS9Y4VHvfI/ew0shaq9")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_tk5p0")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_1341",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

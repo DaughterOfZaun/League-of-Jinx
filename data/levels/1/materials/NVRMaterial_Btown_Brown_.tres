@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bxb6j4j27hgqo"]
 
-[ext_resource type="Texture2D" uid="uid://5a7m5rj011oo" path="res://data/levels/1/textures/room_Btown_Brown.png" id="1_31yxs"]
+[ext_resource type="Texture2D" uid="uid://btecqv6a3bw48" path="res://data/levels/1/textures/room_Btown_Brown.png" id="1_31yxs"]
 
 [resource]
 resource_name = "NVRMaterial_Btown_Brown_"

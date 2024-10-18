@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://fhih2hayudgq"]
+
+[ext_resource type="Material" uid="uid://b07aiosc2fi28" path="res://data/levels/1/materials/NVRMaterial_turret_stoneBase_hq_.tres" id="1_j78m5"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_4550m"]
+_surfaces = [{
+"aabb": AABB(167.02, 1.25276, 167.114, 18.7661, 0.0126908, 3.52724),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(3, 0, 0, 0, 1, 0, 2, 0, 3, 0, 1, 0),
+"name": "NVRMaterial_turret_stoneBase_hq_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(255, 255, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 57, 243, 0, 0, 70, 63, 0, 0, 111, 19, 0, 0, 3, 186, 255, 255, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_3782"
+_surfaces = [{
+"aabb": AABB(167.02, 1.25276, 167.114, 18.7661, 0.0126908, 3.52724),
+"attribute_data": PackedByteArray(0, 0, 0, 1, 73, 71, 255, 255, 0, 0, 0, 1, 255, 255, 47, 43, 0, 0, 0, 1, 114, 175, 98, 64, 0, 0, 0, 1, 244, 82, 225, 162),
+"format": 34896613407,
+"index_count": 6,
+"index_data": PackedByteArray(3, 0, 0, 0, 1, 0, 2, 0, 3, 0, 1, 0),
+"material": ExtResource("1_j78m5"),
+"name": "NVRMaterial_turret_stoneBase_hq_",
+"primitive": 3,
+"uv_scale": Vector4(1.89339, 1.87603, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(255, 255, 255, 255, 255, 255, 226, 23, 0, 0, 0, 0, 57, 243, 229, 23, 70, 63, 0, 0, 111, 19, 229, 23, 3, 186, 255, 255, 0, 0, 232, 23, 104, 151, 82, 180, 102, 151, 86, 180, 102, 151, 95, 180, 100, 151, 84, 180)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_4550m")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_3782",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

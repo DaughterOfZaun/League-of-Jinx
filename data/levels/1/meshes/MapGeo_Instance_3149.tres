@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://dot1nupv7v6ar"]
+
+[ext_resource type="Material" uid="uid://ombt1p5cmiyy" path="res://data/levels/1/materials/NVRMaterial_order_base_decal__mid_.tres" id="1_khkq0"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_aul8k"]
+_surfaces = [{
+"aabb": AABB(128.678, 0.555981, 117.612, 19.582, 0.024039, 6.95893),
+"format": 34896613377,
+"index_count": 9,
+"index_data": PackedByteArray(0, 0, 4, 0, 3, 0, 0, 0, 1, 0, 4, 0, 1, 0, 2, 0, 4, 0),
+"name": "NVRMaterial_order_base_decal__mid_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(11, 109, 255, 255, 0, 0, 0, 0, 255, 255, 184, 255, 170, 213, 0, 0, 1, 200, 161, 198, 179, 210, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 210, 154, 175, 1, 154, 143, 0, 0)
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_3149"
+_surfaces = [{
+"aabb": AABB(128.678, 0.555981, 117.612, 19.582, 0.024039, 6.95893),
+"attribute_data": PackedByteArray(250, 251, 252, 1, 241, 107, 131, 137, 0, 222, 190, 1, 255, 255, 184, 140, 0, 0, 0, 1, 115, 211, 237, 113, 0, 0, 0, 1, 201, 60, 0, 0, 241, 249, 0, 1, 183, 165, 102, 113),
+"format": 34896613407,
+"index_count": 9,
+"index_data": PackedByteArray(0, 0, 4, 0, 3, 0, 0, 0, 1, 0, 4, 0, 1, 0, 2, 0, 4, 0),
+"material": ExtResource("1_khkq0"),
+"name": "NVRMaterial_order_base_decal__mid_",
+"primitive": 3,
+"uv_scale": Vector4(2.70603, 2.34424, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(11, 109, 255, 255, 0, 0, 183, 61, 255, 255, 184, 255, 170, 213, 151, 61, 1, 200, 161, 198, 179, 210, 63, 61, 0, 0, 0, 0, 255, 255, 185, 61, 210, 154, 175, 1, 154, 143, 172, 61, 238, 212, 137, 149, 250, 212, 143, 149, 26, 213, 147, 149, 237, 212, 108, 149, 242, 212, 146, 149)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_aul8k")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_3149",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

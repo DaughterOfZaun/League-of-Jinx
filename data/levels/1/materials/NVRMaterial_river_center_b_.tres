@@ -1,9 +1,12 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dnqnovth6x6ah"]
 
-[ext_resource type="Texture2D" uid="uid://dx3331n5327aq" path="res://data/levels/1/textures/room_river_center_c.png" id="1_yjuwm"]
+[ext_resource type="Texture2D" uid="uid://kemadodg1xy4" path="res://data/levels/1/textures/room_river_center_c.png" id="1_yjuwm"]
 
 [resource]
 resource_name = "NVRMaterial_river_center_b_"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_yjuwm")
 metadata/extras = {
 "name": "NVRMaterial_river_center_b_"

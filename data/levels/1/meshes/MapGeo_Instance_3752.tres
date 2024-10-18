@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://dej1vkix1ocee"]
+
+[ext_resource type="Material" uid="uid://c1w10ishu0fv6" path="res://data/levels/1/materials/NVRMaterial_order_tile_floor_mark1_.tres" id="1_sotdi"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_sksin"]
+_surfaces = [{
+"aabb": AABB(148.005, 1.25276, 165.925, 19.0154, 0.00446832, 4.53995),
+"format": 34896613377,
+"index_count": 3,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0),
+"name": "NVRMaterial_order_tile_floor_mark1_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 3,
+"vertex_data": PackedByteArray(79, 196, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 131, 222, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0)
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_3752"
+_surfaces = [{
+"aabb": AABB(148.005, 1.25276, 165.925, 19.0154, 0.00446832, 4.53995),
+"attribute_data": PackedByteArray(0, 0, 0, 1, 88, 201, 255, 255, 231, 240, 0, 1, 38, 25, 213, 173, 0, 0, 0, 1, 255, 255, 242, 167),
+"format": 34896613407,
+"index_count": 3,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0),
+"material": ExtResource("1_sotdi"),
+"name": "NVRMaterial_order_tile_floor_mark1_",
+"primitive": 3,
+"uv_scale": Vector4(5.01257, 3.34757, 0, 0),
+"vertex_count": 3,
+"vertex_data": PackedByteArray(79, 196, 255, 255, 0, 0, 7, 64, 0, 0, 255, 255, 131, 222, 3, 64, 255, 255, 0, 0, 255, 255, 3, 64, 10, 254, 249, 128, 10, 254, 249, 128, 10, 254, 249, 128)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_sksin")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_3752",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

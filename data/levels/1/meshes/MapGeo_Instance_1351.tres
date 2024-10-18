@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://c5vcc2qxgbd37"]
+
+[ext_resource type="Material" uid="uid://dnqnovth6x6ah" path="res://data/levels/1/materials/NVRMaterial_river_center_b_.tres" id="1_ldtes"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ak74w"]
+_surfaces = [{
+"aabb": AABB(15.8674, 0.304479, 159.206, 8.42421, 1e-05, 10.6877),
+"format": 34896613377,
+"index_count": 3,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0),
+"name": "NVRMaterial_river_center_b_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 3,
+"vertex_data": PackedByteArray(223, 216, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 154, 46, 0, 0)
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_1351"
+_surfaces = [{
+"aabb": AABB(15.8674, 0.304479, 159.206, 8.42421, 1e-05, 10.6877),
+"attribute_data": PackedByteArray(239, 250, 0, 1, 34, 255, 255, 255, 0, 0, 0, 1, 214, 152, 48, 157, 233, 247, 0, 1, 255, 255, 224, 213),
+"format": 34896613407,
+"index_count": 3,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0),
+"material": ExtResource("1_ldtes"),
+"name": "NVRMaterial_river_center_b_",
+"primitive": 3,
+"uv_scale": Vector4(2.87199, 1.74649, 0, 0),
+"vertex_count": 3,
+"vertex_data": PackedByteArray(223, 216, 0, 0, 0, 0, 26, 61, 0, 0, 0, 0, 255, 255, 21, 61, 255, 255, 0, 0, 154, 46, 18, 61, 22, 233, 60, 82, 27, 233, 62, 82, 30, 233, 63, 82)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ak74w")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_1351",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

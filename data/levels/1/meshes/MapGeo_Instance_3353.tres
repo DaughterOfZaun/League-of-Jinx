@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://h58q38c3snis"]
+
+[ext_resource type="Material" uid="uid://bb0o4ym1ax0fu" path="res://data/levels/1/materials/NVRMaterial_Tree01_md_.tres" id="1_hi5mw"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_672vt"]
+_surfaces = [{
+"aabb": AABB(125.367, 0.859294, 194.097, 1.35362, 0.40747, 1.21858),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray("AwAAAAEAAgADAAEABwAEAAUABgAHAAUACwAIAAkACgALAAkADwAMAA0ADgAPAA0AEwAQABEAEgATABEA"),
+"name": "NVRMaterial_Tree01_md_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("A9HhBTgqAAD//xYjg3kAABa5NB3hrgAAGooAAJdfAADFgaHEkyMAABmq///wZwAA9GvT6+2YAACgQ3Wwj1QAAECgT7NVXwAAFdUCrAzJAABKfC1I//8AAHVHeE9HlgAARQKgKgAAAACpV9VHygMAAGNV80HoYgAAAAC/JB1fAAArDC2ZV2AAAHZyxJrObAAAsWhOYoPbAABmArdgDc8AAA==")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_3353"
+_surfaces = [{
+"aabb": AABB(125.367, 0.859294, 194.097, 1.35362, 0.40747, 1.21858),
+"attribute_data": PackedByteArray("4/QAASmm+Vrf8gABKaYIMtfvAAEpewgy3PEAASl7+Vrg8wABKab5WtrwAAEppggy0+0AASl7CDLb8AABKXv5WtLtAAEppvlazeoAASmmCDLI6AABKXsIMs7rAAEpe/la4PIAASmm+Vrf8gABKaYIMtbuAAEpewgy1+8AASl7+VrQ7AABKab5WtHsAAEppggyyukAASl7CDLI6AABKXv5Wg=="),
+"format": 34896613407,
+"index_count": 30,
+"index_data": PackedByteArray("AwAAAAEAAgADAAEABwAEAAUABgAHAAUACwAIAAkACgALAAkADwAMAA0ADgAPAA0AEwAQABEAEgATABEA"),
+"material": ExtResource("1_hi5mw"),
+"name": "NVRMaterial_Tree01_md_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("A9HhBTgq3jj//xYjg3neOBa5NB3hrt44GooAAJdf3jjFgaHEkyMjNBmq///wZyM09GvT6+2YIzSgQ3Wwj1QjNECgT7NVXzZAFdUCrAzJNkBKfC1I//81QHVHeE9HljZARQKgKgAASCmpV9VHygNIKWNV80HoYkgpAAC/JB1fSCkrDC2ZV2B2MHZyxJrObHYwsWhOYoPbdjBmArdgDc92MGfqyVBn6slQZ+rKUGfqyVCi7r5Rou6+UaLuvVGi7r5RrvWsUq71rFKu9axSrvWsUuXYoCzl2KAs5digLOXYoCy52U4rudlOK7nZTiu52U4r")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_672vt")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_3353",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

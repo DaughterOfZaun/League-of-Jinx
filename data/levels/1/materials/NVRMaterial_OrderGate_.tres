@@ -1,9 +1,12 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dlr67rc0wtif3"]
 
-[ext_resource type="Texture2D" uid="uid://dwd6iy2f4otfn" path="res://data/levels/1/textures/room_OrderGate.png" id="1_ripy5"]
+[ext_resource type="Texture2D" uid="uid://bj0pym8ugmhn4" path="res://data/levels/1/textures/room_OrderGate.png" id="1_ripy5"]
 
 [resource]
 resource_name = "NVRMaterial_OrderGate_"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_ripy5")
 metadata/extras = {
 "name": "NVRMaterial_OrderGate_"

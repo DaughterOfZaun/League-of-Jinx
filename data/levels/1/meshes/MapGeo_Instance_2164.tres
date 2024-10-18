@@ -1,0 +1,46 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://cg4gv0i33j5uy"]
+
+[ext_resource type="Material" uid="uid://ltrrumubkj3j" path="res://data/levels/1/materials/NVRMaterial_order_seam2_.tres" id="1_obftd"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fcbds"]
+_surfaces = [{
+"aabb": AABB(134.804, 0.577836, 11.0293, 22.4471, 0.0124494, 21.1388),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray("AAAGAAEAAQAEAAAABAABAAUAAQADAAUABgAHAAEAAwABAAcAAgAHAAYACQADAAcAAgAIAAcACAAJAAcA"),
+"lods": [0.00749488, PackedByteArray("BgAEAAAABAAGAAUABgADAAUACQADAAYACAAJAAYAAgAIAAYA")],
+"name": "NVRMaterial_order_seam2_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("RohBYwAAAADEc9tgT4gAAP//Rv7wqgAAOVoTbvPnAAAAAMRgeGsAAJkYE25l8AAAMbUAALQJAAAqnkb+P5QAAFvl//8O+gAA3n3/////AAA=")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_2164"
+_surfaces = [{
+"aabb": AABB(134.804, 0.577836, 11.0293, 22.4471, 0.0124494, 21.1388),
+"attribute_data": PackedByteArray("AAAAAXCb//8AAAABCpLVogAAAAH///KRAAAAAdSC8WAAAAABQTfvsAAAAAGKUCpYAAAAAZi+h/sAAAABWrO8nODuAAEo7y9bAPfqAYCfV1I="),
+"format": 34896613407,
+"index_count": 30,
+"index_data": PackedByteArray("AAAGAAEAAQAEAAAABAABAAUAAQADAAUABgAHAAEAAwABAAcAAgAHAAYACQADAAcAAgAIAAcACAAJAAcA"),
+"lods": [0.00749488, PackedByteArray("BgAEAAAABAAGAAUABgADAAUACQADAAYACAAJAAYAAgAIAAYA")],
+"material": ExtResource("1_obftd"),
+"name": "NVRMaterial_order_seam2_",
+"primitive": 3,
+"uv_scale": Vector4(3.195, 3.3012, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("RohBYwAA9D/Ec9tgT4jxP///Rv7wqu8/OVoTbvPn8D8AAMRgeGv0P5kYE25l8PQ/MbUAALQJ7D8qnkb+P5TuP1vl//8O+vQ/3n3/////8T8y+NyDMvjsgzL45YMy+PmDMvjlgzL45YMy+OiDMvjzgzL45YMy+PSD")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_fcbds")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_2164",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

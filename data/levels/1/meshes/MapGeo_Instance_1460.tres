@@ -1,0 +1,46 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://peyk35f7cm60"]
+
+[ext_resource type="Material" uid="uid://ombt1p5cmiyy" path="res://data/levels/1/materials/NVRMaterial_order_base_decal__mid_.tres" id="1_fgvfr"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_a5d4r"]
+_surfaces = [{
+"aabb": AABB(48.179, 0.533396, 90.0745, 24.3164, 0.0496637, 17.6806),
+"format": 34896613377,
+"index_count": 33,
+"index_data": PackedByteArray("BAACAAAAAwACAAQAAwAJAAIAAQADAAQAAwABAAkAAQAEAAUAAQAIAAkAAQAFAAYACgAIAAEAAQAGAAcACgABAAcA"),
+"lods": [1e-10, PackedByteArray("BAACAAAACQACAAQACgAJAAQACgAIAAkACgAEAAUACgAFAAYACgAGAAcA")],
+"name": "NVRMaterial_order_base_decal__mid_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 11,
+"vertex_data": PackedByteArray("XLMAAIn2AACTa////5EAAP/////ZpAAA0Zz//5E/AABsov//A9UAALd8//+e5QAANQf/////AAAAAP//vnAAACqC//8AAAAA2pf//x0cAADZV///XXcAAA==")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_1460"
+_surfaces = [{
+"aabb": AABB(48.179, 0.533396, 90.0745, 24.3164, 0.0496637, 17.6806),
+"attribute_data": PackedByteArray("+/n3Ae10hW8A4rkBUIHAuAD37QFR1lJfANukAWnRKLgAAAABlX0DhP38+gF3W7iT9/4AAQAA+8wAAAABKk///wD89gFd5fTbAO7UAfHiksYA8dwBIoSMzA=="),
+"format": 34896613407,
+"index_count": 33,
+"index_data": PackedByteArray("BAACAAAAAwACAAQAAwAJAAIAAQADAAQAAwABAAkAAQAEAAUAAQAIAAkAAQAFAAYACgAIAAEAAQAGAAcACgABAAcA"),
+"lods": [1e-10, PackedByteArray("BAACAAAACQACAAQACgAJAAQACgAIAAkACgAEAAUACgAFAAYACgAGAAcA")],
+"material": ExtResource("1_fgvfr"),
+"name": "NVRMaterial_order_base_decal__mid_",
+"primitive": 3,
+"uv_scale": Vector4(3.02146, 4.37436, 0, 0),
+"vertex_count": 11,
+"vertex_data": PackedByteArray("XLMAAIn2BTmTa////5FYOP/////ZpJI40Zz//5E/WDhsov//A9WEOLd8//+e5Vg4NQf/////WDgAAP//vnBYOCqC//8AAFg42pf//x0cWDjZV///XXdYOJPgCUGt4FxBpOBBQa3gXEGn4EhBreBcQa3gXEGt4FxBreBcQa3gXEGt4FxB")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_a5d4r")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_1460",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://c78mbjq3hluio"]
+
+[ext_resource type="Material" uid="uid://bdpi00mobhm3e" path="res://data/levels/1/materials/NVRMaterial_ground_grass_ground_new_dark_.tres" id="1_2qqbn"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_aic8s"]
+_surfaces = [{
+"aabb": AABB(124.637, 0.446516, 193.082, 15.7028, 0.885939, 21.5973),
+"format": 34896613377,
+"index_count": 18,
+"index_data": PackedByteArray("BwAAAAEABAAHAAEABQAHAAQAAwAFAAQABwAFAAYAAgAHAAYA"),
+"name": "NVRMaterial_ground_grass_ground_new_dark_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("ZaD//wAAAAD8/y72lxoAAAcCAAAtMAAA+P/G+f//AAD//y72sl4AAFu23wtkwAAAAADfC2G6AADoht8LJ2cAAA==")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_3462"
+_surfaces = [{
+"aabb": AABB(124.637, 0.446516, 193.082, 15.7028, 0.885939, 21.5973),
+"attribute_data": PackedByteArray("AAAAAbQEn2IAAAABvxTwV9nwAAHcIkw2AAAAAdkTAADr9QABfBTUPQAAAAGqB4gYAAAAATAbDScAAAABAAD7Og=="),
+"format": 34896613407,
+"index_count": 18,
+"index_data": PackedByteArray("BwAAAAEABAAHAAEABQAHAAQAAwAFAAQABwAFAAYAAgAHAAYA"),
+"material": ExtResource("1_2qqbn"),
+"name": "NVRMaterial_ground_grass_ground_new_dark_",
+"primitive": 3,
+"uv_scale": Vector4(21.6079, 13.4851, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("ZaD//wAAyj/8/y72lxpoQAcCAAAtMJ/p+P/G+f//tj///y72sl4zQFu23wtkwCD2AADfC2G6TPfoht8LJ2dX+xr0X5lb/x+DIcs8Fvj91IS+/OSHm4WqvWfEJwlcxs8K")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_aic8s")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_3462",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

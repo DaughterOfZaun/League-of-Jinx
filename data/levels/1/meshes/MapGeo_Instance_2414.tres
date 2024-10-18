@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://bbitikbcoxemh"]
+
+[ext_resource type="Material" uid="uid://3shdyiyxaxay" path="res://data/levels/1/materials/NVRMaterial_Plant01_.tres" id="1_hmhsx"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fmgpm"]
+_surfaces = [{
+"aabb": AABB(139.724, 0.384172, 81.0194, 1.58557, 1.07489, 4.7439),
+"format": 34896613377,
+"index_count": 126,
+"index_data": PackedByteArray("AAACAAMAAgAAAAEAAAAEAAEAAQAEAAwADQALAAwACwANAAkACgAHAAwABQAHAAoACAAFAAoABQAIAAYADAARAA4ADAAQABEADAAOABAAEQAXAA4ADgAXABAAEAAXABEADwAUABIAFAATABIAEwAWABIAFgATABUAGQAbABgAGwAZAB8AGQAaAB8AHwAaACQAJQAjACQAIwAlACEAIgAdACQAHQAiAB4AIAAdAB4AIAAeABwAJAApACYAJAAoACkAJAAmACgAKQAzACYAJgAzACgAKAAzACkAJwAtACoALQAsACoALAAuACoALgAsAC8AMgArADAAKwAyADEA"),
+"name": "NVRMaterial_Plant01_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 52,
+"vertex_data": PackedByteArray("gcbCpMQTAADZglmahyoAAO157YgvEAAAPJqTlQAAAABf2ojINikAAFg44+NtSQAA5RkE6TxgAAAWasnnSDwAAFpmxvyLXgAAgwzniQo8AACqkf//FVIAACp0yZf/JwAAqLWI9h0/AABicRaq+kMAACmZtJkZNAAApwLVZZERAAAZoGCgojsAAN+RM5wPOgAAqhUcciodAABojAyHFhgAAMIx7m5JDgAAcZvTnRo4AACSUPuO+jYAAFCTAAAdPgAANTZxtGyYAAAbcWmWg54AADKiQYrlqQAAkTJfjD2pAAD//xJ+S+cAADaseoqazAAA+fsph/fQAACfYgOJ5bkAABzPU4ag2gAAGTtGncHhAABL5aeJXcAAAEleGJFewQAA1aEVfz7AAABljSCXStQAALiNbVwkwAAAAAB6gYvXAAAsosRbicEAAIKYC152xAAAFiOof5bXAAAmuqSV4OEAALdI/WabtwAAwAy+fEvKAAA8d2lyjNMAAGiYDF84wQAAJKVqc///AADDiDCAZsUAAFdc2UYm4QAARmjPCXTgAAA=")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_2414"
+_surfaces = [{
+"aabb": AABB(139.724, 0.384172, 81.0194, 1.58557, 1.07489, 4.7439),
+"attribute_data": PackedByteArray("7vgAAT+iksHn9AAB/OW9xej0AAHhuUaq7PYAATSBYIjv+AABI75D7uXy/wE/opLB4/D+ATSBYIjr9v8BQb5h7uv0/QHhuUaq3O4AATSBYIjv9/4B/OW9xeDxAAEGvvnt6fUAAef5///f8AAB/OW9xQAAAAEsyrOQ3/AAATSBYIgA/PcBRNyzkNzt/QHd6bOQ6fUAAdbZ8IIAAAABWPrCkODxAAHhuUaq3O39AbH0+ILt9wABX77q7eXzAAE/opLB7vb/Aef5///m8/8B/OW9xfD3/gFr4rmQAAAAAf//AoMAAAABtM3uggDs2wE0gWCIAPz3Ad3p7oL87eABP6KSwfzt4AEjvkPu/OveAeG5RqoA48oBNIFgiPzs3wFBvmHu/+nVAeG5Rqr6694B/OW9xf/n0gE/opLB+uvfATSBYIj87+QB/OW9xfjv6AEGvvnt/OzfAef5///77uIB/OW9xez3AAEsyrOQ9uzjATSBYIgA//0BRNyzkADfwgHd6bOQ/OzfAdbZ8ILs9wABWPrCkPjs4gHhuUaq/OzdAcjlxMX27+oBX77q7fXt5gE/opLB++3iAfzlvcX68OYB5/n//wDr2AE0gWCI9e3mAef5///47eQB3L1r7uz3AAG0ze6C7PcAAf//AoMA3b4Ba+K5kAD//QHd6e6CAN/CAbH0+II="),
+"format": 34896613407,
+"index_count": 126,
+"index_data": PackedByteArray("AAACAAMAAgAAAAEAAAAEAAEAAQAEAAwADQALAAwACwANAAkACgAHAAwABQAHAAoACAAFAAoABQAIAAYAEgAOABAAEgAQABEAEgARABMADwAXABQAFwAWABQAFgAZABQAGQAWABgAFQAaABsAHgAaABUAHAAaAB4AHwAhAB0AIQAfACUAHwAgACUAJQAgACoAKwApACoAKQArACcAKAAjACoAIwAoACQAJgAjACQAJgAkACIAMAAsAC4AMAAuAC8AMAAvADEALQA1ADIANQA0ADIANAA2ADIANgA0ADcAOgAzADgAMwA6ADkAPwA9ADwAPgA9AD8AOwA9AD4A"),
+"material": ExtResource("1_hmhsx"),
+"name": "NVRMaterial_Plant01_",
+"primitive": 3,
+"uv_scale": Vector4(1.97539, 2.00343, 0, 0),
+"vertex_count": 64,
+"vertex_data": PackedByteArray("gcbCpMQTvxbZglmahyr+GO157YgvEIETPJqTlQAATQ1f2ojINilNGVg44+NtSdg55RkE6TxgmDkWasnnSDz5OFpmxvyLXvU5gwzniQo8bjSqkf//FVJPOSp0yZf/J8A3qLWI9h0/GDdicRaq+kPINymZtJkZNAUApwLVZZERZiYZoGCgojubA9+RM5wPOj8DqLWI9h0/KDYpmbSZGTThAqoVHHIqHdgr35EznA86DwFojAyHFhhDLMIx7m5JDqgtcZvTnRo4kCiSUPuO+jbwKlCTAAAdPhW8KZm0mRk05gIpmbSZGTQFADU2cbRsmHcZGaBgoKI7HwgbcWmWg54wIzKiQYrlqX4kkTJfjD2pmCH//xJ+S+cQOTaseoqazBgw+fsph/fQgTWfYgOJ5bknJRzPU4ag2vI3GTtGncHh1ztL5aeJXcDSLEleGJFewfg41aEVfz7Atj5ljSCXStTzOLiNbVwkwO8VAAB6gYvXFDgsosRbicEdE4KYC152xKQK1aEVfz7A0MO4jW1cJMDnBhYjqH+W1xA5JrqkleDhZTm3SP1mm7fcN8AMvnxLymU6PHdpcozTADdomAxfOMEmNSSlanP//wE7w4gwgGbF/DZXXNlGJuHwOLiNbVwkwA/quI1tXCTAZQZGaM8JdODKoCyixFuJwe0ZgpgLXnbEZAITitXArY9wxIaHkb8xfxbAlZBlx1Xal5sr0yWfWN/gl6fZ/ps3vsKooN6jmFG9krG2vpGwfb2CsX7gi5dYpDq0jwjy3uL3yS0S9s2h+eJBatGsx6+cU8CK2K34rpWviq6GqFyx+avkrzbT2u6r4uxpfuCLl1CWVKWtBvzdHp4EqjKjSKoNmw2qvNwGOTTasTQQ28g1KqKzq7zc7Djk4xmO+dgBM7XmWIkn51yHe+Z5iSLwDLLEykOahAL9Qd3cBQFW1LyRNUiKpYHaOJBr/zJRxdz7jS/g54wM2Z+Q39Kqkxr8qa1q+ldKhv4PUCLwDLKhR9Skb8wUM3sKBT9cIroC")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_fmgpm")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_2414",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

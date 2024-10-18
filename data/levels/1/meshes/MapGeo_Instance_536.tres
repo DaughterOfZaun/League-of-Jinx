@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://crtkndaimeomc"]
+
+[ext_resource type="Material" uid="uid://ci3uyjq2chose" path="res://data/levels/1/materials/NVRMaterial_ground_order_tile_floor_.tres" id="1_oan7d"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_njx1q"]
+_surfaces = [{
+"aabb": AABB(47.8225, 0.597175, 29.5963, 14.1998, 0.760813, 20.9214),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("BwAFAAEAAQAFAAwABQADAAwADAADAAQADAAGAAEABgALAAEACwAGAAAADAAJAAYABgAJAAAADAAIAAkACQAKAAAACQACAAoA"),
+"name": "NVRMaterial_ground_order_tile_floor_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("T+oAAJ6nAACmOgfuKtIAAGL0//+GAwAA2wwH7nVaAACaGozv/QcAANIFB+4TwQAAWeAf7cGhAAAAALzubfkAALB1jO8AAAAAGOb//yNIAAD//wAAlz4AADOnGu3//wAAtmMH7k5aAAA=")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_536"
+_surfaces = [{
+"aabb": AABB(47.8225, 0.597175, 29.5963, 14.1998, 0.760813, 20.9214),
+"attribute_data": PackedByteArray("AAAAAbD7OzwAAAABBdiwHgAAAAGV/fepAAAAAZfOIm8AAAABTtGgpgAAAAFDzRkqAAAAAar5ez8AAAABIswvBAAAAAHR4yas6vcAAb/6yXv+/wAB///pgvL7AAEj7gAAAAAAAUDgYG8="),
+"format": 34896613407,
+"index_count": 36,
+"index_data": PackedByteArray("BwAFAAEAAQAFAAwABQADAAwADAADAAQADAAGAAEABgALAAEACwAGAAAADAAJAAYABgAJAAAADAAIAAkACQAKAAAACQACAAoA"),
+"material": ExtResource("1_oan7d"),
+"name": "NVRMaterial_ground_order_tile_floor_",
+"primitive": 3,
+"uv_scale": Vector4(18.7182, 8.29118, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("T+oAAJ6nGj+mOgfuKtL/P2L0//+GA1Y/2wwH7nVaBECaGozv/Qf3P9IFB+4Twf8/WeAf7cGhM0EAALzubfkAQLB1jO8AAO8/GOb//yNIEED//wAAlz6wPjOnGu3//z5JtmMH7k5aDEDPx9xpkv8zgEPeQnKK/0GAi/85gIv/PYAF4A10i/9DgIb/h4DM4FVyutBUazHX+2mS/1SA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_njx1q")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_536",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://bu2p3n03ob47r"]
+
+[ext_resource type="Material" uid="uid://mrfggyx11eg4" path="res://data/levels/1/materials/NVRMaterial_ground_Chaos_dirt_.tres" id="1_q1ywf"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fh5gf"]
+_surfaces = [{
+"aabb": AABB(117.681, 0.49172, 85.3635, 22.4727, 0.127148, 15.9298),
+"format": 34896613377,
+"index_count": 48,
+"index_data": PackedByteArray("DgAKAAsABwARAA4ADgARABAABQAOABAAEQABABAAAAAFABAAEAABAAwAAQAJAAwADwAMAAkACAAPAAkADQAQAAwAAAAQAA0ABAANAAwAAgAAAA0ABgACAA0ABgANAAMA"),
+"name": "NVRMaterial_ground_Chaos_dirt_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("gYv+/6YyAAAlebyhxYwAAKJ2/v+vKwAA22L///gpAABsBf7/K3UAAFSg/v9fSAAAU23+/1ArAAD//1nzhCsAAAAA6Hn//wAAljdAoTGtAACVqgAAeEUAACru/v8AAAAAUC76/7ajAAAgFv7/qlwAAMay/v9BXQAAIA7+/yXRAACrkfz/wV0AAJq//v9yegAA")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_2438"
+_surfaces = [{
+"aabb": AABB(117.681, 0.49172, 85.3635, 22.4727, 0.127148, 15.9298),
+"attribute_data": PackedByteArray("9fwAAUPWuub3+/wB1NhIz+31+AHwzXzl9OzlAY3GLeMA+fMBOKzsxP7y5QEV4Ijk7vDxAYHKTOQA1K0B//9U+AAAAAH8ulKjAAD/AUPExr4A8uMBieOU5vHt6wEG9f//AAAAAei/tr8A/PYByq/mzADbswH06DXiAAAAAde4wbDz7+cB8NyP3QDYrQGh8C/d"),
+"format": 34896613407,
+"index_count": 48,
+"index_data": PackedByteArray("DgAKAAsABwARAA4ADgARABAABQAOABAAEQABABAAAAAFABAAEAABAAwAAQAJAAwADwAMAAkACAAPAAkADQAQAAwAAAAQAA0ABAANAAwAAgAAAA0ABgACAA0ABgANAAMA"),
+"material": ExtResource("1_q1ywf"),
+"name": "NVRMaterial_ground_Chaos_dirt_",
+"primitive": 3,
+"uv_scale": Vector4(17.2836, 18.6176, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("gYv+/6YyZTMlebyhxYwBP6J2/v+vK6gx22L///gp6ihsBf7/K3XcNFSg/v9fSIQ3U23+/1ArCi7//1nzhCtvPgAA6Hn//zY/ljdAoTGtUT+VqgAAeEWeOCru/v8AALg8UC76/7aj+D4gFv7/qlyCNsay/v9BXU09IA7+/yXRhj+rkfz/wV2fPpq//v9yeog+594ZjyfbIZIK4M+QceYzlTXfJqJd3auOKeIbklrbKJLP39yPZttDkYXcs5OF2zOVMNvpkeTex5i72weSSN/hj0rbQZJS22yS")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_fh5gf")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_2438",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

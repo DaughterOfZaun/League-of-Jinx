@@ -1,0 +1,46 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://16l6noxldkd8"]
+
+[ext_resource type="Material" uid="uid://b2sviph808j6i" path="res://data/levels/1/materials/NVRMaterial_ground_order_dirt_.tres" id="1_yahdn"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3pkxy"]
+_surfaces = [{
+"aabb": AABB(40.0873, 0.583057, 97.8611, 11.7763, 0.0404698, 21.8468),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray("AwAAAAEAAgADAAEAAwACAAQACQADAAQABAACAAUACQAEAAgABgAEAAUABAAGAAgABwAGAAUACAAGAAcA"),
+"lods": [0.00784708, PackedByteArray("AwAAAAEAAgADAAEAAwACAAgACQADAAgACAACAAUABwAIAAUA")],
+"name": "NVRMaterial_ground_order_dirt_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("816bQP//AADyaAk5MucAAAAA///ddQAAxnmiRsjxAAATgtFBjIkAAAJP0UE7YwAAZJIEALBnAADmrwQAAAAAAMi+BADvcwAA//8AAPSjAAA=")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_1454"
+_surfaces = [{
+"aabb": AABB(40.0873, 0.583057, 97.8611, 11.7763, 0.0404698, 21.8468),
+"attribute_data": PackedByteArray("/wAAAQAAUvYAAAABhATg8wD++wEXG///AAAAAVECqPHu+QABvhWY7AAAAAGSHRrzAAAAAeAb2OgAAAAB7S6G4Pf+AAEEGWzi3fUAATAPFNo="),
+"format": 34896613407,
+"index_count": 30,
+"index_data": PackedByteArray("AwAAAAEAAgADAAEAAwACAAQACQADAAQABAACAAUACQAEAAgABgAEAAUABAAGAAgABwAGAAUACAAGAAcA"),
+"lods": [0.00784708, PackedByteArray("AwAAAAEAAgADAAEAAwACAAgACQADAAgACAACAAUABwAIAAUA")],
+"material": ExtResource("1_yahdn"),
+"name": "NVRMaterial_ground_order_dirt_",
+"primitive": 3,
+"uv_scale": Vector4(15.8564, 11.1686, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("816bQP//oSfyaAk5MueKJwAA///ddWEnxnmiRsjxoCcTgtFBjImxJwJP0UE7Y4AnZJIEALBnrCfmrwQAAAC+J8i+BADvc6Yn//8AAPSjnSeW0ywn5NM4J4rTVCek0ywnc9MiJ3rTQSd/0yUnntMZJ4vTKSeM0y4n")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_3pkxy")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_1454",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

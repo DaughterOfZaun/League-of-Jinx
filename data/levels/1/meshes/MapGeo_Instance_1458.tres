@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://67ywvgk762lv"]
+
+[ext_resource type="Material" uid="uid://ombt1p5cmiyy" path="res://data/levels/1/materials/NVRMaterial_order_base_decal__mid_.tres" id="1_1p8uj"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_uqqaj"]
+_surfaces = [{
+"aabb": AABB(46.8217, 0.583057, 90.0745, 16.7855, 0.0104052, 23.9011),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("CwAGAAAAAAAGAAMADAAAAAMADAAEAAAADAAFAAQABQAMAAkADAAKAAkAAgAKAAwADAADAAcAAgAMAAcAAwABAAcAAgAHAAgA"),
+"name": "NVRMaterial_order_base_decal__mid_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("XskRANupAAAAABEALbIAAPaTEQBMWAAAJB8RAF69AAD//xEAk50AAN/3EQAGLwAA5EwAAEPpAACzFBEAZlMAAIUh//8gAwAArvARAMwUAABD0REAAAAAALFo/////wAAi7ARAABsAAA=")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_1458"
+_surfaces = [{
+"aabb": AABB(46.8217, 0.583057, 90.0745, 16.7855, 0.0104052, 23.9011),
+"attribute_data": PackedByteArray("/fz6AduTSmIAAAABw3wm9ADx3AG3wmaa9/4AAXB4/toAAAABdqDPPADbpAGr5cJZ3fUAAbpgVbAAAAABi7qx+LXXAAF17v//AO7UAZ/1fGQA/PYB///Wf9HrAAHPVDqXAOK5Aci4WoE="),
+"format": 34896613407,
+"index_count": 36,
+"index_data": PackedByteArray("CwAGAAAAAAAGAAMADAAAAAMADAAEAAAADAAFAAQABQAMAAkADAAKAAkAAgAKAAwADAADAAcAAgAMAAcAAwABAAcAAgAHAAgA"),
+"material": ExtResource("1_1p8uj"),
+"name": "NVRMaterial_order_base_decal__mid_",
+"primitive": 3,
+"uv_scale": Vector4(4.11586, 2.51705, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("XskRANupGS8AABEALbIhL/aTEQBMWCQvJB8RAF69IS///xEAk50hL9/3EQAGLyEv5EwAAEPpES+zFBEAZlMkL4Uh//8gAysvrvARAMwUIS9D0REAAAAhL7Fo/////wAvi7ARAABsIS892H0wO9h4MD3YdjA72HgwO9h4MDvYeDA/2IEwPNh3MD/YczA72HgwO9h4MEPYizA72Hgw")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_uqqaj")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_1458",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

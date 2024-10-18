@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://dparpu3hm5mwm"]
+
+[ext_resource type="Material" uid="uid://b2sviph808j6i" path="res://data/levels/1/materials/NVRMaterial_ground_order_dirt_.tres" id="1_bk3e5"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xrws1"]
+_surfaces = [{
+"aabb": AABB(134.066, 0.577836, 1.11672, 12.6872, 0.0048269, 21.1682),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 4, 0, 2, 0, 3, 0, 1, 0, 4, 0),
+"name": "NVRMaterial_ground_order_dirt_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(30, 215, 0, 0, 0, 0, 0, 0, 228, 14, 149, 249, 51, 227, 0, 0, 0, 0, 208, 249, 160, 110, 0, 0, 183, 219, 208, 249, 255, 255, 0, 0, 255, 255, 255, 255, 224, 119, 0, 0)
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_2155"
+_surfaces = [{
+"aabb": AABB(134.066, 0.577836, 1.11672, 12.6872, 0.0048269, 21.1682),
+"attribute_data": PackedByteArray(0, 0, 0, 1, 255, 255, 2, 0, 0, 0, 0, 1, 221, 208, 170, 19, 250, 253, 0, 1, 6, 235, 230, 18, 0, 0, 0, 1, 4, 199, 234, 3, 0, 0, 0, 1, 236, 228, 0, 0),
+"format": 34896613407,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 4, 0, 2, 0, 3, 0, 1, 0, 4, 0),
+"material": ExtResource("1_bk3e5"),
+"name": "NVRMaterial_ground_order_dirt_",
+"primitive": 3,
+"uv_scale": Vector4(12.9499, 23.4866, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(30, 215, 0, 0, 0, 0, 204, 37, 228, 14, 149, 249, 51, 227, 52, 41, 0, 0, 208, 249, 160, 110, 200, 37, 183, 219, 208, 249, 255, 255, 49, 41, 255, 255, 255, 255, 224, 119, 56, 41, 138, 210, 27, 37, 120, 212, 241, 40, 143, 210, 29, 37, 121, 212, 243, 40, 115, 212, 238, 40)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_xrws1")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_2155",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

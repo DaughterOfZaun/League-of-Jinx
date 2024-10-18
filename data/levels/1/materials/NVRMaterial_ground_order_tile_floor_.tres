@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ci3uyjq2chose"]
 
-[ext_resource type="Texture2D" uid="uid://ceyosyy2pofpt" path="res://data/levels/1/textures/room_order_tile_floor.png" id="1_o73bp"]
+[ext_resource type="Texture2D" uid="uid://bbx3dtoenolhh" path="res://data/levels/1/textures/room_order_tile_floor.png" id="1_o73bp"]
 
 [resource]
 resource_name = "NVRMaterial_ground_order_tile_floor_"

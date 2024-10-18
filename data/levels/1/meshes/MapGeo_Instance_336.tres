@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://bpn85f4ddd7wx"]
+
+[ext_resource type="Material" uid="uid://c8mjamkk7pwfa" path="res://data/levels/1/materials/NVRMaterial_lambert138.tres" id="1_s8r8n"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5qa6y"]
+_surfaces = [{
+"aabb": AABB(13.9828, 1.31149, 50.442, 11.074, 0.000608087, 8.49572),
+"format": 34896613377,
+"index_count": 3,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0),
+"name": "NVRMaterial_lambert138",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 3,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 241, 3, 0, 0, 255, 255, 0, 0, 255, 255, 255, 255, 231, 9, 0, 0)
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_336"
+_surfaces = [{
+"aabb": AABB(13.9828, 1.31149, 50.442, 11.074, 0.000608087, 8.49572),
+"attribute_data": PackedByteArray(0, 0, 0, 1, 255, 255, 245, 83, 0, 0, 0, 1, 92, 109, 156, 151, 0, 0, 0, 1, 21, 56, 0, 0),
+"format": 34896613407,
+"index_count": 3,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0),
+"material": ExtResource("1_s8r8n"),
+"name": "NVRMaterial_lambert138",
+"primitive": 3,
+"uv_scale": Vector4(1.81077, 4.24165, 0, 0),
+"vertex_count": 3,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 207, 21, 241, 3, 0, 0, 255, 255, 206, 21, 255, 255, 255, 255, 231, 9, 207, 21, 188, 202, 122, 21, 185, 202, 124, 21, 188, 202, 122, 21)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_5qa6y")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_336",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

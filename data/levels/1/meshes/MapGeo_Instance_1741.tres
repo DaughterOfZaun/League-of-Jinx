@@ -1,0 +1,46 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://dqr1irdoiened"]
+
+[ext_resource type="Material" uid="uid://bj6wmjbdth7b" path="res://data/levels/1/materials/NVRMaterial_Order_seam_.tres" id="1_fg0lh"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_n42j0"]
+_surfaces = [{
+"aabb": AABB(49.4473, 0.233737, 158.007, 12.8808, 0.273228, 14.4288),
+"format": 34896613377,
+"index_count": 45,
+"index_data": PackedByteArray("BAAFAAAABAAAAAIABAACAAkACQACAAoAAgAIAAoACAACAAAACgAIAAsACAADAAsACAAGAAMABwAAAAUABwAIAAAABgAIAAcAAQAHAAUADAAGAAcADAAHAAEA"),
+"lods": [0.0852511, PackedByteArray("BAAFAAkAAwAJAAUACQADAAoACgADAAsABgADAAUADAAGAAUADAAFAAEA")],
+"name": "NVRMaterial_Order_seam_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("4WhraiLVAAA9GTFdpe0AAKyrpLIOjQAAyEwdtJ1cAAA27QAA1+oAAJFLOGf//wAAwC///5SBAACGOMVcv78AANB/PLSOawAA//+VrmtUAAAh4Qqv9ycAAOu2HbQAAAAAAADKJ6GrAAA=")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_1741"
+_surfaces = [{
+"aabb": AABB(49.4473, 0.233737, 158.007, 12.8808, 0.273228, 14.4288),
+"attribute_data": PackedByteArray("APLjAeaxlYkAAAABzo8EawDz5QHLvFK7AAAAAYB5N7sA/PYB//8snwDy4gH6sIFuAAAAAbR29qIAAP8BvZD9hwAAAAHgmXjAAPfsAVnWCeoAAAABmrZt9wAAAAFYkv//AAAAAahr14M="),
+"format": 34896613407,
+"index_count": 45,
+"index_data": PackedByteArray("BAAFAAAABAAAAAIABAACAAkACQACAAoAAgAIAAoACAACAAAACgAIAAsACAADAAsACAAGAAMABwAAAAUABwAIAAAABgAIAAcAAQAHAAUADAAGAAcADAAHAAEA"),
+"lods": [0.0852511, PackedByteArray("BAAFAAkAAwAJAAUACQADAAoACgADAAsABgADAAUADAAGAAUADAAFAAEA")],
+"material": ExtResource("1_fg0lh"),
+"name": "NVRMaterial_Order_seam_",
+"primitive": 3,
+"uv_scale": Vector4(3.47342, 3.74155, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("4WhraiLVvj09GTFdpe0oPayrpLIOjbs9yEwdtJ1cojw27QAA1+rvPZFLOGf//1o9wC///5SBJj6GOMVcv7/7PdB/PLSOa3M9//+VrmtUpT0h4Qqv9ydJPeu2HbQAAEs9AADKJ6GrcD5I0zWWg9O1lkrTApa10xqWNNODlXDTKJYc0yWWMtOFlmbTFJZS08iVdtM2lnXTOZYH03GX")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_n42j0")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_1741",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

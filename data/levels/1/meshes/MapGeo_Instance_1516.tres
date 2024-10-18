@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://dr24ecbvqtbfh"]
+
+[ext_resource type="Material" uid="uid://mrfggyx11eg4" path="res://data/levels/1/materials/NVRMaterial_ground_Chaos_dirt_.tres" id="1_16uv3"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nr5hj"]
+_surfaces = [{
+"aabb": AABB(60.6867, -1.0752, 106.722, 17.0303, 1.66866, 13.5648),
+"format": 34896613377,
+"index_count": 39,
+"index_data": PackedByteArray("AwAQAAQAEAACABEACgAOAAkABgAJAA4ADAAGAA4ACwAGAAwACwAHAAYABwAIAAYACAAPAAYACAAFAA8ABgAPAAAAAQAGAAAADQABAAAA"),
+"name": "NVRMaterial_ground_Chaos_dirt_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("1iG37ZUzAACpebftAAAAADGTAAANtAAA1GZpJ+qpAAAAACcJP+4AADFIIv9ffgAAy4LC880TAACQb///w4IAAExOHv4UdAAANazH8OsBAAD/////8xsAAHKI//+rigAAGZP///2CAAAURMf2KAcAAPbY//8wTgAAOjU1+jdcAACdhWknc7UAAJwbAAD//wAA")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_1516"
+_surfaces = [{
+"aabb": AABB(60.6867, -1.0752, 106.722, 17.0303, 1.66866, 13.5648),
+"attribute_data": PackedByteArray("wdz9AQAAsCsA3K8BERAPQADz4wG2Iu4cAOrRAQEYQBr85c0BxQWxAAD37AHvDU8gANScAYYT8DwA9+0BGRe0IwD69AGTDiAjAOK9AZAbMkUA/PgBPTD1SADozAFAHcckAOvSARkfiyf7+fYBhwS3OAAAAAELKzU66e/5AT4HWiUA6tABvx82GwDp0AE+DQAA"),
+"format": 34896613407,
+"index_count": 39,
+"index_data": PackedByteArray("AwAQAAQAEAACABEACgAOAAkABgAJAA4ADAAGAA4ACwAGAAwACwAHAAYABwAIAAYACAAPAAYACAAFAA8ABgAPAAAAAQAGAAAADQABAAAA"),
+"material": ExtResource("1_16uv3"),
+"name": "NVRMaterial_ground_Chaos_dirt_",
+"primitive": 3,
+"uv_scale": Vector4(21.2446, 17.6488, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("1iG37ZUzfT6pebftAAAePzGTAAANtLBO1GZpJ+qpe0YAACcJP+6LLTFIIv9ffuRAy4LC880TqD2Qb///w4LkPUxOHv4UdNw9NazH8OsBYD7/////8xukPnKI//+rivE9GZP///2C/j0URMf2KAe5P/bY//8wTtI9OjU1+jdcpj2dhWknc7WrRZwbAAD//zdCSttakhfbRJJTzfuBb9mkjO/d7YZr2j+Vi9unkoTbTJKC23+SU9vSkjjbA5N923OSdNu1kgTbj5F+27+SitvDklvVj45O2pCA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_nr5hj")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_1516",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

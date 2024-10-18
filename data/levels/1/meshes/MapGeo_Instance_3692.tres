@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://emqqvtvqfu3v"]
+
+[ext_resource type="Material" uid="uid://3shdyiyxaxay" path="res://data/levels/1/materials/NVRMaterial_Plant01_.tres" id="1_p6x7l"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2irmw"]
+_surfaces = [{
+"aabb": AABB(192.047, 1.33954, 147.389, 0.531372, 0.164229, 0.967484),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray("AwAAAAEAAwACAAAAAgAEAAAABAACAAUADAANAAUADQAMAAsACgAHAAUABwAKAAgACQAHAAgACQAIAAYA"),
+"name": "NVRMaterial_Plant01_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 14,
+"vertex_data": PackedByteArray("TIVveCAsAAAEqgAAAAAAAP//fp5GXwAADeeksVglAAD8dXFkn2AAAPib00EIkAAAn2P3Ov//AABxcS6RAagAAICJFYIe1wAA2WCubrLQAAB+rvGpX7IAAAAAvpiwcwAA41bg87ShAADXa////30AAA==")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_3692"
+_surfaces = [{
+"aabb": AABB(192.047, 1.33954, 147.389, 0.531372, 0.164229, 0.967484),
+"attribute_data": PackedByteArray("/P4AAXNt+Vj9/wABmwOpF/r9AAHef3rZ+v0AAe9H/ID9/gABMcXIjvz+AAGG5dXs/wAAAZsDqRf9/gAB3n962f3/AAFzbflY/v8AAStIJoL7/gABMcXIjvz+AAFn7Mbl/wAAAZsDqRf8/gABMcXIjvv9AAFpf6vY/P4AAerite8="),
+"format": 34896613407,
+"index_count": 30,
+"index_data": PackedByteArray("AwAAAAEAAwACAAAAAgAEAAAABAACAAUACQAIAAYACQAHAAgABwAKAAgACgAHAAsADgANAAwADQAOAA8A"),
+"material": ExtResource("1_p6x7l"),
+"name": "NVRMaterial_Plant01_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("TIVveCAskRQEqgAAAAAZEP//fp5GX9sWDeeksVglRxP8dXFkn2ATF/ib00EIkDULn2P3Ov//A0JxcS6RAajAN4CJFYIe1zlA2WCubrLQG0F+rvGpX7JCNPib00EIkOQ9AAC+mLBzhzXjVuDztKG4M9dr////fdsz+JvTQQiQNjYvjXu+bYtsy6KNebe7i+nBbY7bts2WCrMA9CVSUev/UKjyHlNQ9MRUwehjUVPdw0yOsPivhbk2mra5GZo+yFWU")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_2irmw")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_3692",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

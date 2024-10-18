@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bv22xj2dho344"]
 
-[ext_resource type="Texture2D" uid="uid://cqkp6jvxx364p" path="res://data/levels/1/textures/room_WallOfGrass.png" id="1_sy45r"]
+[ext_resource type="Texture2D" uid="uid://bb7tmk3hnm12o" path="res://data/levels/1/textures/room_WallOfGrass.png" id="1_sy45r"]
 
 [resource]
 resource_name = "NVRMaterial_Wall_of_Grass"

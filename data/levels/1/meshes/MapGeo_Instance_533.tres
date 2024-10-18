@@ -1,0 +1,46 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://dl8hayxe4fi6g"]
+
+[ext_resource type="Material" uid="uid://omockraf6ymo" path="res://data/levels/1/materials/NVRMaterial_turret_stoneBase_.tres" id="1_rbwiu"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_v22m0"]
+_surfaces = [{
+"aabb": AABB(36.7785, 1.30064, 36.9765, 16.575, 0.0103779, 17.5237),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AwAEAAEACgADAAEAAwAKAAIAAgAKAAkACQAKAAEAAgAJAAAAAAAJAAcACQABAAYACQAGAAcABgABAAUABwAGAAgABgAFAAgA"),
+"lods": [0.00471946, PackedByteArray("AwAEAAEAAgADAAEAAgABAAcAAAACAAcABwABAAUABwAFAAgA")],
+"name": "NVRMaterial_turret_stoneBase_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 11,
+"vertex_data": PackedByteArray("g/iYk///AAA6XwAAEWAAAE1uXBWW8wAABwD//wDFAAAAAN/+JmAAAJa1TmEvAAAAj69OYbJ6AADQ3FFhGY8AAP//UWEAAAAAkqo2lfm9AAACalwVosAAAA==")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_533"
+_surfaces = [{
+"aabb": AABB(36.7785, 1.30064, 36.9765, 16.575, 0.0103779, 17.5237),
+"attribute_data": PackedByteArray("AAAAAUhZ//8AAAABS8GLeAAAAAGHtHT4AAAAAQj+itIAAAAB///aegAAAAFGiiUjAAAAAeOLz40AAAABsW18ngAAAAFJWTwhAAAAAeCNbMgAAAABVrhAzA=="),
+"format": 34896613407,
+"index_count": 36,
+"index_data": PackedByteArray("AwAEAAEACgADAAEAAwAKAAIAAgAKAAkACQAKAAEAAgAJAAAAAAAJAAcACQABAAYACQAGAAcABgABAAUABwAGAAgABgAFAAgA"),
+"lods": [0.00471946, PackedByteArray("AwAEAAEAAgADAAEAAgABAAcAAAACAAcABwABAAUABwAFAAgA")],
+"material": ExtResource("1_rbwiu"),
+"name": "NVRMaterial_turret_stoneBase_",
+"primitive": 3,
+"uv_scale": Vector4(3.15908, 2.52751, 0, 0),
+"vertex_count": 11,
+"vertex_data": PackedByteArray("g/iYk///0AA6XwAAEWDTAE1uXBWW89EABwD//wDF3QAAAN/+JmDfAJa1TmEvAM8Aj69OYbJ60ADQ3FFhGY/SAP//UWEAANIAkqo2lfm9zgACalwVosDTAHfA6gBzwOcAdsDpAG3A3ABswNoAdMDrAHTA6gBzwOgAc8DoAHbA7QBzwOcA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_v22m0")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_533",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://4xpw80gwt23u"]
+
+[ext_resource type="Material" uid="uid://bb0o4ym1ax0fu" path="res://data/levels/1/materials/NVRMaterial_Tree01_md_.tres" id="1_f08iy"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_4jk8c"]
+_surfaces = [{
+"aabb": AABB(80.2652, 0.0719111, 30.388, 14.6524, 0.997116, 11.6996),
+"format": 34896613377,
+"index_count": 66,
+"index_data": PackedByteArray("AAACAAEAAwAFAAQABgAIAAcACQALAAoADAAOAA0ADwARABAAEgAUABMAFQAXABYAGAAaABkAGwAdABwAHgAgAB8AIQAjACIAJAAmACUAJwApACgAKgAsACsALQAvAC4AMAAyADEAMwA1ADQANgA4ADcAOQA7ADoAPAA+AD0APwBBAEAA"),
+"name": "NVRMaterial_Tree01_md_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 66,
+"vertex_data": PackedByteArray("pYvQxoQPAADGigLJPA4AAAiJnjkqDwAA9oVivBgHAAALhdu+3wUAALaDJy4zBgAASINpiFYBAAA8gpmEAAAAAPeAAABlBQAAAerQxo81AAAi6QLJRzQAAGTnnjk0NQAAUuRivCMtAABm49u+6SsAABLiJy4+LAAApOFpiGEnAACY4JmECiYAAFLfAABwKwAApcHQxiIzAADGwALJ2jEAAAi/njnHMgAA9btivLUqAAAKu9u+fCkAALa5Jy7RKQAASLlpiPMkAAA8uJmEnSMAAPa2AAACKQAAl6XQxoPJAADtpgLJqskAAKinnjl6xwAAW65ivI/KAACyr9u+ocoAAHawJy47yQAAfLNpiFbMAAD7tJmEYMwAAOGyAABnxwAAIg/QxlmoAADZDQLJ1KgAANINnjkzqwAAsAZivHarAABsBdu+BawAACAFJy6trQAAZgFpiDSsAAAAAJmE3KwAAG0DAACAsAAA7f09mtf/AABE/2+c//8AAP//Cg3O/QAA7d3QxrbPAABE3wLJ3c8AAP/fnjmtzQAAsuZivMLQAAAJ6Nu+1dAAAM3oJy5uzwAA0+tpiInSAABR7ZmElNIAADjrAACazQAASdDM/TfeAACg0f//Xt4AAFvSmnAu3AAADtle80TfAABl2tj1Vt8AACnbJGXw3QAAL95lvwrhAACt35W7FeEAAJTd/DYb3AAA")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_676"
+_surfaces = [{
+"aabb": AABB(80.2652, 0.0719111, 30.388, 14.6524, 0.997116, 11.6996),
+"attribute_data": PackedByteArray("AAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAPjuAbB1JSoA+O8BMmntIQD79gGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAAAAAbB1JSoAAAABMmntIQAAAAGzZpxaAP/+AbB1JSoA//4BMmntIQD//gGzZpxaAP/9AbB1JSoA//0BMmntIQD//QGzZpxaAP78AbB1JSoA//0BMmntIQD//QGzZpxa"),
+"format": 34896613407,
+"index_count": 66,
+"index_data": PackedByteArray("AAACAAEAAwAFAAQABgAIAAcACQALAAoADAAOAA0ADwARABAAEgAUABMAFQAXABYAGAAaABkAGwAdABwAHgAgAB8AIQAjACIAJAAmACUAJwApACgAKgAsACsALQAvAC4AMAAyADEAMwA1ADQANgA4ADcAOQA7ADoAPAA+AD0APwBBAEAA"),
+"material": ExtResource("1_f08iy"),
+"name": "NVRMaterial_Tree01_md_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 66,
+"vertex_data": PackedByteArray("pYvQxoQPYKvGigLJPA5gqwiJnjkqD2Cr9oVivBgHSqoLhdu+3wVKqraDJy4zBkqqSINpiFYBJ7E8gpmEAAAnsfeAAABlBSexAerQxo81YKsi6QLJRzRgq2Tnnjk0NWCrUuRivCMtSapm49u+6StJqhLiJy4+LEmqpOFpiGEnJ7GY4JmECiYnsVLfAABwKyexpcHQxiIzYKvGwALJ2jFgqwi/njnHMmCr9btivLUqSqoKu9u+fClKqra5Jy7RKUqqSLlpiPMkJ7E8uJmEnSMnsfa2AAACKSexl6XQxoPJ+P/tpgLJqsn4/6innjl6x/j/W65ivI/Kbf+yr9u+ocpt/3awJy47yW3/fLNpiFbMy/v7tJmEYMzL++GyAABnx8v7Ig/QxlmoGaLZDQLJ1KgZotINnjkzqxmisAZivHariaFsBdu+BayJoSAFJy6trYmhZgFpiDSsU64AAJmE3KxTrm0DAACAsFOu7f09mtf/+f9E/2+c///4////Cg3O/fj/7d3QxrbP9/9E3wLJ3c/3///fnjmtzfj/suZivMLQbP8J6Nu+1dBs/83oJy5uz2z/0+tpiInSy/tR7ZmElNLL+zjrAACazcv7SdDM/Tfe+P+g0f//Xt74/1vSmnAu3Pj/Dtle80Tfbf9l2tj1Vt9t/ynbJGXw3Wz/L95lvwrhy/ut35W7FeHL+5Td/DYb3Mv7Aczz3gHM894BzPPe78pi4+/KYuPvymLjXtsF0l7bBdJe2wXSAczz3gHM894BzPPe78pi4+/KYuPvymLjXtsF0l7bBdJe2wXSAczz3gHM894BzPPe78pi4+/KYuPvymLjXtsF0l7bBdJe2wXSP1a7ID9WuyA/VrsgXKEG2VyhBtlcoQbZSqZKyUqmSslKpkrJdNhsBnTYbAZ02GwGAisEAgIrBAICKwQCq929EKvdvRCr3b0QP1a7ID9WuyA+VrsgQFa7IEBWuyA/VrsgXKEG2VyhBtlcoQbZSqZKyUqmSslKpkrJP1a8ID9WvCA/VrwgXKEG2VyhBtlcoQbZS6ZJyUumSclLpknJ")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_4jk8c")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_676",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

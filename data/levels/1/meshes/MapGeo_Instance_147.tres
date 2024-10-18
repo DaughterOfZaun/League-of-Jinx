@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://bbpm5dqndgxdb"]
+
+[ext_resource type="Material" uid="uid://codwvl5r3k1x8" path="res://data/levels/1/materials/NVRMaterial_order_tile_floor_border_.tres" id="1_ekplp"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_w11q8"]
+_surfaces = [{
+"aabb": AABB(19.2518, 1.29297, -1.27244, 12.0337, 0.00253212, 11.2417),
+"format": 34896613377,
+"index_count": 9,
+"index_data": PackedByteArray(1, 0, 0, 0, 4, 0, 0, 0, 2, 0, 4, 0, 3, 0, 4, 0, 2, 0),
+"name": "NVRMaterial_order_tile_floor_border_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(166, 253, 255, 255, 0, 0, 0, 0, 0, 0, 72, 254, 46, 5, 0, 0, 255, 255, 17, 67, 233, 179, 0, 0, 52, 124, 0, 0, 255, 255, 0, 0, 146, 87, 255, 74, 5, 182, 0, 0)
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_147"
+_surfaces = [{
+"aabb": AABB(19.2518, 1.29297, -1.27244, 12.0337, 0.00253212, 11.2417),
+"attribute_data": PackedByteArray(0, 0, 0, 1, 222, 253, 255, 255, 0, 0, 0, 1, 220, 23, 226, 252, 0, 0, 0, 1, 255, 255, 230, 147, 0, 0, 0, 1, 125, 136, 48, 102, 0, 0, 0, 1, 69, 103, 162, 146),
+"format": 34896613407,
+"index_count": 9,
+"index_data": PackedByteArray(1, 0, 0, 0, 4, 0, 0, 0, 2, 0, 4, 0, 3, 0, 4, 0, 2, 0),
+"material": ExtResource("1_ekplp"),
+"name": "NVRMaterial_order_tile_floor_border_",
+"primitive": 3,
+"uv_scale": Vector4(4.03294, 6.16273, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(166, 253, 255, 255, 0, 0, 255, 63, 0, 0, 72, 254, 46, 5, 255, 63, 255, 255, 17, 67, 233, 179, 255, 63, 52, 124, 0, 0, 255, 255, 255, 63, 146, 87, 255, 74, 5, 182, 255, 63, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_w11q8")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_147",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

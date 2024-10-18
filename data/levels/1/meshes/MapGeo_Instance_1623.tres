@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://dcxn837ja76qu"]
+
+[ext_resource type="Material" uid="uid://gae3k4q8q0ro" path="res://data/levels/1/materials/NVRMaterial_river_corner_.tres" id="1_5sigc"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_urovn"]
+_surfaces = [{
+"aabb": AABB(95.5034, -1.92096, 111.233, 1.57407, 2.34799, 1.32925),
+"format": 34896613377,
+"index_count": 48,
+"index_data": PackedByteArray("BgAHAA4ABgAIAAcACAAEAAcABQAIAAYACAAFAAQABQANAAQAAwAAAAEAAAADAAoAAgADAAEAAgABAAkAAwALAAoADAACAAkAAwACAAwADAAJAAoACwADAAwACwAMAAoA"),
+"name": "NVRMaterial_river_corner_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 15,
+"vertex_data": PackedByteArray("cIMAAEe/AAAAAIMTbpQAABY6Sris4QAAGZd7qv//AAC0XHdK+4sAAM3zbuGM9wAAObX//x5uAACNfBpfAAAAAMqWPu852QAA2B8mKHIIAABKo6IUSzMAAIe1O7vklAAAhFgLyZF2AAAk4PM21bYAAP//lkvZKgAA")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_1623"
+_surfaces = [{
+"aabb": AABB(95.5034, -1.92096, 111.233, 1.57407, 2.34799, 1.32925),
+"attribute_data": PackedByteArray("AAAAAZh0z/QAAAABfbXP9Pv+AAF9tUiU6fMAAZh0SJQAAAABmHTP9OrzAAGdTEXosdMAAUUI7KOx0wABfbVIlPv9AAF9tc/09foAAZh0SJT/AAABmHTP9O/2AAF9tc/0vtoAAX21SJS62QABmHRIlL7aAAF9tc/07/YAAX21SJQAAAABmHRIlOnzAAGYdM/0+/4AAZ1M7KO62QABRQjso77aAAFFCEXo6fMAAZ1MRegAAAABmHTP9P8AAAF9tc/0utkAAX21SJT7/gABmHRIlAAAAAGYdM/0AAAAAX21z/T1+gABfbVIlOrzAAGYdEiU+/0AAZh0z/Sx0wABmHRIlPX6AAGdTOyj8fgAAX21z/Q="),
+"format": 34896613407,
+"index_count": 48,
+"index_data": PackedByteArray("HwAeACEABQAgAAYAAwAAAAEAAgADAAEADQAKAAsADAANAAsAEQAOAA8AEAARAA8AFQASABMAFAAVABMAGQAWABcAGAAZABcAHQAaABsAHAAdABsACQAEAAgABwAJAAgA"),
+"material": ExtResource("1_5sigc"),
+"name": "NVRMaterial_river_corner_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 34,
+"vertex_data": PackedByteArray("cIMAAEe/OwUAAIMTbpQMCRY6Sris4WMAGZd7qv//lxG0XHdK+4tXEM3zbuGM92waObX//x5umhc5tf//Hm5xJI18Gl8AAAoQypY+7znZmCDYHyYocgh1FEqjohRLM48Lh7U7u+SU5CmEWAvJkXZQLIe1O7vklK80SqOiFEszmStwgwAAR7/2aBmXe6r//2BbFjpKuKzhcECEWAvJkXaaF4e1O7vklDkRGZd7qv//bBoAAIMTbpRXENgfJihyCAoQhFgLyZF2cSQWOkq4rOGYICTg8zbVtjsFtFx3SvuLDAnKlj7vOdljAM3zbuGM95cRjXwaXwAAdRQ5tf//Hm5QLMqWPu852XBA//+WS9kqjwtyCb7mB/oe3uXmmya8FVYR4fYg37ebjolfpEy5+tcKP4X791Rn+1g38PjhqoXIsnNAyGJvQPO4iNmwJBrYaCkKzk7nJvXMYBGKhezIX6RMuWq7n5O3m46J4fYg34X791T61wo/Z/tYN3IJvuYH+h7e5eabJrwVVhHw+OCqQfO3iIqF7MiFyLJz")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_urovn")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_1623",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

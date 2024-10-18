@@ -1,0 +1,46 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://dcjmaeqoag3er"]
+
+[ext_resource type="Material" uid="uid://b2sviph808j6i" path="res://data/levels/1/materials/NVRMaterial_ground_order_dirt_.tres" id="1_n142q"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_cmgi2"]
+_surfaces = [{
+"aabb": AABB(0.720686, 0.411301, 97.2616, 16.3987, 0.0323907, 18.8492),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("BgACAAcAAgADAAcAAwACAAkABwADAAoACAADAAkAAwAAAAoAAAADAAgACgAAAAsAAQAAAAgAAAAEAAsAAQAFAAAABQAEAAAA"),
+"lods": [0.0554414, PackedByteArray("BgACAAcAAgAKAAcACgACAAkACAAKAAkACgAIAAsACAAEAAsABQAEAAgAAQAFAAgA")],
+"name": "NVRMaterial_ground_order_dirt_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("K1YAAASaAAA5/gQAh5gAAARTTfoAAAAA5VRM+uZZAABxWAAA//8AAIL2BABj9wAAdwVM+n0AAAD5AUz6+VcAAG79///uXgAA/////wQAAAAAAEz6+5gAAKMASvpT+QAA")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_999"
+_surfaces = [{
+"aabb": AABB(0.720686, 0.411301, 97.2616, 16.3987, 0.0323907, 18.8492),
+"attribute_data": PackedByteArray("AAAAAYkQ8PUAAAABKRPc4wAAAAF6MZfzAAAAAeIYZPUAAAABogHp9gAAAAEAAD7m7vcAAfoytvv9/wABwxv5/QAAAAH6Gk/jAAAAAe4tfuH1+wAB8xLm/vD5AAGtBP//"),
+"format": 34896613407,
+"index_count": 36,
+"index_data": PackedByteArray("BgACAAcAAgADAAcAAwACAAkABwADAAoACAADAAkAAwAAAAoAAAADAAgACgAAAAsAAQAAAAgAAAAEAAsAAQAFAAAABQAEAAAA"),
+"lods": [0.0554414, PackedByteArray("BgACAAcAAgAKAAcACgACAAkACAAKAAkACgAIAAsACAAEAAsABQAEAAgAAQAFAAgA")],
+"material": ExtResource("1_n142q"),
+"name": "NVRMaterial_ground_order_dirt_",
+"primitive": 3,
+"uv_scale": Vector4(13.7459, 22.9905, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("K1YAAASafSg5/gQAh5jiJwRTTfoAAGom5VRM+uZZlidxWAAA//9cKIL2BABj95YndwVM+n0Ahib5AUz6+VdpJ279///uXg0o/////wQABScAAEz6+5h+KKMASvpT+Xso9dPjJw3Urifr0oglg9P3JvLT4Sfi03wn6tKcJV3T0Cb9058nadORJujT6yfl08Qn")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_cmgi2")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_999",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

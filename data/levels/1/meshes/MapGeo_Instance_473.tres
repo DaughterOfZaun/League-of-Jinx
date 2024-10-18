@@ -1,0 +1,46 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://cujeyevgsxoa0"]
+
+[ext_resource type="Material" uid="uid://engihehgmafl" path="res://data/levels/1/materials/NVRMaterial_base_moss_patch1_.tres" id="1_1t04c"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_32ts7"]
+_surfaces = [{
+"aabb": AABB(42.5657, 1.28191, -1.78876, 13.0619, 0.0124627, 20.5152),
+"format": 34896613377,
+"index_count": 33,
+"index_data": PackedByteArray("BwACAAoABgAHAAoABgAKAAQABAAKAAUACgACAAAACgAAAAUAAgAJAAAAAwAFAAAAAAAJAAgAAQADAAAAAQAAAAgA"),
+"lods": [0.00963117, PackedByteArray("BwACAAQABgAHAAQAAgAJAAQABAAJAAgAAQAEAAgAAQADAAQAAwAFAAQA")],
+"name": "NVRMaterial_base_moss_patch1_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 11,
+"vertex_data": PackedByteArray("/pKYEpp+AABYlZgSif8AAB/6c/qRagAAlgKYEtj/AAAAAFn0z2gAABMAlR53fwAAEpH//3cBAADm2DP7AAAAAED5AAD//wAA///pDWd9AACqkjv0QGkAAA==")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_473"
+_surfaces = [{
+"aabb": AABB(42.5657, 1.28191, -1.78876, 13.0619, 0.0124627, 20.5152),
+"attribute_data": PackedByteArray("AAAAAfec/5oAAAABYZuj/wAAAAF8V1uLAAAAAUD+4P/+/wAB///8iQAAAAHx/6ybAAAAAUKeUTkAAAAB3m0sOAAAAAESWP//AAAAAYdTD5oAAAABMJ1Uig=="),
+"format": 34896613407,
+"index_count": 33,
+"index_data": PackedByteArray("BwACAAoABgAHAAoABgAKAAQABAAKAAUACgACAAAACgAAAAUAAgAJAAAAAwAFAAAAAAAJAAgAAQADAAAAAQAAAAgA"),
+"lods": [0.00963117, PackedByteArray("BwACAAQABgAHAAQAAgAJAAQABAAJAAgAAQAEAAgAAQADAAQAAwAFAAQA")],
+"material": ExtResource("1_1t04c"),
+"name": "NVRMaterial_base_moss_patch1_",
+"primitive": 3,
+"uv_scale": Vector4(2.36285, 3.47154, 0, 0),
+"vertex_count": 11,
+"vertex_data": PackedByteArray("/pKYEpp+AABYlZgSif8AAB/6c/qRagAAlgKYEtj/AAAAAFn0z2gAABMAlR53fwAAEpH//3cBAADm2DP7AAAAAED5AAD//wAA///pDWd9AACqkjv0QGkAAP9/57//f/+//3/Yv/9//7//f+e//3/ev/9//7//f/+//3//v/9/4L//f+W/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_32ts7")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_473",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://c4kj0cnvb5ivy"]
+
+[ext_resource type="Material" uid="uid://ombt1p5cmiyy" path="res://data/levels/1/materials/NVRMaterial_order_base_decal__mid_.tres" id="1_v3xu2"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_52f0p"]
+_surfaces = [{
+"aabb": AABB(62.603, 0.522081, 92.0163, 17.9039, 0.0609785, 9.44375),
+"format": 34896613377,
+"index_count": 9,
+"index_data": PackedByteArray(3, 0, 2, 0, 4, 0, 4, 0, 2, 0, 0, 0, 0, 0, 2, 0, 1, 0),
+"name": "NVRMaterial_order_base_decal__mid_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(19, 243, 0, 0, 222, 147, 0, 0, 255, 255, 0, 0, 163, 26, 0, 0, 203, 216, 0, 0, 148, 70, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 113, 141, 255, 255, 255, 255, 0, 0)
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_926"
+_surfaces = [{
+"aabb": AABB(62.603, 0.522081, 92.0163, 17.9039, 0.0609785, 9.44375),
+"attribute_data": PackedByteArray(252, 254, 0, 1, 74, 205, 165, 102, 0, 0, 0, 1, 255, 255, 192, 133, 219, 232, 0, 1, 142, 209, 222, 137, 0, 238, 212, 1, 186, 56, 255, 255, 0, 247, 237, 1, 209, 86, 20, 115),
+"format": 34896613407,
+"index_count": 9,
+"index_data": PackedByteArray(3, 0, 2, 0, 4, 0, 4, 0, 2, 0, 0, 0, 0, 0, 2, 0, 1, 0),
+"material": ExtResource("1_v3xu2"),
+"name": "NVRMaterial_order_base_decal__mid_",
+"primitive": 3,
+"uv_scale": Vector4(2.18878, 2.72908, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(19, 243, 0, 0, 222, 147, 178, 59, 255, 255, 0, 0, 163, 26, 187, 59, 203, 216, 0, 0, 148, 70, 176, 59, 0, 0, 255, 255, 0, 0, 167, 59, 113, 141, 255, 255, 255, 255, 162, 59, 225, 229, 15, 76, 5, 230, 11, 76, 225, 229, 16, 76, 207, 229, 20, 76, 196, 229, 22, 76)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_52f0p")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_926",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

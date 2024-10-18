@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://dtwyi6on8dgy4"]
+
+[ext_resource type="Material" uid="uid://ltrrumubkj3j" path="res://data/levels/1/materials/NVRMaterial_order_seam2_.tres" id="1_hshs7"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7j68m"]
+_surfaces = [{
+"aabb": AABB(79.7276, 0.522082, 72.0696, 19.0476, 0.0691781, 20.9295),
+"format": 34896613377,
+"index_count": 39,
+"index_data": PackedByteArray("CgAHAAsAAgAKAAsAAAAKAAIACgAAAAYABgAAAAEAAgAMAAAAAgALAAwACwAIAAwACAANAAwADQAJAAwADQAIAAUACAADAAUADQAFAAQA"),
+"name": "NVRMaterial_order_seam2_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 14,
+"vertex_data": PackedByteArray("anIAAOO5AAB5CgAA//8AAMGdAACQnQAA///0m36jAADf6/SbVdMAAOvo9JsRvQAAAAAAAAZIAADsfv//AAAAAPPg9JuPmAAAVrr0mwPVAAD/RAAAbYIAAMbF9JsafgAAxLUAAHK5AAD9xPSbpLgAAA==")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_954"
+_surfaces = [{
+"aabb": AABB(79.7276, 0.522082, 72.0696, 19.0476, 0.0691781, 20.9295),
+"attribute_data": PackedByteArray("AAAAAXGaXZIAAAABUIwrNAAAAAH/oCK5yuEAAdbiK+rJ4AABBPn0xMDbAAH55rbPAAAAAQAAf5TQ6gABIRv//+PvAAFxx7Hf9foAATbbpKnw9QABrFXlmAAAAAEwo+Df9foAAU7Eerbp8wABQc0Ivw=="),
+"format": 34896613407,
+"index_count": 39,
+"index_data": PackedByteArray("CgAHAAsAAgAKAAsAAAAKAAIACgAAAAYABgAAAAEAAgAMAAAAAgALAAwACwAIAAwACAANAAwADQAJAAwADQAIAAUACAADAAUADQAFAAQA"),
+"material": ExtResource("1_hshs7"),
+"name": "NVRMaterial_order_seam2_",
+"primitive": 3,
+"uv_scale": Vector4(2.55704, 3.05243, 0, 0),
+"vertex_count": 14,
+"vertex_data": PackedByteArray("anIAAOO5mzl5CgAA//+bOcGdAACQnc85///0m36jmznf6/SbVdObOevo9JsRvZs5AAAAAAZImznsfv//AADVOfPg9JuPmJE5Vrr0mwPVDDr/RAAAbYLHOcbF9JsafvQ5xLUAAHK5uDn9xPSbpLiKOcnEmp3JxJqdsMSwncnEmp3JxJqdycSancnEmp2uxLqdzcQVnpvEvJ60xKadn8THnbzEXp7RxCKe")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_7j68m")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_954",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

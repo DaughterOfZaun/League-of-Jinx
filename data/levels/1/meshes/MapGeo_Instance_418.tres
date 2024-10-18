@@ -1,0 +1,46 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://f2g1grsx13po"]
+
+[ext_resource type="Material" uid="uid://ukb5khhsg25t" path="res://data/levels/1/materials/NVRMaterial_stonehenge_.tres" id="1_op3s5"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_poxya"]
+_surfaces = [{
+"aabb": AABB(14.8996, 0.582933, 98.9285, 0.376518, 0.179947, 0.389137),
+"format": 34896613377,
+"index_count": 75,
+"index_data": PackedByteArray("DgAPAAcAAwAPAA4AAQADAA4ACwADAAEAAwALAA8ACAALAAEADwAFAAcABwAFAAwACwAEAA8ADwAEAAUACwAIAAkACAAQAAkAEAACAAkACQAAAAsAAgAAAAkAAAAEAAsABAAAAAIADQAEAAIABAANABEAEQAFAAQADQAGABEAEQAGAAwABQAKAAwACgARAAwACgAFABEA"),
+"lods": [0.0852126, PackedByteArray("DgAFAAcABwAFAAwADAAFAAYADgALAAUACwAOAAEACAALAAEACwAAAAUACwAIAAAABgAFAAAACAAQAAAAAAANAAYAEAACAAAADQAAAAIA"), 0.125167, PackedByteArray("CAAOAAEACAACAA4ACAAQAAIABgAOAAIAAgANAAYADAAOAAYABwAOAAwA")],
+"name": "NVRMaterial_stonehenge_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("H2X//xTCAAD//wMA614AALNLAQCr2QAAetLx5hBhAABLRmjxnJIAABlwL+qvFwAAAAAFALFVAACIeAYAAAAAAJ7wAQCauwAAZ5zx6aTTAAAyKgzeByYAAN7DMO+wmAAAdiEGAJAUAAAPKAIAtKkAAG++BQA8HgAA+KyL7g4yAABjpAAA//8AAHof39AGUAAA")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_418"
+_surfaces = [{
+"aabb": AABB(14.8996, 0.582933, 98.9285, 0.376518, 0.179947, 0.389137),
+"attribute_data": PackedByteArray("AAAAATJDGGcAAAABQGhmTQAAAAGbNCZrAAAAAVZexVcAAAAB3krKbgAAAAHFZLRvAAAAAa5HW4gAAAAB/XGecwAAAAEzTN9HAAAAAXZB01wAAAAB21yvfQAAAAH9TmNVAAAAAfdjn4sAAAABzj00dAAAAAEbcAdgAAAAAYZiGWMAAAABujhVVQAAAAGiUPl7"),
+"format": 34896613407,
+"index_count": 75,
+"index_data": PackedByteArray("DgAPAAcAAwAPAA4AAQADAA4ACwADAAEAAwALAA8ACAALAAEADwAFAAcABwAFAAwACwAEAA8ADwAEAAUACwAIAAkACAAQAAkAEAACAAkACQAAAAsAAgAAAAkAAAAEAAsABAAAAAIADQAEAAIABAANABEAEQAFAAQADQAGABEAEQAGAAwABQAKAAwACgARAAwACgAFABEA"),
+"lods": [0.0852126, PackedByteArray("DgAFAAcABwAFAAwADAAFAAYADgALAAUACwAOAAEACAALAAEACwAAAAUACwAIAAAABgAFAAAACAAQAAAAAAANAAYAEAACAAAADQAAAAIA"), 0.125167, PackedByteArray("CAAOAAEACAACAA4ACAAQAAIABgAOAAIAAgANAAYADAAOAAYABwAOAAwA")],
+"material": ExtResource("1_op3s5"),
+"name": "NVRMaterial_stonehenge_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("H2X//xTC/zP//wMA615LObNLAQCr2RY6etLx5hBhcjJLRmjxnJKLLxlwL+qvF3scAAAFALFV/h2IeAYAAAA3DJ7wAQCau6ZPZ5zx6aTTZ0MyKgzeByaDFN7DMO+wmOQ9diEGAJAUUwEPKAIAtKlCL2++BQA8HjIc+KyL7g4yGChjpAAA//8oSHof39AGUMMiVerVLWyvyz/X8+nYQbf6Nz3vcjrJ1s8/e/E5wyjEIkQqsjwSGd2MFKXrDEdSyZkpIesETAjvatDouC1FksrvPeHltQ8f/YZD")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_poxya")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_418",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

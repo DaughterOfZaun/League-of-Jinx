@@ -1,0 +1,46 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://8su61r0iea88"]
+
+[ext_resource type="Material" uid="uid://ombt1p5cmiyy" path="res://data/levels/1/materials/NVRMaterial_order_base_decal__mid_.tres" id="1_pvlx6"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kerm0"]
+_surfaces = [{
+"aabb": AABB(77.8143, 0.392634, 141.872, 15.6248, 0.202523, 16.472),
+"format": 34896613377,
+"index_count": 21,
+"index_data": PackedByteArray("AQAEAAAABAAHAAgACAAHAAUABwAEAAMABwAGAAUAAgAHAAMABwACAAYA"),
+"lods": [0.000222604, PackedByteArray("AQAEAAAAAgAEAAMABAACAAgACAACAAUAAgAGAAUA")],
+"name": "NVRMaterial_order_base_decal__mid_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 9,
+"vertex_data": PackedByteArray("///a/TaPAAA6lQAA//8AAAAA2f3KLgAAlgHY/at7AABrNdr9/Y8AAGnj//8QYQAAr0LZ/QAAAAB0L9j9ADoAADvb2v2SagAA")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_1670"
+_surfaces = [{
+"aabb": AABB(77.8143, 0.392634, 141.872, 15.6248, 0.202523, 16.472),
+"attribute_data": PackedByteArray("4vgAAX9g4ZEA9+4BACNA0wD05AEX7Ib0AAAAAYqv//8A+OwBp5Il7LrpAAHFi0qXAOLCAf//cM8A1J8Bbtcv4QDiwgH//3DPANSfAW7XL+EA+OwBp5Il7MbuAAFhhm+c"),
+"format": 34896613407,
+"index_count": 21,
+"index_data": PackedByteArray("AQAEAAAABwAEAAMAAgAHAAMABwACAAYACQAIAAUACwAJAAUACgAJAAsA"),
+"lods": [0.000222604, PackedByteArray("AQAEAAAAAgAEAAMABAACAAsACwACAAUAAgAGAAUA")],
+"material": ExtResource("1_pvlx6"),
+"name": "NVRMaterial_order_base_decal__mid_",
+"primitive": 3,
+"uv_scale": Vector4(1.53293, 2.57984, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("///a/TaPJSM6lQAA//8lIwAA2f3KLqIilgHY/at7oiJrNdr9/Y/jImnj//8QYaoir0LZ/QAAoiJ0L9j9ADqiIq9C2f0AAKIidC/Y/QA6pCJrNdr9/Y+iIjvb2v2SaqMiYtF2IWLRdiHm0M4h5tDOISTRoiHP0Mgh5tDOIebQziHm0M4h69DNIebQziHs0M0h")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_kerm0")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_1670",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://b8eilyqomm67"]
+
+[ext_resource type="Material" uid="uid://bkgrehbll3j2u" path="res://data/levels/1/materials/NVRMaterial_order_ground_mix2_.tres" id="1_k4dsa"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_d2pvg"]
+_surfaces = [{
+"aabb": AABB(60.8413, 0.566117, -1.87307, 9.47783, 0.748972, 21.4003),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AQADAAYABQADAAEABQABAAQACwAGAAIADAALAAIACwAMAA0ADAAJAA0AAgAHAAwADAAHAAkABwAIAAkAAgAAAAcACgAHAAAA"),
+"name": "NVRMaterial_order_ground_mix2_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 14,
+"vertex_data": PackedByteArray("AAAAAAAAAAAoPlSNSXkAAN5rHwLNQQAAdCTS+G1pAAA6N50K//8AAOsi//+GegAAMkRI/142AAD//6IF5YsAAEX+1QXK9AAAA7tYCUb1AAD4+TgC+BQAABE+o4tHegAAomczBdaDAAA6N50K//8AAA==")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_503"
+_surfaces = [{
+"aabb": AABB(60.8413, 0.566117, -1.87307, 9.47783, 0.748972, 21.4003),
+"attribute_data": PackedByteArray("AAAAAdNC//8AAAABmZzn4AAAAAHVc+DH9/wAAcqQRe4AAAAB//+U5gAAAAFmnVbvAAAAATtrtdwAAAABO2u13AAAAAEfq5N6AAAAAYn4DH0AAAABnvipoAAAAAFSU/17AAAAAVSd9uAAAAABjqQaywAAAAH//5Tm"),
+"format": 34896613407,
+"index_count": 36,
+"index_data": PackedByteArray("AQADAAcABQADAAEABQABAAQADAAGAAIADQAMAAIADAANAA4ADQAKAA4AAgAIAA0ADQAIAAoACAAJAAoAAgAAAAgACwAIAAAA"),
+"material": ExtResource("1_k4dsa"),
+"name": "NVRMaterial_order_ground_mix2_",
+"primitive": 3,
+"uv_scale": Vector4(3.94456, 2.59128, 0, 0),
+"vertex_count": 15,
+"vertex_data": PackedByteArray("AAAAAAAA/dQoPlSNSXlB295rHwLNQYzYdCTS+G1pwto6N50K///u2+si//+Gem7cMkRI/142jN0yREj/Xjbg2P//ogXliw3VRf7VBcr0ItUDu1gJRvUX1fj5OAL4FAzVET6ji0d6f9uiZzMF1oMb1zo3nQr//2LX/aqKqqOu3KEfrYOllK4/ohKv4KA8r0uhNrCInXat/qIHq32qE6teqg2rdaoGq4Oqo66eoUKsq6dXrP2m")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_d2pvg")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_503",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

@@ -1,0 +1,46 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://dda1b0agd82nl"]
+
+[ext_resource type="Material" uid="uid://dew0e5uailin5" path="res://data/levels/1/materials/NVRMaterial_TombStone01_TombStone01_.tres" id="1_cl6au"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_enyog"]
+_surfaces = [{
+"aabb": AABB(81.1661, 0.222066, 160.63, 1.51181, 1.75082, 1.22852),
+"format": 34896613377,
+"index_count": 78,
+"index_data": PackedByteArray("BAACAAYABAAGAAgABwAEAAgABwAOAAQADgAHAAgADgACAAQADQAIAAYADQAOAAgAAAANAAYAAgAAAAYADQADAA4AAwANAAAAAgAOAAsAAwALAA4ADAAAAAIADAADAAAAAwABAAsAAQADAAwAAQAPAAsABQABAAwACgALAA8ACgACAAsACgAMAAIADAAKAAUACQAKAA8ACgAJAAUA"),
+"lods": [0.102575, PackedByteArray("AgAAAAQAAAANAAQADgACAAQADgAEAA0ADAAAAAIADAANAAAADQABAA4AAQANAAwAAQAPAA4ABQABAAwACgAOAA8ACgACAA4ACgAMAAIADAAKAAUACQAKAA8ACgAJAAUA"), 0.401484, PackedByteArray("DAACAAUAAgAJAAUABQABAAwACQACAA8AAQAPAA4AAgAOAA8AAQAOAAwADAAOAAIA"), 0.496206, PackedByteArray("AgAJAAUACQACAA8ABQABAAIAAQAPAAIA")],
+"name": "NVRMaterial_TombStone01_TombStone01_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("bT7+4e/dAAAcKoMzAAAAAH2w2dmr/wAA2TLhtSZnAADUktHyN/kAAAAAMRAargAADGS98uvsAACKov//Q7gAANRz+f+vqwAA4tUAAMb1AABoy4SV//8AAC/kTKqPmQAAERzGolTFAADAT4bwUJYAAD/CvuhCtgAA//9SI6xHAAA=")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_1845"
+_surfaces = [{
+"aabb": AABB(81.1661, 0.222066, 160.63, 1.51181, 1.75082, 1.22852),
+"attribute_data": PackedByteArray("/gAAAeNly0gA9P4BWEjs++f4AAEvZTMPAP0AAfpU8J3w+wAB7HOyIv8AAAGjH+z79/0AAW5y4jXn+AABXMojV/8AAAHamcNg8PsAATeZZ0UAAAABa3vGYff9AAEEeGdF8PsAAegBjQXo+AABL0r9Cuj4AAGA81OeANf3AfvCU57/AAAB6AGfVAAAAAECJVOe/gAAASdOI1cAAAAB/mAqbQDl+wGbtjJwAAAAAc1Jn1Tw+wAB3/js+//Y+AGMzuz7"),
+"format": 34896613407,
+"index_count": 78,
+"index_data": PackedByteArray("BAACAAYAAgAAAAYAFQAAAAIADQAVAAIAFQANABAADQAMABAABQABABEAAQADABEAEQADABIAAwABAA8AAQAXAA8ADgAPABcAFgAOABcADgAHAA8ABwAUAA8AAwAPABQAFAAHAAkAAwATABIAEwADABQAEgATAAsAEwAKAAsACQALAAoAEwAUAAoACAAUAAkAFAAIAAoACAAJAAoA"),
+"lods": [0.102575, PackedByteArray("AgAAAAQAFQAAAAIADQAVAAIAFQANABAADQAMABAABQABABEAAQATABEAEQATABIAEgATAAkAEwABABQAFAAJABMAFAAHAAkAAQAXABQADgAHABQADgAUABcAFgAOABcA"), 0.401484, PackedByteArray("FQACABAAAgAMABAABQABABEAAQAUABEAEQAUAAcAAQAXABQABwAUABcAFgAHABcA"), 0.496206, PackedByteArray("AgAMABAABQABAAcAAQAXAAcAFgAHABcA")],
+"material": ExtResource("1_cl6au"),
+"name": "NVRMaterial_TombStone01_TombStone01_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("bT7+4e/dhEMcKoMzAABCE32w2dmr/5o82TLhtSZn3xfUktHyN/lnTwAAMRAarggYDGS98uvs+kR9sNnZq/+UN4qi//9DuN411JLR8jf5Hk3Uc/n/r6uAMgxkvfLr7G9Y4tUAAMb1JT1oy4SV//9UO2jLhJX//8wQL+RMqo+ZaxYAADEQGq7RPxEcxqJUxU8UbT7+4e/dGDTAT4bwUJZGKj/CvuhCtnAhERzGolTF4jzi1QAAxvUcDv//UiOsR90RtuP1zqX+lpwHFrMFt/8/m5XbHTOt9izfJ/ymOPGVFn1R4X9/TcRQiffvgoui6Ku43RQ+FtQVcBPpmOR8iNDif3HiJeS6+eXTd/LmzeDzcZ611xF3I94v29yYzHqxwfB4")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_enyog")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_1845",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://dnl7rgeeadq6k"]
+
+[ext_resource type="Material" uid="uid://codwvl5r3k1x8" path="res://data/levels/1/materials/NVRMaterial_order_tile_floor_border_.tres" id="1_grsaj"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lcqsn"]
+_surfaces = [{
+"aabb": AABB(190.503, 1.29848, 164.246, 8.66583, 1e-05, 5.91785),
+"format": 34896613377,
+"index_count": 9,
+"index_data": PackedByteArray(3, 0, 2, 0, 0, 0, 1, 0, 3, 0, 0, 0, 1, 0, 4, 0, 3, 0),
+"name": "NVRMaterial_order_tile_floor_border_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(180, 7, 48, 70, 0, 0, 0, 0, 79, 80, 211, 48, 31, 3, 0, 0, 0, 0, 198, 45, 255, 255, 0, 0, 215, 80, 145, 33, 166, 253, 0, 0, 255, 255, 0, 0, 175, 10, 0, 0)
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_3860"
+_surfaces = [{
+"aabb": AABB(190.503, 1.29848, 164.246, 8.66583, 1e-05, 5.91785),
+"attribute_data": PackedByteArray(0, 0, 0, 1, 255, 255, 195, 118, 233, 244, 0, 1, 8, 255, 228, 158, 0, 0, 0, 1, 157, 88, 1, 116, 243, 249, 0, 1, 89, 91, 167, 160, 254, 255, 0, 1, 178, 252, 255, 255),
+"format": 34896613407,
+"index_count": 9,
+"index_data": PackedByteArray(3, 0, 2, 0, 0, 0, 1, 0, 3, 0, 0, 0, 1, 0, 4, 0, 3, 0),
+"material": ExtResource("1_grsaj"),
+"name": "NVRMaterial_order_tile_floor_border_",
+"primitive": 3,
+"uv_scale": Vector4(2.63203, 4.94052, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(180, 7, 48, 70, 0, 0, 247, 212, 79, 80, 211, 48, 31, 3, 247, 212, 0, 0, 198, 45, 255, 255, 247, 212, 215, 80, 145, 33, 166, 253, 247, 212, 255, 255, 0, 0, 175, 10, 247, 212, 141, 213, 27, 43, 141, 213, 27, 43, 141, 213, 27, 43, 141, 213, 27, 43, 141, 213, 27, 43)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_lcqsn")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_3860",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

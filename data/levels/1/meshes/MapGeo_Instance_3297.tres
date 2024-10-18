@@ -1,0 +1,46 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://dl7sreclauhgo"]
+
+[ext_resource type="Material" uid="uid://ek0mjq8xgqi5" path="res://data/levels/1/materials/NVRMaterial_TorchSet01_.tres" id="1_66en0"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_moloh"]
+_surfaces = [{
+"aabb": AABB(124.588, 0.6458, 158.884, 0.486526, 1.33138, 0.374588),
+"format": 34896613377,
+"index_count": 60,
+"index_data": PackedByteArray("AwAAAAIABAADAAIAAwAEAAYAAgAAAAcABwAFAAYAAAAFAAcABQABAAYAAQADAAYAAwALAAAACwADAAEACwAJAAAACgABAAUACgALAAEACQALAAwACwAKAAwAAAAJAAgABQAAAAgADAAIAAkACAAKAAUACgAIAAwA"),
+"lods": [0.173649, PackedByteArray("AwAAAAIAAgAAAAcABAADAAIAAwAEAAYAAwAJAAAAAQADAAYAAwABAAkABwAFAAYABQABAAYAAAAFAAcAAQAFAAkAAAAJAAUA"), 0.288389, PackedByteArray("BQAAAAIAAgAAAAcAAAAFAAcABAAFAAIABwAFAAYABQAEAAYA")],
+"name": "NVRMaterial_TorchSet01_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 13,
+"vertex_data": PackedByteArray("ZofKoEsoAAAKhXahduAAAFInNgF/XwAAYb5pnGGnAABKNgAARIwAAO9A/qYsZgAAcB75AVePAAAAAIkEmmkAAClYG/GkWwAATslG5QAAAABRiGXr//8AAP//9eC7pwAAWrX//1yDAAA=")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_3297"
+_surfaces = [{
+"aabb": AABB(124.588, 0.6458, 158.884, 0.486526, 1.33138, 0.374588),
+"attribute_data": PackedByteArray("/P4AAc0LHy8AAAABSycfL/3/AAFCQp+F/P4AAUJCHy8AAAAByDkfLwAAAAHIOZ+F+v0AAWYdHy8AAAABSyefhfv+AAHYHJ+F6fUAAWgzjSX9/wABzQufhfr9AAECAjEfyOYAAWgztRf8/gABAgKnFwAAAAFoM7UXAAAAAQICIg8AAAABAgKnF/j8AAFoM9MHrNkAAYFDXRY="),
+"format": 34896613407,
+"index_count": 60,
+"index_data": PackedByteArray("BAADAAIABQAEAAIABAAFAAcAAQAEAAcABgABAAcACAAGAAcAAAAGAAgACgAAAAgADgAQAAsACQAOAAsACwANAAkADgARABAAEQAPABAADwARAA0AEQAOABIADgAJABIAEQAMAA0ADQAMAAkADAARABIAEgAJAAwA"),
+"lods": [0.173649, PackedByteArray("BAADAAIABQAEAAIABAAFAAcAAQAEAAcABgABAAcACAAGAAcAAAAGAAgACgAAAAgADwAQAAwAEAALAAwADwAMAA0ADQAMAAsA"), 0.288389, PackedByteArray("BgADAAIABQAGAAIABgAFAAcACAAGAAcAAAAGAAgACgAAAAgA")],
+"material": ExtResource("1_66en0"),
+"name": "NVRMaterial_TorchSet01_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 19,
+"vertex_data": PackedByteArray("ZofKoEsoBPoKhXahduB4iVInNgF/X97jZofKoEsoV/lhvmmcYad5tUo2AABEjPWr70D+pixmV7pwHvkBV4+ejQAAiQSaaWjbKVgb8aRbuNRSJzYBf19N5O9A/qYsZv3UTslG5QAA0vxmh8qgSyh+91GIZev//xdDYb5pnGGnWTMKhXahduB/Qf//9eC7p1jWWrX//1yDr+VLeBAQZkpzfd1w9BapbBoaC3AuJIRuXif1ibn1z3Agv5tx8OVByWTCNXdEE+3dodIKuXWwEjh9RyX/FtaVGs0xKQg7+I4iCydMo92q")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_moloh")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_3297",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

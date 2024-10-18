@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cy6wkeyg6natm"]
 
-[ext_resource type="Texture2D" uid="uid://bred3ruwppqhs" path="res://data/levels/1/textures/room_stone_steps.png" id="1_1jrq3"]
+[ext_resource type="Texture2D" uid="uid://du1reglp7v0ai" path="res://data/levels/1/textures/room_stone_steps.png" id="1_1jrq3"]
 
 [resource]
 resource_name = "NVRMaterial_lambert150"

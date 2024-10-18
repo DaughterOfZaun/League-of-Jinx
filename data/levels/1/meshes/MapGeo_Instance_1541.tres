@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://c87nv66re5pl2"]
+
+[ext_resource type="Material" uid="uid://dujol4xdnxt4l" path="res://data/levels/1/materials/NVRMaterial_ground_RiverBed_cliff_blend_.tres" id="1_d42l7"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_n8ppg"]
+_surfaces = [{
+"aabb": AABB(48.6933, -1.0752, 143.483, 8.46773, 3.50715, 10.7403),
+"format": 34896613377,
+"index_count": 87,
+"index_data": PackedByteArray("AwAFABQAAwAUAAcADwADAAcABQAZABQAFAAVAAcAFAAZABUAFQAIAAcAGQAYABUACQAHAAgAGQAFAAIAGAAZABEAEQAZAAIAAgABABEAAQAAABEAEAAJAAgACQAQAAoACQAKAA4AEAALAAoADQAOAAoAFwAKAAsAFwANAAoAFgAXAAsADAANABcABAAXABYABAAMABcABgAEABYADAAEABMAEwAEAAYAEgATAAYA"),
+"name": "NVRMaterial_ground_RiverBed_cliff_blend_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 26,
+"vertex_data": PackedByteArray("YO7MedJZAAD//wAA4UAAAE/HAABuEAAA6CQAADUYAABHY9+JrfMAAJ53AAAAAAAADWlr6ALmAACkHSFIz0gAAIwyTqbiUwAAkABQYm+qAAAQHW9kt9gAAK00lfvFzAAAc10lTv//AAAOOdstV/sAAJoCAAAN5gAAAAAAADc9AACjHrDZKKsAAELAzHnULAAA5Lj//8PfAABRvsx5+u0AAHE5dz6ZJAAADUlxlK8uAAAoTezyzeAAADdCjoP57gAA4IDMeTEcAABefTtBGQ8AAA==")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_1541"
+_surfaces = [{
+"aabb": AABB(48.6933, -1.0752, 143.483, 8.46773, 3.50715, 10.7403),
+"attribute_data": PackedByteArray("AAD/Af7//38AAAAB//////Tz9gH/f///9PP2Af////8A2bEB/3///wDt2wH/f2W4+OfbAWe6///+9OwB/3//fwD16QH//4C9AOvbAf7//38A7NYB/3+2uwDixgH///O53+TtAf7//3/55dMB/3////3cvwHitP//AObNAf////8A7doB/3///wDZsQH/////8vX6Af9//3/48vAB/v//f/39/QH+//9/AP78Af////8A4sYB/3/zuQDkxQH///jEAOvbAf9//38A9ekB/3/KvQDkywH+//9/AOzWAf//trsA5s0B/3////3t3gEmxv9/AN28AbS//LgA5MsB/3//f9/k7QH/f/9/8vX6Af7//38A5MUB/39avv707AGeq/9/AO3bAWaYZbj14dYBHrL/f/Pz9wH3tXK7+PLwAf9//38="),
+"format": 34896613407,
+"index_count": 87,
+"index_data": PackedByteArray("BAAGACIABgAmACIAIgAmAB8AJgAGAAMAJgAlAB8AEwAmAAMAJQAmABMABwAFAB0ABQAeAB0AHQAeAAwABQANAB4AHgALAAwADQAOAB4AHgAOAAsADgAPAAsADQAkABUAFQAkACMAFAAVACMACgAIAAkAEgAKAAkAEAARABkAEQAXABkAFwAaABkAGgAYABkAGwAWABwAGwAhABYAIQAgABYAAQAAACcAAgABACcA"),
+"material": ExtResource("1_d42l7"),
+"name": "NVRMaterial_ground_RiverBed_cliff_blend_",
+"primitive": 3,
+"uv_scale": Vector4(2, 2, 0, 0),
+"vertex_count": 40,
+"vertex_data": PackedByteArray("YO7MedJZ6CP//wAA4UAZKk/HAABuEGknT8cAAG4QTSzoJAAANRiuNEdj34mt89oBnncAAAAAkDINaWvoAubHCaQdIUjPSCYTjDJOpuJTGBuQAFBib6rDERAdb2S32IQFrTSV+8XMBQtzXSVO//83sQ452y1X+0wBmgIAAA3mqwAAAAAANz3mMOgkAAA1GFEtox6w2SircxpCwMx51CypK+S4///D3wupUb7MefrtD64QHW9kt9i3CnE5dz6ZJM4VjDJOpuJTaB6kHSFIz0g9GA1JcZSvLggckABQYm+q0wqaAgAADebRFShN7PLN4IkNN0KOg/nu4QINSXGUry6EIq00lfvFzAUSox6w2SirYw1xOXc+mSRyGg1pa+gC5jSmR2Pfia3zGZnggMx5MRxvK159O0EZD44YQsDMedQs/yX/yISRYshAlVHNP5iy5lmGdfYXYLnnCgTG+010yNkrBvjq9z9V43s7SO5FNXlg1Zm+2G4blPzMogxreqo9aS2t++baQ4nkPESK5rA0h+RahLH8cWsx9JxiiO2WJcvt31A65xtAw/GJRmPmBUkS6b4w1N1mJYne+g+Ma5qWW/i4Xszbth8s3Ssqq/y4YJ3ykFBp/ARGx/VyeFX9yXpMzFyW")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_n8ppg")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_1541",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

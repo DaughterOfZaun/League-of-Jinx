@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://q0o1k7uje21i"]
 
-[ext_resource type="Texture2D" uid="uid://c74ho1ktvgokt" path="res://data/levels/1/textures/room_Fence01.png" id="1_pv6xy"]
+[ext_resource type="Texture2D" uid="uid://cnjl6ad5j3n7" path="res://data/levels/1/textures/room_Fence01.png" id="1_pv6xy"]
 
 [resource]
 resource_name = "NVRMaterial_Fence01_"

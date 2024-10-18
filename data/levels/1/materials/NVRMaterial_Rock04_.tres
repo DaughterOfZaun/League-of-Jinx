@@ -1,9 +1,12 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dmmr00h504hec"]
 
-[ext_resource type="Texture2D" uid="uid://nivjjo480r1u" path="res://data/levels/1/textures/room_Rock04.png" id="1_v6fkd"]
+[ext_resource type="Texture2D" uid="uid://cityhbcgt6pei" path="res://data/levels/1/textures/room_Rock04.png" id="1_v6fkd"]
 
 [resource]
 resource_name = "NVRMaterial_Rock04_"
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_v6fkd")
 metadata/extras = {
 "name": "NVRMaterial_Rock04_"

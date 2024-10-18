@@ -1,0 +1,46 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://c400st32phlqm"]
+
+[ext_resource type="Material" uid="uid://engihehgmafl" path="res://data/levels/1/materials/NVRMaterial_base_moss_patch1_.tres" id="1_px4p3"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_1xgr0"]
+_surfaces = [{
+"aabb": AABB(165.853, 1.25276, 145.443, 20.1917, 0.0134219, 21.671),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray("AgAIAAcABgACAAcABgAHAAAABwAFAAAABwAIAAMAAwAFAAcACAABAAMABAAFAAMACQADAAEACQAEAAMA"),
+"lods": [0.00958802, PackedByteArray("AgAIAAUABgACAAUABgAFAAAABQAIAAEABAAFAAEACQAEAAEA")],
+"name": "NVRMaterial_base_moss_patch1_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("g/4N8hyTAAAAAAAAszMAAESGDfJIsgAA3YWc+6U2AABjsvP/AAAAAP//DfI6OAAArrsN8v//AADLww3yQWAAAKVSAAAOYQAANFj//yYHAAA=")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_3611"
+_surfaces = [{
+"aabb": AABB(165.853, 1.25276, 145.443, 20.1917, 0.0134219, 21.671),
+"attribute_data": PackedByteArray("AAAAAf//LW8AAAABwyQoygAAAAGBmYhOAAAAAWWXJ8kAAAABu7z//wAAAAH4/1bJAAAAAVXIOAIAAAABAc3GoAAAAAEobFueAAAAAaJvnPc="),
+"format": 34896613407,
+"index_count": 30,
+"index_data": PackedByteArray("AgAIAAcABgACAAcABgAHAAAABwAFAAAABwAIAAMAAwAFAAcACAABAAMABAAFAAMACQADAAEACQAEAAMA"),
+"lods": [0.00958802, PackedByteArray("AgAIAAUABgACAAUABgAFAAAABQAIAAEABAAFAAEACQAEAAEA")],
+"material": ExtResource("1_px4p3"),
+"name": "NVRMaterial_base_moss_patch1_",
+"primitive": 3,
+"uv_scale": Vector4(2.87427, 2.88561, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("g/4N8hyT/z8AAAAAszMRQESGDfJIsvk/3YWc+6U2CEBjsvP/AAD/P///DfI6OP8/rrsN8v///z/Lww3yQWABQKVSAAAOYQpANFj//yYHBUAK/vmACv4OgQr+BYEK/gSBCv75gAr++YAK/vmACv4BgQr+EIEK/gSB")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_1xgr0")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_3611",
+"QualityFlags": 31.0,
+"RenderFlags": 1.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

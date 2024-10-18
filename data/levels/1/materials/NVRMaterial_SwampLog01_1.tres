@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dgdmjkk8onjk7"]
 
-[ext_resource type="Texture2D" uid="uid://dmsnkvjtivqqp" path="res://data/levels/1/textures/room_SwampLog01.png" id="1_njg6w"]
+[ext_resource type="Texture2D" uid="uid://dui524tkst4vr" path="res://data/levels/1/textures/room_SwampLog01.png" id="1_njg6w"]
 
 [resource]
 resource_name = "NVRMaterial_SwampLog01_1"

@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://na2e0vk1l8tc"]
 
-[ext_resource type="Texture2D" uid="uid://b7fyr272ev88s" path="res://data/levels/1/textures/room_Chaos_stonesb.png" id="1_f70mb"]
+[ext_resource type="Texture2D" uid="uid://cf2bx81oyijqt" path="res://data/levels/1/textures/room_Chaos_stonesb.png" id="1_f70mb"]
 
 [resource]
 resource_name = "NVRMaterial_Chaos_stones_"

@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://dysgvlw0agxuq"]
+
+[ext_resource type="Material" uid="uid://ci3uyjq2chose" path="res://data/levels/1/materials/NVRMaterial_ground_order_tile_floor_.tres" id="1_vhi18"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_or7bw"]
+_surfaces = [{
+"aabb": AABB(-5.5346, 0.597175, 50.3756, 5.55412, 0.819808, 16.9149),
+"format": 34896613377,
+"index_count": 9,
+"index_data": PackedByteArray(0, 0, 2, 0, 3, 0, 2, 0, 0, 0, 4, 0, 0, 0, 1, 0, 4, 0),
+"name": "NVRMaterial_ground_order_tile_floor_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(135, 157, 191, 223, 64, 112, 0, 0, 255, 255, 255, 255, 254, 240, 0, 0, 0, 0, 16, 245, 240, 97, 0, 0, 90, 129, 191, 223, 0, 0, 0, 0, 93, 241, 0, 0, 255, 255, 0, 0)
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_268"
+_surfaces = [{
+"aabb": AABB(-5.5346, 0.597175, 50.3756, 5.55412, 0.819808, 16.9149),
+"attribute_data": PackedByteArray(0, 0, 0, 1, 100, 17, 34, 37, 235, 245, 0, 1, 244, 21, 147, 3, 0, 0, 0, 1, 0, 0, 204, 40, 0, 0, 0, 1, 229, 14, 98, 66, 236, 246, 0, 1, 181, 20, 0, 0),
+"format": 34896613407,
+"index_count": 9,
+"index_data": PackedByteArray(0, 0, 2, 0, 3, 0, 2, 0, 0, 0, 4, 0, 0, 0, 1, 0, 4, 0),
+"material": ExtResource("1_vhi18"),
+"name": "NVRMaterial_ground_order_tile_floor_",
+"primitive": 3,
+"uv_scale": Vector4(17.4567, 17.2982, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(135, 157, 191, 223, 64, 112, 173, 65, 255, 255, 255, 255, 254, 240, 101, 71, 0, 0, 16, 245, 240, 97, 52, 65, 90, 129, 191, 223, 0, 0, 247, 63, 93, 241, 0, 0, 255, 255, 118, 71, 189, 247, 40, 144, 202, 246, 230, 85, 218, 254, 179, 127, 157, 254, 157, 127, 156, 254, 166, 100)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_or7bw")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_268",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

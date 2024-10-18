@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=4 uid="uid://d18erl1uuqouj"]
+
+[ext_resource type="Material" uid="uid://c3akyiamfq2xd" path="res://data/levels/1/materials/NVRMaterial_MushroomPatch02_.tres" id="1_acsc0"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_bmh78"]
+_surfaces = [{
+"aabb": AABB(150.216, 0.482983, 79.4097, 0.239578, 0.508041, 0.272263),
+"format": 34896613377,
+"index_count": 42,
+"index_data": PackedByteArray("AQAAAAMADAABAAMAAwAAAAUADAAGAAEAAAAEAAUABgACAAEABQAEAAIABgAFAAIADQAOAAsACwAOAAoACAAOAA0ACgAOAAkABwAOAAgACQAOAAcA"),
+"name": "NVRMaterial_MushroomPatch02_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 15,
+"vertex_data": PackedByteArray("pLBY1y6YAABQa/bUa6EAAOhVndY0aAAA7M04B3LAAAAwl+nYtF4AACTBZQPUmwAAqZ0AAKqgAADBAlThiDsAAAAAGtwPuAAAKH9r5wAAAAD//zHoLDYAAFz/S+N4wQAAQ6ibA+/EAAAifRrd//8AAKx0///VegAA")
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_2759"
+_surfaces = [{
+"aabb": AABB(150.216, 0.482983, 79.4097, 0.239578, 0.508041, 0.272263),
+"attribute_data": PackedByteArray("AAAAAQNTNwMAAAABA1PNE+z3AAEDU/ojAAAAARRuNwMAAAABA1PNEwAAAAEUbtMT8voAARRu+iPp9gABUQz5yPH5AAE0JtD17vgAATQmIpz5/QABzVn3lv7/AAGkd6PIAAAAARRu0xP7/gABmlyb9/P6AAF+QJ3I"),
+"format": 34896613407,
+"index_count": 42,
+"index_data": PackedByteArray("AQAAAAMADAABAAMAAwAAAAUADAAGAAEAAAAEAAUABgACAAEABQAEAAIABgAFAAIADQAOAAsACwAOAAoACAAOAA0ACgAOAAkABwAOAAgACQAOAAcA"),
+"material": ExtResource("1_acsc0"),
+"name": "NVRMaterial_MushroomPatch02_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 15,
+"vertex_data": PackedByteArray("pLBY1y6YrCxQa/bUa6E0vehVndY0aOsX7M04B3LAND0wl+nYtF5WCyTBZQPUm/cLqZ0AAKqgDyzBAlThiDtRxgAAGtwPuNu1KH9r5wAActD//zHoLDY+y1z/S+N4wSK9Q6ibA+/EZ70ifRrd//9ksax0///VehPAd6zVXAJpLpvXRAW4Kp5xa4u6vkxTuidNQE/OrnTSUarUzVCrcNRcnNfWWouBzyWJc2iem83Hf5nz0Fma")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_bmh78")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_2759",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}

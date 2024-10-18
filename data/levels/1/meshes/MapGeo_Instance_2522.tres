@@ -1,0 +1,44 @@
+[gd_resource type="ArrayMesh" load_steps=3 format=3 uid="uid://b66l0nt1we7bf"]
+
+[ext_resource type="Material" uid="uid://mrfggyx11eg4" path="res://data/levels/1/materials/NVRMaterial_ground_Chaos_dirt_.tres" id="1_etmim"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_1any8"]
+_surfaces = [{
+"aabb": AABB(152.674, 2.71209, 28.0532, 2.12262, 0.0388992, 1.99338),
+"format": 34896613377,
+"index_count": 9,
+"index_data": PackedByteArray(2, 0, 0, 0, 1, 0, 4, 0, 2, 0, 1, 0, 3, 0, 4, 0, 1, 0),
+"name": "NVRMaterial_ground_Chaos_dirt_",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(255, 255, 255, 255, 226, 129, 0, 0, 194, 225, 200, 18, 240, 198, 0, 0, 93, 118, 0, 0, 0, 0, 0, 0, 0, 0, 246, 205, 255, 255, 0, 0, 236, 65, 255, 24, 217, 25, 0, 0)
+}]
+blend_shape_mode = 0
+
+[resource]
+resource_name = "room_nvr_MapGeo_Instance_2522"
+_surfaces = [{
+"aabb": AABB(152.674, 2.71209, 28.0532, 2.12262, 0.0388992, 1.99338),
+"attribute_data": PackedByteArray(252, 254, 0, 1, 184, 255, 65, 255, 250, 253, 0, 1, 255, 255, 117, 254, 0, 0, 0, 1, 52, 247, 255, 255, 254, 255, 0, 1, 73, 250, 241, 251, 0, 0, 0, 1, 215, 247, 163, 254),
+"format": 34896613407,
+"index_count": 9,
+"index_data": PackedByteArray(2, 0, 0, 0, 1, 0, 4, 0, 2, 0, 1, 0, 3, 0, 4, 0, 1, 0),
+"material": ExtResource("1_etmim"),
+"name": "NVRMaterial_ground_Chaos_dirt_",
+"primitive": 3,
+"uv_scale": Vector4(12.2966, 53.2143, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(255, 255, 255, 255, 226, 129, 135, 63, 194, 225, 200, 18, 240, 198, 9, 61, 93, 118, 0, 0, 0, 0, 185, 59, 0, 0, 246, 205, 255, 255, 107, 58, 236, 65, 255, 24, 217, 25, 114, 58, 237, 221, 198, 145, 64, 208, 66, 152, 231, 201, 126, 155, 127, 200, 142, 155, 173, 199, 169, 155)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_1any8")
+metadata/extras = {
+"BakedLight": {},
+"BakedPaint": {},
+"Name": "MapGeo_Instance_2522",
+"QualityFlags": 31.0,
+"RenderFlags": 0.0,
+"StationaryLight": {},
+"VisibilityFlags": 255.0
+}
