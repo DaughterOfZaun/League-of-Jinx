@@ -11,3 +11,7 @@
 *.dds.import
 *.cs
 *.sh
+*.7z
+*.nvr.glb
+*.aimesh
+*.aimesh_ngrid

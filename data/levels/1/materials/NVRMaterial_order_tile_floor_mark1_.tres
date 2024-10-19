@@ -8,6 +8,7 @@ transparency = 2
 alpha_scissor_threshold = 0.5
 alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_ed3wa")
+texture_repeat = false
 metadata/extras = {
 "name": "NVRMaterial_order_tile_floor_mark1_"
 }
