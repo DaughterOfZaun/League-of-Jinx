@@ -3,26 +3,27 @@ extends Node3D
 
 @export var main_hero: Unit
 @onready var nav_map_rid := get_world_3d().navigation_map
+@onready var camera: Camera3D = %Camera
+@onready var viewport := get_viewport()
 
 func on_unit_clicked(char: Unit, button: MouseButton) -> void:
 	#if main_hero == null: return
 	if char.team != main_hero.team:
 		main_hero.order(Enums.OrderType.ATTACK_TO, char.global_position, char)
 
-func on_ground_clicked(pos: Vector3, button_index: MouseButton) -> void:
-	#if main_hero == null: return
-	if button_index != MOUSE_BUTTON_RIGHT: return
-	var nearest_reachable_point := NavigationServer3D.map_get_closest_point(nav_map_rid, pos)
-	main_hero.order(Enums.OrderType.MOVE_TO, nearest_reachable_point, null)
-
 var hovered_unit: Unit = null
-var hovered_pos := Vector3.INF
+var hovered_pos: Vector3:
+	get:
+		var event_position := viewport.get_mouse_position()
+		var origin := camera.project_ray_origin(event_position)
+		var normal := camera.project_ray_normal(event_position)
+		var plane := Plane(Vector3.UP, main_hero.global_position)
+		var intersection: Variant = plane.intersects_ray(origin, normal)
+		return intersection if intersection != null else Vector3.INF
 func on_unit_hovered(unit: Unit) -> void:
-	hovered_pos = unit.global_position
 	hovered_unit = unit
-func on_ground_hovered(pos: Vector3) -> void:
+func on_ground_hovered() -> void:
 	hovered_unit = null
-	hovered_pos = pos
 
 func _input(event: InputEvent) -> void:
 	#if main_hero == null: return
@@ -35,7 +36,25 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("Emote" + emote_name):
 			main_hero.emote(emote_index)
 
+const RAY_LENGTH = 1000.0
+func _unhandled_input(unknown_event: InputEvent) -> void:
+	if unknown_event is InputEventMouseButton:
+		var event := unknown_event as InputEventMouseButton
+		if event.pressed && event.button_index == MOUSE_BUTTON_RIGHT:
+			var origin := camera.project_ray_origin(event.position)
+			var normal := camera.project_ray_normal(event.position)
+			var nearest_reachable_point := NavigationServer3D.map_get_closest_point_to_segment(
+				nav_map_rid, origin, origin + normal * RAY_LENGTH
+			)
+			main_hero.order(Enums.OrderType.MOVE_TO, nearest_reachable_point, null)
+		on_ground_hovered()
+	elif unknown_event is InputEventMouseMotion:
+		var event := unknown_event as InputEventMouseMotion
+		on_ground_hovered()
+
 func _ready() -> void:
+	Input.use_accumulated_input = false
+
 	var spells: Dictionary[String, UISpell] = {
 		"q": get_node("%UI/Center/ChampionSpells/Spell1"),
 		"w": get_node("%UI/Center/ChampionSpells/Spell2"),

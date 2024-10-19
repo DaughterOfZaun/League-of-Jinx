@@ -1,6 +1,8 @@
 @tool
 extends Node3D
 
+const HW2GD := 1. / 70.
+
 @export_group("Decals")
 @export var decals: Array[Texture2D] = []
 @export_tool_button("Disable Decals") var disable_decals := func() -> void:
@@ -60,26 +62,33 @@ const mi_dir := "res://data/levels/1/meshes"
 	var magic := file.get_buffer(8)
 	var version := file.get_32()
 	var triangle_count := file.get_32()
+	file.get_32() # zero1
+	file.get_32() # zero2
 	var vertices: Array[Vector3] = []
-	var polygons: Array[Vector3i] = []
-	for i in range(triangle_count):
-		var indeces: Array[int] = []
-		for j in range(3):
+	var polygons: Array[PackedInt32Array] = []
+	for triangle_i in range(triangle_count):
+		var indeces := PackedInt32Array([0, 0, 0])
+		for i in range(3):
 			var vertex := Vector3(
 				file.get_float(),
 				file.get_float(),
 				file.get_float()
-			)
-			file.get_16() # unk1
-			file.get_16() # unk2
-			file.get_16() # triangle_reference
-			var index := vertices.find_custom(
-				func(existing_vertex: Vector3) -> bool:
-					return vertex.is_equal_approx(existing_vertex))
+			) * HW2GD
+			var index := vertices.find(vertex)
+			# var index := vertices.find_custom(
+			# 	func(existing_vertex: Vector3) -> bool:
+			# 		return vertex.is_equal_approx(existing_vertex))
 			if index == -1:
 				index = len(vertices)
 				vertices.append(vertex)
-			indeces.append(index)
-		polygons.append(Vector3i(indeces[0], indeces[1], indeces[2]))
+			indeces[i] = index
+		file.get_16() # unk1
+		file.get_16() # unk2
+		file.get_16() # triangle_reference
+		polygons.append(indeces)
+	nm.clear()
+	nm.set_vertices(PackedVector3Array(vertices))
+	for polygon in polygons:
+		nm.add_polygon(polygon)
 
 @export_group("")
