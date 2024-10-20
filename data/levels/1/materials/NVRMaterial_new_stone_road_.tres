@@ -1,13 +1,16 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bhfi7kjxe1xog"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bhfi7kjxe1xog"]
 
 [ext_resource type="Texture2D" uid="uid://ul5cbc556h5f" path="res://data/levels/1/textures/room_new_stone_road.png" id="1_jplpv"]
+[ext_resource type="Texture2D" uid="uid://cea0e4sl48os2" path="res://data/levels/1/textures/room_new_stone_road.normal.webp" id="2_qe58h"]
 
 [resource]
 resource_name = "NVRMaterial_new_stone_road_"
-transparency = 2
-alpha_scissor_threshold = 0.5
+transparency = 3
+alpha_hash_scale = 1.0
 alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_jplpv")
+normal_enabled = true
+normal_texture = ExtResource("2_qe58h")
 texture_repeat = false
 metadata/extras = {
 "name": "NVRMaterial_new_stone_road_"

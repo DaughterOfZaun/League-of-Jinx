@@ -1,13 +1,16 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c8mjamkk7pwfa"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://c8mjamkk7pwfa"]
 
 [ext_resource type="Texture2D" uid="uid://cdym3an0khu1x" path="res://data/levels/1/textures/room_blueTower_decal.png" id="1_owtwg"]
+[ext_resource type="Texture2D" uid="uid://b0w6b2bww5pgu" path="res://data/levels/1/textures/room_blueTower_decal.normal.webp" id="2_2wgjp"]
 
 [resource]
 resource_name = "NVRMaterial_lambert138"
-transparency = 2
-alpha_scissor_threshold = 0.5
+transparency = 3
+alpha_hash_scale = 1.0
 alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_owtwg")
+normal_enabled = true
+normal_texture = ExtResource("2_2wgjp")
 texture_repeat = false
 metadata/extras = {
 "name": "NVRMaterial_lambert138"

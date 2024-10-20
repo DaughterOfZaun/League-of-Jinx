@@ -1,13 +1,16 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://sdrpq7478qxu"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://sdrpq7478qxu"]
 
 [ext_resource type="Texture2D" uid="uid://gohhf8bgifn6" path="res://data/levels/1/textures/room_order_ground_moss_patch1.png" id="1_06nxk"]
+[ext_resource type="Texture2D" uid="uid://cocf8o2mrfm7d" path="res://data/levels/1/textures/room_order_ground_moss_patch1.normal.webp" id="2_rsx6u"]
 
 [resource]
 resource_name = "NVRMaterial_order_ground_moss_patch1_"
-transparency = 2
-alpha_scissor_threshold = 0.5
+transparency = 3
+alpha_hash_scale = 1.0
 alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_06nxk")
+normal_enabled = true
+normal_texture = ExtResource("2_rsx6u")
 texture_repeat = false
 metadata/extras = {
 "name": "NVRMaterial_order_ground_moss_patch1_"

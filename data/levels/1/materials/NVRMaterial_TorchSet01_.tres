@@ -1,10 +1,13 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://ek0mjq8xgqi5"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://ek0mjq8xgqi5"]
 
 [ext_resource type="Texture2D" uid="uid://c0de32x0bp4o6" path="res://data/levels/1/textures/room_TorchSet01.png" id="1_ucov1"]
+[ext_resource type="Texture2D" uid="uid://jun04ulmmqxn" path="res://data/levels/1/textures/room_TorchSet01.normal.webp" id="2_5mrwt"]
 
 [resource]
 resource_name = "NVRMaterial_TorchSet01_"
 albedo_texture = ExtResource("1_ucov1")
+normal_enabled = true
+normal_texture = ExtResource("2_5mrwt")
 metadata/extras = {
 "name": "NVRMaterial_TorchSet01_"
 }

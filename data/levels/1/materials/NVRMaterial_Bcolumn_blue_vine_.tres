@@ -1,10 +1,13 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://drrnd00sdipm6"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://drrnd00sdipm6"]
 
 [ext_resource type="Texture2D" uid="uid://cfcgeekqxcfg6" path="res://data/levels/1/textures/room_Bcolumn_blue_vine.png" id="1_5kow7"]
+[ext_resource type="Texture2D" uid="uid://cwpq1y5dxet6w" path="res://data/levels/1/textures/room_Bcolumn_blue_vine.normal.webp" id="2_r40j1"]
 
 [resource]
 resource_name = "NVRMaterial_Bcolumn_blue_vine_"
 albedo_texture = ExtResource("1_5kow7")
+normal_enabled = true
+normal_texture = ExtResource("2_r40j1")
 metadata/extras = {
 "name": "NVRMaterial_Bcolumn_blue_vine_"
 }

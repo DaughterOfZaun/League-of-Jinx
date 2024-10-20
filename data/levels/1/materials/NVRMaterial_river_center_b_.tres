@@ -1,13 +1,16 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dnqnovth6x6ah"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dnqnovth6x6ah"]
 
 [ext_resource type="Texture2D" uid="uid://da3qi4h4fb0lv" path="res://data/levels/1/textures/room_river_center_c.png" id="1_yjuwm"]
+[ext_resource type="Texture2D" uid="uid://jn71ur8p2ib0" path="res://data/levels/1/textures/room_river_center_c.normal.webp" id="2_wa5pd"]
 
 [resource]
 resource_name = "NVRMaterial_river_center_b_"
-transparency = 2
-alpha_scissor_threshold = 0.5
+transparency = 3
+alpha_hash_scale = 1.0
 alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_yjuwm")
+normal_enabled = true
+normal_texture = ExtResource("2_wa5pd")
 texture_repeat = false
 metadata/extras = {
 "name": "NVRMaterial_river_center_b_"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://c1voud1rbq3sf"]
+[gd_scene load_steps=79 format=3 uid="uid://c1voud1rbq3sf"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_104n6"]
 [ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.png" id="2_0jsjb"]
@@ -45,8 +45,12 @@
 [ext_resource type="Texture2D" uid="uid://d3vyc5egu2euk" path="res://data/ui/bar/assist.png" id="20_3xb40"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumble.gd" id="20_vbf6b"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbMissile/AhriOrbMissile.gd" id="21_l71pd"]
+[ext_resource type="Texture2D" uid="uid://c4ovd8h1ya3pk" path="res://data/ui/healthbars/blue.webp" id="21_sam6v"]
+[ext_resource type="Texture2D" uid="uid://c610vhtcdjdr7" path="res://data/ui/healthbars/health.webp" id="22_222e8"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbReturn/AhriOrbReturn.gd" id="22_lixky"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/AhriFoxFireMissile.gd" id="23_2f34q"]
+[ext_resource type="Script" path="res://engine/game/healthbar.gd" id="23_8nt75"]
+[ext_resource type="Texture2D" uid="uid://dc3i3ljpey4sv" path="res://data/ui/healthbars/mana.webp" id="23_ey6jq"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissileTwo/AhriFoxFireMissileTwo.gd" id="24_dkrri"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/AhriSeduceMissile.gd" id="25_ivfqq"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/AhriTumbleMissile.gd" id="26_q6kjr"]
@@ -77,8 +81,25 @@ ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
-sdfgi_y_scale = 2
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_albedo = Color(0, 0, 0, 1)
+volumetric_fog_length = 128.0
+adjustment_enabled = true
+adjustment_brightness = 1.2
+adjustment_saturation = 1.2
+
+[sub_resource type="FogMaterial" id="FogMaterial_x4wgi"]
+density = -8.0
+
+[sub_resource type="Gradient" id="Gradient_mgcr6"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lo840"]
+gradient = SubResource("Gradient_mgcr6")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s7c4n"]
 
@@ -99,6 +120,14 @@ radius = 7.5
 [sub_resource type="SphereShape3D" id="SphereShape3D_hvbg6"]
 radius = 7.5
 
+[sub_resource type="FogMaterial" id="FogMaterial_ee6ln"]
+density = -8.0
+
+[sub_resource type="FogMaterial" id="FogMaterial_48dpg"]
+density = 0.1
+albedo = Color(0, 0, 0, 1)
+height_falloff = 0.1
+
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -116,6 +145,7 @@ main_hero = NodePath("../Unit")
 
 [node name="UI" type="Control" parent="."]
 unique_name_in_owner = true
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -732,12 +762,78 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 current = true
 fov = 31.9848
 size = 0.1
+far = 8000.0
 script = ExtResource("2_7jrbs")
 target = NodePath("../Unit")
+
+[node name="FogVolume" type="FogVolume" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0350342, 0.0221863, -18.4652)
+visible = false
+size = Vector3(28.5, 20, 56.5)
+shape = 2
+material = SubResource("FogMaterial_x4wgi")
 
 [node name="Unit" type="CharacterBody3D" parent="." node_paths=PackedStringArray("data")]
 script = ExtResource("3_wwbt7")
 data = NodePath("Data")
+
+[node name="Healthbar" type="Control" parent="Unit"]
+layout_mode = 3
+anchor_left = 0.516
+anchor_top = 0.365
+anchor_right = 0.516
+anchor_bottom = 0.365
+offset_left = -84.48
+offset_top = -37.8
+offset_right = 56.52
+offset_bottom = 0.199982
+pivot_offset = Vector2(84, 38)
+script = ExtResource("23_8nt75")
+
+[node name="TextureRect" type="TextureRect" parent="Unit/Healthbar"]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 141.0
+offset_bottom = 38.0
+grow_vertical = 2
+texture = ExtResource("21_sam6v")
+expand_mode = 1
+
+[node name="LevelLabel" type="Label" parent="Unit/Healthbar"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 26.0
+offset_bottom = 30.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 13
+text = "18"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="TextureProgressBar" parent="Unit/Healthbar"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 11.0
+offset_right = 136.0
+offset_bottom = 19.0
+value = 50.0
+nine_patch_stretch = true
+texture_over = ExtResource("22_222e8")
+texture_progress = SubResource("GradientTexture1D_lo840")
+tint_progress = Color(0.0823529, 0.788235, 0.156863, 1)
+
+[node name="ManaBar" type="TextureProgressBar" parent="Unit/Healthbar"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 23.0
+offset_right = 136.0
+offset_bottom = 26.0
+value = 50.0
+nine_patch_stretch = true
+texture_progress = ExtResource("23_ey6jq")
+tint_progress = Color(0.34902, 0.513726, 0.901961, 1)
 
 [node name="AI" type="Node" parent="Unit"]
 script = ExtResource("4_e8jju")
@@ -1585,8 +1681,39 @@ script = ExtResource("14_t8bj3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Unit/CancelAttackRange"]
 shape = SubResource("SphereShape3D_hvbg6")
 
+[node name="FogVolume" type="FogVolume" parent="Unit"]
+size = Vector3(28.57, 28.57, 28.57)
+shape = 2
+material = SubResource("FogMaterial_ee6ln")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Unit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+visible = false
+light_energy = 16.0
+omni_range = 14.286
+omni_attenuation = 2.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Unit"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 14.286, 0)
+visible = false
+light_energy = 16.0
+light_bake_mode = 0
+shadow_enabled = true
+spot_range = 28.571
+
 [node name="Map" parent="." instance=ExtResource("61_0jbvi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, -0.746, -2.485, 3.787)
+
+[node name="FogVolume" type="FogVolume" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 100, 6, 100)
+size = Vector3(300, 15, 300)
+shape = 0
+material = SubResource("FogMaterial_48dpg")
+
+[node name="Decal" type="Decal" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 100, 6, 100)
+visible = false
+size = Vector3(300, 15, 300)
 
 [editable path="UI/Center/SummonerSpells/Spell1"]
 [editable path="UI/Center/SummonerSpells/Spell2"]

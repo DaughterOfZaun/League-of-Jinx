@@ -1,10 +1,13 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://l2nrq4o0guat"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://l2nrq4o0guat"]
 
 [ext_resource type="Texture2D" uid="uid://ckk55yeo3w1to" path="res://data/levels/1/textures/room_shop_trol_prop.png" id="1_a5wp4"]
+[ext_resource type="Texture2D" uid="uid://ccsq8i6ss5ocl" path="res://data/levels/1/textures/room_shop_trol_prop.normal.webp" id="2_ahjo4"]
 
 [resource]
 resource_name = "NVRMaterial_itemshop:lambert4"
 albedo_texture = ExtResource("1_a5wp4")
+normal_enabled = true
+normal_texture = ExtResource("2_ahjo4")
 metadata/extras = {
 "name": "NVRMaterial_itemshop:lambert4"
 }

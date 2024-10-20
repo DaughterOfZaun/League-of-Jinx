@@ -1,6 +1,7 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b0wt6hismrwmb"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://b0wt6hismrwmb"]
 
 [ext_resource type="Texture2D" uid="uid://bg5w3p6bp7dhj" path="res://data/levels/1/textures/room_ChaosSwampLog01.png" id="1_nk418"]
+[ext_resource type="Texture2D" uid="uid://b0m8cd0yw5evw" path="res://data/levels/1/textures/room_ChaosSwampLog01.normal.webp" id="2_kfu44"]
 
 [resource]
 resource_name = "NVRMaterial_ChaosSwampLog01_"
@@ -8,6 +9,8 @@ transparency = 2
 alpha_scissor_threshold = 0.5
 alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_nk418")
+normal_enabled = true
+normal_texture = ExtResource("2_kfu44")
 metadata/extras = {
 "name": "NVRMaterial_ChaosSwampLog01_"
 }

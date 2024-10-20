@@ -1,10 +1,13 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b106dpanrwfxn"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://b106dpanrwfxn"]
 
 [ext_resource type="Texture2D" uid="uid://d00sl8qu3nxe7" path="res://data/levels/1/textures/room_OrderPantheonDestroyed.png" id="1_ncv2r"]
+[ext_resource type="Texture2D" uid="uid://px5y7o50bifb" path="res://data/levels/1/textures/room_OrderPantheonDestroyed.normal.webp" id="2_w7ld1"]
 
 [resource]
 resource_name = "NVRMaterial_OrderPantheonDestroyed_"
 albedo_texture = ExtResource("1_ncv2r")
+normal_enabled = true
+normal_texture = ExtResource("2_w7ld1")
 metadata/extras = {
 "name": "NVRMaterial_OrderPantheonDestroyed_"
 }

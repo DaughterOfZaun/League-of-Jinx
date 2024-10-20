@@ -1,13 +1,16 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c1w10ishu0fv6"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://c1w10ishu0fv6"]
 
 [ext_resource type="Texture2D" uid="uid://cul768geokfhd" path="res://data/levels/1/textures/room_order_tile_floor_mark2.png" id="1_ed3wa"]
+[ext_resource type="Texture2D" uid="uid://cbrrdwafp4o2y" path="res://data/levels/1/textures/room_order_tile_floor_mark2.normal.webp" id="2_ifbpn"]
 
 [resource]
 resource_name = "NVRMaterial_order_tile_floor_mark1_"
-transparency = 2
-alpha_scissor_threshold = 0.5
+transparency = 3
+alpha_hash_scale = 1.0
 alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_ed3wa")
+normal_enabled = true
+normal_texture = ExtResource("2_ifbpn")
 texture_repeat = false
 metadata/extras = {
 "name": "NVRMaterial_order_tile_floor_mark1_"

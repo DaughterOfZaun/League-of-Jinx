@@ -1,10 +1,13 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://fkuobnspp0j8"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://fkuobnspp0j8"]
 
 [ext_resource type="Texture2D" uid="uid://d010b5vomlt2v" path="res://data/levels/1/textures/room_GoodStatue01.png" id="1_3sny8"]
+[ext_resource type="Texture2D" uid="uid://ccdr8sl88mbqg" path="res://data/levels/1/textures/room_GoodStatue01.normal.webp" id="2_cumon"]
 
 [resource]
 resource_name = "NVRMaterial_GoodStatue01_"
 albedo_texture = ExtResource("1_3sny8")
+normal_enabled = true
+normal_texture = ExtResource("2_cumon")
 metadata/extras = {
 "name": "NVRMaterial_GoodStatue01_"
 }

@@ -1,13 +1,16 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://omockraf6ymo"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://omockraf6ymo"]
 
 [ext_resource type="Texture2D" uid="uid://3o7pk55wqu2w" path="res://data/levels/1/textures/room_turret_stoneBase.png" id="1_sdaqx"]
+[ext_resource type="Texture2D" uid="uid://blqgw6lrd4dic" path="res://data/levels/1/textures/room_turret_stoneBase.normal.webp" id="2_n84kd"]
 
 [resource]
 resource_name = "NVRMaterial_turret_stoneBase_"
-transparency = 2
-alpha_scissor_threshold = 0.5
+transparency = 3
+alpha_hash_scale = 1.0
 alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_sdaqx")
+normal_enabled = true
+normal_texture = ExtResource("2_n84kd")
 texture_repeat = false
 metadata/extras = {
 "name": "NVRMaterial_turret_stoneBase_"

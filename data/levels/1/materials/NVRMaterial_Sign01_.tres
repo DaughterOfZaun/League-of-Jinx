@@ -1,10 +1,13 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b37hche34h5wa"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://b37hche34h5wa"]
 
 [ext_resource type="Texture2D" uid="uid://dkvcwvnj1qlnm" path="res://data/levels/1/textures/room_Sign01.png" id="1_q2uvx"]
+[ext_resource type="Texture2D" uid="uid://ddxf7kiv0gd6q" path="res://data/levels/1/textures/room_Sign01.normal.webp" id="2_qfi2b"]
 
 [resource]
 resource_name = "NVRMaterial_Sign01_"
 albedo_texture = ExtResource("1_q2uvx")
+normal_enabled = true
+normal_texture = ExtResource("2_qfi2b")
 metadata/extras = {
 "name": "NVRMaterial_Sign01_"
 }

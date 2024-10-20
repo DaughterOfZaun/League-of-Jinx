@@ -30,11 +30,13 @@ func _input(event: InputEvent) -> void:
 	for letter in "qwerdfb":
 		if event.is_action_released(letter.to_upper()):
 			main_hero.cast(letter, hovered_pos, hovered_unit)
+			viewport.set_input_as_handled()
 	for emote_index: int in Enums.EmoteType.values():
 		if emote_index == Enums.EmoteType.NONE: continue
 		var emote_name := Enums.EmoteType_to_string(emote_index)
 		if event.is_action_pressed("Emote" + emote_name):
 			main_hero.emote(emote_index)
+			viewport.set_input_as_handled()
 
 const RAY_LENGTH = 1000.0
 func _unhandled_input(unknown_event: InputEvent) -> void:
@@ -47,6 +49,7 @@ func _unhandled_input(unknown_event: InputEvent) -> void:
 				nav_map_rid, origin, origin + normal * RAY_LENGTH
 			)
 			main_hero.order(Enums.OrderType.MOVE_TO, nearest_reachable_point, null)
+			viewport.set_input_as_handled()
 		on_ground_hovered()
 	elif unknown_event is InputEventMouseMotion:
 		var event := unknown_event as InputEventMouseMotion
@@ -54,6 +57,7 @@ func _unhandled_input(unknown_event: InputEvent) -> void:
 
 func _ready() -> void:
 	Input.use_accumulated_input = false
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 
 	var spells: Dictionary[String, UISpell] = {
 		"q": get_node("%UI/Center/ChampionSpells/Spell1"),
