@@ -5,6 +5,7 @@ extends Node3D
 @onready var nav_map_rid := get_world_3d().navigation_map
 @onready var camera: Camera3D = %Camera
 @onready var viewport := get_viewport()
+@onready var window := get_tree().get_root()
 
 func on_unit_clicked(char: Unit, button: MouseButton) -> void:
 	#if main_hero == null: return
@@ -31,12 +32,19 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_released(letter.to_upper()):
 			main_hero.cast(letter, hovered_pos, hovered_unit)
 			viewport.set_input_as_handled()
+			return
 	for emote_index: int in Enums.EmoteType.values():
 		if emote_index == Enums.EmoteType.NONE: continue
 		var emote_name := Enums.EmoteType_to_string(emote_index)
 		if event.is_action_pressed("Emote" + emote_name):
 			main_hero.emote(emote_index)
 			viewport.set_input_as_handled()
+			return
+	if event.is_action_pressed("ToggleFullscreen"):
+		if window.mode != Window.MODE_EXCLUSIVE_FULLSCREEN:
+			window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
+		else:
+			window.mode = Window.MODE_WINDOWED
 
 const RAY_LENGTH = 1000.0
 func _unhandled_input(unknown_event: InputEvent) -> void:
