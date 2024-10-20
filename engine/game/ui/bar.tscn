@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c75a7ire7fgcd"]
 
-[ext_resource type="Texture2D" uid="uid://biguinhuraht0" path="res://data/ui/bars/green.png" id="1_y5xmu"]
+[ext_resource type="Texture2D" uid="uid://biguinhuraht0" path="res://data/ui/bars/green.webp" id="1_y5xmu"]
 
 [node name="Healthbar" type="Control"]
 layout_mode = 3

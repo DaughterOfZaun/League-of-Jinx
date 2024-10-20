@@ -201,7 +201,7 @@ const mi_dir := "res://data/levels/1/meshes"
 		assert(mi.mesh.get_surface_count() == 1)
 		var m := mi.mesh.surface_get_material(0) as StandardMaterial3D
 		m.normal_enabled = true
-		m.normal_texture = load(m.albedo_texture.resource_path.replace(".png", ".normal.webp"))
+		m.normal_texture = load(m.albedo_texture.resource_path.replace(".webp", ".normal.webp"))
 @export_group("")
 
 # func _ready() -> void:

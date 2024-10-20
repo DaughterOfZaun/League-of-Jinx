@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://c1voud1rbq3sf"]
+[gd_scene load_steps=80 format=3 uid="uid://c1voud1rbq3sf"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_104n6"]
 [ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.png" id="2_0jsjb"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://engine/spells/attacks/basic_attack_data.gd" id="7_876sy"]
 [ext_resource type="Script" path="res://engine/ai/ai_cast_state.gd" id="7_eqh1v"]
 [ext_resource type="Texture2D" uid="uid://cc1iubdmpd1kv" path="res://data/characters/Ahri/Ahri_Square.webp" id="7_h4cmg"]
+[ext_resource type="Texture2D" uid="uid://b0vfkfms8norl" path="res://data/ui/bars/blue.webp" id="7_ykpsx"]
 [ext_resource type="Script" path="res://engine/status.gd" id="7_ywlur"]
 [ext_resource type="Texture2D" uid="uid://11hmhsrqbij1" path="res://data/ui/bars/orange.png" id="8_0xr2q"]
 [ext_resource type="Script" path="res://engine/spells/attacks/crit_attack.gd" id="8_os5gn"]
@@ -315,6 +316,9 @@ layout_mode = 1
 layout_mode = 1
 offset_top = -23.0
 offset_bottom = -11.0
+
+[node name="TextureProgressBar" parent="UI/Center/Manabar" index="0"]
+texture_progress = ExtResource("7_ykpsx")
 
 [node name="Left" type="Control" parent="UI"]
 layout_mode = 1
@@ -907,7 +911,7 @@ import_path = "res://data/characters/Ahri/Ahri.ini"
 
 [node name="Passive" type="Node" parent="Unit"]
 script = ExtResource("12_133kh")
-icon = "Ahri_SoulEater.dds"
+icon = "Ahri_SoulEater.webp"
 _name = "game_character_passiveName_Ahri"
 lua_name = "AhriSoulCrusherNumbers"
 desc = "game_character_passiveDescription_Ahri"
@@ -970,7 +974,7 @@ cast_cone_angle = 45.0
 cast_cone_distance = 100.0
 cast_radius_primary = 100.0
 cast_range = 550.0
-cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+cast_range_indicator_texture_name = "DefaultRangeIndicator.webp"
 flags = 232448
 after_effect_name = "globalhit_physical.troy"
 hit_effect_name = "Ahri_BasicAttack_tar.troy"
@@ -1019,7 +1023,7 @@ cast_cone_angle = 45.0
 cast_cone_distance = 100.0
 cast_radius_primary = 100.0
 cast_range = 550.0
-cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+cast_range_indicator_texture_name = "DefaultRangeIndicator.webp"
 flags = 232448
 after_effect_name = "BowGlow.troy"
 hit_effect_name = "Ahri_BasicAttack_tar.troy"
@@ -1068,7 +1072,7 @@ cast_cone_angle = 45.0
 cast_cone_distance = 100.0
 cast_radius_primary = 100.0
 cast_range = 550.0
-cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+cast_range_indicator_texture_name = "DefaultRangeIndicator.webp"
 flags = 232448
 after_effect_name = "globalhit_physical.troy"
 hit_effect_name = "Ahri_BasicAttack_tar.troy"
@@ -1094,7 +1098,7 @@ data = NodePath("Data")
 [node name="Data" type="Node" parent="Unit/Spells/Q_OrbOfDeception"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([ExtResource("43_2dprh"), null, null])
-inventory_icon_name = Array[String](["Ahri_OrbofDeception.dds", "", ""])
+inventory_icon_name = Array[String](["Ahri_OrbofDeception.webp", "", ""])
 spell_name = "AhriOrbofDeception"
 display_name = "game_spell_displayname_AhriOrbofDeception"
 alternate_name = "AhriOrbofDeception"
@@ -1118,11 +1122,11 @@ location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 cast_cone_angle = 45.0
 cast_cone_distance = 100.0
 cast_radius_primary = 275.0
-cast_radius_texture_name = "AOE.tga"
+cast_radius_texture_name = "AOE.webp"
 cast_range = 10000.0
 cast_range_by_level = Array[float]([25000.0, 25000.0, 25000.0, 25000.0, 25000.0, 25000.0])
 cast_range_display_override = 880.0
-cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+cast_range_indicator_texture_name = "DefaultRangeIndicator.webp"
 flags = 347136
 after_effect_name = "Disintegrate_tar.troy"
 hit_effect_name = "LuxLightstrike_mis.troy"
@@ -1164,7 +1168,7 @@ data = NodePath("Data")
 [node name="Data" type="Node" parent="Unit/Spells/E_Seduce"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([ExtResource("47_xivfr"), null, null])
-inventory_icon_name = Array[String](["Ahri_Charm.dds", "", ""])
+inventory_icon_name = Array[String](["Ahri_Charm.webp", "", ""])
 display_name = "game_spell_displayname_AhriSeduce"
 alternate_name = "AhriSeduce"
 description = "game_spell_description_AhriSeduce"
@@ -1187,11 +1191,11 @@ location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 cast_cone_angle = 45.0
 cast_cone_distance = 100.0
 cast_radius_primary = 210.0
-cast_radius_texture_name = "AOE.tga"
+cast_radius_texture_name = "AOE.webp"
 cast_range = 10000.0
 cast_range_by_level = Array[float]([10000.0, 10000.0, 10000.0, 10000.0, 10000.0, 10000.0])
 cast_range_display_override = 975.0
-cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+cast_range_indicator_texture_name = "DefaultRangeIndicator.webp"
 flags = 347136
 after_effect_name = "ChronoClockFast_tar.troy"
 hit_bone_name = "head"
@@ -1223,7 +1227,7 @@ data = NodePath("Data")
 [node name="Data" type="Node" parent="Unit/Spells/R_Tumble"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([ExtResource("49_yoxlj"), null, null])
-inventory_icon_name = Array[String](["Ahri_SpiritRush.dds", "", ""])
+inventory_icon_name = Array[String](["Ahri_SpiritRush.webp", "", ""])
 spell_name = "AhriTumble"
 display_name = "game_spell_displayname_AhriTumble"
 alternate_name = "AhriTumble"
@@ -1247,7 +1251,7 @@ use_minimap_targeting = true
 cast_cone_angle = 45.0
 cast_cone_distance = 100.0
 cast_radius_primary = 300.0
-cast_radius_texture_name = "AOE.tga"
+cast_radius_texture_name = "AOE.webp"
 cast_range = 25000.0
 cast_range_by_level = Array[float]([25000.0, 25000.0, 25000.0, 25000.0, 25000.0, 800.0])
 cast_range_display_override = 450.0
@@ -1277,7 +1281,7 @@ data = NodePath("Data")
 [node name="Data" type="Node" parent="Unit/Spells/E0_OrbMissile"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([null, null, null])
-inventory_icon_name = Array[String](["Ahri_OrbofDeception.dds", "LuxLightStrikeKugel.dds", ""])
+inventory_icon_name = Array[String](["Ahri_OrbofDeception.webp", "LuxLightStrikeKugel.webp", ""])
 spell_name = "AhriOrbMissile"
 display_name = "game_spell_displayname_AhriOrbofDeception"
 alternate_name = "AhriOrbofDeception"
@@ -1301,10 +1305,10 @@ location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 cast_cone_angle = 45.0
 cast_cone_distance = 100.0
 cast_radius_primary = 275.0
-cast_radius_texture_name = "AOE.tga"
+cast_radius_texture_name = "AOE.webp"
 cast_range = 1000.0
 cast_range_by_level = Array[float]([1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0])
-cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+cast_range_indicator_texture_name = "DefaultRangeIndicator.webp"
 flags = 115712
 after_effect_name = "Disintegrate_tar.troy"
 hit_effect_name = "LuxLightstrike_mis.troy"
@@ -1338,7 +1342,7 @@ data = NodePath("Data")
 [node name="Data" type="Node" parent="Unit/Spells/E1_OrbReturn"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([null, null, null])
-inventory_icon_name = Array[String](["Ahri_OrbofDeception.dds", "LuxLightStrikeKugel.dds", ""])
+inventory_icon_name = Array[String](["Ahri_OrbofDeception.webp", "LuxLightStrikeKugel.webp", ""])
 spell_name = "AhriOrbReturn"
 display_name = "game_spell_displayname_LuxLightStrikeKugel"
 alternate_name = "AhriOrbofDeception"
@@ -1362,10 +1366,10 @@ location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 cast_cone_angle = 45.0
 cast_cone_distance = 100.0
 cast_radius_primary = 275.0
-cast_radius_texture_name = "AOE.tga"
+cast_radius_texture_name = "AOE.webp"
 cast_range = 25000.0
 cast_range_by_level = Array[float]([25000.0, 25000.0, 25000.0, 25000.0, 25000.0, 25000.0])
-cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+cast_range_indicator_texture_name = "DefaultRangeIndicator.webp"
 flags = 377856
 after_effect_name = "Disintegrate_tar.troy"
 hit_effect_name = "LuxLightstrike_mis.troy"
@@ -1399,7 +1403,7 @@ data = NodePath("Data")
 [node name="Data" type="Node" parent="Unit/Spells/E2_FoxFireMissile"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([null, null, null])
-inventory_icon_name = Array[String](["Ahri_FoxFire.dds", "Annie_Disintegrate.dds", ""])
+inventory_icon_name = Array[String](["Ahri_FoxFire.webp", "Annie_Disintegrate.webp", ""])
 spell_name = "AhriFoxFireMissile"
 display_name = "game_spell_displayname_BrandConflagration"
 alternate_name = "AhriFoxFire"
@@ -1423,7 +1427,7 @@ location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 cast_cone_angle = 45.0
 cast_cone_distance = 100.0
 cast_radius_primary = 710.0
-cast_radius_texture_name = "AOE.tga"
+cast_radius_texture_name = "AOE.webp"
 cast_range = 300.0
 cast_range_by_level = Array[float]([300.0, 300.0, 300.0, 300.0, 300.0, 675.0])
 flags = 4312068
@@ -1458,7 +1462,7 @@ data = NodePath("Data")
 [node name="Data" type="Node" parent="Unit/Spells/E3_FoxFireMissileTwo"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([null, null, null])
-inventory_icon_name = Array[String](["Ahri_FoxFire.dds", "Annie_Disintegrate.dds", ""])
+inventory_icon_name = Array[String](["Ahri_FoxFire.webp", "Annie_Disintegrate.webp", ""])
 spell_name = "AhriFoxFireMissileTwo"
 display_name = "game_spell_displayname_BrandConflagration"
 alternate_name = "AhriFoxFire"
@@ -1482,7 +1486,7 @@ location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 cast_cone_angle = 45.0
 cast_cone_distance = 100.0
 cast_radius_primary = 710.0
-cast_radius_texture_name = "AOE.tga"
+cast_radius_texture_name = "AOE.webp"
 cast_range = 725.0
 cast_range_by_level = Array[float]([725.0, 725.0, 725.0, 725.0, 725.0, 675.0])
 flags = 115716
@@ -1514,7 +1518,7 @@ data = NodePath("Data")
 [node name="Data" type="Node" parent="Unit/Spells/E4_SeduceMissile"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([null, null, null])
-inventory_icon_name = Array[String](["Ahri_Charm.dds", "FallenAngel_DarkBinding.dds", ""])
+inventory_icon_name = Array[String](["Ahri_Charm.webp", "FallenAngel_DarkBinding.webp", ""])
 spell_name = "AhriSeduceMissile"
 display_name = "game_spell_displayname_DarkBindingMissile"
 alternate_name = "AhriSeduce"
@@ -1538,11 +1542,11 @@ location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 cast_cone_angle = 45.0
 cast_cone_distance = 100.0
 cast_radius_primary = 210.0
-cast_radius_texture_name = "AOE.tga"
+cast_radius_texture_name = "AOE.webp"
 cast_range = 1000.0
 cast_range_by_level = Array[float]([1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0])
 cast_range_display_override = 1175.0
-cast_range_indicator_texture_name = "DefaultRangeIndicator.dds"
+cast_range_indicator_texture_name = "DefaultRangeIndicator.webp"
 flags = 115712
 hit_bone_name = "head"
 cast_type = 3
@@ -1572,7 +1576,7 @@ data = NodePath("Data")
 [node name="Data" type="Node" parent="Unit/Spells/E5_TumbleMissile"]
 script = ExtResource("11_eotle")
 inventory_icon = Array[Texture2D]([null, null, null])
-inventory_icon_name = Array[String](["Ahri_SpiritRush.dds", "Annie_Disintegrate.dds", ""])
+inventory_icon_name = Array[String](["Ahri_SpiritRush.webp", "Annie_Disintegrate.webp", ""])
 spell_name = "AhriTumbleMissile"
 display_name = "game_spell_displayname_BrandConflagration"
 alternate_name = "AhriTumble"
@@ -1596,7 +1600,7 @@ location_targetting_length_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 cast_cone_angle = 45.0
 cast_cone_distance = 100.0
 cast_radius_primary = 710.0
-cast_radius_texture_name = "AOE.tga"
+cast_radius_texture_name = "AOE.webp"
 cast_range = 800.0
 cast_range_by_level = Array[float]([800.0, 800.0, 800.0, 800.0, 800.0, 800.0])
 flags = 115716
@@ -1718,3 +1722,4 @@ size = Vector3(300, 15, 300)
 [editable path="UI/Center/SummonerSpells/Spell1"]
 [editable path="UI/Center/SummonerSpells/Spell2"]
 [editable path="UI/Center/Recall"]
+[editable path="UI/Center/Manabar"]
