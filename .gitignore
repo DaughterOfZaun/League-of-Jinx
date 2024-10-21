@@ -15,3 +15,4 @@
 *.nvr.glb
 *.aimesh
 *.aimesh_ngrid
+*.lua

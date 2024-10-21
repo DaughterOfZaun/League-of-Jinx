@@ -117,6 +117,4 @@ ToggleFullscreen={
 
 [rendering]
 
-scaling_3d/scale=4.0
-anti_aliasing/screen_space_roughness_limiter/enabled=false
-anti_aliasing/quality/use_taa=true
+renderer/rendering_method="mobile"

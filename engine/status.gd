@@ -43,6 +43,14 @@ func _ready() -> void:
 @export var is_clone: bool
 @export var is_moving: bool
 
+@export var targetable_to_team: Dictionary[int, bool] = {
+	Enums.Team.BLUE: true,
+	Enums.Team.PURPLE: true,
+	Enums.Team.NEUTRAL: true,
+}
+func SetNotTargetableToTeam(to: bool, team: Enums.Team) -> void:
+	targetable_to_team[team] = !to
+
 var disabled: bool:
 	get:
 		var status := self

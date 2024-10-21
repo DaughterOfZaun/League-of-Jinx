@@ -1,7 +1,13 @@
 class_name Enums
 
-enum OrderType
-{
+enum Team {
+	NONE = 0,
+	BLUE = 100,
+	PURPLE = 200,
+	NEUTRAL = 300,
+}
+
+enum OrderType {
 	NONE,
 	MOVE_TO,
 	ATTACK_TO,
