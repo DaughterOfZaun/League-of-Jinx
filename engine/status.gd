@@ -44,11 +44,11 @@ func _ready() -> void:
 @export var is_moving: bool
 
 @export var targetable_to_team: Dictionary[int, bool] = {
-	Enums.Team.BLUE: true,
-	Enums.Team.PURPLE: true,
+	Enums.Team.ORDER: true,
+	Enums.Team.CHAOS: true,
 	Enums.Team.NEUTRAL: true,
 }
-func SetNotTargetableToTeam(to: bool, team: Enums.Team) -> void:
+func set_not_targetable_to_team(to: bool, team: Enums.Team) -> void:
 	targetable_to_team[team] = !to
 
 var disabled: bool:

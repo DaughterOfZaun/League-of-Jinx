@@ -1,10 +1,33 @@
 class_name Enums
 
 enum Team {
-	NONE = 0,
-	BLUE = 100,
-	PURPLE = 200,
+	UNKNOWN = 0,
+	ORDER = 100,
+	CHAOS = 200,
 	NEUTRAL = 300,
+	MAX = 400,
+}
+
+enum Lane {
+	RIGHT = 0,
+	CENTER = 1,
+	LEFT = 2,
+}
+
+enum Pos {
+	FOUNTAN = 0,
+	HQ_TOWER1 = 5,
+	HQ_TOWER2 = 4,
+	BACK = 1,
+	MIDDLE = 2,
+	FRONT = 3,
+}
+
+enum MinionType {
+	MELEE,
+	ARCHER,
+	CASTER,
+	SUPER,
 }
 
 enum OrderType {
