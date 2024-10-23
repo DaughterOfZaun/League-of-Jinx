@@ -1,5 +1,5 @@
 class_name Level
-extends Node3D
+extends LuaScript
 
 func preload_character(character_name: String) -> void:
 	pass
@@ -7,7 +7,16 @@ func preload_character(character_name: String) -> void:
 func preload_spell(spell_name: String) -> void:
 	pass
 
-func get_turret(team: int, lane: int, pos: int) -> Unit:
+func get_turret(team: int, lane: int, pos: int) -> Turret:
+	return null
+
+func get_dampener(team: int, lane: int) -> Dampener:
+	return null
+
+func get_barracks(team: int, lane: int) -> Barrack:
+	return null
+
+func get_hq(team: int) -> HQ:
 	return null
 
 func get_total_team_minions_spawned() -> int:

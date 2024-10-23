@@ -1,5 +1,5 @@
 class_name AI
-extends Node
+extends LuaScript
 
 @onready var me := get_parent() as Unit
 
@@ -119,26 +119,6 @@ func on_stop_move() -> void: pass
 func on_AI_command() -> void: pass
 func on_reached_destination_for_going_to_last_location() -> void: pass
 func halt_AI() -> void: pass
-
-var timers: Dictionary[Callable, Timer] = {}
-func init_timer(callback: Callable, time: float, oneshot: bool) -> void:
-	var timer: Timer = timers.get(callback, null)
-	if timer == null:
-		timer = Timer.new()
-		timer.name = callback.get_method()
-		timer.timeout.connect(callback)
-		timers[callback] = timer
-		add_child(timer)
-	timer.one_shot = oneshot
-	timer.start(time)
-
-func stop_timer(callback: Callable) -> void:
-	var timer: Timer = timers.get(callback)
-	if timer != null: timer.stop()
-
-func reset_and_start_timer(callback: Callable) -> void:
-	var timer: Timer = timers.get(callback)
-	if timer != null: timer.start()
 
 func turn_on_auto_attack(target: Unit) -> void:
 	var target_name := str(target.name) if target else "null"

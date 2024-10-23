@@ -2,8 +2,8 @@ extends Level
 
 const max_minions_ever = 180
 
-const order_hq = 1
 const chaos_hq = 2
+const order_hq = 1
 
 const initial_time_to_spawn = 90.0
 const increase_cannon_rate_timer_time = 2090.0
@@ -166,12 +166,12 @@ class LuaBarrack:
 		var minion_magic_resistance := 0.0
 		var hp_bonus := 0.0
 		var damage_bonus := 0.0
-		var gold_bonus := 0.0
 		var exp_bonus := 0.0
+		var gold_bonus := 0.0
 		var exp_given := 0.0
 		var gold_given := 0.0
 	func _init(g: Dictionary[Enums.MinionType, G]) -> void:
-		for type: Enums.MinionType in Enums.MinionType:
+		for type: Enums.MinionType in [melee, archer, caster, syper]:
 			l[type] = L.new()
 			l[type].exp_given = g[type].exp_given
 			l[type].exp_given = g[type].gold_given
@@ -199,8 +199,10 @@ class BuildingStatus:
 		var turret_1 := true
 		var barracks := true
 
-var total_number_of_chaos_barracks := 3
-var total_number_of_order_barracks := 3
+var total_number_of_barracks: Dictionary[Enums.Team, int] = {
+	order: 3,
+	chaos: 3,
+}
 func on_level_init() -> void:
 	#for r_3_2, r_4_2 in pairs(order_names):
 	#	preload_character(r_4_2)
@@ -244,22 +246,24 @@ func upgrade_minion_timer() -> void:
 	for lane: Enums.Lane in [right, center, left]:
 		for team: Enums.Team in [order, chaos]:
 			for type: Enums.MinionType in [melee, archer, caster, syper]:
-				barracks_bonuses[team][lane].melee_hp_bonus += g[type].health_upgrade
-				barracks_bonuses[team][lane].melee_damage_bonus += g[type].damage_upgrade
-				barracks_bonuses[team][lane].melee_gold_bonus += g[type].gold_upgrade
-				barracks_bonuses[team][lane].melee_minion_armor += g[type].armor_upgrade
-				barracks_bonuses[team][lane].melee_minion_magic_resistance += g[type].mr_upgrade
-				if g[type].maximum_gold_bonus < barracks_bonuses[team][lane].melee_gold_bonus:
-					barracks_bonuses[team][lane].melee_gold_bonus = g[type].maximum_gold_bonus
-				barracks_bonuses[team][lane].melee_exp_bonus += g[type].exp_upgrade
-				barracks_bonuses[team][lane].melee_gold_given = barracks_bonuses[team][lane].melee_gold_bonus + g[type].gold_given
-				barracks_bonuses[team][lane].melee_exp_given = barracks_bonuses[team][lane].melee_exp_bonus + g[type].exp_given
+				var lua_barrack: LuaBarrack = barracks_bonuses[team][lane]
+				var l := lua_barrack.l[type]
+				l.hp_bonus += g[type].health_upgrade
+				l.damage_bonus += g[type].damage_upgrade
+				l.gold_bonus += g[type].gold_upgrade
+				l.minion_armor += g[type].armor_upgrade
+				l.minion_magic_resistance += g[type].mr_upgrade
+				if g[type].maximum_gold_bonus < l.gold_bonus:
+					l.gold_bonus = g[type].maximum_gold_bonus
+				l.exp_bonus += g[type].exp_upgrade
+				l.gold_given = l.gold_bonus + g[type].gold_given
+				l.exp_given = l.exp_bonus + g[type].exp_given
 
 const back := Enums.Pos.BACK
 const middle := Enums.Pos.MIDDLE
 const front := Enums.Pos.FRONT
-const hq1 := Enums.Pos.HQ_TOWER1
-const hq2 := Enums.Pos.HQ_TOWER2
+const hq1 := Enums.Pos.HQ_TOWER_1
+const hq2 := Enums.Pos.HQ_TOWER_2
 
 func allow_damage_on_buildings() -> void:
 	for lane: Enums.Lane in [right, center, left]:
@@ -274,7 +278,7 @@ func allow_damage_on_buildings() -> void:
 						turret.status.invulnerable = true
 						turret.status.set_not_targetable_to_team(true, opposite_team(team))
 
-func get_minion_spawn_info(lane: int, r_1_7: int, r_2_7: Variant, team: int, wave: int) -> Dictionary:
+func get_minion_spawn_info(lane: int, r_1_7: int, r_2_7: Variant, team: int, wave: int) -> SpawnInfo:
 	var table_for_barrack := spawn_table
 	if table_for_barrack.did_power_group:
 		table_for_barrack.num_of_minions_per_wave[caster] -= 1
@@ -284,7 +288,7 @@ func get_minion_spawn_info(lane: int, r_1_7: int, r_2_7: Variant, team: int, wav
 		table_for_barrack.num_of_minions_per_wave[caster] += 1
 		table_for_barrack.did_power_group = true
 
-	var r_5_7: LuaBarrack = barracks_bonuses[team][lane]
+	var lua_barrack: LuaBarrack = barracks_bonuses[team][lane]
 
 	table_for_barrack.exp_radius = exp_given_radius
 	var l_num_of_minions_per_wave := table_for_barrack.num_of_minions_per_wave.duplicate()
@@ -322,9 +326,8 @@ func get_minion_spawn_info(lane: int, r_1_7: int, r_2_7: Variant, team: int, wav
 		l_num_of_minions_per_wave[caster] = 0
 		l_num_of_minions_per_wave[syper] = 0
 
-	if r_5_7.will_spawn_super_minion == 1:
-		if team == Enums.Team.ORDER and total_number_of_chaos_barracks == 0 \
-		or team == Enums.Team.CHAOS and total_number_of_order_barracks == 0:
+	if lua_barrack.will_spawn_super_minion == 1:
+		if total_number_of_barracks[opposite_team(team)] == 0:
 			l_num_of_minions_per_wave[syper] = 2
 		else:
 			l_num_of_minions_per_wave[syper] = 1
@@ -332,95 +335,74 @@ func get_minion_spawn_info(lane: int, r_1_7: int, r_2_7: Variant, team: int, wav
 		l_num_of_minions_per_wave[caster] = 0
 
 	for type: Enums.MinionType in [melee, archer, caster, syper]:
-		r_5_7.l[type].minion_name = names[team][type]
+		var l := lua_barrack.l[type]
+		l.minion_name = names[team][type]
 
-	var return_table := {
-		num_of_minions_per_wave = l_num_of_minions_per_wave.duplicate(),
+	var return_table := SpawnInfo.new()
+	return_table.num_of_minions_per_wave = l_num_of_minions_per_wave.duplicate()
+	return_table.wave_spawn_rate = table_for_barrack.wave_spawn_rate
+	return_table.single_minion_spawn_delay = table_for_barrack.single_minion_spawn_delay
+	return_table.is_destroyed = lua_barrack.is_destroyed
+	return_table.experience_radius = table_for_barrack.exp_radius
+	for type: Enums.MinionType in [melee, archer, caster, syper]:
+		var l := lua_barrack.l[type]
+		return_table.l[type].minion_name = l.minion_name
+		return_table.l[type].minion_armor = l.minion_armor
+		return_table.l[type].minion_magic_resistance = l.minion_magic_resistance
+		return_table.l[type].hp_bonus = l.hp_bonus
+		return_table.l[type].damage_bonus = l.damage_bonus
+		return_table.l[type].exp_given = l.exp_given
+		return_table.l[type].gold_given = l.gold_given
+	return return_table
 
-		wave_spawn_rate = table_for_barrack.wave_spawn_rate,
-		single_minion_spawn_delay = table_for_barrack.single_minion_spawn_delay,
-
-		is_destroyed = r_5_7.is_destroyed,
-
-		melee_minion_name = r_5_7.melee_minion_name,
-		melee_minion_armor = r_5_7.melee_minion_armor,
-		melee_minion_magic_resistance = r_5_7.melee_minion_magic_resistance,
-		melee_hp_bonus = r_5_7.melee_hp_bonus,
-		melee_damage_bonus = r_5_7.melee_damage_bonus,
-		melee_exp_given = r_5_7.melee_exp_given,
-		melee_gold_given = r_5_7.melee_gold_given,
-
-		archer_minion_name = r_5_7.archer_minion_name,
-		archer_minion_armor = r_5_7.archer_minion_armor,
-		archer_minion_magic_resistance = r_5_7.archer_minion_magic_resistance,
-		archer_hp_bonus = r_5_7.archer_hp_bonus,
-		archer_damage_bonus = r_5_7.archer_damage_bonus,
-		archer_exp_given = r_5_7.archer_exp_given,
-		archer_gold_given = r_5_7.archer_gold_given,
-
-		caster_minion_name = r_5_7.caster_minion_name,
-		caster_minion_armor = r_5_7.caster_minion_armor,
-		caster_minion_magic_resistance = r_5_7.caster_minion_magic_resistance,
-		caster_hp_bonus = r_5_7.caster_hp_bonus,
-		caster_damage_bonus = r_5_7.caster_damage_bonus,
-		caster_exp_given = r_5_7.caster_exp_given,
-		caster_gold_given = r_5_7.caster_gold_given,
-
-		super_minion_name = r_5_7.super_minion_name,
-		super_minion_armor = r_5_7.super_minion_armor,
-		super_minion_magic_resistance = r_5_7.super_minion_magic_resistance,
-		super_hp_bonus = r_5_7.super_hp_bonus,
-		super_damage_bonus = r_5_7.super_damage_bonus,
-		super_exp_given = r_5_7.super_exp_given,
-		super_gold_given = r_5_7.super_gold_given,
-
-		experience_radius = table_for_barrack.exp_radius,
-	}
-	return return_table #todo:
+class SpawnInfo:
+	var l: Dictionary[Enums.MinionType, L] = {}
+	var num_of_minions_per_wave: Dictionary[Enums.MinionType, int]
+	var wave_spawn_rate: int
+	var single_minion_spawn_delay: float
+	var is_destroyed: bool
+	var experience_radius: float
+	class L:
+		var minion_name: String
+		var minion_armor: float
+		var minion_magic_resistance: float
+		var hp_bonus: float
+		var damage_bonus: float
+		var exp_given: float
+		var gold_given: float
 
 func deactivate_correct_structure(team: int, lane: int, pos: int) -> void:
-	var r_3_8: BuildingStatus	# notice: implicit variable refs by block#[4, 6, 8, 10, 13]
-	if team == Enums.Team.ORDER:
-		r_3_8 = order_building_status
-	else:
-		r_3_8 = chaos_building_status
-
-	if pos == enums.pos.front:
-		r_3_8[lane].turret_3 = false
-		var r_4_8 := get_turret(team, lane, enums.pos.middle)
-		set_invulnerable(r_4_8, false)
-		set_targetable(r_4_8, true)
-	elif pos == enums.pos.middle:
-		r_3_8[lane].turret_2 = false
-		var r_4_8 := get_turret(team, lane, enums.pos.back)
-		set_invulnerable(r_4_8, false)
-		set_targetable(r_4_8, true)
-	elif pos == enums.pos.back:
-		r_3_8[lane].turret_1 = false
-		var r_4_8 := get_dampener(team, lane)
-		set_invulnerable(r_4_8, false)
-		set_targetable(r_4_8, true)
-	elif pos == enums.pos.hq_tower_2:
-		r_3_8.hq_tower_2 = false
-		if r_3_8.hq_tower_1 == false:
-			var r_4_8 := get_hq(team)
-			set_invulnerable(r_4_8, false)
-			set_targetable(r_4_8, true)
-
-	elif pos == enums.pos.hq_tower_1:
-		r_3_8.hq_tower_1 = false
-		if r_3_8.hq_tower_2 == false:
-			var r_4_8 := get_hq(team)
-			set_invulnerable(r_4_8, false)
-			set_targetable(r_4_8, true)
+	var building_status_team := building_status[team]
+	if pos == Enums.Pos.FRONT:
+		building_status_team.lanes[lane].turret_3 = false
+		var turret := get_turret(team, lane, Enums.Pos.MIDDLE)
+		turret.status.invulnerable = false
+		turret.status.targetable = true
+	elif pos == Enums.Pos.MIDDLE:
+		building_status_team.lanes[lane].turret_2 = false
+		var turret := get_turret(team, lane, Enums.Pos.BACK)
+		turret.status.invulnerable = false
+		turret.status.targetable = true
+	elif pos == Enums.Pos.BACK:
+		building_status_team.lanes[lane].turret_1 = false
+		var dampener := get_dampener(team, lane)
+		dampener.status.invulnerable = false
+		dampener.status.targetable = true
+	elif pos == Enums.Pos.HQ_TOWER_2:
+		building_status_team.hq_tower_2 = false
+		if building_status_team.hq_tower_1 == false:
+			var hq := get_hq(team)
+			hq.status.invulnerable = false
+			hq.status.targetable = true
+	elif pos == Enums.Pos.HQ_TOWER_1:
+		building_status_team.hq_tower_1 = false
+		if building_status_team.hq_tower_2 == false:
+			var hq := get_hq(team)
+			hq.status.invulnerable = false
+			hq.status.targetable = true
 
 func get_lua_barracks(team: int, lane: int) -> LuaBarrack:
-	var r_2_9: LuaBarrack	# notice: implicit variable refs by block#[3]
-	if team == Enums.Team.ORDER:
-		r_2_9 = barracks_bonuses[order][lane]
-	else:
-		r_2_9 = barracks_bonuses[chaos][lane]
-	return r_2_9
+	return barracks_bonuses[team][lane]
 
 func get_disable_minion_spawn_time(lane: int, team: int) -> float:
 	var barrack := get_lua_barracks(team, lane)
@@ -429,187 +411,117 @@ func get_disable_minion_spawn_time(lane: int, team: int) -> float:
 func disable_barracks_spawn(lane: int, team: int) -> void:
 	var c_lang_barracks := get_barracks(team, lane)
 	var lua_barrack := get_lua_barracks(team, lane)
-	set_disable_minion_spawn(c_lang_barracks, get_disable_minion_spawn_time(lane, team))
+	c_lang_barracks.disable_minion_spawn(get_disable_minion_spawn_time(lane, team))
 	lua_barrack.num_of_spawn_disables += 1
 
 var bonuses_counter := 0
 func apply_barracks_destruction_bonuses(team: int, barrack_lane: int) -> void:
 	bonuses_counter += 1
-	for lane in range(3):
-		if team == Enums.Team.ORDER:
-			barracks_bonuses[order][lane].melee_hp_bonus += g[Enums.MinionType.MELEE].health_inhibitor
-			barracks_bonuses[order][lane].melee_damage_bonus += g[Enums.MinionType.MELEE].damage_inhibitor
-			barracks_bonuses[order][lane].archer_hp_bonus += archer_health_inhibitor
-			barracks_bonuses[order][lane].archer_damage_bonus += archer_damage_inhibitor
-			barracks_bonuses[order][lane].caster_hp_bonus += caster_health_inhibitor
-			barracks_bonuses[order][lane].caster_damage_bonus += caster_damage_inhibitor
-			barracks_bonuses[order][lane].super_hp_bonus += super_health_inhibitor
-			barracks_bonuses[order][lane].super_damage_bonus += super_damage_inhibitor
-			barracks_bonuses[order][lane].melee_exp_given -= g[Enums.MinionType.MELEE].exp_inhibitor
-			barracks_bonuses[order][lane].melee_gold_given -= g[Enums.MinionType.MELEE].gold_inhibitor
-			barracks_bonuses[order][lane].archer_exp_given -= archer_exp_inhibitor
-			barracks_bonuses[order][lane].archer_gold_given = barracks_bonuses[order][lane].melee_gold_given - archer_gold_inhibitor
-			barracks_bonuses[order][lane].caster_exp_given -= caster_exp_inhibitor
-			barracks_bonuses[order][lane].caster_gold_given = barracks_bonuses[order][lane].melee_gold_given - caster_exp_inhibitor
-			barracks_bonuses[order][lane].super_exp_given -= super_exp_inhibitor
-			barracks_bonuses[order][lane].super_gold_given = barracks_bonuses[order][lane].melee_gold_given - super_exp_inhibitor
-			if lane == barrack_lane:
-				total_number_of_chaos_barracks -= 1
-				barracks_bonuses[order][lane].will_spawn_super_minion = 1
+	var opposing_team := opposite_team(team)
+	for lane: Enums.Lane in [right, center, left]:
+		var lua_barrack: LuaBarrack = barracks_bonuses[team][lane]
 
-		elif team == Enums.Team.CHAOS:
-			barracks_bonuses[chaos][lane].melee_hp_bonus += g[Enums.MinionType.MELEE].health_inhibitor
-			barracks_bonuses[chaos][lane].melee_damage_bonus += g[Enums.MinionType.MELEE].damage_inhibitor
-			barracks_bonuses[chaos][lane].archer_hp_bonus += archer_health_inhibitor
-			barracks_bonuses[chaos][lane].archer_damage_bonus += archer_damage_inhibitor
-			barracks_bonuses[chaos][lane].caster_hp_bonus += caster_health_inhibitor
-			barracks_bonuses[chaos][lane].caster_damage_bonus += caster_damage_inhibitor
-			barracks_bonuses[chaos][lane].super_hp_bonus += super_health_inhibitor
-			barracks_bonuses[chaos][lane].super_damage_bonus += super_damage_inhibitor
-			barracks_bonuses[chaos][lane].melee_exp_given -= g[Enums.MinionType.MELEE].exp_inhibitor
-			barracks_bonuses[chaos][lane].melee_gold_given -= g[Enums.MinionType.MELEE].gold_inhibitor
-			barracks_bonuses[chaos][lane].archer_exp_given -= archer_exp_inhibitor
-			barracks_bonuses[chaos][lane].archer_gold_given = barracks_bonuses[chaos][lane].melee_gold_given - archer_gold_inhibitor
-			barracks_bonuses[chaos][lane].caster_exp_given -= caster_exp_inhibitor
-			barracks_bonuses[chaos][lane].caster_gold_given = barracks_bonuses[chaos][lane].melee_gold_given - caster_exp_inhibitor
-			barracks_bonuses[chaos][lane].super_exp_given -= super_exp_inhibitor
-			barracks_bonuses[chaos][lane].super_gold_given = barracks_bonuses[chaos][lane].melee_gold_given - super_exp_inhibitor
-			if lane == barrack_lane:
-				total_number_of_order_barracks -= 1
-				barracks_bonuses[chaos][lane].will_spawn_super_minion = 1
+		for type: Enums.MinionType in [melee, archer, caster, syper]:
+			var l := lua_barrack.l[type]
+			l.hp_bonus += g[melee].health_inhibitor
+			l.damage_bonus += g[melee].damage_inhibitor
+			l.exp_given -= g[melee].exp_inhibitor
+			l.gold_given -= g[melee].gold_inhibitor
+		#lua_barrack.l[archer].gold_given = lua_barrack.l[melee].gold_given - g[archer].gold_inhibitor
+		#lua_barrack.l[caster].gold_given = lua_barrack.l[melee].gold_given - g[caster].exp_inhibitor
+		#lua_barrack.l[syper].gold_given = lua_barrack.l[melee].gold_given - g[syper].exp_inhibitor
+
+		if lane == barrack_lane:
+			total_number_of_barracks[opposing_team] -= 1
+			lua_barrack.will_spawn_super_minion = 1
 
 var reduction_counter := 0
 func apply_barracks_respawn_reductions(team: int, barrack_lane: int) -> void:
 	reduction_counter += 1
-	for lane in range(3):
-		if team == Enums.Team.ORDER:
-			barracks_bonuses[order][lane].melee_hp_bonus -= g[Enums.MinionType.MELEE].health_inhibitor
-			barracks_bonuses[order][lane].melee_damage_bonus -= g[Enums.MinionType.MELEE].damage_inhibitor
-			barracks_bonuses[order][lane].archer_hp_bonus -= archer_health_inhibitor
-			barracks_bonuses[order][lane].archer_damage_bonus -= archer_damage_inhibitor
-			barracks_bonuses[order][lane].caster_hp_bonus -= caster_health_inhibitor
-			barracks_bonuses[order][lane].caster_damage_bonus -= caster_damage_inhibitor
-			barracks_bonuses[order][lane].super_hp_bonus -= super_health_inhibitor
-			barracks_bonuses[order][lane].super_damage_bonus -= super_damage_inhibitor
-			barracks_bonuses[order][lane].melee_exp_given += g[Enums.MinionType.MELEE].exp_inhibitor
-			barracks_bonuses[order][lane].melee_gold_given += g[Enums.MinionType.MELEE].gold_inhibitor
-			barracks_bonuses[order][lane].archer_exp_given += archer_exp_inhibitor
-			barracks_bonuses[order][lane].archer_gold_given = barracks_bonuses[order][lane].melee_gold_given + archer_gold_inhibitor
-			barracks_bonuses[order][lane].caster_exp_given += caster_exp_inhibitor
-			barracks_bonuses[order][lane].caster_gold_given = barracks_bonuses[order][lane].melee_gold_given + caster_exp_inhibitor
-			barracks_bonuses[order][lane].super_exp_given += super_exp_inhibitor
-			barracks_bonuses[order][lane].super_gold_given = barracks_bonuses[order][lane].melee_gold_given + super_exp_inhibitor
-			if lane == barrack_lane:
-				total_number_of_chaos_barracks += 1
-				barracks_bonuses[order][lane].will_spawn_super_minion = 0
+	var opposing_team := opposite_team(team)
+	for lane: Enums.Lane in [right, center, left]:
+		var lua_barrack: LuaBarrack = barracks_bonuses[team][lane]
 
-			if total_number_of_chaos_barracks == 3:
-				hq = get_hq(Enums.Team.CHAOS)
-				set_invulnerable(hq, true)
-				set_targetable(hq, false)
-				for r_9_13: Enums.Lane in Enums.Lane:
-					var r_10_13 := get_turret(Enums.Team.CHAOS, r_9_13, enums.pos.hq_tower_1)
-					var r_11_13 := get_turret(Enums.Team.CHAOS, r_9_13, enums.pos.hq_tower_2)
-					if r_10_13 != nil:
-						set_invulnerable(r_10_13, true)
-						set_targetable(r_10_13, false)
+		for type: Enums.MinionType in [melee, archer, caster, syper]:
+			var l := lua_barrack.l[type]
+			l.hp_bonus -= g[melee].health_inhibitor
+			l.damage_bonus -= g[melee].damage_inhibitor
+			l.exp_given += g[melee].exp_inhibitor
+			l.gold_given += g[melee].gold_inhibitor
+		#lua_barrack.l[archer].gold_given = lua_barrack.l[melee].gold_given + g[archer].gold_inhibitor
+		#lua_barrack.l[caster].gold_given = lua_barrack.l[melee].gold_given + g[caster].exp_inhibitor
+		#lua_barrack.l[syper].gold_given = lua_barrack.l[melee].gold_given + g[syper].exp_inhibitor
+	
+		if lane == barrack_lane:
+			total_number_of_barracks[opposing_team] += 1
+			lua_barrack.will_spawn_super_minion = 0
 
-					if r_11_13 != nil:
-						set_invulnerable(r_11_13, true)
-						set_targetable(r_11_13, false)
+	if total_number_of_barracks[opposing_team] == 3:
+		var hq := get_hq(opposing_team)
+		hq.status.invulnerable = true
+		hq.status.targetable = false
+		for lane: Enums.Lane in [right, center, left]:
+			var hq_turret_1 := get_turret(opposing_team, lane, Enums.Pos.HQ_TOWER_1)
+			var hq_turret_2 := get_turret(opposing_team, lane, Enums.Pos.HQ_TOWER_2)
+			if hq_turret_1 != null:
+				hq_turret_1.status.invulnerable = true
+				hq_turret_1.status.targetable = false
 
-		elif team == Enums.Team.CHAOS:
-			barracks_bonuses[chaos][lane].melee_hp_bonus -= g[Enums.MinionType.MELEE].health_inhibitor
-			barracks_bonuses[chaos][lane].melee_damage_bonus -= g[Enums.MinionType.MELEE].damage_inhibitor
-			barracks_bonuses[chaos][lane].archer_hp_bonus -= archer_health_inhibitor
-			barracks_bonuses[chaos][lane].archer_damage_bonus -= archer_damage_inhibitor
-			barracks_bonuses[chaos][lane].caster_hp_bonus -= caster_health_inhibitor
-			barracks_bonuses[chaos][lane].caster_damage_bonus -= caster_damage_inhibitor
-			barracks_bonuses[chaos][lane].super_hp_bonus -= super_health_inhibitor
-			barracks_bonuses[chaos][lane].super_damage_bonus -= super_damage_inhibitor
-			barracks_bonuses[chaos][lane].melee_exp_given += g[Enums.MinionType.MELEE].exp_inhibitor
-			barracks_bonuses[chaos][lane].melee_gold_given += g[Enums.MinionType.MELEE].gold_inhibitor
-			barracks_bonuses[chaos][lane].archer_exp_given += archer_exp_inhibitor
-			barracks_bonuses[chaos][lane].archer_gold_given = barracks_bonuses[chaos][lane].melee_gold_given + archer_gold_inhibitor
-			barracks_bonuses[chaos][lane].caster_exp_given += caster_exp_inhibitor
-			barracks_bonuses[chaos][lane].caster_gold_given = barracks_bonuses[chaos][lane].melee_gold_given + caster_exp_inhibitor
-			barracks_bonuses[chaos][lane].super_exp_given += super_exp_inhibitor
-			barracks_bonuses[chaos][lane].super_gold_given = barracks_bonuses[chaos][lane].melee_gold_given + super_exp_inhibitor
-			if lane == barrack_lane:
-				total_number_of_order_barracks += 1
-				barracks_bonuses[chaos][lane].will_spawn_super_minion = 0
-
-			if total_number_of_order_barracks == 3:
-				var r_6_13 := get_hq(Enums.Team.ORDER)
-				set_invulnerable(r_6_13, true)
-				set_targetable(r_6_13, false)
-				for r_10_13: Enums.Lane in Enums.Lane:
-					var r_11_13 := get_turret(Enums.Team.ORDER, r_10_13, enums.pos.hq_tower_1)
-					var r_12_13 := get_turret(Enums.Team.ORDER, r_10_13, enums.pos.hq_tower_2)
-					if r_11_13 != nil:
-						set_invulnerable(r_11_13, true)
-						set_targetable(r_11_13, false)
-
-					if r_12_13 != nil:
-						set_invulnerable(r_12_13, true)
-						set_targetable(r_12_13, false)
+			if hq_turret_2 != null:
+				hq_turret_2.status.invulnerable = true
+				hq_turret_2.status.targetable = false
 
 var reactive_counter := 0
 func barrack_reactive_event(team: int, lane: int) -> void:
 	reactive_counter += 1
-	var r_2_14 := opposite_team(team)
-	var dampener = get_dampener(team, lane)
-	set_invulnerable(dampener, false)
-	set_targetable(dampener, true)
-	apply_barracks_respawn_reductions(r_2_14, lane)
+	var dampener := get_dampener(team, lane)
+	dampener.status.invulnerable = false
+	dampener.status.targetable = true
+	apply_barracks_respawn_reductions(opposite_team(team), lane)
 
 var disactivated_counter := 0
-func handle_destroyed_object(r_0_15: unit):
-	hq_type = get_hq_type(r_0_15)
-	if hq_type == order_hq or hq_type == chaos_hq:
-		if hq_type == chaos_hq:
-			end_of_game_ceremony(Enums.Team.ORDER, r_0_15)
-		else:
-			end_of_game_ceremony(Enums.Team.CHAOS, r_0_15)
+func handle_destroyed_object(unk_obj: Unit) -> void:
+	if unk_obj is HQ:
+		var obj := unk_obj as HQ
+		#end_of_game_ceremony(opposite_team(obj.team), obj)
 		return
 
-	if is_dampener(r_0_15):
-		barrack = get_linked_barrack(r_0_15)
-		barrack_team = get_team_id(barrack)
-		barrack_lane = get_lane(r_0_15)
+	if unk_obj is Dampener:
+		var obj := unk_obj as Dampener
+		var barrack := obj.linked_barrack
+		var barrack_team := barrack.team
+		var barrack_lane := obj.lane
 		disable_barracks_spawn(barrack_lane, barrack_team)
-		set_dampener_state(r_0_15, dampener_regeneration_state)
-		set_invulnerable(r_0_15, true)
-		set_targetable(r_0_15, false)
+		obj.enter_regeneration_state()
+		obj.status.invulnerable = true
+		obj.status.targetable = false
 		disactivated_counter += 1
-		var r_1_15 := get_turret(barrack_team, 1, enums.pos.hq_tower_1)
-		var r_2_15 := get_turret(barrack_team, 1, enums.pos.hq_tower_2)
-		if r_1_15 != nil:
-			set_invulnerable(r_1_15, false)
-			set_targetable(r_1_15, true)
+		var hq_turret_1 := get_turret(barrack_team, 1, Enums.Pos.HQ_TOWER_1)
+		var hq_turret_2 := get_turret(barrack_team, 1, Enums.Pos.HQ_TOWER_2)
+		
+		if hq_turret_1 != null:
+			hq_turret_1.status.invulnerable = false
+			hq_turret_1.status.targetable = true
 
-		if r_2_15 != nil:
-			set_invulnerable(r_2_15, false)
-			set_targetable(r_2_15, true)
+		if hq_turret_2 != null:
+			hq_turret_2.status.invulnerable = false
+			hq_turret_2.status.targetable = true
 
-		if r_1_15 == nil and r_2_15 == nil:
-			var r_3_15 := get_hq(barrack_team)
-			set_invulnerable(r_3_15, false)
-			set_targetable(r_3_15, true)
+		if hq_turret_1 == null and hq_turret_2 == null:
+			var hq := get_hq(barrack_team)
+			hq.status.invulnerable = false
+			hq.status.targetable = true
 
-		var r_3_15 := null
-		if barrack_team == Enums.Team.CHAOS:
-			r_3_15 = Enums.Team.ORDER
-		else:
-			r_3_15 = Enums.Team.CHAOS
+		apply_barracks_destruction_bonuses(opposite_team(barrack_team), barrack_lane)
 
-		apply_barracks_destruction_bonuses(r_3_15, barrack_lane)
-
-	if is_turret_ai(r_0_15):
-		deactivate_correct_structure(get_team_id(r_0_15), get_object_lane_id(r_0_15), get_turret_position(r_0_15))
+	if unk_obj is Turret:
+		var obj := unk_obj as Turret
+		deactivate_correct_structure(obj.team, obj.lane, obj.pos)
 		return
 
-	var r_1_15 := get_dampener_type(r_0_15)
+		#TODO:
+		"""
+	var r_1_15 := get_dampener_type(obj)
 	if r_1_15 > -1:
 		var r_2_15 := 0
 		var r_3_15 := Enums.Team.ORDER
@@ -624,11 +536,13 @@ func handle_destroyed_object(r_0_15: unit):
 			r_4_15 = Enums.Team.ORDER
 			r_2_15 = barracks_bonuses[order][r_5_15 + 1]
 			order_building_status[r_5_15 + 1].barracks = false
+		"""
 
 	else:
 		log("could not find linking barracks!")
 
-	return true
+	#return true
+	return
 
 func increase_cannon_minion_spawn_rate() -> void:
 	caster_minion_spawn_frequency = 2

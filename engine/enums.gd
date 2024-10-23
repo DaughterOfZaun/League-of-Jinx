@@ -16,8 +16,8 @@ enum Lane {
 
 enum Pos {
 	FOUNTAN = 0,
-	HQ_TOWER1 = 5,
-	HQ_TOWER2 = 4,
+	HQ_TOWER_1 = 5,
+	HQ_TOWER_2 = 4,
 	BACK = 1,
 	MIDDLE = 2,
 	FRONT = 3,
