@@ -29,8 +29,8 @@ stretch_mode = 4
 
 [node name="CooldownBar" type="TextureProgressBar" parent="AspectRatioContainer"]
 unique_name_in_owner = true
+clip_contents = true
 layout_mode = 2
-value = 50.0
 fill_mode = 4
 nine_patch_stretch = true
 texture_under = ExtResource("1_wtlgq")
@@ -38,6 +38,8 @@ texture_progress = ExtResource("1_wtlgq")
 tint_under = Color(0.00784314, 0, 0.305882, 1)
 tint_progress = Color(0.313726, 0.254902, 0.952941, 1)
 script = ExtResource("3_4dm5e")
+line_width = 0.5
+line_antialiased = true
 
 [node name="CooldownLabel" type="Label" parent="AspectRatioContainer/CooldownBar"]
 unique_name_in_owner = true

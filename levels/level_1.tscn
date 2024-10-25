@@ -269,9 +269,15 @@ alignment = 1
 custom_minimum_size = Vector2(26, 0)
 layout_mode = 2
 
+[node name="CooldownBar" parent="UI/Center/SummonerSpells/Spell1/AspectRatioContainer" index="1"]
+line_antialiased = null
+
 [node name="Spell2" parent="UI/Center/SummonerSpells" instance=ExtResource("3_aqb5h")]
 custom_minimum_size = Vector2(26, 0)
 layout_mode = 2
+
+[node name="CooldownBar" parent="UI/Center/SummonerSpells/Spell2/AspectRatioContainer" index="1"]
+line_antialiased = null
 
 [node name="Recall" parent="UI/Center" instance=ExtResource("3_aqb5h")]
 layout_mode = 1
@@ -286,6 +292,9 @@ offset_right = 128.0
 offset_bottom = -37.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="CooldownBar" parent="UI/Center/Recall/AspectRatioContainer" index="1"]
+line_antialiased = null
 
 [node name="LevelLabel" parent="UI/Center/Recall" index="1"]
 offset_left = -7.0
