@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://demalxnr8x6to"]
+[gd_scene load_steps=4 format=3 uid="uid://demalxnr8x6to"]
 
 [ext_resource type="Script" path="res://engine/game/ui/ui_spell.gd" id="1_6unfi"]
 [ext_resource type="Texture2D" uid="uid://bmblqfb85gtl1" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/Ahri_OrbofDeception.webp" id="1_wtlgq"]
+[ext_resource type="Script" path="res://engine/game/ui/clock.gd" id="3_4dm5e"]
 
 [node name="Spell" type="Control"]
 layout_mode = 3
@@ -36,6 +37,7 @@ texture_under = ExtResource("1_wtlgq")
 texture_progress = ExtResource("1_wtlgq")
 tint_under = Color(0.00784314, 0, 0.305882, 1)
 tint_progress = Color(0.313726, 0.254902, 0.952941, 1)
+script = ExtResource("3_4dm5e")
 
 [node name="CooldownLabel" type="Label" parent="AspectRatioContainer/CooldownBar"]
 unique_name_in_owner = true

@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 	if on_cooldown:
 		var cd := spell.cooldown_time_left
 		var CD := spell.cooldown_wait_time
-		cooldown_progress_bar.value = (cd / CD) * 100
+		cooldown_progress_bar.value = 100 - (cd / CD) * 100
 		if cd <= 60:
 			cooldown_label.text = str(ceili(cd))
 		else:
