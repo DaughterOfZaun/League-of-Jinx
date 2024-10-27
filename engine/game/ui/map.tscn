@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://0spn4csgi7k1"]
+
+[ext_resource type="Texture2D" uid="uid://bmlrymxrf1wfd" path="res://engine/game/2d_point_light.webp" id="1_o63lw"]
+[ext_resource type="Script" path="res://engine/game/navgrid_tool.gd" id="1_pxe6t"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ppodk"]
+polygon = PackedVector2Array(-43, 18, -144, 5, -103, -50, -69, -43)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_pxe6t")
+import_path = "res://data/levels/1/AIPath.aimesh_ngrid"
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+offset = Vector2(256, 256)
+polygon = PackedVector2Array(256, 256, 256, -256, -256, -256, -256, 256)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("1_o63lw")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
+position = Vector2(86, 82)
+occluder = SubResource("OccluderPolygon2D_ppodk")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(0, 0, 0, 1)

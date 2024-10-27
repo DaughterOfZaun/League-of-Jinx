@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://c1voud1rbq3sf"]
+[gd_scene load_steps=81 format=3 uid="uid://c1voud1rbq3sf"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_104n6"]
 [ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.png" id="2_0jsjb"]
@@ -55,6 +55,7 @@
 [ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissileTwo/AhriFoxFireMissileTwo.gd" id="24_dkrri"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/AhriSeduceMissile.gd" id="25_ivfqq"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/AhriTumbleMissile.gd" id="26_q6kjr"]
+[ext_resource type="Script" path="res://engine/game/ui/meter.gd" id="27_iymbl"]
 [ext_resource type="Texture2D" uid="uid://bmblqfb85gtl1" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/Ahri_OrbofDeception.webp" id="43_2dprh"]
 [ext_resource type="Texture2D" uid="uid://grnrkvvxiyoj" path="res://data/characters/Ahri/S2_W_FoxFire/Ahri_FoxFire.webp" id="45_hfybr"]
 [ext_resource type="Texture2D" uid="uid://djn0h2uutu5f1" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/Ahri_Charm.webp" id="47_xivfr"]
@@ -129,6 +130,9 @@ albedo = Color(0, 0, 0, 1)
 height_falloff = 0.1
 
 [node name="Node3D" type="Node3D"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fu4g7")
@@ -269,15 +273,9 @@ alignment = 1
 custom_minimum_size = Vector2(26, 0)
 layout_mode = 2
 
-[node name="CooldownBar" parent="UI/Center/SummonerSpells/Spell1/AspectRatioContainer" index="1"]
-line_antialiased = null
-
 [node name="Spell2" parent="UI/Center/SummonerSpells" instance=ExtResource("3_aqb5h")]
 custom_minimum_size = Vector2(26, 0)
 layout_mode = 2
-
-[node name="CooldownBar" parent="UI/Center/SummonerSpells/Spell2/AspectRatioContainer" index="1"]
-line_antialiased = null
 
 [node name="Recall" parent="UI/Center" instance=ExtResource("3_aqb5h")]
 layout_mode = 1
@@ -292,9 +290,6 @@ offset_right = 128.0
 offset_bottom = -37.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="CooldownBar" parent="UI/Center/Recall/AspectRatioContainer" index="1"]
-line_antialiased = null
 
 [node name="LevelLabel" parent="UI/Center/Recall" index="1"]
 offset_left = -7.0
@@ -590,6 +585,16 @@ pivot_offset = Vector2(119, 119)
 texture = ExtResource("13_vcwsp")
 expand_mode = 1
 
+[node name="ColorRect" type="ColorRect" parent="UI/Map/Control/MapTexture"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
 [node name="FrameTexture" type="TextureRect" parent="UI/Map"]
 layout_mode = 1
 anchors_preset = 3
@@ -830,11 +835,15 @@ offset_left = 32.0
 offset_top = 11.0
 offset_right = 136.0
 offset_bottom = 19.0
-value = 50.0
+max_value = 2527.0
+value = 2512.0
 nine_patch_stretch = true
 texture_over = ExtResource("22_222e8")
 texture_progress = SubResource("GradientTexture1D_lo840")
 tint_progress = Color(0.0823529, 0.788235, 0.156863, 1)
+script = ExtResource("27_iymbl")
+line_width = 2.0
+line_color = Color(0, 0, 0, 1)
 
 [node name="ManaBar" type="TextureProgressBar" parent="Unit/Healthbar"]
 layout_mode = 0
