@@ -3,6 +3,10 @@ class_name NGT
 extends Node2D
 
 const HW2GD := 1. / 70.
+const GD_3D_to_2D := (70. / 50.) * (512. / 294.)
+
+const null_array_of_array: Array[Array] = []
+const null_array_of_vector2: Array[Vector2] = []
 
 static func get_v3(fa: FileAccess) -> Vector3:
 	return Vector3(fa.get_float(), fa.get_float(), fa.get_float())
@@ -13,30 +17,47 @@ static func get_v2(fa: FileAccess) -> Vector2:
 static func get_v2i_16(fa: FileAccess) -> Vector2i:
 	return Vector2i(fa.get_16(), fa.get_16())
 
-
-var visited: Array[bool]
 @export_file("*.aimesh_ngrid") var import_path: String
 @export_tool_button("Import") var import := func() -> void:
 	var fa := FileAccess.open(import_path, FileAccess.ModeFlags.READ)
 	var ng := NavigationGrid.new(fa)
-	#print_navgrid(ng); return
-	visited = []; visited.resize(len(ng.cells))
-	var contours: Array[Array] = []
+
+	#print(ng.cell_count); return
+
+	var image: Array[Array] = []; image.resize(ng.cell_count.x)
 	for x in range(ng.cell_count.x):
+		image[x] = []; image[x].resize(ng.cell_count.y)
 		for y in range(ng.cell_count.y):
-			var contour: Array[NavigationGridCell] = []
-			find_contour(ng, x, y, contour)
-			if len(contour) >= 3:
-				contours.append(contour)
-	#return
-	for contour in contours:
+			image[x][y] = occludes_light(get_cell(ng, x, y))
+	var contours := find_contours(image, 0.5)
+
+	var holder := get_node("Node2D")
+	for child in holder.get_children():
+		holder.remove_child(child)
+	for contour: Array[Vector2] in contours:
 		var lo := LightOccluder2D.new()
-		add_child(lo, true)
+		holder.add_child(lo, true)
 		lo.owner = self
 		lo.occluder = OccluderPolygon2D.new()
 		var polygon := PackedVector2Array()
-		for cell: NavigationGridCell in contour:
-			polygon.append(Vector2(cell.locator.x * ng.cell_size * HW2GD, cell.locator.y * ng.cell_size * HW2GD))
+		#for cell: NavigationGridCell in contour:
+		#	polygon.append(Vector2(cell.locator) * ng.cell_size * HW2GD)
+
+		var prev_dir := Vector2.ZERO
+		var prev_point := Vector2.INF
+		for point in contour:
+			var should_add := true
+			var dir := Vector2.ZERO
+			if prev_point.is_finite():
+				dir = (point - prev_point).normalized()
+				if dir.is_equal_approx(prev_dir):
+					should_add = false
+			if should_add:
+				var min_pos := Vector2(ng.min_grid_position.x, ng.min_grid_position.z)
+				polygon.append((min_pos / 50. + point) * (512. / 293.))
+				prev_dir = dir
+			prev_point = point
+
 		lo.occluder.polygon = polygon
 		lo.occluder.closed = true
 
@@ -51,47 +72,8 @@ func is_valid_cell_index(ng: NavigationGrid, index: int) -> bool:
 func get_cell(ng: NavigationGrid, x: int, y: int) -> NavigationGridCell:
 	var index := get_cell_index(ng, x, y)
 	return ng.cells[index] if is_valid_cell_index(ng, index) else null
-var neighbor_offsets: Array[Vector2i] = [
-	Vector2i(0, 1),
-	Vector2i(1, 1),
-	Vector2i(1, 0),
-	Vector2i(1, -1),
-	Vector2i(0, -1),
-	Vector2i(-1, -1),
-	Vector2i(-1, 0),
-	Vector2i(-1, 1),
-]
-var neighbor_offsets_plus: Array[Vector2i] = [
-	Vector2i(0, 1),
-	Vector2i(1, 0),
-	Vector2i(0, -1),
-	Vector2i(-1, 0),
-]
-func get_neighbors(ng: NavigationGrid, x: int, y: int) -> Array[NavigationGridCell]:
-	var neighbors: Array[NavigationGridCell] = []
-	for offset in neighbor_offsets_plus:
-		var neighbor := get_cell(ng, x + offset.x, y + offset.y)
-		if neighbor != null:
-			neighbors.append(neighbor)
-	return neighbors
-func is_on_edge(cell: NavigationGridCell, ng: NavigationGrid, x: int, y: int) -> bool:
-	return occludes_light(cell) && get_neighbors(ng, x, y).any(func(neighbor: NavigationGridCell) -> bool: return !occludes_light(neighbor))
-
-func find_contour(ng: NavigationGrid, x: int, y: int, a: Array[NavigationGridCell]) -> bool:
-	var index := get_cell_index(ng, x, y)
-	if !is_valid_cell_index(ng, index): return false
-	if visited[index]: return false;
-	visited[index] = true
-	var cell := ng.cells[index]
-	if is_on_edge(cell, ng, x, y):
-		a.append(cell)
-		var num_of_connections := 0
-		for offset in neighbor_offsets:
-			num_of_connections += int(find_contour(ng, x + offset.x, y + offset.y, a))
-		return true
-	return false
-
 func occludes_light(cell: NavigationGridCell) -> bool:
+	if cell == null: return false
 	var has_grass := (cell.flags & NavigationGridCellFlags.HAS_GRASS) != 0
 	var not_passable := (cell.flags & NavigationGridCellFlags.NOT_PASSABLE) != 0
 	var see_through := (cell.flags & NavigationGridCellFlags.SEE_THROUGH) != 0
@@ -99,18 +81,166 @@ func occludes_light(cell: NavigationGridCell) -> bool:
 	var has_anti_brush := (cell.flags & NavigationGridCellFlags.HAS_ANTI_BRUSH) != 0
 	return has_grass || (not_passable && !see_through)
 
-func print_navgrid(ng: NavigationGrid) -> void:
-	for y in range(ng.cell_count.y):
-		var str := ""
-		for x in range(ng.cell_count.x):
-			if x >= 100: break
-			var cell := get_cell(ng, x, y)
-			#var flags := cell.flags
-			#if flags & NavigationGridCellFlags.NOT_PASSABLE:
-			if is_on_edge(cell, ng, x, y):
-				str += "O"
-			else: str += "+"
-		print(str)
+func find_contours(
+	image: Array[Array],
+	level: float,
+	fully_connected := false,
+	positive_orientation := false,
+	mask: Array[Array] = null_array_of_array
+) -> Array[Array]:
+	var segments := _get_contour_segments(image, level, fully_connected, mask)
+	var contours := _assemble_contours(segments)
+	#if positive_orientation:
+	#	contours = [c[::-1] for c in contours]
+	return contours
+
+func dict_pop(dict: Dictionary[Variant, Variant], key: Variant, default: Variant) -> Variant:
+	var value: Variant = default
+	if key in dict:
+		value = dict[key]
+		dict.erase(key)
+	return value
+func array_extendleft_reversed(a: Array, b: Array) -> void:
+	var c := b.duplicate()
+	c.append_array(a)
+	a.assign(c)
+func dict_sorted_items_values(dict: Dictionary[Variant, Variant]) -> Array[Variant]:
+	var sorted_keys := dict.keys()
+	sorted_keys.sort()
+	var values := []
+	for key: Variant in sorted_keys:
+		values.append(dict[key])
+	return values
+
+func _assemble_contours(segments: Array[Array]) -> Array[Array]:
+	var current_index := 0
+	var contours := {}
+	var starts := {}
+	var ends := {}
+	for segment: Array[Vector2] in segments:
+		var from_point := segment[0]; var to_point := segment[1]
+		if from_point == to_point:
+			continue
+
+		var start: Array = dict_pop(starts, to_point, [null_array_of_vector2, 0])
+		var tail: Array[Vector2] = start[0]; var tail_num: int = start[1]
+		var end: Array = dict_pop(ends, from_point, [null_array_of_vector2, 0])
+		var head: Array[Vector2] = end[0]; var head_num: int = end[1]
+
+		if tail != null_array_of_vector2 and head != null_array_of_vector2:
+			if tail == head:
+				head.append(to_point)
+			else:
+				if tail_num > head_num:
+					head.append_array(tail)
+					dict_pop(contours, tail_num, null)
+					starts[head[0]] = [head, head_num]
+					ends[head[-1]] = [head, head_num]
+				else:
+					array_extendleft_reversed(tail, head)
+					dict_pop(starts, head[0], null)
+					dict_pop(contours, head_num, null)
+					starts[tail[0]] = [tail, tail_num]
+					ends[tail[-1]] = [tail, tail_num]
+		elif tail == null_array_of_vector2 and head == null_array_of_vector2:
+			var new_contour: Array[Vector2] = [from_point, to_point]
+			contours[current_index] = new_contour
+			starts[from_point] = [new_contour, current_index]
+			ends[to_point] = [new_contour, current_index]
+			current_index += 1
+		elif head == null_array_of_vector2:
+			tail.push_front(from_point)
+			starts[from_point] = [tail, tail_num]
+		else:
+			head.append(to_point)
+			ends[to_point] = [head, head_num]
+
+	var tmp: Array[Array] = []
+	tmp.assign(dict_sorted_items_values(contours))
+	return tmp
+
+func _get_fraction(from_value: float, to_value: float, level: float) -> float:
+	if to_value == from_value: return 0
+	return ((level - from_value) / (to_value - from_value))
+
+func _get_contour_segments(
+	array: Array[Array],
+	level: float,
+	vertex_connect_high: bool,
+	mask: Array[Array] = null_array_of_array
+) -> Array[Array]:
+	var segments: Array[Array] = []
+	var use_mask := mask != null_array_of_array
+	var array_shape := Vector2i(len(array), len(array[0]))
+	for r0 in range(array_shape[0] - 1):
+		for c0 in range(array_shape[1] - 1):
+			var r1 := r0 + 1; var c1 := c0 + 1
+			if use_mask and !(
+				mask[r0][c0] and mask[r0][c1] and
+				mask[r1][c0] and mask[r1][c1]
+			): continue
+
+			var ul: float = array[r0][c0]
+			var ur: float = array[r0][c1]
+			var ll: float = array[r1][c0]
+			var lr: float = array[r1][c1]
+			if is_nan(ul) or is_nan(ur) or is_nan(ll) or is_nan(lr):
+				continue
+
+			var square_case := 0
+			if ul > level: square_case += 1
+			if ur > level: square_case += 2
+			if ll > level: square_case += 4
+			if lr > level: square_case += 8
+
+			if square_case in [0, 15]:
+				continue
+
+			var top := Vector2(r0, c0 + _get_fraction(ul, ur, level))
+			var bottom := Vector2(r1, c0 + _get_fraction(ll, lr, level))
+			var left := Vector2(r0 + _get_fraction(ul, ll, level), c0)
+			var right := Vector2(r0 + _get_fraction(ur, lr, level), c1)
+
+			if square_case == 1:
+				segments.append([top, left])
+			elif square_case == 2:
+				segments.append([right, top])
+			elif square_case == 3:
+				segments.append([right, left])
+			elif square_case == 4:
+				segments.append([left, bottom])
+			elif square_case == 5:
+				segments.append([top, bottom])
+			elif square_case == 6:
+				if vertex_connect_high:
+					segments.append([left, top])
+					segments.append([right, bottom])
+				else:
+					segments.append([right, top])
+					segments.append([left, bottom])
+			elif square_case == 7:
+				segments.append([right, bottom])
+			elif square_case == 8:
+				segments.append([bottom, right])
+			elif square_case == 9:
+				if vertex_connect_high:
+					segments.append([top, right])
+					segments.append([bottom, left])
+				else:
+					segments.append([top, left])
+					segments.append([bottom, right])
+			elif square_case == 10:
+				segments.append([bottom, top])
+			elif square_case == 11:
+				segments.append([bottom, left])
+			elif square_case == 12:
+				segments.append([left, right])
+			elif square_case == 13:
+				segments.append([top, right])
+			elif square_case == 14:
+				segments.append([left, top])
+
+	return segments
 
 enum NavigationGridCellFlags {
 	NONE,

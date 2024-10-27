@@ -1,5 +1,6 @@
-[gd_scene load_steps=81 format=3 uid="uid://c1voud1rbq3sf"]
+[gd_scene load_steps=96 format=3 uid="uid://c1voud1rbq3sf"]
 
+[ext_resource type="PackedScene" uid="uid://0spn4csgi7k1" path="res://engine/game/ui/map.tscn" id="1_6ti0h"]
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_104n6"]
 [ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.png" id="2_0jsjb"]
 [ext_resource type="Script" path="res://engine/game/camera.gd" id="2_7jrbs"]
@@ -52,10 +53,13 @@
 [ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/AhriFoxFireMissile.gd" id="23_2f34q"]
 [ext_resource type="Script" path="res://engine/game/healthbar.gd" id="23_8nt75"]
 [ext_resource type="Texture2D" uid="uid://dc3i3ljpey4sv" path="res://data/ui/healthbars/mana.webp" id="23_ey6jq"]
+[ext_resource type="Shader" path="res://engine/game/fog_of_war_ss.gdshader" id="24_bb5a3"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissileTwo/AhriFoxFireMissileTwo.gd" id="24_dkrri"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/AhriSeduceMissile.gd" id="25_ivfqq"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/AhriTumbleMissile.gd" id="26_q6kjr"]
 [ext_resource type="Script" path="res://engine/game/ui/meter.gd" id="27_iymbl"]
+[ext_resource type="Script" path="res://engine/game/3d_to_2d.gd" id="30_ksgkj"]
+[ext_resource type="Texture2D" uid="uid://dfox0jg1u18h2" path="res://engine/game/2d_point_light_sharp.webp" id="31_fd2as"]
 [ext_resource type="Texture2D" uid="uid://bmblqfb85gtl1" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/Ahri_OrbofDeception.webp" id="43_2dprh"]
 [ext_resource type="Texture2D" uid="uid://grnrkvvxiyoj" path="res://data/characters/Ahri/S2_W_FoxFire/Ahri_FoxFire.webp" id="45_hfybr"]
 [ext_resource type="Texture2D" uid="uid://djn0h2uutu5f1" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/Ahri_Charm.webp" id="47_xivfr"]
@@ -65,6 +69,7 @@
 [ext_resource type="Texture2D" uid="uid://bvs00ndscuup" path="res://data/spells/Heal/Summoner_heal.webp" id="58_pw432"]
 [ext_resource type="Texture2D" uid="uid://c8xp3k3d1v7c" path="res://data/spells/Recall/TeleportHome.webp" id="59_isoa0"]
 [ext_resource type="PackedScene" uid="uid://7q5sw0yww3oo" path="res://data/levels/1/map_inherited.tscn" id="61_0jbvi"]
+[ext_resource type="Shader" path="res://engine/game/fog_of_war.gdshader" id="69_7me5f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ovldq"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -91,8 +96,41 @@ adjustment_enabled = true
 adjustment_brightness = 1.2
 adjustment_saturation = 1.2
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_xtm1x"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oud74"]
+resource_local_to_scene = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_ii7v4"]
+size = Vector2(262.5, 262.5)
+orientation = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_34vy8"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i4nua"]
+blend_mode = 3
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_c2u8j"]
+viewport_path = NodePath("SubViewport")
+
 [sub_resource type="FogMaterial" id="FogMaterial_x4wgi"]
 density = -8.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lofpo"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a806a"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("24_bb5a3")
+shader_parameter/density_texture = SubResource("ViewportTexture_lofpo")
+shader_parameter/density_texture_offset = Vector2(64, 64)
+shader_parameter/min_density = 0.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_f4set"]
+flip_faces = true
+size = Vector2(2, 2)
 
 [sub_resource type="Gradient" id="Gradient_mgcr6"]
 interpolation_mode = 1
@@ -124,15 +162,30 @@ radius = 7.5
 [sub_resource type="FogMaterial" id="FogMaterial_ee6ln"]
 density = -8.0
 
-[sub_resource type="FogMaterial" id="FogMaterial_48dpg"]
-density = 0.1
-albedo = Color(0, 0, 0, 1)
-height_falloff = 0.1
+[sub_resource type="ViewportTexture" id="ViewportTexture_dvlov"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m88g3"]
+resource_local_to_scene = true
+shader = ExtResource("69_7me5f")
+shader_parameter/density = 0.2
+shader_parameter/albedo = Color(0, 0, 0, 1)
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/height_falloff = 2.0
+shader_parameter/edge_fade = 0.0
+shader_parameter/density_texture = SubResource("ViewportTexture_dvlov")
 
 [node name="Node3D" type="Node3D"]
 
 [node name="SubViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
 disable_3d = true
+size = Vector2i(640, 640)
+
+[node name="Node2D" parent="SubViewport" instance=ExtResource("1_6ti0h")]
+position = Vector2(64, 64)
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fu4g7")
@@ -141,6 +194,21 @@ environment = SubResource("Environment_fu4g7")
 transform = Transform3D(-0.866025, 0.433013, -0.25, 0, 0.5, 0.866026, 0.5, 0.75, -0.433013, 0, 0, 0)
 light_angular_distance = 0.5
 shadow_enabled = true
+
+[node name="SpotLight" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 105, 140, -105)
+visible = false
+light_projector = SubResource("ViewportTexture_xtm1x")
+shadow_enabled = true
+spot_range = 4096.0
+spot_attenuation = 0.0
+spot_angle_attenuation = 1e-05
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 105, 15, -105)
+visible = false
+material_override = SubResource("StandardMaterial3D_oud74")
+mesh = SubResource("QuadMesh_ii7v4")
 
 [node name="InputManager" type="Node3D" parent="." node_paths=PackedStringArray("main_hero")]
 unique_name_in_owner = true
@@ -587,6 +655,7 @@ expand_mode = 1
 
 [node name="ColorRect" type="ColorRect" parent="UI/Map/Control/MapTexture"]
 visible = false
+material = SubResource("CanvasItemMaterial_34vy8")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -594,6 +663,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5)
+
+[node name="ViewportTextureRect" type="TextureRect" parent="UI/Map/Control/MapTexture"]
+material = SubResource("CanvasItemMaterial_i4nua")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -1.0
+offset_right = 13.0
+offset_bottom = 1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_c2u8j")
+expand_mode = 1
+flip_v = true
 
 [node name="FrameTexture" type="TextureRect" parent="UI/Map"]
 layout_mode = 1
@@ -775,7 +860,7 @@ text = "FPS: 45"
 
 [node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 20, 20)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.746, 22.485, 16.213)
 current = true
 fov = 31.9848
 size = 0.1
@@ -790,7 +875,13 @@ size = Vector3(28.5, 20, 56.5)
 shape = 2
 material = SubResource("FogMaterial_x4wgi")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera"]
+material_override = SubResource("ShaderMaterial_a806a")
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_f4set")
+
 [node name="Unit" type="CharacterBody3D" parent="." node_paths=PackedStringArray("data")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.746, 2.485, -3.787)
 script = ExtResource("3_wwbt7")
 data = NodePath("Data")
 
@@ -855,6 +946,14 @@ value = 50.0
 nine_patch_stretch = true
 texture_progress = ExtResource("23_ey6jq")
 tint_progress = Color(0.34902, 0.513726, 0.901961, 1)
+
+[node name="Node2D" type="Node2D" parent="Unit"]
+script = ExtResource("30_ksgkj")
+
+[node name="PointLight2D" type="PointLight2D" parent="Unit/Node2D"]
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("31_fd2as")
 
 [node name="AI" type="Node" parent="Unit"]
 script = ExtResource("4_e8jju")
@@ -1703,38 +1802,24 @@ script = ExtResource("14_t8bj3")
 shape = SubResource("SphereShape3D_hvbg6")
 
 [node name="FogVolume" type="FogVolume" parent="Unit"]
+visible = false
 size = Vector3(28.57, 28.57, 28.57)
 shape = 2
 material = SubResource("FogMaterial_ee6ln")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Unit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-visible = false
-light_energy = 16.0
-omni_range = 14.286
-omni_attenuation = 2.0
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Unit"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 14.286, 0)
-visible = false
-light_energy = 16.0
-light_bake_mode = 0
-shadow_enabled = true
-spot_range = 28.571
-
 [node name="Map" parent="." instance=ExtResource("61_0jbvi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, -0.746, -2.485, 3.787)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 
 [node name="FogVolume" type="FogVolume" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 100, 6, 100)
-size = Vector3(300, 15, 300)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 105, 6, 105)
+size = Vector3(262.5, 15, 262.5)
 shape = 0
-material = SubResource("FogMaterial_48dpg")
+material = SubResource("ShaderMaterial_m88g3")
 
 [node name="Decal" type="Decal" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 100, 6, 100)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 105, 6, 105)
 visible = false
-size = Vector3(300, 15, 300)
+size = Vector3(262.5, 15, 262.5)
 
 [editable path="UI/Center/SummonerSpells/Spell1"]
 [editable path="UI/Center/SummonerSpells/Spell2"]

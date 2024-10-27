@@ -16,3 +16,5 @@
 *.aimesh
 *.aimesh_ngrid
 *.lua
+*.py
+*.pyx
