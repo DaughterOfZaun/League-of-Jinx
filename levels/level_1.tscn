@@ -1,9 +1,10 @@
-[gd_scene load_steps=96 format=3 uid="uid://c1voud1rbq3sf"]
+[gd_scene load_steps=97 format=3 uid="uid://c1voud1rbq3sf"]
 
 [ext_resource type="PackedScene" uid="uid://0spn4csgi7k1" path="res://engine/game/ui/map.tscn" id="1_6ti0h"]
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_104n6"]
 [ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.png" id="2_0jsjb"]
 [ext_resource type="Script" path="res://engine/game/camera.gd" id="2_7jrbs"]
+[ext_resource type="Script" path="res://engine/game/subviewport.gd" id="2_ipuog"]
 [ext_resource type="Texture2D" uid="uid://cyle4h1k1iu36" path="res://data/ui/center/center.png" id="2_nvcxi"]
 [ext_resource type="Texture2D" uid="uid://w7g1bytpvupe" path="res://data/characters/Ahri/Passive/Ahri_SoulEater.webp" id="2_w53q8"]
 [ext_resource type="PackedScene" uid="uid://demalxnr8x6to" path="res://engine/game/ui/spell.tscn" id="3_aqb5h"]
@@ -39,6 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://kq14qpdrkyqt" path="res://data/ui/map/warn.png" id="14_xpaw0"]
 [ext_resource type="Texture2D" uid="uid://bi1sku2iuxptd" path="res://data/ui/map/error.png" id="15_t5710"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbofDeception.gd" id="16_d8o62"]
+[ext_resource type="Script" path="res://engine/game/borrow_world.gd" id="16_dh0g3"]
 [ext_resource type="Texture2D" uid="uid://cykyr8md63s2b" path="res://data/ui/bar/bar.png" id="17_kvgxc"]
 [ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFire.gd" id="18_8y1v6"]
 [ext_resource type="Texture2D" uid="uid://bducoj0su1fog" path="res://data/ui/bar/kill.png" id="18_rve4l"]
@@ -106,13 +108,10 @@ resource_local_to_scene = true
 size = Vector2(262.5, 262.5)
 orientation = 1
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_34vy8"]
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i4nua"]
 blend_mode = 3
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_c2u8j"]
-viewport_path = NodePath("SubViewport")
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_48rok"]
 
 [sub_resource type="FogMaterial" id="FogMaterial_x4wgi"]
 density = -8.0
@@ -163,7 +162,7 @@ radius = 7.5
 density = -8.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_dvlov"]
-viewport_path = NodePath("SubViewport")
+viewport_path = NodePath("UI/Map/Control/MapTexture1/SubViewportContainer/SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m88g3"]
 resource_local_to_scene = true
@@ -176,16 +175,6 @@ shader_parameter/edge_fade = 0.0
 shader_parameter/density_texture = SubResource("ViewportTexture_dvlov")
 
 [node name="Node3D" type="Node3D"]
-
-[node name="SubViewport" type="SubViewport" parent="."]
-unique_name_in_owner = true
-disable_3d = true
-size = Vector2i(640, 640)
-
-[node name="Node2D" parent="SubViewport" instance=ExtResource("1_6ti0h")]
-position = Vector2(64, 64)
-
-[node name="Camera2D" type="Camera2D" parent="SubViewport"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fu4g7")
@@ -214,6 +203,17 @@ mesh = SubResource("QuadMesh_ii7v4")
 unique_name_in_owner = true
 script = ExtResource("1_104n6")
 main_hero = NodePath("../Unit")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
+disable_3d = true
+handle_input_locally = false
+size = Vector2i(1270, 720)
+script = ExtResource("2_ipuog")
+
+[node name="Node2D" parent="SubViewport" instance=ExtResource("1_6ti0h")]
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport"]
 
 [node name="UI" type="Control" parent="."]
 unique_name_in_owner = true
@@ -635,7 +635,7 @@ offset_bottom = -7.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="MapTexture" type="TextureRect" parent="UI/Map/Control"]
+[node name="MapTexture1" type="TextureRect" parent="UI/Map/Control"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -653,32 +653,57 @@ pivot_offset = Vector2(119, 119)
 texture = ExtResource("13_vcwsp")
 expand_mode = 1
 
-[node name="ColorRect" type="ColorRect" parent="UI/Map/Control/MapTexture"]
-visible = false
-material = SubResource("CanvasItemMaterial_34vy8")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.5)
-
-[node name="ViewportTextureRect" type="TextureRect" parent="UI/Map/Control/MapTexture"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/Map/Control/MapTexture1"]
 material = SubResource("CanvasItemMaterial_i4nua")
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = -1.0
-offset_right = 13.0
-offset_bottom = 1.52588e-05
+anchors_preset = -1
+anchor_left = 0.966
+anchor_top = 0.947
+anchor_right = 0.966
+anchor_bottom = 0.947
+offset_left = -218.874
+offset_top = -227.333
+offset_right = 21.126
+offset_bottom = 12.667
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("ViewportTexture_c2u8j")
+scale = Vector2(1, -1)
+pivot_offset = Vector2(120, 120)
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="UI/Map/Control/MapTexture1/SubViewportContainer" node_paths=PackedStringArray("world_owner")]
+disable_3d = true
+handle_input_locally = false
+size = Vector2i(240, 240)
+size_2d_override = Vector2i(640, 640)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+script = ExtResource("16_dh0g3")
+world_owner = NodePath("../../../../../../SubViewport")
+
+[node name="Camera2D" type="Camera2D" parent="UI/Map/Control/MapTexture1/SubViewportContainer/SubViewport"]
+offset = Vector2(-64, -64)
+anchor_mode = 0
+
+[node name="MapTexture2" type="TextureRect" parent="UI/Map/Control"]
+modulate = Color(1, 1, 1, 0.5)
+material = SubResource("CanvasItemMaterial_48rok")
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -233.0
+offset_top = -230.0
+offset_right = 5.99998
+offset_bottom = 8.99998
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1.1, 1.1)
+pivot_offset = Vector2(119, 119)
+texture = ExtResource("13_vcwsp")
 expand_mode = 1
-flip_v = true
 
 [node name="FrameTexture" type="TextureRect" parent="UI/Map"]
 layout_mode = 1

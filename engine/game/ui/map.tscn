@@ -1,6 +1,5 @@
-[gd_scene load_steps=54 format=3 uid="uid://0spn4csgi7k1"]
+[gd_scene load_steps=53 format=3 uid="uid://0spn4csgi7k1"]
 
-[ext_resource type="Texture2D" uid="uid://bmlrymxrf1wfd" path="res://engine/game/2d_point_light.webp" id="1_o63lw"]
 [ext_resource type="Script" path="res://engine/game/navgrid_tool.gd" id="1_pxe6t"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_04g7s"]
@@ -168,18 +167,7 @@ polygon = PackedVector2Array(512, 512, 512, -512, -512, -512, -512, 512)
 offset = Vector2(256, 256)
 polygon = PackedVector2Array(256, 256, 256, -256, -256, -256, -256, 256)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-visible = false
-enabled = false
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 1)
-texture = ExtResource("1_o63lw")
-
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0, 0, 0, 1)
 
 [node name="Node2D" type="Node2D" parent="."]
