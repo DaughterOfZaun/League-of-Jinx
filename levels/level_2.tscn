@@ -122,6 +122,10 @@ shader = ExtResource("26_87734")
 shader_parameter/density_texture = SubResource("ViewportTexture_lofpo")
 shader_parameter/density_texture_offset = Vector2(64, 64)
 shader_parameter/min_density = 0.5
+shader_parameter/a = null
+shader_parameter/b = null
+shader_parameter/c = null
+shader_parameter/d = null
 
 [sub_resource type="QuadMesh" id="QuadMesh_f4set"]
 flip_faces = true
@@ -862,17 +866,22 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 6
 text = "FPS: 45"
 
-[node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+[node name="Camera2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.746, 30, -3.787)
+
+[node name="Camera3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.746, 22.485, 16.213)
+
+[node name="Camera" type="Camera3D" parent="Camera3" node_paths=PackedStringArray("target")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.746, 32.485, -3.787)
 current = true
 fov = 31.9848
 size = 0.1
 far = 8000.0
 script = ExtResource("25_obkvb")
-target = NodePath("../Unit")
+target = NodePath("../../Unit")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3/Camera"]
 material_override = SubResource("ShaderMaterial_a806a")
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_f4set")

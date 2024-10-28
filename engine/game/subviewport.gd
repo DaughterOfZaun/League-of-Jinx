@@ -3,6 +3,7 @@ extends SubViewport
 @onready var camera3D: Camera3D = %Camera
 @onready var camera2D: Camera2D = $Camera2D
 @onready var viewport3D: Viewport = camera3D.get_viewport()
+@onready var material: ShaderMaterial = (%Camera/MeshInstance3D as MeshInstance3D).material_override
 
 const GD_3D_to_2D := (70. / 50.) * (512. / 294.)
 
@@ -17,13 +18,30 @@ func _process(delta: float) -> void:
 	var B: Vector3 = plane.intersects_ray(camera3D.project_ray_origin(b), camera3D.project_ray_normal(b))
 	var C: Vector3 = plane.intersects_ray(camera3D.project_ray_origin(c), camera3D.project_ray_normal(c))
 	var D: Vector3 = plane.intersects_ray(camera3D.project_ray_origin(d), camera3D.project_ray_normal(d))
+
 	var C2D := C.distance_to(D)
 	var A2B := A.distance_to(B)
 	var B2C := B.distance_to(C)
-	var unit_to_pixel := rect.size.x / C2D
 
-	size.x = roundi(A2B * unit_to_pixel)
-	size.y = roundi(B2C * unit_to_pixel)
+	#var scale := 1.
+	#var unit_to_pixel := rect.size.x / C2D
+	#size.x = roundi(A2B * unit_to_pixel * scale)
+	#size.y = roundi(B2C * unit_to_pixel * scale)
 
-	camera2D.zoom = Vector2.ONE * size.x / (C2D * GD_3D_to_2D)
-	camera2D.global_position = Vector2(camera3D.global_position.x, camera3D.global_position.z) * GD_3D_to_2D
+	size = Vector2.ONE * 640
+
+	camera2D.zoom = Vector2(
+		size.x / (A2B * GD_3D_to_2D),
+		size.y / (B2C * GD_3D_to_2D),
+	)
+
+	var A2 := Vector2(A.x, A.z)
+	var B2 := Vector2(B.x, B.z)
+	var C2 := Vector2(C.x, C.z)
+	var D2 := Vector2(D.x, D.z)
+	camera2D.global_position = (A2 + B2 + C2 + D2) * 0.25 * GD_3D_to_2D
+
+	material.set_shader_parameter('a', A)
+	material.set_shader_parameter('b', B)
+	material.set_shader_parameter('c', C)
+	material.set_shader_parameter('d', D)
