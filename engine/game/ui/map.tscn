@@ -160,17 +160,18 @@ script = ExtResource("1_pxe6t")
 import_path = "res://data/levels/1/AIPath.aimesh_ngrid"
 
 [node name="Polygon2D2" type="Polygon2D" parent="."]
-offset = Vector2(256, 256)
+offset = Vector2(256, -256)
 polygon = PackedVector2Array(512, 512, 512, -512, -512, -512, -512, 512)
 
 [node name="Polygon2D1" type="Polygon2D" parent="."]
-offset = Vector2(256, 256)
+offset = Vector2(256, -256)
 polygon = PackedVector2Array(256, 256, 256, -256, -256, -256, -256, 256)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
 
 [node name="Node2D" type="Node2D" parent="."]
+scale = Vector2(1, -1)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Node2D"]
 visible = false

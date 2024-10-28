@@ -22,10 +22,8 @@ func _process(delta: float) -> void:
 	var B2C := B.distance_to(C)
 	var unit_to_pixel := rect.size.x / C2D
 
-	var scale := 1
-	size.x = roundi(A2B * unit_to_pixel * scale)
-	size.y = roundi(B2C * unit_to_pixel * scale)
+	size.x = roundi(A2B * unit_to_pixel)
+	size.y = roundi(B2C * unit_to_pixel)
 
-	#camera2D.zoom = Vector2.ONE * size.x / (C2D * GD_3D_to_2D)
-
+	camera2D.zoom = Vector2.ONE * size.x / (C2D * GD_3D_to_2D)
 	camera2D.global_position = Vector2(camera3D.global_position.x, camera3D.global_position.z) * GD_3D_to_2D

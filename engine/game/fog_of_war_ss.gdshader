@@ -29,13 +29,13 @@ void fragment() {
 	//vec2 texture_uv = position_world_2D / vec2(texture_size);
 	//float density = max(min_density, texture(density_texture, texture_uv).r);
 
-	vec3 world_camera = (INV_VIEW_MATRIX * vec4(0.0, 0.0, 0.0, 1.0)).xyz;
-	float scale = 13.758;
-	vec2 position_world_2D = (position_world.xz - world_camera.xz) * vec2(1, -1) * GD_3D_to_2D;
-	ivec2 texture_size = textureSize(density_texture, 0);
-	vec2 texture_uv = (position_world_2D / vec2(texture_size)) + vec2(0.5, 0.5);
-	float density = max(min_density, texture(density_texture, texture_uv).r);
+	//vec3 world_camera = (INV_VIEW_MATRIX * vec4(0.0, 0.0, 0.0, 1.0)).xyz;
+	//float scale = 13.758;
+	//vec2 position_world_2D = (position_world.xz - world_camera.xz) * vec2(1, -1) * GD_3D_to_2D;
+	//ivec2 texture_size = textureSize(density_texture, 0);
+	//vec2 texture_uv = (position_world_2D / vec2(texture_size)) + vec2(0.5, 0.5);
+	//float density = max(min_density, texture(density_texture, texture_uv).r);
 
-	//ALBEDO.rgb = screen.rgb * texture(density_texture, UV).x;
-	ALBEDO.rgb = screen.rgb * density;
+	ALBEDO.rgb = screen.rgb * texture(density_texture, vec2(SCREEN_UV.x, 1.0 - SCREEN_UV.y)).x;
+	//ALBEDO.rgb = screen.rgb * density;
 }

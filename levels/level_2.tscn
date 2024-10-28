@@ -1,77 +1,76 @@
-[gd_scene load_steps=96 format=3 uid="uid://c1voud1rbq3sf"]
+[gd_scene load_steps=92 format=3 uid="uid://c4eq6ck01x7ao"]
 
-[ext_resource type="PackedScene" uid="uid://0spn4csgi7k1" path="res://engine/game/ui/map.tscn" id="1_6ti0h"]
-[ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_104n6"]
-[ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.png" id="2_0jsjb"]
-[ext_resource type="Script" path="res://engine/game/camera.gd" id="2_7jrbs"]
-[ext_resource type="Script" path="res://engine/game/subviewport.gd" id="2_ipuog"]
-[ext_resource type="Texture2D" uid="uid://cyle4h1k1iu36" path="res://data/ui/center/center.png" id="2_nvcxi"]
-[ext_resource type="Texture2D" uid="uid://w7g1bytpvupe" path="res://data/characters/Ahri/Passive/Ahri_SoulEater.webp" id="2_w53q8"]
-[ext_resource type="PackedScene" uid="uid://demalxnr8x6to" path="res://engine/game/ui/spell.tscn" id="3_aqb5h"]
-[ext_resource type="Script" path="res://engine/unit/unit.gd" id="3_wwbt7"]
-[ext_resource type="Script" path="res://engine/unit/unit_data.gd" id="4_4y8lh"]
-[ext_resource type="Script" path="res://data/ai/hero.gd" id="4_e8jju"]
-[ext_resource type="Script" path="res://engine/stats.gd" id="5_3vawb"]
-[ext_resource type="Script" path="res://engine/spells/spell_manager.gd" id="5_gep23"]
-[ext_resource type="Script" path="res://engine/ai/ai_run_state.gd" id="6_3jjc0"]
-[ext_resource type="PackedScene" uid="uid://c75a7ire7fgcd" path="res://engine/game/ui/bar.tscn" id="6_gj7h8"]
-[ext_resource type="Script" path="res://engine/spells/attacks/basic_attack.gd" id="6_p5bn8"]
-[ext_resource type="Script" path="res://engine/ai/ai_idle_state.gd" id="6_ut4ak"]
-[ext_resource type="Texture2D" uid="uid://d4acgjwdw05ud" path="res://data/ui/left/left.png" id="7_6oks2"]
-[ext_resource type="PackedScene" uid="uid://brt0fmysxvs5g" path="res://data/characters/Ahri/Skins/Base/Ahri.glb" id="7_45sau"]
-[ext_resource type="Script" path="res://engine/spells/attacks/basic_attack_data.gd" id="7_876sy"]
-[ext_resource type="Script" path="res://engine/ai/ai_cast_state.gd" id="7_eqh1v"]
-[ext_resource type="Texture2D" uid="uid://cc1iubdmpd1kv" path="res://data/characters/Ahri/Ahri_Square.webp" id="7_h4cmg"]
-[ext_resource type="Texture2D" uid="uid://b0vfkfms8norl" path="res://data/ui/bars/blue.webp" id="7_ykpsx"]
-[ext_resource type="Script" path="res://engine/status.gd" id="7_ywlur"]
-[ext_resource type="Texture2D" uid="uid://11hmhsrqbij1" path="res://data/ui/bars/orange.png" id="8_0xr2q"]
-[ext_resource type="Script" path="res://engine/spells/attacks/crit_attack.gd" id="8_os5gn"]
-[ext_resource type="Script" path="res://engine/ai/ai_attack_state.gd" id="8_r48vj"]
-[ext_resource type="Script" path="res://engine/spells/attacks/crit_attack_data.gd" id="9_cwmut"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://bj5tpjmt4q2fk" path="res://data/characters/Ahri/Skins/Base/Animations.tres" id="9_e1mwo"]
-[ext_resource type="Texture2D" uid="uid://b87xf8ukvo7u" path="res://data/ui/left/bag.png" id="10_1iv1b"]
-[ext_resource type="Texture2D" uid="uid://d01dqbfit2hpm" path="res://data/ui/left/shop_enabled.png" id="11_bhi7m"]
-[ext_resource type="Script" path="res://engine/spells/spell_data.gd" id="11_eotle"]
-[ext_resource type="Script" path="res://engine/passive/passive.gd" id="12_133kh"]
-[ext_resource type="Texture2D" uid="uid://ssoelbfv4vo0" path="res://data/ui/left/shop_disabled.png" id="12_fo22a"]
-[ext_resource type="Texture2D" uid="uid://dirw63mnupf18" path="res://data/ui/map/frame.png" id="13_usx5m"]
-[ext_resource type="Texture2D" uid="uid://xgex5ay4l6vm" path="res://data/ui/map/map.png" id="13_vcwsp"]
-[ext_resource type="Script" path="res://engine/game/range.gd" id="14_t8bj3"]
-[ext_resource type="Texture2D" uid="uid://kq14qpdrkyqt" path="res://data/ui/map/warn.png" id="14_xpaw0"]
-[ext_resource type="Texture2D" uid="uid://bi1sku2iuxptd" path="res://data/ui/map/error.png" id="15_t5710"]
-[ext_resource type="Script" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbofDeception.gd" id="16_d8o62"]
-[ext_resource type="Script" path="res://engine/game/borrow_world.gd" id="16_dh0g3"]
-[ext_resource type="Texture2D" uid="uid://cykyr8md63s2b" path="res://data/ui/bar/bar.png" id="17_kvgxc"]
-[ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFire.gd" id="18_8y1v6"]
-[ext_resource type="Texture2D" uid="uid://bducoj0su1fog" path="res://data/ui/bar/kill.png" id="18_rve4l"]
-[ext_resource type="Script" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduce.gd" id="19_djd32"]
-[ext_resource type="Texture2D" uid="uid://m6ya87asjxl2" path="res://data/ui/bar/death.png" id="19_dlu8n"]
-[ext_resource type="Texture2D" uid="uid://d3vyc5egu2euk" path="res://data/ui/bar/assist.png" id="20_3xb40"]
-[ext_resource type="Script" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumble.gd" id="20_vbf6b"]
-[ext_resource type="Script" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbMissile/AhriOrbMissile.gd" id="21_l71pd"]
-[ext_resource type="Texture2D" uid="uid://c4ovd8h1ya3pk" path="res://data/ui/healthbars/blue.webp" id="21_sam6v"]
-[ext_resource type="Texture2D" uid="uid://c610vhtcdjdr7" path="res://data/ui/healthbars/health.webp" id="22_222e8"]
-[ext_resource type="Script" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbReturn/AhriOrbReturn.gd" id="22_lixky"]
-[ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/AhriFoxFireMissile.gd" id="23_2f34q"]
-[ext_resource type="Script" path="res://engine/game/healthbar.gd" id="23_8nt75"]
-[ext_resource type="Texture2D" uid="uid://dc3i3ljpey4sv" path="res://data/ui/healthbars/mana.webp" id="23_ey6jq"]
-[ext_resource type="Shader" path="res://engine/game/fog_of_war_ss.gdshader" id="24_bb5a3"]
-[ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissileTwo/AhriFoxFireMissileTwo.gd" id="24_dkrri"]
-[ext_resource type="Script" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/AhriSeduceMissile.gd" id="25_ivfqq"]
-[ext_resource type="Script" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/AhriTumbleMissile.gd" id="26_q6kjr"]
-[ext_resource type="Script" path="res://engine/game/ui/meter.gd" id="27_iymbl"]
-[ext_resource type="Script" path="res://engine/game/3d_to_2d.gd" id="30_ksgkj"]
-[ext_resource type="Texture2D" uid="uid://dfox0jg1u18h2" path="res://engine/game/2d_point_light_sharp.webp" id="31_fd2as"]
-[ext_resource type="Texture2D" uid="uid://bmblqfb85gtl1" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/Ahri_OrbofDeception.webp" id="43_2dprh"]
-[ext_resource type="Texture2D" uid="uid://grnrkvvxiyoj" path="res://data/characters/Ahri/S2_W_FoxFire/Ahri_FoxFire.webp" id="45_hfybr"]
-[ext_resource type="Texture2D" uid="uid://djn0h2uutu5f1" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/Ahri_Charm.webp" id="47_xivfr"]
-[ext_resource type="Texture2D" uid="uid://uitpm427k4kg" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/Ahri_SpiritRush.webp" id="49_yoxlj"]
-[ext_resource type="Script" path="res://engine/spells/spell.gd" id="52_ey0iw"]
-[ext_resource type="Texture2D" uid="uid://i8r5uocv7r3f" path="res://data/spells/Flash/Summoner_flash.webp" id="57_m5pxd"]
-[ext_resource type="Texture2D" uid="uid://bvs00ndscuup" path="res://data/spells/Heal/Summoner_heal.webp" id="58_pw432"]
-[ext_resource type="Texture2D" uid="uid://c8xp3k3d1v7c" path="res://data/spells/Recall/TeleportHome.webp" id="59_isoa0"]
-[ext_resource type="PackedScene" uid="uid://7q5sw0yww3oo" path="res://data/levels/1/map_inherited.tscn" id="61_0jbvi"]
-[ext_resource type="Shader" path="res://engine/game/fog_of_war.gdshader" id="69_7me5f"]
+[ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
+[ext_resource type="Script" path="res://engine/game/subviewport.gd" id="2_kfdne"]
+[ext_resource type="PackedScene" uid="uid://0spn4csgi7k1" path="res://engine/game/ui/map.tscn" id="3_ybns6"]
+[ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.png" id="4_la1iv"]
+[ext_resource type="Texture2D" uid="uid://w7g1bytpvupe" path="res://data/characters/Ahri/Passive/Ahri_SoulEater.webp" id="5_xidt6"]
+[ext_resource type="PackedScene" uid="uid://demalxnr8x6to" path="res://engine/game/ui/spell.tscn" id="6_qaxp4"]
+[ext_resource type="Texture2D" uid="uid://cyle4h1k1iu36" path="res://data/ui/center/center.png" id="7_jdyie"]
+[ext_resource type="PackedScene" uid="uid://c75a7ire7fgcd" path="res://engine/game/ui/bar.tscn" id="8_nvk2l"]
+[ext_resource type="Texture2D" uid="uid://b0vfkfms8norl" path="res://data/ui/bars/blue.webp" id="9_y6h7o"]
+[ext_resource type="Texture2D" uid="uid://cc1iubdmpd1kv" path="res://data/characters/Ahri/Ahri_Square.webp" id="10_s0kdc"]
+[ext_resource type="Texture2D" uid="uid://11hmhsrqbij1" path="res://data/ui/bars/orange.png" id="11_k6t63"]
+[ext_resource type="Texture2D" uid="uid://d4acgjwdw05ud" path="res://data/ui/left/left.png" id="12_xipey"]
+[ext_resource type="Texture2D" uid="uid://b87xf8ukvo7u" path="res://data/ui/left/bag.png" id="13_8j3ik"]
+[ext_resource type="Texture2D" uid="uid://d01dqbfit2hpm" path="res://data/ui/left/shop_enabled.png" id="14_mnsvh"]
+[ext_resource type="Texture2D" uid="uid://ssoelbfv4vo0" path="res://data/ui/left/shop_disabled.png" id="15_j30nd"]
+[ext_resource type="Texture2D" uid="uid://xgex5ay4l6vm" path="res://data/ui/map/map.png" id="16_y4u57"]
+[ext_resource type="Script" path="res://engine/game/borrow_world.gd" id="17_wk3gk"]
+[ext_resource type="Texture2D" uid="uid://dirw63mnupf18" path="res://data/ui/map/frame.png" id="18_gs7kr"]
+[ext_resource type="Texture2D" uid="uid://kq14qpdrkyqt" path="res://data/ui/map/warn.png" id="19_m14a1"]
+[ext_resource type="Texture2D" uid="uid://bi1sku2iuxptd" path="res://data/ui/map/error.png" id="20_ld22r"]
+[ext_resource type="Texture2D" uid="uid://cykyr8md63s2b" path="res://data/ui/bar/bar.png" id="21_vouoj"]
+[ext_resource type="Texture2D" uid="uid://bducoj0su1fog" path="res://data/ui/bar/kill.png" id="22_su7bi"]
+[ext_resource type="Texture2D" uid="uid://m6ya87asjxl2" path="res://data/ui/bar/death.png" id="23_nc8fv"]
+[ext_resource type="Texture2D" uid="uid://d3vyc5egu2euk" path="res://data/ui/bar/assist.png" id="24_oeos3"]
+[ext_resource type="Script" path="res://engine/game/camera.gd" id="25_obkvb"]
+[ext_resource type="Shader" path="res://engine/game/fog_of_war_ss.gdshader" id="26_87734"]
+[ext_resource type="Script" path="res://engine/unit/unit.gd" id="27_pc2ff"]
+[ext_resource type="Script" path="res://engine/game/healthbar.gd" id="28_qtwjc"]
+[ext_resource type="Texture2D" uid="uid://c4ovd8h1ya3pk" path="res://data/ui/healthbars/blue.webp" id="29_a4oct"]
+[ext_resource type="Texture2D" uid="uid://c610vhtcdjdr7" path="res://data/ui/healthbars/health.webp" id="30_bxyn1"]
+[ext_resource type="Script" path="res://engine/game/ui/meter.gd" id="31_ugk42"]
+[ext_resource type="Texture2D" uid="uid://dc3i3ljpey4sv" path="res://data/ui/healthbars/mana.webp" id="32_x6n4y"]
+[ext_resource type="Script" path="res://engine/game/3d_to_2d.gd" id="33_op7fl"]
+[ext_resource type="Texture2D" uid="uid://dfox0jg1u18h2" path="res://engine/game/2d_point_light_sharp.webp" id="34_jt2uf"]
+[ext_resource type="Script" path="res://data/ai/hero.gd" id="35_wbabt"]
+[ext_resource type="Script" path="res://engine/ai/ai_idle_state.gd" id="36_2psnd"]
+[ext_resource type="Script" path="res://engine/ai/ai_run_state.gd" id="37_bx6as"]
+[ext_resource type="Script" path="res://engine/ai/ai_cast_state.gd" id="38_bitde"]
+[ext_resource type="Script" path="res://engine/ai/ai_attack_state.gd" id="39_tx3bw"]
+[ext_resource type="Script" path="res://engine/stats.gd" id="40_6rdfl"]
+[ext_resource type="Script" path="res://engine/status.gd" id="41_najga"]
+[ext_resource type="Script" path="res://engine/unit/unit_data.gd" id="42_ryu72"]
+[ext_resource type="Script" path="res://engine/passive/passive.gd" id="43_gi7vg"]
+[ext_resource type="PackedScene" uid="uid://brt0fmysxvs5g" path="res://data/characters/Ahri/Skins/Base/Ahri.glb" id="44_xo1f2"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://bj5tpjmt4q2fk" path="res://data/characters/Ahri/Skins/Base/Animations.tres" id="45_ltx8a"]
+[ext_resource type="Script" path="res://engine/spells/spell_manager.gd" id="46_e54hf"]
+[ext_resource type="Script" path="res://engine/spells/attacks/crit_attack.gd" id="47_w5i8c"]
+[ext_resource type="Script" path="res://engine/spells/attacks/crit_attack_data.gd" id="48_p2ks8"]
+[ext_resource type="Script" path="res://engine/spells/attacks/basic_attack.gd" id="49_wj1lt"]
+[ext_resource type="Script" path="res://engine/spells/attacks/basic_attack_data.gd" id="50_xjq4j"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbofDeception.gd" id="51_ol1c2"]
+[ext_resource type="Script" path="res://engine/spells/spell_data.gd" id="52_rrd4i"]
+[ext_resource type="Texture2D" uid="uid://bmblqfb85gtl1" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/Ahri_OrbofDeception.webp" id="53_6j3cv"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFire.gd" id="54_kwm7d"]
+[ext_resource type="Texture2D" uid="uid://grnrkvvxiyoj" path="res://data/characters/Ahri/S2_W_FoxFire/Ahri_FoxFire.webp" id="55_rbbyp"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduce.gd" id="56_5dv87"]
+[ext_resource type="Texture2D" uid="uid://djn0h2uutu5f1" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/Ahri_Charm.webp" id="57_e8o0u"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumble.gd" id="58_2n3jh"]
+[ext_resource type="Texture2D" uid="uid://uitpm427k4kg" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/Ahri_SpiritRush.webp" id="59_obnuv"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbMissile/AhriOrbMissile.gd" id="60_cg88f"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbReturn/AhriOrbReturn.gd" id="61_1j427"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/AhriFoxFireMissile.gd" id="62_30siw"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissileTwo/AhriFoxFireMissileTwo.gd" id="63_uxfe8"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/AhriSeduceMissile.gd" id="64_po323"]
+[ext_resource type="Script" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/AhriTumbleMissile.gd" id="65_d4cln"]
+[ext_resource type="Script" path="res://engine/spells/spell.gd" id="66_ug1m4"]
+[ext_resource type="Texture2D" uid="uid://i8r5uocv7r3f" path="res://data/spells/Flash/Summoner_flash.webp" id="67_3puba"]
+[ext_resource type="Texture2D" uid="uid://bvs00ndscuup" path="res://data/spells/Heal/Summoner_heal.webp" id="68_odt0d"]
+[ext_resource type="Texture2D" uid="uid://c8xp3k3d1v7c" path="res://data/spells/Recall/TeleportHome.webp" id="69_s02j3"]
+[ext_resource type="Script" path="res://engine/game/range.gd" id="70_x5ioe"]
+[ext_resource type="PackedScene" uid="uid://7q5sw0yww3oo" path="res://data/levels/1/map_inherited.tscn" id="71_7skrr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ovldq"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -113,16 +112,13 @@ blend_mode = 3
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_48rok"]
 
-[sub_resource type="FogMaterial" id="FogMaterial_x4wgi"]
-density = -8.0
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_lofpo"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a806a"]
 resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("24_bb5a3")
+shader = ExtResource("26_87734")
 shader_parameter/density_texture = SubResource("ViewportTexture_lofpo")
 shader_parameter/density_texture_offset = Vector2(64, 64)
 shader_parameter/min_density = 0.5
@@ -158,13 +154,6 @@ radius = 7.5
 [sub_resource type="SphereShape3D" id="SphereShape3D_hvbg6"]
 radius = 7.5
 
-[sub_resource type="FogMaterial" id="FogMaterial_ee6ln"]
-density = -8.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m88g3"]
-resource_local_to_scene = true
-shader = ExtResource("69_7me5f")
-
 [node name="Node3D" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -192,7 +181,7 @@ mesh = SubResource("QuadMesh_ii7v4")
 
 [node name="InputManager" type="Node3D" parent="." node_paths=PackedStringArray("main_hero")]
 unique_name_in_owner = true
-script = ExtResource("1_104n6")
+script = ExtResource("1_4aqfu")
 main_hero = NodePath("../Unit")
 
 [node name="SubViewport" type="SubViewport" parent="."]
@@ -200,11 +189,12 @@ unique_name_in_owner = true
 disable_3d = true
 handle_input_locally = false
 size = Vector2i(1270, 720)
-script = ExtResource("2_ipuog")
-
-[node name="Node2D" parent="SubViewport" instance=ExtResource("1_6ti0h")]
+script = ExtResource("2_kfdne")
 
 [node name="Camera2D" type="Camera2D" parent="SubViewport"]
+unique_name_in_owner = true
+
+[node name="Node2D" parent="SubViewport" instance=ExtResource("3_ybns6")]
 
 [node name="UI" type="Control" parent="."]
 unique_name_in_owner = true
@@ -226,7 +216,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("2_0jsjb")
+texture = ExtResource("4_la1iv")
 expand_mode = 2
 
 [node name="Center" type="Control" parent="UI"]
@@ -282,7 +272,7 @@ offset_top = -66.0
 offset_right = -100.0
 offset_bottom = -40.0
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("2_w53q8")
+texture = ExtResource("5_xidt6")
 expand_mode = 2
 
 [node name="ChampionSpells" type="HBoxContainer" parent="UI/Center"]
@@ -300,17 +290,17 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 3
 
-[node name="Spell1" parent="UI/Center/ChampionSpells" instance=ExtResource("3_aqb5h")]
+[node name="Spell1" parent="UI/Center/ChampionSpells" instance=ExtResource("6_qaxp4")]
 custom_minimum_size = Vector2(26, 0)
 layout_mode = 2
 
-[node name="Spell2" parent="UI/Center/ChampionSpells" instance=ExtResource("3_aqb5h")]
+[node name="Spell2" parent="UI/Center/ChampionSpells" instance=ExtResource("6_qaxp4")]
 layout_mode = 2
 
-[node name="Spell3" parent="UI/Center/ChampionSpells" instance=ExtResource("3_aqb5h")]
+[node name="Spell3" parent="UI/Center/ChampionSpells" instance=ExtResource("6_qaxp4")]
 layout_mode = 2
 
-[node name="Spell4" parent="UI/Center/ChampionSpells" instance=ExtResource("3_aqb5h")]
+[node name="Spell4" parent="UI/Center/ChampionSpells" instance=ExtResource("6_qaxp4")]
 layout_mode = 2
 
 [node name="SummonerSpells" type="HBoxContainer" parent="UI/Center"]
@@ -328,15 +318,15 @@ grow_vertical = 0
 theme_override_constants/separation = 3
 alignment = 1
 
-[node name="Spell1" parent="UI/Center/SummonerSpells" instance=ExtResource("3_aqb5h")]
+[node name="Spell1" parent="UI/Center/SummonerSpells" instance=ExtResource("6_qaxp4")]
 custom_minimum_size = Vector2(26, 0)
 layout_mode = 2
 
-[node name="Spell2" parent="UI/Center/SummonerSpells" instance=ExtResource("3_aqb5h")]
+[node name="Spell2" parent="UI/Center/SummonerSpells" instance=ExtResource("6_qaxp4")]
 custom_minimum_size = Vector2(26, 0)
 layout_mode = 2
 
-[node name="Recall" parent="UI/Center" instance=ExtResource("3_aqb5h")]
+[node name="Recall" parent="UI/Center" instance=ExtResource("6_qaxp4")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -369,18 +359,18 @@ grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.52, 0.52)
 pivot_offset = Vector2(334, 167)
-texture = ExtResource("2_nvcxi")
+texture = ExtResource("7_jdyie")
 
-[node name="Healthbar" parent="UI/Center" instance=ExtResource("6_gj7h8")]
+[node name="Healthbar" parent="UI/Center" instance=ExtResource("8_nvk2l")]
 layout_mode = 1
 
-[node name="Manabar" parent="UI/Center" instance=ExtResource("6_gj7h8")]
+[node name="Manabar" parent="UI/Center" instance=ExtResource("8_nvk2l")]
 layout_mode = 1
 offset_top = -23.0
 offset_bottom = -11.0
 
 [node name="TextureProgressBar" parent="UI/Center/Manabar" index="0"]
-texture_progress = ExtResource("7_ykpsx")
+texture_progress = ExtResource("9_y6h7o")
 
 [node name="Left" type="Control" parent="UI"]
 layout_mode = 1
@@ -411,7 +401,7 @@ offset_top = -74.0
 offset_right = 64.0
 offset_bottom = -14.0
 grow_vertical = 0
-texture = ExtResource("7_h4cmg")
+texture = ExtResource("10_s0kdc")
 expand_mode = 1
 stretch_mode = 4
 
@@ -427,7 +417,7 @@ offset_bottom = -1.0
 grow_vertical = 0
 value = 50.0
 nine_patch_stretch = true
-texture_progress = ExtResource("8_0xr2q")
+texture_progress = ExtResource("11_k6t63")
 
 [node name="TextureRect" type="TextureRect" parent="UI/Left"]
 layout_mode = 1
@@ -440,7 +430,7 @@ offset_right = 424.0
 offset_bottom = 87.0
 grow_vertical = 0
 scale = Vector2(0.52, 0.52)
-texture = ExtResource("7_6oks2")
+texture = ExtResource("12_xipey")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Left"]
 layout_mode = 1
@@ -550,37 +540,37 @@ columns = 3
 [node name="TextureRect1" type="TextureRect" parent="UI/Left/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("10_1iv1b")
+texture = ExtResource("13_8j3ik")
 expand_mode = 4
 
 [node name="TextureRect2" type="TextureRect" parent="UI/Left/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("10_1iv1b")
+texture = ExtResource("13_8j3ik")
 expand_mode = 4
 
 [node name="TextureRect3" type="TextureRect" parent="UI/Left/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("10_1iv1b")
+texture = ExtResource("13_8j3ik")
 expand_mode = 4
 
 [node name="TextureRect4" type="TextureRect" parent="UI/Left/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("10_1iv1b")
+texture = ExtResource("13_8j3ik")
 expand_mode = 4
 
 [node name="TextureRect5" type="TextureRect" parent="UI/Left/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("10_1iv1b")
+texture = ExtResource("13_8j3ik")
 expand_mode = 4
 
 [node name="TextureRect6" type="TextureRect" parent="UI/Left/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("10_1iv1b")
+texture = ExtResource("13_8j3ik")
 expand_mode = 4
 
 [node name="ShopButton" type="TextureButton" parent="UI/Left"]
@@ -594,8 +584,8 @@ offset_right = 193.0
 offset_bottom = -9.0
 grow_vertical = 0
 disabled = true
-texture_normal = ExtResource("11_bhi7m")
-texture_disabled = ExtResource("12_fo22a")
+texture_normal = ExtResource("14_mnsvh")
+texture_disabled = ExtResource("15_j30nd")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -641,7 +631,7 @@ grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(1.1, 1.1)
 pivot_offset = Vector2(119, 119)
-texture = ExtResource("13_vcwsp")
+texture = ExtResource("16_y4u57")
 expand_mode = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="UI/Map/Control/MapTexture1"]
@@ -658,7 +648,6 @@ offset_right = 21.126
 offset_bottom = 12.667
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1, -1)
 pivot_offset = Vector2(120, 120)
 stretch = true
 
@@ -669,12 +658,11 @@ size = Vector2i(240, 240)
 size_2d_override = Vector2i(640, 640)
 size_2d_override_stretch = true
 render_target_update_mode = 4
-script = ExtResource("16_dh0g3")
+script = ExtResource("17_wk3gk")
 world_owner = NodePath("../../../../../../SubViewport")
 
 [node name="Camera2D" type="Camera2D" parent="UI/Map/Control/MapTexture1/SubViewportContainer/SubViewport"]
-offset = Vector2(-64, -64)
-anchor_mode = 0
+position = Vector2(256, -256)
 
 [node name="MapTexture2" type="TextureRect" parent="UI/Map/Control"]
 modulate = Color(1, 1, 1, 0.5)
@@ -693,7 +681,7 @@ grow_horizontal = 0
 grow_vertical = 0
 scale = Vector2(1.1, 1.1)
 pivot_offset = Vector2(119, 119)
-texture = ExtResource("13_vcwsp")
+texture = ExtResource("16_y4u57")
 expand_mode = 1
 
 [node name="FrameTexture" type="TextureRect" parent="UI/Map"]
@@ -709,7 +697,7 @@ offset_right = 1.0
 offset_bottom = 8.0
 grow_horizontal = 0
 grow_vertical = 0
-texture = ExtResource("13_usx5m")
+texture = ExtResource("18_gs7kr")
 expand_mode = 1
 
 [node name="Button1" type="TextureButton" parent="UI/Map"]
@@ -725,7 +713,7 @@ offset_right = -186.0
 offset_bottom = -216.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("14_xpaw0")
+texture_normal = ExtResource("19_m14a1")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -742,7 +730,7 @@ offset_right = -212.0
 offset_bottom = -216.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("15_t5710")
+texture_normal = ExtResource("20_ld22r")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -763,7 +751,7 @@ anchor_right = 1.0
 offset_left = -134.0
 offset_bottom = 44.0
 grow_horizontal = 0
-texture = ExtResource("17_kvgxc")
+texture = ExtResource("21_vouoj")
 expand_mode = 1
 
 [node name="TimeLabel" type="Label" parent="UI/Bar"]
@@ -789,7 +777,7 @@ offset_top = 5.0
 offset_right = -77.0
 offset_bottom = 16.0
 grow_horizontal = 0
-texture = ExtResource("18_rve4l")
+texture = ExtResource("22_su7bi")
 expand_mode = 1
 stretch_mode = 5
 
@@ -816,7 +804,7 @@ offset_top = 5.0
 offset_right = -49.0
 offset_bottom = 16.0
 grow_horizontal = 0
-texture = ExtResource("19_dlu8n")
+texture = ExtResource("23_nc8fv")
 expand_mode = 1
 stretch_mode = 5
 
@@ -843,7 +831,7 @@ offset_top = 5.0
 offset_right = -23.0
 offset_bottom = 16.0
 grow_horizontal = 0
-texture = ExtResource("20_3xb40")
+texture = ExtResource("24_oeos3")
 expand_mode = 1
 stretch_mode = 5
 
@@ -876,20 +864,13 @@ text = "FPS: 45"
 
 [node name="Camera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.746, 22.485, 16.213)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.746, 32.485, -3.787)
 current = true
 fov = 31.9848
 size = 0.1
 far = 8000.0
-script = ExtResource("2_7jrbs")
+script = ExtResource("25_obkvb")
 target = NodePath("../Unit")
-
-[node name="FogVolume" type="FogVolume" parent="Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0350342, 0.0221863, -18.4652)
-visible = false
-size = Vector3(28.5, 20, 56.5)
-shape = 2
-material = SubResource("FogMaterial_x4wgi")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera"]
 material_override = SubResource("ShaderMaterial_a806a")
@@ -898,7 +879,7 @@ mesh = SubResource("QuadMesh_f4set")
 
 [node name="Unit" type="CharacterBody3D" parent="." node_paths=PackedStringArray("data")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.746, 2.485, -3.787)
-script = ExtResource("3_wwbt7")
+script = ExtResource("27_pc2ff")
 data = NodePath("Data")
 
 [node name="Healthbar" type="Control" parent="Unit"]
@@ -912,7 +893,7 @@ offset_top = -37.8
 offset_right = 56.52
 offset_bottom = 0.199982
 pivot_offset = Vector2(84, 38)
-script = ExtResource("23_8nt75")
+script = ExtResource("28_qtwjc")
 
 [node name="TextureRect" type="TextureRect" parent="Unit/Healthbar"]
 layout_mode = 1
@@ -920,7 +901,7 @@ anchors_preset = -1
 offset_right = 141.0
 offset_bottom = 38.0
 grow_vertical = 2
-texture = ExtResource("21_sam6v")
+texture = ExtResource("29_a4oct")
 expand_mode = 1
 
 [node name="LevelLabel" type="Label" parent="Unit/Healthbar"]
@@ -945,10 +926,10 @@ offset_bottom = 19.0
 max_value = 2527.0
 value = 2512.0
 nine_patch_stretch = true
-texture_over = ExtResource("22_222e8")
+texture_over = ExtResource("30_bxyn1")
 texture_progress = SubResource("GradientTexture1D_lo840")
 tint_progress = Color(0.0823529, 0.788235, 0.156863, 1)
-script = ExtResource("27_iymbl")
+script = ExtResource("31_ugk42")
 line_width = 2.0
 line_color = Color(0, 0, 0, 1)
 
@@ -960,38 +941,38 @@ offset_right = 136.0
 offset_bottom = 26.0
 value = 50.0
 nine_patch_stretch = true
-texture_progress = ExtResource("23_ey6jq")
+texture_progress = ExtResource("32_x6n4y")
 tint_progress = Color(0.34902, 0.513726, 0.901961, 1)
 
 [node name="Node2D" type="Node2D" parent="Unit"]
-script = ExtResource("30_ksgkj")
+script = ExtResource("33_op7fl")
 
 [node name="PointLight2D" type="PointLight2D" parent="Unit/Node2D"]
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
-texture = ExtResource("31_fd2as")
+texture = ExtResource("34_jt2uf")
 
 [node name="AI" type="Node" parent="Unit"]
-script = ExtResource("4_e8jju")
+script = ExtResource("35_wbabt")
 
 [node name="AIIdleState" type="Node" parent="Unit/AI"]
-script = ExtResource("6_ut4ak")
+script = ExtResource("36_2psnd")
 
 [node name="AIRunState" type="Node" parent="Unit/AI"]
-script = ExtResource("6_3jjc0")
+script = ExtResource("37_bx6as")
 
 [node name="AICastState" type="Node" parent="Unit/AI"]
-script = ExtResource("7_eqh1v")
+script = ExtResource("38_bitde")
 
 [node name="AIAttackState" type="Node" parent="Unit/AI"]
-script = ExtResource("8_r48vj")
+script = ExtResource("39_tx3bw")
 
 [node name="Stats" type="Node" parent="Unit"]
-script = ExtResource("5_3vawb")
+script = ExtResource("40_6rdfl")
 movement_speed_flat = 305.0
 
 [node name="Status" type="Node" parent="Unit"]
-script = ExtResource("7_ywlur")
+script = ExtResource("41_najga")
 can_attack = true
 can_cast = true
 can_move = true
@@ -1004,7 +985,7 @@ height = 2.0
 radius = 0.54
 
 [node name="Data" type="Node" parent="Unit"]
-script = ExtResource("4_4y8lh")
+script = ExtResource("42_ryu72")
 champion_id = 103
 champion_name = "game_character_displayname_Ahri"
 description = "game_character_description_Ahri"
@@ -1042,7 +1023,7 @@ platform_enabled = true
 import_path = "res://data/characters/Ahri/Ahri.ini"
 
 [node name="Passive" type="Node" parent="Unit"]
-script = ExtResource("12_133kh")
+script = ExtResource("43_gi7vg")
 icon = "Ahri_SoulEater.webp"
 _name = "game_character_passiveName_Ahri"
 lua_name = "AhriSoulCrusherNumbers"
@@ -1057,15 +1038,15 @@ visible = false
 mesh = SubResource("CapsuleMesh_gl51m")
 skeleton = NodePath("../..")
 
-[node name="SkinnedMesh" parent="Unit" instance=ExtResource("7_45sau")]
+[node name="SkinnedMesh" parent="Unit" instance=ExtResource("44_xo1f2")]
 
 [node name="AnimationTree" type="AnimationTree" parent="Unit"]
 root_node = NodePath("../SkinnedMesh")
-tree_root = ExtResource("9_e1mwo")
+tree_root = ExtResource("45_ltx8a")
 anim_player = NodePath("../SkinnedMesh/AnimationPlayer")
 
 [node name="Spells" type="Node" parent="Unit" node_paths=PackedStringArray("q", "w", "e", "r", "d", "f", "b", "extra", "crit", "basic")]
-script = ExtResource("5_gep23")
+script = ExtResource("46_e54hf")
 q = NodePath("Q_OrbOfDeception")
 w = NodePath("W_FoxFire")
 e = NodePath("E_Seduce")
@@ -1078,11 +1059,11 @@ crit = NodePath("CritAttack")
 basic = [NodePath("BasicAttack1"), NodePath("BasicAttack2")]
 
 [node name="CritAttack" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("8_os5gn")
+script = ExtResource("47_w5i8c")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/CritAttack"]
-script = ExtResource("9_cwmut")
+script = ExtResource("48_p2ks8")
 inventory_icon = Array[Texture2D]([null])
 inventory_icon_name = Array[String]([""])
 spell_name = "AhriCritAttack"
@@ -1126,11 +1107,11 @@ coefficient = Array[float]([0.0])
 import_path = "res://data/characters/Ahri/Attacks/AhriCritAttack.ini"
 
 [node name="BasicAttack1" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("6_p5bn8")
+script = ExtResource("49_wj1lt")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/BasicAttack1"]
-script = ExtResource("7_876sy")
+script = ExtResource("50_xjq4j")
 probability = 0.5
 inventory_icon = Array[Texture2D]([null])
 inventory_icon_name = Array[String]([""])
@@ -1175,11 +1156,11 @@ coefficient = Array[float]([0.0])
 import_path = "res://data/characters/Ahri/Attacks/AhriBasicAttack.ini"
 
 [node name="BasicAttack2" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("6_p5bn8")
+script = ExtResource("49_wj1lt")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/BasicAttack2"]
-script = ExtResource("7_876sy")
+script = ExtResource("50_xjq4j")
 probability = 0.5
 inventory_icon = Array[Texture2D]([null])
 inventory_icon_name = Array[String]([""])
@@ -1224,12 +1205,12 @@ coefficient = Array[float]([0.0])
 import_path = "res://data/characters/Ahri/Attacks/AhriBasicAttack2.ini"
 
 [node name="Q_OrbOfDeception" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("16_d8o62")
+script = ExtResource("51_ol1c2")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/Q_OrbOfDeception"]
-script = ExtResource("11_eotle")
-inventory_icon = Array[Texture2D]([ExtResource("43_2dprh"), null, null])
+script = ExtResource("52_rrd4i")
+inventory_icon = Array[Texture2D]([ExtResource("53_6j3cv"), null, null])
 inventory_icon_name = Array[String](["Ahri_OrbofDeception.webp", "", ""])
 spell_name = "AhriOrbofDeception"
 display_name = "game_spell_displayname_AhriOrbofDeception"
@@ -1284,22 +1265,22 @@ x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbofDeception.ini"
 
 [node name="W_FoxFire" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("18_8y1v6")
+script = ExtResource("54_kwm7d")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/W_FoxFire"]
-script = ExtResource("11_eotle")
-inventory_icon = Array[Texture2D]([ExtResource("45_hfybr")])
+script = ExtResource("52_rrd4i")
+inventory_icon = Array[Texture2D]([ExtResource("55_rbbyp")])
 spell_name = "AhriFoxFire"
 import_path = "res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFire.ini"
 
 [node name="E_Seduce" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("19_djd32")
+script = ExtResource("56_5dv87")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/E_Seduce"]
-script = ExtResource("11_eotle")
-inventory_icon = Array[Texture2D]([ExtResource("47_xivfr"), null, null])
+script = ExtResource("52_rrd4i")
+inventory_icon = Array[Texture2D]([ExtResource("57_e8o0u"), null, null])
 inventory_icon_name = Array[String](["Ahri_Charm.webp", "", ""])
 display_name = "game_spell_displayname_AhriSeduce"
 alternate_name = "AhriSeduce"
@@ -1353,12 +1334,12 @@ x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S3_E_Seduce/AhriSeduce.ini"
 
 [node name="R_Tumble" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("20_vbf6b")
+script = ExtResource("58_2n3jh")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/R_Tumble"]
-script = ExtResource("11_eotle")
-inventory_icon = Array[Texture2D]([ExtResource("49_yoxlj"), null, null])
+script = ExtResource("52_rrd4i")
+inventory_icon = Array[Texture2D]([ExtResource("59_obnuv"), null, null])
 inventory_icon_name = Array[String](["Ahri_SpiritRush.webp", "", ""])
 spell_name = "AhriTumble"
 display_name = "game_spell_displayname_AhriTumble"
@@ -1407,11 +1388,11 @@ x = Array[float]([0.0])
 import_path = "res://data/characters/Ahri/S4_R_Tumble/AhriTumble.ini"
 
 [node name="E0_OrbMissile" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("21_l71pd")
+script = ExtResource("60_cg88f")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/E0_OrbMissile"]
-script = ExtResource("11_eotle")
+script = ExtResource("52_rrd4i")
 inventory_icon = Array[Texture2D]([null, null, null])
 inventory_icon_name = Array[String](["Ahri_OrbofDeception.webp", "LuxLightStrikeKugel.webp", ""])
 spell_name = "AhriOrbMissile"
@@ -1468,11 +1449,11 @@ x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbMissile/AhriOrbMissile.ini"
 
 [node name="E1_OrbReturn" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("22_lixky")
+script = ExtResource("61_1j427")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/E1_OrbReturn"]
-script = ExtResource("11_eotle")
+script = ExtResource("52_rrd4i")
 inventory_icon = Array[Texture2D]([null, null, null])
 inventory_icon_name = Array[String](["Ahri_OrbofDeception.webp", "LuxLightStrikeKugel.webp", ""])
 spell_name = "AhriOrbReturn"
@@ -1529,11 +1510,11 @@ x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbReturn/AhriOrbReturn.ini"
 
 [node name="E2_FoxFireMissile" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("23_2f34q")
+script = ExtResource("62_30siw")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/E2_FoxFireMissile"]
-script = ExtResource("11_eotle")
+script = ExtResource("52_rrd4i")
 inventory_icon = Array[Texture2D]([null, null, null])
 inventory_icon_name = Array[String](["Ahri_FoxFire.webp", "Annie_Disintegrate.webp", ""])
 spell_name = "AhriFoxFireMissile"
@@ -1588,11 +1569,11 @@ x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/AhriFoxFireMissile.ini"
 
 [node name="E3_FoxFireMissileTwo" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("24_dkrri")
+script = ExtResource("63_uxfe8")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/E3_FoxFireMissileTwo"]
-script = ExtResource("11_eotle")
+script = ExtResource("52_rrd4i")
 inventory_icon = Array[Texture2D]([null, null, null])
 inventory_icon_name = Array[String](["Ahri_FoxFire.webp", "Annie_Disintegrate.webp", ""])
 spell_name = "AhriFoxFireMissileTwo"
@@ -1644,11 +1625,11 @@ x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissileTwo/AhriFoxFireMissileTwo.ini"
 
 [node name="E4_SeduceMissile" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("25_ivfqq")
+script = ExtResource("64_po323")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/E4_SeduceMissile"]
-script = ExtResource("11_eotle")
+script = ExtResource("52_rrd4i")
 inventory_icon = Array[Texture2D]([null, null, null])
 inventory_icon_name = Array[String](["Ahri_Charm.webp", "FallenAngel_DarkBinding.webp", ""])
 spell_name = "AhriSeduceMissile"
@@ -1702,11 +1683,11 @@ x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/AhriSeduceMissile.ini"
 
 [node name="E5_TumbleMissile" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("26_q6kjr")
+script = ExtResource("65_d4cln")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/E5_TumbleMissile"]
-script = ExtResource("11_eotle")
+script = ExtResource("52_rrd4i")
 inventory_icon = Array[Texture2D]([null, null, null])
 inventory_icon_name = Array[String](["Ahri_SpiritRush.webp", "Annie_Disintegrate.webp", ""])
 spell_name = "AhriTumbleMissile"
@@ -1758,39 +1739,39 @@ x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/AhriTumbleMissile.ini"
 
 [node name="D_Flash" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("52_ey0iw")
+script = ExtResource("66_ug1m4")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/D_Flash"]
-script = ExtResource("11_eotle")
-inventory_icon = Array[Texture2D]([ExtResource("57_m5pxd")])
+script = ExtResource("52_rrd4i")
+inventory_icon = Array[Texture2D]([ExtResource("67_3puba")])
 
 [node name="F_Heal" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("52_ey0iw")
+script = ExtResource("66_ug1m4")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/F_Heal"]
-script = ExtResource("11_eotle")
-inventory_icon = Array[Texture2D]([ExtResource("58_pw432")])
+script = ExtResource("52_rrd4i")
+inventory_icon = Array[Texture2D]([ExtResource("68_odt0d")])
 
 [node name="B_Recall" type="Node" parent="Unit/Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("52_ey0iw")
+script = ExtResource("66_ug1m4")
 data = NodePath("Data")
 
 [node name="Data" type="Node" parent="Unit/Spells/B_Recall"]
-script = ExtResource("11_eotle")
-inventory_icon = Array[Texture2D]([ExtResource("59_isoa0")])
+script = ExtResource("52_rrd4i")
+inventory_icon = Array[Texture2D]([ExtResource("69_s02j3")])
 
 [node name="GameplayRange" type="Area3D" parent="Unit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-script = ExtResource("14_t8bj3")
+script = ExtResource("70_x5ioe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Unit/GameplayRange"]
 shape = SubResource("SphereShape3D_2lapu")
 
 [node name="SelectionRange" type="Area3D" parent="Unit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-script = ExtResource("14_t8bj3")
+script = ExtResource("70_x5ioe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Unit/SelectionRange"]
 shape = SubResource("SphereShape3D_okgtt")
@@ -1798,39 +1779,27 @@ disabled = true
 
 [node name="AcquisitionRange" type="Area3D" parent="Unit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-script = ExtResource("14_t8bj3")
+script = ExtResource("70_x5ioe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Unit/AcquisitionRange"]
 shape = SubResource("SphereShape3D_fjou7")
 
 [node name="AttackRange" type="Area3D" parent="Unit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-script = ExtResource("14_t8bj3")
+script = ExtResource("70_x5ioe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Unit/AttackRange"]
 shape = SubResource("SphereShape3D_qw37p")
 
 [node name="CancelAttackRange" type="Area3D" parent="Unit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-script = ExtResource("14_t8bj3")
+script = ExtResource("70_x5ioe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Unit/CancelAttackRange"]
 shape = SubResource("SphereShape3D_hvbg6")
 
-[node name="FogVolume" type="FogVolume" parent="Unit"]
-visible = false
-size = Vector3(28.57, 28.57, 28.57)
-shape = 2
-material = SubResource("FogMaterial_ee6ln")
-
-[node name="Map" parent="." instance=ExtResource("61_0jbvi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
-
-[node name="FogVolume" type="FogVolume" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 105, 6, 105)
-size = Vector3(262.5, 15, 262.5)
-shape = 0
-material = SubResource("ShaderMaterial_m88g3")
+[node name="Map" parent="." instance=ExtResource("71_7skrr")]
+transform = Transform3D(1, 8.74228e-08, 0, -8.74228e-08, 1, 0, 0, 0, -1, 0, 0, 0)
 
 [node name="Decal" type="Decal" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 105, 6, 105)

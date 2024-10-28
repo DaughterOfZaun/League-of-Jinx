@@ -54,7 +54,7 @@ static func get_v2i_16(fa: FileAccess) -> Vector2i:
 					should_add = false
 			if should_add:
 				var min_pos := Vector2(ng.min_grid_position.x, ng.min_grid_position.z)
-				polygon.append((min_pos / 50. + point) * (512. / 293.))
+				polygon.append((min_pos / 50. + point) * (512. / 293.) * Vector2(1, -1))
 				prev_dir = dir
 			prev_point = point
 
@@ -63,7 +63,7 @@ static func get_v2i_16(fa: FileAccess) -> Vector2i:
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
-	import.call()
+	#import.call()
 
 func get_cell_index(ng: NavigationGrid, x: int, y: int) -> int:
 	return y * ng.cell_count.x + x
