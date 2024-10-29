@@ -19,20 +19,16 @@ func _process(delta: float) -> void:
 	var C: Vector3 = plane.intersects_ray(camera3D.project_ray_origin(c), camera3D.project_ray_normal(c))
 	var D: Vector3 = plane.intersects_ray(camera3D.project_ray_origin(d), camera3D.project_ray_normal(d))
 
-	var C2D := C.distance_to(D)
-	var A2B := A.distance_to(B)
-	var B2C := B.distance_to(C)
-
 	#var scale := 1.
 	#var unit_to_pixel := rect.size.x / C2D
 	#size.x = roundi(A2B * unit_to_pixel * scale)
 	#size.y = roundi(B2C * unit_to_pixel * scale)
 
-	size = Vector2.ONE * 640
+	size = Vector2(720, 1280)
 
 	camera2D.zoom = Vector2(
-		size.x / (A2B * GD_3D_to_2D),
-		size.y / (B2C * GD_3D_to_2D),
+		size.x / (absf(A.x - B.x) * GD_3D_to_2D),
+		size.y / (absf(B.z - C.z) * GD_3D_to_2D),
 	)
 
 	var A2 := Vector2(A.x, A.z)

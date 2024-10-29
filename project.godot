@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="League of Jinx"
-run/main_scene="res://levels/level_2.tscn"
+run/main_scene="res://levels/level_1.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"

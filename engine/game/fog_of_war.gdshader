@@ -12,7 +12,7 @@ uniform sampler2D density_texture: hint_default_white;
 void fog() {
     DENSITY = density * clamp(exp2(-height_falloff * (WORLD_POSITION.y - OBJECT_POSITION.y)), 0.0, 1.0);
     float uwu = UVW.y * (SIZE.y / SIZE.z);
-    DENSITY *= 1.0 - texture(density_texture, vec2(UVW.x, 1.0 - UVW.z)).r;
+    DENSITY *= 1.0 - texture(density_texture, vec2(UVW.x, UVW.z)).r;
     DENSITY *= pow(clamp(-2.0 * SDF / min(min(SIZE.x, SIZE.y), SIZE.z), 0.0, 1.0), edge_fade);
     ALBEDO = albedo.rgb;
     EMISSION = emission.rgb;
