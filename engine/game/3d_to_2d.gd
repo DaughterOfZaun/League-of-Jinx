@@ -10,14 +10,13 @@ extends Node2D
 const GD_3D_to_2D := (70. / 50.) * (512. / 294.)
 
 @onready var host: Node3D = get_parent()
-@onready var sub_viewport: SubViewport = %SubViewport
-@onready var sub_viewport_root: Node = sub_viewport #.get_child(0)
+@onready var sub_viewport: SubViewport = get_tree().current_scene.get_node("%SubViewport")
 func _ready() -> void:
 	switch_parent.call_deferred()
 
 func switch_parent() -> void:
 	host.remove_child(self)
-	sub_viewport_root.add_child(self)
+	sub_viewport.add_child(self)
 
 func _process(delta: float) -> void:
 	position = Vector2(host.global_position.x, host.global_position.z) * GD_3D_to_2D
