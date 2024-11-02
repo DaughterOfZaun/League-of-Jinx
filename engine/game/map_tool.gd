@@ -1,4 +1,5 @@
 @tool
+class_name MapTool
 extends Node3D
 
 const HW2GD := 1. / 70.
@@ -15,6 +16,7 @@ const HW2GD := 1. / 70.
 			if mi == null: continue
 			assert(mi.mesh.get_surface_count() == 1)
 			var m := mi.mesh.surface_get_material(0) as StandardMaterial3D
+			assert(m != null, str(child.name))
 			var is_decal := m.albedo_texture in decals
 			mi.visible = value if is_decal else true
 @export_tool_button("Fix Decals (Simple)") var fix_decals_simple := func() -> void:
@@ -38,12 +40,20 @@ const HW2GD := 1. / 70.
 			return decals.find(miam.albedo_texture) < decals.find(mibm.albedo_texture)
 	)
 
+	var levels := sort_to_levels(mis)
+	levels.shuffle()
+	for i in range(len(levels)):
+		var level := levels[i]
+		for mi: MeshInstance3D in level:
+			mi.position.y = 0.001 + i * 0.001
+
+func sort_to_levels(mis: Array[Variant]) -> Array[Array]:
 	var levels: Array[Array] = []
-	for mia in mis:
+	for mia: VisualInstance3D in mis:
 		var mia_aabb := mia.get_aabb()
 		var i := levels.find_custom(
 			func(level: Array) -> bool:
-				for mib: MeshInstance3D in level:
+				for mib: VisualInstance3D in level:
 					var mib_aabb := mib.get_aabb()
 					if mib_aabb.intersects(mia_aabb):
 						return false
@@ -53,11 +63,7 @@ const HW2GD := 1. / 70.
 			levels.append([ mia ])
 		else:
 			levels[i].append(mia)
-
-	for i in range(len(levels)):
-		var level := levels[i]
-		for mi: MeshInstance3D in level:
-			mi.position.y = 0.01 + i * 0.01
+	return levels
 
 @export_tool_button("Fix Decals (Advanced)") var fix_decals_advanced := func() -> void:
 	for child in get_children(true):
@@ -65,6 +71,7 @@ const HW2GD := 1. / 70.
 		if d == null: continue
 		remove_child(d)
 		d.queue_free()
+	var ds: Array[Decal] = []
 	for child in get_children(true):
 		var mi := child as MeshInstance3D
 		if mi == null: continue
@@ -72,16 +79,53 @@ const HW2GD := 1. / 70.
 		var m := mi.mesh.surface_get_material(0) as StandardMaterial3D
 		var is_decal := m.albedo_texture in decals
 		if is_decal:
-			var d := Decal.new()
-			add_child(d)
-			d.name = mi.name + "_Decal"
-			d.texture_albedo = m.albedo_texture
-			d.owner = self
-			var gp := uv_to_3d(mi, Vector2.ONE * 0.5)
-			if gp.is_finite():
-				d.global_position = gp
+			var o := 0.05
+			var gpa := uv_to_3d(mi, Vector2(0.5 - o, 0.5 - o)) - Vector3(0, mi.global_position.y, 0)
+			var gpb := uv_to_3d(mi, Vector2(0.5 + o, 0.5 + o)) - Vector3(0, mi.global_position.y, 0)
+			if gpa.is_finite() and gpb.is_finite():
+				var gp := (gpa + gpb) * 0.5
+				var gpd := gpb - gpa
+				var s := gpd.length() * sqrt(2) * (0.25 / o)
+				var r := Vector3(1, 0, 1).signed_angle_to(gpd.normalized(), Vector3.UP)
+
+				var i := ds.find_custom(func(d: Decal) -> bool:
+					return d.texture_albedo == m.albedo_texture\
+						&& d.global_position.distance_to(gp) <= 0.5)
+				if i == -1:
+					var d := Decal.new()
+					add_child(d)
+					d.owner = self
+					d.name = mi.name + "_Decal"
+					d.texture_albedo = m.albedo_texture
+					d.texture_normal = m.normal_texture
+					d.cull_mask = 1
+					d.global_position = gp
+					d.size = Vector3(s, 1, s)
+					d.rotate_y(r)
+					ds.append(d)
 			else:
 				print(mi.name)
+
+	#ds.sort_custom(func(da: Decal, db: Decal) -> bool:
+	#	return decals.find(da.texture_albedo) < decals.find(db.texture_albedo))
+	#var levels := sort_to_levels(ds)
+	#for i in range(len(levels)):
+	#	var level := levels[i]
+	#	for d: Decal in level:
+	#		d.sorting_offset = i * 1
+	ds.shuffle()
+	# var nds: Array[Decal] = [ ds[0] ]
+	# while len(ds) > 0:
+	# 	ds.sort_custom(func(a: Decal, b: Decal) -> bool:
+	# 		var ndslgp := nds[-1].global_position
+	# 		return ndslgp.distance_squared_to(a.global_position) > ndslgp.distance_squared_to(b.global_position))
+	# 	nds.append(ds.pop_back())
+	# ds = nds
+	var min_size: float = ds.reduce(func(size: float, d: Decal) -> float: return min(size, d.size.length()), 1000000)
+	var max_size: float = ds.reduce(func(size: float, d: Decal) -> float: return max(size, d.size.length()), 0)
+	for i in range(len(ds)):
+		var d := ds[i]
+		d.sorting_offset = ((d.size.length() - min_size) / (max_size - min_size) - 0.5) * 500
 
 func uv_to_3d(mi: MeshInstance3D, uv: Vector2) -> Vector3:
 	var mdt := MeshDataTool.new()
@@ -193,7 +237,16 @@ const mi_dir := "res://data/levels/1/meshes"
 
 @export_group("")
 
-@export_group("Textures")
+@export_group("Materials")
+@export_tool_button("Replace materials") var replace_materials := func() -> void:
+	for child in get_children(true):
+		var mi := child as MeshInstance3D
+		if mi == null: continue
+		assert(mi.mesh.get_surface_count() == 1)
+		var resource_name := str(mi.mesh.get("surface_0/name")).replace(":", "_")
+		#var resource_name := (mi.mesh.surface_get_material(0) as StandardMaterial3D).resource_name
+		mi.mesh.surface_set_material(0, load("res://data/levels/1/materials/%s.tres" % resource_name))
+
 @export_tool_button("Enable Normal Maps") var enable_normal_maps := func() -> void:
 	for child in get_children(true):
 		var mi := child as MeshInstance3D
@@ -204,6 +257,50 @@ const mi_dir := "res://data/levels/1/meshes"
 		m.normal_texture = load(m.albedo_texture.resource_path.replace(".webp", ".normal.webp"))
 @export_group("")
 
-# func _ready() -> void:
-# 	if Engine.is_editor_hint(): return
-# 	remove_LODs_and_SMs.call()
+@export_tool_button("TEST") var test := func() -> void:
+	pass
+
+func _ready() -> void:
+	if Engine.is_editor_hint(): return
+	replace_materials_at_runtime()
+
+@export var level_shader: Shader
+@export var level_decal_shader: Shader
+@export var level_flora_shader: Shader
+@export var viewport_texture: ViewportTexture
+@onready var viewport: SubViewportEx = $"/root/Node3D/SubViewport"
+#@export var shadow_of_war_overlay_material: ShaderMaterial
+var material_cache: Dictionary[StandardMaterial3D, ShaderMaterial] = {}
+func replace_materials_at_runtime() -> void:
+	#var viewport_texture: ViewportTexture = shadow_of_war_overlay_material.get("shader_parameter/density_texture")
+	viewport_texture.set_viewport_path_in_scene("/root/Node3D/SubViewport")
+	for child in get_children(true):
+		var mesh_instance := child as MeshInstance3D
+		if mesh_instance == null: continue
+		#mesh_instance.material_overlay = shadow_of_war_overlay_material
+		var material := mesh_instance.mesh.surface_get_material(0) as StandardMaterial3D
+		if material == null: continue
+		var override_material: ShaderMaterial = material_cache.get(material, null)
+		if override_material == null:
+			override_material = ShaderMaterial.new()
+			material_cache[material] = override_material
+			if material.transparency == BaseMaterial3D.Transparency.TRANSPARENCY_DISABLED:
+				override_material.shader = level_shader
+			if material.transparency == BaseMaterial3D.Transparency.TRANSPARENCY_ALPHA_HASH:
+				override_material.shader = level_decal_shader
+				override_material.set_shader_parameter("alpha_hash_scale", material.alpha_hash_scale)
+			if material.transparency == BaseMaterial3D.Transparency.TRANSPARENCY_ALPHA_SCISSOR:
+				override_material.shader = level_flora_shader
+				override_material.set_shader_parameter("alpha_scissor_threshold", material.alpha_scissor_threshold)
+			override_material.set_shader_parameter("density_texture", viewport_texture)
+			override_material.set_shader_parameter("texture_albedo", material.albedo_texture)
+			override_material.set_shader_parameter("texture_normal", material.normal_texture)
+		mesh_instance.material_override = override_material
+
+#TODO: optimize
+func _process(delta: float) -> void:
+	for material: ShaderMaterial in material_cache.values():
+		material.set_shader_parameter('a', viewport.A)
+		material.set_shader_parameter('b', viewport.B)
+		material.set_shader_parameter('c', viewport.C)
+		material.set_shader_parameter('d', viewport.D)

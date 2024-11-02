@@ -1,6 +1,7 @@
-[gd_scene load_steps=40 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=42 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
+[ext_resource type="LightmapGIData" uid="uid://bv1agprri8rxs" path="res://levels/level_1.lmbake" id="1_ucrx6"]
 [ext_resource type="Script" path="res://engine/game/subviewport.gd" id="2_kfdne"]
 [ext_resource type="PackedScene" uid="uid://0spn4csgi7k1" path="res://engine/game/ui/map.tscn" id="3_ybns6"]
 [ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.png" id="4_la1iv"]
@@ -27,32 +28,26 @@
 [ext_resource type="Script" path="res://engine/game/camera.gd" id="25_obkvb"]
 [ext_resource type="Shader" path="res://engine/game/fog_of_war_ss.gdshader" id="26_87734"]
 [ext_resource type="PackedScene" uid="uid://dgxp55bfpc742" path="res://data/characters/Ahri/unit.tscn" id="27_0mdok"]
+[ext_resource type="Shader" path="res://engine/game/level.gdshader" id="31_g1ghr"]
+[ext_resource type="Shader" path="res://engine/game/level_decal.gdshader" id="32_m603r"]
+[ext_resource type="Shader" path="res://engine/game/level_flora.gdshader" id="33_rqr2r"]
 [ext_resource type="PackedScene" uid="uid://7q5sw0yww3oo" path="res://data/levels/1/map_inherited.tscn" id="71_7skrr"]
-[ext_resource type="Shader" path="res://engine/game/fog_of_war.gdshader" id="72_q266r"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ovldq"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8hxwk"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_x66o3"]
-sky_material = SubResource("ProceduralSkyMaterial_ovldq")
+[sub_resource type="Sky" id="Sky_8uyej"]
+sky_material = SubResource("ProceduralSkyMaterial_8hxwk")
 
-[sub_resource type="Environment" id="Environment_fu4g7"]
+[sub_resource type="Environment" id="Environment_xvl36"]
 background_mode = 2
-sky = SubResource("Sky_x66o3")
-ambient_light_source = 3
-reflected_light_source = 2
-tonemap_mode = 3
-ssr_enabled = true
-ssao_enabled = true
-ssil_enabled = true
-sdfgi_enabled = true
-glow_enabled = true
-volumetric_fog_density = 0.0
-volumetric_fog_albedo = Color(0, 0, 0, 1)
-volumetric_fog_length = 128.0
-adjustment_brightness = 1.2
-adjustment_saturation = 1.2
+sky = SubResource("Sky_8uyej")
+tonemap_mode = 2
+adjustment_enabled = true
+adjustment_brightness = 1.16
+adjustment_contrast = 1.22
+adjustment_saturation = 0.99
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i4nua"]
 blend_mode = 3
@@ -77,26 +72,23 @@ shader_parameter/d = null
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ug5ro"]
-viewport_path = NodePath("UI/Map/Control/MapTexture1/SubViewportContainer/SubViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_legd1"]
-resource_local_to_scene = true
-shader = ExtResource("72_q266r")
-shader_parameter/density = 0.25
-shader_parameter/albedo = Color(0, 0, 0, 1)
-shader_parameter/emission = Color(0, 0, 0, 1)
-shader_parameter/height_falloff = 0.0
-shader_parameter/edge_fade = 0.1
-shader_parameter/density_texture = SubResource("ViewportTexture_ug5ro")
+[sub_resource type="ViewportTexture" id="ViewportTexture_5kqeo"]
+viewport_path = NodePath("SubViewport")
 
 [node name="Node3D" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_fu4g7")
+[node name="LightmapGI" type="LightmapGI" parent="."]
+visible = false
+quality = 0
+directional = true
+use_texture_for_bounces = false
+light_data = ExtResource("1_ucrx6")
 
-[node name="DirectionalLight" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, 0.433013, -0.25, 0, 0.5, 0.866026, 0.5, 0.75, -0.433013, 0, 0, 0)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xvl36")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 light_angular_distance = 0.5
 shadow_enabled = true
 
@@ -799,6 +791,7 @@ script = ExtResource("25_obkvb")
 target = NodePath("../../Unit")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3/Camera"]
+visible = false
 material_override = SubResource("ShaderMaterial_a806a")
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_f4set")
@@ -807,12 +800,12 @@ mesh = SubResource("QuadMesh_f4set")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.746, 2.485, -3.787)
 
 [node name="Map" parent="." instance=ExtResource("71_7skrr")]
-transform = Transform3D(1, 8.74228e-08, 0, -8.74228e-08, 1, 0, 0, 0, -1, 0, 0, 0)
-
-[node name="FogVolume" type="FogVolume" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 105, 6, 105)
-size = Vector3(262.5, 15, 262.5)
-material = SubResource("ShaderMaterial_legd1")
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
+level_shader = ExtResource("31_g1ghr")
+level_decal_shader = ExtResource("32_m603r")
+level_flora_shader = ExtResource("33_rqr2r")
+viewport_texture = SubResource("ViewportTexture_5kqeo")
 
 [editable path="UI/Center/SummonerSpells/Spell1"]
 [editable path="UI/Center/SummonerSpells/Spell2"]

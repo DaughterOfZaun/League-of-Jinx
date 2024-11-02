@@ -1,20 +1,13 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dolk7h6jdkuyg"]
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dolk7h6jdkuyg"]
 
-[ext_resource type="Shader" path="res://engine/game/level.gdshader" id="1_avti1"]
 [ext_resource type="Texture2D" uid="uid://15q64bfwiooc" path="res://data/levels/1/textures/room_Shrine.png" id="1_m05yd"]
 [ext_resource type="Texture2D" uid="uid://bubd4rhp1md8p" path="res://data/levels/1/textures/room_Shrine.normal.webp" id="2_f0wm1"]
 
 [resource]
 resource_name = "NVRMaterial_OrderShrine_Mat"
-render_priority = 0
-shader = ExtResource("1_avti1")
-shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = ExtResource("1_m05yd")
-shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = null
-shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/texture_normal = ExtResource("2_f0wm1")
-shader_parameter/normal_scale = 1.0
-shader_parameter/uv1_scale = Vector3(1, 1, 1)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
+albedo_texture = ExtResource("1_m05yd")
+normal_enabled = true
+normal_texture = ExtResource("2_f0wm1")
+metadata/extras = {
+"name": "NVRMaterial_OrderShrine_Mat"
+}

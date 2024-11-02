@@ -79,7 +79,7 @@ func occludes_light(cell: NavigationGridCell) -> bool:
 	var see_through := (cell.flags & NavigationGridCellFlags.SEE_THROUGH) != 0
 	var has_transparentterrain := (cell.flags & NavigationGridCellFlags.HAS_TRANSPARENTTERRAIN) != 0
 	var has_anti_brush := (cell.flags & NavigationGridCellFlags.HAS_ANTI_BRUSH) != 0
-	return has_grass || (not_passable && !see_through)
+	return (not_passable && !see_through) #|| has_grass
 
 func find_contours(
 	image: Array[Array],

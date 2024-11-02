@@ -144,7 +144,6 @@ script = ExtResource("7_uy5bx")
 [node name="PointLight2D" type="PointLight2D" parent="Node2D"]
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
-shadow_filter = 2
 texture = ExtResource("8_4hqlx")
 
 [node name="AI" type="Node" parent="."]
