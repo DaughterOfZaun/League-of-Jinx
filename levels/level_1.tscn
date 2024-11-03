@@ -1,8 +1,8 @@
-[gd_scene load_steps=42 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=43 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
-[ext_resource type="LightmapGIData" uid="uid://bv1agprri8rxs" path="res://levels/level_1.lmbake" id="1_ucrx6"]
 [ext_resource type="Script" path="res://engine/game/subviewport.gd" id="2_kfdne"]
+[ext_resource type="CompressedTexture3D" uid="uid://cw7h14f61vo0x" path="res://LUT2.webp" id="2_tb6ku"]
 [ext_resource type="PackedScene" uid="uid://0spn4csgi7k1" path="res://engine/game/ui/map.tscn" id="3_ybns6"]
 [ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.png" id="4_la1iv"]
 [ext_resource type="Texture2D" uid="uid://w7g1bytpvupe" path="res://data/characters/Ahri/Passive/Ahri_SoulEater.webp" id="5_xidt6"]
@@ -22,12 +22,14 @@
 [ext_resource type="Texture2D" uid="uid://kq14qpdrkyqt" path="res://data/ui/map/warn.png" id="19_m14a1"]
 [ext_resource type="Texture2D" uid="uid://bi1sku2iuxptd" path="res://data/ui/map/error.png" id="20_ld22r"]
 [ext_resource type="Texture2D" uid="uid://cykyr8md63s2b" path="res://data/ui/bar/bar.png" id="21_vouoj"]
+[ext_resource type="Texture2D" uid="uid://cjgdixmn1dikj" path="res://data/characters/Ahri/Ahri_Circle.webp" id="22_gvtsu"]
 [ext_resource type="Texture2D" uid="uid://bducoj0su1fog" path="res://data/ui/bar/kill.png" id="22_su7bi"]
 [ext_resource type="Texture2D" uid="uid://m6ya87asjxl2" path="res://data/ui/bar/death.png" id="23_nc8fv"]
 [ext_resource type="Texture2D" uid="uid://d3vyc5egu2euk" path="res://data/ui/bar/assist.png" id="24_oeos3"]
 [ext_resource type="Script" path="res://engine/game/camera.gd" id="25_obkvb"]
 [ext_resource type="Shader" path="res://engine/game/fog_of_war_ss.gdshader" id="26_87734"]
 [ext_resource type="PackedScene" uid="uid://dgxp55bfpc742" path="res://data/characters/Ahri/unit.tscn" id="27_0mdok"]
+[ext_resource type="Texture2D" uid="uid://df2lx4qnpncd" path="res://data/screenshots/League of Legends.webp" id="29_qon1i"]
 [ext_resource type="Shader" path="res://engine/game/level.gdshader" id="31_g1ghr"]
 [ext_resource type="Shader" path="res://engine/game/level_decal.gdshader" id="32_m603r"]
 [ext_resource type="Shader" path="res://engine/game/level_flora.gdshader" id="33_rqr2r"]
@@ -45,23 +47,18 @@ background_mode = 2
 sky = SubResource("Sky_8uyej")
 tonemap_mode = 2
 adjustment_enabled = true
-adjustment_brightness = 1.16
-adjustment_contrast = 1.22
-adjustment_saturation = 0.99
+adjustment_color_correction = ExtResource("2_tb6ku")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i4nua"]
 blend_mode = 3
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_48rok"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_lofpo"]
-viewport_path = NodePath("SubViewport")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a806a"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("26_87734")
-shader_parameter/density_texture = SubResource("ViewportTexture_lofpo")
+shader_parameter/density_texture = ExtResource("29_qon1i")
 shader_parameter/min_density = 0.5
 shader_parameter/a = null
 shader_parameter/b = null
@@ -72,7 +69,7 @@ shader_parameter/d = null
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_5kqeo"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_81gdw"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Node3D" type="Node3D"]
@@ -82,7 +79,6 @@ visible = false
 quality = 0
 directional = true
 use_texture_for_bounces = false
-light_data = ExtResource("1_ucrx6")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xvl36")
@@ -122,6 +118,7 @@ mouse_filter = 1
 
 [node name="Screenshot" type="TextureRect" parent="UI"]
 visible = false
+modulate = Color(1, 1, 1, 0.25)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -647,6 +644,21 @@ texture_normal = ExtResource("20_ld22r")
 ignore_texture_size = true
 stretch_mode = 5
 
+[node name="Icon" type="Control" parent="UI/Map"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Map/Icon"]
+layout_mode = 0
+offset_left = -112.0
+offset_top = -105.0
+offset_right = 8.0
+offset_bottom = 15.0
+scale = Vector2(0.173136, 0.173136)
+texture = ExtResource("22_gvtsu")
+stretch_mode = 4
+
 [node name="Bar" type="Control" parent="UI"]
 layout_mode = 1
 anchors_preset = 1
@@ -796,6 +808,12 @@ material_override = SubResource("ShaderMaterial_a806a")
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_f4set")
 
+[node name="Camera4" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 114.801, 22.17, -140.402)
+
+[node name="Camera5" type="Node3D" parent="Camera4"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
 [node name="Unit" parent="." instance=ExtResource("27_0mdok")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.746, 2.485, -3.787)
 
@@ -805,7 +823,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 level_shader = ExtResource("31_g1ghr")
 level_decal_shader = ExtResource("32_m603r")
 level_flora_shader = ExtResource("33_rqr2r")
-viewport_texture = SubResource("ViewportTexture_5kqeo")
+viewport_texture = SubResource("ViewportTexture_81gdw")
 
 [editable path="UI/Center/SummonerSpells/Spell1"]
 [editable path="UI/Center/SummonerSpells/Spell2"]

@@ -18,3 +18,5 @@
 *.lua
 *.py
 *.pyx
+*.glsl
+*.glsl.import

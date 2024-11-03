@@ -4,6 +4,9 @@ extends Node3D
 
 const HW2GD := 1. / 70.
 
+static func get_v3(fa: FileAccess) -> Vector3:
+	return Vector3(fa.get_float(), fa.get_float(), fa.get_float())
+
 @export_group("Decals")
 @export var decals: Array[Texture2D] = []
 @export var show_decals := true:
@@ -304,3 +307,42 @@ func _process(delta: float) -> void:
 		material.set_shader_parameter('b', viewport.B)
 		material.set_shader_parameter('c', viewport.C)
 		material.set_shader_parameter('d', viewport.D)
+
+@export_global_dir var scene_dir: String
+var points_root: Node3D
+@export_tool_button("Import Points") var import_scene_obj_pos := func() -> void:
+	points_root = $Points
+	if points_root == null:
+		points_root = Node3D.new()
+		add_child(points_root)
+		points_root.owner = self
+		points_root.name = "Points"
+	else:
+		for child in points_root.get_children():
+			points_root.remove_child(child)
+
+	var da := DirAccess.open(scene_dir)
+	var level_size := spawn_point_from_file("__LevelSize_.SCB")
+	for fname in da.get_files():
+		if !fname.to_lower().ends_with(".scb"): continue
+		var obj := spawn_point_from_file(fname)
+		obj.global_position -= Vector3(1, 0, 1) * level_size.global_position
+
+func spawn_point_from_file(fname: String) -> Node3D:
+	var fa := FileAccess.open(scene_dir.path_join(fname), FileAccess.READ)
+	var magic := fa.get_buffer(8).get_string_from_utf8()
+	var major_ver := fa.get_16()
+	var minor_ver := fa.get_16()
+	var obj_name := fa.get_buffer(128).get_string_from_utf8()
+	var n_verts := fa.get_32()
+	var n_faces := fa.get_32()
+	var unk := fa.get_32()
+	var center := get_v3(fa)
+
+	var obj := MeshInstance3D.new()
+	obj.mesh = SphereMesh.new()
+	points_root.add_child(obj)
+	obj.owner = self
+	obj.name = obj_name
+	obj.global_position = center * HW2GD
+	return obj

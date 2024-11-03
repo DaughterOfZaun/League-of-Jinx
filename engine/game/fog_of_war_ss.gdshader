@@ -1,9 +1,9 @@
 shader_type spatial;
-render_mode unshaded, fog_disabled;
+render_mode blend_mix, unshaded, fog_disabled;
 
 uniform sampler2D screen_texture : source_color, hint_screen_texture;
-uniform sampler2D depth_texture : source_color, hint_depth_texture;
-uniform sampler2D density_texture: hint_default_white;
+//uniform sampler2D depth_texture : source_color, hint_depth_texture;
+uniform sampler2D density_texture: source_color, hint_default_white;
 uniform float min_density;
 uniform vec3 a;
 uniform vec3 b;
@@ -15,8 +15,9 @@ void vertex() {
 }
 
 void fragment() {
-	vec4 screen = texture(screen_texture, SCREEN_UV);
+	vec4 screen = textureLod(screen_texture, SCREEN_UV, 0);
 
+	/*
 	float depth_raw = texture(depth_texture, SCREEN_UV).x;
 	vec3 ndc = vec3(SCREEN_UV * 2.0 - 1.0, depth_raw);
 	vec4 world = INV_VIEW_MATRIX * INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
@@ -27,4 +28,11 @@ void fragment() {
 	);
 	float density = max(min_density, texture(density_texture, density_uv).r);
 	ALBEDO.rgb = screen.rgb * density;
+	*/
+	vec2 screen_texture_size = vec2(textureSize(screen_texture, 0));
+	vec2 density_texture_size = vec2(textureSize(density_texture, 0));
+	vec2 scale = screen_texture_size / density_texture_size;
+	vec2 offset = abs(screen_texture_size - density_texture_size) * 0.5;
+	ALBEDO.rgb = textureLod(density_texture, SCREEN_UV *  scale + (1.0 - scale) * 0.5, 0).rgb;
+	//ALPHA = 0.25;
 }
