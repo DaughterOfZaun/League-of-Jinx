@@ -221,7 +221,6 @@
 decals = Array[Texture2D]([ExtResource("3_20fo5"), ExtResource("4_3cb6j"), ExtResource("5_1clq0"), ExtResource("6_e8k08"), ExtResource("7_20i4t"), ExtResource("8_7lkl2"), ExtResource("9_3kakp"), ExtResource("10_3kkuq"), ExtResource("11_22k5d"), ExtResource("12_p7fmb"), ExtResource("13_c70x8"), ExtResource("14_8mtv5"), ExtResource("15_jt6yn"), ExtResource("16_6qnun"), ExtResource("17_tqjfx"), ExtResource("18_ctaiw"), ExtResource("19_le0xq"), ExtResource("20_ti5lw"), ExtResource("21_vtx0i"), ExtResource("22_4s2lo")])
 imported = ExtResource("23_l7l4w")
 import_path = "res://data/levels/1/AIPath.aimesh"
-scene_dir = ""
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." index="0"]
 navigation_mesh = ExtResource("23_l7l4w")

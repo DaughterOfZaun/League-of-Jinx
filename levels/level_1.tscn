@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=46 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
 [ext_resource type="Script" path="res://engine/game/subviewport.gd" id="2_kfdne"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cyle4h1k1iu36" path="res://data/ui/center/center.png" id="7_jdyie"]
 [ext_resource type="PackedScene" uid="uid://c75a7ire7fgcd" path="res://engine/game/ui/bar.tscn" id="8_nvk2l"]
 [ext_resource type="Texture2D" uid="uid://b0vfkfms8norl" path="res://data/ui/bars/blue.webp" id="9_y6h7o"]
-[ext_resource type="Texture2D" uid="uid://cc1iubdmpd1kv" path="res://data/characters/Ahri/Ahri_Square.webp" id="10_s0kdc"]
+[ext_resource type="Texture2D" uid="uid://cc1iubdmpd1kv" path="res://data/characters/Ahri/Icons/Ahri_Square.webp" id="10_s0kdc"]
 [ext_resource type="Texture2D" uid="uid://11hmhsrqbij1" path="res://data/ui/bars/orange.png" id="11_k6t63"]
 [ext_resource type="Texture2D" uid="uid://d4acgjwdw05ud" path="res://data/ui/left/left.png" id="12_xipey"]
 [ext_resource type="Texture2D" uid="uid://b87xf8ukvo7u" path="res://data/ui/left/bag.png" id="13_8j3ik"]
@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://kq14qpdrkyqt" path="res://data/ui/map/warn.png" id="19_m14a1"]
 [ext_resource type="Texture2D" uid="uid://bi1sku2iuxptd" path="res://data/ui/map/error.png" id="20_ld22r"]
 [ext_resource type="Texture2D" uid="uid://cykyr8md63s2b" path="res://data/ui/bar/bar.png" id="21_vouoj"]
-[ext_resource type="Texture2D" uid="uid://cjgdixmn1dikj" path="res://data/characters/Ahri/Ahri_Circle.webp" id="22_gvtsu"]
+[ext_resource type="Texture2D" uid="uid://cjgdixmn1dikj" path="res://data/characters/Ahri/Icons/Ahri_Circle.webp" id="22_gvtsu"]
 [ext_resource type="Texture2D" uid="uid://bducoj0su1fog" path="res://data/ui/bar/kill.png" id="22_su7bi"]
 [ext_resource type="Texture2D" uid="uid://m6ya87asjxl2" path="res://data/ui/bar/death.png" id="23_nc8fv"]
 [ext_resource type="Texture2D" uid="uid://d3vyc5egu2euk" path="res://data/ui/bar/assist.png" id="24_oeos3"]
@@ -33,6 +33,9 @@
 [ext_resource type="Shader" path="res://engine/game/level.gdshader" id="31_g1ghr"]
 [ext_resource type="Shader" path="res://engine/game/level_decal.gdshader" id="32_m603r"]
 [ext_resource type="Shader" path="res://engine/game/level_flora.gdshader" id="33_rqr2r"]
+[ext_resource type="Script" path="res://data/levels/1/scripts/LevelScript.gd" id="35_3l20p"]
+[ext_resource type="PackedScene" uid="uid://drv075h83p6aq" path="res://data/characters/OrderTurretNormal/unit.tscn" id="35_x4meo"]
+[ext_resource type="Script" path="res://engine/level/Turret.gd" id="36_0p3ml"]
 [ext_resource type="PackedScene" uid="uid://7q5sw0yww3oo" path="res://data/levels/1/map_inherited.tscn" id="71_7skrr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8hxwk"]
@@ -69,7 +72,7 @@ shader_parameter/d = null
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_81gdw"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_gtkfc"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Node3D" type="Node3D"]
@@ -823,7 +826,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 level_shader = ExtResource("31_g1ghr")
 level_decal_shader = ExtResource("32_m603r")
 level_flora_shader = ExtResource("33_rqr2r")
-viewport_texture = SubResource("ViewportTexture_81gdw")
+viewport_texture = SubResource("ViewportTexture_gtkfc")
+
+[node name="Turret_T1_R_03" type="StaticBody3D" parent="Map" node_paths=PackedStringArray("data") instance=ExtResource("35_x4meo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144.436, 0.591119, 11.6)
+script = ExtResource("36_0p3ml")
+pos = 3
+team = 100
+data = NodePath("Data")
+
+[node name="Turret_T1_C_05" type="StaticBody3D" parent="Map" node_paths=PackedStringArray("data") instance=ExtResource("35_x4meo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 77.8282, 0.630579, 88.344)
+script = ExtResource("36_0p3ml")
+lane = 1
+pos = 3
+team = 100
+data = NodePath("Data")
+
+[node name="Turret_T1_L_03" type="StaticBody3D" parent="Map" node_paths=PackedStringArray("data") instance=ExtResource("35_x4meo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.26559, 0.383416, 146.18)
+script = ExtResource("36_0p3ml")
+lane = 2
+pos = 3
+team = 100
+data = NodePath("Data")
+
+[node name="Level" type="Node" parent="."]
+script = ExtResource("35_3l20p")
 
 [editable path="UI/Center/SummonerSpells/Spell1"]
 [editable path="UI/Center/SummonerSpells/Spell2"]

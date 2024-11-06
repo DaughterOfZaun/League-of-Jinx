@@ -64,6 +64,7 @@ func _unhandled_input(unknown_event: InputEvent) -> void:
 		on_ground_hovered()
 
 func _ready() -> void:
+	if Engine.is_editor_hint(): return
 	Input.use_accumulated_input = false
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 

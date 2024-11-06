@@ -12,6 +12,7 @@ const GD_3D_to_2D := (70. / 50.) * (512. / 294.)
 @onready var host: Node3D = get_parent()
 @onready var sub_viewport: SubViewport = get_tree().current_scene.get_node("%SubViewport")
 func _ready() -> void:
+	if Engine.is_editor_hint(): return
 	switch_parent.call_deferred()
 
 func switch_parent() -> void:

@@ -2,6 +2,7 @@ class_name AIIdleState
 extends AIState
 
 func _ready() -> void:
+	if Engine.is_editor_hint(): return
 	await ai.ready
 	ai.animation_tree.animation_finished.connect(on_animation_finished)
 

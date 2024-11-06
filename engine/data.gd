@@ -181,7 +181,7 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 	pass
 
 func ini_load(import_path: String) -> Dictionary[String, Array]:
-	var result := {}
+	var result: Dictionary[String, Array] = {}
 	var section: Array[Array]
 	var section_name: String
 	var regex_section := RegEx.create_from_string(r'^\[(.*?)\]$')

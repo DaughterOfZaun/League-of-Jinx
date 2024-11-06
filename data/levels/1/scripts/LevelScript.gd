@@ -1,3 +1,4 @@
+@tool
 #class_name Map1_LevelScript
 extends Level
 
@@ -448,7 +449,7 @@ func apply_barracks_respawn_reductions(team: int, barrack_lane: int) -> void:
 		#lua_barrack.l[ARCHER].gold_given = lua_barrack.l[MELEE].gold_given + g[ARCHER].gold_inhibitor
 		#lua_barrack.l[CASTER].gold_given = lua_barrack.l[MELEE].gold_given + g[CASTER].exp_inhibitor
 		#lua_barrack.l[SUPER].gold_given = lua_barrack.l[MELEE].gold_given + g[SUPER].exp_inhibitor
-	
+
 		if lane == barrack_lane:
 			total_number_of_barracks[opposing_team] += 1
 			lua_barrack.will_spawn_super_minion = 0
@@ -481,7 +482,7 @@ func handle_destroyed_object(unk_obj: Unit) -> void:
 	if unk_obj is HQ:
 		var obj := unk_obj as HQ
 		preload("res://data/scripts/EndOfGame.gd").new().end_of_game_ceremony(opposite_team(obj.team), obj)
-	
+
 	elif unk_obj is Dampener:
 		var obj := unk_obj as Dampener
 		var barrack := obj.linked_barrack
@@ -494,7 +495,7 @@ func handle_destroyed_object(unk_obj: Unit) -> void:
 		disactivated_counter += 1
 		var hq_turret_1 := get_turret(barrack_team, 1, Enums.Pos.HQ_TOWER_1)
 		var hq_turret_2 := get_turret(barrack_team, 1, Enums.Pos.HQ_TOWER_2)
-		
+
 		if hq_turret_1 != null:
 			hq_turret_1.status.invulnerable = false
 			hq_turret_1.status.targetable = true
@@ -517,7 +518,7 @@ func handle_destroyed_object(unk_obj: Unit) -> void:
 	elif unk_obj is Dampener:
 		var obj := unk_obj as Dampener
 		building_status[obj.team].lanes[obj.lane].barracks = false
-	
+
 	else:
 		print("Could not find linking barracks!")
 

@@ -57,6 +57,7 @@ enum State {
 var timer := Timer.new()
 signal timeout_or_canceled()
 func _ready() -> void:
+	if Engine.is_editor_hint(): return
 	timer.timeout.connect(func() -> void: timeout_or_canceled.emit())
 	add_child(timer)
 

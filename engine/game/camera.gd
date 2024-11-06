@@ -23,6 +23,7 @@ var zoom := 1.0:
 @export var locked := true
 
 func _ready() -> void:
+	if Engine.is_editor_hint(): return
 	offset_initial = self.global_position - target.global_position
 
 var move_dir := Vector3.ZERO

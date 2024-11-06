@@ -87,6 +87,7 @@ offset_top = -37.8
 offset_right = 56.52
 offset_bottom = 0.199982
 pivot_offset = Vector2(84, 38)
+mouse_filter = 2
 script = ExtResource("2_cj2j0")
 
 [node name="TextureRect" type="TextureRect" parent="Healthbar"]
@@ -174,9 +175,15 @@ can_move_ever = true
 targetable = true
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 2.0
+target_desired_distance = 0.5
+path_metadata_flags = 0
+simplify_path = true
+simplify_epsilon = 0.25
 avoidance_enabled = true
 height = 2.0
 radius = 0.54
+debug_enabled = true
 
 [node name="Data" type="Node" parent="."]
 script = ExtResource("16_genta")

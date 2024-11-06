@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cc1iubdmpd1kv"
-path="res://.godot/imported/Ahri_Square.webp-603bc612c21ec5da761a36bc53d50841.ctex"
+path="res://.godot/imported/Ahri_Square.webp-321a08f21d76a1f8bfafe0fed04f7c3b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/characters/Ahri/Ahri_Square.webp"
-dest_files=["res://.godot/imported/Ahri_Square.webp-603bc612c21ec5da761a36bc53d50841.ctex"]
+source_file="res://data/characters/Ahri/Icons/Ahri_Square.webp"
+dest_files=["res://.godot/imported/Ahri_Square.webp-321a08f21d76a1f8bfafe0fed04f7c3b.ctex"]
 
 [params]
 
