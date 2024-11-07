@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://btacpjtg4pcad"]
+
+[ext_resource type="PackedScene" uid="uid://drq8lju3ayhey" path="res://data/characters/Turrets/Back/unit.tscn" id="1_xqipj"]
+[ext_resource type="PackedScene" uid="uid://ble860t6jorve" path="res://data/characters/Turrets/Back/Chaos/Skin/RedGateTower.gltf" id="2_fi33e"]
+
+[node name="Unit" instance=ExtResource("1_xqipj")]
+
+[node name="Data" parent="." index="3"]
+champion_name = "game_character_displayname_ChaosTurretGiant"
+description = "game_character_description_ChaosTurretGiant"
+import_path = "res://data/characters/Turrets/Back/Chaos/ChaosTurretGiant.ini"
+
+[node name="SkinnedMesh" parent="." index="12" instance=ExtResource("2_fi33e")]

@@ -1,5 +1,5 @@
 #class_name Map1_CreateLevelProps
-extends Level
+extends CreateLevelProps
 
 func create_level_props() -> void:
 	create_child_turret("Turret_T1_R_03", "OrderTurretNormal", Enums.Team.ORDER, 3, 0)

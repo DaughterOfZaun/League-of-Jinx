@@ -36,6 +36,8 @@ gdscript/warnings/empty_file=0
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/window_width_override=1280
+window/size/window_height_override=720
 
 [gui]
 

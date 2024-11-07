@@ -346,3 +346,8 @@ func spawn_point_from_file(fname: String) -> Node3D:
 	obj.name = obj_name
 	obj.global_position = center * HW2GD
 	return obj
+
+@export var create_level_props_script: GDScript
+@export_tool_button("Create Level Props")
+var post_level_load := func() -> void:
+	(create_level_props_script.new() as CreateLevelProps).create_level_props()

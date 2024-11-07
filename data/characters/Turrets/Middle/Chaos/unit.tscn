@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://w234i42o5d2y"]
+
+[ext_resource type="PackedScene" uid="uid://b41kdm36vb65w" path="res://data/characters/Turrets/Middle/unit.tscn" id="1_lvkq0"]
+[ext_resource type="PackedScene" uid="uid://cedp07cal14vg" path="res://data/characters/Turrets/Front/Chaos/Skin/RedLaneTower.gltf" id="2_7bgyw"]
+
+[node name="Unit" instance=ExtResource("1_lvkq0")]
+
+[node name="SkinnedMesh" parent="." index="12" instance=ExtResource("2_7bgyw")]

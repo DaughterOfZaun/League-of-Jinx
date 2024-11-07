@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://biov8lq32ueqn"]
+
+[ext_resource type="PackedScene" uid="uid://drv075h83p6aq" path="res://data/characters/Turrets/unit.tscn" id="1_fp77f"]
+[ext_resource type="PackedScene" uid="uid://beowawptkuocf" path="res://data/characters/Turrets/Front/Order/Skin/BlueLaneTower.gltf" id="2_x3ija"]
+
+[node name="Unit" instance=ExtResource("1_fp77f")]
+
+[node name="SkinnedMesh" parent="." index="11" instance=ExtResource("2_x3ija")]

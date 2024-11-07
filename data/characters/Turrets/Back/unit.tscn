@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://drq8lju3ayhey"]
+
+[ext_resource type="PackedScene" uid="uid://drv075h83p6aq" path="res://data/characters/Turrets/unit.tscn" id="1_qppk8"]
+[ext_resource type="Script" path="res://engine/spells/spell_manager.gd" id="2_1ep3v"]
+[ext_resource type="Script" path="res://engine/spells/attacks/basic_attack.gd" id="3_n1qgq"]
+[ext_resource type="Script" path="res://engine/spells/attacks/basic_attack_data.gd" id="4_xctnc"]
+
+[node name="Unit" instance=ExtResource("1_qppk8")]
+
+[node name="Data" parent="." index="3"]
+champion_name = "game_character_displayname_OrderTurretDragon"
+description = "game_character_description_OrderTurretDragon"
+attack_range = 750.0
+acquisition_range = 750.0
+gameplay_collision_radius = 88.4
+pathfinding_collision_radius = 88.4
+selection_radius = 130.0
+selection_height = 200.0
+armor = 47.5
+armor_material = 1
+spell_block = 75.0
+attack_speed_per_level = 2.125
+base_damage = 210.0
+crit_damage_bonus = 2.0
+base_hp = 1300.0
+global_exp_given_on_death = 70.0
+global_gold_given_on_death = 150.0
+import_path = "res://data/characters/Turrets/Back/Order/OrderTurretDragon.ini"
+
+[node name="Spells" type="Node" parent="." index="4" node_paths=PackedStringArray("basic")]
+script = ExtResource("2_1ep3v")
+basic = [NodePath("BasicAttack1")]
+
+[node name="BasicAttack1" type="Node" parent="Spells" index="0" node_paths=PackedStringArray("data")]
+script = ExtResource("3_n1qgq")
+data = NodePath("Data")
+
+[node name="Data" type="Node" parent="Spells/BasicAttack1" index="0"]
+script = ExtResource("4_xctnc")
+spell_name = "BaseSpell"
+delay_cast_offset_percent = -0.161
+delay_total_time_percent = -0.25

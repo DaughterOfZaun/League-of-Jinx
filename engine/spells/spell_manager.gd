@@ -75,7 +75,7 @@ func get_extra(i: int, name: String = "BaseSpell") -> Spell:
 func get_basic(i: int, name: String = "BaseSpell") -> Spell:
 	var spell: Spell = array_get(basic, i)
 	if !spell:
-		spell = append_spell(BasicAttack.new(), BasicAttackData.new(), "A" + ("A" if i == 0 else str(i)))
+		spell = append_spell(BasicAttack.new(), BasicAttackData.new(), "BasicAttack" + str(i + 1))
 		array_set(basic, i, spell)
 	assign_name(spell, name)
 	return spell
@@ -83,7 +83,7 @@ func get_basic(i: int, name: String = "BaseSpell") -> Spell:
 func get_crit(name: String = "BaseSpell") -> Spell:
 	var spell := crit
 	if !spell:
-		spell = append_spell(CritAttack.new(), CritAttackData.new(), "AC")
+		spell = append_spell(CritAttack.new(), CritAttackData.new(), "CritAttack")
 		crit = spell
 	assign_name(spell, name)
 	return spell

@@ -1,4 +1,3 @@
-@tool
 #class_name Map1_LevelScript
 extends Level
 
