@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmlrymxrf1wfd"
-path="res://.godot/imported/2d_point_light.webp-9ad4e355c160c2c9322e1cc809392f5f.ctex"
+path="res://.godot/imported/2d_point_light.webp-2f24d48635053fbadda17542d9815830.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://engine/game/2d_point_light.webp"
-dest_files=["res://.godot/imported/2d_point_light.webp-9ad4e355c160c2c9322e1cc809392f5f.ctex"]
+source_file="res://engine/game/lights/2d_point_light.webp"
+dest_files=["res://.godot/imported/2d_point_light.webp-2f24d48635053fbadda17542d9815830.ctex"]
 
 [params]
 

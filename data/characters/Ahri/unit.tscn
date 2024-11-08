@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://engine/game/ui/meter.gd" id="5_0muf6"]
 [ext_resource type="Texture2D" uid="uid://dc3i3ljpey4sv" path="res://data/ui/healthbars/mana.webp" id="6_wycds"]
 [ext_resource type="Script" path="res://engine/game/3d_to_2d.gd" id="7_uy5bx"]
-[ext_resource type="Texture2D" uid="uid://dfox0jg1u18h2" path="res://engine/game/2d_point_light_sharp.webp" id="8_4hqlx"]
+[ext_resource type="Texture2D" uid="uid://dfox0jg1u18h2" path="res://engine/game/lights/2d_point_light_sharp.webp" id="8_4hqlx"]
 [ext_resource type="Script" path="res://data/ai/hero.gd" id="9_eaj0j"]
 [ext_resource type="Script" path="res://engine/ai/ai_idle_state.gd" id="10_ybx1b"]
 [ext_resource type="Script" path="res://engine/ai/ai_run_state.gd" id="11_e4iw2"]

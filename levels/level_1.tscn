@@ -30,9 +30,9 @@
 [ext_resource type="Shader" path="res://engine/game/fog_of_war_ss.gdshader" id="26_87734"]
 [ext_resource type="PackedScene" uid="uid://dgxp55bfpc742" path="res://data/characters/Ahri/unit.tscn" id="27_0mdok"]
 [ext_resource type="Texture2D" uid="uid://df2lx4qnpncd" path="res://data/screenshots/League of Legends.webp" id="29_qon1i"]
-[ext_resource type="Shader" path="res://engine/game/level.gdshader" id="31_g1ghr"]
-[ext_resource type="Shader" path="res://engine/game/level_decal.gdshader" id="32_m603r"]
-[ext_resource type="Shader" path="res://engine/game/level_flora.gdshader" id="33_rqr2r"]
+[ext_resource type="Shader" path="res://engine/game/level/level.gdshader" id="31_g1ghr"]
+[ext_resource type="Shader" path="res://engine/game/level/level_decal.gdshader" id="32_m603r"]
+[ext_resource type="Shader" path="res://engine/game/level/level_flora.gdshader" id="33_rqr2r"]
 [ext_resource type="Script" path="res://data/levels/1/scripts/LevelScript.gd" id="35_3l20p"]
 [ext_resource type="Script" path="res://data/levels/1/scripts/CreateLevelProps.gd" id="35_x1iow"]
 [ext_resource type="PackedScene" uid="uid://brmob4058kgjb" path="res://data/characters/Turrets/Front/Order/unit.tscn" id="36_dp7n3"]
@@ -77,7 +77,7 @@ shader_parameter/d = null
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_qldbe"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_aoqjr"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Node3D" type="Node3D"]
@@ -822,7 +822,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 level_shader = ExtResource("31_g1ghr")
 level_decal_shader = ExtResource("32_m603r")
 level_flora_shader = ExtResource("33_rqr2r")
-viewport_texture = SubResource("ViewportTexture_qldbe")
+viewport_texture = SubResource("ViewportTexture_aoqjr")
 create_level_props_script = ExtResource("35_x1iow")
 
 [node name="Turret_T1_R_03" parent="Map" instance=ExtResource("36_dp7n3")]
