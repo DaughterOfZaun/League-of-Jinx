@@ -22,9 +22,9 @@ void fragment() {
 	bool white = false;
 	for(int n = 0; n < light_n && !white; n++) {
 		vec2 l_pos = light_pos[n];
-		l_pos = (comp_mat * vec4(l_pos, 0.0, 1.0)).xy;
+		vec2 p_pos = (inverse(comp_mat) * vec4(pos, 0.0, 1.0)).xy;
 		float l_rng = light_rng[n];
-		vec2 p2l = l_pos - pos;
+		vec2 p2l = l_pos - p_pos;
 		float p2l_len = length(p2l);
 		if(p2l_len >= l_rng){
 			continue;
