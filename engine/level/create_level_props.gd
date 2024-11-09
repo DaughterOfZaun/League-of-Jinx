@@ -18,6 +18,8 @@ func create_child_turret(
 	var points := map.find_child("Points", false) #%Map/Points
 	assert(map != null && points != null)
 
+	if map.find_child(nav_point_name) != null: return
+
 	var pos_name := enum_to_str(Enums.Pos, pos).to_pascal_case()
 	if pos in [Enums.Pos.HQ_TOWER_1, Enums.Pos.HQ_TOWER_2]:
 		pos_name = "HQ"

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://buonvrdcurdhv"]
+
+[ext_resource type="PackedScene" uid="uid://crn46tpe800hl" path="res://data/characters/Turrets/Fountan/unit.tscn" id="1_peqdm"]
+[ext_resource type="PackedScene" uid="uid://bjehu3lw0n80q" path="res://data/characters/Turrets/Fountan/Order/Skin/BlueLaneTower.gltf" id="11_j71x1"]
+
+[node name="Unit" instance=ExtResource("1_peqdm")]
+
+[node name="SkinnedMesh" parent="." index="12" instance=ExtResource("11_j71x1")]

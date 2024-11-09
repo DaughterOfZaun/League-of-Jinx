@@ -104,8 +104,8 @@ signal spell_cast(spell: Spell)
 #signal update_ammo() #TODO: Specific to buff_script
 #signal update_buffs() #TODO: Specific to buff_script
 
-var direction := Vector3.FORWARD
-var direction_angle := 0.
+@onready var direction := Vector3.FORWARD #TODO:
+@onready var direction_angle := rotation.y
 func face_direction(pos: Vector3) -> void:
 	face_dir(pos - self.global_position)
 func face_dir(dir: Vector3) -> void:

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dos4v7ypu3iol"]
+
+[ext_resource type="PackedScene" uid="uid://v8x22wqxjrig" path="res://data/characters/Turrets/HQ/unit.tscn" id="1_eke5a"]
+[ext_resource type="PackedScene" uid="uid://b70w7c4rylwcq" path="res://data/characters/Turrets/HQ/Chaos/Skin/RedHqTower.gltf" id="2_78rc5"]
+
+[node name="Unit" instance=ExtResource("1_eke5a")]
+
+[node name="Data" parent="." index="3"]
+champion_name = "game_character_displayname_ChaosTurretNormal"
+description = "game_character_description_ChaosTurretNormal"
+import_path = "res://data/characters/Turrets/HQ/Chaos/ChaosTurretNormal.ini"
+
+[node name="SkinnedMesh" parent="." index="12" instance=ExtResource("2_78rc5")]
