@@ -271,7 +271,7 @@ func _ready() -> void:
 @export var level_decal_shader: Shader
 @export var level_flora_shader: Shader
 @export var viewport_texture: ViewportTexture
-@onready var viewport: SubViewportEx = $"/root/Node3D/SubViewport"
+#@onready var viewport: SubViewportEx = $"/root/Node3D/SubViewport"
 #@export var shadow_of_war_overlay_material: ShaderMaterial
 var material_cache: Dictionary[StandardMaterial3D, ShaderMaterial] = {}
 func replace_materials_at_runtime() -> void:
@@ -301,12 +301,12 @@ func replace_materials_at_runtime() -> void:
 		mesh_instance.material_override = override_material
 
 #TODO: optimize
-func _process(delta: float) -> void:
-	for material: ShaderMaterial in material_cache.values():
-		material.set_shader_parameter('a', viewport.A)
-		material.set_shader_parameter('b', viewport.B)
-		material.set_shader_parameter('c', viewport.C)
-		material.set_shader_parameter('d', viewport.D)
+#func _process(delta: float) -> void:
+	#for material: ShaderMaterial in material_cache.values():
+		#material.set_shader_parameter('a', viewport.A)
+		#material.set_shader_parameter('b', viewport.B)
+		#material.set_shader_parameter('c', viewport.C)
+		#material.set_shader_parameter('d', viewport.D)
 
 @export_global_dir var scene_dir: String
 var points_root: Node3D

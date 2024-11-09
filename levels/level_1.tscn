@@ -1,10 +1,11 @@
-[gd_scene load_steps=51 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=54 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
-[ext_resource type="Script" path="res://engine/game/subviewport.gd" id="2_kfdne"]
 [ext_resource type="CompressedTexture3D" uid="uid://cw7h14f61vo0x" path="res://LUT2.webp" id="2_tb6ku"]
+[ext_resource type="Shader" path="res://engine/game/lights/new_shader.gdshader" id="3_h7a1n"]
 [ext_resource type="PackedScene" uid="uid://0spn4csgi7k1" path="res://engine/game/ui/map.tscn" id="3_ybns6"]
 [ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.png" id="4_la1iv"]
+[ext_resource type="Script" path="res://engine/game/lights/color_rect.gd" id="4_s88ld"]
 [ext_resource type="Texture2D" uid="uid://w7g1bytpvupe" path="res://data/characters/Ahri/Passive/Ahri_SoulEater.webp" id="5_xidt6"]
 [ext_resource type="PackedScene" uid="uid://demalxnr8x6to" path="res://engine/game/ui/spell.tscn" id="6_qaxp4"]
 [ext_resource type="Texture2D" uid="uid://cyle4h1k1iu36" path="res://data/ui/center/center.png" id="7_jdyie"]
@@ -17,7 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://d01dqbfit2hpm" path="res://data/ui/left/shop_enabled.png" id="14_mnsvh"]
 [ext_resource type="Texture2D" uid="uid://ssoelbfv4vo0" path="res://data/ui/left/shop_disabled.png" id="15_j30nd"]
 [ext_resource type="Texture2D" uid="uid://xgex5ay4l6vm" path="res://data/ui/map/map.png" id="16_y4u57"]
-[ext_resource type="Script" path="res://engine/game/borrow_world.gd" id="17_wk3gk"]
 [ext_resource type="Texture2D" uid="uid://dirw63mnupf18" path="res://data/ui/map/frame.png" id="18_gs7kr"]
 [ext_resource type="Texture2D" uid="uid://kq14qpdrkyqt" path="res://data/ui/map/warn.png" id="19_m14a1"]
 [ext_resource type="Texture2D" uid="uid://bi1sku2iuxptd" path="res://data/ui/map/error.png" id="20_ld22r"]
@@ -57,10 +57,25 @@ tonemap_mode = 2
 adjustment_enabled = true
 adjustment_color_correction = ExtResource("2_tb6ku")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_om28v"]
+shader = ExtResource("3_h7a1n")
+shader_parameter/light_n = 0
+shader_parameter/light_pos = null
+shader_parameter/light_rng = null
+
+[sub_resource type="QuadMesh" id="QuadMesh_608jq"]
+flip_faces = true
+size = Vector2(2, 2)
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i4nua"]
 blend_mode = 3
+light_mode = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_q5s0b"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_48rok"]
+light_mode = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a806a"]
 resource_local_to_scene = true
@@ -77,7 +92,7 @@ shader_parameter/d = null
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_aoqjr"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_xv8d5"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Node3D" type="Node3D"]
@@ -105,11 +120,21 @@ main_hero = NodePath("../Unit")
 unique_name_in_owner = true
 disable_3d = true
 handle_input_locally = false
-size = Vector2i(1270, 720)
-script = ExtResource("2_kfdne")
+use_taa = true
+sdf_oversize = 2
+sdf_scale = 0
+size = Vector2i(640, 640)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="SubViewport"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_om28v")
+position = Vector2(256, -256)
+mesh = SubResource("QuadMesh_608jq")
+script = ExtResource("4_s88ld")
 
 [node name="Camera2D" type="Camera2D" parent="SubViewport"]
 unique_name_in_owner = true
+position = Vector2(256, -256)
 
 [node name="Node2D" parent="SubViewport" instance=ExtResource("3_ybns6")]
 
@@ -545,7 +570,7 @@ pivot_offset = Vector2(119, 119)
 texture = ExtResource("16_y4u57")
 expand_mode = 1
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/Map/Control/MapTexture1"]
+[node name="SubViewportTexture" type="TextureRect" parent="UI/Map/Control/MapTexture1"]
 material = SubResource("CanvasItemMaterial_i4nua")
 layout_mode = 1
 anchors_preset = -1
@@ -560,20 +585,8 @@ offset_bottom = 12.667
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(120, 120)
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="UI/Map/Control/MapTexture1/SubViewportContainer" node_paths=PackedStringArray("world_owner")]
-disable_3d = true
-handle_input_locally = false
-size = Vector2i(240, 240)
-size_2d_override = Vector2i(640, 640)
-size_2d_override_stretch = true
-render_target_update_mode = 4
-script = ExtResource("17_wk3gk")
-world_owner = NodePath("../../../../../../SubViewport")
-
-[node name="Camera2D" type="Camera2D" parent="UI/Map/Control/MapTexture1/SubViewportContainer/SubViewport"]
-position = Vector2(256, -256)
+texture = SubResource("ViewportTexture_q5s0b")
+expand_mode = 1
 
 [node name="MapTexture2" type="TextureRect" parent="UI/Map/Control"]
 modulate = Color(1, 1, 1, 0.5)
@@ -822,7 +835,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 level_shader = ExtResource("31_g1ghr")
 level_decal_shader = ExtResource("32_m603r")
 level_flora_shader = ExtResource("33_rqr2r")
-viewport_texture = SubResource("ViewportTexture_aoqjr")
+viewport_texture = SubResource("ViewportTexture_xv8d5")
 create_level_props_script = ExtResource("35_x1iow")
 
 [node name="Turret_T1_R_03" parent="Map" instance=ExtResource("36_dp7n3")]

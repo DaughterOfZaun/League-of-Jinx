@@ -195,221 +195,208 @@ polygon = PackedVector2Array(468.178, -389.323, 467.304, -388.449, 466.43, -385.
 script = ExtResource("1_pxe6t")
 import_path = "res://data/levels/1/AIPath.aimesh_ngrid"
 
-[node name="Polygon2D2" type="Polygon2D" parent="."]
-offset = Vector2(256, -256)
-polygon = PackedVector2Array(512, 512, 512, -512, -512, -512, -512, 512)
-
-[node name="Polygon2D1" type="Polygon2D" parent="."]
-offset = Vector2(256, -256)
-polygon = PackedVector2Array(256, 256, 256, -256, -256, -256, -256, 256)
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0, 0, 0, 1)
-
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_r2b8l")
 
-[node name="LightOccluder2D2" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_7rbxr")
 
-[node name="LightOccluder2D3" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_ldy6t")
 
-[node name="LightOccluder2D4" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_aiugu")
 
-[node name="LightOccluder2D5" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D5" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_3f1la")
 
-[node name="LightOccluder2D6" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D6" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_0e5kb")
 
-[node name="LightOccluder2D7" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D7" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_hav0s")
 
-[node name="LightOccluder2D8" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D8" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_7ugur")
 
-[node name="LightOccluder2D9" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D9" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_q4gey")
 
-[node name="LightOccluder2D10" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D10" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_t08lf")
 
-[node name="LightOccluder2D11" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D11" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_kfp4q")
 
-[node name="LightOccluder2D12" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D12" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_t36xq")
 
-[node name="LightOccluder2D13" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D13" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_nx8f4")
 
-[node name="LightOccluder2D14" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D14" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_i4feh")
 
-[node name="LightOccluder2D15" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D15" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_t20q5")
 
-[node name="LightOccluder2D16" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D16" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_p2uu4")
 
-[node name="LightOccluder2D17" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D17" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_j7kgg")
 
-[node name="LightOccluder2D18" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D18" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_p1yfh")
 
-[node name="LightOccluder2D19" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D19" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_gvb8w")
 
-[node name="LightOccluder2D20" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D20" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_12mwp")
 
-[node name="LightOccluder2D21" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D21" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_6unnm")
 
-[node name="LightOccluder2D22" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D22" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_ixccl")
 
-[node name="LightOccluder2D23" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D23" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_b4jgd")
 
-[node name="LightOccluder2D24" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D24" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_fguo3")
 
-[node name="LightOccluder2D25" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D25" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_u7v8l")
 
-[node name="LightOccluder2D26" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D26" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_5lxx0")
 
-[node name="LightOccluder2D27" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D27" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_i13wq")
 
-[node name="LightOccluder2D28" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D28" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_kpvgw")
 
-[node name="LightOccluder2D29" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D29" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_q1fm4")
 
-[node name="LightOccluder2D30" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D30" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_r8ag8")
 
-[node name="LightOccluder2D31" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D31" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_bv4fl")
 
-[node name="LightOccluder2D32" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D32" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_lj6t1")
 
-[node name="LightOccluder2D33" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D33" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_q0twf")
 
-[node name="LightOccluder2D34" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D34" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_6nvg1")
 
-[node name="LightOccluder2D35" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D35" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_nnou3")
 
-[node name="LightOccluder2D36" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D36" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_0sndv")
 
-[node name="LightOccluder2D37" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D37" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_nbvm1")
 
-[node name="LightOccluder2D38" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D38" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_ukpwp")
 
-[node name="LightOccluder2D39" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D39" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_wbwxv")
 
-[node name="LightOccluder2D40" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D40" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_0sp3w")
 
-[node name="LightOccluder2D41" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D41" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_q16jc")
 
-[node name="LightOccluder2D42" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D42" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_cwps8")
 
-[node name="LightOccluder2D43" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D43" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_x0r0h")
 
-[node name="LightOccluder2D44" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D44" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_35lac")
 
-[node name="LightOccluder2D45" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D45" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_e3wos")
 
-[node name="LightOccluder2D46" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D46" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_5tkrd")
 
-[node name="LightOccluder2D47" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D47" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_ebxy8")
 
-[node name="LightOccluder2D48" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D48" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_brhp0")
 
-[node name="LightOccluder2D49" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D49" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_r618e")
 
-[node name="LightOccluder2D50" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D50" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_14xis")
 
-[node name="LightOccluder2D51" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D51" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_s8nt6")
 
-[node name="LightOccluder2D52" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D52" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_qvatt")
 
-[node name="LightOccluder2D53" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D53" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_2oxx7")
 
-[node name="LightOccluder2D54" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D54" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_57ehx")
 
-[node name="LightOccluder2D55" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D55" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_75xkd")
 
-[node name="LightOccluder2D56" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D56" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_3tkgg")
 
-[node name="LightOccluder2D57" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D57" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_vhu6l")
 
-[node name="LightOccluder2D58" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D58" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_rtr6t")
 
-[node name="LightOccluder2D59" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D59" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_xba38")
 
-[node name="LightOccluder2D60" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D60" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_o7i7c")
 
-[node name="LightOccluder2D61" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D61" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_wgl1s")
 
-[node name="LightOccluder2D62" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D62" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_u5fgx")
 
-[node name="LightOccluder2D63" type="LightOccluder2D" parent="Node2D"]
+[node name="LightOccluder2D63" type="LightOccluder2D" parent="."]
 visible = false
 occluder = SubResource("OccluderPolygon2D_4sxbn")

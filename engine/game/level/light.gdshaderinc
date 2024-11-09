@@ -24,7 +24,7 @@ vec3 F0(float metallic, float specular, vec3 albedo) {
 float SchlickFresnel(float u) {
 	float m = 1.0 - u;
 	float m2 = m * m;
-	return m2 * m2 * m; 
+	return m2 * m2 * m;
 }
 
 void light_compute(vec3 N, vec3 L, vec3 V, float A, vec3 light_color, bool is_directional, float attenuation, vec3 f0, uint orms, float specular_amount, vec3 albedo, inout float alpha,
@@ -54,7 +54,7 @@ void light_compute(vec3 N, vec3 L, vec3 V, float A, vec3 light_color, bool is_di
 	float metallic = orms_unpacked.z;
 
 #if defined(LIGHT_CODE_USED)
-	
+
 
 	mat4 inv_view_matrix = scene_data_block.data.inv_view_matrix;
 
@@ -81,7 +81,7 @@ void light_compute(vec3 N, vec3 L, vec3 V, float A, vec3 light_color, bool is_di
 #else
 
 	float NdotL = min(A + dot(N, L), 1.0);
-	float cNdotL = max(NdotL, 0.0); 
+	float cNdotL = max(NdotL, 0.0);
 	float NdotV = dot(N, V);
 	float cNdotV = max(NdotV, 1e-4);
 
@@ -98,11 +98,11 @@ void light_compute(vec3 N, vec3 L, vec3 V, float A, vec3 light_color, bool is_di
 #endif
 
 	if (metallic < 1.0) {
-		float diffuse_brdf_NL; 
+		float diffuse_brdf_NL;
 
 #if defined(DIFFUSE_LAMBERT_WRAP)
-		
-		
+
+
 		diffuse_brdf_NL = max(0.0, (NdotL + roughness) / ((1.0 + roughness) * (1.0 + roughness))) * (1.0 / M_PI);
 #elif defined(DIFFUSE_TOON)
 
@@ -127,7 +127,7 @@ void light_compute(vec3 N, vec3 L, vec3 V, float A, vec3 light_color, bool is_di
 			*/
 		}
 #else
-		
+
 		diffuse_brdf_NL = cNdotL * (1.0 / M_PI);
 #endif
 
@@ -138,7 +138,7 @@ void light_compute(vec3 N, vec3 L, vec3 V, float A, vec3 light_color, bool is_di
 #endif
 
 #if defined(LIGHT_RIM_USED)
-		
+
 		float rim_light = pow(max(1e-4, 1.0 - cNdotV), max(0.0, (1.0 - roughness) * 16.0));
 		diffuse_light += rim_light * rim * mix(vec3(1.0), albedo, rim_tint) * light_color;
 #endif
@@ -168,12 +168,12 @@ void light_compute(vec3 N, vec3 L, vec3 V, float A, vec3 light_color, bool is_di
 		}
 #else
 
-#endif 
+#endif
 	}
 
-	if (roughness > 0.0) { 
+	if (roughness > 0.0) {
 
-		
+
 
 #if defined(SPECULAR_TOON)
 
@@ -182,13 +182,13 @@ void light_compute(vec3 N, vec3 L, vec3 V, float A, vec3 light_color, bool is_di
 		float mid = 1.0 - roughness;
 		mid *= mid;
 		float intensity = smoothstep(mid - roughness * 0.5, mid + roughness * 0.5, RdotV) * mid;
-		diffuse_light += light_color * intensity * attenuation * specular_amount; 
+		diffuse_light += light_color * intensity * attenuation * specular_amount;
 
 #elif defined(SPECULAR_DISABLED)
-		
+
 
 #elif defined(SPECULAR_SCHLICK_GGX)
-		
+
 		float alpha_ggx = roughness * roughness;
 #if defined(LIGHT_ANISOTROPY_USED)
 
@@ -199,14 +199,14 @@ void light_compute(vec3 N, vec3 L, vec3 V, float A, vec3 light_color, bool is_di
 		float YdotH = dot(B, H);
 		float D = D_GGX_anisotropic(cNdotH, ax, ay, XdotH, YdotH);
 		float G = V_GGX_anisotropic(ax, ay, dot(T, V), dot(T, L), dot(B, V), dot(B, L), cNdotV, cNdotL);
-#else 
+#else
 		float D = D_GGX(cNdotH, alpha_ggx);
 		float G = V_GGX(cNdotL, cNdotV, alpha_ggx);
-#endif 
-	   
+#endif
+
 		float cLdotH5 = SchlickFresnel(cLdotH);
-		
-		
+
+
 		float f90 = clamp(dot(f0, vec3(50.0 * 0.33)), metallic, 1.0);
 		vec3 F = f0 + (f90 - f0) * cLdotH5;
 
@@ -216,7 +216,7 @@ void light_compute(vec3 N, vec3 L, vec3 V, float A, vec3 light_color, bool is_di
 #endif
 
 #if defined(LIGHT_CLEARCOAT_USED)
-		
+
 		float ccNdotL = max(min(A + dot(vertex_normal, L), 1.0), 0.0);
 		float ccNdotH = clamp(A + dot(vertex_normal, H), 0.0, 1.0);
 		float ccNdotV = max(dot(vertex_normal, V), 1e-4);
@@ -230,9 +230,9 @@ void light_compute(vec3 N, vec3 L, vec3 V, float A, vec3 light_color, bool is_di
 		float clearcoat_specular_brdf_NL = clearcoat * Gr * Fr * Dr * cNdotL;
 
 		specular_light += clearcoat_specular_brdf_NL * light_color * attenuation * specular_amount;
-		
-		
-#endif 
+
+
+#endif
 	}
 
 #ifdef USE_SHADOW_TO_OPACITY

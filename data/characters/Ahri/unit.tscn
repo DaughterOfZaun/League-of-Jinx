@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dgxp55bfpc742"]
+[gd_scene load_steps=53 format=3 uid="uid://dgxp55bfpc742"]
 
 [ext_resource type="Script" path="res://engine/unit/unit.gd" id="1_r3toj"]
 [ext_resource type="Script" path="res://engine/game/healthbar.gd" id="2_cj2j0"]
@@ -6,8 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c610vhtcdjdr7" path="res://data/ui/healthbars/health.webp" id="4_jjcjx"]
 [ext_resource type="Script" path="res://engine/game/ui/meter.gd" id="5_0muf6"]
 [ext_resource type="Texture2D" uid="uid://dc3i3ljpey4sv" path="res://data/ui/healthbars/mana.webp" id="6_wycds"]
-[ext_resource type="Script" path="res://engine/game/3d_to_2d.gd" id="7_uy5bx"]
-[ext_resource type="Texture2D" uid="uid://dfox0jg1u18h2" path="res://engine/game/lights/2d_point_light_sharp.webp" id="8_4hqlx"]
+[ext_resource type="Script" path="res://engine/game/lights/light_2d.gd" id="8_isf2m"]
 [ext_resource type="Script" path="res://data/ai/hero.gd" id="9_eaj0j"]
 [ext_resource type="Script" path="res://engine/ai/ai_idle_state.gd" id="10_ybx1b"]
 [ext_resource type="Script" path="res://engine/ai/ai_run_state.gd" id="11_e4iw2"]
@@ -76,6 +75,12 @@ radius = 7.5
 script = ExtResource("1_r3toj")
 data = NodePath("Data")
 
+[node name="Icon" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Healthbar" type="Control" parent="."]
 layout_mode = 3
 anchor_left = 0.516
@@ -139,13 +144,8 @@ nine_patch_stretch = true
 texture_progress = ExtResource("6_wycds")
 tint_progress = Color(0.34902, 0.513726, 0.901961, 1)
 
-[node name="Node2D" type="Node2D" parent="."]
-script = ExtResource("7_uy5bx")
-
-[node name="PointLight2D" type="PointLight2D" parent="Node2D"]
-shadow_enabled = true
-shadow_color = Color(0, 0, 0, 1)
-texture = ExtResource("8_4hqlx")
+[node name="PointLight2D" type="Node" parent="."]
+script = ExtResource("8_isf2m")
 
 [node name="AI" type="Node" parent="."]
 script = ExtResource("9_eaj0j")
@@ -183,7 +183,6 @@ simplify_epsilon = 0.25
 avoidance_enabled = true
 height = 2.0
 radius = 0.54
-debug_enabled = true
 
 [node name="Data" type="Node" parent="."]
 script = ExtResource("16_genta")

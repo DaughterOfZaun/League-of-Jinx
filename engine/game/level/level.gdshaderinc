@@ -36,11 +36,12 @@ void vertex() {
 	world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 }
 
-uniform sampler2D density_texture: hint_default_white;
-uniform vec3 a;
-uniform vec3 b;
-uniform vec3 c;
-uniform vec3 d;
+uniform sampler2D density_texture: hint_default_white, filter_linear_mipmap, repeat_disable;
+uniform vec2 density_texture_offset = vec2(64, -64);
+//uniform vec3 a;
+//uniform vec3 b;
+//uniform vec3 c;
+//uniform vec3 d;
 
 void fragment() {
 	vec2 base_uv = UV;
@@ -72,6 +73,7 @@ void fragment() {
 #define DIFFUSE_BURLEY
 #define SPECULAR_SCHLICK_GGX
 #include "light.gdshaderinc"
+#include "blur.gdshaderinc"
 
 void light() {
 	float alpha;
@@ -82,13 +84,30 @@ void light() {
 	vec3 f0 = F0(metallic, specular, ALBEDO);
 	uint orms = packUnorm4x8(vec4(ao, roughness, metallic, specular));
 	light_compute(NORMAL, LIGHT, VIEW, size_A, LIGHT_COLOR, LIGHT_IS_DIRECTIONAL, ATTENUATION, f0, orms, SPECULAR_AMOUNT, ALBEDO, alpha, diffuse_light, specular_light);
-
+	/*
 	vec2 density_uv = vec2(
 		(world_position.x - a.x) / (b.x - a.x),
 		(world_position.z - b.z) / (c.z - b.z)
 	);
-	vec4 density_tex = texture(density_texture, density_uv);
-	float density = density_tex.r;
+	*/
+	vec2 off = 1.0 / vec2(textureSize(density_texture, 0));
+	const float GD_3D_to_2D = (70. / 50.) * (512. / 294.);
+	vec2 density_uv = (world_position.xz * GD_3D_to_2D + density_texture_offset) / vec2(textureSize(density_texture, 0)) + vec2(0, 1);
+	//float density = textureLod(density_texture, density_uv, 0).r;
+	float density = blur(density_texture, density_uv, off).r;
+	/*
+	vec2 at = density_uv;
+	float density = (
+		texture(density_texture, at + vec2(-off.x, -off.y)) +
+		texture(density_texture, at + vec2(off.x, -off.y)) +
+		texture(density_texture, at + vec2(-off.x, off.y)) +
+		texture(density_texture, at + vec2(off.x, off.y)) +
+		texture(density_texture, at + vec2(0.0, -off.y)) +
+		texture(density_texture, at + vec2(0.0, off.y)) +
+		texture(density_texture, at + vec2(-off.x, 0.0)) +
+		texture(density_texture, at + vec2(off.x, 0.0))
+	).r / 9.0;
+	*/
 	if(LIGHT_IS_DIRECTIONAL){
 		diffuse_light *= density;
 		specular_light *= density;
