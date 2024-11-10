@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://dleik3uybf55k"]
+
+[ext_resource type="Script" path="res://engine/level/hq.gd" id="1_qnxhr"]
+[ext_resource type="Script" path="res://engine/game/lights/light_2d.gd" id="2_4gn4w"]
+[ext_resource type="Script" path="res://engine/unit/unit_data.gd" id="3_08xdx"]
+[ext_resource type="Script" path="res://engine/vars.gd" id="4_ygpca"]
+[ext_resource type="Script" path="res://engine/stats.gd" id="5_3s81b"]
+[ext_resource type="Script" path="res://engine/status.gd" id="6_pjstu"]
+[ext_resource type="Script" path="res://data/characters/Turrets/Passive/CharScriptOrderTurretNormal.gd" id="7_8yjoc"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3b3uc"]
+height = 5.0
+radius = 4.2
+
+[node name="Unit" type="StaticBody3D" node_paths=PackedStringArray("data")]
+script = ExtResource("1_qnxhr")
+data = NodePath("Data")
+
+[node name="Icon" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Healthbar" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PointLight2D" type="Node" parent="."]
+script = ExtResource("2_4gn4w")
+range = 1350.0
+
+[node name="Data" type="Node" parent="."]
+script = ExtResource("3_08xdx")
+champion_name = "game_character_displayname_OrderNexus"
+armor_material = 1
+import_path = "res://data/characters/Nexus/Order/OrderNexus.ini"
+
+[node name="Vars" type="Node" parent="."]
+script = ExtResource("4_ygpca")
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("5_3s81b")
+
+[node name="Status" type="Node" parent="."]
+script = ExtResource("6_pjstu")
+
+[node name="Passive" type="Node" parent="."]
+script = ExtResource("7_8yjoc")
+
+[node name="AI" type="Node" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("CylinderShape3D_3b3uc")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+radius = 4.2
+height = 5.0
+affect_navigation_mesh = true

@@ -1,7 +1,7 @@
 class_name Unit
 extends Node3D
 
-@export_range(1, 31, 1, "hide_slider") var team := 1
+@export var team: Enums.Team = 0
 @export var data: UnitData
 
 var stats: Stats

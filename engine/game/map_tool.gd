@@ -347,7 +347,59 @@ func spawn_point_from_file(fname: String) -> Node3D:
 	obj.global_position = center * HW2GD
 	return obj
 
+@export_file("*.cfg") var object_cfg: String
 @export var create_level_props_script: GDScript
 @export_tool_button("Create Level Props")
 var post_level_load := func() -> void:
-	(create_level_props_script.new() as CreateLevelProps).create_level_props()
+	#(create_level_props_script.new() as CreateLevelProps).create_level_props()
+	var root := EditorInterface.get_edited_scene_root()
+	var points := find_child("Points", false)
+	var ini := Data.ini_load(object_cfg)
+	for section_name: String in ini:
+		var section: Array[Array] = ini[section_name]
+		var nav_point_name := section_name.split('\\')[-1].rsplit('.', false, 2)[0]
+		var nav_point: Node3D = points.find_child(nav_point_name, false)
+		#assert(nav_point != null, nav_point_name)
+		if nav_point == null:
+			print("nav point %s not found. skipping" % nav_point_name)
+			continue
+
+		var char: Unit = find_child(nav_point_name, false)
+		if char == null:
+			var char_prefab_path := "res://data/characters"
+			var i := section.find_custom(func (kv: Array) -> bool:
+				var key_array: Array = kv[0]
+				var value: Variant = kv[1]
+				return key_array[0] == "SkinName" && key_array[1] == 1)
+			if i != -1:
+				var skin_name: String = section[i][1]
+				var prefix := ""
+				for s: String in ["Order", "Chaos", "Destroyed"]:
+					if skin_name.begins_with(s):
+						prefix = s
+				if len(prefix):
+					char_prefab_path += "/" + skin_name.replace(prefix, "")
+					char_prefab_path += "/" + prefix
+				else:
+					char_prefab_path += "/" + skin_name
+				char_prefab_path += "/" + "unit.tscn"
+				var char_prefab: PackedScene = load(char_prefab_path)
+				#assert(char_prefab != null, char_prefab_path)
+				if char_prefab == null:
+					print("char %s not found. skipping" % skin_name)
+					continue
+				
+				char = char_prefab.instantiate()
+				add_child(char)
+				char.owner = root
+				char.name = nav_point_name
+				#char.global_position = nav_point.global_position
+		
+		if char != null:
+			for entry: Array in section:
+				var key_array: Array = entry[0]
+				var value: Variant = entry[1]
+				match key_array:
+					["Move"]: char.position += Data.vec3_parse(value) * Data.HW2GD
+					["Rot"]: char.rotation_degrees.y += Data.vec3_parse(value).x
+					_: char.data.set_from_ini_entry(key_array, value)

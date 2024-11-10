@@ -3,7 +3,7 @@ extends Node
 
 static var HW2GD := 1. / 70. #0.014285714
 
-func string_parse(from: String) -> String:
+static func string_parse(from: String) -> String:
 	return from
 
 var res_path := "res://Data/Particles"
@@ -44,7 +44,7 @@ func res_parse(from: String, bin_ext: String, txt_ext: String, out_ext: String) 
 	# return load(res_path + "/" + get_from_cache(from))
 
 enum VectorUsage { UNDEFINED, SCALE, ROTATION }
-func vec3_parse(from: String, u := VectorUsage.UNDEFINED) -> Vector3:
+static func vec3_parse(from: String, u := VectorUsage.UNDEFINED) -> Vector3:
 	from = string_parse(from)
 	var v := from.split(' ')
 	assert(len(v) == 3 || (len(v) == 1 && u != VectorUsage.UNDEFINED), from)
@@ -67,8 +67,8 @@ func ivec2_parse(from: String) -> Vector2i:
 	assert(len(v) == 2, from)
 	return Vector2i(int_parse(v[0]), int_parse(v[1]))
 
-var regex_float := RegEx.create_from_string(r'^[+-]?[0-9.]*$')
-func float_parse(from: String) -> float:
+static var regex_float := RegEx.create_from_string(r'^[+-]?[0-9.]*$')
+static func float_parse(from: String) -> float:
 	from = string_parse(from)
 	assert(regex_float.search(from), from)
 	return float(from)
@@ -180,7 +180,7 @@ func set_from_ini_section(section: Array) -> void:
 func set_from_ini_entry(key_array: Array, value: String) -> void:
 	pass
 
-func ini_load(import_path: String) -> Dictionary[String, Array]:
+static func ini_load(import_path: String) -> Dictionary[String, Array]:
 	var result: Dictionary[String, Array] = {}
 	var section: Array[Array]
 	var section_name: String

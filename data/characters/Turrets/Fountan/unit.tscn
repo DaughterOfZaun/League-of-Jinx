@@ -7,9 +7,6 @@
 
 [node name="Unit" instance=ExtResource("1_yv8h1")]
 
-[node name="PointLight2D" parent="." index="2"]
-range = 4900.0
-
 [node name="Data" parent="." index="3"]
 champion_name = "game_character_displayname_OrderTurretShrine"
 description = "game_character_description_OrderTurretShrine"

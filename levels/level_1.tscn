@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=62 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
 [ext_resource type="CompressedTexture3D" uid="uid://cw7h14f61vo0x" path="res://LUT2.webp" id="2_tb6ku"]
@@ -37,11 +37,14 @@
 [ext_resource type="Script" path="res://data/levels/1/scripts/CreateLevelProps.gd" id="35_x1iow"]
 [ext_resource type="PackedScene" uid="uid://brmob4058kgjb" path="res://data/characters/Turrets/Front/Order/unit.tscn" id="36_dp7n3"]
 [ext_resource type="PackedScene" uid="uid://n1ycncd12rnq" path="res://data/characters/Turrets/Back/Order/unit.tscn" id="36_oe0ed"]
+[ext_resource type="PackedScene" uid="uid://c03dkhsata3gj" path="res://data/characters/Nexus/Order/unit.tscn" id="36_yik85"]
+[ext_resource type="PackedScene" uid="uid://dwtgxxdqtsfyo" path="res://data/characters/Nexus/Chaos/unit.tscn" id="37_5vbbt"]
 [ext_resource type="PackedScene" uid="uid://btacpjtg4pcad" path="res://data/characters/Turrets/Back/Chaos/unit.tscn" id="38_bto7k"]
 [ext_resource type="PackedScene" uid="uid://biov8lq32ueqn" path="res://data/characters/Turrets/Middle/Order/unit.tscn" id="38_mmvut"]
+[ext_resource type="PackedScene" uid="uid://k3wk84ssvmbv" path="res://data/characters/Inhibitor/Chaos/unit.tscn" id="38_vsljp"]
 [ext_resource type="PackedScene" uid="uid://b1rfde0af8ixp" path="res://data/characters/Turrets/Front/Chaos/unit.tscn" id="39_qsin3"]
+[ext_resource type="PackedScene" uid="uid://t0fwl3cknumm" path="res://data/characters/Inhibitor/Order/unit.tscn" id="39_rx1pf"]
 [ext_resource type="PackedScene" uid="uid://w234i42o5d2y" path="res://data/characters/Turrets/Middle/Chaos/unit.tscn" id="41_igafg"]
-[ext_resource type="Script" path="res://engine/level/turret.gd" id="42_ua8iw"]
 [ext_resource type="PackedScene" uid="uid://dfqmiqpdxf0mi" path="res://data/characters/Turrets/HQ/Order/unit.tscn" id="43_vg3su"]
 [ext_resource type="PackedScene" uid="uid://dos4v7ypu3iol" path="res://data/characters/Turrets/HQ/Chaos/unit.tscn" id="44_yyq8c"]
 [ext_resource type="PackedScene" uid="uid://buonvrdcurdhv" path="res://data/characters/Turrets/Fountan/Order/unit.tscn" id="45_yik85"]
@@ -97,7 +100,7 @@ shader_parameter/d = null
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_vsljp"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_yik85"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Node3D" type="Node3D"]
@@ -832,7 +835,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 114.801, 22.17, -140.402)
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
 [node name="Unit" parent="." instance=ExtResource("27_0mdok")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.746, 2.485, -3.787)
+transform = Transform3D(-0.803857, 0, 0.594823, 0, 1, 0, -0.594823, 0, -0.803857, 0.746, 2.485, -3.787)
 
 [node name="Map" parent="." instance=ExtResource("71_7skrr")]
 unique_name_in_owner = true
@@ -840,8 +843,41 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 level_shader = ExtResource("31_g1ghr")
 level_decal_shader = ExtResource("32_m603r")
 level_flora_shader = ExtResource("33_rqr2r")
-viewport_texture = SubResource("ViewportTexture_vsljp")
+viewport_texture = SubResource("ViewportTexture_yik85")
+object_cfg = "res://data/levels/1/ObjectCFG.cfg"
 create_level_props_script = ExtResource("35_x1iow")
+
+[node name="HQ_T1" parent="Map" instance=ExtResource("36_yik85")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5361, 1.35, 20.494)
+team = 100
+
+[node name="HQ_T2" parent="Map" instance=ExtResource("37_5vbbt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 182.066, 1.35, 186.275)
+team = 200
+
+[node name="Barracks_T1_L1" parent="Map" instance=ExtResource("39_rx1pf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7469, 1.35, 48.0652)
+team = 100
+
+[node name="Barracks_T1_C1" parent="Map" instance=ExtResource("39_rx1pf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.6091, 1.35, 42.6522)
+team = 100
+
+[node name="Barracks_T1_R1" parent="Map" instance=ExtResource("39_rx1pf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.1607, 1.35, 14.8302)
+team = 100
+
+[node name="Barracks_T2_L1" parent="Map" instance=ExtResource("38_vsljp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 156.772, 1.35, 191.76)
+team = 200
+
+[node name="Barracks_T2_C1" parent="Map" instance=ExtResource("38_vsljp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160.773, 1.35, 163.67)
+team = 200
+
+[node name="Barracks_T2_R1" parent="Map" instance=ExtResource("38_vsljp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 188.945, 1.35, 159.438)
+team = 200
 
 [node name="Turrets" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
@@ -948,189 +984,141 @@ lane = 2
 pos = 1
 team = 200
 
-[node name="Turret_T1_R_04" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("36_dp7n3")]
+[node name="Turret_T1_R_04" parent="Turrets" instance=ExtResource("36_dp7n3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144.436, 0.591119, 11.6)
-script = ExtResource("42_ua8iw")
 pos = 3
 team = 100
-data = NodePath("Data")
 
-[node name="Turret_T1_R_05" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("38_mmvut")]
+[node name="Turret_T1_R_05" parent="Turrets" instance=ExtResource("38_mmvut")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 93.172, 0.619441, 18.0901)
-script = ExtResource("42_ua8iw")
 pos = 2
 team = 100
-data = NodePath("Data")
 
-[node name="Turret_T1_C_08" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("36_oe0ed")]
+[node name="Turret_T1_C_08" parent="Turrets" instance=ExtResource("36_oe0ed")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.6311, 1.3765, 14.922)
-script = ExtResource("42_ua8iw")
 pos = 1
 team = 100
-data = NodePath("Data")
 
-[node name="Turret_T2_R_04" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("39_qsin3")]
+[node name="Turret_T2_R_04" parent="Turrets" instance=ExtResource("39_qsin3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192.51, 0.58589, 61.2968)
-script = ExtResource("42_ua8iw")
 pos = 3
 team = 200
-data = NodePath("Data")
 
-[node name="Turret_T2_R_05" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("41_igafg")]
+[node name="Turret_T2_R_05" parent="Turrets" instance=ExtResource("41_igafg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 184.805, 0.540161, 114.505)
-script = ExtResource("42_ua8iw")
 pos = 2
 team = 200
-data = NodePath("Data")
 
-[node name="Turret_T2_R_06" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("38_bto7k")]
+[node name="Turret_T2_R_06" parent="Turrets" instance=ExtResource("38_bto7k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 188.88, 1.36929, 149.814)
-script = ExtResource("42_ua8iw")
 pos = 1
 team = 200
-data = NodePath("Data")
 
-[node name="Turret_T1_C_09" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("36_dp7n3")]
+[node name="Turret_T1_C_09" parent="Turrets" instance=ExtResource("36_dp7n3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 77.8282, 0.630579, 88.344)
-script = ExtResource("42_ua8iw")
 lane = 1
 pos = 3
 team = 100
-data = NodePath("Data")
 
-[node name="Turret_T1_C_10" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("38_mmvut")]
+[node name="Turret_T1_C_10" parent="Turrets" instance=ExtResource("38_mmvut")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.4172, 0.622275, 65.6962)
-script = ExtResource("42_ua8iw")
 lane = 1
 pos = 2
 team = 100
-data = NodePath("Data")
 
-[node name="Turret_T1_C_11" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("36_oe0ed")]
+[node name="Turret_T1_C_11" parent="Turrets" instance=ExtResource("36_oe0ed")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.2919, 1.37321, 49.3285)
-script = ExtResource("42_ua8iw")
 lane = 1
 pos = 1
 team = 100
-data = NodePath("Data")
 
-[node name="Turret_T1_C_01" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("43_vg3su")]
+[node name="Turret_T1_C_01" parent="Turrets" instance=ExtResource("43_vg3su")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2327, 1.40461, 29.0629)
-script = ExtResource("42_ua8iw")
 lane = 1
 pos = 5
 team = 100
-data = NodePath("Data")
 
-[node name="Turret_T1_C_02" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("43_vg3su")]
+[node name="Turret_T1_C_02" parent="Turrets" instance=ExtResource("43_vg3su")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1082, 1.37948, 22.5399)
-script = ExtResource("42_ua8iw")
 lane = 1
 pos = 4
 team = 100
-data = NodePath("Data")
 
-[node name="Turret_T2_C_06" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("39_qsin3")]
+[node name="Turret_T2_C_06" parent="Turrets" instance=ExtResource("39_qsin3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122.289, 0.633639, 118.569)
-script = ExtResource("42_ua8iw")
 lane = 1
 pos = 3
 team = 200
-data = NodePath("Data")
 
-[node name="Turret_T2_C_07" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("41_igafg")]
+[node name="Turret_T2_C_07" parent="Turrets" instance=ExtResource("41_igafg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 133.904, 0.589871, 141.491)
-script = ExtResource("42_ua8iw")
 lane = 1
 pos = 2
 team = 200
-data = NodePath("Data")
 
-[node name="Turret_T2_C_08" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("38_bto7k")]
+[node name="Turret_T2_C_08" parent="Turrets" instance=ExtResource("38_bto7k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 153.672, 1.38023, 157.47)
-script = ExtResource("42_ua8iw")
 lane = 1
 pos = 1
 team = 200
-data = NodePath("Data")
 
-[node name="Turret_T2_C_01" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("44_yyq8c")]
+[node name="Turret_T2_C_01" parent="Turrets" instance=ExtResource("44_yyq8c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 181.111, 1.34368, 177.956)
-script = ExtResource("42_ua8iw")
 lane = 1
 pos = 5
 team = 200
-data = NodePath("Data")
 
-[node name="Turret_T2_C_02" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("44_yyq8c")]
+[node name="Turret_T2_C_02" parent="Turrets" instance=ExtResource("44_yyq8c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 173.328, 1.34268, 184.16)
-script = ExtResource("42_ua8iw")
 lane = 1
 pos = 4
 team = 200
-data = NodePath("Data")
 
-[node name="Turret_OrderTurretShrine" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("45_yik85")]
+[node name="Turret_OrderTurretShrine" parent="Turrets" instance=ExtResource("45_yik85")]
 transform = Transform3D(-0.803857, 0, -0.594823, 0, 1, 0, 0.594823, 0, -0.803857, -2.81916, 2.62725, -0.219003)
-script = ExtResource("42_ua8iw")
 lane = 1
 team = 100
-data = NodePath("Data")
 
-[node name="Turret_ChaosTurretShrine" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("46_5vbbt")]
+[node name="Turret_ChaosTurretShrine" parent="Turrets" instance=ExtResource("46_5vbbt")]
 transform = Transform3D(0.793353, 0, 0.608761, 0, 1, 0, -0.608761, 0, 0.793353, 202.99, 2.62725, 207.257)
-script = ExtResource("42_ua8iw")
 lane = 1
 team = 200
-data = NodePath("Data")
 
-[node name="Turret_T1_L_04" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("36_dp7n3")]
+[node name="Turret_T1_L_04" parent="Turrets" instance=ExtResource("36_dp7n3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.26559, 0.383416, 146.18)
-script = ExtResource("42_ua8iw")
 lane = 2
 pos = 3
 team = 100
-data = NodePath("Data")
 
-[node name="Turret_T1_L_05" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("38_mmvut")]
+[node name="Turret_T1_L_05" parent="Turrets" instance=ExtResource("38_mmvut")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8671, 0.601478, 92.6741)
-script = ExtResource("42_ua8iw")
 lane = 2
 pos = 2
 team = 100
-data = NodePath("Data")
 
-[node name="Turret_T1_C_12" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("36_oe0ed")]
+[node name="Turret_T1_C_12" parent="Turrets" instance=ExtResource("36_oe0ed")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5233, 1.38329, 57.9765)
-script = ExtResource("42_ua8iw")
 lane = 2
 pos = 1
 team = 100
-data = NodePath("Data")
 
-[node name="Turret_T2_L_04" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("39_qsin3")]
+[node name="Turret_T2_L_04" parent="Turrets" instance=ExtResource("39_qsin3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.9821, 0.187753, 195.288)
-script = ExtResource("42_ua8iw")
 lane = 2
 pos = 3
 team = 200
-data = NodePath("Data")
 
-[node name="Turret_T2_L_05" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("41_igafg")]
+[node name="Turret_T2_L_05" parent="Turrets" instance=ExtResource("41_igafg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 107.814, 0.560307, 188.654)
-script = ExtResource("42_ua8iw")
 lane = 2
 pos = 2
 team = 200
-data = NodePath("Data")
 
-[node name="Turret_T2_L_06" type="StaticBody3D" parent="Turrets" node_paths=PackedStringArray("data") instance=ExtResource("38_bto7k")]
+[node name="Turret_T2_L_06" parent="Turrets" instance=ExtResource("38_bto7k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 146.785, 1.3642, 192.586)
-script = ExtResource("42_ua8iw")
 lane = 2
 pos = 1
 team = 200
-data = NodePath("Data")
 
 [node name="Level" type="Node" parent="."]
 script = ExtResource("35_3l20p")

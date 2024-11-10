@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://k3wk84ssvmbv"]
+
+[ext_resource type="PackedScene" uid="uid://b1g8y4l4o36ne" path="res://data/characters/Inhibitor/unit.tscn" id="1_ob1ed"]
+[ext_resource type="PackedScene" uid="uid://bmpd3knqfvr48" path="res://data/characters/Inhibitor/Chaos/Skin/ChaosInhibitor.gltf" id="2_fr4je"]
+
+[node name="Unit" instance=ExtResource("1_ob1ed")]
+
+[node name="SkinnedMesh" parent="." index="11" instance=ExtResource("2_fr4je")]

@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c1myck60qjm1v"]
+
+[ext_resource type="Texture2D" uid="uid://dg4a5enngl2so" path="res://data/characters/Inhibitor/Destroyed/Skin/Inhibitor_destroyed_diff.webp" id="1_8jwdg"]
+
+[resource]
+albedo_texture = ExtResource("1_8jwdg")

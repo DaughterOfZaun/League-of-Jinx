@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://t0fwl3cknumm"]
+
+[ext_resource type="PackedScene" uid="uid://b1g8y4l4o36ne" path="res://data/characters/Inhibitor/unit.tscn" id="1_nwx4q"]
+[ext_resource type="PackedScene" uid="uid://bmpd3knqfvr48" path="res://data/characters/Inhibitor/Chaos/Skin/ChaosInhibitor.gltf" id="2_v23mh"]
+[ext_resource type="Material" uid="uid://dsagtn1alu1kv" path="res://data/characters/Inhibitor/Order/Skin/Inhibitor.tres" id="3_bd8wl"]
+
+[node name="Unit" instance=ExtResource("1_nwx4q")]
+
+[node name="Data" parent="." index="3"]
+champion_name = "game_character_displayname_OrderInhibitor"
+import_path = "res://data/characters/Inhibitor/Order/OrderInhibitor.ini"
+
+[node name="SkinnedMesh" parent="." index="11" instance=ExtResource("2_v23mh")]
+
+[node name="skinned_mesh" parent="SkinnedMesh/skinned_mesh/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("3_bd8wl")
+
+[editable path="SkinnedMesh"]

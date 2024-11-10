@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwtgxxdqtsfyo"]
+
+[ext_resource type="PackedScene" uid="uid://dleik3uybf55k" path="res://data/characters/Nexus/unit.tscn" id="1_ou5c8"]
+[ext_resource type="PackedScene" uid="uid://d1s1bdt2pvl31" path="res://data/characters/Nexus/Order/Skin/Nexus.gltf" id="2_d46uv"]
+[ext_resource type="Material" uid="uid://bfkmr2d16nv60" path="res://data/characters/Nexus/Chaos/Skin/ChaosNexus.tres" id="3_d46uv"]
+
+[node name="Unit" instance=ExtResource("1_ou5c8")]
+
+[node name="Data" parent="." index="3"]
+champion_name = "game_character_displayname_ChaosNexus"
+import_path = "res://data/characters/Nexus/Chaos/ChaosNexus.ini"
+
+[node name="SkinnedMesh" parent="." index="11" instance=ExtResource("2_d46uv")]
+
+[node name="skinned_mesh" parent="SkinnedMesh/skinned_mesh/Skeleton3D" index="0"]
+surface_material_override/0 = ExtResource("3_d46uv")
+
+[editable path="SkinnedMesh"]
