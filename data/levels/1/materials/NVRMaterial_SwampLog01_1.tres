@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dgdmjkk8onjk7"]
 
-[ext_resource type="Texture2D" uid="uid://p277pjr5fh6y" path="res://data/levels/1/textures/room_SwampLog01.png" id="1_njg6w"]
+[ext_resource type="Texture2D" uid="uid://p277pjr5fh6y" path="res://data/levels/1/textures/room_SwampLog01.webp" id="1_njg6w"]
 [ext_resource type="Texture2D" uid="uid://d0fqa6q3lb2yu" path="res://data/levels/1/textures/room_SwampLog01.normal.webp" id="2_dscbb"]
 
 [resource]

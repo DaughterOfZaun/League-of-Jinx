@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://gae3k4q8q0ro"]
 
-[ext_resource type="Texture2D" uid="uid://cfb4f6u1uigbj" path="res://data/levels/1/textures/room_river_corner.png" id="1_3fdjl"]
+[ext_resource type="Texture2D" uid="uid://cfb4f6u1uigbj" path="res://data/levels/1/textures/room_river_corner.webp" id="1_3fdjl"]
 [ext_resource type="Texture2D" uid="uid://bp7a5d1nemltt" path="res://data/levels/1/textures/room_river_corner.normal.webp" id="2_ui3ck"]
 
 [resource]

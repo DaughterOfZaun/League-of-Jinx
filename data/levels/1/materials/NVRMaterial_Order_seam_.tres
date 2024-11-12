@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bj6wmjbdth7b"]
 
-[ext_resource type="Texture2D" uid="uid://cb33itjuts2sb" path="res://data/levels/1/textures/room_order_seam.png" id="1_qh2xi"]
+[ext_resource type="Texture2D" uid="uid://cb33itjuts2sb" path="res://data/levels/1/textures/room_order_seam.webp" id="1_qh2xi"]
 [ext_resource type="Texture2D" uid="uid://674ndjs3s8mv" path="res://data/levels/1/textures/room_order_seam.normal.webp" id="2_lxxpx"]
 
 [resource]

@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://celx1nx4gq4ta"]
 
-[ext_resource type="Texture2D" uid="uid://dsgq61d0pp55a" path="res://data/levels/1/textures/room_shop_diffuse.png" id="1_35kk8"]
+[ext_resource type="Texture2D" uid="uid://dsgq61d0pp55a" path="res://data/levels/1/textures/room_shop_diffuse.webp" id="1_35kk8"]
 [ext_resource type="Texture2D" uid="uid://bhsfp428rwk4p" path="res://data/levels/1/textures/room_shop_diffuse.normal.webp" id="2_5g2bv"]
 
 [resource]

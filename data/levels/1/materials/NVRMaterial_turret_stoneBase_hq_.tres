@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://b07aiosc2fi28"]
 
-[ext_resource type="Texture2D" uid="uid://dvfta870b0iep" path="res://data/levels/1/textures/room_turret_stoneBase_hq.png" id="1_nq705"]
+[ext_resource type="Texture2D" uid="uid://dvfta870b0iep" path="res://data/levels/1/textures/room_turret_stoneBase_hq.webp" id="1_nq705"]
 [ext_resource type="Texture2D" uid="uid://dvhxrdabvy8m2" path="res://data/levels/1/textures/room_turret_stoneBase_hq.normal.webp" id="2_jb3ru"]
 
 [resource]

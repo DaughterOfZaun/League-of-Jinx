@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bq2uk4lsg83ca"]
 
-[ext_resource type="Texture2D" uid="uid://ds6r1ljo8q1i6" path="res://data/levels/1/textures/room_TreeLogFallen03.png" id="1_4cpjd"]
+[ext_resource type="Texture2D" uid="uid://ds6r1ljo8q1i6" path="res://data/levels/1/textures/room_TreeLogFallen03.webp" id="1_4cpjd"]
 [ext_resource type="Texture2D" uid="uid://dcokee7wtx4p" path="res://data/levels/1/textures/room_TreeLogFallen03.normal.webp" id="2_urcu3"]
 
 [resource]

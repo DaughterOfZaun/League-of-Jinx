@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://ombt1p5cmiyy"]
 
-[ext_resource type="Texture2D" uid="uid://cqbw57iuf3yps" path="res://data/levels/1/textures/room_order_base_decal_mid.png" id="1_8kosw"]
+[ext_resource type="Texture2D" uid="uid://cqbw57iuf3yps" path="res://data/levels/1/textures/room_order_base_decal_mid.webp" id="1_8kosw"]
 [ext_resource type="Texture2D" uid="uid://c7mvftsoiqjso" path="res://data/levels/1/textures/room_order_base_decal_mid.normal.webp" id="2_u8jmw"]
 
 [resource]

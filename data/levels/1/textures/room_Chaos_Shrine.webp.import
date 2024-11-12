@@ -3,25 +3,26 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0x2isk3gig1i"
-path="res://.godot/imported/room_Chaos_Shrine.webp-4d4b8b4b4881170e7a47d58378238b6f.ctex"
+path.s3tc="res://.godot/imported/room_Chaos_Shrine.webp-4d4b8b4b4881170e7a47d58378238b6f.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://data/levels/1/textures/room_Chaos_Shrine.webp"
-dest_files=["res://.godot/imported/room_Chaos_Shrine.webp-4d4b8b4b4881170e7a47d58378238b6f.ctex"]
+dest_files=["res://.godot/imported/room_Chaos_Shrine.webp-4d4b8b4b4881170e7a47d58378238b6f.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,4 +32,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

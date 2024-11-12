@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://pwswbtu8cw4j"]
 
-[ext_resource type="Texture2D" uid="uid://bnb6yf2pq1wsv" path="res://data/levels/1/textures/room_ChaosFlag02.png" id="1_bul56"]
+[ext_resource type="Texture2D" uid="uid://bnb6yf2pq1wsv" path="res://data/levels/1/textures/room_ChaosFlag02.webp" id="1_bul56"]
 [ext_resource type="Texture2D" uid="uid://6hp8gnomd6my" path="res://data/levels/1/textures/room_ChaosFlag02.normal.webp" id="2_ufclx"]
 
 [resource]

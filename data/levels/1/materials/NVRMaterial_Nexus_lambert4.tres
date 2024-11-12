@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://4w3d6p7esnc8"]
 
-[ext_resource type="Texture2D" uid="uid://cb8uk2tdqpvmf" path="res://data/levels/1/textures/room_Nexus_diff.png" id="1_rel7i"]
+[ext_resource type="Texture2D" uid="uid://cb8uk2tdqpvmf" path="res://data/levels/1/textures/room_Nexus_diff.webp" id="1_rel7i"]
 [ext_resource type="Texture2D" uid="uid://cs5glibbdtwsx" path="res://data/levels/1/textures/room_Nexus_diff.normal.webp" id="2_4xrol"]
 
 [resource]

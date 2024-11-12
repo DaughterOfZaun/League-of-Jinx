@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://ukb5khhsg25t"]
 
-[ext_resource type="Texture2D" uid="uid://dtm8va4j5dwij" path="res://data/levels/1/textures/room_stonehenge.png" id="1_68bid"]
+[ext_resource type="Texture2D" uid="uid://dtm8va4j5dwij" path="res://data/levels/1/textures/room_stonehenge.webp" id="1_68bid"]
 [ext_resource type="Texture2D" uid="uid://uthmo6tukxrh" path="res://data/levels/1/textures/room_stonehenge.normal.webp" id="2_vhfr5"]
 
 [resource]

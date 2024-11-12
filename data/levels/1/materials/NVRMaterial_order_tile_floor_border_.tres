@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://codwvl5r3k1x8"]
 
-[ext_resource type="Texture2D" uid="uid://cqq7lu4js081r" path="res://data/levels/1/textures/room_order_tile_floor_border.png" id="1_qs7a4"]
+[ext_resource type="Texture2D" uid="uid://cqq7lu4js081r" path="res://data/levels/1/textures/room_order_tile_floor_border.webp" id="1_qs7a4"]
 [ext_resource type="Texture2D" uid="uid://bbt0r8q8g7sgn" path="res://data/levels/1/textures/room_order_tile_floor_border.normal.webp" id="2_hpj7y"]
 
 [resource]

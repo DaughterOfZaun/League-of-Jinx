@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://d4iaqlp2qpiqq"]
 
-[ext_resource type="Texture2D" uid="uid://b6pn4ih7jlv0r" path="res://data/levels/1/textures/room_shrineVine.png" id="1_5t4il"]
+[ext_resource type="Texture2D" uid="uid://b6pn4ih7jlv0r" path="res://data/levels/1/textures/room_shrineVine.webp" id="1_5t4il"]
 [ext_resource type="Texture2D" uid="uid://dw3ekb0sus7su" path="res://data/levels/1/textures/room_shrineVine.normal.webp" id="2_drc2q"]
 
 [resource]

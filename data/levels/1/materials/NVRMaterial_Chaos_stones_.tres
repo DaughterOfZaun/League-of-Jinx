@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://na2e0vk1l8tc"]
 
-[ext_resource type="Texture2D" uid="uid://x11jaldk04sy" path="res://data/levels/1/textures/room_Chaos_stonesb.png" id="1_f70mb"]
+[ext_resource type="Texture2D" uid="uid://x11jaldk04sy" path="res://data/levels/1/textures/room_Chaos_stonesb.webp" id="1_f70mb"]
 [ext_resource type="Texture2D" uid="uid://c5ojtpmlr4s3e" path="res://data/levels/1/textures/room_Chaos_stonesb.normal.webp" id="2_xy0hw"]
 
 [resource]

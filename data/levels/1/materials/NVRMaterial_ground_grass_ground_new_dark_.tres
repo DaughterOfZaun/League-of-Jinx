@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bdpi00mobhm3e"]
 
-[ext_resource type="Texture2D" uid="uid://wq1g682vxrd7" path="res://data/levels/1/textures/room_grass_ground_new_dark.png" id="1_r8ao4"]
+[ext_resource type="Texture2D" uid="uid://wq1g682vxrd7" path="res://data/levels/1/textures/room_grass_ground_new_dark.webp" id="1_r8ao4"]
 [ext_resource type="Texture2D" uid="uid://c016tvry3lr74" path="res://data/levels/1/textures/room_grass_ground_new_dark.normal.webp" id="2_kpgld"]
 
 [resource]

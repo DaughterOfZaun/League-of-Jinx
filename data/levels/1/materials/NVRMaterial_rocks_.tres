@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cfaf2i0ykjfc4"]
 
-[ext_resource type="Texture2D" uid="uid://cu1wafkgicj7u" path="res://data/levels/1/textures/room_rocks.png" id="1_yj4xv"]
+[ext_resource type="Texture2D" uid="uid://cu1wafkgicj7u" path="res://data/levels/1/textures/room_rocks.webp" id="1_yj4xv"]
 [ext_resource type="Texture2D" uid="uid://dltb677ov8l1v" path="res://data/levels/1/textures/room_rocks.normal.webp" id="2_80hqn"]
 
 [resource]
