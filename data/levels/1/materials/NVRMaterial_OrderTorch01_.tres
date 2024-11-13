@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cfvjl7cacaerw"]
 
-[ext_resource type="Texture2D" uid="uid://b4itasoion4ep" path="res://data/levels/1/textures/room_OrderTorch01.webp" id="1_tl338"]
+[ext_resource type="Texture2D" uid="uid://brcrow6s5d2in" path="res://data/levels/1/textures/room_OrderTorch01.webp" id="1_tl338"]
 [ext_resource type="Texture2D" uid="uid://drpfs8qdfyuol" path="res://data/levels/1/textures/room_OrderTorch01.normal.webp" id="2_af63l"]
 
 [resource]

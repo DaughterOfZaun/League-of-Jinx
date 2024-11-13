@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://c3akyiamfq2xd"]
 
-[ext_resource type="Texture2D" uid="uid://bw84qefg7kjmt" path="res://data/levels/1/textures/room_MushroomPatch02.webp" id="1_eh38g"]
+[ext_resource type="Texture2D" uid="uid://c18wfqsodes0d" path="res://data/levels/1/textures/room_MushroomPatch02.webp" id="1_eh38g"]
 [ext_resource type="Texture2D" uid="uid://bst7kvqlxlsvp" path="res://data/levels/1/textures/room_MushroomPatch02.normal.webp" id="2_1xmjd"]
 
 [resource]

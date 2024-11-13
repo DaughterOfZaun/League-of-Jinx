@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://q0o1k7uje21i"]
 
-[ext_resource type="Texture2D" uid="uid://ce4lwke06l0gv" path="res://data/levels/1/textures/room_Fence01.webp" id="1_pv6xy"]
+[ext_resource type="Texture2D" uid="uid://dqqyngo72opqj" path="res://data/levels/1/textures/room_Fence01.webp" id="1_pv6xy"]
 [ext_resource type="Texture2D" uid="uid://c37b8hpo23ch6" path="res://data/levels/1/textures/room_Fence01.normal.webp" id="2_g8u8f"]
 
 [resource]

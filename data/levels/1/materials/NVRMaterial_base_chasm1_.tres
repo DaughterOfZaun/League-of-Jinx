@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://buuxpy258p7pn"]
 
-[ext_resource type="Texture2D" uid="uid://bpy5xo1oqpo1l" path="res://data/levels/1/textures/room_base_chasm1.webp" id="1_jcqxo"]
+[ext_resource type="Texture2D" uid="uid://ca5cgjas76nhx" path="res://data/levels/1/textures/room_base_chasm1.webp" id="1_jcqxo"]
 [ext_resource type="Texture2D" uid="uid://cjuptqyt3pux1" path="res://data/levels/1/textures/room_base_chasm1.normal.webp" id="2_r5clr"]
 
 [resource]

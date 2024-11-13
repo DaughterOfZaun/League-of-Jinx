@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bv22xj2dho344"]
 
-[ext_resource type="Texture2D" uid="uid://dybaak6ya8s6y" path="res://data/levels/1/textures/room_WallOfGrass.webp" id="1_sy45r"]
+[ext_resource type="Texture2D" uid="uid://o4d5osdxes7x" path="res://data/levels/1/textures/room_WallOfGrass.webp" id="1_sy45r"]
 [ext_resource type="Texture2D" uid="uid://dek7uktmqjmp2" path="res://data/levels/1/textures/room_WallOfGrass.normal.webp" id="2_0joao"]
 
 [resource]

@@ -20,3 +20,7 @@
 *.pyx
 *.glsl
 *.glsl.import
+
+node_modules/
+bun.lockb
+*.txt

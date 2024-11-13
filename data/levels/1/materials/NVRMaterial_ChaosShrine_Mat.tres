@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://b33qq7j682ltr"]
 
-[ext_resource type="Texture2D" uid="uid://d0mk0e5h5kaly" path="res://data/levels/1/textures/room_Chaos_Shrine.webp" id="1_lcoia"]
+[ext_resource type="Texture2D" uid="uid://0x2isk3gig1i" path="res://data/levels/1/textures/room_Chaos_Shrine.webp" id="1_lcoia"]
 [ext_resource type="Texture2D" uid="uid://bh2c6p12bbqpt" path="res://data/levels/1/textures/room_Chaos_Shrine.normal.webp" id="2_0mrfi"]
 
 [resource]

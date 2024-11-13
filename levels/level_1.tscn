@@ -1,35 +1,34 @@
-[gd_scene load_steps=62 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=61 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
 [ext_resource type="CompressedTexture3D" uid="uid://cw7h14f61vo0x" path="res://LUT2.webp" id="2_tb6ku"]
 [ext_resource type="Shader" path="res://engine/game/lights/new_shader.gdshader" id="3_h7a1n"]
 [ext_resource type="PackedScene" uid="uid://0spn4csgi7k1" path="res://engine/game/ui/map.tscn" id="3_ybns6"]
-[ext_resource type="Texture2D" uid="uid://cefst6pinhr1h" path="res://data/screenshots/League of Legends.webp" id="4_la1iv"]
+[ext_resource type="Texture2D" uid="uid://df2lx4qnpncd" path="res://data/screenshots/League of Legends.webp" id="4_la1iv"]
 [ext_resource type="Script" path="res://engine/game/lights/color_rect.gd" id="4_s88ld"]
 [ext_resource type="Texture2D" uid="uid://w7g1bytpvupe" path="res://data/characters/Ahri/Passive/Ahri_SoulEater.webp" id="5_xidt6"]
 [ext_resource type="PackedScene" uid="uid://demalxnr8x6to" path="res://engine/game/ui/spell.tscn" id="6_qaxp4"]
-[ext_resource type="Texture2D" uid="uid://cyle4h1k1iu36" path="res://data/ui/center/center.webp" id="7_jdyie"]
+[ext_resource type="Texture2D" uid="uid://dl6k42tco4ex1" path="res://data/ui/center/center.webp" id="7_jdyie"]
 [ext_resource type="PackedScene" uid="uid://c75a7ire7fgcd" path="res://engine/game/ui/bar.tscn" id="8_nvk2l"]
 [ext_resource type="Texture2D" uid="uid://b0vfkfms8norl" path="res://data/ui/bars/blue.webp" id="9_y6h7o"]
 [ext_resource type="Texture2D" uid="uid://cc1iubdmpd1kv" path="res://data/characters/Ahri/Icons/Ahri_Square.webp" id="10_s0kdc"]
-[ext_resource type="Texture2D" uid="uid://11hmhsrqbij1" path="res://data/ui/bars/orange.webp" id="11_k6t63"]
-[ext_resource type="Texture2D" uid="uid://d4acgjwdw05ud" path="res://data/ui/left/left.webp" id="12_xipey"]
-[ext_resource type="Texture2D" uid="uid://b87xf8ukvo7u" path="res://data/ui/left/bag.webp" id="13_8j3ik"]
-[ext_resource type="Texture2D" uid="uid://d01dqbfit2hpm" path="res://data/ui/left/shop_enabled.webp" id="14_mnsvh"]
-[ext_resource type="Texture2D" uid="uid://ssoelbfv4vo0" path="res://data/ui/left/shop_disabled.webp" id="15_j30nd"]
-[ext_resource type="Texture2D" uid="uid://xgex5ay4l6vm" path="res://data/ui/map/map.webp" id="16_y4u57"]
-[ext_resource type="Texture2D" uid="uid://dirw63mnupf18" path="res://data/ui/map/frame.webp" id="18_gs7kr"]
-[ext_resource type="Texture2D" uid="uid://kq14qpdrkyqt" path="res://data/ui/map/warn.webp" id="19_m14a1"]
-[ext_resource type="Texture2D" uid="uid://bi1sku2iuxptd" path="res://data/ui/map/error.webp" id="20_ld22r"]
-[ext_resource type="Texture2D" uid="uid://cykyr8md63s2b" path="res://data/ui/bar/bar.webp" id="21_vouoj"]
+[ext_resource type="Texture2D" uid="uid://dbwnetuafjmtl" path="res://data/ui/bars/orange.webp" id="11_k6t63"]
+[ext_resource type="Texture2D" uid="uid://dlxibrkg4tfgu" path="res://data/ui/left/left.webp" id="12_xipey"]
+[ext_resource type="Texture2D" uid="uid://bnq6twfpdhi65" path="res://data/ui/left/bag.webp" id="13_8j3ik"]
+[ext_resource type="Texture2D" uid="uid://cmv4y8qi1vg0b" path="res://data/ui/left/shop_enabled.webp" id="14_mnsvh"]
+[ext_resource type="Texture2D" uid="uid://bbtuh43ti6i0a" path="res://data/ui/left/shop_disabled.webp" id="15_j30nd"]
+[ext_resource type="Texture2D" uid="uid://bhnu2l01o01j6" path="res://data/ui/map/map.webp" id="16_y4u57"]
+[ext_resource type="Texture2D" uid="uid://diblu6kiv38r0" path="res://data/ui/map/frame.webp" id="18_gs7kr"]
+[ext_resource type="Texture2D" uid="uid://bmxex45phpnmc" path="res://data/ui/map/warn.webp" id="19_m14a1"]
+[ext_resource type="Texture2D" uid="uid://b4icsk04py5r3" path="res://data/ui/map/error.webp" id="20_ld22r"]
+[ext_resource type="Texture2D" uid="uid://dgmlec0fqa025" path="res://data/ui/bar/bar.webp" id="21_vouoj"]
 [ext_resource type="Texture2D" uid="uid://cjgdixmn1dikj" path="res://data/characters/Ahri/Icons/Ahri_Circle.webp" id="22_gvtsu"]
-[ext_resource type="Texture2D" uid="uid://bducoj0su1fog" path="res://data/ui/bar/kill.webp" id="22_su7bi"]
-[ext_resource type="Texture2D" uid="uid://m6ya87asjxl2" path="res://data/ui/bar/death.webp" id="23_nc8fv"]
-[ext_resource type="Texture2D" uid="uid://d3vyc5egu2euk" path="res://data/ui/bar/assist.webp" id="24_oeos3"]
+[ext_resource type="Texture2D" uid="uid://b8whsq4kc8d0i" path="res://data/ui/bar/kill.webp" id="22_su7bi"]
+[ext_resource type="Texture2D" uid="uid://b7vgdscg5ad1v" path="res://data/ui/bar/death.webp" id="23_nc8fv"]
+[ext_resource type="Texture2D" uid="uid://bdg3p2d8p458b" path="res://data/ui/bar/assist.webp" id="24_oeos3"]
 [ext_resource type="Script" path="res://engine/game/camera.gd" id="25_obkvb"]
 [ext_resource type="Shader" path="res://engine/game/fog_of_war_ss.gdshader" id="26_87734"]
 [ext_resource type="PackedScene" uid="uid://dgxp55bfpc742" path="res://data/characters/Ahri/unit.tscn" id="27_0mdok"]
-[ext_resource type="Texture2D" uid="uid://df2lx4qnpncd" path="res://data/screenshots/League of Legends.webp" id="29_qon1i"]
 [ext_resource type="Shader" path="res://engine/game/level/level.gdshader" id="31_g1ghr"]
 [ext_resource type="Shader" path="res://engine/game/level/level_decal.gdshader" id="32_m603r"]
 [ext_resource type="Shader" path="res://engine/game/level/level_flora.gdshader" id="33_rqr2r"]
@@ -89,7 +88,7 @@ light_mode = 1
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("26_87734")
-shader_parameter/density_texture = ExtResource("29_qon1i")
+shader_parameter/density_texture = ExtResource("4_la1iv")
 shader_parameter/min_density = 0.5
 shader_parameter/a = null
 shader_parameter/b = null
@@ -100,7 +99,7 @@ shader_parameter/d = null
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_yik85"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_yyq8c"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Node3D" type="Node3D"]
@@ -843,7 +842,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 level_shader = ExtResource("31_g1ghr")
 level_decal_shader = ExtResource("32_m603r")
 level_flora_shader = ExtResource("33_rqr2r")
-viewport_texture = SubResource("ViewportTexture_yik85")
+viewport_texture = SubResource("ViewportTexture_yyq8c")
 object_cfg = "res://data/levels/1/ObjectCFG.cfg"
 create_level_props_script = ExtResource("35_x1iow")
 

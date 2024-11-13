@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://c8mjamkk7pwfa"]
 
-[ext_resource type="Texture2D" uid="uid://cdym3an0khu1x" path="res://data/levels/1/textures/room_blueTower_decal.webp" id="1_owtwg"]
+[ext_resource type="Texture2D" uid="uid://dbt05pm0b5xv5" path="res://data/levels/1/textures/room_blueTower_decal.webp" id="1_owtwg"]
 [ext_resource type="Texture2D" uid="uid://b0w6b2bww5pgu" path="res://data/levels/1/textures/room_blueTower_decal.normal.webp" id="2_2wgjp"]
 
 [resource]

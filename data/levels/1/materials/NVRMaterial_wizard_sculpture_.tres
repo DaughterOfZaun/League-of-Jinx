@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bhmpsm5clmevq"]
 
-[ext_resource type="Texture2D" uid="uid://wdfmbjw6pbrg" path="res://data/levels/1/textures/room_wizard_sculpture.webp" id="1_76urw"]
+[ext_resource type="Texture2D" uid="uid://mtrghapr7hek" path="res://data/levels/1/textures/room_wizard_sculpture.webp" id="1_76urw"]
 [ext_resource type="Texture2D" uid="uid://cyf3y5g584834" path="res://data/levels/1/textures/room_wizard_sculpture.normal.webp" id="2_wowp1"]
 
 [resource]

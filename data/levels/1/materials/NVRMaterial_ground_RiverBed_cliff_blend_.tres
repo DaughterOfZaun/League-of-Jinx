@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dujol4xdnxt4l"]
 
-[ext_resource type="Texture2D" uid="uid://bgcxu4as2iffb" path="res://data/levels/1/textures/room_RiverBed_cliff_blend.webp" id="1_3vypv"]
+[ext_resource type="Texture2D" uid="uid://cvxo0visrwtjl" path="res://data/levels/1/textures/room_RiverBed_cliff_blend.webp" id="1_3vypv"]
 [ext_resource type="Texture2D" uid="uid://xhvpkeq67iad" path="res://data/levels/1/textures/room_RiverBed_cliff_blend.normal.webp" id="2_ny82v"]
 
 [resource]

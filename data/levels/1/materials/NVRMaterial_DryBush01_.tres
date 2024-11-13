@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bjir5eexct0oe"]
 
-[ext_resource type="Texture2D" uid="uid://bxoiwdtutcw57" path="res://data/levels/1/textures/room_DryBush01.webp" id="1_u8k3f"]
+[ext_resource type="Texture2D" uid="uid://cq8vx08fvt1dv" path="res://data/levels/1/textures/room_DryBush01.webp" id="1_u8k3f"]
 [ext_resource type="Texture2D" uid="uid://8sebj8hs6lcc" path="res://data/levels/1/textures/room_DryBush01.normal.webp" id="2_wu634"]
 
 [resource]
