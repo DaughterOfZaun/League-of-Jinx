@@ -65,8 +65,13 @@ func _unhandled_input(unknown_event: InputEvent) -> void:
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
+
 	Input.use_accumulated_input = false
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+
+	var svt: TextureRect = %UI/Map/Control/MapTexture1/SubViewportTexture
+	var vt: ViewportTexture = svt.texture
+	vt.viewport_path = "/root/Node3D/SubViewport"
 
 	var spells: Dictionary[String, UISpell] = {
 		"q": get_node("%UI/Center/ChampionSpells/Spell1"),

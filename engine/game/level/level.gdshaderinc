@@ -36,8 +36,11 @@ void vertex() {
 	world_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 }
 
+const float GD_3D_to_2D = ((70. / 50.) * (512. / 294.));
+
 uniform sampler2D density_texture: hint_default_white, filter_linear_mipmap, repeat_disable;
 uniform vec2 density_texture_offset = vec2(64, -64);
+/*uniform*/ const float density_texture_scale = GD_3D_to_2D;
 //uniform vec3 a;
 //uniform vec3 b;
 //uniform vec3 c;
@@ -91,8 +94,7 @@ void light() {
 	);
 	*/
 	vec2 off = 1.0 / vec2(textureSize(density_texture, 0));
-	const float GD_3D_to_2D = (70. / 50.) * (512. / 294.);
-	vec2 density_uv = (world_position.xz * GD_3D_to_2D + density_texture_offset) / vec2(textureSize(density_texture, 0)) + vec2(0, 1);
+	vec2 density_uv = (world_position.xz * density_texture_scale + density_texture_offset) / vec2(textureSize(density_texture, 0)) + vec2(0, 1);
 	//float density = textureLod(density_texture, density_uv, 0).r;
 	float density = blur(density_texture, density_uv, off).r;
 	/*
