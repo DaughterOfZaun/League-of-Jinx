@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://diknhd1061r8r"]
+[gd_scene load_steps=26 format=3 uid="uid://diknhd1061r8r"]
 
 [ext_resource type="Texture2D" uid="uid://df2lx4qnpncd" path="res://data/screenshots/League of Legends.webp" id="1_n4n8a"]
 [ext_resource type="Texture2D" uid="uid://w7g1bytpvupe" path="res://data/characters/Ahri/Passive/Ahri_SoulEater.webp" id="2_foojt"]
@@ -13,7 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://cmv4y8qi1vg0b" path="res://data/ui/left/shop_enabled.webp" id="11_a0w1y"]
 [ext_resource type="Texture2D" uid="uid://bbtuh43ti6i0a" path="res://data/ui/left/shop_disabled.webp" id="12_7mu2h"]
 [ext_resource type="Texture2D" uid="uid://bhnu2l01o01j6" path="res://data/ui/map/map.webp" id="13_gr0p2"]
+[ext_resource type="Shader" path="res://engine/game/ui/minimap_fow_layer.gdshader" id="14_foojt"]
+[ext_resource type="Script" path="res://engine/game/ui/minimap_fow_layer.gd" id="14_n4n8a"]
 [ext_resource type="Texture2D" uid="uid://diblu6kiv38r0" path="res://data/ui/map/frame.webp" id="15_c3s7d"]
+[ext_resource type="Script" path="res://engine/game/ui/minimap_overlay_layer.gd" id="16_0bgng"]
 [ext_resource type="Texture2D" uid="uid://bmxex45phpnmc" path="res://data/ui/map/warn.webp" id="16_y36mb"]
 [ext_resource type="Texture2D" uid="uid://b4icsk04py5r3" path="res://data/ui/map/error.webp" id="17_p82r5"]
 [ext_resource type="Texture2D" uid="uid://dgmlec0fqa025" path="res://data/ui/bar/bar.webp" id="18_bn46l"]
@@ -21,14 +24,11 @@
 [ext_resource type="Texture2D" uid="uid://b7vgdscg5ad1v" path="res://data/ui/bar/death.webp" id="20_idkr5"]
 [ext_resource type="Texture2D" uid="uid://bdg3p2d8p458b" path="res://data/ui/bar/assist.webp" id="21_5tvyd"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i4nua"]
-blend_mode = 3
-light_mode = 1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0bgng"]
+shader = ExtResource("14_foojt")
+shader_parameter/opacity = 0.5
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_q5s0b"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_48rok"]
-light_mode = 1
 
 [node name="UI" type="Control"]
 z_index = 1
@@ -444,7 +444,7 @@ offset_bottom = -7.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="MapTexture1" type="TextureRect" parent="Map/Control"]
+[node name="MapTexture" type="TextureRect" parent="Map/Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.041
@@ -462,8 +462,8 @@ pivot_offset = Vector2(119, 119)
 texture = ExtResource("13_gr0p2")
 expand_mode = 1
 
-[node name="SubViewportTexture" type="TextureRect" parent="Map/Control/MapTexture1"]
-material = SubResource("CanvasItemMaterial_i4nua")
+[node name="SubViewportTexture" type="TextureRect" parent="Map/Control/MapTexture"]
+material = SubResource("ShaderMaterial_0bgng")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.966
@@ -479,8 +479,9 @@ grow_vertical = 2
 pivot_offset = Vector2(120, 120)
 texture = SubResource("ViewportTexture_q5s0b")
 expand_mode = 1
+script = ExtResource("14_n4n8a")
 
-[node name="Icons" type="Control" parent="Map/Control/MapTexture1/SubViewportTexture"]
+[node name="Icons" type="Control" parent="Map/Control/MapTexture/SubViewportTexture"]
 z_index = 1
 layout_mode = 1
 anchors_preset = 15
@@ -489,25 +490,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MapTexture2" type="TextureRect" parent="Map/Control"]
-modulate = Color(1, 1, 1, 0.5)
-material = SubResource("CanvasItemMaterial_48rok")
+[node name="Overlay" type="Control" parent="Map/Control/MapTexture/SubViewportTexture"]
+z_index = 1
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.041
-anchor_top = 1.033
-anchor_right = 1.041
-anchor_bottom = 1.033
-offset_left = -241.938
-offset_top = -237.029
-offset_right = -2.93802
-offset_bottom = 1.97099
-grow_horizontal = 0
-grow_vertical = 0
-scale = Vector2(1.1, 1.1)
-pivot_offset = Vector2(119, 119)
-texture = ExtResource("13_gr0p2")
-expand_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16_0bgng")
+line_width = 0.5
+line_antialiased = true
 
 [node name="FrameTexture" type="TextureRect" parent="Map"]
 layout_mode = 1

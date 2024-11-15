@@ -69,10 +69,6 @@ func _ready() -> void:
 	Input.use_accumulated_input = false
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 
-	var svt: TextureRect = %UI/Map/Control/MapTexture1/SubViewportTexture
-	var vt: ViewportTexture = svt.texture
-	vt.viewport_path = "/root/Node3D/SubViewport"
-
 	var spells: Dictionary[String, UISpell] = {
 		"q": get_node("%UI/Center/ChampionSpells/Spell1"),
 		"w": get_node("%UI/Center/ChampionSpells/Spell2"),

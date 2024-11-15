@@ -1,3 +1,4 @@
+class_name Camera
 extends Camera3D
 
 @onready var viewport := get_viewport()
@@ -52,3 +53,17 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	offset += move_dir * move_speed * delta
 	global_position = global_position.lerp(target_position + offset_initial * zoom + offset, lerp_speed * delta)
+
+func get_rect_3d() -> Array[Vector2]:
+	var plane := Plane(Vector3.UP, 1.35)
+	var rect := viewport.get_visible_rect()
+	var a := rect.position
+	var c := rect.end
+	var b := Vector2(c.x, a.y)
+	var d := Vector2(a.x, c.y)
+	var array: Array[Vector2] = [a, b, c, d]
+	for i in len(array):
+		var v := array[i]
+		var p: Vector3 = plane.intersects_ray(project_ray_origin(v), project_ray_normal(v))
+		array[i] = Vector2(p.x, p.z)
+	return array
