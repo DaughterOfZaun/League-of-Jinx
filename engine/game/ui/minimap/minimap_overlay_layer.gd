@@ -1,4 +1,3 @@
-@tool
 extends Control
 
 @export var line_width := 1.0
@@ -9,24 +8,19 @@ var camera: Camera
 var viewport: SubViewportEx
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
-	
 	var root := get_tree().current_scene
 	camera = root.get_node("%Camera")
 	viewport = root.get_node("%SubViewport")
 
 var prev_camera_global_position: Vector3
 func _process(delta: float) -> void:
-	if Engine.is_editor_hint():
-		queue_redraw()
-		return
+	if Engine.is_editor_hint(): return
 	if camera.global_position != prev_camera_global_position:
 		prev_camera_global_position = camera.global_position
 		queue_redraw()
 
 func _draw() -> void:
-	if Engine.is_editor_hint():
-		draw_line(Vector2(0, 0), Vector2(1000, 1000), line_color, line_width, line_antialiased)
-		return
+	if Engine.is_editor_hint(): return
 	var rect := camera.get_rect_3d()
 	for i in range(4):
 		rect[i] = viewport.to_uv(rect[i]) * size
@@ -35,5 +29,10 @@ func _draw() -> void:
 
 func _gui_input(unk_event: InputEvent) -> void:
 	if Engine.is_editor_hint(): return
-	if unk_event is InputEventMouseMotion:
-		var event := unk_event as InputEventMouseMotion
+	if unk_event is InputEventMouse:
+		var event: InputEventMouse = unk_event
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			camera.locked = false
+			camera.offset = Vector3.ZERO
+			var pos := viewport.from_canvas(event.position / size * Vector2(viewport.size))
+			camera.target_position = pos + Vector3.UP * camera.ground_height

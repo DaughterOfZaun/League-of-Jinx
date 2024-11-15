@@ -23,6 +23,8 @@ var zoom := 1.0:
 
 @export var locked := true
 
+@export var ground_height := 1.35
+
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	offset_initial = self.global_position - target.global_position
@@ -55,7 +57,7 @@ func _physics_process(delta: float) -> void:
 	global_position = global_position.lerp(target_position + offset_initial * zoom + offset, lerp_speed * delta)
 
 func get_rect_3d() -> Array[Vector2]:
-	var plane := Plane(Vector3.UP, 1.35)
+	var plane := Plane(Vector3.UP, ground_height)
 	var rect := viewport.get_visible_rect()
 	var a := rect.position
 	var c := rect.end

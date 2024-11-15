@@ -38,7 +38,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="Screenshot" type="TextureRect" parent="."]
 visible = false
@@ -429,7 +429,6 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="Control" type="Control" parent="Map"]
-z_index = -2
 clip_contents = true
 layout_mode = 1
 anchors_preset = 3
@@ -482,7 +481,6 @@ expand_mode = 1
 script = ExtResource("14_n4n8a")
 
 [node name="Icons" type="Control" parent="Map/Control/MapTexture/SubViewportTexture"]
-z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -491,7 +489,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Overlay" type="Control" parent="Map/Control/MapTexture/SubViewportTexture"]
-z_index = 1
+z_index = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -515,6 +513,7 @@ offset_right = 1.0
 offset_bottom = 8.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 2
 texture = ExtResource("15_c3s7d")
 expand_mode = 1
 
