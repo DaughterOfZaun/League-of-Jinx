@@ -1,7 +1,7 @@
 [gd_scene load_steps=55 format=3 uid="uid://dgxp55bfpc742"]
 
 [ext_resource type="Script" path="res://engine/unit/unit.gd" id="1_r3toj"]
-[ext_resource type="Script" path="res://engine/game/ui/minimap_icon.gd" id="2_81mpc"]
+[ext_resource type="Script" path="res://engine/game/ui/minimap/minimap_icon.gd" id="2_81mpc"]
 [ext_resource type="Texture2D" uid="uid://cjgdixmn1dikj" path="res://data/characters/Ahri/Icons/Ahri_Circle.webp" id="3_7i6v8"]
 [ext_resource type="Script" path="res://engine/game/ui/healthbar.gd" id="3_81mpc"]
 [ext_resource type="Texture2D" uid="uid://c4ovd8h1ya3pk" path="res://data/ui/healthbars/blue.webp" id="3_biknk"]

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
 [ext_resource type="CompressedTexture3D" uid="uid://cw7h14f61vo0x" path="res://LUT2.webp" id="2_tb6ku"]
-[ext_resource type="Script" path="res://engine/game/subviewport.gd" id="3_06ecp"]
+[ext_resource type="Script" path="res://engine/game/ui/minimap/subviewport.gd" id="3_06ecp"]
 [ext_resource type="Shader" path="res://engine/game/lights/new_shader.gdshader" id="3_h7a1n"]
-[ext_resource type="PackedScene" uid="uid://0spn4csgi7k1" path="res://engine/game/ui/map.tscn" id="3_ybns6"]
+[ext_resource type="PackedScene" uid="uid://0spn4csgi7k1" path="res://engine/game/ui/minimap/map.tscn" id="3_ybns6"]
 [ext_resource type="Script" path="res://engine/game/lights/color_rect.gd" id="4_s88ld"]
 [ext_resource type="PackedScene" uid="uid://diknhd1061r8r" path="res://engine/game/ui/ui.tscn" id="6_pnpm1"]
 [ext_resource type="Script" path="res://engine/game/camera.gd" id="25_obkvb"]
