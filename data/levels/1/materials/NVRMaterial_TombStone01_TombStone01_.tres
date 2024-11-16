@@ -1,13 +1,16 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dew0e5uailin5"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://dew0e5uailin5"]
 
 [ext_resource type="Texture2D" uid="uid://cl7gpe15v5n7l" path="res://data/levels/1/textures/room_TombStone01.webp" id="1_s28n2"]
 [ext_resource type="Texture2D" uid="uid://1efnvmf1fb3i" path="res://data/levels/1/textures/room_TombStone01.normal.webp" id="2_jfivm"]
+[ext_resource type="Texture2D" uid="uid://0kgyjytnll0b" path="res://data/levels/1/textures/room_TombStone01.height.webp" id="2_n1cvr"]
 
 [resource]
 resource_name = "NVRMaterial_TombStone01_TombStone01_"
 albedo_texture = ExtResource("1_s28n2")
 normal_enabled = true
 normal_texture = ExtResource("2_jfivm")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_n1cvr")
 metadata/extras = {
 "name": "NVRMaterial_TombStone01_TombStone01_"
 }

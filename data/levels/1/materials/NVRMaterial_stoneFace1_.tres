@@ -1,6 +1,7 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://btug7yjlys87k"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://btug7yjlys87k"]
 
 [ext_resource type="Texture2D" uid="uid://b1ruvw4j852l2" path="res://data/levels/1/textures/room_stoneFace1.webp" id="1_2gyim"]
+[ext_resource type="Texture2D" uid="uid://dbxn2ijejtvn1" path="res://data/levels/1/textures/room_stoneFace1.height.webp" id="2_bcsdm"]
 [ext_resource type="Texture2D" uid="uid://ca0v5ljst2hlb" path="res://data/levels/1/textures/room_stoneFace1.normal.webp" id="2_jjdkp"]
 
 [resource]
@@ -8,6 +9,8 @@ resource_name = "NVRMaterial_stoneFace1_"
 albedo_texture = ExtResource("1_2gyim")
 normal_enabled = true
 normal_texture = ExtResource("2_jjdkp")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_bcsdm")
 metadata/extras = {
 "name": "NVRMaterial_stoneFace1_"
 }

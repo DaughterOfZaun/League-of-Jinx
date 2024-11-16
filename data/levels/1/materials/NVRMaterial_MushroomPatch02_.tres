@@ -1,7 +1,8 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://c3akyiamfq2xd"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://c3akyiamfq2xd"]
 
 [ext_resource type="Texture2D" uid="uid://c18wfqsodes0d" path="res://data/levels/1/textures/room_MushroomPatch02.webp" id="1_eh38g"]
 [ext_resource type="Texture2D" uid="uid://bst7kvqlxlsvp" path="res://data/levels/1/textures/room_MushroomPatch02.normal.webp" id="2_1xmjd"]
+[ext_resource type="Texture2D" uid="uid://bd3m04hq0oavu" path="res://data/levels/1/textures/room_MushroomPatch02.height.webp" id="2_qxhv7"]
 
 [resource]
 resource_name = "NVRMaterial_MushroomPatch02_"
@@ -11,6 +12,8 @@ alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_eh38g")
 normal_enabled = true
 normal_texture = ExtResource("2_1xmjd")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_qxhv7")
 metadata/extras = {
 "name": "NVRMaterial_MushroomPatch02_"
 }

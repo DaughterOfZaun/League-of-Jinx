@@ -1,6 +1,7 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dkfsb4kyjspir"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://dkfsb4kyjspir"]
 
 [ext_resource type="Texture2D" uid="uid://ssa8v31msbam" path="res://data/levels/1/textures/room_Chaos_dirt_grass_blend.webp" id="1_soxjq"]
+[ext_resource type="Texture2D" uid="uid://ykfg5j21nm0i" path="res://data/levels/1/textures/room_Chaos_dirt_grass_blend.height.webp" id="2_7cnqy"]
 [ext_resource type="Texture2D" uid="uid://dyv42fkwb3eo8" path="res://data/levels/1/textures/room_Chaos_dirt_grass_blend.normal.webp" id="2_jt8ks"]
 
 [resource]
@@ -8,6 +9,8 @@ resource_name = "NVRMaterial_ground_Chaos_dirt_grass_blend_"
 albedo_texture = ExtResource("1_soxjq")
 normal_enabled = true
 normal_texture = ExtResource("2_jt8ks")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_7cnqy")
 metadata/extras = {
 "name": "NVRMaterial_ground_Chaos_dirt_grass_blend_"
 }

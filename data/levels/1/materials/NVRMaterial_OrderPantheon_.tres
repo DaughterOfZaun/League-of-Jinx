@@ -1,6 +1,7 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://3g0y1k0g6bjp"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://3g0y1k0g6bjp"]
 
 [ext_resource type="Texture2D" uid="uid://c4ejugiwp7ejc" path="res://data/levels/1/textures/room_OrderPantheon.webp" id="1_tlt5u"]
+[ext_resource type="Texture2D" uid="uid://dt4ua364vkcgr" path="res://data/levels/1/textures/room_OrderPantheon.height.webp" id="2_3t0ij"]
 [ext_resource type="Texture2D" uid="uid://bsganww7ymbg0" path="res://data/levels/1/textures/room_OrderPantheon.normal.webp" id="2_8wh4l"]
 
 [resource]
@@ -8,6 +9,8 @@ resource_name = "NVRMaterial_OrderPantheon_"
 albedo_texture = ExtResource("1_tlt5u")
 normal_enabled = true
 normal_texture = ExtResource("2_8wh4l")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_3t0ij")
 metadata/extras = {
 "name": "NVRMaterial_OrderPantheon_"
 }

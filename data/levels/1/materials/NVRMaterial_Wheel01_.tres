@@ -1,6 +1,7 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bwk13tqpdmuja"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://bwk13tqpdmuja"]
 
 [ext_resource type="Texture2D" uid="uid://c5qx2gdo3t45l" path="res://data/levels/1/textures/room_Wheel01.webp" id="1_p08oi"]
+[ext_resource type="Texture2D" uid="uid://dftffkx4e314l" path="res://data/levels/1/textures/room_Wheel01.height.webp" id="2_mv75w"]
 [ext_resource type="Texture2D" uid="uid://6w6mra1ohrv5" path="res://data/levels/1/textures/room_Wheel01.normal.webp" id="2_rxrvd"]
 
 [resource]
@@ -8,6 +9,8 @@ resource_name = "NVRMaterial_Wheel01_"
 albedo_texture = ExtResource("1_p08oi")
 normal_enabled = true
 normal_texture = ExtResource("2_rxrvd")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_mv75w")
 metadata/extras = {
 "name": "NVRMaterial_Wheel01_"
 }

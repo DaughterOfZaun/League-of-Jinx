@@ -1,6 +1,7 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://mrfggyx11eg4"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://mrfggyx11eg4"]
 
 [ext_resource type="Texture2D" uid="uid://8lugfg8f57nu" path="res://data/levels/1/textures/room_Chaos_dirt.webp" id="1_ym0i6"]
+[ext_resource type="Texture2D" uid="uid://cbuuad8t013cb" path="res://data/levels/1/textures/room_Chaos_dirt.height.webp" id="2_61gie"]
 [ext_resource type="Texture2D" uid="uid://dn6hxvm3gvco2" path="res://data/levels/1/textures/room_Chaos_dirt.normal.webp" id="2_vnd4y"]
 
 [resource]
@@ -8,6 +9,8 @@ resource_name = "NVRMaterial_ground_Chaos_dirt_"
 albedo_texture = ExtResource("1_ym0i6")
 normal_enabled = true
 normal_texture = ExtResource("2_vnd4y")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_61gie")
 metadata/extras = {
 "name": "NVRMaterial_ground_Chaos_dirt_"
 }

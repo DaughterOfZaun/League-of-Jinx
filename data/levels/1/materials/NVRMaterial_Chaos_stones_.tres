@@ -1,6 +1,7 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://na2e0vk1l8tc"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://na2e0vk1l8tc"]
 
 [ext_resource type="Texture2D" uid="uid://cxa7vsinrnoy7" path="res://data/levels/1/textures/room_Chaos_stonesb.webp" id="1_f70mb"]
+[ext_resource type="Texture2D" uid="uid://d0dhjr1upcai1" path="res://data/levels/1/textures/room_Chaos_stonesb.height.webp" id="2_lujx1"]
 [ext_resource type="Texture2D" uid="uid://c5ojtpmlr4s3e" path="res://data/levels/1/textures/room_Chaos_stonesb.normal.webp" id="2_xy0hw"]
 
 [resource]
@@ -8,6 +9,8 @@ resource_name = "NVRMaterial_Chaos_stones_"
 albedo_texture = ExtResource("1_f70mb")
 normal_enabled = true
 normal_texture = ExtResource("2_xy0hw")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_lujx1")
 metadata/extras = {
 "name": "NVRMaterial_Chaos_stones_"
 }

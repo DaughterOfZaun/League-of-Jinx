@@ -1,6 +1,7 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bkgrehbll3j2u"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://bkgrehbll3j2u"]
 
 [ext_resource type="Texture2D" uid="uid://bqanvy5c3w7p3" path="res://data/levels/1/textures/room_order_ground_mix2.webp" id="1_nd8pk"]
+[ext_resource type="Texture2D" uid="uid://qveiydnxvjri" path="res://data/levels/1/textures/room_order_ground_mix2.height.webp" id="2_60xne"]
 [ext_resource type="Texture2D" uid="uid://dwqoc4hv2pd0u" path="res://data/levels/1/textures/room_order_ground_mix2.normal.webp" id="2_ishnf"]
 
 [resource]
@@ -11,6 +12,8 @@ alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_nd8pk")
 normal_enabled = true
 normal_texture = ExtResource("2_ishnf")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_60xne")
 texture_repeat = false
 metadata/extras = {
 "name": "NVRMaterial_order_ground_mix2_"

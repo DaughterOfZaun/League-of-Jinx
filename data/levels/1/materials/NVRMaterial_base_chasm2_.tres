@@ -1,7 +1,8 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dss2hwqrxyc86"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://dss2hwqrxyc86"]
 
 [ext_resource type="Texture2D" uid="uid://cehkhf6rj7op6" path="res://data/levels/1/textures/room_base_chasm2.webp" id="1_lwcyl"]
 [ext_resource type="Texture2D" uid="uid://dbrvtp7jpigx" path="res://data/levels/1/textures/room_base_chasm2.normal.webp" id="2_b56hk"]
+[ext_resource type="Texture2D" uid="uid://dn6yy2i2snjqs" path="res://data/levels/1/textures/room_base_chasm2.height.webp" id="2_cy7ws"]
 
 [resource]
 resource_name = "NVRMaterial_base_chasm2_"
@@ -11,6 +12,8 @@ alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_lwcyl")
 normal_enabled = true
 normal_texture = ExtResource("2_b56hk")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_cy7ws")
 texture_repeat = false
 metadata/extras = {
 "name": "NVRMaterial_base_chasm2_"

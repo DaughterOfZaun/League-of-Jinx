@@ -7,6 +7,22 @@ extends Node3D
 @onready var viewport := get_viewport()
 @onready var window := get_tree().get_root()
 
+enum CursorShape {
+	DEFAULT, HOVER_ENEMY, HOVER_ENEMY_DISABLED, HOVER_FRIENDLY, HOVER_SHOP
+}
+@export var cursor_textures: Dictionary[CursorShape, Texture2D] = {}
+#@export_group("Cursor", "cursor_texture_")
+#@export var cursor_texture_default: Texture2D
+#@export var cursor_texture_hover_enemy: Texture2D
+#@export var cursor_texture_hover_enemy_disabled: Texture2D
+#@export var cursor_texture_hover_friendly: Texture2D
+#@export var cursor_texture_hover_shop: Texture2D
+#@export_group("")
+func set_cursor_shape(shape: CursorShape) -> void:
+	#Input.set_custom_mouse_cursor(cursor_textures[shape], Input.CURSOR_ARROW)
+	#Input.set_default_cursor_shape(int(shape))
+	print(Engine.get_process_frames(), ' ', CursorShape.keys()[shape])
+
 func on_unit_clicked(char: Unit, button: MouseButton) -> void:
 	#if main_hero == null: return
 	if char.team != main_hero.team:
@@ -22,9 +38,25 @@ var hovered_pos: Vector3:
 		var intersection: Variant = plane.intersects_ray(origin, normal)
 		return intersection if intersection != null else Vector3.INF
 func on_unit_hovered(unit: Unit) -> void:
+	var shape: CursorShape
+	if unit.team == main_hero.team:
+		shape = CursorShape.HOVER_FRIENDLY
+	elif unit.status.targetable && unit.status.targetable_to_team.get(unit.team, true):
+		shape = CursorShape.HOVER_ENEMY
+	else:
+		shape = CursorShape.HOVER_ENEMY_DISABLED
+	set_cursor_shape(shape)
+	viewport.set_input_as_handled()
 	hovered_unit = unit
+
 func on_ground_hovered() -> void:
+	set_cursor_shape(CursorShape.DEFAULT)
+	viewport.set_input_as_handled()
 	hovered_unit = null
+
+
+func set_event_as_handled(event: InputEventMouse) -> void:
+	pass
 
 func _input(event: InputEvent) -> void:
 	#if main_hero == null: return
@@ -45,6 +77,7 @@ func _input(event: InputEvent) -> void:
 			window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
 		else:
 			window.mode = Window.MODE_WINDOWED
+		viewport.set_input_as_handled()
 
 const RAY_LENGTH = 1000.0
 func _unhandled_input(unknown_event: InputEvent) -> void:
@@ -57,17 +90,27 @@ func _unhandled_input(unknown_event: InputEvent) -> void:
 				nav_map_rid, origin, origin + normal * RAY_LENGTH
 			)
 			main_hero.order(Enums.OrderType.MOVE_TO, nearest_reachable_point, null)
-			viewport.set_input_as_handled()
+		#viewport.set_input_as_handled()
 		on_ground_hovered()
 	elif unknown_event is InputEventMouseMotion:
 		var event := unknown_event as InputEventMouseMotion
+		#viewport.set_input_as_handled()
 		on_ground_hovered()
+
+func on_ground_clicked(pos: Vector3) -> void:
+	var nearest_reachable_point := NavigationServer3D.map_get_closest_point(nav_map_rid, pos)
+	main_hero.order(Enums.OrderType.MOVE_TO, nearest_reachable_point, null)
+	#viewport.set_input_as_handled()
+	on_ground_hovered()
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 
-	Input.use_accumulated_input = false
-	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+	#Input.use_accumulated_input = false
+	#Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+
+	#for shape: CursorShape in cursor_textures.keys():
+	#	Input.set_custom_mouse_cursor(cursor_textures[shape], int(shape))
 
 	var spells: Dictionary[String, UISpell] = {
 		"q": get_node("%UI/Center/ChampionSpells/Spell1"),

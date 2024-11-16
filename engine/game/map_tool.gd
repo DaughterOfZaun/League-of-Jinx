@@ -258,6 +258,14 @@ const mi_dir := "res://data/levels/1/meshes"
 		var m := mi.mesh.surface_get_material(0) as StandardMaterial3D
 		m.normal_enabled = true
 		m.normal_texture = load(m.albedo_texture.resource_path.replace(".webp", ".normal.webp"))
+@export_tool_button("Enable Height Maps") var enable_height_maps := func() -> void:
+	for child in get_children(true):
+		var mi := child as MeshInstance3D
+		if mi == null: continue
+		assert(mi.mesh.get_surface_count() == 1)
+		var m := mi.mesh.surface_get_material(0) as StandardMaterial3D
+		m.heightmap_enabled = true
+		m.heightmap_texture = load(m.albedo_texture.resource_path.replace(".webp", ".height.webp"))
 @export_group("")
 
 @export_tool_button("TEST") var test := func() -> void:

@@ -1,6 +1,7 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dqi26yd4x3moq"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://dqi26yd4x3moq"]
 
 [ext_resource type="Texture2D" uid="uid://dejqwcbpmg3im" path="res://data/levels/1/textures/room_ChaosPantheon01.webp" id="1_64snf"]
+[ext_resource type="Texture2D" uid="uid://6alwmwelfk51" path="res://data/levels/1/textures/room_ChaosPantheon01.height.webp" id="2_7nce0"]
 [ext_resource type="Texture2D" uid="uid://d336u4h0i7lr0" path="res://data/levels/1/textures/room_ChaosPantheon01.normal.webp" id="2_uylnv"]
 
 [resource]
@@ -11,6 +12,8 @@ alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("1_64snf")
 normal_enabled = true
 normal_texture = ExtResource("2_uylnv")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_7nce0")
 metadata/extras = {
 "name": "NVRMaterial_lambert98"
 }

@@ -1,6 +1,7 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cy6wkeyg6natm"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cy6wkeyg6natm"]
 
 [ext_resource type="Texture2D" uid="uid://cr25eb5s45n4" path="res://data/levels/1/textures/room_stone_steps.webp" id="1_1jrq3"]
+[ext_resource type="Texture2D" uid="uid://vcw813s1qs13" path="res://data/levels/1/textures/room_stone_steps.height.webp" id="2_4q1dc"]
 [ext_resource type="Texture2D" uid="uid://1ftqbwkdklcw" path="res://data/levels/1/textures/room_stone_steps.normal.webp" id="2_kd5uo"]
 
 [resource]
@@ -8,6 +9,8 @@ resource_name = "NVRMaterial_lambert150"
 albedo_texture = ExtResource("1_1jrq3")
 normal_enabled = true
 normal_texture = ExtResource("2_kd5uo")
+heightmap_enabled = true
+heightmap_texture = ExtResource("2_4q1dc")
 metadata/extras = {
 "name": "NVRMaterial_lambert150"
 }
