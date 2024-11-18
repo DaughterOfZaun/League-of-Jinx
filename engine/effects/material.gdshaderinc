@@ -21,7 +21,7 @@ uniform vec2 uv_scroll = vec2(0, 0);
 #define TIME_PASSED INSTANCE_CUSTOM.y
 #define ALT_SEED INSTANCE_CUSTOM.z
 
-#include "res://Effects/random.gdshaderinc"
+#include "random.gdshaderinc"
 
 void vertex() {
     UV = UV * uv_scale + uv_offset + uv_scroll * TIME_PASSED;

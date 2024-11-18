@@ -24,6 +24,10 @@ uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, RE
 uniform float specular : hint_range(0.0, 1.0, 0.01) = 0.5;
 uniform float metallic : hint_range(0.0, 1.0, 0.01) = 0.0;
 
+uniform sampler2D texture_heightmap : hint_default_black, filter_linear_mipmap, repeat_disable;
+uniform float heightmap_scale : hint_range(-16.0, 16.0, 0.001);
+uniform vec2 heightmap_flip;
+
 uniform sampler2D texture_normal : hint_roughness_normal, filter_linear_mipmap, REPEAT_MODE;
 uniform float normal_scale : hint_range(-16.0, 16.0) = 1.0;
 
@@ -48,6 +52,14 @@ uniform vec2 density_texture_offset = vec2(64, -64);
 
 void fragment() {
 	vec2 base_uv = UV;
+
+	{
+		// Height: Enabled
+		vec3 view_dir = normalize(normalize(-VERTEX + EYE_OFFSET) * mat3(TANGENT * heightmap_flip.x, -BINORMAL * heightmap_flip.y, NORMAL));
+		float depth = 1.0 - texture(texture_heightmap, base_uv).r;
+		vec2 ofs = base_uv - view_dir.xy * depth * heightmap_scale * 0.01;
+		base_uv = ofs;
+	}
 
 	vec4 albedo_tex = texture(texture_albedo, base_uv);
 	ALBEDO = albedo.rgb * albedo_tex.rgb;

@@ -2,10 +2,9 @@ class_name Enums
 
 enum Team {
 	UNKNOWN = 0,
-	ORDER = 100,
-	CHAOS = 200,
-	NEUTRAL = 300,
-	MAX = 400,
+	ORDER = 1,
+	CHAOS = 2,
+	NEUTRAL = 3,
 }
 
 enum Lane {

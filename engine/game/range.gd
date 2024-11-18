@@ -21,6 +21,7 @@ func _ready() -> void:
 	monitoring = true
 	monitorable = true
 
+	assert(char.team != 0)
 	var team_mask := 1 << char.team
 	collision_mask = ~(team_mask | 1) if monitoring else 0
 	collision_layer = team_mask if monitorable else 0
@@ -31,8 +32,11 @@ func _ready() -> void:
 @onready var input_manager: InputManager = root.get_node("%InputManager");
 func _input_event(camera: Camera3D, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	var iemb := event as InputEventMouseButton
-	var iemm := event as InputEventMouseMotion
 	if iemb and iemb.pressed:
 		input_manager.on_unit_clicked(char, iemb.button_index)
-	elif iemm:
-		input_manager.on_unit_hovered(char)
+	
+func _mouse_enter() -> void:
+	input_manager.on_unit_hovered(char)
+
+func _mouse_exit() -> void:
+	input_manager.on_ground_hovered()

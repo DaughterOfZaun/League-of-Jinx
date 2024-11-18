@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=44 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
 [ext_resource type="CompressedTexture3D" uid="uid://cw7h14f61vo0x" path="res://LUT2.webp" id="2_tb6ku"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cn46pgxvwo13r" path="res://data/ui/cursor/Hand2.webp" id="6_5t0se"]
 [ext_resource type="PackedScene" uid="uid://diknhd1061r8r" path="res://engine/game/ui/ui.tscn" id="6_pnpm1"]
 [ext_resource type="Texture2D" uid="uid://bnu40pa7h3jgo" path="res://data/ui/cursor/Hover_Shop.webp" id="7_tqj1w"]
+[ext_resource type="PackedScene" uid="uid://cmuj1g4sexvke" path="res://data/particles/cursor_moveto/system.tscn" id="8_toluw"]
 [ext_resource type="Script" path="res://engine/game/camera.gd" id="25_obkvb"]
 [ext_resource type="PackedScene" uid="uid://dgxp55bfpc742" path="res://data/characters/Ahri/unit.tscn" id="27_0mdok"]
 [ext_resource type="Shader" path="res://engine/game/level/level.gdshader" id="31_g1ghr"]
@@ -66,7 +67,7 @@ resource_local_to_scene = true
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0x1rk"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_rf48r"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Node3D" type="Node3D"]
@@ -96,6 +97,7 @@ cursor_textures = Dictionary[int, Texture2D]({
 3: ExtResource("6_5t0se"),
 4: ExtResource("7_tqj1w")
 })
+cursor_moveto_effect = ExtResource("8_toluw")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 unique_name_in_owner = true
@@ -152,6 +154,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="Unit" parent="." instance=ExtResource("27_0mdok")]
 transform = Transform3D(-0.803857, 0, 0.594823, 0, 1, 0, -0.594823, 0, -0.803857, 0.746, 2.485, -3.787)
+team = 1
 
 [node name="Map" parent="." instance=ExtResource("71_7skrr")]
 unique_name_in_owner = true
@@ -159,282 +162,279 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 level_shader = ExtResource("31_g1ghr")
 level_decal_shader = ExtResource("32_m603r")
 level_flora_shader = ExtResource("33_rqr2r")
-viewport_texture = SubResource("ViewportTexture_0x1rk")
+viewport_texture = SubResource("ViewportTexture_rf48r")
 object_cfg = "res://data/levels/1/ObjectCFG.cfg"
 create_level_props_script = ExtResource("35_x1iow")
 
 [node name="HQ_T1" parent="Map" instance=ExtResource("36_yik85")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5361, 1.35, 20.494)
-team = 100
+team = 1
 
 [node name="HQ_T2" parent="Map" instance=ExtResource("37_5vbbt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 182.066, 1.35, 186.275)
-team = 200
+team = 2
 
 [node name="Barracks_T1_L1" parent="Map" instance=ExtResource("39_rx1pf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7469, 1.35, 48.0652)
-team = 100
+team = 1
 
 [node name="Barracks_T1_C1" parent="Map" instance=ExtResource("39_rx1pf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.6091, 1.35, 42.6522)
-team = 100
+team = 1
 
 [node name="Barracks_T1_R1" parent="Map" instance=ExtResource("39_rx1pf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.1607, 1.35, 14.8302)
-team = 100
+team = 1
 
 [node name="Barracks_T2_L1" parent="Map" instance=ExtResource("38_vsljp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 156.772, 1.35, 191.76)
-team = 200
+team = 2
 
 [node name="Barracks_T2_C1" parent="Map" instance=ExtResource("38_vsljp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 160.773, 1.35, 163.67)
-team = 200
+team = 2
 
 [node name="Barracks_T2_R1" parent="Map" instance=ExtResource("38_vsljp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 188.945, 1.35, 159.438)
-team = 200
+team = 2
 
-[node name="Turrets" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
-
-[node name="Turret_T1_R_03" parent="Turrets" instance=ExtResource("36_dp7n3")]
+[node name="Turret_T1_R_03" parent="Map" instance=ExtResource("36_dp7n3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144.436, 0.591119, 11.6)
 pos = 3
-team = 100
+team = 1
 
-[node name="Turret_T1_R_02" parent="Turrets" instance=ExtResource("38_mmvut")]
+[node name="Turret_T1_R_02" parent="Map" instance=ExtResource("38_mmvut")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 93.172, 0.619441, 18.0901)
 pos = 2
-team = 100
+team = 1
 
-[node name="Turret_T1_C_07" parent="Turrets" instance=ExtResource("36_oe0ed")]
+[node name="Turret_T1_C_07" parent="Map" instance=ExtResource("36_oe0ed")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.6311, 1.3765, 14.922)
 pos = 1
-team = 100
+team = 1
 
-[node name="Turret_T2_R_03" parent="Turrets" instance=ExtResource("39_qsin3")]
+[node name="Turret_T2_R_03" parent="Map" instance=ExtResource("39_qsin3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192.51, 0.58589, 61.2968)
 pos = 3
-team = 200
+team = 2
 
-[node name="Turret_T2_R_02" parent="Turrets" instance=ExtResource("41_igafg")]
+[node name="Turret_T2_R_02" parent="Map" instance=ExtResource("41_igafg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 184.805, 0.540161, 114.505)
 pos = 2
-team = 200
+team = 2
 
-[node name="Turret_T2_R_01" parent="Turrets" instance=ExtResource("38_bto7k")]
+[node name="Turret_T2_R_01" parent="Map" instance=ExtResource("38_bto7k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 188.88, 1.36929, 149.814)
 pos = 1
-team = 200
+team = 2
 
-[node name="Turret_T1_C_05" parent="Turrets" instance=ExtResource("36_dp7n3")]
+[node name="Turret_T1_C_05" parent="Map" instance=ExtResource("36_dp7n3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 77.8282, 0.630579, 88.344)
 lane = 1
 pos = 3
-team = 100
+team = 1
 
-[node name="Turret_T1_C_04" parent="Turrets" instance=ExtResource("38_mmvut")]
+[node name="Turret_T1_C_04" parent="Map" instance=ExtResource("38_mmvut")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.4172, 0.622275, 65.6962)
 lane = 1
 pos = 2
-team = 100
+team = 1
 
-[node name="Turret_T1_C_03" parent="Turrets" instance=ExtResource("36_oe0ed")]
+[node name="Turret_T1_C_03" parent="Map" instance=ExtResource("36_oe0ed")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.2919, 1.37321, 49.3285)
 lane = 1
 pos = 1
-team = 100
+team = 1
 
-[node name="Turret_T2_C_05" parent="Turrets" instance=ExtResource("39_qsin3")]
+[node name="Turret_T2_C_05" parent="Map" instance=ExtResource("39_qsin3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122.289, 0.633639, 118.569)
 lane = 1
 pos = 3
-team = 200
+team = 2
 
-[node name="Turret_T2_C_04" parent="Turrets" instance=ExtResource("41_igafg")]
+[node name="Turret_T2_C_04" parent="Map" instance=ExtResource("41_igafg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 133.904, 0.589871, 141.491)
 lane = 1
 pos = 2
-team = 200
+team = 2
 
-[node name="Turret_T2_C_03" parent="Turrets" instance=ExtResource("38_bto7k")]
+[node name="Turret_T2_C_03" parent="Map" instance=ExtResource("38_bto7k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 153.672, 1.38023, 157.47)
 lane = 1
 pos = 1
-team = 200
+team = 2
 
-[node name="Turret_T1_L_03" parent="Turrets" instance=ExtResource("36_dp7n3")]
+[node name="Turret_T1_L_03" parent="Map" instance=ExtResource("36_dp7n3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.26559, 0.383416, 146.18)
 lane = 2
 pos = 3
-team = 100
+team = 1
 
-[node name="Turret_T1_L_02" parent="Turrets" instance=ExtResource("38_mmvut")]
+[node name="Turret_T1_L_02" parent="Map" instance=ExtResource("38_mmvut")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8671, 0.601478, 92.6741)
 lane = 2
 pos = 2
-team = 100
+team = 1
 
-[node name="Turret_T1_C_06" parent="Turrets" instance=ExtResource("36_oe0ed")]
+[node name="Turret_T1_C_06" parent="Map" instance=ExtResource("36_oe0ed")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5233, 1.38329, 57.9765)
 lane = 2
 pos = 1
-team = 100
+team = 1
 
-[node name="Turret_T2_L_03" parent="Turrets" instance=ExtResource("39_qsin3")]
+[node name="Turret_T2_L_03" parent="Map" instance=ExtResource("39_qsin3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.9821, 0.187753, 195.288)
 lane = 2
 pos = 3
-team = 200
+team = 2
 
-[node name="Turret_T2_L_02" parent="Turrets" instance=ExtResource("41_igafg")]
+[node name="Turret_T2_L_02" parent="Map" instance=ExtResource("41_igafg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 107.814, 0.560307, 188.654)
 lane = 2
 pos = 2
-team = 200
+team = 2
 
-[node name="Turret_T2_L_01" parent="Turrets" instance=ExtResource("38_bto7k")]
+[node name="Turret_T2_L_01" parent="Map" instance=ExtResource("38_bto7k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 146.785, 1.3642, 192.586)
 lane = 2
 pos = 1
-team = 200
+team = 2
 
-[node name="Turret_T1_R_04" parent="Turrets" instance=ExtResource("36_dp7n3")]
+[node name="Turret_T1_R_04" parent="Map" instance=ExtResource("36_dp7n3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144.436, 0.591119, 11.6)
 pos = 3
-team = 100
+team = 1
 
-[node name="Turret_T1_R_05" parent="Turrets" instance=ExtResource("38_mmvut")]
+[node name="Turret_T1_R_05" parent="Map" instance=ExtResource("38_mmvut")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 93.172, 0.619441, 18.0901)
 pos = 2
-team = 100
+team = 1
 
-[node name="Turret_T1_C_08" parent="Turrets" instance=ExtResource("36_oe0ed")]
+[node name="Turret_T1_C_08" parent="Map" instance=ExtResource("36_oe0ed")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.6311, 1.3765, 14.922)
 pos = 1
-team = 100
+team = 1
 
-[node name="Turret_T2_R_04" parent="Turrets" instance=ExtResource("39_qsin3")]
+[node name="Turret_T2_R_04" parent="Map" instance=ExtResource("39_qsin3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 192.51, 0.58589, 61.2968)
 pos = 3
-team = 200
+team = 2
 
-[node name="Turret_T2_R_05" parent="Turrets" instance=ExtResource("41_igafg")]
+[node name="Turret_T2_R_05" parent="Map" instance=ExtResource("41_igafg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 184.805, 0.540161, 114.505)
 pos = 2
-team = 200
+team = 2
 
-[node name="Turret_T2_R_06" parent="Turrets" instance=ExtResource("38_bto7k")]
+[node name="Turret_T2_R_06" parent="Map" instance=ExtResource("38_bto7k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 188.88, 1.36929, 149.814)
 pos = 1
-team = 200
+team = 2
 
-[node name="Turret_T1_C_09" parent="Turrets" instance=ExtResource("36_dp7n3")]
+[node name="Turret_T1_C_09" parent="Map" instance=ExtResource("36_dp7n3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 77.8282, 0.630579, 88.344)
 lane = 1
 pos = 3
-team = 100
+team = 1
 
-[node name="Turret_T1_C_10" parent="Turrets" instance=ExtResource("38_mmvut")]
+[node name="Turret_T1_C_10" parent="Map" instance=ExtResource("38_mmvut")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66.4172, 0.622275, 65.6962)
 lane = 1
 pos = 2
-team = 100
+team = 1
 
-[node name="Turret_T1_C_11" parent="Turrets" instance=ExtResource("36_oe0ed")]
+[node name="Turret_T1_C_11" parent="Map" instance=ExtResource("36_oe0ed")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.2919, 1.37321, 49.3285)
 lane = 1
 pos = 1
-team = 100
+team = 1
 
-[node name="Turret_T1_C_01" parent="Turrets" instance=ExtResource("43_vg3su")]
+[node name="Turret_T1_C_01" parent="Map" instance=ExtResource("43_vg3su")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2327, 1.40461, 29.0629)
 lane = 1
 pos = 5
-team = 100
+team = 1
 
-[node name="Turret_T1_C_02" parent="Turrets" instance=ExtResource("43_vg3su")]
+[node name="Turret_T1_C_02" parent="Map" instance=ExtResource("43_vg3su")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1082, 1.37948, 22.5399)
 lane = 1
 pos = 4
-team = 100
+team = 1
 
-[node name="Turret_T2_C_06" parent="Turrets" instance=ExtResource("39_qsin3")]
+[node name="Turret_T2_C_06" parent="Map" instance=ExtResource("39_qsin3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 122.289, 0.633639, 118.569)
 lane = 1
 pos = 3
-team = 200
+team = 2
 
-[node name="Turret_T2_C_07" parent="Turrets" instance=ExtResource("41_igafg")]
+[node name="Turret_T2_C_07" parent="Map" instance=ExtResource("41_igafg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 133.904, 0.589871, 141.491)
 lane = 1
 pos = 2
-team = 200
+team = 2
 
-[node name="Turret_T2_C_08" parent="Turrets" instance=ExtResource("38_bto7k")]
+[node name="Turret_T2_C_08" parent="Map" instance=ExtResource("38_bto7k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 153.672, 1.38023, 157.47)
 lane = 1
 pos = 1
-team = 200
+team = 2
 
-[node name="Turret_T2_C_01" parent="Turrets" instance=ExtResource("44_yyq8c")]
+[node name="Turret_T2_C_01" parent="Map" instance=ExtResource("44_yyq8c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 181.111, 1.34368, 177.956)
 lane = 1
 pos = 5
-team = 200
+team = 2
 
-[node name="Turret_T2_C_02" parent="Turrets" instance=ExtResource("44_yyq8c")]
+[node name="Turret_T2_C_02" parent="Map" instance=ExtResource("44_yyq8c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 173.328, 1.34268, 184.16)
 lane = 1
 pos = 4
-team = 200
+team = 2
 
-[node name="Turret_OrderTurretShrine" parent="Turrets" instance=ExtResource("45_yik85")]
+[node name="Turret_OrderTurretShrine" parent="Map" instance=ExtResource("45_yik85")]
 transform = Transform3D(-0.803857, 0, -0.594823, 0, 1, 0, 0.594823, 0, -0.803857, -2.81916, 2.62725, -0.219003)
 lane = 1
-team = 100
+team = 1
 
-[node name="Turret_ChaosTurretShrine" parent="Turrets" instance=ExtResource("46_5vbbt")]
+[node name="Turret_ChaosTurretShrine" parent="Map" instance=ExtResource("46_5vbbt")]
 transform = Transform3D(0.793353, 0, 0.608761, 0, 1, 0, -0.608761, 0, 0.793353, 202.99, 2.62725, 207.257)
 lane = 1
-team = 200
+team = 2
 
-[node name="Turret_T1_L_04" parent="Turrets" instance=ExtResource("36_dp7n3")]
+[node name="Turret_T1_L_04" parent="Map" instance=ExtResource("36_dp7n3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.26559, 0.383416, 146.18)
 lane = 2
 pos = 3
-team = 100
+team = 1
 
-[node name="Turret_T1_L_05" parent="Turrets" instance=ExtResource("38_mmvut")]
+[node name="Turret_T1_L_05" parent="Map" instance=ExtResource("38_mmvut")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.8671, 0.601478, 92.6741)
 lane = 2
 pos = 2
-team = 100
+team = 1
 
-[node name="Turret_T1_C_12" parent="Turrets" instance=ExtResource("36_oe0ed")]
+[node name="Turret_T1_C_12" parent="Map" instance=ExtResource("36_oe0ed")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5233, 1.38329, 57.9765)
 lane = 2
 pos = 1
-team = 100
+team = 1
 
-[node name="Turret_T2_L_04" parent="Turrets" instance=ExtResource("39_qsin3")]
+[node name="Turret_T2_L_04" parent="Map" instance=ExtResource("39_qsin3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.9821, 0.187753, 195.288)
 lane = 2
 pos = 3
-team = 200
+team = 2
 
-[node name="Turret_T2_L_05" parent="Turrets" instance=ExtResource("41_igafg")]
+[node name="Turret_T2_L_05" parent="Map" instance=ExtResource("41_igafg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 107.814, 0.560307, 188.654)
 lane = 2
 pos = 2
-team = 200
+team = 2
 
-[node name="Turret_T2_L_06" parent="Turrets" instance=ExtResource("38_bto7k")]
+[node name="Turret_T2_L_06" parent="Map" instance=ExtResource("38_bto7k")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 146.785, 1.3642, 192.586)
 lane = 2
 pos = 1
-team = 200
+team = 2
 
 [node name="Level" type="Node" parent="."]
 script = ExtResource("35_3l20p")

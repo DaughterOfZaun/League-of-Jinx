@@ -5,4 +5,7 @@
 
 [node name="Unit" instance=ExtResource("1_64e8p")]
 
+[node name="Sprite2D" parent="Icon" index="0"]
+region_rect = Rect2(439, 8, 22, 21)
+
 [node name="SkinnedMesh" parent="." index="11" instance=ExtResource("2_3xbo3")]

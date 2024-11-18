@@ -5,6 +5,10 @@
 
 [node name="Unit" instance=ExtResource("1_o6xe0")]
 
+[node name="Sprite2D" parent="Icon" index="0"]
+scale = Vector2(0.615, 0.615)
+region_rect = Rect2(514, 6, 16, 26)
+
 [node name="Data" parent="." index="3"]
 champion_name = "game_character_displayname_ChaosTurretWorm"
 description = "game_character_description_ChaosTurretWorm"

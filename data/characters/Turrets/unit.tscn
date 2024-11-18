@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://drv075h83p6aq"]
+[gd_scene load_steps=12 format=3 uid="uid://drv075h83p6aq"]
 
 [ext_resource type="Script" path="res://engine/level/turret.gd" id="1_hwx8t"]
 [ext_resource type="Script" path="res://engine/unit/unit_data.gd" id="2_d0iym"]
+[ext_resource type="Script" path="res://engine/game/ui/minimap/minimap_icon.gd" id="2_e04id"]
 [ext_resource type="Script" path="res://engine/game/lights/light_2d.gd" id="3_0mnm8"]
 [ext_resource type="Script" path="res://engine/vars.gd" id="3_3nycg"]
+[ext_resource type="Texture2D" uid="uid://c4s8ntg8i86j7" path="res://data/ui/map/MiniMapIcons.webp" id="3_vry3m"]
 [ext_resource type="Script" path="res://engine/stats.gd" id="7_bqt6a"]
 [ext_resource type="Script" path="res://engine/game/range.gd" id="8_k1854"]
 [ext_resource type="Script" path="res://engine/status.gd" id="8_loxka"]
@@ -17,11 +19,13 @@ radius = 1.5
 script = ExtResource("1_hwx8t")
 data = NodePath("Data")
 
-[node name="Icon" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Icon" type="Node2D" parent="."]
+script = ExtResource("2_e04id")
+
+[node name="Sprite2D" type="Sprite2D" parent="Icon"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_vry3m")
+region_enabled = true
 
 [node name="Healthbar" type="Control" parent="."]
 layout_mode = 3

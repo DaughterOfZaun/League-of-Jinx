@@ -1,8 +1,6 @@
 @tool
 class_name MapTool
-extends Node3D
-
-const HW2GD := 1. / 70.
+extends Data
 
 static func get_v3(fa: FileAccess) -> Vector3:
 	return Vector3(fa.get_float(), fa.get_float(), fa.get_float())
@@ -285,7 +283,8 @@ var material_cache: Dictionary[StandardMaterial3D, ShaderMaterial] = {}
 func replace_materials_at_runtime() -> void:
 	#var viewport_texture: ViewportTexture = shadow_of_war_overlay_material.get("shader_parameter/density_texture")
 	viewport_texture.set_viewport_path_in_scene("/root/Node3D/SubViewport")
-	for child in get_children(true):
+	#for child in get_children(true):
+	for child in find_children("*", "MeshInstance3D", true):
 		var mesh_instance := child as MeshInstance3D
 		if mesh_instance == null: continue
 		#mesh_instance.material_overlay = shadow_of_war_overlay_material
@@ -306,6 +305,7 @@ func replace_materials_at_runtime() -> void:
 			override_material.set_shader_parameter("density_texture", viewport_texture)
 			override_material.set_shader_parameter("texture_albedo", material.albedo_texture)
 			override_material.set_shader_parameter("texture_normal", material.normal_texture)
+			override_material.set_shader_parameter("texture_heightmap", material.heightmap_texture)
 		mesh_instance.material_override = override_material
 
 #TODO: optimize
@@ -362,7 +362,7 @@ var post_level_load := func() -> void:
 	#(create_level_props_script.new() as CreateLevelProps).create_level_props()
 	var root := EditorInterface.get_edited_scene_root()
 	var points := find_child("Points", false)
-	var ini := Data.ini_load(object_cfg)
+	var ini := ini_load(object_cfg)
 	for section_name: String in ini:
 		var section: Array[Array] = ini[section_name]
 		var nav_point_name := section_name.split('\\')[-1].rsplit('.', false, 2)[0]
@@ -408,6 +408,6 @@ var post_level_load := func() -> void:
 				var key_array: Array = entry[0]
 				var value: Variant = entry[1]
 				match key_array:
-					["Move"]: char.position += Data.vec3_parse(value) * Data.HW2GD
-					["Rot"]: char.rotation_degrees.y += Data.vec3_parse(value).x
+					["Move"]: char.position += vec3_parse(value) * HW2GD
+					["Rot"]: char.rotation_degrees.y += vec3_parse(value).x
 					_: char.data.set_from_ini_entry(key_array, value)

@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1g8y4l4o36ne"]
+[gd_scene load_steps=11 format=3 uid="uid://b1g8y4l4o36ne"]
 
 [ext_resource type="Script" path="res://engine/level/dampener.gd" id="1_lfbuj"]
 [ext_resource type="Script" path="res://engine/game/lights/light_2d.gd" id="2_4s6kg"]
+[ext_resource type="Script" path="res://engine/game/ui/minimap/minimap_icon.gd" id="2_d6mox"]
 [ext_resource type="Script" path="res://engine/unit/unit_data.gd" id="3_d6mox"]
+[ext_resource type="Texture2D" uid="uid://c4s8ntg8i86j7" path="res://data/ui/map/MiniMapIcons.webp" id="3_owmcq"]
 [ext_resource type="Script" path="res://engine/vars.gd" id="4_owmcq"]
 [ext_resource type="Script" path="res://engine/stats.gd" id="5_8i050"]
 [ext_resource type="Script" path="res://engine/status.gd" id="6_2a1vn"]
@@ -16,11 +18,13 @@ radius = 2.85
 script = ExtResource("1_lfbuj")
 data = NodePath("Data")
 
-[node name="Icon" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Icon" type="Node2D" parent="."]
+script = ExtResource("2_d6mox")
+
+[node name="Sprite2D" type="Sprite2D" parent="Icon"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_owmcq")
+region_enabled = true
 
 [node name="Healthbar" type="Control" parent="."]
 layout_mode = 3

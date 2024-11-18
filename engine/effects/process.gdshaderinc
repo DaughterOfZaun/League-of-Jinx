@@ -36,7 +36,7 @@ uniform sampler2D p_rotvel_a_p: hint_default_white, filter_nearest;
 #define E_LIFE LIFETIME
 #define MAX_VELOCITY 1.0 // Temporary hack
 
-#include "res://Effects/random.gdshaderinc"
+#include "random.gdshaderinc"
 
 mat3 basis_from_euler(vec3 p_euler) {
 	float c, s;

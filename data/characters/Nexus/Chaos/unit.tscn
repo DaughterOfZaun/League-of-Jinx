@@ -6,6 +6,9 @@
 
 [node name="Unit" instance=ExtResource("1_ou5c8")]
 
+[node name="Sprite2D" parent="Icon" index="0"]
+region_rect = Rect2(187, 8, 22, 21)
+
 [node name="Data" parent="." index="3"]
 champion_name = "game_character_displayname_ChaosNexus"
 import_path = "res://data/characters/Nexus/Chaos/ChaosNexus.ini"

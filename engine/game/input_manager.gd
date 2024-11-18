@@ -11,6 +11,7 @@ enum CursorShape {
 	DEFAULT, HOVER_ENEMY, HOVER_ENEMY_DISABLED, HOVER_FRIENDLY, HOVER_SHOP
 }
 @export var cursor_textures: Dictionary[CursorShape, Texture2D] = {}
+@export var cursor_moveto_effect: PackedScene
 #@export_group("Cursor", "cursor_texture_")
 #@export var cursor_texture_default: Texture2D
 #@export var cursor_texture_hover_enemy: Texture2D
@@ -19,14 +20,15 @@ enum CursorShape {
 #@export var cursor_texture_hover_shop: Texture2D
 #@export_group("")
 func set_cursor_shape(shape: CursorShape) -> void:
+	Input.set_default_cursor_shape(int(shape))
 	#Input.set_custom_mouse_cursor(cursor_textures[shape], Input.CURSOR_ARROW)
-	#Input.set_default_cursor_shape(int(shape))
-	print(Engine.get_process_frames(), ' ', CursorShape.keys()[shape])
+	#print(Engine.get_process_frames(), ' ', CursorShape.keys()[shape])
 
 func on_unit_clicked(char: Unit, button: MouseButton) -> void:
 	#if main_hero == null: return
 	if char.team != main_hero.team:
 		main_hero.order(Enums.OrderType.ATTACK_TO, char.global_position, char)
+	viewport.set_input_as_handled()
 
 var hovered_unit: Unit = null
 var hovered_pos: Vector3:
@@ -54,10 +56,6 @@ func on_ground_hovered() -> void:
 	viewport.set_input_as_handled()
 	hovered_unit = null
 
-
-func set_event_as_handled(event: InputEventMouse) -> void:
-	pass
-
 func _input(event: InputEvent) -> void:
 	#if main_hero == null: return
 	for letter in "qwerdfb":
@@ -84,21 +82,28 @@ func _unhandled_input(unknown_event: InputEvent) -> void:
 	if unknown_event is InputEventMouseButton:
 		var event := unknown_event as InputEventMouseButton
 		if event.pressed && event.button_index == MOUSE_BUTTON_RIGHT:
-			var origin := camera.project_ray_origin(event.position)
-			var normal := camera.project_ray_normal(event.position)
-			var nearest_reachable_point := NavigationServer3D.map_get_closest_point_to_segment(
-				nav_map_rid, origin, origin + normal * RAY_LENGTH
-			)
-			main_hero.order(Enums.OrderType.MOVE_TO, nearest_reachable_point, null)
-		#viewport.set_input_as_handled()
-		on_ground_hovered()
-	elif unknown_event is InputEventMouseMotion:
-		var event := unknown_event as InputEventMouseMotion
-		#viewport.set_input_as_handled()
-		on_ground_hovered()
+			on_ground_clicked_on_screen(event.position)
 
-func on_ground_clicked(pos: Vector3) -> void:
+func on_ground_clicked_on_screen(event_position: Vector2) -> void:
+	var origin := camera.project_ray_origin(event_position)
+	var normal := camera.project_ray_normal(event_position)
+	var nearest_reachable_point := NavigationServer3D.map_get_closest_point_to_segment(
+		nav_map_rid, origin, origin + normal * RAY_LENGTH
+	)
+	on_ground_clicked(nearest_reachable_point)
+
+func on_ground_clicked_on_minimap(pos: Vector3) -> void:
 	var nearest_reachable_point := NavigationServer3D.map_get_closest_point(nav_map_rid, pos)
+	on_ground_clicked(nearest_reachable_point)
+
+func on_ground_clicked(nearest_reachable_point: Vector3) -> void:
+	
+	var root := get_tree().current_scene
+	var effect: Node3D = cursor_moveto_effect.instantiate()
+	root.add_child(effect)
+	effect.owner = root
+	effect.global_position = nearest_reachable_point
+
 	main_hero.order(Enums.OrderType.MOVE_TO, nearest_reachable_point, null)
 	#viewport.set_input_as_handled()
 	on_ground_hovered()
@@ -107,11 +112,14 @@ func _ready() -> void:
 	if Engine.is_editor_hint(): return
 
 	#Input.use_accumulated_input = false
-	#Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 
-	#for shape: CursorShape in cursor_textures.keys():
-	#	Input.set_custom_mouse_cursor(cursor_textures[shape], int(shape))
-
+	#ProjectSettings.set_setting("display/mouse_cursor/custom_image", cursor_textures[CursorShape.DEFAULT])
+	var hotspot: Vector2 = ProjectSettings.get_setting("display/mouse_cursor/custom_image_hotspot")
+	for shape: CursorShape in cursor_textures.keys():
+		#if shape != CursorShape.DEFAULT:
+		Input.set_custom_mouse_cursor(cursor_textures[shape], int(shape), hotspot)
+	
 	var spells: Dictionary[String, UISpell] = {
 		"q": get_node("%UI/Center/ChampionSpells/Spell1"),
 		"w": get_node("%UI/Center/ChampionSpells/Spell2"),

@@ -24,6 +24,7 @@ extends Effect
 @export_file("*.troy") var import_path: String
 @export_tool_button("Import") var import := func() -> void:
 	var ini := ini_load(import_path)
+	res_path = '/'.join(import_path.split('/').slice(0, -1))
 	set_from_ini_section(ini["System"])
 	recreate_groups(ini)
 @export_group("")
@@ -61,9 +62,18 @@ func recreate_groups(ini: Dictionary[String, Array]) -> void:
 		group.name = info[0]
 		if len(info) > 1: group.group_type = info[1]
 		if len(info) > 2: group.group_importance = info[2]
+
+		group.res_path = res_path
+		group.res_cache = res_cache
+		group.res_cache_is_null = res_cache_is_null
 		group.set_from_ini_section(ini[group.name])
+		
 		add_child(group, true)
 		group.owner = owner if owner else self
 
 		group.updating_fields -= 1
 		group.update_fields()
+
+func _ready() -> void:
+	for child: GPUParticles3D in find_children("*", "GPUParticles3D", true):
+		child.emitting = true

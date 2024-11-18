@@ -38,6 +38,8 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/window_width_override=1280
 window/size/window_height_override=720
+mouse_cursor/custom_image="res://data/ui/cursor/Hand1.webp"
+mouse_cursor/custom_image_hotspot=Vector2(8, 11)
 
 [gui]
 

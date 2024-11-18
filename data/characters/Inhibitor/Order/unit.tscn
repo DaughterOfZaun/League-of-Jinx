@@ -6,6 +6,9 @@
 
 [node name="Unit" instance=ExtResource("1_nwx4q")]
 
+[node name="Sprite2D" parent="Icon" index="0"]
+region_rect = Rect2(403, 7, 21, 22)
+
 [node name="Data" parent="." index="3"]
 champion_name = "game_character_displayname_OrderInhibitor"
 import_path = "res://data/characters/Inhibitor/Order/OrderInhibitor.ini"

@@ -428,9 +428,9 @@ func update_fields() -> void:
 	p.amount = 1 if emitter_emit_single_particle else round(total_emitter_life * emitter_rate)
 
 	#TODO:
-	#p.draw_pass_1 = particle_mesh if particle_mesh else preload("res://Effects/new_quad_mesh.tres")
-	#p.draw_pass_1 = preload("res://Effects/new_sphere_mesh.tres") as Mesh if particle_mesh \
-			   #else preload("res://Effects/new_quad_mesh.tres") as Mesh
+	p.draw_pass_1 = particle_mesh if particle_mesh else preload("res://engine/effects/new_quad_mesh.tres")
+	#p.draw_pass_1 = preload("res://engine/effects/new_sphere_mesh.tres") if particle_mesh \
+			   #else preload("res://engine/effects/new_quad_mesh.tres")
 
 	p.cast_shadow = int(particle_does_cast_shadow) as GeometryInstance3D.ShadowCastingSetting;
 
@@ -458,7 +458,7 @@ func update_fields() -> void:
 
 		m.set_shader_parameter('p_bindweight', particle_bind_weight)
 
-		m.set_shader_parameter('p_scale_i', particle_scale * HW2GD)
+		m.set_shader_parameter('p_scale_i', particle_scale) # particle mesh should be already scaled by HW2GD on import
 		set_shader_parameter_curve(m, 'p_scale_p', particle_scale_prob)
 		set_shader_parameter_curve(m, 'p_scale_a_p', particle_scale_x_prob, particle_scale_y_prob, particle_scale_z_prob)
 
@@ -578,14 +578,14 @@ class MaterialShader extends MyShader:
 		"shader_type spatial;\n" +\
 		"render_mode " + ",".join(render_mode) + ";\n" +\
 		(define('BILLBOARD') if billboard_enabled else '') +\
-		include('res://Effects/material.gdshaderinc')
+		include('res://engine/effects/material.gdshaderinc')
 
 var process_shader := ProcessShader.new()
 class ProcessShader extends MyShader:
 	func gen_code() -> String:
 		return \
 		"shader_type particles;\n" +\
-		include('res://Effects/process.gdshaderinc')
+		include('res://engine/effects/process.gdshaderinc')
 
 func set_from_ini_section(section: Array) -> void:
 	updating_fields += 1
@@ -684,7 +684,7 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["p-beammode"]: particle_beam_mode = uint_parse(value) as BeamMode
 		["p-bindtoemitter", var i]: particle_bind_weight_over_lifetime = curve_set(particle_bind_weight_over_lifetime, i, value)
 		["p-bindtoemitterP", var i]: particle_bind_weight_prob = curve_set(particle_bind_weight_prob, i, value)
-		["p-bindtoemitter"]: particle_bind_weight = vec2_parse(value).x
+		["p-bindtoemitter"]: particle_bind_weight = float_parse(string_parse(value).split(' ')[0])
 		["p-coloroffset"]: particle_color_lookup_offset = vec2_parse(value)
 		["p-colorscale"]: particle_color_lookup_scale = vec2_parse(value)
 		["p-colortype"]: particle_color_lookup_type = ivec2_parse(value) # String?
