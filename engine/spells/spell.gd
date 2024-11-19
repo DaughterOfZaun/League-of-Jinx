@@ -39,9 +39,9 @@ var level_plus_one: int:
 
 var cost: float
 var cooldown_wait_time: float:
-	get: return timer.wait_time if state == State.COOLDOWN else 0
+	get: return timer.wait_time if state == State.COOLDOWN else 0.0
 var cooldown_time_left: float:
-	get: return timer.time_left if state == State.COOLDOWN else 0
+	get: return timer.time_left if state == State.COOLDOWN else 0.0
 var cast_range: float
 var is_attack_override: bool
 

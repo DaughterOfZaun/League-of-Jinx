@@ -320,7 +320,10 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["LevelSpellEffectiveness"]: level_spell_effectiveness = float_parse(value)
 		["Lore", 1]: lore = string_parse(value)
 		["MagicRank"]: magic_rank = int_parse(value)
-		["MaxLevels"]: ignored = true #max_levels = string_parse(value)
+		["MaxLevels"]:
+			var max_levels := Array(string_parse(value).split(' ', false)).map(int_parse)
+			for i in len(max_levels):
+				get_target_spells().get_spell(i).data.max_level = max_levels[i]
 		["MoveSpeed"]: move_speed = float_parse(value)
 		["MPPerLevel"]: mp_per_level = float_parse(value)
 		["MPRegenPerLevel"]: mp_regen_per_level = float_parse(value)
@@ -382,7 +385,8 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 			get_target_spells().get_spell(i - 1, string_parse(value))
 		["SpellBlock"]: spell_block = float_parse(value)
 		["SpellBlockPerLevel"]: spell_block_per_level = float_parse(value)
-		["SpellsUpLevels", var i]: ignored = true #spells_up_levels = string_parse(value)
+		["SpellsUpLevels", var i]:
+			get_target_spells().get_spell(i - 1).data.up_levels = Array(string_parse(value).split(' ', false)).map(int_parse)
 		["SR_easy"]: sr_easy = bool_parse(value)
 		["SR_medium"]: sr_medium = bool_parse(value)
 		["Tips", 1]: tips = string_parse(value)

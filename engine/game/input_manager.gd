@@ -131,4 +131,4 @@ func _ready() -> void:
 	}
 	await main_hero.ready
 	for letter in spells:
-		spells[letter].bind_to(main_hero.spells[letter])
+		spells[letter].bind_to(letter, main_hero.spells[letter])

@@ -5,9 +5,11 @@ var spell: Spell
 @onready var icon_texture_rect: TextureRect = get_node("%IconTexture")
 @onready var cooldown_progress_bar: TextureProgressBar = get_node("%CooldownBar")
 @onready var cooldown_label: Label = get_node("%CooldownLabel")
-@onready var level_label: Label = get_node("%LevelLabel")
-func bind_to(spell: Spell) -> void:
+#@onready var level_label: Label = get_node("%LevelLabel")
+@onready var key_label: Label = get_node("%KeyLabel")
+func bind_to(letter: String, spell: Spell) -> void:
 	assert(spell != null)
+	self.key_label.text = letter.to_upper()
 	self.spell = spell
 
 func _process(delta: float) -> void:
@@ -25,4 +27,4 @@ func _process(delta: float) -> void:
 			cooldown_label.text =\
 				str(ceili(cd / 60)) + ":" +\
 				str(ceili(fmod(cd, 60)))
-	level_label.text = str(spell.level)
+	#level_label.text = str(spell.level)

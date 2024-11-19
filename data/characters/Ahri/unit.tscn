@@ -180,6 +180,7 @@ targetable = true
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 2.0
 target_desired_distance = 0.5
+path_height_offset = 0.05
 path_metadata_flags = 0
 simplify_path = true
 simplify_epsilon = 0.25
@@ -465,6 +466,8 @@ line_missile_bounce_radius = 450.0
 death_recap_priority = 6.0
 coefficient = Array[float]([0.325, 0.325])
 x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+up_levels = Array[int]([1, 3, 5, 7, 9, 11])
+max_level = 5
 import_path = "res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbofDeception.ini"
 
 [node name="W_FoxFire" type="Node" parent="Spells" node_paths=PackedStringArray("data")]
@@ -475,6 +478,8 @@ data = NodePath("Data")
 script = ExtResource("26_2652s")
 inventory_icon = Array[Texture2D]([ExtResource("29_slgjb")])
 spell_name = "AhriFoxFire"
+up_levels = Array[int]([1, 3, 5, 7, 9, 11])
+max_level = 5
 import_path = "res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFire.ini"
 
 [node name="E_Seduce" type="Node" parent="Spells" node_paths=PackedStringArray("data")]
@@ -534,6 +539,8 @@ line_missile_bounce_radius = 450.0
 death_recap_priority = 13.0
 coefficient = Array[float]([0.35, 0.0])
 x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+up_levels = Array[int]([1, 3, 5, 7, 9, 11])
+max_level = 5
 import_path = "res://data/characters/Ahri/S3_E_Seduce/AhriSeduce.ini"
 
 [node name="R_Tumble" type="Node" parent="Spells" node_paths=PackedStringArray("data")]
@@ -588,6 +595,8 @@ missile_target_height_augment = 100.0
 line_missile_bounce_radius = 600.0
 coefficient = Array[float]([0.3, 0.0])
 x = Array[float]([0.0])
+up_levels = Array[int]([6, 11, 16])
+max_level = 3
 import_path = "res://data/characters/Ahri/S4_R_Tumble/AhriTumble.ini"
 
 [node name="E0_OrbMissile" type="Node" parent="Spells" node_paths=PackedStringArray("data")]

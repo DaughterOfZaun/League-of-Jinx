@@ -41,6 +41,11 @@ window/size/window_height_override=720
 mouse_cursor/custom_image="res://data/ui/cursor/Hand1.webp"
 mouse_cursor/custom_image_hotspot=Vector2(8, 11)
 
+[editor]
+
+movie_writer/mix_rate=8000
+movie_writer/movie_file="movie.avi"
+
 [gui]
 
 theme/default_font_antialiasing=2
@@ -131,3 +136,4 @@ ToggleFullscreen={
 
 anti_aliasing/screen_space_roughness_limiter/enabled=false
 anti_aliasing/quality/use_taa=true
+anti_aliasing/scale=2.0

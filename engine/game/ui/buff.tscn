@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://ks0fvfmqrgtp"]
+
+[ext_resource type="Texture2D" uid="uid://w7g1bytpvupe" path="res://data/characters/Ahri/Passive/Ahri_SoulEater.webp" id="1_ou2sn"]
+[ext_resource type="Texture2D" uid="uid://c6yw2nxte74v4" path="res://data/ui/center/buff_icon_frame_green.webp" id="2_2i75w"]
+
+[node name="Control" type="Control"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="IconTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ou2sn")
+expand_mode = 1
+
+[node name="FrameTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_2i75w")
+expand_mode = 1

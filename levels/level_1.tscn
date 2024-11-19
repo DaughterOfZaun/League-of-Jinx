@@ -67,7 +67,7 @@ resource_local_to_scene = true
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_rf48r"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_toluw"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Node3D" type="Node3D"]
@@ -104,6 +104,7 @@ unique_name_in_owner = true
 disable_3d = true
 handle_input_locally = false
 use_taa = true
+scaling_3d_scale = 1.0
 sdf_oversize = 2
 sdf_scale = 0
 size = Vector2i(640, 640)
@@ -152,17 +153,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 114.801, 22.17, -140.402)
 [node name="Camera5" type="Node3D" parent="Camera4"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
-[node name="Unit" parent="." instance=ExtResource("27_0mdok")]
-transform = Transform3D(-0.803857, 0, 0.594823, 0, 1, 0, -0.594823, 0, -0.803857, 0.746, 2.485, -3.787)
-team = 1
-
 [node name="Map" parent="." instance=ExtResource("71_7skrr")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 level_shader = ExtResource("31_g1ghr")
 level_decal_shader = ExtResource("32_m603r")
 level_flora_shader = ExtResource("33_rqr2r")
-viewport_texture = SubResource("ViewportTexture_rf48r")
+viewport_texture = SubResource("ViewportTexture_toluw")
 object_cfg = "res://data/levels/1/ObjectCFG.cfg"
 create_level_props_script = ExtResource("35_x1iow")
 
@@ -438,3 +435,7 @@ team = 2
 
 [node name="Level" type="Node" parent="."]
 script = ExtResource("35_3l20p")
+
+[node name="Unit" parent="." instance=ExtResource("27_0mdok")]
+transform = Transform3D(-0.803857, 0, 0.594823, 0, 1, 0, -0.594823, 0, -0.803857, 0.746, 2.485, -3.787)
+team = 1

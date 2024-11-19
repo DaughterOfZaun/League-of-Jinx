@@ -269,6 +269,8 @@ var doesnt_trigger_spell_casts: bool:
 @export var platform_enabled: bool #?
 @export var coefficient: Array[float] #= [ 0, 0 ]
 @export var x: Array[float] #= [ 0, 0, 0, 0, 0 ] #?
+@export var up_levels: Array[int] #TODO: move to ChampionSpellData?
+@export var max_level: int = 0   #TODO: move to ChampionSpellData?
 @export_subgroup("")
 #endregion
 

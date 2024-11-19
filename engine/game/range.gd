@@ -18,9 +18,6 @@ func _ready() -> void:
 		'AcquisitionRange', 'AttackRange', 'CancelAttackRange':
 			monitoring = true
 
-	monitoring = true
-	monitorable = true
-
 	assert(char.team != 0)
 	var team_mask := 1 << char.team
 	collision_mask = ~(team_mask | 1) if monitoring else 0

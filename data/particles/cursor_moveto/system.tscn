@@ -453,7 +453,6 @@ blend_mode = 1
 [node name="GPUParticles3D" type="GPUParticles3D" parent="cursor"]
 material_override = SubResource("ShaderMaterial_l7sbp")
 cast_shadow = 0
-emitting = false
 amount = 1
 one_shot = true
 process_material = SubResource("ShaderMaterial_474kf")
@@ -486,7 +485,6 @@ particle_does_cast_shadow = true
 [node name="GPUParticles3D" type="GPUParticles3D" parent="cursor_shadow1"]
 visible = false
 material_override = SubResource("ShaderMaterial_viu47")
-emitting = false
 amount = 1
 one_shot = true
 process_material = SubResource("ShaderMaterial_r8k3y")
@@ -520,7 +518,6 @@ particle_does_cast_shadow = true
 [node name="GPUParticles3D" type="GPUParticles3D" parent="cursor_shadow2"]
 visible = false
 material_override = SubResource("ShaderMaterial_g6sxb")
-emitting = false
 amount = 1
 one_shot = true
 process_material = SubResource("ShaderMaterial_7y62o")
@@ -554,7 +551,6 @@ particle_does_cast_shadow = true
 [node name="GPUParticles3D" type="GPUParticles3D" parent="cursor_shadow3"]
 visible = false
 material_override = SubResource("ShaderMaterial_mqgas")
-emitting = false
 amount = 1
 one_shot = true
 process_material = SubResource("ShaderMaterial_pvoyp")
@@ -588,7 +584,6 @@ particle_does_cast_shadow = true
 [node name="GPUParticles3D" type="GPUParticles3D" parent="cursor_shadow4"]
 visible = false
 material_override = SubResource("ShaderMaterial_hitxm")
-emitting = false
 amount = 1
 one_shot = true
 process_material = SubResource("ShaderMaterial_dmldq")
@@ -622,7 +617,6 @@ in_uniform_scale = true
 visible = false
 material_override = SubResource("ShaderMaterial_rxxao")
 cast_shadow = 0
-emitting = false
 amount = 1
 one_shot = true
 process_material = SubResource("ShaderMaterial_b1iym")
