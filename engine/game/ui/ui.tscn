@@ -1,6 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://diknhd1061r8r"]
+[gd_scene load_steps=30 format=3 uid="uid://diknhd1061r8r"]
 
 [ext_resource type="Texture2D" uid="uid://df2lx4qnpncd" path="res://data/screenshots/League of Legends.webp" id="1_n4n8a"]
+[ext_resource type="Script" path="res://engine/game/ui/center.gd" id="2_84jna"]
 [ext_resource type="Texture2D" uid="uid://w7g1bytpvupe" path="res://data/characters/Ahri/Passive/Ahri_SoulEater.webp" id="2_foojt"]
 [ext_resource type="PackedScene" uid="uid://demalxnr8x6to" path="res://engine/game/ui/spell.tscn" id="3_0bgng"]
 [ext_resource type="Texture2D" uid="uid://dl6k42tco4ex1" path="res://data/ui/center/center.webp" id="4_ag3ei"]
@@ -10,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://df8p7kmquoxm1" path="res://data/ui/center/level_up_panel.webp" id="7_ag3ei"]
 [ext_resource type="PackedScene" uid="uid://ks0fvfmqrgtp" path="res://engine/game/ui/buff.tscn" id="8_glbka"]
 [ext_resource type="Texture2D" uid="uid://dbwnetuafjmtl" path="res://data/ui/bars/orange.webp" id="8_qwp58"]
+[ext_resource type="Script" path="res://engine/game/ui/left.gd" id="9_0vwin"]
 [ext_resource type="Texture2D" uid="uid://dlxibrkg4tfgu" path="res://data/ui/left/left.webp" id="9_i8ivr"]
 [ext_resource type="Texture2D" uid="uid://bnq6twfpdhi65" path="res://data/ui/left/bag.webp" id="10_0j1eb"]
 [ext_resource type="Texture2D" uid="uid://cmv4y8qi1vg0b" path="res://data/ui/left/shop_enabled.webp" id="11_a0w1y"]
@@ -54,7 +56,7 @@ mouse_filter = 2
 texture = ExtResource("1_n4n8a")
 expand_mode = 2
 
-[node name="Center" type="Control" parent="."]
+[node name="Center" type="Control" parent="." node_paths=PackedStringArray("q", "w", "e", "r", "d", "f", "b", "healthbar", "manabar")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -63,6 +65,16 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
+script = ExtResource("2_84jna")
+q = NodePath("ChampionSpells/Spell1")
+w = NodePath("ChampionSpells/Spell2")
+e = NodePath("ChampionSpells/Spell3")
+r = NodePath("ChampionSpells/Spell4")
+d = NodePath("SummonerSpells/Spell1")
+f = NodePath("SummonerSpells/Spell2")
+b = NodePath("Recall")
+healthbar = NodePath("Healthbar")
+manabar = NodePath("Manabar")
 
 [node name="BackgroundColor" type="ColorRect" parent="Center"]
 layout_mode = 1
@@ -183,13 +195,27 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -101.0
-offset_top = -108.0
+offset_top = -153.0
 offset_right = 102.0
 offset_bottom = -81.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 1
+alignment = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Center/VBoxContainer"]
+custom_minimum_size = Vector2(188, 44)
+layout_mode = 2
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+reverse_fill = true
+
+[node name="Control" parent="Center/VBoxContainer/HFlowContainer" instance=ExtResource("8_glbka")]
+visible = false
+layout_mode = 2
 
 [node name="LevelUpPanel" type="Control" parent="Center/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(203, 27)
 layout_mode = 2
 
@@ -244,25 +270,19 @@ offset_bottom = -11.0
 [node name="TextureProgressBar" parent="Center/Manabar" index="0"]
 texture_progress = ExtResource("6_0vwin")
 
-[node name="HFlowContainer" type="HFlowContainer" parent="Center"]
-layout_mode = 0
-offset_left = -94.0
-offset_top = -153.0
-offset_right = 94.0
-offset_bottom = -109.0
-theme_override_constants/h_separation = 1
-theme_override_constants/v_separation = 1
-reverse_fill = true
-
-[node name="Control" parent="Center/HFlowContainer" instance=ExtResource("8_glbka")]
-layout_mode = 2
-
-[node name="Left" type="Control" parent="."]
+[node name="Left" type="Control" parent="." node_paths=PackedStringArray("attack_damage_label", "magical_damage_label", "attack_speed_label", "movement_speed_label", "armor_label", "spell_block_label")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
+script = ExtResource("9_0vwin")
+attack_damage_label = NodePath("VBoxContainer/AttackDamageLabel")
+magical_damage_label = NodePath("VBoxContainer/MagicalDamageLabel")
+attack_speed_label = NodePath("VBoxContainer/AttackSpeedLabel")
+movement_speed_label = NodePath("VBoxContainer/MovementSpeedLabel")
+armor_label = NodePath("VBoxContainer/ArmorLabel")
+spell_block_label = NodePath("VBoxContainer/SpellBlockLabel")
 
 [node name="BackgroundColor" type="ColorRect" parent="Left"]
 layout_mode = 1
@@ -327,37 +347,37 @@ offset_bottom = -11.0
 grow_vertical = 0
 theme_override_constants/separation = -2
 
-[node name="Label1" type="Label" parent="Left/VBoxContainer"]
+[node name="AttackDamageLabel" type="Label" parent="Left/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.109804, 0.470588, 0.0666667, 1)
 theme_override_font_sizes/font_size = 9
 text = "273"
 
-[node name="Label2" type="Label" parent="Left/VBoxContainer"]
+[node name="MagicalDamageLabel" type="Label" parent="Left/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.109804, 0.470588, 0.0666667, 1)
 theme_override_font_sizes/font_size = 9
 text = "70"
 
-[node name="Label3" type="Label" parent="Left/VBoxContainer"]
+[node name="AttackSpeedLabel" type="Label" parent="Left/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.109804, 0.470588, 0.0666667, 1)
 theme_override_font_sizes/font_size = 9
 text = "1.387"
 
-[node name="Label4" type="Label" parent="Left/VBoxContainer"]
+[node name="MovementSpeedLabel" type="Label" parent="Left/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.109804, 0.470588, 0.0666667, 1)
 theme_override_font_sizes/font_size = 9
 text = "437"
 
-[node name="Label5" type="Label" parent="Left/VBoxContainer"]
+[node name="ArmorLabel" type="Label" parent="Left/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.109804, 0.470588, 0.0666667, 1)
 theme_override_font_sizes/font_size = 9
 text = "151"
 
-[node name="Label6" type="Label" parent="Left/VBoxContainer"]
+[node name="SpellBlockLabel" type="Label" parent="Left/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.109804, 0.470588, 0.0666667, 1)
 theme_override_font_sizes/font_size = 9

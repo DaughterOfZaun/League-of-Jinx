@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=45 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
 [ext_resource type="CompressedTexture3D" uid="uid://cw7h14f61vo0x" path="res://LUT2.webp" id="2_tb6ku"]
@@ -20,6 +20,7 @@
 [ext_resource type="Shader" path="res://engine/game/level/level_flora.gdshader" id="33_rqr2r"]
 [ext_resource type="Script" path="res://data/levels/1/scripts/LevelScript.gd" id="35_3l20p"]
 [ext_resource type="Script" path="res://data/levels/1/scripts/CreateLevelProps.gd" id="35_x1iow"]
+[ext_resource type="Script" path="res://engine/level/constants.gd" id="36_dp1ib"]
 [ext_resource type="PackedScene" uid="uid://brmob4058kgjb" path="res://data/characters/Turrets/Front/Order/unit.tscn" id="36_dp7n3"]
 [ext_resource type="PackedScene" uid="uid://n1ycncd12rnq" path="res://data/characters/Turrets/Back/Order/unit.tscn" id="36_oe0ed"]
 [ext_resource type="PackedScene" uid="uid://c03dkhsata3gj" path="res://data/characters/Nexus/Order/unit.tscn" id="36_yik85"]
@@ -67,7 +68,7 @@ resource_local_to_scene = true
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_toluw"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_5t0se"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Node3D" type="Node3D"]
@@ -104,7 +105,6 @@ unique_name_in_owner = true
 disable_3d = true
 handle_input_locally = false
 use_taa = true
-scaling_3d_scale = 1.0
 sdf_oversize = 2
 sdf_scale = 0
 size = Vector2i(640, 640)
@@ -159,7 +159,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 level_shader = ExtResource("31_g1ghr")
 level_decal_shader = ExtResource("32_m603r")
 level_flora_shader = ExtResource("33_rqr2r")
-viewport_texture = SubResource("ViewportTexture_toluw")
+viewport_texture = SubResource("ViewportTexture_5t0se")
 object_cfg = "res://data/levels/1/ObjectCFG.cfg"
 create_level_props_script = ExtResource("35_x1iow")
 
@@ -439,3 +439,80 @@ script = ExtResource("35_3l20p")
 [node name="Unit" parent="." instance=ExtResource("27_0mdok")]
 transform = Transform3D(-0.803857, 0, 0.594823, 0, 1, 0, -0.594823, 0, -0.803857, 0.746, 2.485, -3.787)
 team = 1
+
+[node name="Constants" type="Node" parent="."]
+script = ExtResource("36_dp1ib")
+ar_stop_attack_range_modifier = 100.0
+ar_ai_charmed_acquisition_range = 1000.0
+ai_target_distance_factor_per_neightbor = 0.6
+ai_target_distance_factor_per_attacker = 0.8
+ai_target_range_factor = 0.7
+ai_target_path_factor = 0.5
+ai_minion_targeting_hero_boost = 150.0
+ai_target_max_num_attackers = 5
+sv_spell_ratio = 1.0
+sv_spell_aoe_ratio = 0.333
+sv_spell_persist_ratio = 1.0
+ai_ambient_gold_delay = 90.0
+ai_ambient_gold_interval = 5.0
+ai_ambient_gold_amount = 6.5
+ai_ambient_xp_interval = 5.0
+ai_time_dead_per_level = 4.0
+ser_closeness_line_of_sight_threshold_turret = 200.0
+bar_spawn_enabled = true
+bar_max_hp = 4000
+sp_regen_radius = 1100.0
+sp_health_regen_percent = 0.085
+sp_mana_regen_percent = 0.085
+sp_regen_tick_interval = 1.0
+ca_reveal_attacker_range = 400.0
+ca_reveal_attacker_time_out = 4.5
+ca_min_cast_rotation_speed = 250.0
+events_time_for_multi_kill = 8.0
+events_timer_for_assist = 10.0
+aud_fmod_music_cue_id = 3
+aud_fmod_ambient_event = "map_forest"
+aud_fmod_victory_music_cue_id = 10
+aud_fmod_defeat_music_cue_id = 11
+hud_blink_frequency = 1000
+hud_default_blink_count = 3
+hud_targeting_reticle_height = 40.0
+cam_keyboard_orbit_speed_x = 100.0
+cam_keyboard_orbit_speed_y = 50.0
+cam_min_x = 300.0
+cam_min_y = 300.0
+cam_max_x = 14545.0
+cam_max_y = 14545.0
+cr_spell_cast_flash_time = 2.0
+cr_mouse_scroll_speed = 3900.0
+ar_closing_attack_range_modifier = 300.0
+gcd_attack_delay = 1.6
+gcd_attack_delay_cast_percent = 0.3
+gcd_attack_min_delay = 0.4
+gcd_percent_attack_speed_mod_minimum = -0.95
+gcd_attack_max_delay = 5.0
+gcd_percent_cooldown_mod_minimum = -0.4
+gcd_percent_respawn_time_mod_minimum = -0.95
+gcd_percent_gold_lost_on_death_mod_minimum = -0.95
+gcd_percent_exp_bonus_minimum = -1.0
+gcd_percent_exp_bonus_maximum = 5.0
+dr_hero_to_hero = 1.0
+dr_building_to_hero = 1.05
+dr_unit_to_hero = 0.6
+dr_hero_to_unit = 1.0
+dr_building_to_unit = 1.105
+dr_unit_to_unit = 1.0
+dr_hero_to_building = 1.0
+dr_building_to_building = 1.0
+dr_unit_to_building = 0.5
+cfh_delay = 1.0
+cfh_stick = 1.5
+cfh_radius = 800.0
+cfh_duration = 1.0
+cfh_melee_radius = 420.0
+cfh_ranged_radius = 170.0
+ai_ai_toggle = true
+ai_starting_gold = 475.0
+ai_default_pet_return_radius = 200.0
+import_path = "res://data/levels/1/Constants.var"
+metadata/_custom_type_script = ExtResource("36_dp1ib")

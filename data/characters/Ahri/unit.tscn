@@ -1,6 +1,6 @@
 [gd_scene load_steps=55 format=3 uid="uid://dgxp55bfpc742"]
 
-[ext_resource type="Script" path="res://engine/unit/unit.gd" id="1_r3toj"]
+[ext_resource type="Script" path="res://engine/unit/champion.gd" id="1_7i6v8"]
 [ext_resource type="Script" path="res://engine/game/ui/minimap/minimap_icon.gd" id="2_81mpc"]
 [ext_resource type="Texture2D" uid="uid://cjgdixmn1dikj" path="res://data/characters/Ahri/Icons/Ahri_Circle.webp" id="3_7i6v8"]
 [ext_resource type="Script" path="res://engine/game/ui/healthbar.gd" id="3_81mpc"]
@@ -74,7 +74,7 @@ radius = 7.5
 radius = 7.5
 
 [node name="Unit" type="CharacterBody3D" node_paths=PackedStringArray("data")]
-script = ExtResource("1_r3toj")
+script = ExtResource("1_7i6v8")
 data = NodePath("Data")
 
 [node name="Icon" type="Node2D" parent="."]
@@ -167,7 +167,22 @@ script = ExtResource("13_aca3q")
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("14_1rt8n")
-movement_speed_flat = 305.0
+crit_damage_bonus = 2.0
+armor_base = 11.0
+armor_base_per_level = 3.5
+attack_speed_base_per_level = 2.0
+attack_damage_base = 50.0
+attack_damage_base_per_level = 3.0
+health_base = 380.0
+health_base_per_level = 80.0
+health_regen_base = 1.1
+health_regen_base_per_level = 0.12
+mana_base = 230.0
+mana_base_per_level = 50.0
+mana_regen_base = 1.25
+mana_regen_base_per_level = 0.12
+movement_speed_base = 305.0
+spell_block_base = 30.0
 
 [node name="Status" type="Node" parent="."]
 script = ExtResource("15_4u6an")
@@ -206,23 +221,7 @@ acquisition_range = 525.0
 pathfinding_collision_radius = 38.0
 selection_radius = 100.0
 selection_height = 135.0
-armor = 11.0
-armor_per_level = 3.5
-spell_block = 30.0
-attack_speed_per_level = 2.0
-base_damage = 50.0
-damage_per_level = 3.0
-crit_damage_bonus = 2.0
 level_spell_effectiveness = 3.0
-base_hp = 380.0
-hp_per_level = 80.0
-hp_regen_per_level = 0.12
-base_static_hp_regen = 1.1
-base_mp = 230.0
-mp_per_level = 50.0
-mp_regen_per_level = 0.12
-base_static_mp_regen = 1.25
-move_speed = 305.0
 platform_enabled = true
 import_path = "res://data/characters/Ahri/Ahri.ini"
 

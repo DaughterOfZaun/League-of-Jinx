@@ -79,51 +79,51 @@ enum SearchTags {
 
 @export_group("Stats")
 @export_subgroup("Defense")
-@export var armor: float
-@export var armor_per_level: float
+#@export var armor: float
+#@export var armor_per_level: float
 @export var armor_material: ArmorMaterial
 enum ArmorMaterial {
 	Flesh, Stone, Metal, Wood
 }
 #@export var hit_fx_scale: float
 
-@export var spell_block: float
-@export var spell_block_per_level: float
+#@export var spell_block: float
+#@export var spell_block_per_level: float
 
-@export var base_dodge: float
-@export var level_dodge: float
+#@export var base_dodge: float
+#@export var level_dodge: float
 
 @export_subgroup("Offense")
-@export var attack_speed: float
-@export var attack_speed_per_level: float
+#@export var attack_speed: float
+#@export var attack_speed_per_level: float
 
-@export var base_damage: float
-@export var damage_per_level: float
+#@export var base_damage: float
+#@export var damage_per_level: float
 
-@export var base_crit_chance: float
-@export var crit_damage_bonus: float
-@export var crit_per_level: float
+#@export var base_crit_chance: float
+#@export var crit_damage_bonus: float
+#@export var crit_per_level: float
 
-@export var base_ability_power: float
-@export var ability_power_inc_per_level := 0
+#@export var base_ability_power: float
+#@export var ability_power_inc_per_level: float #:= 0
 @export var base_spell_effectiveness: float # 0 or 1.0
 @export var level_spell_effectiveness: float
 @export_subgroup("")
 
 @export_subgroup("Health")
-@export var base_hp: float
-@export var hp_per_level: float
-@export var hp_regen_per_level: float
+#@export var base_hp: float
+#@export var hp_per_level: float
+#@export var hp_regen_per_level: float
 @export var base_factor_hp_regen: float
-@export var base_static_hp_regen: float
+#@export var base_static_hp_regen: float
 @export_subgroup("")
 
 @export_subgroup("Mana")
-@export var base_mp: float
-@export var mp_per_level: float
-@export var mp_regen_per_level: float
+#@export var base_mp: float
+#@export var mp_per_level: float
+#@export var mp_regen_per_level: float
 @export var base_factor_mp_regen: float
-@export var base_static_mp_regen: float
+#@export var base_static_mp_regen: float
 @export_subgroup("")
 
 @export_subgroup("PAR")
@@ -143,7 +143,7 @@ enum PARType {
 @export var par_has_regen_text: bool
 @export_subgroup("")
 
-@export var move_speed: float
+#@export var move_speed: float
 
 @export_group("")
 
@@ -167,17 +167,17 @@ enum PARType {
 @export var post_attack_move_delay: float
 @export_group("")
 
-@export_group("Passive", "passive_")
-#@export var passive: int #?
-@export var passive_icon: String
-@export var passive_name: String
-@export var passive_lua_name: String
-@export_multiline var passive_desc: String
-@export var passive_level: Array[int]
-#@export var passive_num_effects: int
-#@export var passive_effect: Array[float]
-#@export_multiline var pass_lev_desc: Array[String]
-@export_group("")
+#@export_group("Passive", "passive_")
+##@export var passive: int #?
+#@export var passive_icon: String
+#@export var passive_name: String
+#@export var passive_lua_name: String
+#@export_multiline var passive_desc: String
+#@export var passive_level: Array[int]
+##@export var passive_num_effects: int
+##@export var passive_effect: Array[float]
+##@export_multiline var pass_lev_desc: Array[String]
+#@export_group("")
 
 #@export_group("Spells")
 #@export var spell: Array[String]
@@ -218,6 +218,39 @@ var target: Unit
 	var ini := ini_load(import_path)
 	set_from_ini_section(ini["Data"])
 	print("imported")
+#@export_tool_button("Export to Stats") var import_to_stats := func() -> void:
+#	target = get_parent()
+
+	#stats.armor_base = armor
+	#stats.armor_base_per_level = armor_per_level
+	#stats.spell_block_base = spell_block
+	#stats.spell_block_base_per_level = spell_block_per_level
+	#stats.dodge_base = base_dodge
+	#stats.dodge_base_per_level = level_dodge
+	#stats.attack_speed_base = attack_speed
+	#stats.attack_speed_base_per_level = attack_speed_per_level
+	#stats.attack_damage_base = base_damage
+	#stats.attack_damage_base_per_level = damage_per_level
+	#stats.crit_chance_base = base_crit_chance
+	#stats.crit_chance_base_per_level = crit_per_level
+	#stats.crit_damage_bonus = crit_damage_bonus
+	#stats.magic_damage_base = base_ability_power
+	#stats.magic_damage_base_per_level = ability_power_inc_per_level
+	#stats.health_base = base_hp
+	#stats.health_base_per_level = hp_per_level
+	#stats.health_regen_base = base_static_hp_regen
+	#stats.health_regen_base_per_level = hp_regen_per_level
+	#stats.mana_base = base_mp
+	#stats.mana_base_per_level = mp_per_level
+	#stats.mana_regen_base = base_static_mp_regen
+	#stats.mana_regen_base_per_level = mp_regen_per_level
+	#stats.movement_speed_base = move_speed
+
+	#TODO: WTF is that?
+	#stats.base_spell_effectiveness = base_spell_effectiveness
+	#stats.level_spell_effectiveness = level_spell_effectiveness
+	#stats.base_factor_hp_regen = base_factor_hp_regen
+	#stats.base_factor_mp_regen = base_factor_mp_regen
 @export_group("")
 
 func get_target_child(type: GDScript, name: String) -> Variant:
@@ -236,14 +269,23 @@ func get_target_spells() -> Spells:
 func get_target_passive() -> Passive:
 	return get_target_child(Passive, "Passive")
 
+var stats: Stats:
+	get: return get_target_child(Stats, "Stats")
+
 func set_from_ini_entry(key_array: Array, value: String) -> void:
 	var ignored := false
 	match key_array:
-		["AbilityPowerIncPerLevel"]: ability_power_inc_per_level = int_parse(value)
+		["AbilityPowerIncPerLevel"]:
+			#ability_power_inc_per_level = int_parse(value)
+			stats.magic_damage_base_per_level = int_parse(value)
 		["AcquisitionRange"]: acquisition_range = float_parse(value)
-		["Armor"]: armor = float_parse(value)
+		["Armor"]:
+			#armor = float_parse(value)
+			stats.armor_base = float_parse(value)
 		["ArmorMaterial"]: armor_material = enum_parse(UnitData.ArmorMaterial, value) as UnitData.ArmorMaterial
-		["ArmorPerLevel"]: armor_per_level = float_parse(value)
+		["ArmorPerLevel"]:
+			#armor_per_level = float_parse(value)
+			stats.armor_base_per_level = float_parse(value)
 		["AssetCategory"]: ignored = true #asset_category = string_parse(value)
 		["AttackDelayCastOffsetPercent"]:
 			#attack_delay_cast_offset_percent = float_parse(value)
@@ -253,22 +295,42 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 			get_target_spells().get_basic(0).data.delay_total_time_percent = float_parse(value)
 		["AttackRange"]: attack_range = float_parse(value)
 		["AttackRank"]: attack_rank = int_parse(value)
-		["AttackSpeed"]: attack_speed = float_parse(value)
-		["AttackSpeedPerLevel"]: attack_speed_per_level = float_parse(value)
-		["BaseAbilityPower"]: base_ability_power = float_parse(value)
+		["AttackSpeed"]:
+			#attack_speed = float_parse(value)
+			stats.attack_speed_base = float_parse(value)
+		["AttackSpeedPerLevel"]:
+			#attack_speed_per_level = float_parse(value)
+			stats.attack_speed_base_per_level = float_parse(value)
+		["BaseAbilityPower"]:
+			#base_ability_power = float_parse(value)
+			stats.magic_damage_base = float_parse(value)
 		["BaseAttack_Probability"]:
 			#base_attack_probability = float_parse(value)
 			(get_target_spells().get_basic(0).data as BasicAttackData).probability = float_parse(value)
-		["BaseCritChance"]: base_crit_chance = float_parse(value)
-		["BaseDamage"]: base_damage = float_parse(value)
-		["BaseDodge"]: base_dodge = float_parse(value)
+		["BaseCritChance"]:
+			#base_crit_chance = float_parse(value)
+			stats.crit_chance_base = float_parse(value)
+		["BaseDamage"]:
+			#base_damage = float_parse(value)
+			stats.attack_damage_base = float_parse(value)
+		["BaseDodge"]:
+			#base_dodge = float_parse(value)
+			stats.dodge_base = float_parse(value)
 		["BaseFactorHPRegen"]: base_factor_hp_regen = float_parse(value)
 		["BaseFactorMPRegen"]: base_factor_mp_regen = float_parse(value)
-		["BaseHP"]: base_hp = float_parse(value)
-		["BaseMP"]: base_mp = float_parse(value)
+		["BaseHP"]:
+			#base_hp = float_parse(value)
+			stats.health_base = float_parse(value)
+		["BaseMP"]:
+			#base_mp = float_parse(value)
+			stats.mana_base = float_parse(value)
 		["BaseSpellEffectiveness"]: base_spell_effectiveness = float_parse(value)
-		["BaseStaticHPRegen"]: base_static_hp_regen = float_parse(value)
-		["BaseStaticMPRegen"]: base_static_mp_regen = float_parse(value)
+		["BaseStaticHPRegen"]:
+			#base_static_hp_regen = float_parse(value)
+			stats.health_regen_base = float_parse(value)
+		["BaseStaticMPRegen"]:
+			#base_static_mp_regen = float_parse(value)
+			stats.mana_regen_base = float_parse(value)
 		["BotEnabled"]: bot_enabled = bool_parse(value)
 		["BotEnabledMM"]: bot_enabled_mm = bool_parse(value)
 		["ChampionId"]: champion_id = int_parse(value)
@@ -283,13 +345,19 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["CritAttack"]:
 			#crit_attack = string_parse(value)
 			get_target_spells().get_crit(string_parse(value))
-		["CritDamageBonus"]: crit_damage_bonus = float_parse(value)
+		["CritDamageBonus"]:
+			#crit_damage_bonus = float_parse(value)
+			stats.crit_damage_bonus = float_parse(value)
 		["CriticalAttack"]: ignored = true #critical_attack = string_parse(value)
-		["CritPerLevel"]: crit_per_level = float_parse(value)
+		["CritPerLevel"]:
+			#crit_per_level = float_parse(value)
+			stats.crit_chance_base_per_level = float_parse(value)
 		["CS_easy"]: cs_easy = bool_parse(value)
 		["CS_hard"]: cs_hard = bool_parse(value)
 		["CS_medium"]: cs_medium = bool_parse(value)
-		["DamagePerLevel"]: damage_per_level = float_parse(value)
+		["DamagePerLevel"]:
+			#damage_per_level = float_parse(value)
+			stats.attack_damage_base_per_level = float_parse(value)
 		["DefenseRank"]: defense_rank = int_parse(value)
 		["DelayCastOffsetPercent"]: ignored = true #delay_cast_offset_percent = float_parse(value)
 		["DelayTotalTimePercent"]: ignored = true #delay_total_time_percent = float_parse(value)
@@ -313,10 +381,16 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["GlobalGoldGivenOnDeath"]: global_gold_given_on_death = float_parse(value)
 		["GoldGivenOnDeath"]: gold_given_on_death = float_parse(value)
 		["HitFxScale"]: ignored = true #hit_fx_scale = float_parse(value)
-		["HPPerLevel"]: hp_per_level = float_parse(value)
-		["HPRegenPerLevel"]: hp_regen_per_level = float_parse(value)
+		["HPPerLevel"]:
+			#hp_per_level = float_parse(value)
+			stats.health_base_per_level = float_parse(value)
+		["HPRegenPerLevel"]:
+			#hp_regen_per_level = float_parse(value)
+			stats.health_regen_base_per_level = float_parse(value)
 		["IsMelee"]: is_melee = bool_parse(value)
-		["LevelDodge"]: level_dodge = float_parse(value)
+		["LevelDodge"]:
+			#level_dodge = float_parse(value)
+			stats.dodge_base_per_level = float_parse(value)
 		["LevelSpellEffectiveness"]: level_spell_effectiveness = float_parse(value)
 		["Lore", 1]: lore = string_parse(value)
 		["MagicRank"]: magic_rank = int_parse(value)
@@ -324,9 +398,15 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 			var max_levels := Array(string_parse(value).split(' ', false)).map(int_parse)
 			for i in len(max_levels):
 				get_target_spells().get_spell(i).data.max_level = max_levels[i]
-		["MoveSpeed"]: move_speed = float_parse(value)
-		["MPPerLevel"]: mp_per_level = float_parse(value)
-		["MPRegenPerLevel"]: mp_regen_per_level = float_parse(value)
+		["MoveSpeed"]:
+			#move_speed = float_parse(value)
+			stats.movement_speed_base = float_parse(value)
+		["MPPerLevel"]:
+			#mp_per_level = float_parse(value)
+			stats.mana_base_per_level = float_parse(value)
+		["MPRegenPerLevel"]:
+			#mp_regen_per_level = float_parse(value)
+			stats.mana_regen_base_per_level = float_parse(value)
 		["Name"]: champion_name = string_parse(value)
 		["NeverRender"]: never_render = bool_parse(value)
 		["NoAutoAttack"]: no_auto_attack = bool_parse(value)
@@ -383,8 +463,12 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["Spell", var i]:
 			#spell = array_set(spell, i - 1, string_parse(value))
 			get_target_spells().get_spell(i - 1, string_parse(value))
-		["SpellBlock"]: spell_block = float_parse(value)
-		["SpellBlockPerLevel"]: spell_block_per_level = float_parse(value)
+		["SpellBlock"]:
+			#spell_block = float_parse(value)
+			stats.spell_block_base = float_parse(value)
+		["SpellBlockPerLevel"]:
+			#spell_block_per_level = float_parse(value)
+			stats.spell_block_base_per_level = float_parse(value)
 		["SpellsUpLevels", var i]:
 			get_target_spells().get_spell(i - 1).data.up_levels = Array(string_parse(value).split(' ', false)).map(int_parse)
 		["SR_easy"]: sr_easy = bool_parse(value)

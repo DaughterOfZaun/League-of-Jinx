@@ -1,7 +1,7 @@
 class_name InputManager
 extends Node3D
 
-@export var main_hero: Unit
+@export var main_hero: Champion
 @onready var nav_map_rid := get_world_3d().navigation_map
 @onready var camera: Camera3D = %Camera
 @onready var viewport := get_viewport()
@@ -120,15 +120,9 @@ func _ready() -> void:
 		#if shape != CursorShape.DEFAULT:
 		Input.set_custom_mouse_cursor(cursor_textures[shape], int(shape), hotspot)
 	
-	var spells: Dictionary[String, UISpell] = {
-		"q": get_node("%UI/Center/ChampionSpells/Spell1"),
-		"w": get_node("%UI/Center/ChampionSpells/Spell2"),
-		"e": get_node("%UI/Center/ChampionSpells/Spell3"),
-		"r": get_node("%UI/Center/ChampionSpells/Spell4"),
-		"d": get_node("%UI/Center/SummonerSpells/Spell1"),
-		"f": get_node("%UI/Center/SummonerSpells/Spell2"),
-		"b": get_node("%UI/Center/Recall"),
-	}
 	await main_hero.ready
-	for letter in spells:
-		spells[letter].bind_to(letter, main_hero.spells[letter])
+	var ui_center_panel: UICenterPanel = %UI/Center
+	var ui_left_panel: UILeftPanel = %UI/Left
+	ui_center_panel.bind_to(main_hero)
+	ui_left_panel.bind_to(main_hero)
+	

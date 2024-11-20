@@ -179,10 +179,10 @@ func set_from_ini_section(section: Array) -> void:
 func set_from_ini_entry(key_array: Array, value: String) -> void:
 	pass
 
-func ini_load(import_path: String) -> Dictionary[String, Array]:
-	var result: Dictionary[String, Array] = {}
-	var section: Array[Array]
-	var section_name: String
+func ini_load(import_path: String, strip_semicolons := false) -> Dictionary[String, Array]:
+	var section: Array[Array] = []
+	var section_name: String = "Default"
+	var result: Dictionary[String, Array] = { "Default": section }
 	var regex_section := RegEx.create_from_string(r'^\[(.*?)\]$')
 	var regex_entry := RegEx.create_from_string(r'^(.*?)=("?)(.*?)\2$')
 	var regex_key := RegEx.create_from_string(r'^([a-zA-Z\-_]*)(\d*)([a-zA-Z\-_]*)(\d*)([a-zA-Z\-_]*)(\d*)$')
@@ -190,7 +190,10 @@ func ini_load(import_path: String) -> Dictionary[String, Array]:
 	var file := FileAccess.open(import_path, FileAccess.READ).get_as_text(true).split('\n', false)
 	for line in file:
 
-		if line.begins_with("'"):
+		if strip_semicolons:
+			line = line.split(";", true, 2)[0]
+
+		if line.is_empty() || line.begins_with("'"):
 			continue
 
 		var m: RegExMatch
@@ -206,11 +209,11 @@ func ini_load(import_path: String) -> Dictionary[String, Array]:
 
 		m = regex_entry.search(line)
 		assert(m != null)
-		var key := m.strings[1]
-		var value := m.strings[3]
+		var key := m.strings[1].strip_edges()
+		var value := m.strings[3].strip_edges()
 
 		m = regex_key.search(key)
-		assert(m != null)
+		assert(m != null, key)
 		var key_array := []
 		for i in range(1, len(m.strings)):
 			if m.strings[i]:
