@@ -156,6 +156,19 @@ extends Data
 	var ini := ini_load(import_path, true)
 	set_from_ini_section(ini["Default"])
 
+@export_category("ExpCurve")
+@export var exp_curve: Array[int] = []
+@export_group("Import", "import_exp_curve_")
+@export_file("*.ini") var import_exp_curve_path: String
+@export_tool_button("Import") var import_exp_curve := func() -> void:
+	var ini := ini_load(import_exp_curve_path, true)
+	var section := ini["EXP"]
+	for entry: Array in section:
+		var key_array: Array = entry[0]
+		var value: String = entry[1]
+		match key_array:
+			["Level", var i]: array_set(exp_curve, i, int_parse(value))
+
 func set_from_ini_entry(key_array: Array, value: String) -> void:
 	match key_array:
 		["ar_StopAttackRangeModifier"]: ar_stop_attack_range_modifier = float_parse(value)

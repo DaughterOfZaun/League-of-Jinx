@@ -68,7 +68,7 @@ resource_local_to_scene = true
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_5t0se"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_dp1ib"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Node3D" type="Node3D"]
@@ -159,7 +159,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 level_shader = ExtResource("31_g1ghr")
 level_decal_shader = ExtResource("32_m603r")
 level_flora_shader = ExtResource("33_rqr2r")
-viewport_texture = SubResource("ViewportTexture_5t0se")
+viewport_texture = SubResource("ViewportTexture_dp1ib")
 object_cfg = "res://data/levels/1/ObjectCFG.cfg"
 create_level_props_script = ExtResource("35_x1iow")
 
@@ -436,11 +436,8 @@ team = 2
 [node name="Level" type="Node" parent="."]
 script = ExtResource("35_3l20p")
 
-[node name="Unit" parent="." instance=ExtResource("27_0mdok")]
-transform = Transform3D(-0.803857, 0, 0.594823, 0, 1, 0, -0.594823, 0, -0.803857, 0.746, 2.485, -3.787)
-team = 1
-
 [node name="Constants" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("36_dp1ib")
 ar_stop_attack_range_modifier = 100.0
 ar_ai_charmed_acquisition_range = 1000.0
@@ -515,4 +512,10 @@ ai_ai_toggle = true
 ai_starting_gold = 475.0
 ai_default_pet_return_radius = 200.0
 import_path = "res://data/levels/1/Constants.var"
+exp_curve = Array[int]([0, 0, 280, 670, 1170, 1780, 2500, 3330, 4270, 5320, 6480, 7750, 9130, 10620, 12220, 13930, 15750, 17680, 19720])
+import_exp_curve_path = "res://data/levels/1/ExpCurve.ini"
 metadata/_custom_type_script = ExtResource("36_dp1ib")
+
+[node name="Unit" parent="." instance=ExtResource("27_0mdok")]
+transform = Transform3D(-0.803857, 0, 0.594823, 0, 1, 0, -0.594823, 0, -0.803857, 0.746, 2.485, -3.787)
+team = 1

@@ -3,12 +3,16 @@ extends Node
 
 #TODO: Group by offense, defense...
 
-@onready var me := get_parent() as Unit
+@onready var me: Unit = get_parent()
+@onready var root := get_tree().current_scene
+@onready var constants: Constants = root.get_node("%Constants")
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	me.stats = self
 
 @export var level := 1
+func growth(stat_per_level: float) -> float:
+	return stat_per_level * (level - 1)
 
 @export var crit_damage_bonus: float
 
@@ -26,7 +30,7 @@ var armor_flat_temp: float
 @export var armor_percent: float
 var armor_percent_temp: float
 func get_armor() -> float:
-	return (armor_base + (armor_base_per_level * level) + armor_flat + armor_flat_temp)\
+	return (armor_base + growth(armor_base_per_level) + armor_flat + armor_flat_temp)\
 		 * (1 + armor_percent + armor_percent_temp)
 @export_group('Armor penetration', 'armor_penetration_')
 @export var armor_penetration_flat: float
@@ -48,9 +52,13 @@ func get_attack_range() -> float:
 var attack_speed_percent_temp: float
 @export var attack_speed_percent_multiplicative: float
 var attack_speed_percent_multiplicative_temp: float
-func get_attack_speed() -> float: #TODO: check base calc 
-	return (1 + attack_speed_base + (attack_speed_base_per_level * level) + attack_speed_percent + attack_speed_percent_temp)\
-		 * (1 + attack_speed_percent_multiplicative + attack_speed_percent_multiplicative_temp)
+func get_attack_speed() -> float:
+	var base := 1.0 / constants.gcd_attack_delay
+	var ratio := base
+	var base_percent := (attack_speed_base + growth(attack_speed_base_per_level)) * 0.01
+	var bonus_percent := attack_speed_percent + attack_speed_percent_temp
+	var bonus_percent_multiplicative := attack_speed_percent_multiplicative + attack_speed_percent_multiplicative_temp
+	return base + ratio * (base_percent + bonus_percent * (1 + bonus_percent_multiplicative))
 @export_group('Attack damage', 'attack_damage_')
 @export var attack_damage_base: float
 @export var attack_damage_base_per_level: float
@@ -59,7 +67,7 @@ var attack_damage_flat_temp: float
 @export var attack_damage_percent: float
 var attack_damage_percent_temp: float
 func get_attack_damage() -> float:
-	return (attack_damage_base + (attack_damage_base_per_level * level) + attack_damage_flat + attack_damage_flat_temp)\
+	return (attack_damage_base + growth(attack_damage_base_per_level) + attack_damage_flat + attack_damage_flat_temp)\
 		 * (1 + attack_damage_percent + attack_damage_percent_temp)
 @export_group('Bubble radius', 'bubble_radius_')
 @export var bubble_radius_flat: float
@@ -80,7 +88,7 @@ func get_cooldown() -> float:
 @export var crit_chance_flat: float
 var crit_chance_flat_temp: float
 func get_crit_chance() -> float:
-	return (crit_chance_base + (crit_chance_base_per_level * level) + crit_chance_flat + crit_chance_flat_temp)
+	return (crit_chance_base + growth(crit_chance_base_per_level) + crit_chance_flat + crit_chance_flat_temp)
 @export_group('Gold', 'gold_per10_')
 @export var gold_per10_flat: float
 var gold_per10_flat_temp: float
@@ -94,7 +102,7 @@ var health_flat_temp: float
 @export var health_percent: float
 var health_percent_temp: float
 func get_health() -> float:
-	return (health_base + (health_base_per_level * level) + health_flat + health_flat_temp)\
+	return (health_base + growth(health_base_per_level) + health_flat + health_flat_temp)\
 		 * (1 + health_percent + health_percent_temp)
 @onready var health_current := get_health()
 var health_current_percent: float:
@@ -106,7 +114,7 @@ var health_regen_flat_temp: float
 @export var health_regen_percent: float
 var health_regen_percent_temp: float
 func get_health_regen() -> float:
-	return (health_regen_base + (health_regen_base_per_level * level) + health_regen_flat + health_regen_flat_temp)\
+	return (health_regen_base + growth(health_regen_base_per_level) + health_regen_flat + health_regen_flat_temp)\
 		 * (1 + health_regen_percent + health_regen_percent_temp)
 @export_group('Mana', 'mana_')
 @export var mana_base: float
@@ -116,7 +124,7 @@ var mana_flat_temp: float
 @export var mana_percent: float
 var mana_percent_temp: float
 func get_mana() -> float:
-	return (mana_base + (mana_base_per_level * level) + mana_flat + mana_flat_temp)\
+	return (mana_base + growth(mana_base_per_level) + mana_flat + mana_flat_temp)\
 		 * (1 + mana_percent + mana_percent_temp)
 @onready var mana_current := get_mana()
 var mana_current_percent: float:
@@ -128,7 +136,7 @@ var mana_regen_flat_temp: float
 @export var mana_regen_percent: float
 var mana_regen_percent_temp: float
 func get_mana_regen() -> float:
-	return (mana_regen_base + (mana_regen_base_per_level * level) + mana_regen_flat + mana_regen_flat_temp)\
+	return (mana_regen_base + growth(mana_regen_base_per_level) + mana_regen_flat + mana_regen_flat_temp)\
 		 * (1 + mana_regen_percent + mana_regen_percent_temp)
 @export_group('Life steal', 'life_steal_')
 @export var life_steal_percent: float
@@ -143,7 +151,7 @@ var magic_damage_flat_temp: float
 @export var magic_damage_percent: float
 var magic_damage_percent_temp: float
 func get_magic_damage() -> float:
-	return (magic_damage_base + (magic_damage_base_per_level * level) + magic_damage_flat + magic_damage_flat_temp)\
+	return (magic_damage_base + growth(magic_damage_base_per_level) + magic_damage_flat + magic_damage_flat_temp)\
 		 * (1 + magic_damage_percent + magic_damage_percent_temp)
 @export_group('Magic penetration', 'magic_penetration_')
 @export var magic_penetration_flat: float
@@ -187,7 +195,7 @@ var spell_block_flat_temp: float
 @export var spell_block_percent: float
 var spell_block_percent_temp: float
 func get_spell_block() -> float:
-	return (spell_block_base + (spell_block_base_per_level * level) + spell_block_flat + spell_block_flat_temp)\
+	return (spell_block_base + growth(spell_block_base_per_level) + spell_block_flat + spell_block_flat_temp)\
 		 * (1 + spell_block_percent + spell_block_percent_temp)
 @export_group('Spell vamp', 'spell_vamp_')
 @export var spell_vamp_percent: float
@@ -214,7 +222,7 @@ func get_crit_damage() -> float:
 @export var dodge_flat: float
 var dodge_flat_temp: float
 func get_dodge() -> float:
-	return (dodge_base + (dodge_base_per_level * level) + dodge_flat + dodge_flat_temp)
+	return (dodge_base + growth(dodge_base_per_level) + dodge_flat + dodge_flat_temp)
 @export_group('Respawn time', 'respawn_time_')
 @export var respawn_time_percent: float
 var respawn_time_percent_temp: float

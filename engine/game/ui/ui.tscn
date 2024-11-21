@@ -270,7 +270,7 @@ offset_bottom = -11.0
 [node name="TextureProgressBar" parent="Center/Manabar" index="0"]
 texture_progress = ExtResource("6_0vwin")
 
-[node name="Left" type="Control" parent="." node_paths=PackedStringArray("attack_damage_label", "magical_damage_label", "attack_speed_label", "movement_speed_label", "armor_label", "spell_block_label")]
+[node name="Left" type="Control" parent="." node_paths=PackedStringArray("attack_damage_label", "magical_damage_label", "attack_speed_label", "movement_speed_label", "armor_label", "spell_block_label", "level_label", "level_range", "name_label")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -283,6 +283,9 @@ attack_speed_label = NodePath("VBoxContainer/AttackSpeedLabel")
 movement_speed_label = NodePath("VBoxContainer/MovementSpeedLabel")
 armor_label = NodePath("VBoxContainer/ArmorLabel")
 spell_block_label = NodePath("VBoxContainer/SpellBlockLabel")
+level_label = NodePath("LevelLabel")
+level_range = NodePath("LevelBar")
+name_label = NodePath("NameLabel")
 
 [node name="BackgroundColor" type="ColorRect" parent="Left"]
 layout_mode = 1
