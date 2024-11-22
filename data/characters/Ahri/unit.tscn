@@ -84,7 +84,7 @@ script = ExtResource("2_81mpc")
 scale = Vector2(0.178, 0.178)
 texture = ExtResource("3_7i6v8")
 
-[node name="Healthbar" type="Control" parent="."]
+[node name="Healthbar" type="Control" parent="." node_paths=PackedStringArray("level_label", "health_range", "mana_range")]
 layout_mode = 3
 anchor_left = 0.516
 anchor_top = 0.365
@@ -97,6 +97,9 @@ offset_bottom = 0.199982
 pivot_offset = Vector2(84, 38)
 mouse_filter = 2
 script = ExtResource("3_81mpc")
+level_label = NodePath("LevelLabel")
+health_range = NodePath("HealthBar")
+mana_range = NodePath("ManaBar")
 
 [node name="TextureRect" type="TextureRect" parent="Healthbar"]
 layout_mode = 1

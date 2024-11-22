@@ -132,6 +132,11 @@ ToggleFullscreen={
 ]
 }
 
+[internationalization]
+
+rendering/root_node_auto_translate=false
+locale/translations=PackedStringArray("res://data/ui/lang/fontconfig.en.translation")
+
 [rendering]
 
 anti_aliasing/screen_space_roughness_limiter/enabled=false

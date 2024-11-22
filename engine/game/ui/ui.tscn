@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://diknhd1061r8r"]
+[gd_scene load_steps=31 format=3 uid="uid://diknhd1061r8r"]
 
 [ext_resource type="Texture2D" uid="uid://df2lx4qnpncd" path="res://data/screenshots/League of Legends.webp" id="1_n4n8a"]
 [ext_resource type="Script" path="res://engine/game/ui/center.gd" id="2_84jna"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://b8whsq4kc8d0i" path="res://data/ui/bar/kill.webp" id="19_737ry"]
 [ext_resource type="Texture2D" uid="uid://b7vgdscg5ad1v" path="res://data/ui/bar/death.webp" id="20_idkr5"]
 [ext_resource type="Texture2D" uid="uid://bdg3p2d8p458b" path="res://data/ui/bar/assist.webp" id="21_5tvyd"]
+[ext_resource type="Script" path="res://engine/game/ui/titan_bar.gd" id="24_qwp58"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0bgng"]
 shader = ExtResource("14_foojt")
@@ -270,7 +271,7 @@ offset_bottom = -11.0
 [node name="TextureProgressBar" parent="Center/Manabar" index="0"]
 texture_progress = ExtResource("6_0vwin")
 
-[node name="Left" type="Control" parent="." node_paths=PackedStringArray("attack_damage_label", "magical_damage_label", "attack_speed_label", "movement_speed_label", "armor_label", "spell_block_label", "level_label", "level_range", "name_label")]
+[node name="Left" type="Control" parent="." node_paths=PackedStringArray("attack_damage_label", "magical_damage_label", "attack_speed_label", "movement_speed_label", "armor_label", "spell_block_label", "level_label", "level_range", "name_label", "gold_label")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -286,6 +287,7 @@ spell_block_label = NodePath("VBoxContainer/SpellBlockLabel")
 level_label = NodePath("LevelLabel")
 level_range = NodePath("LevelBar")
 name_label = NodePath("NameLabel")
+gold_label = NodePath("GoldLabel")
 
 [node name="BackgroundColor" type="ColorRect" parent="Left"]
 layout_mode = 1
@@ -386,7 +388,7 @@ theme_override_colors/font_color = Color(0.109804, 0.470588, 0.0666667, 1)
 theme_override_font_sizes/font_size = 9
 text = "139"
 
-[node name="MoneyLabel" type="Label" parent="Left"]
+[node name="GoldLabel" type="Label" parent="Left"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -402,6 +404,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="NameLabel" type="Label" parent="Left"]
+auto_translate_mode = 1
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -628,12 +631,18 @@ texture_normal = ExtResource("17_p82r5")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="Bar" type="Control" parent="."]
+[node name="Bar" type="Control" parent="." node_paths=PackedStringArray("fps_label", "time_label", "kills_label", "deaths_label", "assists_label")]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
+script = ExtResource("24_qwp58")
+fps_label = NodePath("FPSLabel/FPSLabel")
+time_label = NodePath("TimeLabel")
+kills_label = NodePath("KillsLabel")
+deaths_label = NodePath("DeathsLabel")
+assists_label = NodePath("AssistsLabel")
 
 [node name="TextureRect" type="TextureRect" parent="Bar"]
 layout_mode = 1
@@ -746,12 +755,23 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -99.0
-offset_top = 22.0
+offset_top = 23.0
 offset_right = -63.0
 offset_bottom = 32.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 6
-text = "FPS: 45"
+text = "FPS:"
+
+[node name="FPSLabel" type="Label" parent="Bar/FPSLabel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 6
+text = "45"
 
 [editable path="Center/SummonerSpells/Spell1"]
 [editable path="Center/SummonerSpells/Spell2"]

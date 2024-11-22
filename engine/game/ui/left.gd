@@ -10,11 +10,12 @@ extends Control
 @export var level_label: Label
 @export var level_range: Range
 @export var name_label: Label
+@export var gold_label: Label
 
 @export var champion: Champion
-func bind_to(c: Champion) -> void:
-	name_label.text = c.data.name
-	champion = c
+func bind_to(champion: Champion) -> void:
+	self.champion = champion
+	name_label.text = champion.data.champion_name
 
 func _process(delta: float) -> void:
 	attack_damage_label.text = str(roundi(champion.stats.get_attack_damage()))
@@ -24,4 +25,7 @@ func _process(delta: float) -> void:
 	armor_label.text = str(roundi(champion.stats.get_armor()))
 	spell_block_label.text = str(roundi(champion.stats.get_spell_block()))
 	level_label.text = str(champion.stats.level)
-	level_range.value = 0
+	#level_range.min_value = 0
+	level_range.max_value = champion.exp_to_next_level - champion.exp_to_current_level
+	level_range.value = champion.exp - champion.exp_to_current_level
+	gold_label.text = str(floori(champion.gold))

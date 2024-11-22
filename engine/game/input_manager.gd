@@ -123,6 +123,7 @@ func _ready() -> void:
 	await main_hero.ready
 	var ui_center_panel: UICenterPanel = %UI/Center
 	var ui_left_panel: UILeftPanel = %UI/Left
+	var ui_titan_bar: UITitanBar = %UI/Bar
 	ui_center_panel.bind_to(main_hero)
 	ui_left_panel.bind_to(main_hero)
-	
+	ui_titan_bar.bind_to(main_hero)
