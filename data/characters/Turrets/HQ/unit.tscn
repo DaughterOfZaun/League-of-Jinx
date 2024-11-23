@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://v8x22wqxjrig"]
 
 [ext_resource type="PackedScene" uid="uid://drv075h83p6aq" path="res://data/characters/Turrets/unit.tscn" id="1_3jdra"]
-[ext_resource type="Script" path="res://engine/spells/spell_manager.gd" id="2_u63em"]
-[ext_resource type="Script" path="res://engine/spells/attacks/basic_attack.gd" id="3_gfjm4"]
-[ext_resource type="Script" path="res://engine/spells/attacks/basic_attack_data.gd" id="4_puorx"]
+[ext_resource type="Script" uid="uid://cnkcmd8f7yv4q" path="res://engine/spells/spell_manager.gd" id="2_u63em"]
+[ext_resource type="Script" uid="uid://spnut3ga6dx8" path="res://engine/spells/attacks/basic_attack.gd" id="3_gfjm4"]
+[ext_resource type="Script" uid="uid://clobsbokippjm" path="res://engine/spells/attacks/basic_attack_data.gd" id="4_puorx"]
 
 [node name="Unit" instance=ExtResource("1_3jdra")]
 
@@ -16,14 +16,7 @@ gameplay_collision_radius = 88.4
 pathfinding_collision_radius = 88.4
 selection_radius = 130.0
 selection_height = 200.0
-armor = 25.0
 armor_material = 1
-spell_block = 75.0
-attack_speed_per_level = 2.125
-base_damage = 115.0
-crit_damage_bonus = 2.0
-base_hp = 1300.0
-base_static_hp_regen = 6.0
 global_exp_given_on_death = 120.0
 global_gold_given_on_death = 150.0
 import_path = "res://data/characters/Turrets/HQ/Order/OrderTurretAngel.ini"

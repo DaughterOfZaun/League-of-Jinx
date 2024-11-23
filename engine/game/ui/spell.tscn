@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://demalxnr8x6to"]
 
-[ext_resource type="Script" path="res://engine/game/ui/ui_spell.gd" id="1_6unfi"]
+[ext_resource type="Script" uid="uid://baacgkxb62o04" path="res://engine/game/ui/ui_spell.gd" id="1_6unfi"]
 [ext_resource type="Texture2D" uid="uid://bmblqfb85gtl1" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/Ahri_OrbofDeception.webp" id="1_wtlgq"]
-[ext_resource type="Script" path="res://engine/game/ui/clock.gd" id="3_4dm5e"]
+[ext_resource type="Script" uid="uid://bfckyo2u30w8e" path="res://engine/game/ui/clock.gd" id="3_4dm5e"]
 
 [node name="Spell" type="Control"]
 layout_mode = 3

@@ -1,7 +1,7 @@
 [gd_scene load_steps=68 format=3 uid="uid://cmuj1g4sexvke"]
 
-[ext_resource type="Script" path="res://engine/effects/system.gd" id="1_oyhqx"]
-[ext_resource type="Script" path="res://engine/effects/group.gd" id="2_kwdmc"]
+[ext_resource type="Script" uid="uid://w51dsm6maeuv" path="res://engine/effects/system.gd" id="1_oyhqx"]
+[ext_resource type="Script" uid="uid://bcqw6ydxjryuf" path="res://engine/effects/group.gd" id="2_kwdmc"]
 [ext_resource type="Texture2D" uid="uid://bbfc6oura0h0t" path="res://data/particles/cursor_moveto/movement_indicator.webp" id="3_l7sbp"]
 [ext_resource type="Texture2D" uid="uid://bs5m2pufk1em1" path="res://data/particles/cursor_moveto/color-hold.webp" id="4_8dwmk"]
 [ext_resource type="ArrayMesh" uid="uid://dv16wobf4nya8" path="res://data/particles/cursor_moveto/movement_indicator4.obj" id="5_msl5a"]

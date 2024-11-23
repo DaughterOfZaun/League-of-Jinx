@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://crn46tpe800hl"]
 
 [ext_resource type="PackedScene" uid="uid://drv075h83p6aq" path="res://data/characters/Turrets/unit.tscn" id="1_yv8h1"]
-[ext_resource type="Script" path="res://engine/spells/spell_manager.gd" id="4_cxsuk"]
-[ext_resource type="Script" path="res://engine/spells/attacks/basic_attack.gd" id="5_s4cms"]
-[ext_resource type="Script" path="res://engine/spells/attacks/basic_attack_data.gd" id="6_co4v5"]
+[ext_resource type="Script" uid="uid://cnkcmd8f7yv4q" path="res://engine/spells/spell_manager.gd" id="4_cxsuk"]
+[ext_resource type="Script" uid="uid://spnut3ga6dx8" path="res://engine/spells/attacks/basic_attack.gd" id="5_s4cms"]
+[ext_resource type="Script" uid="uid://clobsbokippjm" path="res://engine/spells/attacks/basic_attack_data.gd" id="6_co4v5"]
 
 [node name="Unit" instance=ExtResource("1_yv8h1")]
 
@@ -17,11 +17,6 @@ pathfinding_collision_radius = 88.4
 selection_radius = 130.0
 selection_height = 200.0
 armor_material = 1
-attack_speed = 1.6
-attack_speed_per_level = 2.125
-base_damage = 999.0
-crit_damage_bonus = 2.0
-base_hp = 9999.0
 global_exp_given_on_death = 400.0
 global_gold_given_on_death = 100.0
 import_path = "res://data/characters/Turrets/Fountan/Order/OrderTurretShrine.ini"
