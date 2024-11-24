@@ -358,7 +358,7 @@ func spawn_point_from_file(fname: String) -> Node3D:
 @export_file("*.cfg") var object_cfg: String
 @export var create_level_props_script: GDScript
 @export_tool_button("Create Level Props")
-var post_level_load := func() -> void:
+var create_level_props := func() -> void:
 	#(create_level_props_script.new() as CreateLevelProps).create_level_props()
 	var root := EditorInterface.get_edited_scene_root()
 	var points := find_child("Points", false)

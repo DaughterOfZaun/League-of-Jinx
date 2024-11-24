@@ -2,6 +2,7 @@ class_name InputManager
 extends Node3D
 
 @export var main_hero: Champion
+@onready var heroes := get_parent().find_children("*", "Champion", false)
 @onready var nav_map_rid := get_world_3d().navigation_map
 @onready var camera: Camera3D = %Camera
 @onready var viewport := get_viewport()

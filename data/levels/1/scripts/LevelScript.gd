@@ -230,8 +230,8 @@ func on_level_init() -> void:
 	init_timer(increase_cannon_minion_spawn_rate, increase_cannon_rate_timer_time, false)
 	init_timer(allow_damage_on_buildings, 10, false)
 
-func on_post_level_load() -> void:
-	preload("CreateLevelProps.gd").new().create_level_props()
+#func on_post_level_load() -> void:
+#	preload("CreateLevelProps.gd").new().create_level_props()
 
 func opposite_team(team: int) -> int:
 	if team == Enums.Team.CHAOS:

@@ -434,6 +434,7 @@ pos = 1
 team = 2
 
 [node name="Level" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("35_3l20p")
 
 [node name="Constants" type="Node" parent="."]

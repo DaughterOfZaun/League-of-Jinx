@@ -12,6 +12,7 @@ var kills := 0
 @onready var root := get_tree().current_scene
 @onready var constants: Constants = root.get_node("%Constants")
 @onready var gold: float = constants.ai_starting_gold
+@onready var level_script: Level = root.get_node("%Level")
 @onready var exp := 0.0:
 	get: return exp
 	set(value):
@@ -29,3 +30,4 @@ var kills := 0
 
 func _ready() -> void:
 	exp = 0.0
+	level_script.register_champion(self)
