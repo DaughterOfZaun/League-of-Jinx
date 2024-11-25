@@ -31,6 +31,7 @@ func _ready() -> void:
 
 var move_dir := Vector3.ZERO
 func _input(unk_event: InputEvent) -> void:
+	if locked: return
 	if unk_event is InputEventMouseMotion:
 		var event := unk_event as InputEventMouseMotion
 		const thresold := 10

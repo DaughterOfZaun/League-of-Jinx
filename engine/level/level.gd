@@ -5,7 +5,24 @@ func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	on_level_init()
 	on_post_level_load()
-	init_ambient_gold()
+	init_ambient(
+		'gold',
+		constants.ai_ambient_gold_amount,
+		constants.ai_ambient_gold_interval,
+		constants.ai_ambient_gold_delay,
+		constants.ai_disable_ambient_gold_while_dead,
+		func(champion: Champion, amount: float) -> void:
+			champion.gold += amount
+	)
+	init_ambient(
+		'exp',
+		constants.ai_ambient_xp_amount,
+		constants.ai_ambient_xp_interval,
+		constants.ai_ambient_xp_delay,
+		constants.ai_disable_ambient_xp_while_dead,
+		func(champion: Champion, amount: float) -> void:
+			champion.exp += amount
+	)
 
 func on_level_init() -> void: pass
 func on_post_level_load() -> void: pass
@@ -16,19 +33,28 @@ func register_champion(champion: Champion) -> void:
 
 @onready var root := get_tree().current_scene
 @onready var constants: Constants = root.get_node("%Constants")
-func init_ambient_gold() -> void:
-	var ambient_gold_timer := Timer.new()
-	add_child(ambient_gold_timer)
-	var accrue_ambient_gold := func accrue_ambient_gold() -> void:
+func init_ambient(
+	resource_name: String,
+	amount: float,
+	interval: float,
+	delay: float,
+	disable_while_dead: bool,
+	set_resource_func: Callable
+) -> void:
+	if amount == 0: return
+	var ambient_timer := Timer.new()
+	add_child(ambient_timer)
+	var accrue_ambient := func accrue_ambient() -> void:
 		for champion in champions:
-			if !(champion.status.is_dead && constants.ai_disable_ambient_gold_while_dead):
-				champion.gold += constants.ai_ambient_gold_amount
-		ambient_gold_timer.wait_time = constants.ai_ambient_gold_interval
-	ambient_gold_timer.name = nameof(accrue_ambient_gold).to_pascal_case()
-	ambient_gold_timer.wait_time = constants.ai_ambient_gold_delay
-	ambient_gold_timer.timeout.connect(accrue_ambient_gold)
-	ambient_gold_timer.one_shot = false
-	ambient_gold_timer.start()
+			if !(champion.status.is_dead && disable_while_dead):
+				set_resource_func.call(champion, amount)
+				#champion[resource_name] += amount
+		ambient_timer.wait_time = interval
+	ambient_timer.name = (nameof(accrue_ambient) + '_' + resource_name).to_pascal_case()
+	ambient_timer.wait_time = delay
+	ambient_timer.timeout.connect(accrue_ambient)
+	ambient_timer.one_shot = false
+	ambient_timer.start()
 
 func preload_character(character_name: String) -> void:
 	pass
