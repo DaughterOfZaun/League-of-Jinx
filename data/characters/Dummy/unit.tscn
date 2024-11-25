@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbfh3ax275136"]
+
+[ext_resource type="Script" uid="uid://0hod3dqe7m4i" path="res://engine/unit/unit.gd" id="1_y0p2c"]
+[ext_resource type="Script" uid="uid://xxukqtvfymt0" path="res://engine/unit/unit_data.gd" id="2_7grwr"]
+[ext_resource type="Script" uid="uid://dhorowytayhda" path="res://engine/game/range.gd" id="3_tp4xs"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_flmsy"]
+radius = 1.0
+height = 2.0
+radial_segments = 16
+rings = 8
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u7uog"]
+radius = 1.0
+
+[node name="Unit" type="Node3D" node_paths=PackedStringArray("data")]
+script = ExtResource("1_y0p2c")
+data = NodePath("UnitData")
+metadata/_custom_type_script = ExtResource("1_y0p2c")
+
+[node name="UnitData" type="Node" parent="."]
+script = ExtResource("2_7grwr")
+metadata/_custom_type_script = ExtResource("2_7grwr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_flmsy")
+
+[node name="GameplayRange" type="Area3D" parent="."]
+script = ExtResource("3_tp4xs")
+metadata/_custom_type_script = ExtResource("3_tp4xs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameplayRange"]
+shape = SubResource("SphereShape3D_u7uog")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=46 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" uid="uid://csrtiit658one" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
 [ext_resource type="CompressedTexture3D" uid="uid://cw7h14f61vo0x" path="res://LUT2.webp" id="2_tb6ku"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://brmob4058kgjb" path="res://data/characters/Turrets/Front/Order/unit.tscn" id="36_dp7n3"]
 [ext_resource type="PackedScene" uid="uid://n1ycncd12rnq" path="res://data/characters/Turrets/Back/Order/unit.tscn" id="36_oe0ed"]
 [ext_resource type="PackedScene" uid="uid://c03dkhsata3gj" path="res://data/characters/Nexus/Order/unit.tscn" id="36_yik85"]
+[ext_resource type="PackedScene" uid="uid://cbfh3ax275136" path="res://data/characters/Dummy/unit.tscn" id="37_5t0se"]
 [ext_resource type="PackedScene" uid="uid://dwtgxxdqtsfyo" path="res://data/characters/Nexus/Chaos/unit.tscn" id="37_5vbbt"]
 [ext_resource type="PackedScene" uid="uid://btacpjtg4pcad" path="res://data/characters/Turrets/Back/Chaos/unit.tscn" id="38_bto7k"]
 [ext_resource type="PackedScene" uid="uid://biov8lq32ueqn" path="res://data/characters/Turrets/Middle/Order/unit.tscn" id="38_mmvut"]
@@ -68,7 +69,7 @@ resource_local_to_scene = true
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_dp1ib"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_tqj1w"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Node3D" type="Node3D"]
@@ -159,7 +160,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 level_shader = ExtResource("31_g1ghr")
 level_decal_shader = ExtResource("32_m603r")
 level_flora_shader = ExtResource("33_rqr2r")
-viewport_texture = SubResource("ViewportTexture_dp1ib")
+viewport_texture = SubResource("ViewportTexture_tqj1w")
 object_cfg = "res://data/levels/1/ObjectCFG.cfg"
 create_level_props_script = ExtResource("35_x1iow")
 
@@ -520,3 +521,7 @@ metadata/_custom_type_script = ExtResource("36_dp1ib")
 [node name="Unit" parent="." instance=ExtResource("27_0mdok")]
 transform = Transform3D(-0.803857, 0, 0.594823, 0, 1, 0, -0.594823, 0, -0.803857, 0.746, 2.485, -3.787)
 team = 1
+
+[node name="Dummy" parent="." instance=ExtResource("37_5t0se")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35941, 4, -12.2381)
+team = 2

@@ -1,15 +1,15 @@
 class_name AI
 extends LuaScript
 
-@onready var me := get_parent() as Unit
+@onready var me: Unit = get_parent()
 
-@onready var animation_tree := me.find_child("AnimationTree") as AnimationTree
-@onready var animation_player := animation_tree.get_node(animation_tree.anim_player) as AnimationPlayer
-@onready var animation_playback := animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
+@onready var animation_tree: AnimationTree = me.find_child("AnimationTree")
+@onready var animation_player: AnimationPlayer = animation_tree.get_node(animation_tree.anim_player)
+@onready var animation_playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 
-@onready var acquisition_range := me.find_child('AcquisitionRange') as Area3D
-@onready var attack_range := me.find_child('AttackRange') as Area3D
-@onready var cancel_attack_range := me.find_child('CancelAttackRange') as Area3D
+@onready var acquisition_range: Area3D = me.find_child('AcquisitionRange')
+@onready var attack_range: Area3D = me.find_child('AttackRange')
+@onready var cancel_attack_range: Area3D = me.find_child('CancelAttackRange')
 
 var target: Unit = null
 var target_position := Vector3.INF:
@@ -40,9 +40,9 @@ func find_target_in_ac_r() -> Unit:
 	return best_match
 
 func target_in_attack_range() -> bool:
-	return (target.find_child('GameplayRange') as Radius).overlaps_area(attack_range)
+	return attack_range.overlaps_area(target.find_child('GameplayRange') as Area3D)
 func target_in_cancel_attack_range() -> bool:
-	return (target.find_child('GameplayRange') as Radius).overlaps_area(cancel_attack_range)
+	return cancel_attack_range.overlaps_area(target.find_child('GameplayRange') as Area3D)
 func get_taunt_target() -> Unit:
 	return null
 func is_target_lost() -> bool:
@@ -121,13 +121,15 @@ func on_reached_destination_for_going_to_last_location() -> void: pass
 func halt_AI() -> void: pass
 
 func turn_on_auto_attack(target: Unit) -> void:
-	var target_name := str(target.name) if target else "null"
-	print("turn_on_auto_attack", ' ', target_name)
+	if current_state == attack_state: return
+	var target_unit_name := str(target.name) if target else "null"
+	print("turn_on_auto_attack", ' ', target_unit_name)
 	attack_state.try_enter()
 
 func turn_off_auto_attack(reason := Enums.ReasonToTurnOffAA.IMMEDIATELY) -> void:
+	if current_state != attack_state: return
 	print("turn_off_auto_attack", ' ', Enums.ReasonToTurnOffAA.keys()[reason])
-	idle_state.try_enter() #TODO: deffered.try_enter()
+	run_state.try_enter() #TODO: deffered.try_enter()
 
 func last_auto_attack_finished() -> bool:
 	return true
