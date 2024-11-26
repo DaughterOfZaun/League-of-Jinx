@@ -52,13 +52,13 @@ func get_attack_range() -> float:
 var attack_speed_percent_temp: float
 @export var attack_speed_percent_multiplicative: float
 var attack_speed_percent_multiplicative_temp: float
-func get_attack_speed() -> float:
-	var base := 1.0 / constants.gcd_attack_delay
-	var ratio := base
+func get_attack_speed(delay_offset_percent: float = 0) -> float:
+	var base_delay := constants.gcd_attack_delay * (1.0 + delay_offset_percent)
+	var base := 1.0 / base_delay
 	var base_percent := (attack_speed_base + growth(attack_speed_base_per_level)) * 0.01
 	var bonus_percent := attack_speed_percent + attack_speed_percent_temp
-	var bonus_percent_multiplicative := attack_speed_percent_multiplicative + attack_speed_percent_multiplicative_temp
-	return base + ratio * (base_percent + bonus_percent * (1 + bonus_percent_multiplicative))
+	#TODO: var bonus_percent_multiplicative := attack_speed_percent_multiplicative + attack_speed_percent_multiplicative_temp
+	return base + base_percent + bonus_percent #TODO: (1 + bonus_percent_multiplicative)
 @export_group('Attack damage', 'attack_damage_')
 @export var attack_damage_base: float
 @export var attack_damage_base_per_level: float

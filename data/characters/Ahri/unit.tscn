@@ -250,6 +250,7 @@ skeleton = NodePath("../..")
 root_node = NodePath("../SkinnedMesh")
 tree_root = ExtResource("19_66ge0")
 anim_player = NodePath("../SkinnedMesh/AnimationPlayer")
+parameters/Attack/TimeScale/scale = 1.0
 
 [node name="Spells" type="Node" parent="." node_paths=PackedStringArray("q", "w", "e", "r", "d", "f", "b", "extra", "crit", "basic")]
 script = ExtResource("20_ecg27")
