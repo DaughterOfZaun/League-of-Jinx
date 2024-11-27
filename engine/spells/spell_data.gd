@@ -51,9 +51,9 @@ var auto_cooldown_by_level: Array[float]:
 #region Animation
 @export_group("Animation")
 @export var cast_frame: float #= 7.5
-@export var animation_name: String
-@export var animation_loop_name: String
-@export var animation_winddown_name: String
+@export var animation_name: StringName
+@export var animation_loop_name: StringName
+@export var animation_winddown_name: StringName
 @export var use_animator_framerate: bool
 @export_group("")
 #endregion
