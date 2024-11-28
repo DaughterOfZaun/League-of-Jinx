@@ -113,7 +113,8 @@ func face_dir(dir: Vector3) -> void:
 	direction = dir
 	direction_angle = Vector2(dir.z, dir.x).angle()
 
-@onready var skeleton: Skeleton3D = find_child("SkinnedMesh", false).find_child("Skeleton3D", true)
+@onready var skinned_mesh_root := find_child("SkinnedMesh", false)
+@onready var skeleton: Skeleton3D = skinned_mesh_root.find_child("Skeleton3D", true) if skinned_mesh_root else null
 func get_bone_global_position(bone_idx: int) -> Vector3:
 	return skeleton.to_global(skeleton.get_bone_global_pose(bone_idx).origin)
 
