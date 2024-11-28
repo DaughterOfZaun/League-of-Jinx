@@ -113,6 +113,10 @@ func face_dir(dir: Vector3) -> void:
 	direction = dir
 	direction_angle = Vector2(dir.z, dir.x).angle()
 
+@onready var skeleton: Skeleton3D = find_child("SkinnedMesh", false).find_child("Skeleton3D", true)
+func get_bone_global_position(bone_idx: int) -> Vector3:
+	return skeleton.to_global(skeleton.get_bone_global_pose(bone_idx).origin)
+
 func _process(delta: float) -> void:
 	var rot_delta := angle_difference(rotation.y, direction_angle)
 	#var rot_speed := deg_to_rad(180. / ((0.08 + (0.01/3.))))

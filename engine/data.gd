@@ -48,16 +48,17 @@ func vec3_parse(from: String, u := VectorUsage.UNDEFINED) -> Vector3:
 	var v := from.split(' ')
 	assert(len(v) == 3 || (len(v) == 1 && u != VectorUsage.UNDEFINED), from)
 	if len(v) == 1: match u:
-		VectorUsage.SCALE:
-			return Vector3.ONE * float_parse(v[0])
-		VectorUsage.ROTATION:
-			return Vector3.BACK * float_parse(v[0])
+		VectorUsage.SCALE: return Vector3.ONE * float_parse(v[0])
+		VectorUsage.ROTATION: return Vector3.BACK * float_parse(v[0])
 	return Vector3(float_parse(v[0]), float_parse(v[1]), float_parse(v[2]))
 
-func vec2_parse(from: String) -> Vector2:
+func vec2_parse(from: String, u := VectorUsage.UNDEFINED) -> Vector2:
 	from = string_parse(from)
 	var v := from.split(' ')
-	assert(len(v) == 2, from)
+	assert(len(v) == 2 || (len(v) == 1 && u != VectorUsage.UNDEFINED), from)
+	if len(v) == 1: match u:
+		VectorUsage.SCALE: return Vector2.ONE * float_parse(v[0])
+		VectorUsage.ROTATION: return Vector2.DOWN * float_parse(v[0])
 	return Vector2(float_parse(v[0]), float_parse(v[1]))
 
 func ivec2_parse(from: String) -> Vector2i:
@@ -122,13 +123,26 @@ func curve_set(curve: Curve, i: Variant, from: String) -> Curve:
 func vec3_to_color(v: Vector3) -> Color:
 	return Color(v.x, v.y, v.z)
 
-func curve3d_set(curve: Gradient, i: Variant, from: String, u := VectorUsage.UNDEFINED) -> Gradient:
+func curve3d_set(curve: PackedVector4Array, i: Variant, from: String, u := VectorUsage.UNDEFINED) -> PackedVector4Array:
 	assert(typeof(i) == TYPE_INT)
 	from = string_parse(from)
-	if !curve: curve = Gradient.new()
+	if !curve: curve = PackedVector4Array()
 	var s := from.split(' ', false, 1)
 	assert(len(s) == 2, from)
-	curve.add_point(float_parse(s[0]), vec3_to_color(vec3_parse(s[1], u)))
+	var t := float_parse(s[0])
+	var v := vec3_parse(s[1], u)
+	curve.append(Vector4(v.x, v.y, v.z, t))
+	return curve
+
+func curve2d_set(curve: PackedVector3Array, i: Variant, from: String, u := VectorUsage.UNDEFINED) -> PackedVector3Array:
+	assert(typeof(i) == TYPE_INT)
+	from = string_parse(from)
+	if !curve: curve = PackedVector3Array()
+	var s := from.split(' ', false, 1)
+	assert(len(s) == 2, from)
+	var t := float_parse(s[0])
+	var v := vec2_parse(s[1], u)
+	curve.append(Vector3(v.x, v.y, t))
 	return curve
 
 func gradient_set(grad: Gradient, i: Variant, from: String) -> Gradient:

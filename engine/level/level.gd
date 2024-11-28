@@ -45,16 +45,16 @@ func init_ambient(
 	var ambient_timer := Timer.new()
 	add_child(ambient_timer)
 	var accrue_ambient := func accrue_ambient() -> void:
+		if is_equal_approx(ambient_timer.wait_time, delay):
+			ambient_timer.start(interval)
 		for champion in champions:
 			if !(champion.status.is_dead && disable_while_dead):
 				set_resource_func.call(champion, amount)
 				#champion[resource_name] += amount
-		ambient_timer.wait_time = interval
 	ambient_timer.name = (nameof(accrue_ambient) + '_' + resource_name).to_pascal_case()
-	ambient_timer.wait_time = delay
 	ambient_timer.timeout.connect(accrue_ambient)
 	ambient_timer.one_shot = false
-	ambient_timer.start()
+	ambient_timer.start(delay)
 
 func preload_character(character_name: String) -> void:
 	pass

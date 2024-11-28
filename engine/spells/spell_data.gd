@@ -196,7 +196,8 @@ var have_point_effect: bool
 @export_subgroup("Missile", "missile_")
 @export var missile_accel: float
 @export var missile_bone_name: String
-@export var missile_effect: String
+@export var missile_effect_name: String
+@export var missile_effect: PackedScene
 @export var missile_fixed_travel_time: float
 @export var missile_gravity: float
 @export var missile_lifetime: float
@@ -382,7 +383,7 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["ManaCost", var i]: mana_cost_by_level = array_set(mana_cost_by_level, i - 1, float_parse(value))
 		["MissileAccel"]: missile_accel = float_parse(value)
 		["MissileBoneName"]: missile_bone_name = string_parse(value)
-		["MissileEffect"]: missile_effect = string_parse(value)
+		["MissileEffect"]: missile_effect_name = string_parse(value)
 		["MissileFixedTravelTime"]: missile_fixed_travel_time = float_parse(value)
 		["MissileGravity"]: missile_gravity = float_parse(value)
 		["MissileLifetime"]: missile_lifetime = float_parse(value)

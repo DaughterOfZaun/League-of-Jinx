@@ -11,13 +11,26 @@ func new_one() -> Curve:
 func or_one(c: Curve) -> Curve:
 	return c if c else Curve_ONE
 
-func set_shader_parameter_curve(m: ShaderMaterial, key: String, value_x: Curve, value_y: Curve = null, value_z: Curve = null) -> void:
+func set_shader_parameter_curve(m: ShaderMaterial, key: String, value_x: Curve = null, value_y: Curve = null, value_z: Curve = null) -> void:
 	var t := m.get_shader_parameter(key) as CurveXYZTexture
 	if !t: t = CurveXYZTexture.new()
 	t.curve_x = or_one(value_x)
 	t.curve_y = or_one(value_y)
 	t.curve_z = or_one(value_z)
 	m.set_shader_parameter(key, t)
+
+func set_shader_parameter_curve3d(m: ShaderMaterial, key: String, value: PackedVector4Array) -> void:
+	if len(value) == 0:
+		set_shader_parameter_curve(m, key)
+		return
+	var value_x := Curve.new()
+	var value_y := Curve.new()
+	var value_z := Curve.new()
+	for v in value:
+		value_x.add_point(Vector2(v.w, v.x))
+		value_y.add_point(Vector2(v.w, v.y))
+		value_z.add_point(Vector2(v.w, v.z))
+	set_shader_parameter_curve(m, key, value_x, value_y, value_z)
 
 @export var group_type: GroupType:
 	set(value): group_type = value; update_fields()
@@ -141,9 +154,9 @@ func set_shader_parameter_curve(m: ShaderMaterial, key: String, value_x: Curve, 
 @export var particle_color_lookup_texture_name: String
 @export var particle_color_lookup_texture: Texture2D: #p-rgba
 	set(value): particle_color_lookup_texture = value; update_fields()
-@export var particle_color_lookup_type_x: ColorLookupType: #p-colortype
+@export var particle_color_lookup_type_x := ColorLookupType.LIFETIME: #p-colortype
 	set(value): particle_color_lookup_type_x = value; update_fields()
-@export var particle_color_lookup_type_y: ColorLookupType: #p-colortype
+@export var particle_color_lookup_type_y := ColorLookupType.LIFETIME: #p-colortype
 	set(value): particle_color_lookup_type_y = value; update_fields()
 var particle_color_lookup_type: Vector2i:
 	get:
@@ -157,7 +170,7 @@ var particle_color_lookup_type: Vector2i:
 	set(value): particle_color_lookup_offset = value; update_fields()
 
 @export_subgroup("Position", "particle_")
-@export var particle_bind_weight: float:
+@export var particle_bind_weight: Vector2:
 	set(value): particle_bind_weight = value; update_fields()
 @export var particle_bind_weight_over_lifetime: Curve:
 	set(value): particle_bind_weight_over_lifetime = value; update_fields()
@@ -168,7 +181,7 @@ var particle_color_lookup_type: Vector2i:
 
 @export var particle_emit_offset: Vector3: #p-offset
 	set(value): particle_emit_offset = value; update_fields()
-@export var particle_emit_offset_over_lifetime: Gradient: #Curve3D #p-offsetN
+@export var particle_emit_offset_over_lifetime: PackedVector4Array: #Curve3D #p-offsetN
 	set(value): particle_emit_offset_over_lifetime = value; update_fields()
 @export var particle_emit_offset_x_prob: Curve: #p-offsetXPN
 	set(value): particle_emit_offset_x_prob = value; update_fields()
@@ -181,7 +194,7 @@ var particle_color_lookup_type: Vector2i:
 
 @export var particle_translation: Vector3: #p-postoffset
 	set(value): particle_translation = value; update_fields()
-@export var particle_translation_over_lifetime: Gradient: #Curve3D
+@export var particle_translation_over_lifetime: PackedVector4Array: #Curve3D
 	set(value): particle_translation_over_lifetime = value; update_fields()
 @export var particle_translation_x_prob: Curve:
 	set(value): particle_translation_x_prob = value; update_fields()
@@ -192,7 +205,7 @@ var particle_color_lookup_type: Vector2i:
 
 @export var particle_velocity: Vector3: #p-vel
 	set(value): particle_velocity = value; update_fields()
-@export var particle_velocity_over_lifetime: Gradient: #Curve3D #p-velN
+@export var particle_velocity_over_lifetime: PackedVector4Array: #Curve3D #p-velN
 	set(value): particle_velocity_over_lifetime = value; update_fields()
 @export var particle_velocity_x_prob: Curve: #p-velXPN
 	set(value): particle_velocity_x_prob = value; update_fields()
@@ -203,7 +216,7 @@ var particle_color_lookup_type: Vector2i:
 
 @export var particle_acceleration: Vector3:
 	set(value): particle_acceleration = value; update_fields()
-@export var particle_acceleration_over_lifetime: Gradient: #Curve3D
+@export var particle_acceleration_over_lifetime: PackedVector4Array: #Curve3D
 	set(value): particle_acceleration_over_lifetime = value; update_fields()
 @export var particle_acceleration_x_prob: Curve:
 	set(value): particle_acceleration_x_prob = value; update_fields()
@@ -214,7 +227,7 @@ var particle_color_lookup_type: Vector2i:
 
 @export var particle_drag: Vector3: #p-drag
 	set(value): particle_drag = value; update_fields()
-@export var particle_drag_over_lifetime: Gradient: #Curve3D
+@export var particle_drag_over_lifetime: PackedVector4Array: #Curve3D
 	set(value): particle_drag_over_lifetime = value; update_fields()
 @export var particle_drag_x_prob: Curve:
 	set(value): particle_drag_x_prob = value; update_fields()
@@ -239,13 +252,13 @@ var particle_color_lookup_type: Vector2i:
 	set(value): particle_xrotation_is_enabled = value; update_fields()
 @export var particle_xrotation: Vector3:
 	set(value): particle_xrotation = value; update_fields()
-@export var particle_xrotation_over_lifetime: Gradient: #Curve3D
+@export var particle_xrotation_over_lifetime: PackedVector4Array: #Curve3D
 	set(value): particle_xrotation_over_lifetime = value; update_fields()
 @export var particle_xrotation_z_prob: Curve:
 	set(value): particle_xrotation_z_prob = value; update_fields()
 @export var particle_rotation: Vector3: #p-quadrot
 	set(value): particle_rotation = value; update_fields()
-@export var particle_rotation_over_lifetime: Gradient: #Curve3D #p-quadrotN
+@export var particle_rotation_over_lifetime: PackedVector4Array: #Curve3D #p-quadrotN
 	set(value): particle_rotation_over_lifetime = value; update_fields()
 @export var particle_rotation_x_prob: Curve: #p-quadrotXPN
 	set(value): particle_rotation_x_prob = value; update_fields()
@@ -255,7 +268,7 @@ var particle_color_lookup_type: Vector2i:
 	set(value): particle_rotation_z_prob = value; update_fields()
 @export var particle_rotational_velocity: Vector3: #p-rotvel
 	set(value): particle_rotational_velocity = value; update_fields()
-@export var particle_rotational_velocity_over_lifetime: Gradient: #Curve3D #p-rotvelN
+@export var particle_rotational_velocity_over_lifetime: PackedVector4Array: #Curve3D #p-rotvelN
 	set(value): particle_rotational_velocity_over_lifetime = value; update_fields()
 @export var particle_rotational_velocity_x_prob: Curve: #p-rotvelXPN
 	set(value): particle_rotational_velocity_x_prob = value; update_fields()
@@ -272,7 +285,7 @@ var particle_color_lookup_type: Vector2i:
 	set(value): particle_fixed_orbit_type = value; update_fields()
 @export var particle_orbit_velocity: Vector3:
 	set(value): particle_orbit_velocity = value; update_fields()
-@export var particle_orbit_velocity_over_lifetime: Gradient: #Curve3D
+@export var particle_orbit_velocity_over_lifetime: PackedVector4Array: #Curve3D
 	set(value): particle_orbit_velocity_over_lifetime = value; update_fields()
 @export var particle_orbit_velocity_y_prob: Curve:
 	set(value): particle_orbit_velocity_y_prob = value; update_fields()
@@ -283,9 +296,9 @@ var particle_color_lookup_type: Vector2i:
 	set(value): particle_scale = value; update_fields()
 @export var particle_scale_bias: Vector2:
 	set(value): particle_scale_bias = value; update_fields()
-@export var particle_scale_over_lifetime: Gradient: #Curve3D #p-scaleN
+@export var particle_scale_over_lifetime: PackedVector4Array: #Curve3D #p-scaleN
 	set(value): particle_scale_over_lifetime = value; update_fields()
-@export var particle_scale_prob: Curve:
+@export var particle_scale_prob: PackedVector4Array:
 	set(value): particle_scale_prob = value; update_fields()
 @export var particle_scale_x_prob: Curve:
 	set(value): particle_scale_x_prob = value; update_fields()
@@ -295,7 +308,7 @@ var particle_color_lookup_type: Vector2i:
 	set(value): particle_scale_z_prob = value; update_fields()
 @export var particle_xscale: Vector3:
 	set(value): particle_xscale = value; update_fields()
-@export var particle_xscale_over_lifetime: Gradient: #Curve3D
+@export var particle_xscale_over_lifetime: PackedVector4Array: #Curve3D
 	set(value): particle_xscale_over_lifetime = value; update_fields()
 @export var particle_xscale_prob: Curve: #p-xscalePN
 	set(value): particle_xscale_prob = value; update_fields()
@@ -358,7 +371,7 @@ var particle_color_lookup_type: Vector2i:
 
 @export var particle_world_acceleration: Vector3:
 	set(value): particle_world_acceleration = value; update_fields()
-@export var particle_world_acceleration_over_lifetime: Gradient: #Curve3D
+@export var particle_world_acceleration_over_lifetime: PackedVector4Array: #Curve3D
 	set(value): particle_world_acceleration_over_lifetime = value; update_fields()
 @export var particle_world_acceleration_y_prob: Curve:
 	set(value): particle_world_acceleration_y_prob = value; update_fields()
@@ -459,13 +472,18 @@ func update_fields() -> void:
 		m.set_shader_parameter('p_bindweight', particle_bind_weight)
 
 		m.set_shader_parameter('p_scale_i', particle_scale) # particle mesh should be already scaled by HW2GD on import
-		set_shader_parameter_curve(m, 'p_scale_p', particle_scale_prob)
+		set_shader_parameter_curve3d(m, 'p_scale_p', particle_scale_prob)
 		set_shader_parameter_curve(m, 'p_scale_a_p', particle_scale_x_prob, particle_scale_y_prob, particle_scale_z_prob)
 
 		m.set_shader_parameter('p_quadrot_i', particle_rotation)
 		set_shader_parameter_curve(m, 'p_quadrot_a_p', particle_rotation_x_prob, particle_rotation_y_prob, particle_rotation_z_prob)
 		m.set_shader_parameter('p_rotvel_i', particle_rotational_velocity)
 		set_shader_parameter_curve(m, 'p_rotvel_a_p', particle_rotational_velocity_x_prob, particle_rotational_velocity_y_prob, particle_rotational_velocity_z_prob)
+
+		m.set_shader_parameter('p_vel_i', particle_velocity)
+		set_shader_parameter_curve(m, 'p_vel_a_p', particle_velocity_x_prob, particle_velocity_y_prob, particle_velocity_z_prob)
+
+		set_shader_parameter_curve3d(m, 'p_xscale_ol', particle_xscale_over_lifetime)
 
 	if true:
 		var m := p.material_override as ShaderMaterial
@@ -684,7 +702,7 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["p-beammode"]: particle_beam_mode = uint_parse(value) as BeamMode
 		["p-bindtoemitter", var i]: particle_bind_weight_over_lifetime = curve_set(particle_bind_weight_over_lifetime, i, value)
 		["p-bindtoemitterP", var i]: particle_bind_weight_prob = curve_set(particle_bind_weight_prob, i, value)
-		["p-bindtoemitter"]: particle_bind_weight = float_parse(string_parse(value).split(' ')[0])
+		["p-bindtoemitter"]: particle_bind_weight = vec2_parse(value, VectorUsage.SCALE)
 		["p-coloroffset"]: particle_color_lookup_offset = vec2_parse(value)
 		["p-colorscale"]: particle_color_lookup_scale = vec2_parse(value)
 		["p-colortype"]: particle_color_lookup_type = ivec2_parse(value) # String?
@@ -766,7 +784,7 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		#0 ["p-scalebyradius"]: particle_scale_scale_by_bound_object_radius = float_parse(value)
 		#2 ["p-scaleEmitOffset_flex", var i]: pass
 		["p-scaleupfromorigin"]: particle_scale_up_from_origin = bool_parse(value)
-		["p-scaleP", var i]: particle_scale_prob = curve_set(particle_scale_prob, i, value)
+		["p-scaleP", var i]: particle_scale_prob = curve3d_set(particle_scale_prob, i, value, VectorUsage.SCALE)
 		["p-scaleXP", var i]: particle_scale_x_prob = curve_set(particle_scale_x_prob, i, value)
 		["p-scaleYP", var i]: particle_scale_y_prob = curve_set(particle_scale_y_prob, i, value)
 		["p-scaleZP", var i]: particle_scale_z_prob = curve_set(particle_scale_z_prob, i, value)

@@ -86,13 +86,15 @@ func _physics_process(delta: float) -> void:
 			animation_winding_up = true
 			last_animation_change_time = current_time
 			switch_to_spell_animation()
+			idling = false
 		elif !idling:
-			idling = true
 			last_animation_change_time = current_time
 			animation_playback.travel("Idle1")
+			idling = true
 	elif animation_time_left <= xfade1 + xfade2:
 		last_animation_change_time = current_time
 		_animation_finished("")
+		idling = false
 
 	if !winding_up:
 		if cooldown_time_left <= windup_time:

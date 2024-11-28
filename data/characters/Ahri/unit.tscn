@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://dgxp55bfpc742"]
+[gd_scene load_steps=56 format=3 uid="uid://dgxp55bfpc742"]
 
 [ext_resource type="Script" uid="uid://4a06w3g4bx3a" path="res://engine/unit/champion.gd" id="1_7i6v8"]
 [ext_resource type="Script" uid="uid://dksbt75edeseg" path="res://engine/game/ui/minimap/minimap_icon.gd" id="2_81mpc"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://spnut3ga6dx8" path="res://engine/spells/attacks/basic_attack.gd" id="23_i33fp"]
 [ext_resource type="Script" uid="uid://clobsbokippjm" path="res://engine/spells/attacks/basic_attack_data.gd" id="24_dggeg"]
 [ext_resource type="Script" uid="uid://cvpxefwcj71qc" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbofDeception.gd" id="25_7cysh"]
+[ext_resource type="PackedScene" uid="uid://ch30l02846s26" path="res://data/characters/Ahri/Attacks/Particles/BasicAttack/system.tscn" id="26_6bol8"]
 [ext_resource type="Script" uid="uid://0b1cv7pexwmr" path="res://engine/spells/spell_data.gd" id="26_2652s"]
 [ext_resource type="Texture2D" uid="uid://bmblqfb85gtl1" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/Ahri_OrbofDeception.webp" id="27_y8lhb"]
 [ext_resource type="Script" uid="uid://8brbo7pwb5m5" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFire.gd" id="28_jwrfk"]
@@ -306,7 +307,7 @@ delay_cast_offset_percent = -0.2358
 delay_total_time_percent = -0.065
 is_disabled_while_dead = true
 missile_bone_name = "R_hand"
-missile_effect = "Ahri_BasicAttack_mis.troy"
+missile_effect_name = "Ahri_BasicAttack_mis.troy"
 missile_speed = 1750.0
 line_missile_bounce_radius = 450.0
 apply_attack_damage = true
@@ -356,7 +357,8 @@ delay_cast_offset_percent = -0.2358
 delay_total_time_percent = -0.065
 is_disabled_while_dead = true
 missile_bone_name = "R_hand"
-missile_effect = "Ahri_BasicAttack_mis.troy"
+missile_effect_name = "Ahri_BasicAttack_mis.troy"
+missile_effect = ExtResource("26_6bol8")
 missile_speed = 1750.0
 line_missile_bounce_radius = 450.0
 apply_attack_damage = true
@@ -406,7 +408,7 @@ delay_cast_offset_percent = -0.2358
 delay_total_time_percent = -0.065
 is_disabled_while_dead = true
 missile_bone_name = "R_hand"
-missile_effect = "Ahri_BasicAttack_mis.troy"
+missile_effect_name = "Ahri_BasicAttack_mis.troy"
 missile_speed = 1750.0
 line_missile_bounce_radius = 450.0
 apply_attack_damage = true
@@ -464,7 +466,7 @@ cant_cancel_while_winding_up = true
 is_disabled_while_dead = true
 line_width = 100.0
 missile_bone_name = "R_hand"
-missile_effect = "LuxLightstrike_mis.troy"
+missile_effect_name = "LuxLightstrike_mis.troy"
 missile_max_speed = 1100.0
 missile_min_speed = 1100.0
 missile_speed = 1100.0
@@ -536,7 +538,7 @@ cant_cancel_while_winding_up = true
 is_disabled_while_dead = true
 line_width = 60.0
 missile_bone_name = "R_hand"
-missile_effect = "DarkBinding_mis.troy"
+missile_effect_name = "DarkBinding_mis.troy"
 missile_max_speed = 1200.0
 missile_min_speed = 1200.0
 missile_speed = 1200.0
@@ -593,7 +595,7 @@ cant_cancel_while_winding_up = true
 cant_cast_while_rooted = true
 is_disabled_while_dead = true
 missile_bone_name = "root"
-missile_effect = "AlphaStrike_mis.troy"
+missile_effect_name = "AlphaStrike_mis.troy"
 missile_max_speed = 2200.0
 missile_min_speed = 2200.0
 missile_speed = 2200.0
@@ -655,7 +657,7 @@ is_disabled_while_dead = true
 line_width = 100.0
 missile_accel = -3200.0
 missile_bone_name = "R_hand"
-missile_effect = "Ahri_Orb_mis.troy"
+missile_effect_name = "Ahri_Orb_mis.troy"
 missile_max_speed = 2500.0
 missile_min_speed = 400.0
 missile_speed = 2500.0
@@ -716,7 +718,7 @@ is_disabled_while_dead = true
 line_width = 100.0
 missile_accel = 1900.0
 missile_bone_name = "root"
-missile_effect = "Ahri_Orb_mis_02.troy"
+missile_effect_name = "Ahri_Orb_mis_02.troy"
 missile_max_speed = 2600.0
 missile_min_speed = 60.0
 missile_speed = 60.0
@@ -773,7 +775,7 @@ spell_reveals_champion = true
 cant_cancel_while_winding_up = true
 is_disabled_while_dead = true
 missile_bone_name = "chest"
-missile_effect = "Ahri_FoxFire_mis.troy"
+missile_effect_name = "Ahri_FoxFire_mis.troy"
 missile_lifetime = 5.0
 missile_max_speed = 1400.0
 missile_min_speed = 1400.0
@@ -832,7 +834,7 @@ spell_reveals_champion = true
 cant_cancel_while_winding_up = true
 is_disabled_while_dead = true
 missile_bone_name = "chest"
-missile_effect = "Ahri_FoxFire_mis_02.troy"
+missile_effect_name = "Ahri_FoxFire_mis_02.troy"
 missile_max_speed = 1400.0
 missile_min_speed = 1400.0
 missile_speed = 1400.0
@@ -889,7 +891,7 @@ cant_cancel_while_winding_up = true
 is_disabled_while_dead = true
 line_width = 60.0
 missile_bone_name = "BUFFBONE_CSTM_WEAPON_1"
-missile_effect = "Ahri_Charm_mis.troy"
+missile_effect_name = "Ahri_Charm_mis.troy"
 missile_max_speed = 1500.0
 missile_min_speed = 1500.0
 missile_speed = 1550.0
@@ -946,7 +948,7 @@ spell_reveals_champion = true
 cant_cancel_while_winding_up = true
 is_disabled_while_dead = true
 missile_bone_name = "chest"
-missile_effect = "Ahri_SpiritRush_mis_02.troy"
+missile_effect_name = "Ahri_SpiritRush_mis_02.troy"
 missile_max_speed = 1400.0
 missile_min_speed = 1400.0
 missile_speed = 1400.0

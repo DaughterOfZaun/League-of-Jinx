@@ -56,10 +56,17 @@ enum State {
 
 var timer := Timer.new()
 signal timeout_or_canceled()
+
+var missile_bone_idx := -1
+
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
+
 	timer.timeout.connect(func() -> void: timeout_or_canceled.emit())
 	add_child(timer)
+
+	await me.ready
+	missile_bone_idx = me.skeleton.find_bone(data.missile_bone_name)
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
