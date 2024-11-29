@@ -24,7 +24,7 @@ point_count = 2
 _data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Shader" id="Shader_4gakh"]
+[sub_resource type="Shader" id="Shader_vjoon"]
 code = "shader_type spatial;
 render_mode blend_add,depth_draw_opaque,cull_back,diffuse_burley,unshaded,specular_disabled,ambient_light_disabled,fog_disabled;
 #define BILLBOARD
@@ -33,7 +33,7 @@ render_mode blend_add,depth_draw_opaque,cull_back,diffuse_burley,unshaded,specul
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kcsvs"]
 render_priority = 0
-shader = SubResource("Shader_4gakh")
+shader = SubResource("Shader_vjoon")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("3_vjoon")
 shader_parameter/uv_scale = Vector2(1, 1)
@@ -149,7 +149,7 @@ point_count = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vdgim"]
 render_priority = 0
-shader = SubResource("Shader_4gakh")
+shader = SubResource("Shader_vjoon")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("6_4vdmn")
 shader_parameter/uv_scale = Vector2(1, 1)
@@ -214,7 +214,7 @@ curve_z = SubResource("Curve_iyvrx")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vd6uc"]
 shader = SubResource("Shader_sjftl")
-shader_parameter/amount = 130
+shader_parameter/amount = 260
 shader_parameter/p_life_i = 1.1
 shader_parameter/p_life_p = SubResource("CurveXYZTexture_4wih1")
 shader_parameter/p_linger = 1.0
@@ -268,7 +268,7 @@ point_count = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lcail"]
 render_priority = 0
-shader = SubResource("Shader_4gakh")
+shader = SubResource("Shader_vjoon")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("8_0pga1")
 shader_parameter/uv_scale = Vector2(1, 1)
@@ -367,7 +367,7 @@ shader_parameter/p_xscale_ol = SubResource("CurveXYZTexture_ybwdx")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dqdm2"]
 render_priority = 0
-shader = SubResource("Shader_4gakh")
+shader = SubResource("Shader_vjoon")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("10_hwysp")
 shader_parameter/uv_scale = Vector2(1, 1)
@@ -448,7 +448,6 @@ import_path = "res://data/characters/Ahri/Attacks/Particles/BasicAttack/Ahri_Bas
 [node name="Head" type="Node3D" parent="."]
 script = ExtResource("2_xt7xa")
 emitter_lifetime = 1.0
-emitter_life_is_infinite = true
 emitter_rate = 50.0
 emitter_is_local_orientation = true
 particle_lifetime = 0.3
@@ -468,15 +467,15 @@ particle_xscale_over_lifetime = PackedVector4Array(1, 1, 1, 0, 0.1, 0.1, 0.1, 1)
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Head"]
 material_override = SubResource("ShaderMaterial_kcsvs")
 cast_shadow = 0
+emitting = false
 amount = 50
+one_shot = true
 process_material = SubResource("ShaderMaterial_d3aie")
 draw_pass_1 = ExtResource("3_vgjgu")
 
 [node name="Blue_Trail" type="Node3D" parent="."]
-visible = false
 script = ExtResource("2_xt7xa")
 emitter_lifetime = 2.0
-emitter_life_is_infinite = true
 emitter_rate = 130.0
 emitter_is_local_orientation = true
 emitter_rotation_angles = Array[float]([0.0, 1.0])
@@ -509,14 +508,16 @@ particle_trail_mode = 1
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Blue_Trail"]
 material_override = SubResource("ShaderMaterial_vdgim")
 cast_shadow = 0
-amount = 130
+emitting = false
+amount = 260
+lifetime = 2.0
+one_shot = true
 process_material = SubResource("ShaderMaterial_vd6uc")
 draw_pass_1 = ExtResource("3_vgjgu")
 
 [node name="Swirls" type="Node3D" parent="."]
 script = ExtResource("2_xt7xa")
 emitter_lifetime = 1.0
-emitter_life_is_infinite = true
 emitter_rate = 60.0
 emitter_is_local_orientation = true
 particle_lifetime = 0.5
@@ -543,15 +544,15 @@ particle_xscale_over_lifetime = PackedVector4Array(0.1, 0.1, 0.1, 0, 1.1, 1.1, 1
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Swirls"]
 material_override = SubResource("ShaderMaterial_lcail")
 cast_shadow = 0
+emitting = false
 amount = 60
+one_shot = true
 process_material = SubResource("ShaderMaterial_jw6lm")
 draw_pass_1 = ExtResource("3_vgjgu")
 
 [node name="ProjectedLight" type="Node3D" parent="."]
-visible = false
 script = ExtResource("2_xt7xa")
 emitter_lifetime = 1.0
-emitter_life_is_infinite = true
 emitter_emit_single_particle = true
 emitter_rate = 2.0
 particle_lifetime = 0.5
@@ -568,6 +569,8 @@ particle_scale = Vector3(220, 220, 220)
 [node name="GPUParticles3D" type="GPUParticles3D" parent="ProjectedLight"]
 material_override = SubResource("ShaderMaterial_dqdm2")
 cast_shadow = 0
+emitting = false
 amount = 1
+one_shot = true
 process_material = SubResource("ShaderMaterial_7pp74")
 draw_pass_1 = ExtResource("3_vgjgu")

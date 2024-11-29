@@ -12,15 +12,16 @@ func _ready() -> void:
 	spell = me.spells.basic[0]
 	next_spell = me.spells.basic[1]
 	attack_animation_playback = animation_tree.get("parameters/Attack/StateMachine/playback")
-	#animation_tree.animation_started.connect(func(anim_name: StringName) -> void: print('animation_started ', anim_name))
 
 var is_running := false
 func try_enter() -> void:
 	if !current_state.can_cancel(): return
 	switch_to_self()
 	is_running = true
+
 	me.face_direction(target.global_position)
-	#animation_tree.animation_finished.connect(_animation_finished)
+
+	just_entered_state = true
 
 var spell_i := 1
 func _animation_finished(anim_name: StringName) -> void:
@@ -48,12 +49,10 @@ func get_current_animation_frames_count() -> int:
 
 var current_time := 0.0
 var last_attack_time := 0.0
-var last_windup_time := 0.0
-var last_animation_change_time := 0.0
 
-var animation_winding_up := false
+var just_entered_state := true
+var state_enter_time_point := 0.0
 var winding_up := false
-var idling := false
 
 func _physics_process(delta: float) -> void:
 	current_time += delta
@@ -64,51 +63,40 @@ func _physics_process(delta: float) -> void:
 	var windup_percent := constants.gcd_attack_delay_cast_percent * (1.0 + spell.data.delay_cast_offset_percent)
 
 	var xfade := 0.2
-	var xfade1 := 0.0 #xfade * windup_percent
-	var xfade2 := xfade #xfade * (1.0 - windup_percent)
+	var xfade_begin := xfade * windup_percent; var xfade_end := xfade * (1.0 - windup_percent)
+	#var xfade_begin := 0.0; var xfade_end := xfade
 
 	var length := attack_animation_playback.get_current_length()
-	var time_scale := 1.0 #length / (cooldown_time + xfade1 + xfade2)
-	if winding_up:
-		time_scale = (length * windup_percent) / (cooldown_time * windup_percent + xfade1)
-	else:
-		time_scale = (length * (1.0 - windup_percent)) / (cooldown_time * (1.0 - windup_percent) + xfade2)
+	var time_scale := length / (cooldown_time + xfade_begin + xfade_end)
+	#var time_scale := 1.0
+	#if winding_up:
+	#	time_scale = (length * windup_percent) / (cooldown_time * windup_percent + xfade_begin)
+	#else:
+	#	time_scale = (length * (1.0 - windup_percent)) / (cooldown_time * (1.0 - windup_percent) + xfade_end)
 	set_current_animation_time_scale(time_scale)
 
 	var windup_time := cooldown_time * windup_percent
+
+	#if is not winding up and (animation is not playing or (animation xfade sec from finish and windup_start_point is > xfade sec from here))
 	
-	var windup_time_left := windup_time - (current_time - last_windup_time)
 	var cooldown_time_left := cooldown_time - (current_time - last_attack_time)
-	var animation_time_left := (cooldown_time + xfade1 + xfade2) - (current_time - last_animation_change_time)
 
-	if !animation_winding_up:
-		if cooldown_time_left <= windup_time + xfade1:
-			animation_winding_up = true
-			last_animation_change_time = current_time
-			switch_to_spell_animation()
-			idling = false
-		elif !idling:
-			last_animation_change_time = current_time
+	if just_entered_state:
+		just_entered_state = false
+		state_enter_time_point = current_time
+		if cooldown_time_left > windup_time + xfade_begin:
 			animation_playback.travel("Idle1")
-			idling = true
-	elif animation_time_left <= xfade1 + xfade2:
-		last_animation_change_time = current_time
-		_animation_finished("")
-		idling = false
 
-	if !winding_up:
-		if cooldown_time_left <= windup_time:
-			winding_up = true
-			last_windup_time = current_time
-	elif windup_time_left <= 0 && cooldown_time_left <= 0:
+	if !winding_up && cooldown_time_left <= windup_time + xfade_begin:
+		_animation_finished("")
+		winding_up = true
+
+	var first_windup_time_left := windup_time - (current_time - state_enter_time_point)
+	if first_windup_time_left <= 0 && cooldown_time_left <= 0:
 		last_attack_time = current_time
+		spell.cast(target)
 		winding_up = false
-		print('ATTACK!')
-		spell.cast(target, target.global_position)
 
 func on_exit() -> void:
-	#animation_tree.animation_finished.disconnect(_animation_finished)
 	is_running = false
-	animation_winding_up = false
 	winding_up = false
-	idling = false

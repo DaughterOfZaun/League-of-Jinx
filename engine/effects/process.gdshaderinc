@@ -47,7 +47,7 @@ uniform sampler2D p_xscale_ol: hint_default_white, filter_nearest;
 
 mat3 basis_from_euler(vec3 p_euler) {
 	float c, s;
-    
+
 	c = cos(p_euler.x);
 	s = sin(p_euler.x);
 	mat3 xmat = mat3(vec3(1., 0., 0.), vec3(0., c, -s), vec3(0., s, c));
@@ -84,24 +84,24 @@ void start() {
     if (RESTART_VELOCITY){
         VELOCITY = vec3(0.);
     }
-    
+
     uint alt_seed = hash(NUMBER + uint(1) + RANDOM_SEED); ALT_SEED = float(alt_seed);
-    
+
     vec3 p_quadrot = p_quadrot_i * GET_RAND3_VEC3(p_quadrot_a_p);
-    
+
     TRANSFORM *= mat4(basis_from_euler(radians(p_quadrot)));
 }
 
 // Called every frame on existing particles (according to the Fixed FPS property).
 void process() {
     uint alt_seed = hash(NUMBER + uint(1) + RANDOM_SEED); ALT_SEED = float(alt_seed);
-    
+
 	TIME_PASSED += DELTA;
     float p_life = p_life_i * GET_RAND_FLOAT(p_life_p);
 	float p_life_percent = TIME_PASSED / p_life;
     if(p_life_percent >= 1.0)
         ACTIVE = false;
-	
+
     vec3 p_scale = p_scale_i * GET_RAND_COLOR(p_scale_p).xyz * GET_RAND3_VEC3(p_scale_a_p);
          p_scale *= texture(p_xscale_ol, vec2(p_life_percent, 0)).rgb;
          p_scale = sign(p_scale) * max(abs(p_scale), 0.01);
@@ -125,7 +125,7 @@ void process() {
     TRANSFORM[0].xyz = normalize(TRANSFORM[0].xyz) * p_scale.x;
     TRANSFORM[1].xyz = normalize(TRANSFORM[1].xyz) * p_scale.y;
     TRANSFORM[2].xyz = normalize(TRANSFORM[2].xyz) * p_scale.z;
-    
+
     TRANSFORM *= mat4(basis_from_euler(radians(p_rotvel * DELTA)));
     ROTATION_Z = radians(p_quadrot.z + (p_rotvel.z * TIME_PASSED));
 }
