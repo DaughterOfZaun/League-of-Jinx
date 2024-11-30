@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djn0h2uutu5f1"
-path="res://.godot/imported/Ahri_Charm.webp-8320e7b12ef6bb82528f3325b0650672.ctex"
+uid="uid://c7sl03cpmo41v"
+path="res://.godot/imported/color-AhriSmoke.webp-6a8d12f9e179b04352d1e5da83c34564.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/Ahri_Charm.webp"
-dest_files=["res://.godot/imported/Ahri_Charm.webp-8320e7b12ef6bb82528f3325b0650672.ctex"]
+source_file="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/color-AhriSmoke.webp"
+dest_files=["res://.godot/imported/color-AhriSmoke.webp-6a8d12f9e179b04352d1e5da83c34564.ctex"]
 
 [params]
 

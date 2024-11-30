@@ -66,7 +66,7 @@ func _ready() -> void:
 	add_child(timer)
 
 	await me.ready
-	missile_bone_idx = me.skeleton.find_bone(data.missile_bone_name)
+	missile_bone_idx = me.skeleton.find_bone(data.missile_bone_name.replace("_CSTM_", "_GLB_"))
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
@@ -186,8 +186,8 @@ func cast(
 		match data.cast_type:
 			Enums.CastType.TARGET_MISSILE: m = SpellTargetMissile.new(self, target);
 			Enums.CastType.CHAIN_MISSILE: m = SpellChainMissile.new(self, target);
-			Enums.CastType.CIRCLE_MISSILE: m = SpellCircleMissile.new(self, target);
-			Enums.CastType.ARC_MISSILE: m = SpellLineMissile.new(self, pos);
+			Enums.CastType.CIRCLE_MISSILE: m = SpellCircleMissile.new(self, target, pos);
+			Enums.CastType.ARC_MISSILE: m = SpellLineMissile.new(self, target, pos);
 			_: assert(false)
 		get_tree().current_scene.add_child(m)
 	else:

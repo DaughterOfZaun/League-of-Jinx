@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ceoedbyvru352"
+path="res://.godot/imported/SonaTwirl.obj-32ae45f8aca21b5e5ad50d3e4df708f8.mesh"
+
+[deps]
+
+files=["res://.godot/imported/SonaTwirl.obj-32ae45f8aca21b5e5ad50d3e4df708f8.mesh"]
+
+source_file="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/SonaTwirl.obj"
+dest_files=["res://.godot/imported/SonaTwirl.obj-32ae45f8aca21b5e5ad50d3e4df708f8.mesh", "res://.godot/imported/SonaTwirl.obj-32ae45f8aca21b5e5ad50d3e4df708f8.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(0.014, 0.014, 0.014)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

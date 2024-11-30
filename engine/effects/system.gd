@@ -22,9 +22,21 @@ extends Effect
 #region Import
 @export_group("Import", "import_")
 @export_file("*.troy") var import_path: String
+@export_dir var import_res_path_1: String
+@export_dir var import_res_path_2: String
+@export_dir var import_res_path_3: String
+@export_dir var import_res_path_4: String
+@export_dir var import_res_path_5: String
 @export_tool_button("Import") var import := func() -> void:
 	var ini := ini_load(import_path)
-	res_path = '/'.join(import_path.split('/').slice(0, -1))
+	res_paths = [
+		'/'.join(import_path.split('/').slice(0, -1)),
+		import_res_path_1,
+		import_res_path_2,
+		import_res_path_3,
+		import_res_path_4,
+		import_res_path_5,
+	]; res_paths.reverse()
 	set_from_ini_section(ini["System"])
 	recreate_groups(ini)
 @export_group("")
@@ -66,7 +78,7 @@ func recreate_groups(ini: Dictionary[String, Array]) -> void:
 		if len(info) > 1: group.group_type = info[1]
 		if len(info) > 2: group.group_importance = info[2]
 
-		group.res_path = res_path
+		group.res_paths = res_paths
 		group.res_cache = res_cache
 		group.res_cache_is_null = res_cache_is_null
 		group.set_from_ini_section(ini[group.name])

@@ -7,23 +7,24 @@ static var HW2GD := 1. / GD2HW #0.014285714
 func string_parse(from: String) -> String:
 	return from
 
-var res_path := "res://data/particles"
+var res_paths: Array[String] = []
 var res_cache: Dictionary[String, String] = {}
 var res_cache_is_null := true
 func get_from_cache(key: String) -> String:
 	if res_cache_is_null:
 		res_cache_is_null = false
-		var dir := DirAccess.open(res_path)
-		dir.list_dir_begin()
-		while true:
-			var fname := dir.get_next()
-			if fname == "": break
-			if dir.current_is_dir(): continue
-			var fname_lc := fname.to_lower()
-			if fname_lc.ends_with(tex_ext)\
-			|| fname_lc.ends_with(mesh_ext)\
-			|| fname_lc.ends_with(effect_ext):
-				res_cache[fname_lc] = fname
+		for res_path in res_paths:
+			var dir := DirAccess.open(res_path)
+			dir.list_dir_begin()
+			while true:
+				var fname := dir.get_next()
+				if fname == "": break
+				if dir.current_is_dir(): continue
+				var fname_lc := fname.to_lower()
+				if fname_lc.ends_with(tex_ext)\
+				|| fname_lc.ends_with(mesh_ext)\
+				|| fname_lc.ends_with(effect_ext):
+					res_cache[fname_lc] = res_path + '/' + fname
 	return res_cache[key]
 
 const tex_ext := ".webp"
@@ -41,7 +42,7 @@ func effect_parse(from: String) -> PackedScene:
 func res_parse(from: String, bin_ext: String, txt_ext: String, out_ext: String) -> Resource:
 	from = string_parse(from)
 	from = from.to_lower().replace(bin_ext, out_ext).replace(txt_ext, out_ext)
-	return load(res_path + "/" + get_from_cache(from))
+	return load(get_from_cache(from))
 
 enum VectorUsage { UNDEFINED, SCALE, ROTATION }
 func vec3_parse(from: String, u := VectorUsage.UNDEFINED) -> Vector3:
