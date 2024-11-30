@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=48 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" uid="uid://csrtiit658one" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
 [ext_resource type="CompressedTexture3D" uid="uid://cw7h14f61vo0x" path="res://LUT2.webp" id="2_tb6ku"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://dwtgxxdqtsfyo" path="res://data/characters/Nexus/Chaos/unit.tscn" id="37_5vbbt"]
 [ext_resource type="PackedScene" uid="uid://btacpjtg4pcad" path="res://data/characters/Turrets/Back/Chaos/unit.tscn" id="38_bto7k"]
 [ext_resource type="PackedScene" uid="uid://biov8lq32ueqn" path="res://data/characters/Turrets/Middle/Order/unit.tscn" id="38_mmvut"]
+[ext_resource type="Script" path="res://engine/game/ground.gd" id="38_tqj1w"]
 [ext_resource type="PackedScene" uid="uid://k3wk84ssvmbv" path="res://data/characters/Inhibitor/Chaos/unit.tscn" id="38_vsljp"]
 [ext_resource type="PackedScene" uid="uid://b1rfde0af8ixp" path="res://data/characters/Turrets/Front/Chaos/unit.tscn" id="39_qsin3"]
 [ext_resource type="PackedScene" uid="uid://t0fwl3cknumm" path="res://data/characters/Inhibitor/Order/unit.tscn" id="39_rx1pf"]
@@ -69,8 +70,10 @@ resource_local_to_scene = true
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_tqj1w"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_gtrna"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xapae"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -160,7 +163,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 level_shader = ExtResource("31_g1ghr")
 level_decal_shader = ExtResource("32_m603r")
 level_flora_shader = ExtResource("33_rqr2r")
-viewport_texture = SubResource("ViewportTexture_tqj1w")
+viewport_texture = SubResource("ViewportTexture_gtrna")
 object_cfg = "res://data/levels/1/ObjectCFG.cfg"
 create_level_props_script = ExtResource("35_x1iow")
 
@@ -525,3 +528,14 @@ team = 1
 [node name="Dummy" parent="." instance=ExtResource("37_5t0se")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35941, 4, -12.2381)
 team = 2
+
+[node name="Area3D" type="Area3D" parent="."]
+monitoring = false
+monitorable = false
+script = ExtResource("38_tqj1w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("WorldBoundaryShape3D_xapae")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.085, 2.90684, -114.142)

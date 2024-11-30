@@ -1,5 +1,6 @@
 class_name SpellLineMissile
 extends Missile
 
-func _init(spell: Spell, target_pos: Vector3) -> void:
-	pass
+func _process(delta: float) -> void:
+	if linear_movement(delta, target_position):
+		destroy_self()

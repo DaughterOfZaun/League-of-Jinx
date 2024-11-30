@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dgxp55bfpc742"]
+[gd_scene load_steps=57 format=3 uid="uid://dgxp55bfpc742"]
 
 [ext_resource type="Script" uid="uid://4a06w3g4bx3a" path="res://engine/unit/champion.gd" id="1_7i6v8"]
 [ext_resource type="Script" uid="uid://dksbt75edeseg" path="res://engine/game/ui/minimap/minimap_icon.gd" id="2_81mpc"]
@@ -39,6 +39,7 @@
 [ext_resource type="Script" uid="uid://dcya6jchl3kli" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbReturn/AhriOrbReturn.gd" id="35_8p4um"]
 [ext_resource type="Script" uid="uid://dd3wmxg16eat" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/AhriFoxFireMissile.gd" id="36_8vcje"]
 [ext_resource type="Script" uid="uid://da82xpdn6aha6" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissileTwo/AhriFoxFireMissileTwo.gd" id="37_1lxee"]
+[ext_resource type="PackedScene" uid="uid://y61xcopda0k1" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbMissile/system.tscn" id="37_tp3m5"]
 [ext_resource type="Script" uid="uid://cuk2ojoit5vyq" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/AhriSeduceMissile.gd" id="38_u1j7k"]
 [ext_resource type="Script" uid="uid://cltufwymt2bir" path="res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/AhriTumbleMissile.gd" id="39_r444b"]
 [ext_resource type="Script" uid="uid://cxoxpng11dipv" path="res://engine/spells/spell.gd" id="40_6ykpd"]
@@ -660,6 +661,7 @@ line_width = 100.0
 missile_accel = -3200.0
 missile_bone_name = "R_hand"
 missile_effect_name = "Ahri_Orb_mis.troy"
+missile_effect = ExtResource("37_tp3m5")
 missile_max_speed = 2500.0
 missile_min_speed = 400.0
 missile_speed = 2500.0

@@ -104,24 +104,23 @@ signal spell_cast(spell: Spell)
 #signal update_ammo() #TODO: Specific to buff_script
 #signal update_buffs() #TODO: Specific to buff_script
 
-@onready var direction := Vector3.FORWARD #TODO:
 @onready var direction_angle := rotation.y
+@onready var direction := Vector2.from_angle(direction_angle)
 func face_direction(pos: Vector3) -> void:
 	face_dir(pos - self.global_position)
 func face_dir(dir: Vector3) -> void:
-	dir = dir.normalized()
-	direction = dir
-	direction_angle = Vector2(dir.z, dir.x).angle()
+	direction = Vector2(dir.x, dir.z).normalized()
+	direction_angle = atan2(dir.x, dir.z)
 
 @onready var skinned_mesh_root := find_child("SkinnedMesh", false)
 @onready var skeleton: Skeleton3D = skinned_mesh_root.find_child("Skeleton3D", true) if skinned_mesh_root else null
 func get_bone_global_position(bone_idx: int) -> Vector3:
 	return skeleton.to_global(skeleton.get_bone_global_pose(bone_idx).origin)
 
+#var rot_speed := deg_to_rad(180. / ((0.08 + (0.01/3.))))
+var rot_speed := deg_to_rad(180 / 0.2)
 func _process(delta: float) -> void:
 	var rot_delta := angle_difference(rotation.y, direction_angle)
-	#var rot_speed := deg_to_rad(180. / ((0.08 + (0.01/3.))))
-	var rot_speed := deg_to_rad(180 / 0.2)
 	rotation.y += sign(rot_delta) * min(abs(rot_delta), rot_speed * delta)
 
 func break_spell_shields() -> void:

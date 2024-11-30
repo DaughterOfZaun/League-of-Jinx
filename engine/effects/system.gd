@@ -56,7 +56,10 @@ func recreate_groups(ini: Dictionary[String, Array]) -> void:
 	for info: Array in groups:
 		if len(info) == 0: continue
 
-		var group := Group.new()
+		#var group := Group.new()
+		var group_node := Node3D.new(); group_node.set_script(Group)
+		var group: Group = group_node as Variant
+		
 		group.updating_fields += 1
 
 		group.name = info[0]

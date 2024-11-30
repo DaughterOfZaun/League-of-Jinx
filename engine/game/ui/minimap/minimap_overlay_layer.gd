@@ -65,4 +65,4 @@ func _gui_input(unk_event: InputEvent) -> void:
 				camera.offset = Vector3.ZERO
 				camera.target_position = pos
 			if right_click:
-				input_manager.on_ground_clicked(pos)
+				input_manager.on_ground_clicked_on_minimap(pos)

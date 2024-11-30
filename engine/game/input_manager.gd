@@ -25,10 +25,13 @@ func set_cursor_shape(shape: CursorShape) -> void:
 	#Input.set_custom_mouse_cursor(cursor_textures[shape], Input.CURSOR_ARROW)
 	#print(Engine.get_process_frames(), ' ', CursorShape.keys()[shape])
 
-func on_unit_clicked(char: Unit, button: MouseButton) -> void:
+func on_unit_clicked(event: InputEventMouseButton, char: Unit) -> void:
 	#if main_hero == null: return
-	if char.team != main_hero.team:
-		main_hero.order(Enums.OrderType.ATTACK_TO, char.global_position, char)
+	if event.button_index == MOUSE_BUTTON_RIGHT:
+		if char.team != main_hero.team:
+			main_hero.order(Enums.OrderType.ATTACK_TO, char.global_position, char)
+		else:
+			on_ground_clicked_on_screen(event)
 	viewport.set_input_as_handled()
 
 var hovered_unit: Unit = null
@@ -40,6 +43,7 @@ var hovered_pos: Vector3:
 		var plane := Plane(Vector3.UP, main_hero.global_position)
 		var intersection: Variant = plane.intersects_ray(origin, normal)
 		return intersection if intersection != null else Vector3.INF
+
 func on_unit_hovered(unit: Unit) -> void:
 	var shape: CursorShape
 	if unit.team == main_hero.team:
@@ -79,25 +83,22 @@ func _input(event: InputEvent) -> void:
 		viewport.set_input_as_handled()
 
 const RAY_LENGTH = 1000.0
-func _unhandled_input(unknown_event: InputEvent) -> void:
-	if unknown_event is InputEventMouseButton:
-		var event := unknown_event as InputEventMouseButton
-		if event.pressed && event.button_index == MOUSE_BUTTON_RIGHT:
-			on_ground_clicked_on_screen(event.position)
+func on_ground_clicked_on_screen(event: InputEventMouseButton) -> void:
+	if event.button_index == MOUSE_BUTTON_RIGHT:
+		var origin := camera.project_ray_origin(event.position)
+		var normal := camera.project_ray_normal(event.position)
+		var nearest_reachable_point := NavigationServer3D.map_get_closest_point_to_segment(
+			nav_map_rid, origin, origin + normal * RAY_LENGTH
+		)
+		order_move_to(nearest_reachable_point)
+	viewport.set_input_as_handled()
 
-func on_ground_clicked_on_screen(event_position: Vector2) -> void:
-	var origin := camera.project_ray_origin(event_position)
-	var normal := camera.project_ray_normal(event_position)
-	var nearest_reachable_point := NavigationServer3D.map_get_closest_point_to_segment(
-		nav_map_rid, origin, origin + normal * RAY_LENGTH
-	)
-	on_ground_clicked(nearest_reachable_point)
+func on_ground_clicked_on_minimap(world_position: Vector3) -> void:
+	var nearest_reachable_point := NavigationServer3D.map_get_closest_point(nav_map_rid, world_position)
+	order_move_to(nearest_reachable_point)
+	viewport.set_input_as_handled()
 
-func on_ground_clicked_on_minimap(pos: Vector3) -> void:
-	var nearest_reachable_point := NavigationServer3D.map_get_closest_point(nav_map_rid, pos)
-	on_ground_clicked(nearest_reachable_point)
-
-func on_ground_clicked(nearest_reachable_point: Vector3) -> void:
+func order_move_to(nearest_reachable_point: Vector3) -> void:
 	
 	var root := get_tree().current_scene
 	var effect: Node3D = cursor_moveto_effect.instantiate()
@@ -106,8 +107,6 @@ func on_ground_clicked(nearest_reachable_point: Vector3) -> void:
 	effect.global_position = nearest_reachable_point
 
 	main_hero.order(Enums.OrderType.MOVE_TO, nearest_reachable_point, null)
-	#viewport.set_input_as_handled()
-	on_ground_hovered()
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
@@ -120,6 +119,8 @@ func _ready() -> void:
 	for shape: CursorShape in cursor_textures.keys():
 		#if shape != CursorShape.DEFAULT:
 		Input.set_custom_mouse_cursor(cursor_textures[shape], int(shape), hotspot)
+
+	set_cursor_shape(CursorShape.HOVER_FRIENDLY) #HACK:
 	
 	await main_hero.ready
 	var ui_center_panel: UICenterPanel = %UI/Center
