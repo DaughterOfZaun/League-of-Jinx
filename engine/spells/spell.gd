@@ -150,10 +150,10 @@ func cast(
 		Enums.TargetingType.SELF,\
 		Enums.TargetingType.SELF_AOE:
 			target = caster
-			pos = target.global_position
+			pos = target.position_3d
 		Enums.TargetingType.TARGET:
 			assert(target != null)
-			pos = target.global_position
+			pos = target.position_3d
 		Enums.TargetingType.AREA,\
 		Enums.TargetingType.CONE,\
 		Enums.TargetingType.LOCATION,\
@@ -198,7 +198,7 @@ func cast(
 			Enums.TargetingType.TARGET: targets = [ target ]
 			Enums.TargetingType.AREA,\
 			Enums.TargetingType.SELF_AOE: targets = API.filter_units_in_range(
-				caster, caster.position, cast_range, data.flags
+				caster, caster.position_3d, cast_range, data.flags
 			)
 		for subtarget in targets:
 			_target_execute(subtarget, null)

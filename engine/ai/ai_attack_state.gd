@@ -19,7 +19,7 @@ func try_enter() -> void:
 	switch_to_self()
 	is_running = true
 
-	me.face_direction(target.global_position)
+	me.face_direction(target.position_3d)
 
 	just_entered_state = true
 

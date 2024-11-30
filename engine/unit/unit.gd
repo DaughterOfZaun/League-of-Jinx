@@ -1,5 +1,5 @@
 class_name Unit
-extends Node3D
+extends Node3DExt
 
 @export var team: Enums.Team = 0
 @export var data: UnitData
@@ -107,7 +107,7 @@ signal spell_cast(spell: Spell)
 @onready var direction_angle := rotation.y
 @onready var direction := Vector2.from_angle(direction_angle)
 func face_direction(pos: Vector3) -> void:
-	face_dir(pos - self.global_position)
+	face_dir(pos - self.position_3d)
 func face_dir(dir: Vector3) -> void:
 	direction = Vector2(dir.x, dir.z).normalized()
 	direction_angle = atan2(dir.x, dir.z)

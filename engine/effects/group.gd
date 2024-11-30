@@ -471,7 +471,7 @@ func update_fields() -> void:
 
 		m.set_shader_parameter('p_bindweight', particle_bind_weight)
 
-		m.set_shader_parameter('p_scale_i', particle_scale) # particle mesh should be already scaled by HW2GD on import
+		m.set_shader_parameter('p_scale_i', particle_scale)
 		set_shader_parameter_curve3d(m, 'p_scale_p', particle_scale_prob)
 		set_shader_parameter_curve(m, 'p_scale_a_p', particle_scale_x_prob, particle_scale_y_prob, particle_scale_z_prob)
 

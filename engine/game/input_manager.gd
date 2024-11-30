@@ -29,7 +29,7 @@ func on_unit_clicked(event: InputEventMouseButton, char: Unit) -> void:
 	#if main_hero == null: return
 	if event.button_index == MOUSE_BUTTON_RIGHT:
 		if char.team != main_hero.team:
-			main_hero.order(Enums.OrderType.ATTACK_TO, char.global_position, char)
+			main_hero.order(Enums.OrderType.ATTACK_TO, char.position_3d, char)
 		else:
 			on_ground_clicked_on_screen(event)
 	viewport.set_input_as_handled()
@@ -42,7 +42,8 @@ var hovered_pos: Vector3:
 		var normal := camera.project_ray_normal(event_position)
 		var plane := Plane(Vector3.UP, main_hero.global_position)
 		var intersection: Variant = plane.intersects_ray(origin, normal)
-		return intersection if intersection != null else Vector3.INF
+		if intersection != null: return intersection * Data.GD2HW
+		else: return Vector3.INF
 
 func on_unit_hovered(unit: Unit) -> void:
 	var shape: CursorShape
@@ -82,7 +83,7 @@ func _input(event: InputEvent) -> void:
 			window.mode = Window.MODE_WINDOWED
 		viewport.set_input_as_handled()
 
-const RAY_LENGTH = 1000.0
+const RAY_LENGTH := 1000.0
 func on_ground_clicked_on_screen(event: InputEventMouseButton) -> void:
 	if event.button_index == MOUSE_BUTTON_RIGHT:
 		var origin := camera.project_ray_origin(event.position)
@@ -106,7 +107,7 @@ func order_move_to(nearest_reachable_point: Vector3) -> void:
 	effect.owner = root
 	effect.global_position = nearest_reachable_point
 
-	main_hero.order(Enums.OrderType.MOVE_TO, nearest_reachable_point, null)
+	main_hero.order(Enums.OrderType.MOVE_TO, nearest_reachable_point * Data.GD2HW, null)
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return

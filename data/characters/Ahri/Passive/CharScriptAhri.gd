@@ -33,4 +33,4 @@ func on_spell_cast(spell: Spell) -> void:
 			host.buffs.add(host, AhriIdleCheckBuff.new(), 1, 1, 0.75)
 
 func on_disconnect() -> void:
-	host.spells.b.cast(host, host.position, host.position, 1, true)
+	host.spells.b.cast(host, host.position_3d, host.position_3d, 1, true)

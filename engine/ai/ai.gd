@@ -14,7 +14,7 @@ extends LuaScript
 var target: Unit = null
 var target_position := Vector3.INF:
 	get:
-		if target != null: return target.global_position
+		if target != null: return target.position_3d
 		else: return target_position
 	set(to):
 		target_position = to
@@ -33,7 +33,7 @@ func find_target_in_ac_r() -> Unit:
 	var best_match: Unit = null;
 	for area in areas:
 		var char := area.get_parent() as Unit
-		var dist := me.global_position.distance_squared_to(char.global_position)
+		var dist := me.position_3d.distance_squared_to(char.position_3d)
 		if dist < min_dist:
 			min_dist = dist
 			best_match = char
@@ -52,7 +52,7 @@ func get_lost_target_if_visible() -> Unit:
 
 #var pos := Vector3.INF
 func clear_target_pos_in_pos() -> void: pass #pos = Vector3.INF
-func assign_target_pos_in_pos(position: Vector3) -> void: pass #pos = target.global_position
+func assign_target_pos_in_pos(position: Vector3) -> void: pass #pos = target.position_3d
 
 var state := Enums.AIState.IDLE
 func get_state() -> Enums.AIState: return state
@@ -151,5 +151,5 @@ func is_moving() -> bool:
 func is_movement_stopped() -> bool:
 	return !run_state.is_running
 
-func distance_between_object_and_target_pos_sq(obj: Node3D) -> float:
-	return target_position.distance_squared_to(obj.global_position) * Data.HW2GD
+func distance_between_object_and_target_pos_sq(obj: Node3DExt) -> float:
+	return target_position.distance_squared_to(obj.position_3d)

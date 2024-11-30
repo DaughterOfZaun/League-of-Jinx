@@ -40,7 +40,7 @@ func try_enter() -> void:
 	switch_to_self()
 	is_running = true
 	animation_playback.travel("Run")
-	navigation_agent.target_position = target_position
+	navigation_agent.target_position = target_position * Data.HW2GD
 	navigation_agent.avoidance_priority = 0
 func on_exit() -> void:
 	is_running = false

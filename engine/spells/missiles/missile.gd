@@ -1,5 +1,5 @@
 class_name Missile
-extends Node3D
+extends Node3DExt
 
 var spell: Spell
 var target: Unit = null
@@ -28,18 +28,18 @@ func linear_movement(delta: float, target_position: Vector3) -> bool:
 	var accel := spell.data.missile_accel
 	
 	var speed: float
-	var dir := target_position - global_position
+	var dir := target_position - position_3d
 	var dir_len := dir.length()
 	if fixed_travel_time > 0:
 		speed = dir_len / (fixed_travel_time - time_elapsed)
 	else:
 		speed = clampf(initial_speed + (accel * time_elapsed), min_speed, max_speed)
-	var dist := speed * delta * Data.HW2GD
+	var dist := speed * delta
 	if dist < dir_len:
-		global_position += (dir / dir_len) * dist
+		position_3d += (dir / dir_len) * dist
 		return false
 	else:
-		global_position = target_position
+		position_3d = target_position
 		return true
 
 func destroy_self() -> void:	

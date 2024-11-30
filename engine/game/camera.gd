@@ -1,9 +1,10 @@
 class_name Camera
-extends Camera3D
+extends Node3DExt
 
-@onready var viewport := get_viewport()
+@onready var camera: Camera3D = self as Variant
+@onready var viewport := camera.get_viewport()
 
-@export var target: Node3D
+@export var target: Unit
 var target_position := Vector3.ZERO:
 	get:
 		if locked:
@@ -25,6 +26,8 @@ var zoom := 1.0:
 
 @export var ground_height := 1.35
 
+@export var screen_edge_thresold := 10
+
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	offset_initial = self.global_position - target.global_position
@@ -34,13 +37,12 @@ func _input(unk_event: InputEvent) -> void:
 	if locked: return
 	if unk_event is InputEventMouseMotion:
 		var event := unk_event as InputEventMouseMotion
-		const thresold := 10
 		var rect := viewport.get_visible_rect()
 		var d_start: Vector2 = abs(event.position - rect.position)
 		var d_end: Vector2 = abs(event.position - rect.end)
 		move_dir = Vector3(
-			int(d_end.x <= thresold) - int(d_start.x <= thresold), 0,
-			int(d_end.y <= thresold) - int(d_start.y <= thresold),
+			int(d_end.x <= screen_edge_thresold) - int(d_start.x <= screen_edge_thresold), 0,
+			int(d_end.y <= screen_edge_thresold) - int(d_start.y <= screen_edge_thresold),
 		)
 		locked = locked && move_dir.length_squared() == 0
 
@@ -67,6 +69,6 @@ func get_rect_3d() -> PackedVector2Array:
 	var array := PackedVector2Array([a, b, c, d])
 	for i in len(array):
 		var v := array[i]
-		var p: Vector3 = plane.intersects_ray(project_ray_origin(v), project_ray_normal(v))
+		var p: Vector3 = plane.intersects_ray(camera.project_ray_origin(v), camera.project_ray_normal(v))
 		array[i] = Vector2(p.x, p.z)
 	return array

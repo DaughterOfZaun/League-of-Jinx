@@ -3,7 +3,7 @@ extends Spell
 
 func on_missile_end(missile: Missile) -> void:
 
-	var missile_end_position := missile.position - Vector3(0, 50, 0)
+	var missile_end_position := missile.position_3d - Vector3(0, 50, 0)
 
 	for unit in API.get_units_in_area(
 		attacker, missile_end_position, 100,

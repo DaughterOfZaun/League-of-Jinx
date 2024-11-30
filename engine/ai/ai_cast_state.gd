@@ -51,7 +51,7 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 			current_spell.put_on_cooldown()
 		current_spell = spell
 
-	if should_cancel && target_position != me.global_position:
+	if should_cancel && target_position != me.position_3d:
 		me.face_direction(target_position)
 
 	var animation_changed := false
