@@ -75,14 +75,14 @@ func float_parse(from: String) -> float:
 	assert(regex_float.search(from), from)
 	return float(from)
 
-func bool_parse(from: String) -> bool:
+func bool_parse(from: String, strict := true) -> bool:
 	from = string_parse(from).to_lower()
 	if from == "yes": return true
 	elif from == "no": return false
 	else:
 		var i := int_parse(from)
-		assert(i == 0 || i == 1, from)
-		return i == 1
+		assert(!strict || i == 0 || i == 1, from)
+		return i > 0
 
 #var regex_int = RegEx.create_from_string(r'^[+-]?[0-9]*$')
 func int_parse(from: String) -> int:

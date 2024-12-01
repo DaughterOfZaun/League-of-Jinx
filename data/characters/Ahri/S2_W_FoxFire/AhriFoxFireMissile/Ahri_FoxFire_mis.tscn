@@ -1,0 +1,648 @@
+[gd_scene load_steps=93 format=4 uid="uid://downenwco7m2h"]
+
+[ext_resource type="Script" uid="uid://w51dsm6maeuv" path="res://engine/effects/system.gd" id="1_tti04"]
+[ext_resource type="Script" uid="uid://bcqw6ydxjryuf" path="res://engine/effects/group.gd" id="2_it3b0"]
+[ext_resource type="Texture2D" uid="uid://kg10vgvhp7or" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbReturn/FlareBlue.webp" id="3_q0cwb"]
+[ext_resource type="Texture2D" uid="uid://btmn6tcv6lt6l" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbMissile/color-rampdown.webp" id="4_fw8w5"]
+[ext_resource type="QuadMesh" uid="uid://cekxghrhqjuj2" path="res://engine/effects/new_quad_mesh.tres" id="5_8opj2"]
+[ext_resource type="Texture2D" uid="uid://giv6cy2ofq5i" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/flames03.webp" id="6_c5rn0"]
+[ext_resource type="Texture2D" uid="uid://b1xkooc5i7uti" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/color-blueflame.webp" id="7_m0jb6"]
+[ext_resource type="Texture2D" uid="uid://bj14rlablpdy1" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/bearfire_frost.webp" id="8_5cubh"]
+[ext_resource type="Texture2D" uid="uid://cfvuo1kwayjn2" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/color-blue.webp" id="9_jc6b4"]
+
+[sub_resource type="Shader" id="Shader_2xxks"]
+code = "shader_type spatial;
+render_mode blend_add,depth_draw_opaque,cull_back,diffuse_burley,unshaded,specular_disabled,ambient_light_disabled,fog_disabled;
+#define BILLBOARD
+#include \"res://engine/effects/material.gdshaderinc\"
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_reh5d"]
+render_priority = 0
+shader = SubResource("Shader_2xxks")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_q0cwb")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/texdiv = Vector2(1, 1)
+shader_parameter/random_start_frame = false
+shader_parameter/start_frame = 0.0
+shader_parameter/num_frames = 1.0
+shader_parameter/frame_rate = 0.0
+shader_parameter/uv_scroll = Vector2(0, 0)
+
+[sub_resource type="Shader" id="Shader_ij0b1"]
+code = "shader_type particles;
+#include \"res://engine/effects/process.gdshaderinc\"
+"
+
+[sub_resource type="Curve" id="Curve_7kttt"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_u4o74"]
+curve_x = SubResource("Curve_7kttt")
+curve_y = SubResource("Curve_7kttt")
+curve_z = SubResource("Curve_7kttt")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_c4egq"]
+curve_x = SubResource("Curve_7kttt")
+curve_y = SubResource("Curve_7kttt")
+curve_z = SubResource("Curve_7kttt")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ihcay"]
+curve_x = SubResource("Curve_7kttt")
+curve_y = SubResource("Curve_7kttt")
+curve_z = SubResource("Curve_7kttt")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_nfmsy"]
+curve_x = SubResource("Curve_7kttt")
+curve_y = SubResource("Curve_7kttt")
+curve_z = SubResource("Curve_7kttt")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_06xqf"]
+curve_x = SubResource("Curve_7kttt")
+curve_y = SubResource("Curve_7kttt")
+curve_z = SubResource("Curve_7kttt")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_sb7es"]
+curve_x = SubResource("Curve_7kttt")
+curve_y = SubResource("Curve_7kttt")
+curve_z = SubResource("Curve_7kttt")
+
+[sub_resource type="Curve" id="Curve_enbu1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_0jtf0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_5wdm0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_gjnh1"]
+curve_x = SubResource("Curve_enbu1")
+curve_y = SubResource("Curve_0jtf0")
+curve_z = SubResource("Curve_5wdm0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cohkw"]
+shader = SubResource("Shader_ij0b1")
+shader_parameter/amount = 1
+shader_parameter/p_life_i = 0.3
+shader_parameter/p_life_p = SubResource("CurveXYZTexture_u4o74")
+shader_parameter/p_linger = 0.3
+shader_parameter/p_rgba = ExtResource("4_fw8w5")
+shader_parameter/p_colortype = Vector2i(1, 1)
+shader_parameter/p_coloroffset = Vector2(0, 0)
+shader_parameter/p_colorscale = Vector2(1, 1)
+shader_parameter/p_bindweight = Vector2(1, 1)
+shader_parameter/p_scale_i = Vector3(120, 120, 120)
+shader_parameter/p_scale_p = SubResource("CurveXYZTexture_06xqf")
+shader_parameter/p_scale_a_p = SubResource("CurveXYZTexture_nfmsy")
+shader_parameter/p_quadrot_i = Vector3(0, 0, 0)
+shader_parameter/p_quadrot_a_p = SubResource("CurveXYZTexture_c4egq")
+shader_parameter/p_rotvel_i = Vector3(0, 0, 0)
+shader_parameter/p_rotvel_a_p = SubResource("CurveXYZTexture_ihcay")
+shader_parameter/p_vel_i = Vector3(0, 0, 0)
+shader_parameter/p_vel_a_p = SubResource("CurveXYZTexture_sb7es")
+shader_parameter/p_xscale_ol = SubResource("CurveXYZTexture_gjnh1")
+
+[sub_resource type="Curve" id="Curve_8y5ub"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_fyx1j"]
+_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.9, 0.4), 0.0, 0.0, 0, 0, Vector2(1, 0.6), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_3vbrt"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_2f5tp"]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_1t0p2"]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_hpjun"]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_qpofj"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_x3jt1"]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.1, -0.5), 0.0, 0.0, 0, 0, Vector2(0.9, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mpoer"]
+render_priority = 0
+shader = SubResource("Shader_2xxks")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("6_c5rn0")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/texdiv = Vector2(4, 4)
+shader_parameter/random_start_frame = true
+shader_parameter/start_frame = 5.0
+shader_parameter/num_frames = 12.0
+shader_parameter/frame_rate = 0.0
+shader_parameter/uv_scroll = Vector2(0, 0)
+
+[sub_resource type="Curve" id="Curve_ihnls"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_a0mrb"]
+curve_x = SubResource("Curve_fyx1j")
+curve_y = SubResource("Curve_ihnls")
+curve_z = SubResource("Curve_ihnls")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_y6q6q"]
+curve_x = SubResource("Curve_ihnls")
+curve_y = SubResource("Curve_ihnls")
+curve_z = SubResource("Curve_qpofj")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_me11f"]
+curve_x = SubResource("Curve_ihnls")
+curve_y = SubResource("Curve_ihnls")
+curve_z = SubResource("Curve_x3jt1")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_lpvos"]
+curve_x = SubResource("Curve_ihnls")
+curve_y = SubResource("Curve_ihnls")
+curve_z = SubResource("Curve_ihnls")
+
+[sub_resource type="Curve" id="Curve_buc57"]
+_data = [Vector2(0, 0.4), 0.0, 0.0, 0, 0, Vector2(1, 1.2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_qst8b"]
+_data = [Vector2(0, 0.4), 0.0, 0.0, 0, 0, Vector2(1, 1.2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_p5qat"]
+_data = [Vector2(0, 0.4), 0.0, 0.0, 0, 0, Vector2(1, 1.2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_5y1xl"]
+curve_x = SubResource("Curve_buc57")
+curve_y = SubResource("Curve_qst8b")
+curve_z = SubResource("Curve_p5qat")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_b7cx3"]
+curve_x = SubResource("Curve_2f5tp")
+curve_y = SubResource("Curve_1t0p2")
+curve_z = SubResource("Curve_hpjun")
+
+[sub_resource type="Curve" id="Curve_go5ac"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.2, 1.5), 0.0, 0.0, 0, 0, Vector2(0.4, 2.1), 0.0, 0.0, 0, 0, Vector2(0.6, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_c5gtn"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.2, 1.5), 0.0, 0.0, 0, 0, Vector2(0.4, 2.1), 0.0, 0.0, 0, 0, Vector2(0.6, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_wk0kt"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.2, 1.5), 0.0, 0.0, 0, 0, Vector2(0.4, 2.1), 0.0, 0.0, 0, 0, Vector2(0.6, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ad6ix"]
+curve_x = SubResource("Curve_go5ac")
+curve_y = SubResource("Curve_c5gtn")
+curve_z = SubResource("Curve_wk0kt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1126g"]
+shader = SubResource("Shader_ij0b1")
+shader_parameter/amount = 1
+shader_parameter/p_life_i = 1.0
+shader_parameter/p_life_p = SubResource("CurveXYZTexture_a0mrb")
+shader_parameter/p_linger = 0.0
+shader_parameter/p_rgba = ExtResource("7_m0jb6")
+shader_parameter/p_colortype = Vector2i(1, 3)
+shader_parameter/p_coloroffset = Vector2(0, 0)
+shader_parameter/p_colorscale = Vector2(1, 0.7)
+shader_parameter/p_bindweight = Vector2(0, 0)
+shader_parameter/p_scale_i = Vector3(20, 20, 20)
+shader_parameter/p_scale_p = SubResource("CurveXYZTexture_5y1xl")
+shader_parameter/p_scale_a_p = SubResource("CurveXYZTexture_lpvos")
+shader_parameter/p_quadrot_i = Vector3(0, 0, 1)
+shader_parameter/p_quadrot_a_p = SubResource("CurveXYZTexture_y6q6q")
+shader_parameter/p_rotvel_i = Vector3(0, 0, 120)
+shader_parameter/p_rotvel_a_p = SubResource("CurveXYZTexture_me11f")
+shader_parameter/p_vel_i = Vector3(240, 240, 240)
+shader_parameter/p_vel_a_p = SubResource("CurveXYZTexture_b7cx3")
+shader_parameter/p_xscale_ol = SubResource("CurveXYZTexture_ad6ix")
+
+[sub_resource type="Curve" id="Curve_57c2l"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_7opch"]
+_data = [Vector2(0, 0.2), 0.0, 0.0, 0, 0, Vector2(0.9, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 0.5), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_os3t7"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_rjatx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1.2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_7r2fn"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_xlvnc"]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.1, -0.5), 0.0, 0.0, 0, 0, Vector2(0.9, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fu6t1"]
+render_priority = 0
+shader = SubResource("Shader_2xxks")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("6_c5rn0")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/texdiv = Vector2(4, 4)
+shader_parameter/random_start_frame = true
+shader_parameter/start_frame = 5.0
+shader_parameter/num_frames = 12.0
+shader_parameter/frame_rate = 0.0
+shader_parameter/uv_scroll = Vector2(0, 0)
+
+[sub_resource type="Curve" id="Curve_ltraw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_uw4px"]
+curve_x = SubResource("Curve_7opch")
+curve_y = SubResource("Curve_ltraw")
+curve_z = SubResource("Curve_ltraw")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_0hjdm"]
+curve_x = SubResource("Curve_ltraw")
+curve_y = SubResource("Curve_ltraw")
+curve_z = SubResource("Curve_7r2fn")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_73kgf"]
+curve_x = SubResource("Curve_ltraw")
+curve_y = SubResource("Curve_ltraw")
+curve_z = SubResource("Curve_xlvnc")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_tcygi"]
+curve_x = SubResource("Curve_ltraw")
+curve_y = SubResource("Curve_ltraw")
+curve_z = SubResource("Curve_ltraw")
+
+[sub_resource type="Curve" id="Curve_gign1"]
+_data = [Vector2(0, 0.4), 0.0, 0.0, 0, 0, Vector2(1, 1.2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_iaaqj"]
+_data = [Vector2(0, 0.4), 0.0, 0.0, 0, 0, Vector2(1, 1.2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_4mqns"]
+_data = [Vector2(0, 0.4), 0.0, 0.0, 0, 0, Vector2(1, 1.2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_o5k15"]
+curve_x = SubResource("Curve_gign1")
+curve_y = SubResource("Curve_iaaqj")
+curve_z = SubResource("Curve_4mqns")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_clhsj"]
+curve_x = SubResource("Curve_ltraw")
+curve_y = SubResource("Curve_rjatx")
+curve_z = SubResource("Curve_ltraw")
+
+[sub_resource type="Curve" id="Curve_5xkfb"]
+_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.2, 1.3), 0.0, 0.0, 0, 0, Vector2(0.4, 1.5), 0.0, 0.0, 0, 0, Vector2(0.6, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_tpby7"]
+_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.2, 1.3), 0.0, 0.0, 0, 0, Vector2(0.4, 1.5), 0.0, 0.0, 0, 0, Vector2(0.6, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_x6chn"]
+_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(0.2, 1.3), 0.0, 0.0, 0, 0, Vector2(0.4, 1.5), 0.0, 0.0, 0, 0, Vector2(0.6, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_l2tkr"]
+curve_x = SubResource("Curve_5xkfb")
+curve_y = SubResource("Curve_tpby7")
+curve_z = SubResource("Curve_x6chn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_16mpv"]
+shader = SubResource("Shader_ij0b1")
+shader_parameter/amount = 80
+shader_parameter/p_life_i = 2.3
+shader_parameter/p_life_p = SubResource("CurveXYZTexture_uw4px")
+shader_parameter/p_linger = 0.0
+shader_parameter/p_rgba = ExtResource("7_m0jb6")
+shader_parameter/p_colortype = Vector2i(1, 3)
+shader_parameter/p_coloroffset = Vector2(0, 0)
+shader_parameter/p_colorscale = Vector2(1, 0.7)
+shader_parameter/p_bindweight = Vector2(1, 1)
+shader_parameter/p_scale_i = Vector3(14, 14, 14)
+shader_parameter/p_scale_p = SubResource("CurveXYZTexture_o5k15")
+shader_parameter/p_scale_a_p = SubResource("CurveXYZTexture_tcygi")
+shader_parameter/p_quadrot_i = Vector3(0, 0, 1)
+shader_parameter/p_quadrot_a_p = SubResource("CurveXYZTexture_0hjdm")
+shader_parameter/p_rotvel_i = Vector3(0, 0, 80)
+shader_parameter/p_rotvel_a_p = SubResource("CurveXYZTexture_73kgf")
+shader_parameter/p_vel_i = Vector3(0, 75, 0)
+shader_parameter/p_vel_a_p = SubResource("CurveXYZTexture_clhsj")
+shader_parameter/p_xscale_ol = SubResource("CurveXYZTexture_l2tkr")
+
+[sub_resource type="Curve" id="Curve_tee01"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ouawo"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.9, 0.8), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_opod7"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_715xd"]
+_data = [Vector2(0, 0.1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_5s3lj"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_7yb3u"]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.1, -0.3), 0.0, 0.0, 0, 0, Vector2(0.9, 0.3), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ly0cc"]
+render_priority = 0
+shader = SubResource("Shader_2xxks")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("8_5cubh")
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/texdiv = Vector2(4, 4)
+shader_parameter/random_start_frame = true
+shader_parameter/start_frame = 6.0
+shader_parameter/num_frames = 12.0
+shader_parameter/frame_rate = 0.0
+shader_parameter/uv_scroll = Vector2(0, 0)
+
+[sub_resource type="Curve" id="Curve_sk1j5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_knjxf"]
+curve_x = SubResource("Curve_ouawo")
+curve_y = SubResource("Curve_sk1j5")
+curve_z = SubResource("Curve_sk1j5")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_tcca8"]
+curve_x = SubResource("Curve_sk1j5")
+curve_y = SubResource("Curve_sk1j5")
+curve_z = SubResource("Curve_5s3lj")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_mhj5y"]
+curve_x = SubResource("Curve_sk1j5")
+curve_y = SubResource("Curve_sk1j5")
+curve_z = SubResource("Curve_7yb3u")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_fxmv1"]
+curve_x = SubResource("Curve_sk1j5")
+curve_y = SubResource("Curve_sk1j5")
+curve_z = SubResource("Curve_sk1j5")
+
+[sub_resource type="Curve" id="Curve_0pcmv"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1.2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_xxc1c"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1.2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_p2nd5"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1.2), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ulyc7"]
+curve_x = SubResource("Curve_0pcmv")
+curve_y = SubResource("Curve_xxc1c")
+curve_z = SubResource("Curve_p2nd5")
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_2rprw"]
+curve_x = SubResource("Curve_sk1j5")
+curve_y = SubResource("Curve_715xd")
+curve_z = SubResource("Curve_sk1j5")
+
+[sub_resource type="Curve" id="Curve_a4nm4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.2, 1.3), 0.0, 0.0, 0, 0, Vector2(0.4, 2), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_go0gt"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.2, 1.3), 0.0, 0.0, 0, 0, Vector2(0.4, 2), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_qctfm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.2, 1.3), 0.0, 0.0, 0, 0, Vector2(0.4, 2), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_q8drm"]
+curve_x = SubResource("Curve_a4nm4")
+curve_y = SubResource("Curve_go0gt")
+curve_z = SubResource("Curve_qctfm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwdaf"]
+shader = SubResource("Shader_ij0b1")
+shader_parameter/amount = 100
+shader_parameter/p_life_i = 1.5
+shader_parameter/p_life_p = SubResource("CurveXYZTexture_knjxf")
+shader_parameter/p_linger = 0.0
+shader_parameter/p_rgba = ExtResource("9_jc6b4")
+shader_parameter/p_colortype = Vector2i(1, 3)
+shader_parameter/p_coloroffset = Vector2(0, 0)
+shader_parameter/p_colorscale = Vector2(1, 0.2)
+shader_parameter/p_bindweight = Vector2(1, 1)
+shader_parameter/p_scale_i = Vector3(23, 23, 23)
+shader_parameter/p_scale_p = SubResource("CurveXYZTexture_ulyc7")
+shader_parameter/p_scale_a_p = SubResource("CurveXYZTexture_fxmv1")
+shader_parameter/p_quadrot_i = Vector3(0, 0, 1)
+shader_parameter/p_quadrot_a_p = SubResource("CurveXYZTexture_tcca8")
+shader_parameter/p_rotvel_i = Vector3(0, 0, 80)
+shader_parameter/p_rotvel_a_p = SubResource("CurveXYZTexture_mhj5y")
+shader_parameter/p_vel_i = Vector3(0, 90, 0)
+shader_parameter/p_vel_a_p = SubResource("CurveXYZTexture_2rprw")
+shader_parameter/p_xscale_ol = SubResource("CurveXYZTexture_q8drm")
+
+[node name="System" type="Node3D"]
+script = ExtResource("1_tti04")
+simulate_every_frame = true
+import_path = "res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/Ahri_FoxFire_mis.troy"
+import_res_path_1 = "res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbMissile"
+import_res_path_2 = "res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbReturn"
+
+[node name="Flash" type="Node3D" parent="."]
+script = ExtResource("2_it3b0")
+emitter_lifetime = 1.0
+emitter_emit_single_particle = true
+emitter_rate = 1.0
+emitter_is_local_orientation = true
+particle_lifetime = 0.3
+particle_linger = 0.3
+particle_texture_name = "flareblue.tga"
+particle_texture = ExtResource("3_q0cwb")
+particle_color_lookup_texture_name = "color-rampdown.tga"
+particle_color_lookup_texture = ExtResource("4_fw8w5")
+particle_bind_weight = Vector2(1, 1)
+particle_emit_offset = Vector3(0, 20, 0)
+particle_quad_type = 1
+particle_simple_orientation = 2
+particle_scale = Vector3(120, 120, 120)
+particle_xscale_over_lifetime = PackedVector4Array(1, 1, 1, 0, 0, 0, 0, 1)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Flash"]
+material_override = SubResource("ShaderMaterial_reh5d")
+cast_shadow = 0
+emitting = false
+amount = 1
+one_shot = true
+process_material = SubResource("ShaderMaterial_cohkw")
+draw_pass_1 = ExtResource("5_8opj2")
+
+[node name="Fire_Flash" type="Node3D" parent="."]
+script = ExtResource("2_it3b0")
+emitter_lifetime = 1.0
+emitter_emit_single_particle = true
+emitter_rate = 40.0
+emitter_rotation_angles = Array[float]([0.0, 1.0])
+emitter_rotation_axes = Array[Vector3]([Vector3(0, 0, 0), Vector3(0, 1, 0)])
+emitter_rotation_probs = Array[Curve]([null, SubResource("Curve_8y5ub")])
+particle_lifetime = 1.0
+particle_lifetime_prob = SubResource("Curve_fyx1j")
+particle_texture_name = "flames03.tga"
+particle_texture = ExtResource("6_c5rn0")
+particle_texture_division = Vector2(4, 4)
+particle_start_frame = 5
+particle_number_of_frames = 12
+particle_start_frame_is_random = true
+particle_color_lookup_texture_name = "color-blueflame.tga"
+particle_color_lookup_texture = ExtResource("7_m0jb6")
+particle_color_lookup_type_y = 3
+particle_color_lookup_scale = Vector2(1, 0.7)
+particle_emit_offset = Vector3(15, 0, 0)
+particle_emit_offset_x_prob = SubResource("Curve_3vbrt")
+particle_translation = Vector3(0, 20, 0)
+particle_velocity = Vector3(240, 240, 240)
+particle_velocity_x_prob = SubResource("Curve_2f5tp")
+particle_velocity_y_prob = SubResource("Curve_1t0p2")
+particle_velocity_z_prob = SubResource("Curve_hpjun")
+particle_rotation = Vector3(0, 0, 1)
+particle_rotation_z_prob = SubResource("Curve_qpofj")
+particle_rotational_velocity = Vector3(0, 0, 120)
+particle_rotational_velocity_z_prob = SubResource("Curve_x3jt1")
+particle_scale = Vector3(20, 20, 20)
+particle_scale_prob = PackedVector4Array(0.4, 0.4, 0.4, 0, 1.2, 1.2, 1.2, 1)
+particle_xscale_over_lifetime = PackedVector4Array(0.5, 0.5, 0.5, 0, 1.5, 1.5, 1.5, 0.2, 2.1, 2.1, 2.1, 0.4, 1, 1, 1, 0.6, 0.1, 0.1, 0.1, 1)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Fire_Flash"]
+material_override = SubResource("ShaderMaterial_mpoer")
+cast_shadow = 0
+emitting = false
+amount = 1
+one_shot = true
+process_material = SubResource("ShaderMaterial_1126g")
+draw_pass_1 = ExtResource("5_8opj2")
+
+[node name="Inner_Flame" type="Node3D" parent="."]
+script = ExtResource("2_it3b0")
+emitter_lifetime = -1.0
+emitter_life_is_infinite = true
+emitter_rate = 80.0
+emitter_rotation_angles = Array[float]([0.0, 1.0])
+emitter_rotation_axes = Array[Vector3]([Vector3(0, 0, 0), Vector3(0, 1, 0)])
+emitter_rotation_probs = Array[Curve]([null, SubResource("Curve_57c2l")])
+particle_lifetime = 2.3
+particle_lifetime_prob = SubResource("Curve_7opch")
+particle_texture_name = "flames03.tga"
+particle_texture = ExtResource("6_c5rn0")
+particle_texture_division = Vector2(4, 4)
+particle_start_frame = 5
+particle_number_of_frames = 12
+particle_start_frame_is_random = true
+particle_color_lookup_texture_name = "color-blueflame.tga"
+particle_color_lookup_texture = ExtResource("7_m0jb6")
+particle_color_lookup_type_y = 3
+particle_color_lookup_scale = Vector2(1, 0.7)
+particle_bind_weight = Vector2(1, 1)
+particle_emit_offset = Vector3(10, 0, 0)
+particle_emit_offset_x_prob = SubResource("Curve_os3t7")
+particle_translation = Vector3(0, 20, 0)
+particle_velocity = Vector3(0, 75, 0)
+particle_velocity_y_prob = SubResource("Curve_rjatx")
+particle_rotation = Vector3(0, 0, 1)
+particle_rotation_z_prob = SubResource("Curve_7r2fn")
+particle_rotational_velocity = Vector3(0, 0, 80)
+particle_rotational_velocity_z_prob = SubResource("Curve_xlvnc")
+particle_scale = Vector3(14, 14, 14)
+particle_scale_prob = PackedVector4Array(0.4, 0.4, 0.4, 0, 1.2, 1.2, 1.2, 1)
+particle_xscale_over_lifetime = PackedVector4Array(0.1, 0.1, 0.1, 0, 1.3, 1.3, 1.3, 0.2, 1.5, 1.5, 1.5, 0.4, 1, 1, 1, 0.6, 0.1, 0.1, 0.1, 1)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Inner_Flame"]
+material_override = SubResource("ShaderMaterial_fu6t1")
+cast_shadow = 0
+amount = 80
+process_material = SubResource("ShaderMaterial_16mpv")
+draw_pass_1 = ExtResource("5_8opj2")
+
+[node name="Outer_Flame" type="Node3D" parent="."]
+script = ExtResource("2_it3b0")
+emitter_lifetime = -1.0
+emitter_life_is_infinite = true
+emitter_rate = 100.0
+emitter_rotation_angles = Array[float]([0.0, 1.0])
+emitter_rotation_axes = Array[Vector3]([Vector3(0, 0, 0), Vector3(0, 1, 0)])
+emitter_rotation_probs = Array[Curve]([null, SubResource("Curve_tee01")])
+particle_lifetime = 1.5
+particle_lifetime_prob = SubResource("Curve_ouawo")
+particle_texture_name = "bearfire_frost.tga"
+particle_texture = ExtResource("8_5cubh")
+particle_texture_division = Vector2(4, 4)
+particle_start_frame = 6
+particle_number_of_frames = 12
+particle_start_frame_is_random = true
+particle_color_lookup_texture_name = "color-blue.tga"
+particle_color_lookup_texture = ExtResource("9_jc6b4")
+particle_color_lookup_type_y = 3
+particle_color_lookup_scale = Vector2(1, 0.2)
+particle_bind_weight = Vector2(1, 1)
+particle_emit_offset = Vector3(10, 0, 0)
+particle_emit_offset_x_prob = SubResource("Curve_opod7")
+particle_translation = Vector3(0, 20, 0)
+particle_velocity = Vector3(0, 90, 0)
+particle_velocity_y_prob = SubResource("Curve_715xd")
+particle_rotation = Vector3(0, 0, 1)
+particle_rotation_z_prob = SubResource("Curve_5s3lj")
+particle_rotational_velocity = Vector3(0, 0, 80)
+particle_rotational_velocity_z_prob = SubResource("Curve_7yb3u")
+particle_scale = Vector3(23, 23, 23)
+particle_scale_prob = PackedVector4Array(0.5, 0.5, 0.5, 0, 1.2, 1.2, 1.2, 1)
+particle_xscale_over_lifetime = PackedVector4Array(1, 1, 1, 0, 1.3, 1.3, 1.3, 0.2, 2, 2, 2, 0.4, 1, 1, 1, 0.7, 0.1, 0.1, 0.1, 1)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Outer_Flame"]
+material_override = SubResource("ShaderMaterial_ly0cc")
+cast_shadow = 0
+amount = 100
+process_material = SubResource("ShaderMaterial_vwdaf")
+draw_pass_1 = ExtResource("5_8opj2")

@@ -3,13 +3,13 @@ extends GPUParticles2D
 
 static func create(effect_name := "", effect_name_for_other_team := "") -> Particle:
 	return Particle.new() #TODO: add_child
-func fow(fow_team := Enums.TeamID.UNKNOWN, fow_visibility_radius := 0.0) -> Particle:
+func fow(fow_team := Enums.Team.UNKNOWN, fow_visibility_radius := 0.0) -> Particle:
 	return self
 func flags(flags := 0) -> Particle:
 	return self
 func specific(
-	specific_team_only := Enums.TeamID.UNKNOWN,
-	specific_team_only_override := Enums.TeamID.UNKNOWN,
+	specific_team_only := Enums.Team.UNKNOWN,
+	specific_team_only_override := Enums.Team.UNKNOWN,
 	specific_unit_only: Unit = null,
 	use_specific_unit := false
 ) -> Particle:

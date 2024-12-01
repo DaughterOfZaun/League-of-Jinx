@@ -765,7 +765,7 @@ func set_from_ini_entry(key_array: Array, value: String) -> void:
 		["p-quadrotXP", var i]: particle_rotation_x_prob = curve_set(particle_rotation_x_prob, i, value)
 		["p-quadrotYP", var i]: particle_rotation_y_prob = curve_set(particle_rotation_y_prob, i, value)
 		["p-quadrotZP", var i]: particle_rotation_z_prob = curve_set(particle_rotation_z_prob, i, value)
-		["p-randomstartframe"]: particle_start_frame_is_random = bool_parse(value)
+		["p-randomstartframe"]: particle_start_frame_is_random = bool_parse(value, false)
 		["p-rgba"]:
 			particle_color_lookup_texture_name = string_parse(value)
 			particle_color_lookup_texture = tex_parse(value)

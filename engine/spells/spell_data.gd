@@ -55,6 +55,8 @@ var auto_cooldown_by_level: Array[float]:
 @export var animation_loop_name: StringName
 @export var animation_winddown_name: StringName
 @export var use_animator_framerate: bool
+@export var delay_cast_offset_percent: float #= -0.5
+@export var delay_total_time_percent: float #= -0.5
 @export_group("")
 #endregion
 
@@ -174,8 +176,6 @@ var have_point_effect: bool
 @export var override_force_spell_animation: bool
 @export_subgroup("")
 #endregion
-@export var delay_cast_offset_percent: float #= -0.5
-@export var delay_total_time_percent: float
 #region Flags
 @export_subgroup("Flags")
 @export var always_snap_facing: bool
@@ -243,8 +243,6 @@ var have_point_effect: bool
 @export var apply_attack_damage: bool
 @export var auto_target_damage: float
 @export var auto_target_damage_by_level: Array[float] #= [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
-@export var physical_damage_ratio: float
-@export var spell_damage_ratio: float
 @export var death_recap_priority: float
 @export_subgroup("")
 #endregion
@@ -261,6 +259,8 @@ var doesnt_trigger_spell_casts: bool:
 		return !triggers_spell_casts
 	set(value):
 		triggers_spell_casts = !value
+@export var physical_damage_ratio: float
+@export var spell_damage_ratio: float
 @export_subgroup("")
 #endregion
 

@@ -210,14 +210,6 @@ enum EffCreate
 	UPDATE_ORIENTATION
 }
 
-enum TeamID
-{
-	UNKNOWN = 0,
-	ORDER = 1 << 0,
-	CHAOS = 1 << 1,
-	NEUTRAL = 1 << 2,
-}
-
 enum TargetingType
 {
 	SELF = 0,
