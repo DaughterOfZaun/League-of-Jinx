@@ -9,9 +9,10 @@ func _ready() -> void:
 	me.buffs = self
 
 var slots: Dictionary[GDScript, Dictionary] = {}
+var null_Dictionary_Unit_BuffSlot: Dictionary[Unit, BuffSlot] = {} #HACK:
 func get_slot(script: GDScript, attacker: Unit, create := false) -> BuffSlot:
-	var slot: BuffSlot
-	var slots_with_script: Dictionary[Unit, BuffSlot] = slots.get(script, null)
+	var slot: BuffSlot = null
+	var slots_with_script: Dictionary[Unit, BuffSlot] = slots.get(script, null_Dictionary_Unit_BuffSlot)
 	if slots_with_script == null:
 		if create:
 			slots_with_script = {}
@@ -19,8 +20,9 @@ func get_slot(script: GDScript, attacker: Unit, create := false) -> BuffSlot:
 		else:
 			return null
 	else:
-		slot = slots_with_script.get(null, slots_with_script.get(attacker, null))
-
+		if attacker != null: slot = slots_with_script.get(attacker, null)
+		if slot == null: slot = slots_with_script.get(null, null)
+		
 		if len(slots_with_script.keys()) > 1 && (attacker == null || slots_with_script.has(null)):
 			var warn := ".stacks_exclusive value is inconsistent. " +\
 				"Either set it to false or pass the attacker to all methods that require it."
@@ -117,10 +119,12 @@ func remove_and_renew(script: GDScript, reset_duration: float, attacker: Unit = 
 	remove_by_script(script, attacker); renew(script, reset_duration, attacker)
 
 func renew(script: GDScript, reset_duration: float, attacker: Unit = null) -> void:
-	get_slot(script, attacker).renew(reset_duration)
+	var slot := get_slot(script, attacker)
+	if slot != null: slot.renew(reset_duration)
 
 func remove_stacks(script: GDScript, num_stacks: int, attacker: Unit = null) -> void:
-	get_slot(script, attacker).remove_stacks(num_stacks)
+	var slot := get_slot(script, attacker)
+	if slot != null: slot.remove_stacks(num_stacks)
 
 #func remove(type_or_script: Variant, attacker: Unit = null) -> void:
 #	if type_or_script is Enums.BuffType:
@@ -130,7 +134,8 @@ func remove_stacks(script: GDScript, num_stacks: int, attacker: Unit = null) -> 
 
 ## Removes one stack of buff with the specified script
 func remove_by_script(script: GDScript, attacker: Unit = null) -> void:
-	get_slot(script, attacker).remove_stacks(1)
+	var slot := get_slot(script, attacker)
+	if slot != null: slot.remove_stacks(1)
 
 ## Removes all buffs with the specified type, regardless of the attacker who applied them.
 func remove_by_type(type: Enums.BuffType) -> void:
@@ -145,7 +150,9 @@ func has(type: Enums.BuffType) -> bool:
 	return false
 
 func count(script: GDScript, caster: Unit = null) -> int:
-	return len(get_slot(script, caster).stacks)
+	var slot := get_slot(script, caster)
+	if slot != null: return len(slot.stacks)
+	return 0
 
 func get_remaining_duration(script: GDScript) -> float:
 	push_warning("Buffs.get_remaining_duration is unimplemented")

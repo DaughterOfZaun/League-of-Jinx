@@ -149,11 +149,11 @@ func move(
 ) -> void:
 	push_warning("Unit.move is unimplemented")
 func move_away(
-    away_from: Vector3,
-    speed: float,
-    gravity: float,
-    distance: float,
-    distance_inner: float,
+	away_from: Vector3,
+	speed: float,
+	gravity: float,
+	distance: float,
+	distance_inner: float,
 	movement_type: Enums.ForceMovementType = 0,
 	movement_orders_type: Enums.ForceMovementOrdersType = 0,
 	ideal_distance: float = 0,
@@ -161,14 +161,14 @@ func move_away(
 ) -> void:
 	push_warning("Unit.move_away is unimplemented")
 func move_to_unit(
-    target: Unit,
-    speed: float,
-    gravity: float,
+	target: Unit,
+	speed: float,
+	gravity: float,
 	movement_orders_type: Enums.ForceMovementOrdersType,
-    move_back_by: float,
-    max_track_distance: float,
-    ideal_distance: float,
-    time_override: float
+	move_back_by: float,
+	max_track_distance: float,
+	ideal_distance: float,
+	time_override: float
 ) -> void:
 	push_warning("Unit.move_to_unit is unimplemented")
 func stop_move() -> void:
@@ -185,16 +185,16 @@ func inc_health(delta: float, healer: Unit = null) -> void:
 func inc_max_health(delta: float, inc_current_health: bool) -> void:
 	push_warning("Unit.inc_max_health is unimplemented")
 func apply_damage(
-    attacker: Unit,
-    damage: float,
-    damage_type: Enums.DamageType,
-    source_damage_type: Enums.DamageSource,
-    percent_of_attack: float = 0,
-    spell_damage_ratio: float = 0,
-    physical_damage_ratio: float = 0,
-    ignore_damage_increase_mods: bool = false,
-    ignore_damage_crit: bool = false,
-    call_for_help_attacker: Unit = null
+	attacker: Unit,
+	damage: float,
+	damage_type: Enums.DamageType,
+	source_damage_type: Enums.DamageSource,
+	percent_of_attack: float = 0,
+	spell_damage_ratio: float = 0,
+	physical_damage_ratio: float = 0,
+	ignore_damage_increase_mods: bool = false,
+	ignore_damage_crit: bool = false,
+	call_for_help_attacker: Unit = null
 ) -> void:
 	push_warning("Unit.apply_damage is unimplemented")
 func force_dead() -> void:

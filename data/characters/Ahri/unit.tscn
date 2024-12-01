@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://dgxp55bfpc742"]
+[gd_scene load_steps=61 format=3 uid="uid://dgxp55bfpc742"]
 
 [ext_resource type="Script" uid="uid://4a06w3g4bx3a" path="res://engine/unit/champion.gd" id="1_7i6v8"]
 [ext_resource type="Script" uid="uid://dksbt75edeseg" path="res://engine/game/ui/minimap/minimap_icon.gd" id="2_81mpc"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://dcvek1lhy4x2v" path="res://engine/stats.gd" id="14_1rt8n"]
 [ext_resource type="Script" uid="uid://wllpm0ictc2m" path="res://engine/status.gd" id="15_4u6an"]
 [ext_resource type="Script" uid="uid://xxukqtvfymt0" path="res://engine/unit/unit_data.gd" id="16_genta"]
+[ext_resource type="Script" uid="uid://cfp7n61elnlki" path="res://engine/buffs/buff_manager.gd" id="16_su6i3"]
 [ext_resource type="Script" uid="uid://cxodj84eu1gx7" path="res://engine/passive/passive.gd" id="17_36pd6"]
 [ext_resource type="PackedScene" uid="uid://brt0fmysxvs5g" path="res://data/characters/Ahri/Skins/Base/Ahri.glb" id="18_x0hbm"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://bj5tpjmt4q2fk" path="res://data/characters/Ahri/Skins/Base/Animations.tres" id="19_66ge0"]
@@ -46,6 +47,7 @@
 [ext_resource type="Script" uid="uid://cxoxpng11dipv" path="res://engine/spells/spell.gd" id="40_6ykpd"]
 [ext_resource type="Texture2D" uid="uid://i8r5uocv7r3f" path="res://data/spells/Flash/Summoner_flash.webp" id="41_7o2jq"]
 [ext_resource type="Texture2D" uid="uid://bvs00ndscuup" path="res://data/spells/Heal/Summoner_heal.webp" id="42_mr6ag"]
+[ext_resource type="PackedScene" uid="uid://downenwco7m2h" path="res://data/characters/Ahri/S2_W_FoxFire/AhriFoxFireMissile/Ahri_FoxFire_mis.tscn" id="42_o8ytv"]
 [ext_resource type="PackedScene" uid="uid://qpasfskm5vmm" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/Ahri_Charm_mis.tscn" id="43_c277o"]
 [ext_resource type="Texture2D" uid="uid://c8xp3k3d1v7c" path="res://data/spells/Recall/TeleportHome.webp" id="43_x5dr7"]
 [ext_resource type="Script" uid="uid://dhorowytayhda" path="res://engine/game/range.gd" id="44_sr3ak"]
@@ -190,6 +192,10 @@ mana_regen_base = 1.25
 mana_regen_base_per_level = 0.12
 movement_speed_base = 305.0
 spell_block_base = 30.0
+
+[node name="Buffs" type="Node" parent="."]
+script = ExtResource("16_su6i3")
+metadata/_custom_type_script = ExtResource("16_su6i3")
 
 [node name="Status" type="Node" parent="."]
 script = ExtResource("15_4u6an")
@@ -790,6 +796,7 @@ cant_cancel_while_winding_up = true
 is_disabled_while_dead = true
 missile_bone_name = "chest"
 missile_effect_name = "Ahri_FoxFire_mis.troy"
+missile_effect = ExtResource("42_o8ytv")
 missile_lifetime = 5.0
 missile_max_speed = 1400.0
 missile_min_speed = 1400.0

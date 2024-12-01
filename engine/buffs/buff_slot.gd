@@ -28,7 +28,7 @@ func add(buff: Buff, count := 1, continious := false) -> BuffSlot:
 			duplicate.delay = time_remaining
 			time_remaining += duplicate.duration
 		self.stacks.append(duplicate)
-		self.mngr.add_child(buff) #TODO: Protect stacks from modification during iteration
+		self.mngr.add_child(duplicate) #TODO: Protect stacks from modification during iteration
 	return self
 
 func sort_stacks() -> void:
