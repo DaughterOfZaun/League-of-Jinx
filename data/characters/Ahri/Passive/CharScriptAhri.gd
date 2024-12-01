@@ -1,4 +1,4 @@
-#class_name CharScriptAhri extends Passive
+class_name CharScriptAhri extends Passive
 
 func on_activate() -> void:
 	host.buffs.add(host, AhriIdleParticleBuff.new())

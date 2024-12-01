@@ -106,7 +106,7 @@ func color_parse(from: String) -> Color:
 	from = string_parse(from)
 	var v := from.split(' ')
 	assert(len(v) == 4, from)
-	var c: Array[float] = [ 0, 1, 2, 3 ];
+	var c: Array[float] = [ 0, 1, 2, 3 ]
 	for i in c:
 		c[i] = float_parse(v[i])
 	for e in c:
@@ -185,15 +185,13 @@ func array_set(a: Array, i: Variant, v: Variant, f := return_null) -> Array:
 	a[i] = v
 	return a
 
-func set_from_ini(ini: Dictionary[String, Array]) -> void:
-	pass
+func set_from_ini(ini: Dictionary[String, Array]) -> void: pass
 
 func set_from_ini_section(section: Array) -> void:
 	for entry: Array in section:
 		self.set_from_ini_entry(entry[0], entry[1])
 
-func set_from_ini_entry(key_array: Array, value: String) -> void:
-	pass
+func set_from_ini_entry(key_array: Array, value: String) -> void: pass
 
 func ini_load(import_path: String, strip_semicolons := false) -> Dictionary[String, Array]:
 	var section: Array[Array] = []
@@ -233,7 +231,7 @@ func ini_load(import_path: String, strip_semicolons := false) -> Dictionary[Stri
 		var key_array := []
 		for i in range(1, len(m.strings)):
 			if m.strings[i]:
-				var t: Variant;
+				var t: Variant
 				if i % 2: t = m.strings[i]
 				else: t = int(m.strings[i])
 				key_array.append(t)

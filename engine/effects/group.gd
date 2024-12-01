@@ -443,7 +443,7 @@ func update_fields() -> void:
 	#p.draw_pass_1 = preload("res://engine/effects/new_sphere_mesh.tres") if particle_mesh \
 			   #else preload("res://engine/effects/new_quad_mesh.tres")
 
-	p.cast_shadow = int(particle_does_cast_shadow) as GeometryInstance3D.ShadowCastingSetting;
+	p.cast_shadow = int(particle_does_cast_shadow) as GeometryInstance3D.ShadowCastingSetting
 
 	if true:
 		var m := p.process_material as ShaderMaterial
@@ -573,7 +573,7 @@ class MaterialShader extends MyShader:
 	func gen_code() -> String:
 		var render_mode: Array[String] = []
 
-		var bm: String;
+		var bm: String
 		match blend_mode:
 			BlendMode.ADD: bm = "blend_add"
 			BlendMode.UNKNOWN_1: bm = "blend_mix"

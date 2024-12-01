@@ -14,6 +14,9 @@ var stacks_exclusive := true
 var can_mitigate_duration := false #TODO
 var is_hidden_on_client := false
 
+var vars: Vars:
+	get: return host.vars
+
 var delay := 0.0
 
 var delay_remaining := 0.0:

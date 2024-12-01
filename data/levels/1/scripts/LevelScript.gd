@@ -1,4 +1,4 @@
-#class_name Map1_LevelScript extends Level
+class_name Map1_LevelScript extends Level
 
 const max_minions_ever = 180
 const initial_time_to_spawn = 90.0
@@ -102,7 +102,7 @@ var g: Dictionary[Enums.MinionType, G] = (
 ).call()
 
 var last_wave := -1
-var special_minion_mode: SpecialMinionMode = SpecialMinionMode.NONE
+var special_minion_mode := SpecialMinionMode.NONE
 enum SpecialMinionMode {
 	NONE,
 	THREE_ARCHERS,

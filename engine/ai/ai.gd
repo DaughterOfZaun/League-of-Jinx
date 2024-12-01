@@ -28,8 +28,8 @@ func get_target_or_find_target_in_ac_r() -> Unit:
 	return target if target != null else find_target_in_ac_r()
 func find_target_in_ac_r() -> Unit:
 	var areas := acquisition_range.get_overlapping_areas()
-	var min_dist := INF;
-	var best_match: Unit = null;
+	var min_dist := INF
+	var best_match: Unit = null
 	for area in areas:
 		var char := area.get_parent() as Unit
 		var dist := me.position_3d.distance_squared_to(char.position_3d)

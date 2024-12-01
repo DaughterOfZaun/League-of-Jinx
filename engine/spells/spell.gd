@@ -183,10 +183,10 @@ func cast(
 	if has_missile:
 		var m: Missile
 		match data.cast_type:
-			Enums.CastType.TARGET_MISSILE: m = SpellTargetMissile.new(self, target);
-			Enums.CastType.CHAIN_MISSILE: m = SpellChainMissile.new(self, target);
-			Enums.CastType.CIRCLE_MISSILE: m = SpellCircleMissile.new(self, target, pos);
-			Enums.CastType.ARC_MISSILE: m = SpellLineMissile.new(self, target, pos);
+			Enums.CastType.TARGET_MISSILE: m = SpellTargetMissile.new(self, target)
+			Enums.CastType.CHAIN_MISSILE: m = SpellChainMissile.new(self, target)
+			Enums.CastType.CIRCLE_MISSILE: m = SpellCircleMissile.new(self, target, pos)
+			Enums.CastType.ARC_MISSILE: m = SpellLineMissile.new(self, target, pos)
 			_: assert(false)
 		get_tree().current_scene.add_child(m)
 	else:
@@ -196,7 +196,7 @@ func cast(
 			Enums.TargetingType.SELF: targets = [ caster ]
 			Enums.TargetingType.TARGET: targets = [ target ]
 			Enums.TargetingType.AREA,\
-			Enums.TargetingType.SELF_AOE: targets = API.filter_units_in_range(
+			Enums.TargetingType.SELF_AOE: targets = API.get_units_in_area(
 				caster, caster.position_3d, cast_range, data.flags
 			)
 		for subtarget in targets:
@@ -237,19 +237,20 @@ func get_cost_inc(par_type: Enums.PARType) -> float:
 	return 0
 
 func set_cost_inc(cost: float, par_type: Enums.PARType) -> void:
-	pass
+	push_warning("Spell.set_cost_inc is unimplemented")
 
 func get_cost_inc_multiplicative(par_type: Enums.PARType) -> float:
+	push_warning("Spell.get_cost_inc_multiplicative is unimplemented")
 	return 0
 
 func set_cost_inc_multiplicative(cost: float, par_type: Enums.PARType) -> void:
-	pass
+	push_warning("Spell.set_cost_inc_multiplicative is unimplemented")
 
 func set_cooldown(src: float, broadcast_event := false) -> void:
-	pass
+	push_warning("Spell.set_cooldown is unimplemented")
 
 func set_tool_tip_var(index: int, value: float) -> void:
-	pass
+	push_warning("Spell.set_tool_tip_var is unimplemented")
 
 func replace_with(script: Spell) -> void:
-	pass
+	push_warning("Spell.replace_with is unimplemented")

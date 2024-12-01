@@ -68,3 +68,6 @@ func linear_movement(delta: float) -> bool:
 func destroy_self() -> void:
 	spell.on_missile_end(self)
 	queue_free()
+
+func destroy() -> void:
+	push_warning("Missile.destroy is unimplemented")

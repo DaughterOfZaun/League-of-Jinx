@@ -122,11 +122,11 @@ func renew(script: GDScript, reset_duration: float, attacker: Unit = null) -> vo
 func remove_stacks(script: GDScript, num_stacks: int, attacker: Unit = null) -> void:
 	get_slot(script, attacker).remove_stacks(num_stacks)
 
-# func remove(type_or_script, attacker: Unit = null) -> void:
-# 	if type_or_script is Enums.BuffType:
-# 		remove_by_type(type_or_script)
-# 	else:
-# 		remove_by_script(type_or_script, attacker)
+#func remove(type_or_script: Variant, attacker: Unit = null) -> void:
+#	if type_or_script is Enums.BuffType:
+#		remove_by_type(type_or_script)
+#	else:
+#		remove_by_script(type_or_script, attacker)
 
 ## Removes one stack of buff with the specified script
 func remove_by_script(script: GDScript, attacker: Unit = null) -> void:
@@ -146,3 +146,7 @@ func has(type: Enums.BuffType) -> bool:
 
 func count(script: GDScript, caster: Unit = null) -> int:
 	return len(get_slot(script, caster).stacks)
+
+func get_remaining_duration(script: GDScript) -> float:
+	push_warning("Buffs.get_remaining_duration is unimplemented")
+	return 0.0

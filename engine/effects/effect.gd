@@ -10,11 +10,15 @@ enum BeamMode { DEFAULT = 0, ARBITARY = 1, }
 enum GroupImportance { INVALID = -1, LOW = 1, MEDIUM = 0, HIGH = 2, }
 enum GroupType { INVALID = -1, SIMPLE = 0, COMPLEX = 1, }
 
-@export_group("Material Override")
-@export var MaterialOverrideTexture: Texture2D
-@export var MaterialOverrideSubMesh: Texture2D
-@export var MaterialOverridePriority: Texture2D
-@export var MaterialOverrideBlendMode: BlendMode
+#TODO:
+@export_group("Material Override", "material_override_")
+@export var material_override_texture_name: String
+@export var material_override_texture: Texture2D
+@export var material_override_submesh_name: String
+@export var material_override_submesh: Texture2D
+@export var material_override_priority: int
+@export var material_override_blend_mode: BlendMode
+#@export var material_override_trans_map: Variant
 
 func set_from_ini_entry(key_array: Array, value: String) -> void:
 	match key_array:

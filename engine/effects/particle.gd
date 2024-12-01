@@ -1,8 +1,13 @@
 class_name Particle
-extends GPUParticles2D
+extends Node3DExt
 
 static func create(effect_name := "", effect_name_for_other_team := "") -> Particle:
+	push_warning("Particle.create is unimplemented")
 	return Particle.new() #TODO: add_child
+
+func remove() -> void:
+	push_warning("Particle.remove is unimplemented")
+
 func fow(fow_team := Enums.Team.UNKNOWN, fow_visibility_radius := 0.0) -> Particle:
 	return self
 func flags(flags := 0) -> Particle:
@@ -36,6 +41,3 @@ func more_flags(
 	return self
 func orient(orient_towards: Unit = null) -> Particle:
 	return self
-
-func remove() -> void:
-	pass

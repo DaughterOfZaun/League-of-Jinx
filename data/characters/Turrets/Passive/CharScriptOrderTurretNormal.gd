@@ -1,1 +1,1 @@
-#class_name CharScriptOrderTurretNormal extends Passive
+class_name CharScriptOrderTurretNormal extends Passive

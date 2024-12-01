@@ -79,6 +79,8 @@ func get_bubble_radius() -> float:
 @export_group('Cooldown', 'cooldown_')
 @export var cooldown_percent: float
 var cooldown_percent_temp: float
+func get_cooldown_percent() -> float:
+	return cooldown_percent + cooldown_percent_temp
 func get_cooldown() -> float:
 	return (1 + cooldown_percent + cooldown_percent_temp)
 @export_group('Crit chance', 'crit_chance_')
@@ -149,6 +151,8 @@ func get_life_steal() -> float:
 var magic_damage_flat_temp: float
 @export var magic_damage_percent: float
 var magic_damage_percent_temp: float
+func get_magic_damage_flat() -> float:
+	return magic_damage_flat + magic_damage_flat_temp
 func get_magic_damage() -> float:
 	return (magic_damage_base + growth(magic_damage_base_per_level) + magic_damage_flat + magic_damage_flat_temp)\
 		 * (1 + magic_damage_percent + magic_damage_percent_temp)

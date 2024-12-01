@@ -11,6 +11,8 @@ var passive: Passive
 var vars: Vars
 var ai: AI
 
+func issue_order(order: Enums.OrderType, targetOfOrderPosition := Vector3.INF, targetOfOrder: Unit = null) -> void:
+	ai.order(order, targetOfOrderPosition, targetOfOrder)
 func order(type: Enums.OrderType, pos: Vector3, unit: Unit) -> void:
 	ai.order(type, pos, unit)
 func cast(letter: String, pos: Vector3, unit: Unit) -> void:
@@ -33,6 +35,8 @@ func _physics_process(delta: float) -> void:
 		update_stats()
 	if should_update_actions:
 		update_actions()
+
+#region Signals
 
 func connect_all(to: Node) -> void:
 	var signals := get_signal_list()
@@ -103,6 +107,8 @@ signal spell_cast(spell: Spell)
 #signal update_ammo() #TODO: Specific to buff_script
 #signal update_buffs() #TODO: Specific to buff_script
 
+#endregion
+
 @onready var direction_angle := rotation.y
 @onready var direction := Vector2.from_angle(direction_angle)
 func face_direction(pos: Vector3) -> void:
@@ -110,11 +116,9 @@ func face_direction(pos: Vector3) -> void:
 func face_dir(dir: Vector3) -> void:
 	direction = Vector2(dir.x, dir.z).normalized()
 	direction_angle = atan2(dir.x, dir.z)
-
-@onready var skinned_mesh_root := find_child("SkinnedMesh", false)
-@onready var skeleton: Skeleton3D = skinned_mesh_root.find_child("Skeleton3D", true) if skinned_mesh_root else null
-func get_bone_global_position(bone_idx: int) -> Vector3:
-	return skeleton.to_global(skeleton.get_bone_global_pose(bone_idx).origin)
+func get_point_by_facing_offset(distance: float, offset_angle: float) -> Vector3:
+	var v2 := direction.rotated(deg_to_rad(offset_angle)) * distance
+	return position_3d + Vector3(v2.x, 0, v2.y)
 
 #var rot_speed := deg_to_rad(180. / ((0.08 + (0.01/3.))))
 var rot_speed := deg_to_rad(180 / 0.2)
@@ -122,5 +126,168 @@ func _process(delta: float) -> void:
 	var rot_delta := angle_difference(rotation.y, direction_angle)
 	rotation.y += sign(rot_delta) * min(abs(rot_delta), rot_speed * delta)
 
+@onready var skinned_mesh_root := find_child("SkinnedMesh", false)
+@onready var skeleton: Skeleton3D = skinned_mesh_root.find_child("Skeleton3D", true) if skinned_mesh_root else null
+func get_bone_global_position(bone_idx: int) -> Vector3:
+	return skeleton.to_global(skeleton.get_bone_global_pose(bone_idx).origin)
+
+func teleport(cast_position: Vector3) -> void:
+	push_warning("Unit.teleport is unimplemented")
+#func teleport(team: Enums.Team, location: Enums.SpawnType) -> void:
+#	push_warning("Unit.teleport is unimplemented")
+
+#region Movement
+func move(
+	target: Vector3,
+	speed: float,
+	gravity: float = 0,
+	move_back_by: float = 0,
+	movement_type: Enums.ForceMovementType = 0,
+	movement_orders_type: Enums.ForceMovementOrdersType = 0,
+	ideal_distance: float = 0,
+	movement_orders_facing: Enums.ForceMovementOrdersFacing = 0
+) -> void:
+	push_warning("Unit.move is unimplemented")
+func move_away(
+    away_from: Vector3,
+    speed: float,
+    gravity: float,
+    distance: float,
+    distance_inner: float,
+	movement_type: Enums.ForceMovementType = 0,
+	movement_orders_type: Enums.ForceMovementOrdersType = 0,
+	ideal_distance: float = 0,
+	movement_orders_facing: Enums.ForceMovementOrdersFacing = 0
+) -> void:
+	push_warning("Unit.move_away is unimplemented")
+func move_to_unit(
+    target: Unit,
+    speed: float,
+    gravity: float,
+	movement_orders_type: Enums.ForceMovementOrdersType,
+    move_back_by: float,
+    max_track_distance: float,
+    ideal_distance: float,
+    time_override: float
+) -> void:
+	push_warning("Unit.move_to_unit is unimplemented")
+func stop_move() -> void:
+	push_warning("Unit.stop_move is unimplemented")
+func stop_move_block() -> void:
+	push_warning("Unit.stop_move_block is unimplemented")
+#endregion
+
+#region Health&Life
+func inc_par(delta: float, par_type := Enums.PARType.MANA) -> void:
+	push_warning("Unit.inc_par is unimplemented")
+func inc_health(delta: float, healer: Unit = null) -> void:
+	push_warning("Unit.inc_health is unimplemented")
+func inc_max_health(delta: float, inc_current_health: bool) -> void:
+	push_warning("Unit.inc_max_health is unimplemented")
+func apply_damage(
+    attacker: Unit,
+    damage: float,
+    damage_type: Enums.DamageType,
+    source_damage_type: Enums.DamageSource,
+    percent_of_attack: float = 0,
+    spell_damage_ratio: float = 0,
+    physical_damage_ratio: float = 0,
+    ignore_damage_increase_mods: bool = false,
+    ignore_damage_crit: bool = false,
+    call_for_help_attacker: Unit = null
+) -> void:
+	push_warning("Unit.apply_damage is unimplemented")
+func force_dead() -> void:
+	push_warning("Unit.force_dead is unimplemented")
+func reincarnate() -> void:
+	push_warning("Unit.reincarnate is unimplemented")
+#endregion
+#region AutoAttack
+func override_auto_attack(spell: Spell, auto_attack_spell_level: int, cancelAttack: bool) -> void:
+	push_warning("Unit.override_auto_attack is unimplemented")
+func remove_override_auto_attack(cancel_attack: bool) -> void:
+	push_warning("Unit.remove_override_auto_attack is unimplemented")
+func cancel_auto_attack(reset: bool) -> void:
+	push_warning("Unit.cancel_auto_attack is unimplemented")
+func skip_next_auto_attack() -> void:
+	push_warning("Unit.skip_next_auto_attack is unimplemented")
+#endregion
+#region Animation
+func override_animation(to_override_anim: String, override_anim: String) -> void:
+	push_warning("Unit.override_animation is unimplemented")
+func stop_current_override_animation(animation_name: String, blend: bool) -> void:
+	push_warning("Unit.stop_current_override_animation is unimplemented")
+func clear_override_animation(to_override_anim: String) -> void:
+	push_warning("Unit.clear_override_animation is unimplemented")
+func play_animation(animation_name: String, scale_time: float, loop: bool, blend: bool, lock: bool = false) -> void:
+	push_warning("Unit.play_animation is unimplemented")
+func unlock_animation(blend: bool = false) -> void:
+	push_warning("Unit.unlock_animation is unimplemented")
+func pause_animation(pause: bool) -> void:
+	push_warning("Unit.pause_animation is unimplemented")
+#endregion
+#region Shields
+func modify_shield(amount: float = 0, magic_shield: bool = false, physical_shield: bool = false, no_fade: bool = false) -> void:
+	push_warning("Unit.modify_shield is unimplemented")
+func increase_shield(amount: float = 0, magic_shield: bool = false, physical_shield: bool = false) -> void:
+	push_warning("Unit.increase_shield is unimplemented")
+func reduce_shield(amount: float = 0, magic_shield: bool = false, physical_shield: bool = false) -> void:
+	push_warning("Unit.reduce_shield is unimplemented")
+func remove_shield(amount: float = 0, magic_shield: bool = false, physical_shield: bool = false) -> void:
+	push_warning("Unit.remove_shield is unimplemented")
 func break_spell_shields() -> void:
-	pass
+	push_warning("Unit.break_spell_shields is unimplemented")
+#endregion
+#region CharData
+func push_character_data(skin_name: String, override_spells: bool) -> void:
+	push_warning("Unit.push_character_data is unimplemented")
+func pop_character_data(id: int) -> void:
+	push_warning("Unit.pop_character_data is unimplemented")
+func pop_all_character_data() -> void:
+	push_warning("Unit.pop_all_character_data is unimplemented")
+#endregion
+#region Fade
+class Fade: pass
+func push_fade(fade_amount: float, fade_time: float, id: Fade = null) -> Fade:
+	push_warning("Unit.push_fade is unimplemented")
+	return null
+func pop_fade(id: Fade) -> void:
+	push_warning("Unit.pop_fade is unimplemented")
+#endregion
+#region Misc
+var is_in_brush: bool:
+	get: return false
+func start_tracking_collisions(value: bool) -> void:
+	push_warning("Unit.start_tracking_collisions is unimplemented")
+func set_voice_override(override_suffix: String) -> void:
+	push_warning("Unit.set_voice_override is unimplemented")
+func reset_voice_override() -> void:
+	push_warning("Unit.reset_voice_override is unimplemented")
+func say(to_say: String, src: Variant = null) -> void:
+	push_warning("Unit.say is unimplemented")
+func debug_say(to_say: String, src: Variant = null) -> void:
+	push_warning("Unit.debug_say is unimplemented")
+func invalidate() -> void:
+	push_warning("Unit.invalidate is unimplemented")
+func set_not_targetable_to_team(to_ally: bool, to_enemy: bool) -> void:
+	push_warning("Unit.set_not_targetable_to_team is unimplemented")
+func update_can_cast() -> void:
+	push_warning("Unit.update_can_cast is unimplemented")
+#endregion
+
+func apply_assist_marker(source: Unit, duration: float) -> void:
+	push_warning("Unit.apply_assist_marker is unimplemented")
+
+func can_see(target: Unit) -> bool:
+	push_warning("Unit.can_see is unimplemented")
+	return false
+func is_in_front(target: Unit) -> bool:
+	push_warning("Unit.is_in_front is unimplemented")
+	return false
+func is_behind(target: Unit) -> bool:
+	push_warning("Unit.is_behind is unimplemented")
+	return false
+
+func get_nearest_passable_position(pos: Vector3) -> Vector3:
+	push_warning("Unit.get_nearest_passable_position is unimplemented")
+	return Vector3.INF
