@@ -1,5 +1,4 @@
-class_name SpellLineMissile
-extends Missile
+class_name SpellLineMissile extends Missile
 
 func _process(delta: float) -> void:
 	

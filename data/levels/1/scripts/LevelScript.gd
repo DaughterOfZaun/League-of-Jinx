@@ -1,5 +1,4 @@
-#class_name Map1_LevelScript
-extends Level
+#class_name Map1_LevelScript extends Level
 
 const max_minions_ever = 180
 const initial_time_to_spawn = 90.0

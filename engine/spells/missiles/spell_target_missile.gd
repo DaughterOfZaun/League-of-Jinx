@@ -1,5 +1,4 @@
-class_name SpellTargetMissile
-extends Missile
+class_name SpellTargetMissile extends Missile
 
 func _process(delta: float) -> void:
 	if linear_movement(delta):

@@ -1,5 +1,4 @@
-class_name AhriIdleParticleBuff
-extends Buff
+class_name AhriIdleParticleBuff extends Buff
 
 var metadata := BuffMetadata.from({
 	auto_buff_activate_attach_bone_name = [ "" ],

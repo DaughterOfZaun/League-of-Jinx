@@ -1,5 +1,4 @@
-class_name AhriOrbOfDeceptionSpell
-extends Spell
+class_name AhriOrbOfDeceptionSpell extends Spell
 
 func self_execute() -> void:
 	var targetPos := spell.target_position

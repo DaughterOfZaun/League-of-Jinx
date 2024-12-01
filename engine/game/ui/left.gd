@@ -1,5 +1,4 @@
-class_name UILeftPanel
-extends Control
+class_name UILeftPanel extends Control
 
 @export var attack_damage_label: Label
 @export var magical_damage_label: Label

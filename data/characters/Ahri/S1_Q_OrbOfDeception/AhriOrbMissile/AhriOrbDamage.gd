@@ -1,5 +1,4 @@
-class_name AhriOrbDamageBuff
-extends Buff
+class_name AhriOrbDamageBuff extends Buff
 
 var orb_of_deception_is_active: int
 var effect_0 := [ 40, 65, 90, 115, 140 ]

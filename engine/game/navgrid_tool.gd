@@ -1,6 +1,4 @@
-@tool
-class_name NGT
-extends Node2D
+@tool class_name NGT extends Node2D
 
 const HW2GD := 1. / 70.
 const GD_3D_to_2D := (70. / 50.) * (512. / 294.)

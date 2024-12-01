@@ -1,5 +1,4 @@
-class_name Passive
-extends PassiveData
+class_name Passive extends PassiveData
 
 @onready
 var me: Unit = get_parent()

@@ -1,2 +1,1 @@
-class_name APBonusDamageToTowersBuff
-extends Buff
+class_name APBonusDamageToTowersBuff extends Buff

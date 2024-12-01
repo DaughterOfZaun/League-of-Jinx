@@ -1,5 +1,4 @@
-class_name AI
-extends LuaScript
+class_name AI extends LuaScript
 
 @onready var me: Unit = get_parent()
 

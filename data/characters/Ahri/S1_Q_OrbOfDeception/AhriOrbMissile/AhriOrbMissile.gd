@@ -1,5 +1,4 @@
-class_name AhriOrbMissileSpell
-extends Spell
+class_name AhriOrbMissileSpell extends Spell
 
 func on_missile_end(missile: Missile) -> void:
 

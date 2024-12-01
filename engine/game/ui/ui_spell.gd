@@ -1,5 +1,4 @@
-class_name UISpell
-extends Control
+class_name UISpell extends Control
 
 var spell: Spell
 @onready var icon_texture_rect: TextureRect = get_node("%IconTexture")

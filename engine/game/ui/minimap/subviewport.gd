@@ -1,5 +1,4 @@
-class_name SubViewportEx
-extends SubViewport
+class_name SubViewportEx extends SubViewport
 
 const GD_3D_to_2D := (70. / 50.) * (512. / 294.)
 

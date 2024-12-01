@@ -1,5 +1,4 @@
-class_name Dampener
-extends Unit
+class_name Dampener extends Unit
 
 var linked_barrack: Barrack
 var lane: Enums.Lane

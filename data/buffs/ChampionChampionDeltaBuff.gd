@@ -1,2 +1,1 @@
-class_name ChampionChampionDeltaBuff
-extends Buff
+class_name ChampionChampionDeltaBuff extends Buff

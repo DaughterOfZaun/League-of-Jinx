@@ -1,0 +1,160 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=51 format=3 uid="uid://bts7s0tda1nvr"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_us6rc"]
+state_machine_type = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ah5p3"]
+state_machine_type = 2
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_msgaf"]
+animation = &"Ahri_dance"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yrie2"]
+animation = &"Ahri_death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bvoxd"]
+animation = &"Ahri_hanbok_dance"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_brco2"]
+animation = &"Ahri_idle1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lr38p"]
+animation = &"Ahri_idle2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0idj1"]
+animation = &"Ahri_idle3"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n24cm"]
+animation = &"Ahri_idle4"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yvvky"]
+animation = &"Ahri_idle5"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xicho"]
+animation = &"Ahri_joke"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e4nwl"]
+animation = &"Ahri_laugh"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wh73g"]
+animation = &"Ahri_taunt"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y863o"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cldj3"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pewy1"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_egyu8"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o1c7t"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_68dt8"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_stf73"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2tobo"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_utf1n"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uo0ok"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ty3yp"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u2io5"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_myg8u"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ohjmh"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r8ipf"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vdr2y"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jm0e3"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c70ys"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ikge3"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wnnr8"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i6oj0"]
+state_machine_type = 2
+states/Ahri_dance/node = SubResource("AnimationNodeAnimation_msgaf")
+states/Ahri_dance/position = Vector2(745, -11.2105)
+states/Ahri_death/node = SubResource("AnimationNodeAnimation_yrie2")
+states/Ahri_death/position = Vector2(318.684, 126.684)
+states/Ahri_hanbok_dance/node = SubResource("AnimationNodeAnimation_bvoxd")
+states/Ahri_hanbok_dance/position = Vector2(761.787, 126.483)
+states/Ahri_idle1/node = SubResource("AnimationNodeAnimation_brco2")
+states/Ahri_idle1/position = Vector2(531.316, 98.2632)
+states/Ahri_idle2/node = SubResource("AnimationNodeAnimation_lr38p")
+states/Ahri_idle2/position = Vector2(455.36, 317.211)
+states/Ahri_idle3/node = SubResource("AnimationNodeAnimation_0idj1")
+states/Ahri_idle3/position = Vector2(613.421, 317.044)
+states/Ahri_idle4/node = SubResource("AnimationNodeAnimation_n24cm")
+states/Ahri_idle4/position = Vector2(745.111, 250.956)
+states/Ahri_idle5/node = SubResource("AnimationNodeAnimation_yvvky")
+states/Ahri_idle5/position = Vector2(344.945, 251.006)
+states/Ahri_joke/node = SubResource("AnimationNodeAnimation_xicho")
+states/Ahri_joke/position = Vector2(345, 17.2105)
+states/Ahri_laugh/node = SubResource("AnimationNodeAnimation_e4nwl")
+states/Ahri_laugh/position = Vector2(460.789, -76.4737)
+states/Ahri_taunt/node = SubResource("AnimationNodeAnimation_wh73g")
+states/Ahri_taunt/position = Vector2(625, -76.4737)
+transitions = ["Ahri_idle1", "Ahri_joke", SubResource("AnimationNodeStateMachineTransition_y863o"), "Ahri_joke", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_cldj3"), "Ahri_idle1", "Ahri_death", SubResource("AnimationNodeStateMachineTransition_pewy1"), "Ahri_death", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_egyu8"), "Ahri_idle1", "Ahri_idle5", SubResource("AnimationNodeStateMachineTransition_o1c7t"), "Ahri_idle5", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_68dt8"), "Ahri_idle1", "Ahri_idle2", SubResource("AnimationNodeStateMachineTransition_stf73"), "Ahri_idle2", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_2tobo"), "Ahri_idle1", "Ahri_idle3", SubResource("AnimationNodeStateMachineTransition_utf1n"), "Ahri_idle3", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_uo0ok"), "Ahri_idle1", "Ahri_idle4", SubResource("AnimationNodeStateMachineTransition_ty3yp"), "Ahri_idle4", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_u2io5"), "Ahri_idle1", "Ahri_hanbok_dance", SubResource("AnimationNodeStateMachineTransition_myg8u"), "Ahri_hanbok_dance", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_ohjmh"), "Ahri_idle1", "Ahri_dance", SubResource("AnimationNodeStateMachineTransition_r8ipf"), "Ahri_dance", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_vdr2y"), "Ahri_idle1", "Ahri_taunt", SubResource("AnimationNodeStateMachineTransition_jm0e3"), "Ahri_taunt", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_c70ys"), "Ahri_idle1", "Ahri_laugh", SubResource("AnimationNodeStateMachineTransition_ikge3"), "Ahri_laugh", "Ahri_idle1", SubResource("AnimationNodeStateMachineTransition_wnnr8")]
+graph_offset = Vector2(69, -181)
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_id55f"]
+state_machine_type = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kkf8r"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2g517"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ibiij"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p5gnf"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oyyiq"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m4nnd"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ksbt5"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s5bdf"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2hvpq"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vqwfr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_21ekq"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p7lm0"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1d6qy"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_50m4w"]
+states/Attack/node = SubResource("AnimationNodeStateMachine_us6rc")
+states/Attack/position = Vector2(635.894, 19.4764)
+states/Cast/node = SubResource("AnimationNodeStateMachine_ah5p3")
+states/Cast/position = Vector2(635.679, 211)
+states/End/position = Vector2(772.632, 19.5855)
+states/Idle/node = SubResource("AnimationNodeStateMachine_i6oj0")
+states/Idle/position = Vector2(421.215, 210.834)
+states/Run/node = SubResource("AnimationNodeStateMachine_id55f")
+states/Run/position = Vector2(421.209, 19.5737)
+states/Start/position = Vector2(267.368, 210.748)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_kkf8r"), "Idle", "Cast", SubResource("AnimationNodeStateMachineTransition_2g517"), "Cast", "Attack", SubResource("AnimationNodeStateMachineTransition_ibiij"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_p5gnf"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_oyyiq"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_m4nnd"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_ksbt5"), "Attack", "Cast", SubResource("AnimationNodeStateMachineTransition_s5bdf"), "Cast", "Idle", SubResource("AnimationNodeStateMachineTransition_2hvpq"), "Run", "Cast", SubResource("AnimationNodeStateMachineTransition_vqwfr"), "Cast", "Run", SubResource("AnimationNodeStateMachineTransition_21ekq"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_p7lm0"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_1d6qy")]
+graph_offset = Vector2(44, -223)
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ugonm"]
+
+[resource]
+graph_offset = Vector2(-224.393, -134.777)
+nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_50m4w")
+nodes/StateMachine/position = Vector2(-42.1053, 147.368)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_ugonm")
+nodes/TimeScale/position = Vector2(147.368, 147.368)
+node_connections = [&"TimeScale", 0, &"StateMachine", &"output", 0, &"TimeScale"]

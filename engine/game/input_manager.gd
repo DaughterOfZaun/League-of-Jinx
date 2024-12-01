@@ -1,5 +1,4 @@
-class_name InputManager
-extends Node3D
+class_name InputManager extends Node3D
 
 @export var main_hero: Champion
 @onready var heroes := get_parent().find_children("*", "Champion", false)

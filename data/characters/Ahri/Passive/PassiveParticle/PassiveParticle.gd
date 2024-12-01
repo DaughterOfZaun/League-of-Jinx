@@ -1,2 +1,1 @@
-class_name AhriPassiveParticleBuff
-extends Buff
+class_name AhriPassiveParticleBuff extends Buff

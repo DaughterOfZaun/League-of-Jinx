@@ -1,5 +1,4 @@
-class_name Vars
-extends Node
+class_name Vars extends Node
 
 @onready var me := get_parent() as Unit
 func _ready() -> void:

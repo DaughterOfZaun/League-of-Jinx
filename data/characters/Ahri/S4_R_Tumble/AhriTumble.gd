@@ -1,2 +1,1 @@
-class_name AhriTumbleSpell
-extends Spell
+class_name AhriTumbleSpell extends Spell

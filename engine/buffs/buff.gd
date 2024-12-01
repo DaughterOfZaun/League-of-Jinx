@@ -1,5 +1,4 @@
-class_name Buff
-extends BuffData
+class_name Buff extends BuffData
 
 var slot: BuffSlot
 var attacker: Unit

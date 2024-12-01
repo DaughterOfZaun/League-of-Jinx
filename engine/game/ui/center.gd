@@ -1,5 +1,4 @@
-class_name UICenterPanel
-extends Control
+class_name UICenterPanel extends Control
 
 @export var champion: Champion
 @export var q: UISpell

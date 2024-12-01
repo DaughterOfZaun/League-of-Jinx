@@ -1,5 +1,4 @@
-class_name Champion
-extends Unit
+class_name Champion extends Unit
 
 var level := 1
 var level_ups_avaible := 1

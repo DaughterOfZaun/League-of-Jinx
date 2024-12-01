@@ -24,43 +24,43 @@ uniform vec2 uv_scroll = vec2(0, 0);
 #include "random.gdshaderinc"
 
 void vertex() {
-    UV = UV * uv_scale + uv_offset + uv_scroll * TIME_PASSED;
-    
-    #ifdef BILLBOARD
-    // Billboard Mode: Particles
-    MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
-        normalize(INV_VIEW_MATRIX[0]),
-        normalize(INV_VIEW_MATRIX[1]),
-        normalize(INV_VIEW_MATRIX[2]),
-        MODEL_MATRIX[3]
-    ) * mat4(
-        vec4(cos(ROTATION_Z), -sin(ROTATION_Z), 0.0, 0.0),
-        vec4(sin(ROTATION_Z),  cos(ROTATION_Z), 0.0, 0.0),
-        vec4(0.0, 0.0, 1.0, 0.0),
-        vec4(0.0, 0.0, 0.0, 1.0)
-    // Billboard Keep Scale: Enabled
-    ) * mat4(
-        vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0),
-        vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0),
-        vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0),
-        vec4(0.0, 0.0, 0.0, 1.0)
-    );
-    MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
-    #endif
-    
-    float real_num_frames = texdiv.x * texdiv.y;
-    float frame = (frame_rate == 0.) ? 0. : (TIME_PASSED / frame_rate);
-          frame = (num_frames == 0.) ? 0. : (mod(frame, num_frames) + start_frame);
-          frame = (real_num_frames == 0.) ? 0. : floor(mod(frame, real_num_frames));
-    
-    UV /= vec2(texdiv.x, texdiv.y);
-    UV += vec2(mod(frame, texdiv.x) / texdiv.x, floor((frame + 0.5) / texdiv.x) / texdiv.y);
+	UV = UV * uv_scale + uv_offset + uv_scroll * TIME_PASSED;
+	
+	#ifdef BILLBOARD
+	// Billboard Mode: Particles
+	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
+		normalize(INV_VIEW_MATRIX[0]),
+		normalize(INV_VIEW_MATRIX[1]),
+		normalize(INV_VIEW_MATRIX[2]),
+		MODEL_MATRIX[3]
+	) * mat4(
+		vec4(cos(ROTATION_Z), -sin(ROTATION_Z), 0.0, 0.0),
+		vec4(sin(ROTATION_Z),  cos(ROTATION_Z), 0.0, 0.0),
+		vec4(0.0, 0.0, 1.0, 0.0),
+		vec4(0.0, 0.0, 0.0, 1.0)
+	// Billboard Keep Scale: Enabled
+	) * mat4(
+		vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0),
+		vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0),
+		vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0),
+		vec4(0.0, 0.0, 0.0, 1.0)
+	);
+	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
+	#endif
+	
+	float real_num_frames = texdiv.x * texdiv.y;
+	float frame = (frame_rate == 0.) ? 0. : (TIME_PASSED / frame_rate);
+		  frame = (num_frames == 0.) ? 0. : (mod(frame, num_frames) + start_frame);
+		  frame = (real_num_frames == 0.) ? 0. : floor(mod(frame, real_num_frames));
+	
+	UV /= vec2(texdiv.x, texdiv.y);
+	UV += vec2(mod(frame, texdiv.x) / texdiv.x, floor((frame + 0.5) / texdiv.x) / texdiv.y);
 }
 
 void fragment() {
-    vec2 base_uv = UV;
-    vec4 albedo_tex = texture(texture_albedo, base_uv);
-    albedo_tex *= COLOR;
-    ALBEDO = albedo.rgb * albedo_tex.rgb;
-    ALPHA *= albedo.a * albedo_tex.a;
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	albedo_tex *= COLOR;
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	ALPHA *= albedo.a * albedo_tex.a;
 }

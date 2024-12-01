@@ -1,5 +1,4 @@
-class_name Level
-extends LuaScript
+class_name Level extends LuaScript
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return

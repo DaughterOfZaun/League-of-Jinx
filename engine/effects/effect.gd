@@ -1,5 +1,4 @@
-class_name Effect
-extends Data
+class_name Effect extends Data
 
 enum ColorLookupType { CONSTANT = 0, LIFETIME = 1, VELOCITY = 2, BIRTH_RANDOM = 3, COUNT = 4, }
 enum BlendMode { ADD, UNKNOWN_1, UNKNOWN_2, UNKNOWN_3, UNKNOWN_4, }

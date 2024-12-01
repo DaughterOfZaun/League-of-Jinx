@@ -1,5 +1,4 @@
-class_name Stats
-extends Node
+class_name Stats extends Node
 
 #TODO: Group by offense, defense...
 

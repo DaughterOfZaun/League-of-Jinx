@@ -1,5 +1,4 @@
-class_name Buffs
-extends Node
+class_name Buffs extends Node
 
 #TODO: Signals
 #TODO: Remove empty slots

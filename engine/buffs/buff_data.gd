@@ -1,5 +1,4 @@
-class_name BuffData
-extends Timer
+class_name BuffData extends Timer
 
 @export var buff_name := ""
 @export var buff_texture_name := ""

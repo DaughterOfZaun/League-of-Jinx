@@ -1,2 +1,1 @@
-class_name SpellChainMissile
-extends Missile
+class_name SpellChainMissile extends Missile

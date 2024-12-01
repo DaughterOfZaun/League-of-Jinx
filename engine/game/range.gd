@@ -1,5 +1,4 @@
-class_name Radius
-extends Area3D
+class_name Radius extends Area3D
 
 @onready var char := get_parent() as Unit
 

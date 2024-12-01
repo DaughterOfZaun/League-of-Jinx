@@ -1,5 +1,4 @@
-class_name CustomLight2D
-extends Node
+class_name CustomLight2D extends Node
 
 @export var enabled := true
 @export var range := 1000.0

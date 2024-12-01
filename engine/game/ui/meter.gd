@@ -1,5 +1,4 @@
-@tool
-extends TextureProgressBar
+@tool extends TextureProgressBar
 
 @export var line_width := 1.0
 @export var line_color := Color.WHITE

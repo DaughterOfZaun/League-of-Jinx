@@ -1,6 +1,4 @@
-@tool
-class_name Constants
-extends Data
+@tool class_name Constants extends Data
 
 @export_group("Attack Range variables", "ar_")
 @export var ar_stop_attack_range_modifier: float

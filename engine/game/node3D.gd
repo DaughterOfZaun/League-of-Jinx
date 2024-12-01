@@ -1,5 +1,4 @@
-class_name Node3DExt
-extends Node3D
+class_name Node3DExt extends Node3D
 
 var position_3d: Vector3:
 	get: return global_position * Data.GD2HW

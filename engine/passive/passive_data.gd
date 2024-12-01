@@ -1,5 +1,4 @@
-class_name PassiveData
-extends Node
+class_name PassiveData extends Node
 
 @export var icon: String
 @export var _name: String

@@ -1,2 +1,1 @@
-class_name AhriIdleCheckBuff
-extends Buff
+class_name AhriIdleCheckBuff extends Buff

@@ -1,5 +1,4 @@
-class_name Healthbar
-extends Control
+class_name Healthbar extends Control
 
 @export var height := 2.5
 @export var level_label: Label

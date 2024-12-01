@@ -1,5 +1,4 @@
-class_name Status
-extends Node
+class_name Status extends Node
 
 @onready var me: Unit = get_parent()
 func _ready() -> void:

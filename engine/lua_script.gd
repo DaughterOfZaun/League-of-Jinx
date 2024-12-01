@@ -1,5 +1,4 @@
-class_name LuaScript
-extends Node
+class_name LuaScript extends Node
 
 func nameof(callable: Callable) -> StringName:
 	return callable.get_method()

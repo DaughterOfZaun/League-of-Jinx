@@ -1,3 +1,1 @@
-@tool
-class_name CritAttackData
-extends SpellData
+@tool class_name CritAttackData extends SpellData

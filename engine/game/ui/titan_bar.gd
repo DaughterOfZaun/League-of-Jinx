@@ -1,5 +1,4 @@
-class_name UITitanBar
-extends Control
+class_name UITitanBar extends Control
 
 @export var fps_label: Label
 @export var time_label: Label

@@ -1,6 +1,4 @@
-@tool
-class_name MapTool
-extends Data
+@tool class_name MapTool extends Data
 
 static func get_v3(fa: FileAccess) -> Vector3:
 	return Vector3(fa.get_float(), fa.get_float(), fa.get_float())

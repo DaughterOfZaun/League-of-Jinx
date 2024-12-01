@@ -1,2 +1,1 @@
-class_name BasicAttack
-extends Spell
+class_name BasicAttack extends Spell

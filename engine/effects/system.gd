@@ -1,6 +1,4 @@
-@tool
-class_name System
-extends Effect
+@tool class_name System extends Effect
 
 @export var visibility_radius: float
 

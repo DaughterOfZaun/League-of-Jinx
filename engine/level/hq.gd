@@ -1,5 +1,4 @@
-class_name HQ
-extends Unit
+class_name HQ extends Unit
 
 func _ready() -> void:
 	var ap: AnimationPlayer = find_child("AnimationPlayer")

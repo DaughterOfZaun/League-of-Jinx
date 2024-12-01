@@ -1,6 +1,4 @@
-@tool
-class_name Group
-extends Effect
+@tool class_name Group extends Effect
 
 var Curve_ONE := new_one()
 func new_one() -> Curve:

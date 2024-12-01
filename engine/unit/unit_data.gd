@@ -1,6 +1,4 @@
-@tool
-class_name UnitData
-extends Data
+@tool class_name UnitData extends Data
 
 #@export var asset_category := "obj"
 

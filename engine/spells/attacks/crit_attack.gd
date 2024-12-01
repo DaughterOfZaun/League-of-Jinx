@@ -1,2 +1,1 @@
-class_name CritAttack
-extends Spell
+class_name CritAttack extends Spell

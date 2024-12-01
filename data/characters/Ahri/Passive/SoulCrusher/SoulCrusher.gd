@@ -1,2 +1,1 @@
-class_name AhriSoulCrusherBuff
-extends Buff
+class_name AhriSoulCrusherBuff extends Buff

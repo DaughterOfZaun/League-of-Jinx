@@ -1,6 +1,4 @@
-@tool
-class_name SpellData
-extends Data
+@tool class_name SpellData extends Data
 
 #region Info
 @export_group("Info")

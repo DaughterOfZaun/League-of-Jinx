@@ -1,5 +1,4 @@
-class_name Camera
-extends Node3DExt
+class_name Camera extends Node3DExt
 
 @onready var camera: Camera3D = self as Variant
 @onready var viewport := camera.get_viewport()

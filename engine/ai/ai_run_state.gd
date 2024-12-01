@@ -1,5 +1,4 @@
-class_name AIRunState
-extends AIState
+class_name AIRunState extends AIState
 
 @onready var character_body := ai.get_parent() as CharacterBody3D
 @onready var navigation_agent := me.find_child("NavigationAgent3D") as NavigationAgent3D
