@@ -17,9 +17,9 @@ func on_activate() -> void:
 	#require_var(self.slow_percent)
 	host.status.can_attack = false
 	host.apply_assist_marker(attacker, 10)
-	particle1 = Particle.create("Ahri_Charm_buf.troy").bind(host, "head").target(host)
-	particle2 = Particle.create("Ahri_Charm_buf.troy").bind(host, "l_hand").target(host)
-	particle3 = Particle.create("Ahri_Charm_buf.troy").bind(host, "r_hand").target(host)
+	particle1 = Particle.create(preload("Ahri_Charm_buf.tscn")).bind(host, "head").target(host)
+	particle2 = Particle.create(preload("Ahri_Charm_buf.tscn")).bind(host, "l_hand").target(host)
+	particle3 = Particle.create(preload("Ahri_Charm_buf.tscn")).bind(host, "r_hand").target(host)
 	if host is Champion:
 		host.issue_order(Enums.OrderType.MOVE_TO, Vector3.INF, attacker)
 

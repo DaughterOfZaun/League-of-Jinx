@@ -4,8 +4,8 @@ extends Spell
 func self_execute() -> void:
 	host.buffs.add(host, UnlockAnimationBuff.new(), 1, 1, 0.25)
 	host.play_animation("Spell2", 0.71, false, true, true)
-	Particle.create("Ahri_FoxFire_cas.troy").fow(host.team, 10).bind(target).target(target).more_flags(true)
-	Particle.create("Ahri_FoxFire_weapon_cas.troy").fow(host.team, 10).bind(target, "BUFFBONE_GLB_WEAPON_1").target(target, "BUFFBONE_GLB_WEAPON_1").more_flags(true)
+	Particle.create(preload("Ahri_FoxFire_cas.tscn")).fow(host.team, 10).bind(target).target(target).more_flags(true)
+	Particle.create(preload("Ahri_FoxFire_weapon_cas.tscn")).fow(host.team, 10).bind(target, "BUFFBONE_GLB_WEAPON_1").target(target, "BUFFBONE_GLB_WEAPON_1").more_flags(true)
 	var point1 := host.get_point_by_facing_offset(150, 45)
 	var point2 := host.get_point_by_facing_offset(150, 165)
 	var point3 := host.get_point_by_facing_offset(150, 285)

@@ -14,8 +14,8 @@ func self_execute() -> void:
 	elif count == 2:
 		host.buffs.remove_stacks(AhriTumbleBuff, 1, host)
 		host.spells.r.set_cooldown(0.75, true)
-	Particle.create("Ahri_SpiritRush_cas.troy").bind(host, "BUFFBONE_GLB_GROUND_LOC").target(host, "BUFFBONE_GLB_GROUND_LOC")
-	Particle.create("Ahri_Orb_cas.troy").bind(host, "BUFFBONE_GLB_WEAPON_1").target(host, "BUFFBONE_GLB_WEAPON_1")
+	Particle.create(preload("Ahri_SpiritRush_cas.tscn")).bind(host, "BUFFBONE_GLB_GROUND_LOC").target(host, "BUFFBONE_GLB_GROUND_LOC")
+	Particle.create(preload("Ahri_Orb_cas.tscn")).bind(host, "BUFFBONE_GLB_WEAPON_1").target(host, "BUFFBONE_GLB_WEAPON_1")
 	var target_pos := spell.target_position
 	var dash_speed := host.stats.get_movement_speed() + 1200
 	var distance := host.position_3d.distance_to(target_pos)

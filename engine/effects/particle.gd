@@ -1,8 +1,9 @@
 class_name Particle
 extends Node3DExt
 
-static func create(effect_name := "", effect_name_for_other_team := "") -> Particle:
+static func create(effect: PackedScene = null, effect_for_other_team: PackedScene = null) -> Particle:
 	push_warning("Particle.create is unimplemented")
+	assert(effect != null || effect_for_other_team != null)
 	return Particle.new() #TODO: add_child
 
 func remove() -> void:

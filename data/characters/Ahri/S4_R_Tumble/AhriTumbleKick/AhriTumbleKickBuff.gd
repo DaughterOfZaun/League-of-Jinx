@@ -20,7 +20,7 @@ func on_activate() -> void:
 	#require_var(self.distance)
 	host.play_animation("Spell4", 0, true, false, true)
 	host.move(target_pos, dash_speed, 0, 0, Enums.ForceMovementType.FURTHEST_WITHIN_RANGE, Enums.ForceMovementOrdersType.CANCEL_ORDER, distance, Enums.ForceMovementOrdersFacing.FACE_MOVEMENT_DIRECTION)
-	self_particle = Particle.create("Ahri_SpiritRush_mis.troy").bind(host, "BUFFBONE_GLB_GROUND_LOC").target(target, "BUFFBONE_GLB_GROUND_LOC")
+	self_particle = Particle.create(preload("Ahri_SpiritRush_mis.tscn")).bind(host, "BUFFBONE_GLB_GROUND_LOC").target(target, "BUFFBONE_GLB_GROUND_LOC")
 	#will_remove = false
 	host.status.ghosted = true
 

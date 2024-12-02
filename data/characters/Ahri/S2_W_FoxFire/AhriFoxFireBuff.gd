@@ -18,5 +18,5 @@ func on_deactivate(expired: bool) -> void:
 	host.spells.w.set_cooldown(final_cooldown, false)
 	var duration := host.buffs.get_remaining_duration(AhriFoxFireBuff)
 	if duration < -0.001:
-		Particle.create("Ahri_foxfire_obd-sound.troy").bind(host, "BUFFBONE_GLB_WEAPON_1").target(host)
+		Particle.create(preload("Ahri_foxfire_obd-sound.tscn")).bind(host, "BUFFBONE_GLB_WEAPON_1").target(host)
 	host.spells.w.is_sealed = false

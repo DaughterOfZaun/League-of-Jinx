@@ -1,4 +1,4 @@
-[gd_scene load_steps=152 format=4 uid="uid://qpasfskm5vmm"]
+[gd_scene load_steps=153 format=4 uid="uid://qpasfskm5vmm"]
 
 [ext_resource type="Script" uid="uid://w51dsm6maeuv" path="res://engine/effects/system.gd" id="1_34ieq"]
 [ext_resource type="Script" uid="uid://bcqw6ydxjryuf" path="res://engine/effects/group.gd" id="2_3dlbn"]
@@ -31,7 +31,7 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0, 0.7, 1)
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0.8, 1, 1, 1, 1, 1, 1, 1, 1)
 
-[sub_resource type="Shader" id="Shader_b7l1n"]
+[sub_resource type="Shader" id="Shader_3dlbn"]
 code = "shader_type spatial;
 render_mode blend_add,depth_draw_opaque,cull_back,diffuse_burley,unshaded,specular_disabled,ambient_light_disabled,fog_disabled;
 #include \"res://engine/effects/material.gdshaderinc\"
@@ -39,7 +39,7 @@ render_mode blend_add,depth_draw_opaque,cull_back,diffuse_burley,unshaded,specul
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j827i"]
 render_priority = 0
-shader = SubResource("Shader_b7l1n")
+shader = SubResource("Shader_3dlbn")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("5_msfet")
 shader_parameter/uv_scale = Vector2(1, 1)
@@ -51,64 +51,64 @@ shader_parameter/num_frames = 1.0
 shader_parameter/frame_rate = 0.0
 shader_parameter/uv_scroll = Vector2(-2, -2)
 
-[sub_resource type="Shader" id="Shader_d1g8i"]
+[sub_resource type="Shader" id="Shader_fvg6n"]
 code = "shader_type particles;
 #include \"res://engine/effects/process.gdshaderinc\"
 "
 
-[sub_resource type="Curve" id="Curve_3dlbn"]
+[sub_resource type="Curve" id="Curve_kowt0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_6v2lx"]
-curve_x = SubResource("Curve_3dlbn")
-curve_y = SubResource("Curve_3dlbn")
-curve_z = SubResource("Curve_3dlbn")
+curve_x = SubResource("Curve_kowt0")
+curve_y = SubResource("Curve_kowt0")
+curve_z = SubResource("Curve_kowt0")
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_top63"]
-curve_x = SubResource("Curve_3dlbn")
-curve_y = SubResource("Curve_3dlbn")
-curve_z = SubResource("Curve_3dlbn")
+curve_x = SubResource("Curve_kowt0")
+curve_y = SubResource("Curve_kowt0")
+curve_z = SubResource("Curve_kowt0")
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_5n8rc"]
-curve_x = SubResource("Curve_3dlbn")
-curve_y = SubResource("Curve_3dlbn")
-curve_z = SubResource("Curve_3dlbn")
+curve_x = SubResource("Curve_kowt0")
+curve_y = SubResource("Curve_kowt0")
+curve_z = SubResource("Curve_kowt0")
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_lo7l1"]
-curve_x = SubResource("Curve_3dlbn")
-curve_y = SubResource("Curve_3dlbn")
-curve_z = SubResource("Curve_3dlbn")
+curve_x = SubResource("Curve_kowt0")
+curve_y = SubResource("Curve_kowt0")
+curve_z = SubResource("Curve_kowt0")
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_o6crd"]
-curve_x = SubResource("Curve_3dlbn")
-curve_y = SubResource("Curve_3dlbn")
-curve_z = SubResource("Curve_3dlbn")
+curve_x = SubResource("Curve_kowt0")
+curve_y = SubResource("Curve_kowt0")
+curve_z = SubResource("Curve_kowt0")
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_hnpm5"]
-curve_x = SubResource("Curve_3dlbn")
-curve_y = SubResource("Curve_3dlbn")
-curve_z = SubResource("Curve_3dlbn")
-
-[sub_resource type="Curve" id="Curve_fvg6n"]
-_data = [Vector2(0, 0.6), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_kowt0"]
-_data = [Vector2(0, 0.6), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+curve_x = SubResource("Curve_kowt0")
+curve_y = SubResource("Curve_kowt0")
+curve_z = SubResource("Curve_kowt0")
 
 [sub_resource type="Curve" id="Curve_msfet"]
 _data = [Vector2(0, 0.6), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_bdda0"]
+_data = [Vector2(0, 0.6), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_1b8ho"]
+_data = [Vector2(0, 0.6), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_ybglf"]
-curve_x = SubResource("Curve_fvg6n")
-curve_y = SubResource("Curve_kowt0")
-curve_z = SubResource("Curve_msfet")
+curve_x = SubResource("Curve_msfet")
+curve_y = SubResource("Curve_bdda0")
+curve_z = SubResource("Curve_1b8ho")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_in32f"]
-shader = SubResource("Shader_d1g8i")
+shader = SubResource("Shader_fvg6n")
 shader_parameter/amount = 1
 shader_parameter/p_life_i = 0.7
 shader_parameter/p_life_p = SubResource("CurveXYZTexture_6v2lx")
@@ -807,6 +807,9 @@ shader_parameter/p_vel_i = Vector3(25, 400, 25)
 shader_parameter/p_vel_a_p = SubResource("CurveXYZTexture_rdg5e")
 shader_parameter/p_xscale_ol = SubResource("CurveXYZTexture_fn3id")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7nhat"]
+albedo_texture = ExtResource("5_msfet")
+
 [node name="System" type="Node3D"]
 script = ExtResource("1_34ieq")
 simulate_every_frame = true
@@ -1066,3 +1069,9 @@ amount = 1
 one_shot = true
 process_material = SubResource("ShaderMaterial_wrvpg")
 draw_pass_1 = ExtResource("8_by0ss")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(170, 0, 0, 0, 170, 0, 0, 0, 70, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_7nhat")
+mesh = ExtResource("4_kowt0")

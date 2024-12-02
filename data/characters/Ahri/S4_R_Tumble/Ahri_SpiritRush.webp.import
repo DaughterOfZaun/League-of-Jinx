@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://uitpm427k4kg"
-path="res://.godot/imported/Ahri_SpiritRush.webp-805f134371eec60d056f0820693bcfac.ctex"
+path="res://.godot/imported/Ahri_SpiritRush.webp-4a57cd751f2571a93da9c1674b1380ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/Ahri_SpiritRush.webp"
-dest_files=["res://.godot/imported/Ahri_SpiritRush.webp-805f134371eec60d056f0820693bcfac.ctex"]
+source_file="res://data/characters/Ahri/S4_R_Tumble/Ahri_SpiritRush.webp"
+dest_files=["res://.godot/imported/Ahri_SpiritRush.webp-4a57cd751f2571a93da9c1674b1380ea.ctex"]
 
 [params]
 

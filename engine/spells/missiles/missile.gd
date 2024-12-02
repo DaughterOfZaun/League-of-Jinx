@@ -50,13 +50,17 @@ func linear_movement(delta: float) -> bool:
 
 	assert(accel == 0 || fixed_travel_time == 0)
 	
-	var speed: float
 	var dir := target_position - position_3d
 	var dir_len := dir.length()
+
+	self.look_at(global_position + dir)
+
+	var speed: float
 	if fixed_travel_time > 0:
 		speed = dir_len / (fixed_travel_time - time_elapsed)
 	else:
 		speed = clampf(initial_speed + (accel * time_elapsed), min_speed, max_speed)
+	
 	var dist := speed * delta
 	if dist < dir_len:
 		position_3d += (dir / dir_len) * dist

@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cn46pgxvwo13r" path="res://data/ui/cursor/Hand2.webp" id="6_5t0se"]
 [ext_resource type="PackedScene" uid="uid://diknhd1061r8r" path="res://engine/game/ui/ui.tscn" id="6_pnpm1"]
 [ext_resource type="Texture2D" uid="uid://bnu40pa7h3jgo" path="res://data/ui/cursor/Hover_Shop.webp" id="7_tqj1w"]
-[ext_resource type="PackedScene" uid="uid://cmuj1g4sexvke" path="res://data/particles/cursor_moveto/system.tscn" id="8_toluw"]
+[ext_resource type="PackedScene" uid="uid://cmuj1g4sexvke" path="res://data/particles/cursor_moveto/Cursor_Moveto.tscn" id="8_toluw"]
 [ext_resource type="Script" uid="uid://bk2me5aywj65r" path="res://engine/game/camera.gd" id="25_obkvb"]
 [ext_resource type="PackedScene" uid="uid://dgxp55bfpc742" path="res://data/characters/Ahri/unit.tscn" id="27_0mdok"]
 [ext_resource type="Shader" uid="uid://b71ir7qq5o8g1" path="res://engine/game/level/level.gdshader" id="31_g1ghr"]
