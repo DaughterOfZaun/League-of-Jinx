@@ -23,7 +23,7 @@ func add(buff: Buff, count := 1, continious := false) -> BuffSlot:
 		#for stack: Buff in self.stacks:
 			#time_remaining = max(time_remaining, stack.time_remaining)
 	for i in range(count):
-		var duplicate: Buff = buff if i == 0 else buff.duplicate(DUPLICATE_ALL)
+		var duplicate: Buff = buff if i == 0 else buff.clone().copy(buff)
 		if continious:
 			duplicate.delay = time_remaining
 			time_remaining += duplicate.duration

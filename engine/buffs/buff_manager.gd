@@ -64,14 +64,13 @@ func add(
 	if is_hidden_on_client == null: is_hidden_on_client = buff.is_hidden_on_client
 
 	number_of_stacks = min(max_stack, number_of_stacks)
-	match add_type:
-		Enums.BuffAddType.REPLACE_EXISTING,\
-		Enums.BuffAddType.RENEW_EXISTING\
-		when number_of_stacks > 1 or max_stack > 1:
-			push_warning()
-
-	if stacks_exclusive && attacker == null:
-		push_warning()
+	#match add_type:
+	#	Enums.BuffAddType.REPLACE_EXISTING,\
+	#	Enums.BuffAddType.RENEW_EXISTING\
+	#	when number_of_stacks > 1 or max_stack > 1:
+	#		push_warning()
+	#if stacks_exclusive && attacker == null:
+	#	push_warning()
 
 	var script: Script = buff.get_script()
 	var slot := get_slot(script, attacker if stacks_exclusive else null, true)

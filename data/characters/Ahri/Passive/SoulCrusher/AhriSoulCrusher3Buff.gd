@@ -1,6 +1,6 @@
 class_name AhriSoulCrusher3Buff extends Buff
 
-var metadata := BuffMetadata.from({
+var data := BuffData.from({
 	auto_buff_activate_effect = [
 		"PotionofElusiveness_itm.troy",
 		"PotionofBrilliance_itm.troy",

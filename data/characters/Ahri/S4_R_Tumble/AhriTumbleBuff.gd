@@ -1,6 +1,6 @@
 class_name AhriTumbleBuff extends Buff
 
-var metadata := BuffMetadata.from({
+var data := BuffData.from({
 	auto_buff_activate_effect = [ "" ],
 	buff_name = "AhriTumble",
 	buff_texture_name = "Ahri_SpiritRush.dds",

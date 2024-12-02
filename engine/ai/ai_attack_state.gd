@@ -60,21 +60,24 @@ func _physics_process(delta: float) -> void:
 
 	var cooldown_time := 1.0 / me.stats.get_attack_speed(spell.data.delay_total_time_percent)
 	var windup_percent := constants.gcd_attack_delay_cast_percent * (1.0 + spell.data.delay_cast_offset_percent)
+	var windup_time := cooldown_time * windup_percent
 
 	var xfade := 0.2
-	var xfade_begin := xfade * windup_percent; var xfade_end := xfade * (1.0 - windup_percent)
-	#var xfade_begin := 0.0; var xfade_end := xfade
+	#var xfade_begin := xfade * windup_percent; var xfade_end := xfade * (1.0 - windup_percent)
+	var xfade_begin := 0.0; var xfade_end := xfade
 
 	var length := attack_animation_playback.get_current_length()
-	var time_scale := length / (cooldown_time + xfade_begin + xfade_end)
-	#var time_scale := 1.0
-	#if winding_up:
-	#	time_scale = (length * windup_percent) / (cooldown_time * windup_percent + xfade_begin)
-	#else:
-	#	time_scale = (length * (1.0 - windup_percent)) / (cooldown_time * (1.0 - windup_percent) + xfade_end)
+	#var animation_windup_length := length * (spell.data.cast_frame / get_current_animation_frames_count())
+	var animation_windup_length := spell.data.cast_frame * (1.0 / 30.0)
+	#var time_scale := length / (cooldown_time + xfade_begin + xfade_end)
+	#var time_scale := ((9.0/28.0)*0.9677) / (1.6*(1.0-0.065)*0.3*(1.0-0.236))
+	var time_scale := 1.0
+	if winding_up:
+		time_scale = animation_windup_length / (windup_time + xfade_begin)
+	else:
+		time_scale = (length - animation_windup_length) / (cooldown_time - windup_time + xfade_end)
 	set_current_animation_time_scale(time_scale)
 
-	var windup_time := cooldown_time * windup_percent
 
 	#if is not winding up and (animation is not playing or (animation xfade sec from finish and windup_start_point is > xfade sec from here))
 	

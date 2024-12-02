@@ -1,4 +1,4 @@
-class_name BuffData extends Timer
+class_name BuffData extends Resource
 
 @export var buff_name := ""
 @export var buff_texture_name := ""
@@ -23,7 +23,7 @@ class_name BuffData extends Timer
 @export_group("")
 #endregion
 
-var spell_toggle_slot := 0 # [1-4]
+@export var spell_toggle_slot := 0 # [1-4]
 
 #region Flags
 @export_group("Flags")
@@ -36,7 +36,13 @@ var spell_toggle_slot := 0 # [1-4]
 
 #region Pre damage
 @export_group("Pre Damage")
-var on_pre_damage_priority := 0
-var do_on_pre_damage_in_expiration_order := false
+@export var on_pre_damage_priority := 0
+@export var do_on_pre_damage_in_expiration_order := false
 @export_group("")
 #endregion
+
+static func from(dict: Dictionary[String, Variant]) -> BuffData:
+	var inst := new()
+	for key in dict:
+		inst.set(key, dict[key])
+	return inst

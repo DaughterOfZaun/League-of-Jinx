@@ -1,6 +1,6 @@
 class_name AhriTumbleKickBuff extends Buff
 
-var metadata := BuffMetadata.from({
+var data := BuffData.from({
 	buff_name = "AkaliShadowDance",
 	buff_texture_name = "Ahri_SpiritRush.dds",
 })
@@ -13,6 +13,8 @@ func _init(target_pos := Vector3.INF, distance := 0.0, dash_speed := 0.0) -> voi
 	self.target_pos = target_pos
 	self.distance = distance
 	self.dash_speed = dash_speed
+func clone() -> Buff:
+	return new(target_pos, distance, dash_speed)
 
 func on_activate() -> void:
 	#require_var(self.dash_speed)

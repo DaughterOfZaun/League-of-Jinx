@@ -1,6 +1,6 @@
 class_name AhriSeduceBuff extends Buff
 
-var metadata := BuffMetadata.from({
+var data := BuffData.from({
 	auto_buff_activate_effect = [ "", "" ],
 	buff_name = "AhriSeduce",
 	buff_texture_name = "Ahri_Charm.dds",
@@ -12,6 +12,8 @@ var particle2: Particle
 var particle3: Particle
 func _init(slow_percent := 0.0) -> void:
 	self.slow_percent = slow_percent
+func clone() -> Buff:
+	return new(slow_percent)
 
 func on_activate() -> void:
 	#require_var(self.slow_percent)

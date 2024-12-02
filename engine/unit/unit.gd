@@ -28,6 +28,8 @@ var should_update_actions := false
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 
+	_physics_process_rotate(delta)
+
 	var frame: int = Engine.get_physics_frames() % target_frame
 	should_update_stats = frame == 0
 	should_update_actions = frame == 1
@@ -122,7 +124,7 @@ func get_point_by_facing_offset(distance: float, offset_angle: float) -> Vector3
 
 #var rot_speed := deg_to_rad(180. / ((0.08 + (0.01/3.))))
 var rot_speed := deg_to_rad(180 / 0.2)
-func _process(delta: float) -> void:
+func _physics_process_rotate(delta: float) -> void:
 	var rot_delta := angle_difference(rotation.y, direction_angle)
 	rotation.y += sign(rot_delta) * min(abs(rot_delta), rot_speed * delta)
 

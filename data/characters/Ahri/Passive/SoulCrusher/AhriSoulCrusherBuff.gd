@@ -1,6 +1,6 @@
 class_name AhriSoulCrusherBuff extends Buff
 
-var metadata := BuffMetadata.from({
+var data := BuffData.from({
 	auto_buff_activate_attach_bone_name = [ "" ],
 	auto_buff_activate_effect = [ "" ],
 	buff_name = "AhriSoulCrusher",

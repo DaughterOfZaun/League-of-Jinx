@@ -1,6 +1,6 @@
 class_name AhriSoulCrusherCounterBuff extends Buff
 
-var metadata := BuffMetadata.from({
+var data := BuffData.from({
 	buff_name = "AhriSoulCrusherCounter",
 	buff_texture_name = "Ahri_SoulEater2.dds",
 	persists_through_death = true,

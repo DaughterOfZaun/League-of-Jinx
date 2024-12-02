@@ -1,4 +1,4 @@
-class_name Buff extends BuffData
+class_name Buff extends Timer
 
 var slot: BuffSlot
 var attacker: Unit
@@ -13,6 +13,25 @@ var tick_rate := 0.0
 var stacks_exclusive := true
 var can_mitigate_duration := false #TODO
 var is_hidden_on_client := false
+
+func copy(from: Buff) -> Buff:
+	slot = from.slot
+	attacker = from.attacker
+	caster = from.caster
+	target = from.target
+	host = from.host
+	max_stack = from.max_stack
+	duration = from.duration
+	add_type = from.add_type
+	type = from.type
+	tick_rate = from.tick_rate
+	stacks_exclusive = from.stacks_exclusive
+	can_mitigate_duration = from.can_mitigate_duration
+	is_hidden_on_client = from.is_hidden_on_client
+	return self
+
+func clone() -> Buff:
+	return new()
 
 var vars: Vars:
 	get: return host.vars
@@ -46,6 +65,7 @@ func _ready() -> void:
 	timeout.connect(remove_internal_0.bind(true))
 	start(self.delay + self.duration)
 	host.connect_all(self)
+	on_activate()
 
 ## Can be called by scripts.
 func remove() -> void:
@@ -64,6 +84,7 @@ func remove_internal_1(expired := false) -> void:
 	if !can_mitigate_duration:
 		queue_free()
 
+func on_activate() -> void: pass
 func on_deactivate(_expired: bool) -> void: pass
 
 func renew(reset_duration: float) -> void:
