@@ -2,8 +2,11 @@ class_name BuffData extends Resource
 
 @export var buff_name := ""
 @export var buff_texture_name := ""
+@export var buff_texture: Texture2D
 @export var minimap_icon_texture_name := ""
+@export var minimap_icon_texture: Texture2D
 @export var minimap_icon_enemy_texture_name := ""
+@export var minimap_icon_enemy_texture: Texture2D
 @export var popup_message := ""
 
 #region Tooltip

@@ -1,12 +1,7 @@
 class_name AhriSoulCrusherBuff extends Buff
 
-var data := BuffData.from({
-	auto_buff_activate_attach_bone_name = [ "" ],
-	auto_buff_activate_effect = [ "" ],
-	buff_name = "AhriSoulCrusher",
-	buff_texture_name = "Ahri_SoulEater.dds",
-	persists_through_death = true,
-})
+var data := preload('AhriSoulCrusherBuff.tres')
+
 func on_activate() -> void:
 	host.buffs.add(host, AhriPassiveParticleBuff.new())
 func on_deactivate(expired: bool) -> void:

@@ -1,11 +1,7 @@
 class_name AhriSeduceMissileBuff extends Buff
 
-var data := BuffData.from({
-	auto_buff_activate_attach_bone_name = [ "" ],
-	auto_buff_activate_effect = [ "" ],
-	buff_name = "",
-	buff_texture_name = "",
-})
+var data := preload('AhriSeduceMissileBuff.tres')
+
 func on_activate() -> void:
 	host.status.can_attack = false
 	host.apply_assist_marker(attacker, 10)

@@ -1,11 +1,7 @@
 class_name AhriSeduceBuff extends Buff
 
-var data := BuffData.from({
-	auto_buff_activate_effect = [ "", "" ],
-	buff_name = "AhriSeduce",
-	buff_texture_name = "Ahri_Charm.dds",
-	popup_message = [ "game_floatingtext_Slowed" ],
-})
+var data := preload('AhriSeduceBuff.tres')
+
 var slow_percent: float
 var particle1: Particle
 var particle2: Particle

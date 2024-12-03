@@ -1,9 +1,6 @@
 class_name AhriFoxFireBuff extends Buff
 
-var data := BuffData.from({
-	buff_name = "AhriFoxFire",
-	buff_texture_name = "Ahri_FoxFire.dds",
-})
+var data := preload('AhriFoxFireBuff.tres')
 
 func on_activate() -> void:
 	host.spells.w.set_cooldown(0, false)

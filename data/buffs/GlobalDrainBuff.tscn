@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://r3gej4rsjrla"]
+
+[ext_resource type="Script" uid="uid://bfy23qgwe2fqr" path="res://data/buffs/GlobalDrainBuff.gd" id="1_4u474"]
+
+[node name="GlobalDrainBuff" type="Timer"]
+script = ExtResource("1_4u474")
+buff_name = "GlobalDrain"
+metadata/_custom_type_script = ExtResource("1_4u474")

@@ -1,9 +1,7 @@
 class_name AhriTumbleKickBuff extends Buff
 
-var data := BuffData.from({
-	buff_name = "AkaliShadowDance",
-	buff_texture_name = "Ahri_SpiritRush.dds",
-})
+var data := preload('AhriTumbleKickBuff.tres')
+
 var target_pos: Vector3
 var distance: float
 var dash_speed: float

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="BuffData" load_steps=2 format=3 uid="uid://7een4giakyrk"]
+
+[ext_resource type="Script" uid="uid://bouw5alvreplc" path="res://engine/buffs/buff_data.gd" id="1_a1gtg"]
+
+[resource]
+script = ExtResource("1_a1gtg")
+buff_name = "AhriSoulCrusher"
+buff_texture_name = "Ahri_SoulEater.dds"
+minimap_icon_texture_name = ""
+minimap_icon_enemy_texture_name = ""
+popup_message = ""
+dynamic_tooltip = ""
+float_statics_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+float_vars_decimals = Array[int]([2, 2, 2, 2, 2, 2])
+auto_buff_activate_event = ""
+auto_buff_activate_effect_flags = 0
+auto_buff_activate_effect = Dictionary[String, PackedScene]({
+"": null
+})
+auto_buff_activate_attach_bone_name = Array[StringName]([&""])
+spell_toggle_slot = 0
+non_dispellable = false
+persists_through_death = true
+is_pet_duration_buff = false
+is_death_recap_source = false
+on_pre_damage_priority = 0
+do_on_pre_damage_in_expiration_order = false
+metadata/_custom_type_script = ExtResource("1_a1gtg")
