@@ -18,8 +18,8 @@ class_name BuffData extends Resource
 @export_group("Auto Activate", "auto_buff_activate_")
 @export var auto_buff_activate_event := ""
 @export var auto_buff_activate_effect_flags := Enums.EffCreate.NONE
-@export var auto_buff_activate_effect: Array[String] = []
-@export var auto_buff_activate_attach_bone_name: Array[String] = []
+@export var auto_buff_activate_effect: Dictionary[String, PackedScene] = {}
+@export var auto_buff_activate_attach_bone_name: Array[StringName] = []
 @export_group("")
 #endregion
 

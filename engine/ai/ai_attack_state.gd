@@ -17,10 +17,8 @@ func try_enter() -> void:
 	if !current_state.can_cancel(): return
 	switch_to_self()
 	is_running = true
-
-	me.face_direction(target.position_3d)
-
 	just_entered_state = true
+	me.face_direction(target.position_3d)
 
 var spell_i := 1
 func _animation_finished(anim_name: StringName) -> void:
@@ -90,6 +88,7 @@ func _physics_process(delta: float) -> void:
 			animation_playback.travel("Idle1")
 
 	if !winding_up && cooldown_time_left <= windup_time + xfade_begin:
+		me.face_direction(target.position_3d)
 		_animation_finished("")
 		winding_up = true
 
