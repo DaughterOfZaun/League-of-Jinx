@@ -64,23 +64,28 @@ func on_ground_hovered() -> void:
 func _input(event: InputEvent) -> void:
 	#if main_hero == null: return
 	for letter in "qwerdfb":
-		if event.is_action_released(letter.to_upper()):
-			main_hero.cast(letter, hovered_pos, hovered_unit)
-			viewport.set_input_as_handled()
-			return
+		if event.is_action(letter.to_upper()):
+			var spell: Spell = main_hero.spells[letter]
+			if event.is_pressed():
+				if spell.state == Spell.State.READY:
+					spell.indicator.spell = spell
+					spell.indicator.show()
+			elif event.is_released():
+				spell.indicator.hide()
+				main_hero.cast(letter, hovered_pos, hovered_unit)
+			return viewport.set_input_as_handled()
 	for emote_index: int in Enums.EmoteType.values():
 		if emote_index == Enums.EmoteType.NONE: continue
 		var emote_name := Enums.EmoteType_to_string(emote_index)
 		if event.is_action_pressed("Emote" + emote_name):
 			main_hero.emote(emote_index)
-			viewport.set_input_as_handled()
-			return
+			return viewport.set_input_as_handled()
 	if event.is_action_pressed("ToggleFullscreen"):
 		if window.mode != Window.MODE_EXCLUSIVE_FULLSCREEN:
 			window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
 		else:
 			window.mode = Window.MODE_WINDOWED
-		viewport.set_input_as_handled()
+		return viewport.set_input_as_handled()
 
 const RAY_LENGTH := 1000.0
 func on_ground_clicked_on_screen(event: InputEventMouseButton) -> void:

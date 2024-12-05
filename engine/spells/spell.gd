@@ -1,6 +1,7 @@
 class_name Spell extends Node
 
 @export var data: SpellData
+@export var indicator: SpellIndicator
 
 @onready var me := (
 	get_parent() #as Spells
@@ -157,14 +158,14 @@ func cast(
 		Enums.TargetingType.CONE,\
 		Enums.TargetingType.LOCATION,\
 		Enums.TargetingType.DIRECTION,\
-		Enums.TargetingType.DRAG_DIRECTION:
+		-1: #Enums.TargetingType.DRAG_DIRECTION:
 			assert(pos.is_finite())
 			assert(data.cast_type not in [
 				Enums.CastType.TARGET_MISSILE,
 				Enums.CastType.CHAIN_MISSILE,
 			])
 			target = null
-	if data.targetting_type == Enums.TargetingType.DRAG_DIRECTION:
+	if data.targetting_type == -1: #Enums.TargetingType.DRAG_DIRECTION:
 		assert(end_pos.is_finite())
 	else:
 		end_pos = Vector3.INF
