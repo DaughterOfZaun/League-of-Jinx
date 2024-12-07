@@ -604,7 +604,6 @@ particle_uv_scroll_rate = Vector2(0, -4)
 in_uniform_scale = true
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="circle"]
-visible = false
 material_override = SubResource("ShaderMaterial_rxxao")
 cast_shadow = 0
 emitting = false
