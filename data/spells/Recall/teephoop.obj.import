@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c06sr1ccy6sii"
+path="res://.godot/imported/teephoop.obj-6612c2f7f18c1e84be5c68c6319e5f81.mesh"
+
+[deps]
+
+files=["res://.godot/imported/teephoop.obj-6612c2f7f18c1e84be5c68c6319e5f81.mesh"]
+
+source_file="res://data/spells/Recall/teephoop.obj"
+dest_files=["res://.godot/imported/teephoop.obj-6612c2f7f18c1e84be5c68c6319e5f81.mesh", "res://.godot/imported/teephoop.obj-6612c2f7f18c1e84be5c68c6319e5f81.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(0.014, 0.014, 0.014)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

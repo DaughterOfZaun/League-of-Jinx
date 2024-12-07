@@ -30,3 +30,6 @@ var kills := 0
 func _ready() -> void:
 	exp = 0.0
 	level_script.register_champion(self)
+
+func set_camera_position(position: Vector3) -> void:
+	push_warning("unimplemented")

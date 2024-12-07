@@ -132,11 +132,14 @@ func _physics_process_rotate(delta: float) -> void:
 @onready var skeleton: Skeleton3D = skinned_mesh_root.find_child("Skeleton3D", true) if skinned_mesh_root else null
 func get_bone_global_position(bone_idx: int) -> Vector3:
 	return skeleton.to_global(skeleton.get_bone_global_pose(bone_idx).origin)
+func get_bone_idx(bone_name: StringName) -> int:
+	return skeleton.find_bone(bone_name.replace("_CSTM_", "_GLB_"))
 
-func teleport(cast_position: Vector3) -> void:
-	push_warning("Unit.teleport is unimplemented")
+#func teleport(cast_position: Vector3) -> void:
 #func teleport(team: Enums.Team, location: Enums.SpawnType) -> void:
-#	push_warning("Unit.teleport is unimplemented")
+func teleport(team_or_cast_position: Variant, location: Enums.SpawnType = 0) -> void:
+	assert(team_or_cast_position is Vector3 || (team_or_cast_position is Enums.Team && location != 0))
+	push_warning("Unit.teleport is unimplemented")
 
 #region Movement
 func move(
@@ -293,3 +296,6 @@ func is_behind(target: Unit) -> bool:
 func get_nearest_passable_position(pos: Vector3) -> Vector3:
 	push_warning("Unit.get_nearest_passable_position is unimplemented")
 	return Vector3.INF
+
+func stop_channeling(condition: Enums.ChannelingStopCondition, souce: Enums.ChannelingStopSource) -> void:
+	push_warning("unimplemented")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://dgxp55bfpc742"]
+[gd_scene load_steps=73 format=3 uid="uid://dgxp55bfpc742"]
 
 [ext_resource type="Script" uid="uid://4a06w3g4bx3a" path="res://engine/unit/champion.gd" id="1_7i6v8"]
 [ext_resource type="Script" uid="uid://dksbt75edeseg" path="res://engine/game/ui/minimap/minimap_icon.gd" id="2_81mpc"]
@@ -55,6 +55,8 @@
 [ext_resource type="PackedScene" uid="uid://qpasfskm5vmm" path="res://data/characters/Ahri/S3_E_Seduce/AhriSeduceMissile/Ahri_Charm_mis.tscn" id="43_c277o"]
 [ext_resource type="Texture2D" uid="uid://c8xp3k3d1v7c" path="res://data/spells/Recall/TeleportHome.webp" id="43_x5dr7"]
 [ext_resource type="Script" uid="uid://dhorowytayhda" path="res://engine/game/range.gd" id="44_sr3ak"]
+[ext_resource type="Script" uid="uid://wm5ptcjnltoy" path="res://data/spells/Recall/BluePillSpell.gd" id="54_yee7n"]
+[ext_resource type="PackedScene" uid="uid://s44tscgo3jl0" path="res://data/spells/Recall/TeleportHome.tscn" id="56_2vy42"]
 
 [sub_resource type="Gradient" id="Gradient_mgcr6"]
 interpolation_mode = 1
@@ -293,6 +295,7 @@ desc = "game_character_passiveDescription_Ahri"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_s7c4n")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 visible = false
@@ -1060,29 +1063,66 @@ coefficient = Array[float]([0.7, 0.0])
 x = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
 import_path = "res://data/characters/Ahri/S4_R_Tumble/AhriTumbleMissile/AhriTumbleMissile.ini"
 
-[node name="D_Flash" type="Node" parent="Spells" node_paths=PackedStringArray("data")]
+[node name="D_Flash" type="Node" parent="Spells" node_paths=PackedStringArray("data", "indicator")]
 script = ExtResource("40_6ykpd")
 data = NodePath("Data")
+indicator = NodePath("../../Indicator")
 
 [node name="Data" type="Node" parent="Spells/D_Flash"]
 script = ExtResource("26_2652s")
 inventory_icon = Array[Texture2D]([ExtResource("41_7o2jq")])
 
-[node name="F_Heal" type="Node" parent="Spells" node_paths=PackedStringArray("data")]
+[node name="F_Heal" type="Node" parent="Spells" node_paths=PackedStringArray("data", "indicator")]
 script = ExtResource("40_6ykpd")
 data = NodePath("Data")
+indicator = NodePath("../../Indicator")
 
 [node name="Data" type="Node" parent="Spells/F_Heal"]
 script = ExtResource("26_2652s")
 inventory_icon = Array[Texture2D]([ExtResource("42_mr6ag")])
 
-[node name="B_Recall" type="Node" parent="Spells" node_paths=PackedStringArray("data")]
-script = ExtResource("40_6ykpd")
+[node name="B_Recall" type="Node" parent="Spells" node_paths=PackedStringArray("data", "indicator")]
+script = ExtResource("54_yee7n")
 data = NodePath("Data")
+indicator = NodePath("../../Indicator")
 
 [node name="Data" type="Node" parent="Spells/B_Recall"]
 script = ExtResource("26_2652s")
 inventory_icon = Array[Texture2D]([ExtResource("43_x5dr7")])
+inventory_icon_name = Array[String]([""])
+display_name = "game_spell_displayname_BluePill"
+description = "game_spell_description_BluePill"
+level_desc = Array[String](["NONE", "NONE", "NONE", "NONE", "NONE"])
+dynamic_tooltip = "game_spell_tooltip_BluePill"
+dynamic_extended = "game_spell_levelup_BluePill"
+effect_level_amount = Array[Array]([[0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
+version = 1
+cooldown_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+subject_to_global_cooldown = true
+cast_frame = 10.0
+animation_name = &"Idle1"
+selection_preference = 1
+cast_cone_angle = 45.0
+cast_cone_distance = 100.0
+cast_radius_primary = 100.0
+cast_range = 200.0
+flags = 236544
+after_effect_name = "TeleportHome.troy"
+after_effect = ExtResource("56_2vy42")
+hit_effect_name = "AnnieBasicAttack_mis.troy"
+sound_cast_name = "none.wav"
+sound_hit_name = "none.wav"
+channel_duration = 8.0
+mana_cost_by_level = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0])
+cant_cancel_while_winding_up = true
+is_disabled_while_dead = true
+missile_bone_name = "R_hand"
+missile_effect_name = "AnnieBasicAttack_mis.troy"
+line_missile_bounce_radius = 450.0
+casting_breaks_stealth = true
+not_single_target_spell = true
+coefficient = Array[float]([0.0])
+import_path = "res://data/spells/Recall/BluePill.ini"
 
 [node name="GameplayRange" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -1090,6 +1130,7 @@ script = ExtResource("44_sr3ak")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GameplayRange"]
 shape = SubResource("SphereShape3D_2lapu")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="SelectionRange" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -1098,6 +1139,7 @@ script = ExtResource("44_sr3ak")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionRange"]
 shape = SubResource("SphereShape3D_okgtt")
 disabled = true
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="AcquisitionRange" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -1105,6 +1147,7 @@ script = ExtResource("44_sr3ak")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AcquisitionRange"]
 shape = SubResource("SphereShape3D_fjou7")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="AttackRange" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -1112,6 +1155,7 @@ script = ExtResource("44_sr3ak")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRange"]
 shape = SubResource("SphereShape3D_qw37p")
+debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="CancelAttackRange" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -1119,3 +1163,4 @@ script = ExtResource("44_sr3ak")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CancelAttackRange"]
 shape = SubResource("SphereShape3D_hvbg6")
+debug_color = Color(0, 0.6, 0.7, 0.42)

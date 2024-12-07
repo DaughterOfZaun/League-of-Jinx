@@ -66,7 +66,7 @@ func _ready() -> void:
 	add_child(timer)
 
 	await me.ready
-	missile_bone_idx = me.skeleton.find_bone(data.missile_bone_name.replace("_CSTM_", "_GLB_"))
+	missile_bone_idx = me.get_bone_idx(data.missile_bone_name)
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return

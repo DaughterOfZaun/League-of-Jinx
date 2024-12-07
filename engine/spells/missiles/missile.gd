@@ -13,6 +13,7 @@ func _init(spell: Spell, target: Unit, target_position: Vector3 = Vector3.INF) -
 	else:
 		assert(false)
 
+var effect: System = null
 func _ready() -> void:
 	var bone_name := spell.data.missile_bone_name
 	#TODO: bone_name == "root" or cast(override_cast_pos == true) ?
@@ -21,13 +22,16 @@ func _ready() -> void:
 	else:
 		global_position = spell.host.get_bone_global_position(spell.missile_bone_idx)
 
-	var effect: System = spell.data.missile_effect.instantiate()
+	effect = spell.data.missile_effect.instantiate()
 	add_child(effect)
 
 var time_elapsed := 0.0
 func _physics_process(delta: float) -> void:
 	time_elapsed += delta
-	spell.on_missile_update(self)
+	var lifetime := spell.data.missile_lifetime
+	if is_zero_approx(lifetime): lifetime = INF
+	if time_elapsed >= lifetime: destroy_self()
+	else: spell.on_missile_update(self)
 
 func calc_speed() -> float:
 	var initial_speed := spell.data.missile_speed
@@ -80,9 +84,9 @@ func linear_movement(delta: float, ends_at_target_point := true) -> bool:
 			position_3d += last_dir_normalized * dist
 			return false
 	
-	elif ends_at_target_point:
-		assert(false)
-		return true
+	#elif ends_at_target_point:
+	#	assert(false)
+	#	return true
 	
 	else:
 		last_dir_normalized.y = 0 #HACK:
@@ -100,7 +104,13 @@ func linear_movement(delta: float, ends_at_target_point := true) -> bool:
 
 func destroy_self() -> void:
 	spell.on_missile_end(self)
-	queue_free()
+	self.destroy()
 
+#var is_being_destroyed := false
 func destroy() -> void:
 	queue_free()
+	#if is_being_destroyed: return
+	#is_being_destroyed = true
+	#if effect != null:
+	#	for particle: GPUParticles3D in effect.find_children("*", "GPUParticles3D", true):
+	#		particle.emitting = false

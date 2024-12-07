@@ -1,13 +1,29 @@
 class_name Particle
 extends Node3DExt
 
+static var root: Node
+func _ready() -> void:
+	root = get_tree().current_scene
+
+var bind_obj: Unit = null
+var bind_bone_idx := -1
+func _physics_process(delta: float) -> void:
+	if bind_obj != null:
+		if bind_bone_idx != -1:
+			global_position = bind_obj.get_bone_global_position(bind_bone_idx)
+		else:
+			global_position = bind_obj.global_position
+
 static func create(effect: PackedScene = null, effect_for_other_team: PackedScene = null) -> Particle:
-	push_warning("Particle.create is unimplemented")
 	assert(effect != null || effect_for_other_team != null)
-	return Particle.new() #TODO: add_child
+	var particle := Particle.new()
+	var system: System = effect.instantiate()
+	particle.add_child(system)
+	root.add_child(particle)
+	return particle
 
 func remove() -> void:
-	push_warning("Particle.remove is unimplemented")
+	queue_free()
 
 func fow(fow_team := Enums.Team.UNKNOWN, fow_visibility_radius := 0.0) -> Particle:
 	return self
@@ -22,13 +38,20 @@ func specific(
 	return self
 func bind(
 	bind_object: Unit = null,
-	bone_name := "",
+	bone_name: StringName = "",
 	pos := Vector3.INF,
 ) -> Particle:
+	assert(bind_object != null || pos != Vector3.INF)
+	if pos.is_finite():
+		position_3d = pos
+	elif bind_object != null:
+		self.bind_obj = bind_object
+		if bone_name != "":
+			self.bind_bone_idx = bind_object.get_bone_idx(bone_name)
 	return self
 func target(
 	target_object: Unit = null,
-	target_bone_name := "",
+	target_bone_name: StringName = "",
 	target_pos := Vector3.INF,
 ) -> Particle:
 	return self
