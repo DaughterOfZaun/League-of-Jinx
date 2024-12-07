@@ -10,12 +10,27 @@ class_name UICenterPanel extends Control
 @export var b: UISpell
 @export var healthbar: Control
 @export var manabar: Control
+@export var channel_bar: Control
+@export var channel_bar_label: Label
+@export var channel_bar_range: Range
+
+func _ready() -> void:
+	channel_bar.visible = false
 
 func bind_to(c: Champion) -> void:
 	champion = c
 	for letter in "qwerdfb":
 		var spell: UISpell = self[letter]
 		spell.bind_to(letter, c.spells[letter])
+	c.ai.cast_state.timer_started.connect(func() -> void:
+		channel_bar_label.text = c.ai.cast_state.current_spell.data.display_name
+		#channel_bar_range.max_value = c.ai.cast_state.timer.wait_time
+		channel_bar_range.value = 0
+		channel_bar.visible = true
+	)
+	c.ai.cast_state.timeout_or_canceled.connect(func() -> void:
+		channel_bar.visible = false
+	)
 
 @onready var health_bar_label: Label = healthbar.find_child("Label", false)
 @onready var health_bar_range: Range = healthbar.find_child("TextureProgressBar", false)
@@ -36,3 +51,9 @@ func _process(delta: float) -> void:
 	mana_bar_label.text = "%d / %d" % [ roundi(mana), roundi(max_mana) ]
 	mana_bar_range.value = mana
 	mana_bar_range.max_value = max_mana
+
+	if channel_bar.visible:
+		var timer := champion.ai.cast_state.timer
+		var timer_time_passed := timer.wait_time - timer.time_left
+		#channel_bar_range.value = timer_time_passed
+		channel_bar_range.value = (timer_time_passed / timer.wait_time) * 100

@@ -3,12 +3,16 @@ class_name AICastState extends AIState
 var current_spell: Spell = null
 
 var timer: Timer
+signal timer_started()
+func timer_start(time_sec: float) -> void:
+	timer.start(time_sec)
+	timer_started.emit()
 var cancelled := false
 signal timeout_or_canceled()
 func timeout_or_canceled_emit(cancelled: bool) -> void:
+	timer.stop()
 	self.cancelled = cancelled
 	timeout_or_canceled.emit()
-	cancelled = false
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
@@ -44,10 +48,7 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 		deffered_state = current_state
 
 	if should_cancel:
-		switch_to_self()
-		if current_spell != null:
-			timeout_or_canceled_emit(true)
-			current_spell.put_on_cooldown()
+		switch_to_self(); #on_exit()
 		current_spell = spell
 
 	if should_cancel && target_position != me.position_3d:
@@ -60,12 +61,12 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 
 	if !cancelled && has_cast:
 		spell.state = Spell.State.CASTING
-		timer.start(cast_time)
+		timer_start(cast_time)
 		await timeout_or_canceled
 
 	if !cancelled && has_channel:
 		spell.state = Spell.State.CHANNELING
-		timer.start(channel_duration)
+		timer_start(channel_duration)
 		spell.channeling_start()
 		await timeout_or_canceled
 		if cancelled: spell.channeling_cancel_stop()
@@ -78,10 +79,11 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 		if should_cancel:
 			current_spell.put_on_cooldown()
 			current_spell = null
+			cancelled = false
 			match deffered_state: #TODO: try_enter_again
 				run_state: run_state.try_enter()
-				idle_state: idle_state.try_enter()
 				attack_state: attack_state.try_enter()
+				_: idle_state.try_enter()
 			deffered_state = null
 		elif animation_changed:
 			animation_playback.travel(deffered_animation)
@@ -92,6 +94,13 @@ func can_cancel() -> bool:
 		(current_spell.state == Spell.State.CASTING && !current_spell.data.cant_cancel_while_winding_up) ||
 		(current_spell.state == Spell.State.CHANNELING && !current_spell.data.cant_cancel_while_channeling)
 	)
+
+func on_exit() -> void:
+	if current_spell != null && current_spell.state in [Spell.State.CASTING, Spell.State.CHANNELING]:
+		timeout_or_canceled_emit(true)
+		current_spell.put_on_cooldown()
+		current_spell = null
+		cancelled = false
 
 func can_cast(spell: Spell, target: Unit = null) -> bool:
 	var status := me.status

@@ -8,7 +8,10 @@ class_name SpellIndicator extends Node3D
 @onready var line_missile_indicator_base: Node3D = $LineMissile/Base
 @onready var line_missile_indicator_target: Node3D = $LineMissile/Target
 
-func _process(delta: float) -> void:
+func _ready() -> void:
+    visible = false
+
+func _physics_process(delta: float) -> void:
     if !spell: return
     if line_missile_indicator.visible:
         #var range := spell.get_cast_range()
@@ -21,8 +24,8 @@ func _process(delta: float) -> void:
         range = range * Data.HW2GD
         
         line_missile_indicator_base.scale.x = width
-        line_missile_indicator_base.scale.z = range - width
-        line_missile_indicator_target.position.z = -(range - 0.5 * width)
+        line_missile_indicator_base.scale.z = range - width * 0.5
+        line_missile_indicator_target.position.z = -range
         line_missile_indicator_target.scale.x = width
         line_missile_indicator_target.scale.z = width
 

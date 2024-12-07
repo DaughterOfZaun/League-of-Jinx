@@ -1,6 +1,6 @@
-[gd_scene load_steps=31 format=3 uid="uid://diknhd1061r8r"]
+[gd_scene load_steps=33 format=3 uid="uid://diknhd1061r8r"]
 
-[ext_resource type="Texture2D" uid="uid://df2lx4qnpncd" path="res://data/screenshots/League of Legends.webp" id="1_n4n8a"]
+[ext_resource type="Texture2D" uid="uid://blu7c68psvgas" path="res://data/screenshots/screenshot_2.png" id="1_qwp58"]
 [ext_resource type="Script" uid="uid://bmu4xiepnom3l" path="res://engine/game/ui/center.gd" id="2_84jna"]
 [ext_resource type="Texture2D" uid="uid://w7g1bytpvupe" path="res://data/characters/Ahri/Passive/Ahri_SoulEater.webp" id="2_foojt"]
 [ext_resource type="PackedScene" uid="uid://demalxnr8x6to" path="res://engine/game/ui/spell.tscn" id="3_0bgng"]
@@ -14,6 +14,8 @@
 [ext_resource type="Script" uid="uid://75d2bqxw00ij" path="res://engine/game/ui/left.gd" id="9_0vwin"]
 [ext_resource type="Texture2D" uid="uid://dlxibrkg4tfgu" path="res://data/ui/left/left.webp" id="9_i8ivr"]
 [ext_resource type="Texture2D" uid="uid://bnq6twfpdhi65" path="res://data/ui/left/bag.webp" id="10_0j1eb"]
+[ext_resource type="Texture2D" uid="uid://bxe7p88gokatq" path="res://data/ui/channel_bar/background.png" id="10_a0w1y"]
+[ext_resource type="Texture2D" uid="uid://bbctqevu2qy5b" path="res://data/ui/channel_bar/bar.png" id="11_7mu2h"]
 [ext_resource type="Texture2D" uid="uid://cmv4y8qi1vg0b" path="res://data/ui/left/shop_enabled.webp" id="11_a0w1y"]
 [ext_resource type="Texture2D" uid="uid://bbtuh43ti6i0a" path="res://data/ui/left/shop_disabled.webp" id="12_7mu2h"]
 [ext_resource type="Texture2D" uid="uid://bhnu2l01o01j6" path="res://data/ui/map/map.webp" id="13_gr0p2"]
@@ -54,10 +56,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("1_n4n8a")
+texture = ExtResource("1_qwp58")
 expand_mode = 2
 
-[node name="Center" type="Control" parent="." node_paths=PackedStringArray("q", "w", "e", "r", "d", "f", "b", "healthbar", "manabar")]
+[node name="Center" type="Control" parent="." node_paths=PackedStringArray("q", "w", "e", "r", "d", "f", "b", "healthbar", "manabar", "channel_bar", "channel_bar_label", "channel_bar_range")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -77,6 +79,9 @@ f = NodePath("SummonerSpells/Spell2")
 b = NodePath("Recall")
 healthbar = NodePath("Healthbar")
 manabar = NodePath("Manabar")
+channel_bar = NodePath("ChannelBar")
+channel_bar_label = NodePath("ChannelBar/Label")
+channel_bar_range = NodePath("ChannelBar/TextureProgressBar")
 
 [node name="BackgroundColor" type="ColorRect" parent="Center"]
 layout_mode = 1
@@ -273,6 +278,52 @@ offset_bottom = -11.0
 
 [node name="TextureProgressBar" parent="Center/Manabar" index="0"]
 texture_progress = ExtResource("6_0vwin")
+
+[node name="ChannelBar" type="TextureRect" parent="Center"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -134.0
+offset_top = -195.0
+offset_right = 134.0
+offset_bottom = -179.0
+texture = ExtResource("10_a0w1y")
+expand_mode = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Center/ChannelBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 5.0
+offset_right = -13.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.0
+nine_patch_stretch = true
+texture_progress = ExtResource("11_7mu2h")
+
+[node name="Label" type="Label" parent="Center/ChannelBar"]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -15.0
+offset_top = -16.0
+offset_right = 25.0
+offset_bottom = 7.0
+grow_horizontal = 2
+scale = Vector2(1.065, 1.065)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 12
+text = "Fling"
 
 [node name="Left" type="Control" parent="." node_paths=PackedStringArray("attack_damage_label", "magical_damage_label", "attack_speed_label", "movement_speed_label", "armor_label", "spell_block_label", "level_label", "level_range", "name_label", "gold_label")]
 layout_mode = 1
