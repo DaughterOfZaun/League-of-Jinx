@@ -21,6 +21,7 @@ func _ready() -> void:
 	add_child(timer)
 
 func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
+
 	var cast_time := spell.get_cast_time()
 	var channel_duration := spell.get_channel_duration()
 
@@ -40,8 +41,6 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 	if should_cancel && !current_state.can_cancel(): return
 	if !can_cast(spell, target): return
 
-	me.stats.mana_current = me.stats.mana_current - spell.get_mana_cost()
-
 	var deffered_animation := animation_playback.get_current_node()
 	var deffered_state: AIState = idle_state
 	if current_state in [run_state, attack_state]:
@@ -59,6 +58,8 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 		animation_playback.travel(spell.data.animation_name)
 		animation_changed = true
 
+	cancelled = false
+
 	if !cancelled && has_cast:
 		spell.state = Spell.State.CASTING
 		timer_start(cast_time)
@@ -73,20 +74,23 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 		else: spell.channeling_success_stop()
 		spell.channeling_stop()
 
+	spell.put_on_cooldown()
+	if should_cancel:
+		current_spell = null
+
 	if !cancelled:
-		spell.state = Spell.State.EXECUTING
+		me.stats.mana_current -= spell.get_mana_cost()
 		spell.cast(target, target_position)
+
 		if should_cancel:
-			current_spell.put_on_cooldown()
-			current_spell = null
-			cancelled = false
-			match deffered_state: #TODO: try_enter_again
+			match deffered_state: #TODO: try_enter_prev
 				run_state: run_state.try_enter()
 				attack_state: attack_state.try_enter()
 				_: idle_state.try_enter()
 			deffered_state = null
-		elif animation_changed:
+		if animation_changed:
 			animation_playback.travel(deffered_animation)
+
 
 func can_cancel() -> bool:
 	return (
@@ -98,9 +102,6 @@ func can_cancel() -> bool:
 func on_exit() -> void:
 	if current_spell != null && current_spell.state in [Spell.State.CASTING, Spell.State.CHANNELING]:
 		timeout_or_canceled_emit(true)
-		current_spell.put_on_cooldown()
-		current_spell = null
-		cancelled = false
 
 func can_cast(spell: Spell, target: Unit = null) -> bool:
 	var status := me.status

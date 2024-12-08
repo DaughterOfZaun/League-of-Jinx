@@ -50,12 +50,14 @@ enum State {
 	READY,
 	CASTING,
 	CHANNELING,
-	EXECUTING,
 	COOLDOWN,
 }
 
 var timer := Timer.new()
 signal timeout_or_canceled()
+func timeout_or_canceled_emit() -> void:
+	timer.stop()
+	timeout_or_canceled.emit()
 
 var missile_bone_idx := -1
 
@@ -86,7 +88,7 @@ func on_update_actions() -> void:
 		channeling_update_actions()
 
 func get_by_level(a: Array) -> float:
-	return 0. if len(a) == 0 else a[clampi(0, len(a) - 1, level)]
+	return 0. if len(a) == 0 else a[clampi(level, 0, len(a) - 1)]
 
 func get_cooldown() -> float:
 	return data.cooldown + get_by_level(data.cooldown_by_level)
@@ -178,7 +180,6 @@ func cast(
 	self.drag_end_position = end_pos
 	self.targets_hit = 0
 
-	state = State.READY
 	self_execute()
 
 	if has_missile:
@@ -210,10 +211,11 @@ func _target_execute(target: Unit, missile: Missile) -> void:
 	target.being_spell_hit.emit(caster, spell)
 	target_execute(target, missile)
 
-func put_on_cooldown() -> void:
-	state = State.COOLDOWN
-	timer.start(get_cooldown())
-	await timeout_or_canceled
+func put_on_cooldown(time_sec := get_cooldown()) -> void:
+	if !is_zero_approx(time_sec):
+		state = State.COOLDOWN
+		timer.start(time_sec)
+		await timeout_or_canceled
 	state = State.READY
 
 func self_execute() -> void: pass
@@ -248,7 +250,14 @@ func set_cost_inc_multiplicative(cost: float, par_type: Enums.PARType) -> void:
 	push_warning("Spell.set_cost_inc_multiplicative is unimplemented")
 
 func set_cooldown(src: float, broadcast_event := false) -> void:
-	push_warning("Spell.set_cooldown is unimplemented")
+	if is_zero_approx(src) && state == State.COOLDOWN:
+		timeout_or_canceled_emit()
+	elif state in [ State.COOLDOWN, State.READY ]:
+		put_on_cooldown(src)
+	else:
+		# Should I cancel the cast/channel
+		# or just use a different cooldown later?
+		assert(false)
 
 func set_tool_tip_var(index: int, value: float) -> void:
 	push_warning("Spell.set_tool_tip_var is unimplemented")

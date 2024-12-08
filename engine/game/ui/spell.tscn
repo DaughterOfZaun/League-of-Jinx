@@ -4,13 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://bmblqfb85gtl1" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/Ahri_OrbofDeception.webp" id="1_wtlgq"]
 [ext_resource type="Script" uid="uid://bfckyo2u30w8e" path="res://engine/game/ui/clock.gd" id="3_4dm5e"]
 
-[node name="Spell" type="Control"]
+[node name="Spell" type="Control" node_paths=PackedStringArray("icon_texture_rect", "seal_color_rect", "cooldown_progress_bar", "cooldown_label", "key_label")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 17.0
 offset_bottom = 34.0
 size_flags_horizontal = 3
 script = ExtResource("1_6unfi")
+icon_texture_rect = NodePath("AspectRatioContainer/IconTexture")
+seal_color_rect = NodePath("AspectRatioContainer/ColorRect")
+cooldown_progress_bar = NodePath("AspectRatioContainer/CooldownBar")
+cooldown_label = NodePath("AspectRatioContainer/CooldownBar/CooldownLabel")
+key_label = NodePath("KeyLabel")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 layout_mode = 1
@@ -26,6 +31,10 @@ layout_mode = 2
 texture = ExtResource("1_wtlgq")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="AspectRatioContainer"]
+layout_mode = 2
+color = Color(0.314, 0.314, 0.314, 0.75)
 
 [node name="CooldownBar" type="TextureProgressBar" parent="AspectRatioContainer"]
 unique_name_in_owner = true

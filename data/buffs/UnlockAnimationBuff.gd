@@ -1,4 +1,4 @@
 class_name UnlockAnimationBuff extends Buff
 
-func _init() -> void:
-	push_warning("UnlockAnimationBuff is unimplemented")
+func on_deactivate(expired: bool) -> void:
+	host.unlock_animation()

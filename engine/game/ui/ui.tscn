@@ -1,6 +1,6 @@
 [gd_scene load_steps=33 format=3 uid="uid://diknhd1061r8r"]
 
-[ext_resource type="Texture2D" uid="uid://blu7c68psvgas" path="res://data/screenshots/screenshot_2.png" id="1_qwp58"]
+[ext_resource type="Texture2D" uid="uid://sfh85de872b8" path="res://data/screenshots/screenshot_3.png" id="1_0j1eb"]
 [ext_resource type="Script" uid="uid://bmu4xiepnom3l" path="res://engine/game/ui/center.gd" id="2_84jna"]
 [ext_resource type="Texture2D" uid="uid://w7g1bytpvupe" path="res://data/characters/Ahri/Passive/Ahri_SoulEater.webp" id="2_foojt"]
 [ext_resource type="PackedScene" uid="uid://demalxnr8x6to" path="res://engine/game/ui/spell.tscn" id="3_0bgng"]
@@ -56,7 +56,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("1_qwp58")
+texture = ExtResource("1_0j1eb")
 expand_mode = 2
 
 [node name="Center" type="Control" parent="." node_paths=PackedStringArray("q", "w", "e", "r", "d", "f", "b", "healthbar", "manabar", "channel_bar", "channel_bar_label", "channel_bar_range")]
