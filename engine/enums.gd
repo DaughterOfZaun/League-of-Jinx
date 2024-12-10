@@ -299,6 +299,9 @@ enum PARType
 enum EmoteType {
 	NONE, JOKE, TAUNT, DANCE, LAUGH
 }
+static var EmoteType_to_StringName: Array[StringName] = [
+	&"Idle1", &"Joke", &"Taunt", &"Dance", &"Laugh",
+]
 static func EmoteType_to_string(i: int) -> String:
 	return str(EmoteType.keys()[i]).to_pascal_case()
 

@@ -41,7 +41,6 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 	if should_cancel && !current_state.can_cancel(): return
 	if !can_cast(spell, target): return
 
-	var deffered_animation := animation_playback.get_current_node()
 	var deffered_state: AIState = idle_state
 	if current_state in [run_state, attack_state]:
 		deffered_state = current_state
@@ -53,10 +52,8 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 	if should_cancel && target_position != me.position_3d:
 		me.face_direction(target_position)
 
-	var animation_changed := false
 	if !spell.data.animation_name.is_empty():
-		animation_playback.travel(spell.data.animation_name)
-		animation_changed = true
+		animation.play(spell.data.animation_name)
 
 	cancelled = false
 
@@ -88,9 +85,6 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 				attack_state: attack_state.try_enter()
 				_: idle_state.try_enter()
 			deffered_state = null
-		if animation_changed:
-			animation_playback.travel(deffered_animation)
-
 
 func can_cancel() -> bool:
 	return (

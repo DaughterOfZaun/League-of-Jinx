@@ -619,7 +619,6 @@ particle_uv_scroll_rate = Vector2(0, -0.1)
 [node name="GPUParticles3D" type="GPUParticles3D" parent="cylinderlines1"]
 material_override = SubResource("ShaderMaterial_yrapy")
 cast_shadow = 0
-emitting = false
 amount = 48
 lifetime = 6.0
 one_shot = true
@@ -653,7 +652,6 @@ particle_uv_scroll_rate = Vector2(0, 0.1)
 [node name="GPUParticles3D" type="GPUParticles3D" parent="cylinderlines2"]
 material_override = SubResource("ShaderMaterial_6nojr")
 cast_shadow = 0
-emitting = false
 amount = 48
 lifetime = 6.0
 one_shot = true

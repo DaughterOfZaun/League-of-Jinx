@@ -2,13 +2,11 @@ class_name AI extends LuaScript
 
 @onready var me: Unit = get_parent()
 
-@onready var animation_tree: AnimationTree = me.find_child("AnimationTree")
-@onready var animation_player: AnimationPlayer = animation_tree.get_node(animation_tree.anim_player)
-@onready var animation_playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+@onready var animation: AnimationController = me.find_child("AnimationTree")
 
-@onready var acquisition_range: Area3D = me.find_child('AcquisitionRange')
-@onready var attack_range: Area3D = me.find_child('AttackRange')
-@onready var cancel_attack_range: Area3D = me.find_child('CancelAttackRange')
+@onready var acquisition_range: Area3D = me.find_child('AcquisitionRange', false)
+@onready var attack_range: Area3D = me.find_child('AttackRange', false)
+@onready var cancel_attack_range: Area3D = me.find_child('CancelAttackRange', false)
 
 var target: Unit = null
 var target_position := Vector3.INF:
@@ -39,9 +37,9 @@ func find_target_in_ac_r() -> Unit:
 	return best_match
 
 func target_in_attack_range() -> bool:
-	return attack_range.overlaps_area(target.find_child('GameplayRange') as Area3D)
+	return attack_range.overlaps_area(target.find_child('GameplayRange', false) as Area3D)
 func target_in_cancel_attack_range() -> bool:
-	return cancel_attack_range.overlaps_area(target.find_child('GameplayRange') as Area3D)
+	return cancel_attack_range.overlaps_area(target.find_child('GameplayRange', false) as Area3D)
 func get_taunt_target() -> Unit:
 	return null
 func is_target_lost() -> bool:
@@ -72,10 +70,10 @@ func set_state_and_move_internal(state: Enums.AIState, target: Unit, target_posi
 	set_target_and_target_position(target, target_position)
 	run_state.try_enter()
 
-@onready var run_state := find_child("AIRunState") as AIRunState
-@onready var idle_state := find_child("AIIdleState") as AIIdleState
-@onready var cast_state := find_child("AICastState") as AICastState
-@onready var attack_state := find_child("AIAttackState") as AIAttackState
+@onready var run_state := find_child("AIRunState", false) as AIRunState
+@onready var idle_state := find_child("AIIdleState", false) as AIIdleState
+@onready var cast_state := find_child("AICastState", false) as AICastState
+@onready var attack_state := find_child("AIAttackState", false) as AIAttackState
 @onready var current_state: AIState = idle_state
 func switch_to(state: AIState) -> void:
 	current_state.on_exit()

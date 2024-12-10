@@ -252,7 +252,7 @@ var target: Unit
 @export_group("")
 
 func get_target_child(type: GDScript, name: String) -> Variant:
-	var child := target.find_child(name)
+	var child := target.find_child(name, false)
 	if !child:
 		child = type.new()
 		target.add_child(child)

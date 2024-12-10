@@ -10,6 +10,7 @@ var spells: Spells
 var passive: Passive
 var vars: Vars
 var ai: AI
+var animation: AnimationController
 
 func issue_order(order: Enums.OrderType, targetOfOrderPosition := Vector3.INF, targetOfOrder: Unit = null) -> void:
 	ai.order(order, targetOfOrderPosition, targetOfOrder)
@@ -224,7 +225,7 @@ func stop_current_override_animation(animation_name: String, blend: bool) -> voi
 	push_warning("Unit.stop_current_override_animation is unimplemented")
 func clear_override_animation(to_override_anim: String) -> void:
 	push_warning("Unit.clear_override_animation is unimplemented")
-func play_animation(animation_name: String, scale_time: float, loop: bool, blend: bool, lock: bool = false) -> void:
+func play_animation(animation_name: StringName, scale_time: float, loop: bool, blend: bool, lock: bool = false) -> void:
 	push_warning("Unit.play_animation is unimplemented")
 func unlock_animation(blend: bool = false) -> void:
 	push_warning("Unit.unlock_animation is unimplemented")

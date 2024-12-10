@@ -1,7 +1,7 @@
 class_name AIRunState extends AIState
 
-@onready var character_body := ai.get_parent() as CharacterBody3D
-@onready var navigation_agent := me.find_child("NavigationAgent3D") as NavigationAgent3D
+@onready var character_body: CharacterBody3D = ai.get_parent()
+@onready var navigation_agent: NavigationAgent3D = me.find_child("NavigationAgent3D", false)
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
@@ -38,7 +38,7 @@ func try_enter() -> void:
 	if !current_state.can_cancel(): return
 	switch_to_self()
 	is_running = true
-	animation_playback.travel("Run")
+	animation.set_default(&"Run")
 	navigation_agent.target_position = target_position * Data.HW2GD
 	navigation_agent.avoidance_priority = 0
 func on_exit() -> void:

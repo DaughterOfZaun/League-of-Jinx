@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://dgxp55bfpc742"]
+[gd_scene load_steps=74 format=3 uid="uid://dgxp55bfpc742"]
 
 [ext_resource type="Script" uid="uid://4a06w3g4bx3a" path="res://engine/unit/champion.gd" id="1_7i6v8"]
 [ext_resource type="Script" uid="uid://dksbt75edeseg" path="res://engine/game/ui/minimap/minimap_icon.gd" id="2_81mpc"]
@@ -20,10 +20,11 @@
 [ext_resource type="Script" uid="uid://cfp7n61elnlki" path="res://engine/buffs/buff_manager.gd" id="16_su6i3"]
 [ext_resource type="Script" uid="uid://cxodj84eu1gx7" path="res://engine/passive/passive.gd" id="17_36pd6"]
 [ext_resource type="PackedScene" uid="uid://brt0fmysxvs5g" path="res://data/characters/Ahri/Skins/Base/Ahri.glb" id="18_x0hbm"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://bj5tpjmt4q2fk" path="res://data/characters/Ahri/Skins/Base/Animations.tres" id="19_66ge0"]
 [ext_resource type="Script" uid="uid://cnkcmd8f7yv4q" path="res://engine/spells/spell_manager.gd" id="20_ecg27"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://ds58co1e3f0wn" path="res://data/characters/Ahri/Skins/Base/Animations_v2.tres" id="21_2vy42"]
 [ext_resource type="Script" uid="uid://cbgjcxjyyqgy2" path="res://engine/spells/attacks/crit_attack.gd" id="21_10hyd"]
 [ext_resource type="Script" uid="uid://hsoruaed7p5o" path="res://engine/spells/attacks/crit_attack_data.gd" id="22_i5ydy"]
+[ext_resource type="Script" path="res://engine/game/animation.gd" id="22_rdujr"]
 [ext_resource type="Script" uid="uid://spnut3ga6dx8" path="res://engine/spells/attacks/basic_attack.gd" id="23_i33fp"]
 [ext_resource type="Script" uid="uid://clobsbokippjm" path="res://engine/spells/attacks/basic_attack_data.gd" id="24_dggeg"]
 [ext_resource type="Script" uid="uid://cvpxefwcj71qc" path="res://data/characters/Ahri/S1_Q_OrbOfDeception/AhriOrbofDeceptionSpell.gd" id="25_7cysh"]
@@ -306,9 +307,31 @@ skeleton = NodePath("../..")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../SkinnedMesh")
-tree_root = ExtResource("19_66ge0")
+tree_root = ExtResource("21_2vy42")
 anim_player = NodePath("../SkinnedMesh/AnimationPlayer")
-parameters/Attack/TimeScale/scale = 1.0
+script = ExtResource("22_rdujr")
+nodes = Dictionary[StringName, StringName]({
+&"Attack1": &"Attack1",
+&"Attack2": &"Attack2",
+&"Channel": &"Channel",
+&"Channel_WNDUP": &"Channel_WNDUP",
+&"Crit": &"Crit",
+&"Dance": &"Dance",
+&"Death": &"Death",
+&"Idle1": &"Idle1",
+&"Idle2": &"Idle2",
+&"Idle3": &"Idle3",
+&"Idle4": &"Idle4",
+&"Idle5": &"Idle5",
+&"Joke": &"Joke",
+&"Laugh": &"Laugh",
+&"Run": &"Run",
+&"Spell1": &"Spell1",
+&"Spell2": &"Spell2",
+&"Spell3": &"Spell3",
+&"Spell4": &"Spell4",
+&"Taunt": &"Taunt"
+})
 
 [node name="Indicator" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
