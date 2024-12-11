@@ -16,7 +16,7 @@ func try_enter() -> void:
 	switch_to_self()
 	is_running = true
 	just_entered_state = true
-	animation.set_default(&"Idle1")
+	animation.switch_loop(&"Idle1")
 	me.face_direction(target.position_3d)
 
 var spell_i := 1
@@ -55,11 +55,11 @@ func _physics_process(delta: float) -> void:
 	##var time_scale := length / (cooldown_time + xfade_begin + xfade_end)
 	##var time_scale := ((9.0/28.0)*0.9677) / (1.6*(1.0-0.065)*0.3*(1.0-0.236))
 	var time_scale := 1.0
-	if winding_up:
-		time_scale = animation_windup_length / (windup_time + xfade_begin)
+	#if winding_up:
+	time_scale = animation_windup_length / (windup_time + xfade_begin)
 	#else:
 	#	time_scale = (length - animation_windup_length) / (cooldown_time - windup_time + xfade_end)
-	#set_current_animation_time_scale(time_scale)
+	animation.set_time_scale(spell.data.animation_name, time_scale)
 
 
 	#if is not winding up and (animation is not playing or (animation xfade sec from finish and windup_start_point is > xfade sec from here))

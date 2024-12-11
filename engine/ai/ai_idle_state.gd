@@ -7,7 +7,7 @@ func _ready() -> void:
 func try_enter(emote := Enums.EmoteType.NONE) -> void:
 	if !current_state.can_cancel(): return
 	switch_to_self()
-	animation.set_default(&"Idle1")
+	animation.switch_loop(&"Idle1")
 	if emote != Enums.EmoteType.NONE:
 		animation.play(Enums.EmoteType_to_string(emote))
 

@@ -1,0 +1,238 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=31 format=3 uid="uid://bwx612epjcvih"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2vy42"]
+animation = &"Ahri_attack1"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_rdujr"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eh8vk"]
+animation = &"Ahri_attack2"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_sprqx"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g056d"]
+animation = &"Ahri_crit"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_froj6"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u5b30"]
+animation = &"Ahri_dance"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v5ng4"]
+animation = &"Ahri_death"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rdujr"]
+animation = &"Ahri_idle1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jolfr"]
+animation = &"Ahri_idle2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xtypc"]
+animation = &"Ahri_idle3"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v5uvp"]
+animation = &"Ahri_idle4"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_djb7f"]
+animation = &"Ahri_idle5"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y2jlo"]
+animation = &"Ahri_joke"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3vdt2"]
+animation = &"Ahri_laugh"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_op0jf"]
+xfade_time = 0.2
+allow_transition_to_self = true
+input_0/name = "Idle1"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "Death"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_gqv7u"]
+xfade_time = 0.2
+input_0/name = "OneShot"
+input_0/auto_advance = true
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Loop"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="Curve" id="Curve_2vy42"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_u5b30"]
+xfade_time = 0.2
+xfade_curve = SubResource("Curve_2vy42")
+allow_transition_to_self = true
+input_0/name = "Attack1"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Attack2"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "Crit"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+input_3/name = "Run"
+input_3/auto_advance = false
+input_3/break_loop_at_end = false
+input_3/reset = true
+input_4/name = "Spell1"
+input_4/auto_advance = false
+input_4/break_loop_at_end = false
+input_4/reset = true
+input_5/name = "Spell2"
+input_5/auto_advance = false
+input_5/break_loop_at_end = false
+input_5/reset = true
+input_6/name = "Spell3"
+input_6/auto_advance = false
+input_6/break_loop_at_end = false
+input_6/reset = true
+input_7/name = "Spell4"
+input_7/auto_advance = false
+input_7/break_loop_at_end = false
+input_7/reset = true
+input_8/name = "Joke"
+input_8/auto_advance = false
+input_8/break_loop_at_end = false
+input_8/reset = true
+input_9/name = "Taunt"
+input_9/auto_advance = false
+input_9/break_loop_at_end = false
+input_9/reset = true
+input_10/name = "Dance"
+input_10/auto_advance = false
+input_10/break_loop_at_end = false
+input_10/reset = true
+input_11/name = "Laugh"
+input_11/auto_advance = false
+input_11/break_loop_at_end = false
+input_11/reset = true
+input_12/name = "Idle1"
+input_12/auto_advance = false
+input_12/break_loop_at_end = false
+input_12/reset = true
+input_13/name = "Idle2"
+input_13/auto_advance = false
+input_13/break_loop_at_end = false
+input_13/reset = true
+input_14/name = "Idle3"
+input_14/auto_advance = false
+input_14/break_loop_at_end = false
+input_14/reset = true
+input_15/name = "Idle4"
+input_15/auto_advance = false
+input_15/break_loop_at_end = false
+input_15/reset = true
+input_16/name = "Idle5"
+input_16/auto_advance = false
+input_16/break_loop_at_end = false
+input_16/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sprqx"]
+animation = &"Ahri_run"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_g056d"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_froj6"]
+animation = &"Ahri_spell1"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_u5b30"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q6yhp"]
+animation = &"Ahri_spell2"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_jolfr"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0soi2"]
+animation = &"Ahri_spell3"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_2vy42"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nxkfm"]
+animation = &"Ahri_spell4"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_eh8vk"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ac8m6"]
+animation = &"Ahri_taunt"
+
+[resource]
+graph_offset = Vector2(-319.7, 87.9806)
+nodes/Attack1/node = SubResource("AnimationNodeAnimation_2vy42")
+nodes/Attack1/position = Vector2(-120, -140)
+nodes/Attack1TimeScale/node = SubResource("AnimationNodeTimeScale_rdujr")
+nodes/Attack1TimeScale/position = Vector2(20, -140)
+nodes/Attack2/node = SubResource("AnimationNodeAnimation_eh8vk")
+nodes/Attack2/position = Vector2(-120, 20)
+nodes/Attack2TimeScale/node = SubResource("AnimationNodeTimeScale_sprqx")
+nodes/Attack2TimeScale/position = Vector2(20, 20)
+nodes/Crit/node = SubResource("AnimationNodeAnimation_g056d")
+nodes/Crit/position = Vector2(-120, 180)
+nodes/CritTimeScale/node = SubResource("AnimationNodeTimeScale_froj6")
+nodes/CritTimeScale/position = Vector2(20, 180)
+nodes/Dance/node = SubResource("AnimationNodeAnimation_u5b30")
+nodes/Dance/position = Vector2(400, 460)
+nodes/Death/node = SubResource("AnimationNodeAnimation_v5ng4")
+nodes/Death/position = Vector2(220, 1220)
+nodes/Idle1/node = SubResource("AnimationNodeAnimation_rdujr")
+nodes/Idle1/position = Vector2(400, 620)
+nodes/Idle2/node = SubResource("AnimationNodeAnimation_jolfr")
+nodes/Idle2/position = Vector2(540, 680)
+nodes/Idle3/node = SubResource("AnimationNodeAnimation_xtypc")
+nodes/Idle3/position = Vector2(400, 780)
+nodes/Idle4/node = SubResource("AnimationNodeAnimation_v5uvp")
+nodes/Idle4/position = Vector2(540, 840)
+nodes/Idle5/node = SubResource("AnimationNodeAnimation_djb7f")
+nodes/Idle5/position = Vector2(400, 940)
+nodes/Joke/node = SubResource("AnimationNodeAnimation_y2jlo")
+nodes/Joke/position = Vector2(400, 300)
+nodes/Laugh/node = SubResource("AnimationNodeAnimation_3vdt2")
+nodes/Laugh/position = Vector2(540, 520)
+nodes/LoopTransition/node = SubResource("AnimationNodeTransition_op0jf")
+nodes/LoopTransition/position = Vector2(400, 1100)
+nodes/MainTransition/node = SubResource("AnimationNodeTransition_gqv7u")
+nodes/MainTransition/position = Vector2(800, 560)
+nodes/OneShotTransition/node = SubResource("AnimationNodeTransition_u5b30")
+nodes/OneShotTransition/position = Vector2(220, 320)
+nodes/Run/node = SubResource("AnimationNodeAnimation_sprqx")
+nodes/Run/position = Vector2(-120, 340)
+nodes/RunTimeScale/node = SubResource("AnimationNodeTimeScale_g056d")
+nodes/RunTimeScale/position = Vector2(20, 340)
+nodes/Spell1/node = SubResource("AnimationNodeAnimation_froj6")
+nodes/Spell1/position = Vector2(-120, 500)
+nodes/Spell1TimeScale/node = SubResource("AnimationNodeTimeScale_u5b30")
+nodes/Spell1TimeScale/position = Vector2(20, 500)
+nodes/Spell2/node = SubResource("AnimationNodeAnimation_q6yhp")
+nodes/Spell2/position = Vector2(-120, 660)
+nodes/Spell2TimeScale/node = SubResource("AnimationNodeTimeScale_jolfr")
+nodes/Spell2TimeScale/position = Vector2(20, 660)
+nodes/Spell3/node = SubResource("AnimationNodeAnimation_0soi2")
+nodes/Spell3/position = Vector2(-120, 820)
+nodes/Spell3TimeScale/node = SubResource("AnimationNodeTimeScale_2vy42")
+nodes/Spell3TimeScale/position = Vector2(20, 820)
+nodes/Spell4/node = SubResource("AnimationNodeAnimation_nxkfm")
+nodes/Spell4/position = Vector2(-120, 980)
+nodes/Spell4TimeScale/node = SubResource("AnimationNodeTimeScale_eh8vk")
+nodes/Spell4TimeScale/position = Vector2(20, 980)
+nodes/TauntStateMachine/node = SubResource("AnimationNodeAnimation_ac8m6")
+nodes/TauntStateMachine/position = Vector2(540, 360)
+nodes/output/position = Vector2(1020, 560)
+node_connections = [&"Attack1TimeScale", 0, &"Attack1", &"Attack2TimeScale", 0, &"Attack2", &"CritTimeScale", 0, &"Crit", &"LoopTransition", 0, &"Idle1", &"LoopTransition", 1, &"RunTimeScale", &"LoopTransition", 2, &"Death", &"MainTransition", 0, &"OneShotTransition", &"MainTransition", 1, &"LoopTransition", &"OneShotTransition", 0, &"Attack1TimeScale", &"OneShotTransition", 1, &"Attack2TimeScale", &"OneShotTransition", 2, &"CritTimeScale", &"OneShotTransition", 4, &"Spell1TimeScale", &"OneShotTransition", 5, &"Spell2TimeScale", &"OneShotTransition", 6, &"Spell3TimeScale", &"OneShotTransition", 7, &"Spell4TimeScale", &"OneShotTransition", 8, &"Joke", &"OneShotTransition", 9, &"TauntStateMachine", &"OneShotTransition", 10, &"Dance", &"OneShotTransition", 11, &"Laugh", &"OneShotTransition", 13, &"Idle2", &"OneShotTransition", 14, &"Idle3", &"OneShotTransition", 15, &"Idle4", &"OneShotTransition", 16, &"Idle5", &"RunTimeScale", 0, &"Run", &"Spell1TimeScale", 0, &"Spell1", &"Spell2TimeScale", 0, &"Spell2", &"Spell3TimeScale", 0, &"Spell3", &"Spell4TimeScale", 0, &"Spell4", &"output", 0, &"MainTransition"]

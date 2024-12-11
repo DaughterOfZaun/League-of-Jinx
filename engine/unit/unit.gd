@@ -218,20 +218,6 @@ func cancel_auto_attack(reset: bool) -> void:
 func skip_next_auto_attack() -> void:
 	push_warning("Unit.skip_next_auto_attack is unimplemented")
 #endregion
-#region Animation
-func override_animation(to_override_anim: String, override_anim: String) -> void:
-	push_warning("Unit.override_animation is unimplemented")
-func stop_current_override_animation(animation_name: String, blend: bool) -> void:
-	push_warning("Unit.stop_current_override_animation is unimplemented")
-func clear_override_animation(to_override_anim: String) -> void:
-	push_warning("Unit.clear_override_animation is unimplemented")
-func play_animation(animation_name: StringName, scale_time: float, loop: bool, blend: bool, lock: bool = false) -> void:
-	push_warning("Unit.play_animation is unimplemented")
-func unlock_animation(blend: bool = false) -> void:
-	push_warning("Unit.unlock_animation is unimplemented")
-func pause_animation(pause: bool) -> void:
-	push_warning("Unit.pause_animation is unimplemented")
-#endregion
 #region Shields
 func modify_shield(amount: float = 0, magic_shield: bool = false, physical_shield: bool = false, no_fade: bool = false) -> void:
 	push_warning("Unit.modify_shield is unimplemented")

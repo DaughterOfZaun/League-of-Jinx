@@ -23,39 +23,44 @@ let fnames = [
 	"Ahri_spell1",
 ];
 let animations = Object.entries({
-	Attack1: "Ahri_attack1",
-	Attack2: "Ahri_attack2",
-	Channel: "Ahri_channel",
-	Channel_WNDUP: "Ahri_channel_windup",
-	Crit: "Ahri_Crit",
-	Dance: "Ahri_Dance",
-	//"Dance": "Ahri_hanbok_Dance",
-	Death: "Ahri_Death",
 	Idle1: "Ahri_Idle1",
 	Idle2: "Ahri_Idle2",
 	Idle3: "Ahri_Idle3",
 	Idle4: "Ahri_Idle4",
 	Idle5: "Ahri_Idle5",
+	
 	Joke: "Ahri_Joke",
+	Taunt: "Ahri_Taunt",
+	//"Dance": "Ahri_hanbok_Dance",
+	Dance: "Ahri_Dance",
 	Laugh: "Ahri_Laugh",
+	
 	Run: "Ahri_Run",
+
+	Attack1: "Ahri_attack1",
+	Attack2: "Ahri_attack2",
+	Crit: "Ahri_Crit",
+	
+	//Channel: "Ahri_channel",
+	//Channel_WNDUP: "Ahri_channel_windup",
+	Death: "Ahri_Death",
+
 	Spell1: "Ahri_Spell1",
 	Spell2: "Ahri_Spell2",
 	Spell3: "Ahri_Spell3",
 	Spell4: "Ahri_Spell4",
-	Taunt: "Ahri_Taunt",
 }).map(([alias, name], i, a) => ({
 	id: i.toString(36).padStart(5, "0"),
 	name: fnames.find((fname) => fname.toLowerCase() == name.toLowerCase()),
 	alias,
 	position: [
-		d * Math.cos(i * ((Math.PI * 2) / a.length)),
+		d * -Math.cos(i * ((Math.PI * 2) / a.length)),
 		d * Math.sin(i * ((Math.PI * 2) / a.length)),
 	],
 }));
 
 let transitions: { id: string; from: string; to: string }[] = [];
-/*
+///*
 for (let i = 0; i < animations.length; i++)
 	for (let j = 0; j < animations.length; j++)
 		if (i != j)
@@ -66,7 +71,7 @@ for (let i = 0; i < animations.length; i++)
 				from: animations[i].alias,
 				to: animations[j].alias,
 			});
-*/
+//*/
 let res = "";
 res += `[gd_resource type="AnimationNodeStateMachine" load_steps=${animations.length + transitions.length} format=3 uid="uid://bj5tpjmt4q2fk"]\n`;
 for (let animation of animations)

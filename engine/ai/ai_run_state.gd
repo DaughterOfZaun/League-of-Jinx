@@ -38,7 +38,8 @@ func try_enter() -> void:
 	if !current_state.can_cancel(): return
 	switch_to_self()
 	is_running = true
-	animation.set_default(&"Run")
+	animation.switch_loop(&"Run")
+	animation.switch_to_loop()
 	navigation_agent.target_position = target_position * Data.HW2GD
 	navigation_agent.avoidance_priority = 0
 func on_exit() -> void:

@@ -525,7 +525,6 @@ particle_mesh_disable_backface_cull = true
 [node name="GPUParticles3D" type="GPUParticles3D" parent="hoops"]
 material_override = SubResource("ShaderMaterial_g8fvs")
 cast_shadow = 0
-emitting = false
 amount = 12
 one_shot = true
 process_material = SubResource("ShaderMaterial_mmgu2")
@@ -558,7 +557,6 @@ particle_mesh_disable_backface_cull = true
 [node name="GPUParticles3D" type="GPUParticles3D" parent="hoops2"]
 material_override = SubResource("ShaderMaterial_p87aa")
 cast_shadow = 0
-emitting = false
 amount = 12
 one_shot = true
 process_material = SubResource("ShaderMaterial_ieirk")
@@ -586,7 +584,6 @@ particle_uv_scroll_rate = Vector2(0, -0.1)
 [node name="GPUParticles3D" type="GPUParticles3D" parent="beams"]
 material_override = SubResource("ShaderMaterial_10fx5")
 cast_shadow = 0
-emitting = false
 amount = 1
 one_shot = true
 process_material = SubResource("ShaderMaterial_kvwu0")
