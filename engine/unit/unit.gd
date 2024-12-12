@@ -272,17 +272,17 @@ func apply_assist_marker(source: Unit, duration: float) -> void:
 
 func can_see(target: Unit) -> bool:
 	push_warning("Unit.can_see is unimplemented")
-	return false
+	return true
 func is_in_front(target: Unit) -> bool:
 	push_warning("Unit.is_in_front is unimplemented")
-	return false
+	return true
 func is_behind(target: Unit) -> bool:
 	push_warning("Unit.is_behind is unimplemented")
 	return false
 
 func get_nearest_passable_position(pos: Vector3) -> Vector3:
 	push_warning("Unit.get_nearest_passable_position is unimplemented")
-	return Vector3.INF
+	return pos
 
 func stop_channeling(condition: Enums.ChannelingStopCondition, souce: Enums.ChannelingStopSource) -> void:
 	push_warning("unimplemented")

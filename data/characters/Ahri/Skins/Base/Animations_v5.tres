@@ -145,6 +145,10 @@ input_16/name = "Idle5"
 input_16/auto_advance = false
 input_16/break_loop_at_end = false
 input_16/reset = true
+input_17/name = "Death"
+input_17/auto_advance = false
+input_17/break_loop_at_end = false
+input_17/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sprqx"]
 animation = &"Ahri_run"
@@ -175,7 +179,6 @@ animation = &"Ahri_spell4"
 animation = &"Ahri_taunt"
 
 [resource]
-graph_offset = Vector2(-319.7, 87.9806)
 nodes/Attack1/node = SubResource("AnimationNodeAnimation_2vy42")
 nodes/Attack1/position = Vector2(-120, -140)
 nodes/Attack1TimeScale/node = SubResource("AnimationNodeTimeScale_rdujr")
@@ -232,7 +235,7 @@ nodes/Spell4/node = SubResource("AnimationNodeAnimation_nxkfm")
 nodes/Spell4/position = Vector2(-120, 980)
 nodes/Spell4TimeScale/node = SubResource("AnimationNodeTimeScale_eh8vk")
 nodes/Spell4TimeScale/position = Vector2(20, 980)
-nodes/TauntStateMachine/node = SubResource("AnimationNodeAnimation_ac8m6")
-nodes/TauntStateMachine/position = Vector2(540, 360)
+nodes/Taunt/node = SubResource("AnimationNodeAnimation_ac8m6")
+nodes/Taunt/position = Vector2(540, 360)
 nodes/output/position = Vector2(1020, 560)
-node_connections = [&"Attack1TimeScale", 0, &"Attack1", &"Attack2TimeScale", 0, &"Attack2", &"CritTimeScale", 0, &"Crit", &"LoopTransition", 0, &"Idle1", &"LoopTransition", 1, &"RunTimeScale", &"LoopTransition", 2, &"Death", &"MainTransition", 0, &"OneShotTransition", &"MainTransition", 1, &"LoopTransition", &"OneShotTransition", 0, &"Attack1TimeScale", &"OneShotTransition", 1, &"Attack2TimeScale", &"OneShotTransition", 2, &"CritTimeScale", &"OneShotTransition", 4, &"Spell1TimeScale", &"OneShotTransition", 5, &"Spell2TimeScale", &"OneShotTransition", 6, &"Spell3TimeScale", &"OneShotTransition", 7, &"Spell4TimeScale", &"OneShotTransition", 8, &"Joke", &"OneShotTransition", 9, &"TauntStateMachine", &"OneShotTransition", 10, &"Dance", &"OneShotTransition", 11, &"Laugh", &"OneShotTransition", 13, &"Idle2", &"OneShotTransition", 14, &"Idle3", &"OneShotTransition", 15, &"Idle4", &"OneShotTransition", 16, &"Idle5", &"RunTimeScale", 0, &"Run", &"Spell1TimeScale", 0, &"Spell1", &"Spell2TimeScale", 0, &"Spell2", &"Spell3TimeScale", 0, &"Spell3", &"Spell4TimeScale", 0, &"Spell4", &"output", 0, &"MainTransition"]
+node_connections = [&"Attack1TimeScale", 0, &"Attack1", &"Attack2TimeScale", 0, &"Attack2", &"CritTimeScale", 0, &"Crit", &"LoopTransition", 0, &"Idle1", &"LoopTransition", 1, &"RunTimeScale", &"LoopTransition", 2, &"Death", &"MainTransition", 0, &"OneShotTransition", &"MainTransition", 1, &"LoopTransition", &"OneShotTransition", 0, &"Attack1TimeScale", &"OneShotTransition", 1, &"Attack2TimeScale", &"OneShotTransition", 2, &"CritTimeScale", &"OneShotTransition", 4, &"Spell1TimeScale", &"OneShotTransition", 5, &"Spell2TimeScale", &"OneShotTransition", 6, &"Spell3TimeScale", &"OneShotTransition", 7, &"Spell4TimeScale", &"OneShotTransition", 8, &"Joke", &"OneShotTransition", 9, &"Taunt", &"OneShotTransition", 10, &"Dance", &"OneShotTransition", 11, &"Laugh", &"OneShotTransition", 13, &"Idle2", &"OneShotTransition", 14, &"Idle3", &"OneShotTransition", 15, &"Idle4", &"OneShotTransition", 16, &"Idle5", &"RunTimeScale", 0, &"Run", &"Spell1TimeScale", 0, &"Spell1", &"Spell2TimeScale", 0, &"Spell2", &"Spell3TimeScale", 0, &"Spell3", &"Spell4TimeScale", 0, &"Spell4", &"output", 0, &"MainTransition"]

@@ -16,7 +16,9 @@ func timeout_or_canceled_emit(cancelled: bool) -> void:
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
+	
 	timer = Timer.new()
+	timer.one_shot = true
 	timer.timeout.connect(func() -> void: timeout_or_canceled.emit())
 	add_child(timer)
 
@@ -114,7 +116,7 @@ func can_cast(spell: Spell, target: Unit = null) -> bool:
 
 	if !!spell.is_sealed: return false
 	if !spell.state == Spell.State.READY: return false
-	if !me.stats.mana_current >= spell.get_mana_cost(): return false
+	if !spell.is_enough_mana_to_cast(): return false
 
 	if !spell.can_cast(): return false
 

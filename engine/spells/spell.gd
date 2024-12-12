@@ -53,7 +53,7 @@ enum State {
 	COOLDOWN,
 }
 
-var timer := Timer.new()
+var timer: Timer
 signal timeout_or_canceled()
 func timeout_or_canceled_emit() -> void:
 	timer.stop()
@@ -64,6 +64,8 @@ var missile_bone_idx := -1
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 
+	timer = Timer.new()
+	timer.one_shot = true
 	timer.timeout.connect(func() -> void: timeout_or_canceled.emit())
 	add_child(timer)
 
@@ -250,10 +252,13 @@ func set_cost_inc_multiplicative(cost: float, par_type: Enums.PARType) -> void:
 	push_warning("Spell.set_cost_inc_multiplicative is unimplemented")
 
 func set_cooldown(src: float, broadcast_event := false) -> void:
-	if is_zero_approx(src) && state == State.COOLDOWN:
-		timeout_or_canceled_emit()
-	elif state in [ State.COOLDOWN, State.READY ]:
+	if state == State.READY:
 		put_on_cooldown(src)
+	elif state == State.COOLDOWN:
+		if is_zero_approx(src):
+			timeout_or_canceled_emit()
+		else:
+			timer.start(src)
 	else:
 		# Should I cancel the cast/channel
 		# or just use a different cooldown later?
@@ -264,3 +269,6 @@ func set_tool_tip_var(index: int, value: float) -> void:
 
 func replace_with(script: Spell) -> void:
 	push_warning("Spell.replace_with is unimplemented")
+
+func is_enough_mana_to_cast() -> bool:
+	return me.stats.mana_current >= spell.get_mana_cost()
