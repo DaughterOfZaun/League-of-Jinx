@@ -74,6 +74,7 @@ func set_state_and_move_internal(state: Enums.AIState, target: Unit, target_posi
 @onready var idle_state := find_child("AIIdleState", false) as AIIdleState
 @onready var cast_state := find_child("AICastState", false) as AICastState
 @onready var attack_state := find_child("AIAttackState", false) as AIAttackState
+@onready var move_state := find_child("AIMoveState", false) as AIMoveState
 @onready var current_state: AIState = idle_state
 func switch_to(state: AIState) -> void:
 	current_state.on_exit()

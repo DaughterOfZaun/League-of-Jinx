@@ -18,6 +18,8 @@ var cast_state: AICastState:
 	get: return ai.cast_state
 var run_state: AIRunState:
 	get: return ai.run_state
+var move_state: AIMoveState:
+	get: return ai.move_state
 var current_state: AIState:
 	get: return ai.current_state
 func on_reached_destination_for_going_to_last_location() -> void:

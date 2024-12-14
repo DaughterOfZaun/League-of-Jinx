@@ -9,11 +9,11 @@ func _ready() -> void:
 	me.buffs = self
 
 var slots: Dictionary[GDScript, Dictionary] = {}
-var null_Dictionary_Unit_BuffSlot: Dictionary[Unit, BuffSlot] = {} #HACK:
+var empty_Dictionary_Unit_BuffSlot: Dictionary[Unit, BuffSlot] = {} #HACK:
 func get_slot(script: GDScript, attacker: Unit, create := false) -> BuffSlot:
 	var slot: BuffSlot = null
-	var slots_with_script: Dictionary[Unit, BuffSlot] = slots.get(script, null_Dictionary_Unit_BuffSlot)
-	if slots_with_script == null:
+	var slots_with_script: Dictionary[Unit, BuffSlot] = slots.get(script, empty_Dictionary_Unit_BuffSlot)
+	if slots_with_script == empty_Dictionary_Unit_BuffSlot:
 		if create:
 			slots_with_script = {}
 			slots[script] = slots_with_script
@@ -109,7 +109,7 @@ func dispell_negative() -> void:
 
 ## Removes all buffs with the specified script, regardless of the attacker who applied them.
 func clear(script: GDScript) -> void:
-	var slots_by_attacker: Dictionary[Unit, BuffSlot] = slots.get(script, [])
+	var slots_by_attacker: Dictionary[Unit, BuffSlot] = slots.get(script, empty_Dictionary_Unit_BuffSlot)
 	for attacker: Unit in slots_by_attacker:
 		var slot: BuffSlot = slots_by_attacker[attacker]
 		slot.clear()

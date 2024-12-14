@@ -153,7 +153,18 @@ func move(
 	ideal_distance: float = 0,
 	movement_orders_facing: Enums.ForceMovementOrdersFacing = 0
 ) -> void:
-	push_warning("Unit.move is unimplemented")
+	var aims := ai.move_state
+	aims.move_target_position = target
+	aims.speed = speed
+	aims.gravity = gravity
+	aims.movement_type = movement_type
+	aims.movement_orders_type = movement_orders_type
+	aims.movement_orders_facing = movement_orders_facing
+	aims.move = AIMoveState.MoveType.TO_POS
+	aims.move_back_by = move_back_by
+	aims.ideal_distance = ideal_distance
+	aims.enter()
+
 func move_away(
 	away_from: Vector3,
 	speed: float,
