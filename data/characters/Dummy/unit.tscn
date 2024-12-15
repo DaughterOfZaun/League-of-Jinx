@@ -1,33 +1,60 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbfh3ax275136"]
+[gd_scene load_steps=10 format=3 uid="uid://cbfh3ax275136"]
 
 [ext_resource type="Script" uid="uid://0hod3dqe7m4i" path="res://engine/unit/unit.gd" id="1_y0p2c"]
 [ext_resource type="Script" uid="uid://xxukqtvfymt0" path="res://engine/unit/unit_data.gd" id="2_7grwr"]
+[ext_resource type="PackedScene" uid="uid://bsjlrji1ixlo3" path="res://data/characters/Dummy/Skin/target_dummy_order.glb" id="3_7grwr"]
 [ext_resource type="Script" uid="uid://dhorowytayhda" path="res://engine/game/range.gd" id="3_tp4xs"]
+[ext_resource type="Material" uid="uid://tp62lsfqwj7b" path="res://data/characters/Dummy/Skin/target_dummy_chaos.tres" id="4_tp4xs"]
+[ext_resource type="Script" uid="uid://hps2qaay130q" path="res://engine/game/animation.gd" id="5_flmsy"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_flmsy"]
-radius = 1.0
-height = 2.0
-radial_segments = 16
-rings = 8
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_flmsy"]
+animation = &"Idle1_Base"
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_u7uog"]
-radius = 1.0
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_u7uog"]
+graph_offset = Vector2(-153, 86)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_flmsy")
+nodes/Idle/position = Vector2(-20, 120)
+nodes/output/position = Vector2(200, 140)
+node_connections = [&"output", 0, &"Idle"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tp4xs"]
+radius = 0.666
+height = 3.2
 
 [node name="Unit" type="Node3D" node_paths=PackedStringArray("data")]
 script = ExtResource("1_y0p2c")
-data = NodePath("UnitData")
+data = NodePath("Data")
 metadata/_custom_type_script = ExtResource("1_y0p2c")
 
-[node name="UnitData" type="Node" parent="."]
+[node name="Data" type="Node" parent="."]
 script = ExtResource("2_7grwr")
 metadata/_custom_type_script = ExtResource("2_7grwr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_flmsy")
+[node name="AuxScene" parent="." instance=ExtResource("3_7grwr")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Node" parent="AuxScene" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="AuxScene/Node/Skeleton" index="0"]
+
+[node name="mesh_0" parent="AuxScene/Node/Skeleton/Skeleton3D" index="0"]
+material_override = ExtResource("4_tp4xs")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../AuxScene")
+tree_root = SubResource("AnimationNodeBlendTree_u7uog")
+anim_player = NodePath("../AuxScene/AnimationPlayer")
+script = ExtResource("5_flmsy")
+metadata/_custom_type_script = ExtResource("5_flmsy")
 
 [node name="GameplayRange" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 script = ExtResource("3_tp4xs")
 metadata/_custom_type_script = ExtResource("3_tp4xs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GameplayRange"]
-shape = SubResource("SphereShape3D_u7uog")
+shape = SubResource("CapsuleShape3D_tp4xs")
+debug_color = Color(0, 0.6, 0.7, 0.42)
+
+[editable path="AuxScene"]

@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c1lw4p3bx5jju"]
+
+[ext_resource type="Texture2D" uid="uid://btpat671g2ojd" path="res://data/characters/Dummy/Skin/target_dummy_order_0.png" id="1_4iyk2"]
+
+[resource]
+resource_name = "lambert1"
+shading_mode = 0
+albedo_texture = ExtResource("1_4iyk2")
+uv1_scale = Vector3(15.8165, 15.7964, 1)
+uv1_offset = Vector3(0.003958, 0.00776702, 0)
+metadata/extras = {
+"hash": 3.52355e+09,
+"visible": true
+}
