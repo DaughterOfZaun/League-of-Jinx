@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="BuffData" load_steps=2 format=3 uid="uid://2mlrclwl3ads"]
+[gd_resource type="Resource" script_class="BuffData" load_steps=3 format=3 uid="uid://2mlrclwl3ads"]
 
 [ext_resource type="Script" uid="uid://bouw5alvreplc" path="res://engine/buffs/buff_data.gd" id="1_a1gtg"]
+[ext_resource type="Texture2D" uid="uid://grnrkvvxiyoj" path="res://data/characters/Ahri/S2_W_FoxFire/Ahri_FoxFire.webp" id="1_sgy4k"]
 
 [resource]
 script = ExtResource("1_a1gtg")
 buff_name = "AhriFoxFire"
 buff_texture_name = "Ahri_FoxFire.dds"
+buff_texture = ExtResource("1_sgy4k")
 minimap_icon_texture_name = ""
 minimap_icon_enemy_texture_name = ""
 popup_message = ""

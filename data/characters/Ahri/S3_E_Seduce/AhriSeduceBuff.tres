@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="BuffData" load_steps=2 format=3 uid="uid://4r7rh6jduvls"]
+[gd_resource type="Resource" script_class="BuffData" load_steps=3 format=3 uid="uid://4r7rh6jduvls"]
 
 [ext_resource type="Script" uid="uid://bouw5alvreplc" path="res://engine/buffs/buff_data.gd" id="1_a1gtg"]
+[ext_resource type="Texture2D" uid="uid://djn0h2uutu5f1" path="res://data/characters/Ahri/S3_E_Seduce/Ahri_Charm.webp" id="1_j866g"]
 
 [resource]
 script = ExtResource("1_a1gtg")
 buff_name = "AhriSeduce"
 buff_texture_name = "Ahri_Charm.dds"
+buff_texture = ExtResource("1_j866g")
 minimap_icon_texture_name = ""
 minimap_icon_enemy_texture_name = ""
 popup_message = ""

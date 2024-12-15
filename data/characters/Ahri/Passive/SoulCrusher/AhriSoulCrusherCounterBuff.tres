@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="BuffData" load_steps=2 format=3 uid="uid://7bs5a8pncsqo"]
+[gd_resource type="Resource" script_class="BuffData" load_steps=3 format=3 uid="uid://7bs5a8pncsqo"]
 
 [ext_resource type="Script" uid="uid://bouw5alvreplc" path="res://engine/buffs/buff_data.gd" id="1_a1gtg"]
+[ext_resource type="Texture2D" uid="uid://xfbxn3ijodjr" path="res://data/characters/Ahri/Passive/Ahri_SoulEater2.webp" id="1_h3miv"]
 
 [resource]
 script = ExtResource("1_a1gtg")
 buff_name = "AhriSoulCrusherCounter"
 buff_texture_name = "Ahri_SoulEater2.dds"
+buff_texture = ExtResource("1_h3miv")
 minimap_icon_texture_name = ""
 minimap_icon_enemy_texture_name = ""
 popup_message = ""
