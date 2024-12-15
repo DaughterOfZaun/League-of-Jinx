@@ -14,6 +14,9 @@ class_name UICenterPanel extends Control
 @export var channel_bar_label: Label
 @export var channel_bar_range: Range
 
+@export var ui_buffs_container: FlowContainer
+@export var ui_buff_scene: PackedScene
+
 func _ready() -> void:
 	channel_bar.visible = false
 
@@ -30,6 +33,11 @@ func bind_to(c: Champion) -> void:
 	)
 	c.ai.cast_state.timeout_or_canceled.connect(func() -> void:
 		channel_bar.visible = false
+	)
+	c.buffs.slot_created.connect(func (slot: BuffSlot, buff: Buff) -> void:
+		var ui_buff: UIBuff = ui_buff_scene.instantiate()
+		ui_buffs_container.add_child(ui_buff)
+		ui_buff.bind_to(slot, buff)
 	)
 
 @onready var health_bar_label: Label = healthbar.find_child("Label", false)

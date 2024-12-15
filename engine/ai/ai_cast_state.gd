@@ -23,7 +23,6 @@ func _ready() -> void:
 	add_child(timer)
 
 func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
-
 	var cast_time := spell.get_cast_time()
 	var channel_duration := spell.get_channel_duration()
 
@@ -42,10 +41,6 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 	#TODO: check range and move into range
 	if should_cancel && !current_state.can_cancel(): return
 	if !can_cast(spell, target): return
-
-	var deffered_state: AIState = idle_state
-	if current_state in [run_state, attack_state]:
-		deffered_state = current_state
 
 	if should_cancel:
 		switch_to_self(); #on_exit()
@@ -78,15 +73,11 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 		current_spell = null
 
 	if !cancelled:
-		me.stats.mana_current -= spell.get_mana_cost()
+		me.stats.mana_current -= max(0, spell.get_mana_cost())
 		spell.cast(target, target_position)
 
 		if should_cancel:
-			match deffered_state: #TODO: try_enter_prev
-				run_state: run_state.try_enter()
-				attack_state: attack_state.try_enter()
-				_: idle_state.try_enter()
-			deffered_state = null
+			switch_to_deffered()
 
 func can_cancel() -> bool:
 	return (

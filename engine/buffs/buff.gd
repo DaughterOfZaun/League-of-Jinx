@@ -62,27 +62,19 @@ func _init() -> void:
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
-	timeout.connect(remove_internal_0.bind(true))
+	timeout.connect(on_timeout)
 	start(self.delay + self.duration)
 	host.connect_all(self)
 	on_activate()
 
-## Can be called by scripts.
-func remove() -> void:
-	if !is_queued_for_deletion():
-		remove_internal_0()
+func remove_self() -> void:
+	slot.mngr.remove_by_instance(self)
 
-## Can be called on timeout. Calls buff manager.
-func remove_internal_0(expired := false) -> void:
+var expired := false
+func on_timeout() -> void:
+	expired = true
 	if !can_mitigate_duration:
-		slot.remove(self)
-	remove_internal_1(expired)
-
-## Can be called by buff manager.
-func remove_internal_1(expired := false) -> void:
-	on_deactivate(expired)
-	if !can_mitigate_duration:
-		queue_free()
+		remove_self()
 
 func on_activate() -> void: pass
 func on_deactivate(_expired: bool) -> void: pass

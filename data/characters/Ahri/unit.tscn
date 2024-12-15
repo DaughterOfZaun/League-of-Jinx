@@ -16,7 +16,7 @@
 [ext_resource type="Script" uid="uid://dn7t5yybqrhd5" path="res://engine/ai/ai_attack_state.gd" id="13_aca3q"]
 [ext_resource type="Script" uid="uid://dcvek1lhy4x2v" path="res://engine/stats.gd" id="14_1rt8n"]
 [ext_resource type="Script" uid="uid://wllpm0ictc2m" path="res://engine/status.gd" id="15_4u6an"]
-[ext_resource type="Script" path="res://engine/ai/ai_move_state.gd" id="15_eh8vk"]
+[ext_resource type="Script" uid="uid://ca43nqrr7riix" path="res://engine/ai/ai_move_state.gd" id="15_eh8vk"]
 [ext_resource type="Script" uid="uid://xxukqtvfymt0" path="res://engine/unit/unit_data.gd" id="16_genta"]
 [ext_resource type="Script" uid="uid://cfp7n61elnlki" path="res://engine/buffs/buff_manager.gd" id="16_su6i3"]
 [ext_resource type="Script" uid="uid://cxodj84eu1gx7" path="res://engine/passive/passive.gd" id="17_36pd6"]
@@ -241,6 +241,7 @@ health_regen_base = 1.1
 health_regen_base_per_level = 0.12
 mana_base = 230.0
 mana_base_per_level = 50.0
+mana_percent = 1.0
 mana_regen_base = 1.25
 mana_regen_base_per_level = 0.12
 movement_speed_base = 305.0
@@ -317,14 +318,14 @@ anim_player = NodePath("../SkinnedMesh/AnimationPlayer")
 parameters/Attack1TimeScale/scale = 1.0
 parameters/Attack2TimeScale/scale = 1.0
 parameters/CritTimeScale/scale = 1.0
-parameters/LoopTransition/current_state = ""
+parameters/LoopTransition/current_state = "Idle1"
 parameters/LoopTransition/transition_request = ""
-parameters/LoopTransition/current_index = -1
-parameters/MainTransition/current_state = ""
+parameters/LoopTransition/current_index = 0
+parameters/MainTransition/current_state = "Loop"
 parameters/MainTransition/transition_request = ""
-parameters/MainTransition/current_index = -1
+parameters/MainTransition/current_index = 1
 parameters/OneShotTransition/current_state = "Laugh"
-parameters/OneShotTransition/transition_request = ""
+parameters/OneShotTransition/transition_request = "Idle1"
 parameters/OneShotTransition/current_index = 11
 parameters/RunTimeScale/scale = 1.0
 parameters/Spell1TimeScale/scale = 1.0

@@ -1,6 +1,7 @@
 class_name Buffs extends Node
 
-#TODO: Signals
+signal slot_created(slot: BuffSlot, buff: Buff)
+
 #TODO: Remove empty slots
 
 @onready var me := get_parent() as Unit
@@ -10,7 +11,7 @@ func _ready() -> void:
 
 var slots: Dictionary[GDScript, Dictionary] = {}
 var empty_Dictionary_Unit_BuffSlot: Dictionary[Unit, BuffSlot] = {} #HACK:
-func get_slot(script: GDScript, attacker: Unit, create := false) -> BuffSlot:
+func get_slot(script: GDScript, attacker: Unit, create := false, buff: Buff = null) -> BuffSlot:
 	var slot: BuffSlot = null
 	var slots_with_script: Dictionary[Unit, BuffSlot] = slots.get(script, empty_Dictionary_Unit_BuffSlot)
 	if slots_with_script == empty_Dictionary_Unit_BuffSlot:
@@ -20,10 +21,13 @@ func get_slot(script: GDScript, attacker: Unit, create := false) -> BuffSlot:
 		else:
 			return null
 	else:
-		if attacker != null: slot = slots_with_script.get(attacker, null)
-		if slot == null: slot = slots_with_script.get(null, null)
-		
-		if len(slots_with_script.keys()) > 1 && (attacker == null || slots_with_script.has(null)):
+		if attacker == null:
+			slot = slots_with_script.values()[0]
+		else:
+			slot = slots_with_script.get(attacker, null)
+			if slot == null: slot = slots_with_script.get(null, null)
+
+		if len(slots_with_script.keys()) > 1 && (slots_with_script.has(null) || attacker == null):
 			var warn := ".stacks_exclusive value is inconsistent. " +\
 				"Either set it to false or pass the attacker to all methods that require it."
 			push_warning(script, warn)
@@ -32,6 +36,7 @@ func get_slot(script: GDScript, attacker: Unit, create := false) -> BuffSlot:
 		if create:
 			slot = BuffSlot.new(self)
 			slots_with_script[attacker] = slot
+			slot_created.emit(slot, buff)
 		else:
 			return null
 
@@ -73,7 +78,7 @@ func add(
 	#	push_warning()
 
 	var script: Script = buff.get_script()
-	var slot := get_slot(script, attacker if stacks_exclusive else null, true)
+	var slot := get_slot(script, attacker if stacks_exclusive else null, true, buff)
 
 	buff.slot = slot
 	buff.attacker = attacker
@@ -101,7 +106,7 @@ func add(
 			slot.add(buff, max_count_to_add).remove_stacks(max_count_to_rem)
 		Enums.BuffAddType.STACKS_AND_CONTINUE:
 			slot.add(buff, max_count_to_add, true).remove_stacks(max_count_to_rem) #TODO
-
+	slot.update()
 
 ## Removes all debuffs, regardless of the attacker who applied them.
 func dispell_negative() -> void:
@@ -113,17 +118,27 @@ func clear(script: GDScript) -> void:
 	for attacker: Unit in slots_by_attacker:
 		var slot: BuffSlot = slots_by_attacker[attacker]
 		slot.clear()
+		slot.update()
 
 func remove_and_renew(script: GDScript, reset_duration: float, attacker: Unit = null) -> void:
-	remove_by_script(script, attacker); renew(script, reset_duration, attacker)
+	var slot := get_slot(script, attacker)
+	if slot != null:
+		slot.remove_stacks(1)
+		slot.renew(reset_duration)
+		slot.update()
 
 func renew(script: GDScript, reset_duration: float, attacker: Unit = null) -> void:
 	var slot := get_slot(script, attacker)
-	if slot != null: slot.renew(reset_duration)
+	if slot != null:
+		slot.renew(reset_duration)
+		slot.update()
 
 func remove_stacks(script: GDScript, num_stacks: int, attacker: Unit = null) -> void:
 	var slot := get_slot(script, attacker)
-	if slot != null: slot.remove_stacks(num_stacks)
+	if slot != null:
+		if num_stacks == 0: slot.clear()
+		else: slot.remove_stacks(num_stacks)
+		slot.update()
 
 #func remove(type_or_script: Variant, attacker: Unit = null) -> void:
 #	if type_or_script is Enums.BuffType:
@@ -134,13 +149,20 @@ func remove_stacks(script: GDScript, num_stacks: int, attacker: Unit = null) -> 
 ## Removes one stack of buff with the specified script
 func remove_by_script(script: GDScript, attacker: Unit = null) -> void:
 	var slot := get_slot(script, attacker)
-	if slot != null: slot.remove_stacks(1)
+	if slot != null:
+		slot.remove_stacks(1)
+		slot.update()
 
 ## Removes all buffs with the specified type, regardless of the attacker who applied them.
 func remove_by_type(type: Enums.BuffType) -> void:
 	for buff: Buff in get_children():
 		if (type & buff.type) != 0:
-			buff.remove()
+			remove_by_instance(buff)
+			buff.slot.update() #TODO:
+
+func remove_by_instance(buff: Buff) -> void:
+	buff.slot.remove(buff)
+	buff.slot.update()
 
 func has(type: Enums.BuffType) -> bool:
 	for buff: Buff in get_children():

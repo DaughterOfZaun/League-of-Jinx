@@ -163,7 +163,7 @@ func move(
 	aims.move = AIMoveState.MoveType.TO_POS
 	aims.move_back_by = move_back_by
 	aims.ideal_distance = ideal_distance
-	aims.enter()
+	aims.try_enter()
 
 func move_away(
 	away_from: Vector3,
@@ -176,7 +176,18 @@ func move_away(
 	ideal_distance: float = 0,
 	movement_orders_facing: Enums.ForceMovementOrdersFacing = 0
 ) -> void:
-	push_warning("Unit.move_away is unimplemented")
+	var aims := ai.move_state
+	aims.move_target_position = away_from
+	aims.speed = speed
+	aims.gravity = gravity
+	aims.movement_type = movement_type
+	aims.movement_orders_type = movement_orders_type
+	aims.movement_orders_facing = movement_orders_facing
+	aims.move = AIMoveState.MoveType.AWAY_FROM
+	aims.distance = distance
+	aims.distance_inner = distance_inner
+	aims.try_enter()
+
 func move_to_unit(
 	target: Unit,
 	speed: float,
@@ -187,9 +198,23 @@ func move_to_unit(
 	ideal_distance: float,
 	time_override: float
 ) -> void:
-	push_warning("Unit.move_to_unit is unimplemented")
+	var aims := ai.move_state
+	aims.move_target = target
+	aims.speed = speed
+	aims.gravity = gravity
+	#aims.movement_type = movement_type
+	aims.movement_orders_type = movement_orders_type
+	#aims.movement_orders_facing = movement_orders_facing
+	aims.move = AIMoveState.MoveType.TO_UNIT
+	aims.move_back_by = move_back_by
+	aims.ideal_distance = ideal_distance
+	aims.max_track_distance = max_track_distance
+	aims.time_override = time_override
+	aims.try_enter()
+
 func stop_move() -> void:
 	push_warning("Unit.stop_move is unimplemented")
+
 func stop_move_block() -> void:
 	push_warning("Unit.stop_move_block is unimplemented")
 #endregion
@@ -291,9 +316,9 @@ func is_behind(target: Unit) -> bool:
 	push_warning("Unit.is_behind is unimplemented")
 	return false
 
+@onready var nav_map_rid := get_world_3d().navigation_map
 func get_nearest_passable_position(pos: Vector3) -> Vector3:
-	push_warning("Unit.get_nearest_passable_position is unimplemented")
-	return pos
+	return NavigationServer3D.map_get_closest_point(nav_map_rid, pos * Data.HW2GD)
 
 func stop_channeling(condition: Enums.ChannelingStopCondition, souce: Enums.ChannelingStopSource) -> void:
 	push_warning("unimplemented")

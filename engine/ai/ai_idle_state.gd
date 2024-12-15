@@ -5,7 +5,9 @@ func _ready() -> void:
 	if Engine.is_editor_hint(): return
 
 func try_enter(emote := Enums.EmoteType.NONE) -> void:
-	if !current_state.can_cancel(): return
+	if current_state.can_cancel() && can_enter(): enter(emote)
+
+func enter(emote := Enums.EmoteType.NONE) -> void:
 	switch_to_self()
 	animation.switch_loop(&"Idle1")
 	if emote != Enums.EmoteType.NONE:

@@ -1,17 +1,19 @@
 class_name BuffSlot
 
-const DUPLICATE_ALL := \
-	Node.DUPLICATE_SIGNALS |\
-	Node.DUPLICATE_GROUPS |\
-	Node.DUPLICATE_SCRIPTS |\
-	Node.DUPLICATE_USE_INSTANTIATION
-
 var mngr: Buffs
 var stacks: Array[Buff] = []
 var time_remaining := 0.0
 
 func _init(buffs: Buffs) -> void:
 	self.mngr = buffs
+
+signal updated(count: int, top_buff: Buff)
+func update() -> void:
+	var first_buff: Buff = null
+	if len(stacks) > 0:
+		sort_stacks()
+		first_buff = stacks[0]
+	updated.emit(len(stacks), first_buff)
 
 func clear() -> BuffSlot:
 	self.stacks.clear()
@@ -34,28 +36,29 @@ func add(buff: Buff, count := 1, continious := false) -> BuffSlot:
 func sort_stacks() -> void:
 	stacks.sort_custom(func (a: Buff, b: Buff) -> bool: return a.duration_remaining > b.duration_remaining)
 
-func remove_stacks(count := 0) -> BuffSlot:
-	if len(stacks) == 0 || count <= -len(stacks):
+func remove_stacks(count: int = len(stacks)) -> BuffSlot:
+	if count == 0 && len(stacks) == 0:
 		return self
-	if count == 0 || count >= len(stacks):
+	if count >= len(stacks):
 		return clear()
 	if count < 0:
 		count += len(stacks)
-	var final_len := len(stacks) - count
 	sort_stacks()
-	for i: int in range(len(stacks), final_len):
-		var buff := stacks[i]
-		self.post_removal(buff)
-		buff.remove_internal_1() #TODO: Protect stacks from modification during iteration
-	stacks.resize(final_len)
+	for i in range(count):
+		var buff: Buff = stacks.pop_back()
+		self.adjust_delays_after_removal_of(buff)
+		buff.on_deactivate(buff.expired) #TODO: Protect stacks from modification during iteration
+		buff.queue_free()
 	return self
 
 ## Can be called by scripts.
 func remove(buff: Buff) -> void:
-	post_removal(buff)
 	self.stacks.erase(buff)
+	adjust_delays_after_removal_of(buff)
+	buff.on_deactivate(buff.expired)
+	buff.queue_free()
 
-func post_removal(buff: Buff) -> void:
+func adjust_delays_after_removal_of(buff: Buff) -> void:
 	if buff.delay_remaining == 0: return
 	for stack: Buff in self.stacks:
 		if stack.delay_remaining >= buff.delay_remaining:

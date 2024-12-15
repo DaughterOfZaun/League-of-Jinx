@@ -1,6 +1,6 @@
 [gd_scene load_steps=33 format=3 uid="uid://diknhd1061r8r"]
 
-[ext_resource type="Texture2D" uid="uid://inyrgp6giuih" path="res://data/screenshots/screenshot_4.webp" id="1_0j1eb"]
+[ext_resource type="Texture2D" uid="uid://crxkmy85xynsq" path="res://data/screenshots/screenshot_1.webp" id="1_0j1eb"]
 [ext_resource type="Script" uid="uid://bmu4xiepnom3l" path="res://engine/game/ui/center.gd" id="2_84jna"]
 [ext_resource type="Texture2D" uid="uid://w7g1bytpvupe" path="res://data/characters/Ahri/Passive/Ahri_SoulEater.webp" id="2_foojt"]
 [ext_resource type="PackedScene" uid="uid://demalxnr8x6to" path="res://engine/game/ui/spell.tscn" id="3_0bgng"]
@@ -59,7 +59,7 @@ mouse_filter = 2
 texture = ExtResource("1_0j1eb")
 expand_mode = 2
 
-[node name="Center" type="Control" parent="." node_paths=PackedStringArray("q", "w", "e", "r", "d", "f", "b", "healthbar", "manabar", "channel_bar", "channel_bar_label", "channel_bar_range")]
+[node name="Center" type="Control" parent="." node_paths=PackedStringArray("q", "w", "e", "r", "d", "f", "b", "healthbar", "manabar", "channel_bar", "channel_bar_label", "channel_bar_range", "ui_buffs_container")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -82,6 +82,8 @@ manabar = NodePath("Manabar")
 channel_bar = NodePath("ChannelBar")
 channel_bar_label = NodePath("ChannelBar/Label")
 channel_bar_range = NodePath("ChannelBar/TextureProgressBar")
+ui_buffs_container = NodePath("VBoxContainer/HFlowContainer/HFlowContainer")
+ui_buff_scene = ExtResource("8_glbka")
 
 [node name="BackgroundColor" type="ColorRect" parent="Center"]
 layout_mode = 1
@@ -211,17 +213,22 @@ mouse_filter = 2
 theme_override_constants/separation = 1
 alignment = 2
 
-[node name="HFlowContainer" type="HFlowContainer" parent="Center/VBoxContainer"]
+[node name="HFlowContainer" type="MarginContainer" parent="Center/VBoxContainer"]
 custom_minimum_size = Vector2(188, 44)
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/h_separation = 1
-theme_override_constants/v_separation = 1
-reverse_fill = true
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 3
 
-[node name="Control" parent="Center/VBoxContainer/HFlowContainer" instance=ExtResource("8_glbka")]
-visible = false
+[node name="HFlowContainer" type="HFlowContainer" parent="Center/VBoxContainer/HFlowContainer"]
+custom_minimum_size = Vector2(188, 44)
 layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+reverse_fill = true
 
 [node name="LevelUpPanel" type="Control" parent="Center/VBoxContainer"]
 visible = false

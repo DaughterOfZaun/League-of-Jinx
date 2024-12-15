@@ -30,6 +30,10 @@ var kills := 0
 func _ready() -> void:
 	exp = 0.0
 	level_script.register_champion(self)
+	
+	for letter in "qwerdfb":
+		var spell: Spell = spells[letter]
+		spell.level = 1
 
 func set_camera_position(position: Vector3) -> void:
 	push_warning("unimplemented")

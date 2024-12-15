@@ -32,16 +32,18 @@ func _on_navigation_finished() -> void:
 		on_reached_destination_for_going_to_last_location() #TODO: check
 		on_stop_move()
 
-# Running is the only state where voluntary movement is allowed
-var is_running := false
 func try_enter() -> void:
-	if !current_state.can_cancel(): return
+	if current_state.can_cancel() && can_enter(): enter()
+
+var is_running := false
+func enter() -> void:
 	switch_to_self()
 	is_running = true
 	animation.switch_loop(&"Run")
 	animation.switch_to_loop()
 	navigation_agent.target_position = target_position * Data.HW2GD
 	navigation_agent.avoidance_priority = 0
+
 func on_exit() -> void:
 	is_running = false
 	navigation_agent.set_velocity(Vector3.ZERO)

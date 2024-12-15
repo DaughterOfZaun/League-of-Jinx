@@ -37,9 +37,11 @@ var time_override: float
 var distance: float
 var distance_inner: float
 
+func try_enter() -> void:
+	if current_state.can_cancel() && can_enter(): enter()
+
 var is_moving := false
 func enter() -> void:
-	#if !current_state.can_cancel(): return
 	switch_to_self()
 	is_moving = true
 
@@ -57,8 +59,11 @@ func _process(delta: float) -> void:
 	var target_reached := dist >= dir_len
 	if target_reached:
 		me.position_3d = move_target_position
+		
 		me.move_success.emit()
 		me.move_end.emit()
+		
+		switch_to_deffered()
 	else:
 		var dir_normalized := dir / dir_len
 		me.position_3d += dir_normalized * dist

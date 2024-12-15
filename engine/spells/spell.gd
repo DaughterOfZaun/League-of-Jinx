@@ -114,7 +114,7 @@ func get_channel_duration() -> float:
 	return data.channel_duration + get_by_level(data.channel_duration_by_level)
 
 func get_mana_cost() -> float:
-	return data.mana_cost + get_by_level(data.mana_cost_by_level)
+	return (data.mana_cost + get_by_level(data.mana_cost_by_level) + cost_inc) * (1.0 + cost_inc_multiplicative)
 
 func get_chain_missile_maximum_hits() -> float:
 	return data.chain_missile_maximum_hits + get_by_level(data.chain_missile_maximum_hits_by_level)
@@ -238,18 +238,16 @@ func update_tooltip(_slot: SpellSlot) -> void: pass
 func on_missile_update(_missile: Missile) -> void: pass
 func on_missile_end(_missile: Missile) -> void: pass
 
+var cost_inc := 0.0
+var cost_inc_multiplicative := 0.0
 func get_cost_inc(par_type: Enums.PARType) -> float:
-	return 0
-
+	return cost_inc if par_type == me.data.par_type else 0.0
 func set_cost_inc(cost: float, par_type: Enums.PARType) -> void:
-	push_warning("Spell.set_cost_inc is unimplemented")
-
+	if par_type == me.data.par_type: cost_inc = cost
 func get_cost_inc_multiplicative(par_type: Enums.PARType) -> float:
-	push_warning("Spell.get_cost_inc_multiplicative is unimplemented")
-	return 0
-
+	return cost_inc_multiplicative if par_type == me.data.par_type else 0.0
 func set_cost_inc_multiplicative(cost: float, par_type: Enums.PARType) -> void:
-	push_warning("Spell.set_cost_inc_multiplicative is unimplemented")
+	if par_type == me.data.par_type: cost_inc_multiplicative = cost
 
 func set_cooldown(src: float, broadcast_event := false) -> void:
 	if state == State.READY:

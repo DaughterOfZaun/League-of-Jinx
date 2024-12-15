@@ -72,7 +72,7 @@ resource_local_to_scene = true
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_xapae"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_gtrna"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xapae"]
@@ -96,7 +96,7 @@ shadow_enabled = true
 [node name="InputManager" type="Node3D" parent="." node_paths=PackedStringArray("main_hero")]
 unique_name_in_owner = true
 script = ExtResource("1_4aqfu")
-main_hero = NodePath("../Unit")
+main_hero = NodePath("../Ahri")
 cursor_textures = Dictionary[int, Texture2D]({
 0: ExtResource("3_rf48r"),
 1: ExtResource("4_toluw"),
@@ -145,7 +145,7 @@ fov = 31.9848
 size = 0.1
 far = 8000.0
 script = ExtResource("25_obkvb")
-target = NodePath("../../Unit")
+target = NodePath("../../Ahri")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3/Camera"]
 visible = false
@@ -165,7 +165,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 level_shader = ExtResource("31_g1ghr")
 level_decal_shader = ExtResource("32_m603r")
 level_flora_shader = ExtResource("33_rqr2r")
-viewport_texture = SubResource("ViewportTexture_xapae")
+viewport_texture = SubResource("ViewportTexture_gtrna")
 object_cfg = "res://data/levels/1/ObjectCFG.cfg"
 create_level_props_script = ExtResource("35_x1iow")
 
@@ -523,12 +523,12 @@ exp_curve = Array[int]([0, 0, 280, 670, 1170, 1780, 2500, 3330, 4270, 5320, 6480
 import_exp_curve_path = "res://data/levels/1/ExpCurve.ini"
 metadata/_custom_type_script = ExtResource("36_dp1ib")
 
-[node name="Unit" parent="." instance=ExtResource("27_0mdok")]
+[node name="Ahri" parent="." instance=ExtResource("27_0mdok")]
 transform = Transform3D(-0.803857, 0, 0.594823, 0, 1, 0, -0.594823, 0, -0.803857, 0.746, 2.485, -3.787)
 team = 1
 
 [node name="Dummy" parent="." instance=ExtResource("37_5t0se")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35941, 4, -12.2381)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.359, 2.415, -12.238)
 team = 2
 
 [node name="Area3D" type="Area3D" parent="."]

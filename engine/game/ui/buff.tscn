@@ -1,12 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://ks0fvfmqrgtp"]
+[gd_scene load_steps=4 format=3 uid="uid://ks0fvfmqrgtp"]
 
-[ext_resource type="Texture2D" uid="uid://w7g1bytpvupe" path="res://data/characters/Ahri/Passive/Ahri_SoulEater.webp" id="1_ou2sn"]
+[ext_resource type="Script" uid="uid://hun4ohgkxwwd" path="res://engine/game/ui/ui_buff.gd" id="1_2i75w"]
 [ext_resource type="Texture2D" uid="uid://c6yw2nxte74v4" path="res://data/ui/center/buff_icon_frame_green.webp" id="2_2i75w"]
+[ext_resource type="Script" uid="uid://bfckyo2u30w8e" path="res://engine/game/ui/clock.gd" id="4_jaweh"]
 
-[node name="Control" type="Control"]
-custom_minimum_size = Vector2(20, 20)
+[node name="Control" type="Control" node_paths=PackedStringArray("lifetime_progress_bar", "icon_texture_rect", "count_label", "name_label")]
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_2i75w")
+lifetime_progress_bar = NodePath("TextureProgressBar")
+icon_texture_rect = NodePath("IconTexture")
+count_label = NodePath("CountLabel")
+name_label = NodePath("NameLabel")
+
+[node name="NameLabel" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_top = -1.0
+offset_right = 41.0
+offset_bottom = 19.0
+rotation = -1.5708
+theme_override_font_sizes/font_size = 14
+text = "Name"
+vertical_alignment = 1
 
 [node name="IconTexture" type="TextureRect" parent="."]
 layout_mode = 1
@@ -19,8 +36,20 @@ offset_right = -1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_ou2sn")
 expand_mode = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.0
+value = 8.0
+fill_mode = 4
+script = ExtResource("4_jaweh")
 
 [node name="FrameTexture" type="TextureRect" parent="."]
 layout_mode = 1
@@ -31,3 +60,21 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_2i75w")
 expand_mode = 1
+
+[node name="CountLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = 2.0
+offset_right = -3.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 12
+text = "2"
+horizontal_alignment = 2
+vertical_alignment = 2

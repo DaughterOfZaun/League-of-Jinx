@@ -75,14 +75,27 @@ func set_state_and_move_internal(state: Enums.AIState, target: Unit, target_posi
 @onready var cast_state := find_child("AICastState", false) as AICastState
 @onready var attack_state := find_child("AIAttackState", false) as AIAttackState
 @onready var move_state := find_child("AIMoveState", false) as AIMoveState
+
+var deffered_state: AIState = idle_state
 @onready var current_state: AIState = idle_state
 func switch_to(state: AIState) -> void:
+	if current_state in [run_state, attack_state]:
+		deffered_state = current_state
+	else:
+		deffered_state = idle_state
 	current_state.on_exit()
 	current_state = state
 
+func switch_to_deffered() -> void:
+	var cached_current_state := self.current_state
+	match deffered_state:
+		run_state: run_state.try_enter()
+		attack_state: attack_state.try_enter()
+	if cached_current_state == self.current_state:
+		idle_state.enter()
+
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
-	#animation_player.playback_default_blend_time = 0.2
 	me.ai = self
 	on_init()
 

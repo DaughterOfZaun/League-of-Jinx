@@ -28,6 +28,11 @@ func on_stop_move() -> void:
 	ai.on_stop_move()
 func switch_to_self() -> void:
 	ai.switch_to(self)
+func switch_to_deffered() -> void:
+	ai.switch_to_deffered()
+
+func can_enter() -> bool:
+	return true
 
 func can_cancel() -> bool:
 	return true

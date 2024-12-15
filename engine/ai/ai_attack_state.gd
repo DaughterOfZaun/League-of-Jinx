@@ -10,9 +10,11 @@ func _ready() -> void:
 	spell = me.spells.basic[0]
 	next_spell = me.spells.basic[1]
 
-var is_running := false
 func try_enter() -> void:
-	if !current_state.can_cancel(): return
+	if current_state.can_cancel() && can_enter(): enter()
+
+var is_running := false
+func enter() -> void:
 	switch_to_self()
 	is_running = true
 	just_entered_state = true
