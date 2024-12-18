@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeBlendTree" load_steps=31 format=3 uid="uid://bwx612epjcvih"]
+[gd_resource type="AnimationNodeBlendTree" load_steps=32 format=3 uid="uid://bwx612epjcvih"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2vy42"]
 animation = &"Ahri_attack1"
@@ -42,9 +42,13 @@ animation = &"Ahri_joke"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3vdt2"]
 animation = &"Ahri_laugh"
 
+[sub_resource type="Curve" id="Curve_v5ng4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_op0jf"]
 xfade_time = 0.2
-allow_transition_to_self = true
+xfade_curve = SubResource("Curve_v5ng4")
 input_0/name = "Idle1"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false

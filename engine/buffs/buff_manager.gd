@@ -77,10 +77,6 @@ func add(
 	#if stacks_exclusive && attacker == null:
 	#	push_warning()
 
-	var script: Script = buff.get_script()
-	var slot := get_slot(script, attacker if stacks_exclusive else null, true, buff)
-
-	buff.slot = slot
 	buff.attacker = attacker
 	buff.caster = attacker
 	buff.target = me
@@ -94,6 +90,10 @@ func add(
 	buff.can_mitigate_duration = can_mitigate_duration
 	buff.is_hidden_on_client = is_hidden_on_client
 
+	var script: Script = buff.get_script()
+	var slot := get_slot(script, attacker if stacks_exclusive else null, true, buff)
+	buff.slot = slot
+
 	var min_count_to_rem := maxi(0, maxi(len(slot.stacks), number_of_stacks) - max_stack)
 	var max_count_to_rem := maxi(0, len(slot.stacks) + number_of_stacks - max_stack)
 	var min_count_to_add := maxi(0, number_of_stacks - len(slot.stacks))
@@ -101,11 +101,11 @@ func add(
 
 	match add_type:
 		Enums.BuffAddType.RENEW_EXISTING, Enums.BuffAddType.STACKS_AND_RENEWS:
-			slot.add(buff, min_count_to_add).remove_stacks(min_count_to_rem).renew(duration)
+			slot.remove_stacks(min_count_to_rem).add(buff, min_count_to_add).renew(duration)
 		Enums.BuffAddType.REPLACE_EXISTING, Enums.BuffAddType.STACKS_AND_OVERLAPS:
-			slot.add(buff, max_count_to_add).remove_stacks(max_count_to_rem)
+			slot.remove_stacks(max_count_to_rem).add(buff, max_count_to_add)
 		Enums.BuffAddType.STACKS_AND_CONTINUE:
-			slot.add(buff, max_count_to_add, true).remove_stacks(max_count_to_rem) #TODO
+			slot.remove_stacks(max_count_to_rem).add(buff, max_count_to_add, true) #TODO
 	slot.update()
 
 ## Removes all debuffs, regardless of the attacker who applied them.
@@ -155,10 +155,14 @@ func remove_by_script(script: GDScript, attacker: Unit = null) -> void:
 
 ## Removes all buffs with the specified type, regardless of the attacker who applied them.
 func remove_by_type(type: Enums.BuffType) -> void:
-	for buff: Buff in get_children():
-		if (type & buff.type) != 0:
-			remove_by_instance(buff)
-			buff.slot.update() #TODO:
+	for d: Dictionary[Unit, BuffSlot] in slots.values():
+		for slot: BuffSlot in d.values():
+			var removed := false
+			for buff: Buff in slot.stacks:
+				if (type & buff.type) != 0:
+					slot.remove(buff)
+					removed = true
+			if removed: slot.update()
 
 func remove_by_instance(buff: Buff) -> void:
 	buff.slot.remove(buff)
@@ -177,4 +181,5 @@ func count(script: GDScript, caster: Unit = null) -> int:
 
 func get_remaining_duration(script: GDScript) -> float:
 	push_warning("Buffs.get_remaining_duration is unimplemented")
+	var slot := get_slot(script, null)
 	return 0.0

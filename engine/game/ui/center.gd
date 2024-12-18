@@ -35,6 +35,9 @@ func bind_to(c: Champion) -> void:
 		channel_bar.visible = false
 	)
 	c.buffs.slot_created.connect(func (slot: BuffSlot, buff: Buff) -> void:
+		if buff.is_hidden_on_client ||\
+		   buff.type in [ Enums.BuffType.UNDEFINED, Enums.BuffType.INTERNAL ] ||\
+		   buff.get_data() == null || buff.get_data().buff_texture == null: return
 		var ui_buff: UIBuff = ui_buff_scene.instantiate()
 		ui_buffs_container.add_child(ui_buff)
 		ui_buff.bind_to(slot, buff)

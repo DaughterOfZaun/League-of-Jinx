@@ -318,7 +318,7 @@ func is_behind(target: Unit) -> bool:
 
 @onready var nav_map_rid := get_world_3d().navigation_map
 func get_nearest_passable_position(pos: Vector3) -> Vector3:
-	return NavigationServer3D.map_get_closest_point(nav_map_rid, pos * Data.HW2GD)
+	return NavigationServer3D.map_get_closest_point(nav_map_rid, pos * Data.HW2GD) * Data.GD2HW
 
 func stop_channeling(condition: Enums.ChannelingStopCondition, souce: Enums.ChannelingStopSource) -> void:
 	push_warning("unimplemented")

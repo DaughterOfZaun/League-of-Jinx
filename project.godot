@@ -142,3 +142,7 @@ ToggleFullscreen={
 
 rendering/root_node_auto_translate=false
 locale/translations=PackedStringArray("res://data/ui/lang/fontconfig.en.translation")
+
+[rendering]
+
+scaling_3d/mode=2

@@ -15,10 +15,6 @@ func update() -> void:
 		first_buff = stacks[0]
 	updated.emit(len(stacks), first_buff)
 
-func clear() -> BuffSlot:
-	self.stacks.clear()
-	return self
-
 func add(buff: Buff, count := 1, continious := false) -> BuffSlot:
 	#var time_remaining := 0.0
 	#if continious:
@@ -57,6 +53,13 @@ func remove(buff: Buff) -> void:
 	adjust_delays_after_removal_of(buff)
 	buff.on_deactivate(buff.expired)
 	buff.queue_free()
+
+func clear() -> BuffSlot:
+	for i in len(stacks):
+		var buff: Buff = stacks.pop_back()
+		buff.on_deactivate(buff.expired)
+		buff.queue_free()
+	return self
 
 func adjust_delays_after_removal_of(buff: Buff) -> void:
 	if buff.delay_remaining == 0: return

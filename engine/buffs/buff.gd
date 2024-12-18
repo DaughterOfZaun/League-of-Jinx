@@ -83,3 +83,6 @@ func renew(reset_duration: float) -> void:
 	self.delay = 0
 	self.duration = reset_duration
 	self.start(reset_duration)
+
+func get_data() -> BuffData:
+	return self[&'data'] if &'data' in self else null

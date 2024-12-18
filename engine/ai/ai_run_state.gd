@@ -8,13 +8,15 @@ func _ready() -> void:
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
 	navigation_agent.navigation_finished.connect(_on_navigation_finished)
 
+var speed: float
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 
 	if is_running: #and !navigation_agent.is_navigation_finished():
 		var next_path_position := navigation_agent.get_next_path_position()
 		var dir := me.global_position.direction_to(next_path_position)
-		var new_velocity := dir * me.stats.get_movement_speed() * Data.HW2GD #* delta
+		speed = me.stats.get_movement_speed() * Data.HW2GD
+		var new_velocity := dir * speed #* delta
 		if navigation_agent.avoidance_enabled:
 			navigation_agent.set_velocity(new_velocity)
 		else:
@@ -23,7 +25,7 @@ func _physics_process(delta: float) -> void:
 func _on_velocity_computed(safe_velocity: Vector3) -> void:
 	if is_running:
 		me.face_dir(safe_velocity)
-		character_body.velocity = safe_velocity
+		character_body.velocity = safe_velocity.normalized() * speed
 		character_body.move_and_slide()
 
 func _on_navigation_finished() -> void:
