@@ -46,7 +46,9 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 		switch_to_self(); #on_exit()
 		current_spell = spell
 
-	if should_cancel && target_position != me.position_3d:
+	if should_cancel &&\
+	   target_position != me.position_3d &&\
+	   spell.data.targetting_type != Enums.TargetingType.SELF:
 		me.face_direction(target_position)
 
 	if !spell.data.animation_name.is_empty():

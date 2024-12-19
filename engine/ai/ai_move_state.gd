@@ -46,7 +46,7 @@ func enter() -> void:
 	is_moving = true
 
 #TODO: Merge movement code with missile
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if !is_moving: return
 
 	var dir := move_target_position - me.position_3d

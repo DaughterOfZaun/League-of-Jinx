@@ -385,6 +385,7 @@ offset_top = -11.0
 offset_right = 185.0
 offset_bottom = -1.0
 grow_vertical = 0
+step = 0.0
 value = 50.0
 nine_patch_stretch = true
 texture_progress = ExtResource("8_qwp58")

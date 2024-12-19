@@ -75,9 +75,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 
-	if host.should_update_actions:
+	if Balancer.should_update_actions(self):
 		on_update_actions()
-	if host.should_update_stats:
+	if Balancer.should_update_stats(self):
 		on_update_stats()
 
 func on_update_stats() -> void:

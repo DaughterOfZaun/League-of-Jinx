@@ -4,6 +4,7 @@ class_name Unit extends Node3DExt
 @export var data: UnitData
 
 var stats: Stats
+var stats_temp: Stats
 var status: Status
 var buffs: Buffs
 var spells: Spells
@@ -21,22 +22,14 @@ func cast(letter: String, pos: Vector3, unit: Unit) -> void:
 func emote(type: Enums.EmoteType) -> void:
 	ai.emote(type)
 
-var tick_rate: float = 0.25
-var physics_fps: int = Engine.physics_ticks_per_second
-var target_frame: int = max(2, floor(physics_fps * tick_rate))
-var should_update_stats := false
-var should_update_actions := false
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 
 	_physics_process_rotate(delta)
 
-	var frame: int = Engine.get_physics_frames() % target_frame
-	should_update_stats = frame == 0
-	should_update_actions = frame == 1
-	if should_update_stats:
+	if Balancer.should_update_stats(self):
 		update_stats()
-	if should_update_actions:
+	if Balancer.should_update_actions(self):
 		update_actions()
 
 #region Signals

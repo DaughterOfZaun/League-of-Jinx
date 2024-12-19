@@ -30,5 +30,5 @@ func on_deactivate(expired: bool) -> void:
 
 func on_update_stats() -> void:
 	host.status.can_attack = false
-	host.stats.movement_speed_percent_multiplicative_temp += slow_percent
-	host.stats.attack_range_flat_temp -= 600
+	host.stats_temp.movement_speed_percent_multiplicative_temp += slow_percent
+	host.stats_temp.attack_range_flat_temp -= 600

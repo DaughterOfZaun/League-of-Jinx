@@ -7,7 +7,8 @@ class_name Stats extends Node
 @onready var constants: Constants = root.get_node("%Constants")
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
-	me.stats = self
+	if temp: me.stats_temp = self
+	else: me.stats = self
 
 @export var level := 1
 func growth(stat_per_level: float) -> float:
@@ -241,3 +242,45 @@ func get_miss_chance() -> float:
 var hardness_percent_temp: float
 func get_hardness() -> float:
 	return (1 + hardness_percent + hardness_percent_temp)
+
+static var temp_property_list: Array[StringName] = []
+static var non_temp_property_list: Array[StringName] = []
+
+static var reflected := false
+func _init() -> void:
+	if !reflected:
+		reflected = true
+		for prop in get_property_list():
+			var prop_name: String = prop['name']
+			var prop_type: Variant.Type = prop['type']
+			if prop_type == TYPE_FLOAT:
+				if prop_name.ends_with("_temp"):
+					temp_property_list.append(StringName(prop_name))
+				else:
+					non_temp_property_list.append(StringName(prop_name))
+	
+@export var temp := false
+
+var delta_time := 0.0
+func _physics_process(delta: float) -> void:
+
+	delta_time += delta
+	if !temp:
+		health_current = clampf(health_current + get_health_regen() * delta, 0, get_health())
+		mana_current = clampf(mana_current + get_mana_regen() * delta, 0, get_mana())
+		delta_time = 0
+
+	var copy_to_from := me.stats
+
+	if temp && Balancer.should_reset_stats(self):
+		for prop in non_temp_property_list:
+			self[prop] = copy_to_from[prop]
+		for prop in temp_property_list:
+			self[prop] = 0.0
+
+	if temp && Balancer.should_sync_stats(self):
+		for prop in non_temp_property_list:
+			copy_to_from[prop] = self[prop]
+		for prop in temp_property_list:
+			copy_to_from[prop] = self[prop]
+	

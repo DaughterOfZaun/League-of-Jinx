@@ -24,6 +24,7 @@ anchor_bottom = 1.0
 offset_right = -0.111969
 grow_horizontal = 2
 grow_vertical = 2
+step = 0.0
 value = 100.0
 nine_patch_stretch = true
 texture_progress = ExtResource("1_y5xmu")

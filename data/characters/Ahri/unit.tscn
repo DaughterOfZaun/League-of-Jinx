@@ -185,6 +185,7 @@ offset_top = 11.0
 offset_right = 136.0
 offset_bottom = 19.0
 max_value = 2527.0
+step = 0.0
 value = 2512.0
 nine_patch_stretch = true
 texture_over = ExtResource("4_jjcjx")
@@ -200,6 +201,7 @@ offset_left = 32.0
 offset_top = 23.0
 offset_right = 136.0
 offset_bottom = 26.0
+step = 0.0
 value = 50.0
 nine_patch_stretch = true
 texture_progress = ExtResource("6_wycds")
@@ -246,6 +248,10 @@ mana_regen_base = 1.25
 mana_regen_base_per_level = 0.12
 movement_speed_base = 305.0
 spell_block_base = 30.0
+
+[node name="StatsTemp" type="Node" parent="."]
+script = ExtResource("14_1rt8n")
+temp = true
 
 [node name="Buffs" type="Node" parent="."]
 script = ExtResource("16_su6i3")
