@@ -10,19 +10,20 @@ class_name Balancer extends Node
 #	Balancer.unregister(self)
 
 static func register(obj: Node) -> void:
-    pass
+	pass
 
 static func unregister(obj: Node) -> void:
-    pass
+	pass
 
-static var frame := 0
+static var frame := -1
 static func should_reset_stats(obj: Node) -> bool:
-    return frame == 0
+	return frame == 0
 static func should_update_stats(obj: Node) -> bool:
-    return frame == 1
+	return frame == 1
 static func should_sync_stats(obj: Node) -> bool:
-    return frame == 2
+	return frame == 2
 static func should_update_actions(obj: Node) -> bool:
-    return frame == 3
+	return frame == 3
 func _physics_process(delta: float) -> void:
-    frame = Engine.get_physics_frames() % 4
+	#frame = (Engine.get_physics_frames() - 1) % 15
+	frame = (frame + 1) % 15

@@ -230,6 +230,7 @@ script = ExtResource("15_eh8vk")
 metadata/_custom_type_script = ExtResource("15_eh8vk")
 
 [node name="Stats" type="Node" parent="."]
+process_mode = 4
 script = ExtResource("14_1rt8n")
 crit_damage_bonus = 2.0
 armor_base = 11.0
@@ -308,7 +309,6 @@ desc = "game_character_passiveDescription_Ahri"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_s7c4n")
-debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 visible = false
@@ -1210,7 +1210,6 @@ script = ExtResource("44_sr3ak")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GameplayRange"]
 shape = SubResource("SphereShape3D_2lapu")
-debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="SelectionRange" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -1219,7 +1218,6 @@ script = ExtResource("44_sr3ak")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionRange"]
 shape = SubResource("SphereShape3D_okgtt")
 disabled = true
-debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="AcquisitionRange" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -1227,7 +1225,6 @@ script = ExtResource("44_sr3ak")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AcquisitionRange"]
 shape = SubResource("SphereShape3D_fjou7")
-debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="AttackRange" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -1235,7 +1232,6 @@ script = ExtResource("44_sr3ak")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRange"]
 shape = SubResource("SphereShape3D_qw37p")
-debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="CancelAttackRange" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -1243,4 +1239,3 @@ script = ExtResource("44_sr3ak")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CancelAttackRange"]
 shape = SubResource("SphereShape3D_hvbg6")
-debug_color = Color(0, 0.6, 0.7, 0.42)

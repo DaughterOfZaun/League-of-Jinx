@@ -1,6 +1,6 @@
 # LeagueSandbox <span style="opacity: 0.1">// The source of evil</span>
-old repo: https://github.com/LeagueSandbox/GameServer<br>
-new repo: https://github.com/cabeca1143/GameServer<br>
+old repo: [GitHub/LeagueSandbox/GameServer](https://github.com/LeagueSandbox/GameServer)<br>
+new repo: [GitHub/cabeca1143/GameServer](https://github.com/cabeca1143/GameServer)<br>
 discord: [League Sandbox Developers](https://discord.gg/8HbHaVtf)<br>
 discord: [League Sandbox Public](https://discord.gg/UKaMUg3Y)<br>
 
@@ -12,7 +12,7 @@ download link: [mega.nz](https://mega.nz/file/D35i0YaD#P08udvnbUByZHGBvCTbC1XDPk
 
 The main difference from its predecessor (apart from the fact that many systems were improved, added or rewritten) was the transition from custom scripts (which had to be written by enthusiasts together with the server) to original scripts (supplied with the game up until version 1.0.0.133).<br>
 However, like its predecessor, it uses client version 4.20, so it suffers from a mismatch between the version of scripts used on the server side and the version of resources and configs on the client side.
-Therefore, only those **champions and items that were added before 1.0.0.133 and did not change untill 4.20 work best**. Anything added or reworked after 1.0.0.132 - doesn't work.<br>
+Therefore, only those **champions and items that were added before 1.0.0.133 and did not change untill 4.20 work**. Anything added or reworked after 1.0.0.132 - doesn't work.<br>
 <small>There is a version that uses the old client, but it has not been released publicly.<br>An alternative solution would be to port resources from the old client to the new one.</small>
 
 ## FAQ
@@ -42,7 +42,6 @@ cd GameServerConsole/bin/Debug/net8.0
 cd GameServer/GameServerConsole
 dotnet run .
 ```
-<br>
 
 # League of Legends 4.20 game client
 download link: [magnet](magnet:?xt=urn:btih:4bb197635194f4242d9f937f0f9225851786a0a8&dn=League%20of%20Legends_UNPACKED.7z) (please help to seed)<br>
@@ -70,15 +69,14 @@ start "" "League of Legends.exe" "" "" "" "127.0.0.1 5119 17BLOhi6KZsTtldTsizvHg
 cd /path/to/your/League-of-Legends-4-20/RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy
 wine "./League of Legends.exe" "" "" "" "127.0.0.1 5119 17BLOhi6KZsTtldTsizvHg== 1"
 ```
-<br>
 
 # Userful links
 It may be a good idea to save their contents to preserve.
 
 Old clients with debug data to revers engineer: <br>
-https://archive.org/details/league-of-legends-0.9.22.14-beta <br>
-https://archive.org/details/LOL-1.0.0.106 <br>
-https://archive.org/details/LOL-1.0.0.126 <br>
+[archive.org/league-of-legends-0.9.22.14-beta](https://archive.org/details/league-of-legends-0.9.22.14-beta)<br>
+[archive.org/LOL-1.0.0.106](https://archive.org/details/LOL-1.0.0.106)<br>
+[archive.org/LOL-1.0.0.126](https://archive.org/details/LOL-1.0.0.126)<br>
 
 1.0.0.131 client (solution 0.0.0.64):<br>
 [magnet](magnet:?xt=urn:btih:eb6dd0165ac7216d6e87247102e79fcf7099dcb2&xt=urn:btmh:12208e9e8d50ee6a8ebbfd7c8f69cd53ae48c4b6ba55fff736ea899eae68b79cc5dd&dn=131.7z) (please help to seed)<br>

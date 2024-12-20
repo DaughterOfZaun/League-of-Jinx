@@ -1,6 +1,7 @@
-[gd_scene load_steps=49 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=50 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" uid="uid://csrtiit658one" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
+[ext_resource type="Script" uid="uid://b7nriuublxfpo" path="res://engine/game/balancer.gd" id="1_xapae"]
 [ext_resource type="CompressedTexture3D" uid="uid://cw7h14f61vo0x" path="res://LUT2.webp" id="2_tb6ku"]
 [ext_resource type="Script" uid="uid://bbmqg3c1pc7h3" path="res://engine/game/ui/minimap/subviewport.gd" id="3_06ecp"]
 [ext_resource type="Shader" uid="uid://tq1sju8pdr36" path="res://engine/game/lights/new_shader.gdshader" id="3_h7a1n"]
@@ -72,12 +73,16 @@ resource_local_to_scene = true
 flip_faces = true
 size = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_gtrna"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_xapae"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xapae"]
 
 [node name="Node3D" type="Node3D"]
+
+[node name="Balancer" type="Node" parent="."]
+script = ExtResource("1_xapae")
+metadata/_custom_type_script = ExtResource("1_xapae")
 
 [node name="LightmapGI" type="LightmapGI" parent="."]
 visible = false
@@ -165,7 +170,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 level_shader = ExtResource("31_g1ghr")
 level_decal_shader = ExtResource("32_m603r")
 level_flora_shader = ExtResource("33_rqr2r")
-viewport_texture = SubResource("ViewportTexture_gtrna")
+viewport_texture = SubResource("ViewportTexture_xapae")
 object_cfg = "res://data/levels/1/ObjectCFG.cfg"
 create_level_props_script = ExtResource("35_x1iow")
 
@@ -538,7 +543,6 @@ script = ExtResource("38_tqj1w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("WorldBoundaryShape3D_xapae")
-debug_color = Color(0, 0.6, 0.7, 0.42)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.085, 2.90684, -114.142)
