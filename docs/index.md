@@ -19,9 +19,10 @@ Therefore, only those **champions and items that were added before 1.0.0.133 and
 
 ### FAQ
 <details>
-<summary>
+<summary><h4 style="display:inline">
 Has anyone developed bots for Chronobreak?
-</summary>
+</h4></summary>
+
 Although it is technically possible to convert and use bot behavior trees leaked with version 1.0.0.142 of the game client, as of 12/20/2024 only Garen is publicly available (functionality not confirmed).
 </details>
 
@@ -32,7 +33,11 @@ Install [.NET 8 or newer](https://dotnet.microsoft.com/en-us/download)
 #### Manual Setup (Windows)
 If you have Microsoft Visual Studio 2019 or newer (Community Edition is fine too) installed, then open the GameServer Solution in VS, build and run GameServerConsole project.
 
-#### Manual Setup (Linux)
+<details>
+<summary><h4 style="display:inline">
+Manual Setup (Linux)
+</h4></summary>
+
 ```bash
 # Build:
 cd GameServer/GameServerConsole
@@ -44,6 +49,7 @@ cd GameServerConsole/bin/Debug/net8.0
 cd GameServer/GameServerConsole
 dotnet run .
 ```
+</details>
 
 ## League of Legends 4.20 game client
 download link: [magnet](magnet:?xt=urn:btih:4bb197635194f4242d9f937f0f9225851786a0a8&dn=League%20of%20Legends_UNPACKED.7z) (please help to seed)<br>
@@ -52,12 +58,6 @@ download link: [mega.nz](mega.nz/file/Hr5XEAqT#veo2lfRWK7RrLUdFBBqRdUvxwr_gd8UyU
 ### Running the game client
 #### Prerequisites
 Download and unpack the 4.20 version of League game client.
-
-#### Automatic launch from Visual Studio or GameServerConsole.exe
-* Open `GameServer\GameServerConsole\bin\Debug\net8.0\Settings\GameServerSettings.json` in any text editor
-* Replace `false` in `"autoStartClient": false` to `true`
-* Set the path to your League of Legends' `deploy` folder (`Path\To\Your\League420\RADS\solutions\lol_game_client_sln\releases\0.0.1.68\deploy`), which shown by the example already in the file. Don't forget to replace all backslashes (`\`) with double backslashes (`\\`), i.e. in the end you should end up with somethig like `"clientLocation": "C:\\Users\\User\\Downloads\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy"`.
-* If that doesn't work, try launching it manually.
 
 #### Manually Launching from command line (Windows)
 * Go to the `deploy` folder
@@ -71,7 +71,11 @@ or
 * Rename it to something like `run.bat`
 * Double-click to run `run.bat`
 
-#### Manually Launching from command line (Linux)
+<details>
+<summary><h4 style="display:inline">
+Manually Launching from command line (Linux)
+</h4></summary>
+
 * Install `wine` and `winetricks` using your package manager.
 * Run `winetricks d3dx9` - without this you will get into the game, but your screen will be black.
 * Enter the directory containing the client  and run the game:
@@ -79,11 +83,22 @@ or
 cd /path/to/your/League-of-Legends-4-20/RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy
 wine "./League of Legends.exe" "" "" "" "127.0.0.1 5119 17BLOhi6KZsTtldTsizvHg== 1"
 ```
+</details>
+
+<details>
+<summary><h4 style="display:inline">
+Automatic launch from Visual Studio or GameServerConsole.exe
+</h4></summary>
+
+* Open `GameServer\GameServerConsole\bin\Debug\net8.0\Settings\GameServerSettings.json` in any text editor
+* Replace `false` in `"autoStartClient": false` to `true`
+* Set the path to your League of Legends' `deploy` folder (`Path\To\Your\League420\RADS\solutions\lol_game_client_sln\releases\0.0.1.68\deploy`), which shown by the example already in the file. Don't forget to replace all backslashes (`\`) with double backslashes (`\\`), i.e. in the end you should end up with somethig like `"clientLocation": "C:\\Users\\User\\Downloads\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy"`
+</details>
 
 ## Userful links
 It may be a good idea to save their contents to preserve.
 
-Old clients with debug data to revers engineer: <br>
+Old clients with debug data to reverse engineer: <br>
 [archive.org/league-of-legends-0.9.22.14-beta](https://archive.org/details/league-of-legends-0.9.22.14-beta)<br>
 [archive.org/LOL-1.0.0.106](https://archive.org/details/LOL-1.0.0.106)<br>
 [archive.org/LOL-1.0.0.126](https://archive.org/details/LOL-1.0.0.126)<br>
