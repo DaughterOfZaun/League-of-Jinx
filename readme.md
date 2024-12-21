@@ -1,13 +1,10 @@
-<div style="text-align: center;">
-
-<img alt="Logo" src="logo.webp" style="width: 33%"/>
-
-![The current state of the game](screenshot.webp)
-
-<small>Consider this not an attempt to recreate the original, but an attempt to make a better game parasitizing on the assets and scripts of the original.</small>
-
-**CONTRIBUTORS WANTED**
-
-[**DISCORD**](https://discord.gg/yawms85z)
-
-</div>
+<p align="center">
+    <img alt="Logo" src="logo.webp" width="33%"/>
+    <img alt="The current state of the game" src="screenshot.webp" width="100%"/>
+</p>
+<p align="center">
+    <b>CONTRIBUTORS WANTED</b>
+</p>
+<p align="center">
+    <a href="https://discord.gg/yawms85z">DISCORD</a>
+</p>
