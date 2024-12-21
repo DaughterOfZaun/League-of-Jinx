@@ -19,11 +19,10 @@ Therefore, only those **champions and items that were added before 1.0.0.133 and
 
 ### FAQ
 <details>
-<summary><h4 style="display:inline">
-Has anyone developed bots for Chronobreak?
-</h4></summary>
+<summary><h4 style="display:inline">Has anyone developed bots for Chronobreak?</h4></summary>
 
 Although it is technically possible to convert and use bot behavior trees leaked with version 1.0.0.142 of the game client, as of 12/20/2024 only Garen is publicly available (functionality not confirmed).
+
 </details>
 
 ### Running the server
@@ -34,9 +33,7 @@ Install [.NET 8 or newer](https://dotnet.microsoft.com/en-us/download)
 If you have Microsoft Visual Studio 2019 or newer (Community Edition is fine too) installed, then open the GameServer Solution in VS, build and run GameServerConsole project.
 
 <details>
-<summary><h4 style="display:inline">
-Manual Setup (Linux)
-</h4></summary>
+<summary><h4 style="display:inline">Manual Setup (Linux)</h4></summary>
 
 ```bash
 # Build:
@@ -49,6 +46,7 @@ cd GameServerConsole/bin/Debug/net8.0
 cd GameServer/GameServerConsole
 dotnet run .
 ```
+
 </details>
 
 ## League of Legends 4.20 game client
@@ -72,9 +70,7 @@ or
 * Double-click to run `run.bat`
 
 <details>
-<summary><h4 style="display:inline">
-Manually Launching from command line (Linux)
-</h4></summary>
+<summary><h4 style="display:inline">Manually Launching from command line (Linux)</h4></summary>
 
 * Install `wine` and `winetricks` using your package manager.
 * Run `winetricks d3dx9` - without this you will get into the game, but your screen will be black.
@@ -83,16 +79,16 @@ Manually Launching from command line (Linux)
 cd /path/to/your/League-of-Legends-4-20/RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy
 wine "./League of Legends.exe" "" "" "" "127.0.0.1 5119 17BLOhi6KZsTtldTsizvHg== 1"
 ```
+
 </details>
 
 <details>
-<summary><h4 style="display:inline">
-Automatic launch from Visual Studio or GameServerConsole.exe
-</h4></summary>
+<summary><h4 style="display:inline">Automatic launch from Visual Studio or GameServerConsole.exe</h4></summary>
 
 * Open `GameServer\GameServerConsole\bin\Debug\net8.0\Settings\GameServerSettings.json` in any text editor
 * Replace `false` in `"autoStartClient": false` to `true`
 * Set the path to your League of Legends' `deploy` folder (`Path\To\Your\League420\RADS\solutions\lol_game_client_sln\releases\0.0.1.68\deploy`), which shown by the example already in the file. Don't forget to replace all backslashes (`\`) with double backslashes (`\\`), i.e. in the end you should end up with somethig like `"clientLocation": "C:\\Users\\User\\Downloads\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy"`
+
 </details>
 
 ## Userful links
