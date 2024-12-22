@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=51 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" uid="uid://csrtiit658one" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
 [ext_resource type="Script" uid="uid://b7nriuublxfpo" path="res://engine/game/balancer.gd" id="1_xapae"]
@@ -78,6 +78,9 @@ viewport_path = NodePath("SubViewport")
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xapae"]
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_r0nt2"]
+viewport_path = NodePath("Camera3/Camera/SubViewportContainer/SubViewport")
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Balancer" type="Node" parent="."]
@@ -136,6 +139,7 @@ position = Vector2(256, -256)
 
 [node name="UI" parent="." instance=ExtResource("6_pnpm1")]
 unique_name_in_owner = true
+z_index = 2
 
 [node name="Camera2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.746, 30, -3.787)
@@ -145,8 +149,9 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="Camera" type="Camera3D" parent="Camera3" node_paths=PackedStringArray("target")]
 unique_name_in_owner = true
+cull_mask = 524287
 current = true
-fov = 31.9848
+fov = 32.0
 size = 0.1
 far = 8000.0
 script = ExtResource("25_obkvb")
@@ -157,6 +162,29 @@ visible = false
 material_override = SubResource("ShaderMaterial_a806a")
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_f4set")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Camera3/Camera"]
+remote_path = NodePath("../SubViewportContainer/SubViewport/Camera3D")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Camera3/Camera"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Camera3/Camera/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+scaling_3d_mode = 0
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Camera3/Camera/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.746, 22.485, 16.213)
+cull_mask = 524288
+fov = 32.0
 
 [node name="Camera4" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 114.801, 22.17, -140.402)
@@ -550,3 +578,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.085, 2.90684, -114.142)
 [node name="Particle" type="Node3D" parent="."]
 script = ExtResource("39_gtrna")
 metadata/_custom_type_script = ExtResource("39_gtrna")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("ViewportTexture_r0nt2")
+centered = false

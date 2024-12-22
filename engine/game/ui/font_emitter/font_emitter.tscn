@@ -1,0 +1,45 @@
+[gd_scene load_steps=10 format=3 uid="uid://bkmt7jl6obfr7"]
+
+[ext_resource type="Shader" uid="uid://drg2nr4gsmm4f" path="res://engine/game/ui/font_emitter/material.gdshader" id="1_fypvc"]
+[ext_resource type="Texture2D" uid="uid://iwnwqxel47fi" path="res://engine/game/ui/font_emitter/default_font.webp" id="1_kvw4k"]
+[ext_resource type="Script" uid="uid://dhr2rbqyf1052" path="res://engine/game/ui/font_emitter/font_emitter.gd" id="2_wmf0x"]
+[ext_resource type="Shader" uid="uid://je1ffeltlm7f" path="res://engine/game/ui/font_emitter/process.gdshader" id="3_gc0pc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ne6ii"]
+render_priority = 0
+shader = ExtResource("1_fypvc")
+shader_parameter/texture_albedo = ExtResource("1_kvw4k")
+shader_parameter/particles_anim_h_frames = 7
+shader_parameter/particles_anim_v_frames = 10
+
+[sub_resource type="Curve" id="Curve_fypvc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gc0pc"]
+curve = SubResource("Curve_fypvc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iwufi"]
+shader = ExtResource("3_gc0pc")
+shader_parameter/inherit_emitter_velocity_ratio = 0.0
+shader_parameter/alpha_curve = SubResource("CurveTexture_gc0pc")
+
+[sub_resource type="QuadMesh" id="QuadMesh_o2a77"]
+size = Vector2(0.6, 1)
+
+[node name="GPUParticles3D" type="GPUParticles3D"]
+layers = 524288
+material_override = SubResource("ShaderMaterial_ne6ii")
+cast_shadow = 0
+gi_mode = 0
+emitting = false
+amount = 100
+process_material = SubResource("ShaderMaterial_iwufi")
+draw_pass_1 = SubResource("QuadMesh_o2a77")
+script = ExtResource("2_wmf0x")
+letter_width_offset = -0.3
+test_scale = 0.5
+test_speed = 2.5
+test_color = Color(1, 1, 1, 1)
+test_text = "test"
+test_offset = 1.0

@@ -13,6 +13,8 @@ var vars: Vars
 var ai: AI
 var animation: AnimationController
 
+@onready var font_emitter: FontEmitter = find_child("FontEmitter", false)
+
 func issue_order(order: Enums.OrderType, targetOfOrderPosition := Vector3.INF, targetOfOrder: Unit = null) -> void:
 	ai.order(order, targetOfOrderPosition, targetOfOrder)
 func order(type: Enums.OrderType, pos: Vector3, unit: Unit) -> void:
@@ -90,8 +92,8 @@ signal missile_end(spell: Spell, missile: Missile)
 
 # DAMAGE
 signal pre_deal_damage(target: Unit, damage: DamageData)
-signal pre_mitigation_damage(target: Unit, damage: DamageData)
-signal pre_damage(target: Unit, damage: DamageData)
+signal pre_mitigation_damage(target: Unit, damage: DamageData) #TODO: target -> attacker
+signal pre_damage(target: Unit, damage: DamageData) #TODO: target -> attacker
 signal take_damage(attacker: Unit, damage: DamageData)
 signal deal_damage(target: Unit, damage: DamageData)
 
@@ -215,10 +217,13 @@ func stop_move_block() -> void:
 #region Health&Life
 func inc_par(delta: float, par_type := Enums.PARType.MANA) -> void:
 	push_warning("Unit.inc_par is unimplemented")
+
 func inc_health(delta: float, healer: Unit = null) -> void:
 	push_warning("Unit.inc_health is unimplemented")
+
 func inc_max_health(delta: float, inc_current_health: bool) -> void:
 	push_warning("Unit.inc_max_health is unimplemented")
+
 func apply_damage(
 	attacker: Unit,
 	damage: float,
@@ -231,7 +236,50 @@ func apply_damage(
 	ignore_damage_crit: bool = false,
 	call_for_help_attacker: Unit = null
 ) -> void:
-	push_warning("Unit.apply_damage is unimplemented")
+
+	var damage_data := DamageData.new()
+	damage_data.amount = damage
+	damage_data.type = damage_type
+	damage_data.source = source_damage_type
+	damage_data.result = Enums.HitResult.NORMAL
+
+	var target := self
+
+	if damage_data.source == Enums.DamageSource.ATTACK:
+		target.being_hit.emit(attacker, damage_data)
+		attacker.hit_unit.emit(target, damage_data)
+		if damage_data.result == Enums.HitResult.DODGE:
+			target.dodge.emit(attacker)
+			attacker.being_dodged.emit(target)
+		elif damage_data.result == Enums.HitResult.MISS:
+			attacker.miss.emit(target)
+
+	var can_take_damage := damage_data.source == Enums.DamageSource.INTERNALRAW || (
+		!target.status.invulnerable && (
+			(damage_data.type == Enums.DamageType.PHYSICAL && !target.status.physical_immune) ||\
+			(damage_data.type == Enums.DamageType.MAGICAL && !target.status.magic_immune)
+		)
+	)
+	if !(can_take_damage && damage_data.amount > 0): return
+
+	attacker.pre_deal_damage.emit(target, damage_data)
+	target.pre_mitigation_damage.emit(target, damage_data)
+
+	#TODO: migitation
+
+	if !(damage_data.amount > 0): return
+
+	target.pre_damage.emit(damage_data)
+	target.stats.health_current -= damage_data.amount
+	font_emitter.emit_text(str(roundi(damage_data.amount)), 0.5, 2.5, Color.RED, 1.0)
+
+	target.take_damage.emit(attacker, damage_data)
+	attacker.deal_damage.emit(target, damage_data)
+
+	#TODO: lifesteal/spellvamp
+
+	#TODO: death
+
 func force_dead() -> void:
 	push_warning("Unit.force_dead is unimplemented")
 func reincarnate() -> void:

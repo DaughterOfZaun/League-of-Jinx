@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7kagvrpffj3o"]
+
+[ext_resource type="Script" uid="uid://cpoecyfmv4o1e" path="res://engine/game/ui/healthbar.gd" id="1_58y2c"]
+[ext_resource type="Texture2D" uid="uid://c4ovd8h1ya3pk" path="res://data/ui/healthbars/blue.webp" id="2_egcdg"]
+[ext_resource type="Texture2D" uid="uid://c610vhtcdjdr7" path="res://data/ui/healthbars/health.webp" id="3_5w7n4"]
+[ext_resource type="Script" uid="uid://h8ophhkr317p" path="res://engine/game/ui/meter.gd" id="4_6mh5p"]
+[ext_resource type="Texture2D" uid="uid://dc3i3ljpey4sv" path="res://data/ui/healthbars/mana.webp" id="5_svvua"]
+
+[sub_resource type="Gradient" id="Gradient_mgcr6"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lo840"]
+gradient = SubResource("Gradient_mgcr6")
+
+[node name="Healthbar" type="Control" node_paths=PackedStringArray("level_label", "health_range", "mana_range")]
+layout_mode = 3
+anchor_left = 0.516
+anchor_top = 0.365
+anchor_right = 0.516
+anchor_bottom = 0.365
+offset_left = -84.48
+offset_top = -37.8
+offset_right = 56.52
+offset_bottom = 0.199982
+pivot_offset = Vector2(84, 38)
+mouse_filter = 2
+script = ExtResource("1_58y2c")
+level_label = NodePath("LevelLabel")
+health_range = NodePath("HealthBar")
+mana_range = NodePath("ManaBar")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 141.0
+offset_bottom = 38.0
+grow_vertical = 2
+texture = ExtResource("2_egcdg")
+expand_mode = 1
+
+[node name="LevelLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 26.0
+offset_bottom = 30.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 13
+text = "18"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 11.0
+offset_right = 136.0
+offset_bottom = 19.0
+max_value = 2527.0
+step = 0.0
+value = 2512.0
+nine_patch_stretch = true
+texture_over = ExtResource("3_5w7n4")
+texture_progress = SubResource("GradientTexture1D_lo840")
+tint_progress = Color(0.0823529, 0.788235, 0.156863, 1)
+script = ExtResource("4_6mh5p")
+line_width = 2.0
+line_color = Color(0, 0, 0, 1)
+
+[node name="ManaBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 23.0
+offset_right = 136.0
+offset_bottom = 26.0
+step = 0.0
+value = 50.0
+nine_patch_stretch = true
+texture_progress = ExtResource("5_svvua")
+tint_progress = Color(0.34902, 0.513726, 0.901961, 1)

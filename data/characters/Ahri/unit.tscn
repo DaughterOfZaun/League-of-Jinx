@@ -1,13 +1,9 @@
-[gd_scene load_steps=75 format=3 uid="uid://dgxp55bfpc742"]
+[gd_scene load_steps=69 format=3 uid="uid://dgxp55bfpc742"]
 
 [ext_resource type="Script" uid="uid://4a06w3g4bx3a" path="res://engine/unit/champion.gd" id="1_7i6v8"]
 [ext_resource type="Script" uid="uid://dksbt75edeseg" path="res://engine/game/ui/minimap/minimap_icon.gd" id="2_81mpc"]
 [ext_resource type="Texture2D" uid="uid://cjgdixmn1dikj" path="res://data/characters/Ahri/Icons/Ahri_Circle.webp" id="3_7i6v8"]
-[ext_resource type="Script" uid="uid://cpoecyfmv4o1e" path="res://engine/game/ui/healthbar.gd" id="3_81mpc"]
-[ext_resource type="Texture2D" uid="uid://c4ovd8h1ya3pk" path="res://data/ui/healthbars/blue.webp" id="3_biknk"]
-[ext_resource type="Texture2D" uid="uid://c610vhtcdjdr7" path="res://data/ui/healthbars/health.webp" id="4_jjcjx"]
-[ext_resource type="Script" uid="uid://h8ophhkr317p" path="res://engine/game/ui/meter.gd" id="5_0muf6"]
-[ext_resource type="Texture2D" uid="uid://dc3i3ljpey4sv" path="res://data/ui/healthbars/mana.webp" id="6_wycds"]
+[ext_resource type="PackedScene" uid="uid://b7kagvrpffj3o" path="res://engine/game/ui/champion_healthbar_blue.tscn" id="4_k5kv2"]
 [ext_resource type="Script" uid="uid://cupxcn0nv1r6i" path="res://engine/game/lights/light_2d.gd" id="8_isf2m"]
 [ext_resource type="Script" uid="uid://berrc4malkwbm" path="res://data/ai/hero.gd" id="9_eaj0j"]
 [ext_resource type="Script" uid="uid://73tqm1fjcobh" path="res://engine/ai/ai_idle_state.gd" id="10_ybx1b"]
@@ -59,14 +55,6 @@
 [ext_resource type="Script" uid="uid://dhorowytayhda" path="res://engine/game/range.gd" id="44_sr3ak"]
 [ext_resource type="Script" uid="uid://wm5ptcjnltoy" path="res://data/spells/Recall/BluePillSpell.gd" id="54_yee7n"]
 [ext_resource type="PackedScene" uid="uid://s44tscgo3jl0" path="res://data/spells/Recall/TeleportHome.tscn" id="56_2vy42"]
-
-[sub_resource type="Gradient" id="Gradient_mgcr6"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_lo840"]
-gradient = SubResource("Gradient_mgcr6")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s7c4n"]
 
@@ -139,73 +127,7 @@ script = ExtResource("2_81mpc")
 scale = Vector2(0.178, 0.178)
 texture = ExtResource("3_7i6v8")
 
-[node name="Healthbar" type="Control" parent="." node_paths=PackedStringArray("level_label", "health_range", "mana_range")]
-layout_mode = 3
-anchor_left = 0.516
-anchor_top = 0.365
-anchor_right = 0.516
-anchor_bottom = 0.365
-offset_left = -84.48
-offset_top = -37.8
-offset_right = 56.52
-offset_bottom = 0.199982
-pivot_offset = Vector2(84, 38)
-mouse_filter = 2
-script = ExtResource("3_81mpc")
-level_label = NodePath("LevelLabel")
-health_range = NodePath("HealthBar")
-mana_range = NodePath("ManaBar")
-
-[node name="TextureRect" type="TextureRect" parent="Healthbar"]
-layout_mode = 1
-anchors_preset = -1
-offset_right = 141.0
-offset_bottom = 38.0
-grow_vertical = 2
-texture = ExtResource("3_biknk")
-expand_mode = 1
-
-[node name="LevelLabel" type="Label" parent="Healthbar"]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 7.0
-offset_right = 26.0
-offset_bottom = 30.0
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 13
-text = "18"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HealthBar" type="TextureProgressBar" parent="Healthbar"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 11.0
-offset_right = 136.0
-offset_bottom = 19.0
-max_value = 2527.0
-step = 0.0
-value = 2512.0
-nine_patch_stretch = true
-texture_over = ExtResource("4_jjcjx")
-texture_progress = SubResource("GradientTexture1D_lo840")
-tint_progress = Color(0.0823529, 0.788235, 0.156863, 1)
-script = ExtResource("5_0muf6")
-line_width = 2.0
-line_color = Color(0, 0, 0, 1)
-
-[node name="ManaBar" type="TextureProgressBar" parent="Healthbar"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 23.0
-offset_right = 136.0
-offset_bottom = 26.0
-step = 0.0
-value = 50.0
-nine_patch_stretch = true
-texture_progress = ExtResource("6_wycds")
-tint_progress = Color(0.34902, 0.513726, 0.901961, 1)
+[node name="Healthbar" parent="." instance=ExtResource("4_k5kv2")]
 
 [node name="PointLight2D" type="Node" parent="."]
 script = ExtResource("8_isf2m")
@@ -230,7 +152,6 @@ script = ExtResource("15_eh8vk")
 metadata/_custom_type_script = ExtResource("15_eh8vk")
 
 [node name="Stats" type="Node" parent="."]
-process_mode = 4
 script = ExtResource("14_1rt8n")
 crit_damage_bonus = 2.0
 armor_base = 11.0

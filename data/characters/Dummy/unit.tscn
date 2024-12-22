@@ -1,11 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://cbfh3ax275136"]
+[gd_scene load_steps=14 format=3 uid="uid://cbfh3ax275136"]
 
 [ext_resource type="Script" uid="uid://0hod3dqe7m4i" path="res://engine/unit/unit.gd" id="1_y0p2c"]
 [ext_resource type="Script" uid="uid://xxukqtvfymt0" path="res://engine/unit/unit_data.gd" id="2_7grwr"]
 [ext_resource type="PackedScene" uid="uid://bsjlrji1ixlo3" path="res://data/characters/Dummy/Skin/target_dummy_order.glb" id="3_7grwr"]
+[ext_resource type="Script" uid="uid://dcvek1lhy4x2v" path="res://engine/stats.gd" id="3_e45ik"]
 [ext_resource type="Script" uid="uid://dhorowytayhda" path="res://engine/game/range.gd" id="3_tp4xs"]
+[ext_resource type="PackedScene" uid="uid://cfp06i2055j2s" path="res://engine/game/ui/champion_healthbar_red.tscn" id="3_u7uog"]
+[ext_resource type="Script" uid="uid://wllpm0ictc2m" path="res://engine/status.gd" id="4_rk3y8"]
 [ext_resource type="Material" uid="uid://tp62lsfqwj7b" path="res://data/characters/Dummy/Skin/target_dummy_chaos.tres" id="4_tp4xs"]
 [ext_resource type="Script" uid="uid://hps2qaay130q" path="res://engine/game/animation.gd" id="5_flmsy"]
+[ext_resource type="PackedScene" uid="uid://bkmt7jl6obfr7" path="res://engine/game/ui/font_emitter/font_emitter.tscn" id="10_tvrld"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_flmsy"]
 animation = &"Idle1_Base"
@@ -29,6 +33,19 @@ metadata/_custom_type_script = ExtResource("1_y0p2c")
 [node name="Data" type="Node" parent="."]
 script = ExtResource("2_7grwr")
 metadata/_custom_type_script = ExtResource("2_7grwr")
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("3_e45ik")
+health_base = 1000.0
+health_regen_base = 1000.0
+metadata/_custom_type_script = ExtResource("3_e45ik")
+
+[node name="StatsTemp" type="Node" parent="."]
+script = ExtResource("3_e45ik")
+temp = true
+metadata/_custom_type_script = ExtResource("3_e45ik")
+
+[node name="Healthbar" parent="." instance=ExtResource("3_u7uog")]
 
 [node name="AuxScene" parent="." instance=ExtResource("3_7grwr")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -55,6 +72,14 @@ metadata/_custom_type_script = ExtResource("3_tp4xs")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GameplayRange"]
 shape = SubResource("CapsuleShape3D_tp4xs")
-debug_color = Color(0, 0.6, 0.7, 0.42)
+
+[node name="Status" type="Node" parent="."]
+script = ExtResource("4_rk3y8")
+targetable = true
+metadata/_custom_type_script = ExtResource("4_rk3y8")
+
+[node name="FontEmitter" parent="." instance=ExtResource("10_tvrld")]
+test_color = Color(1, 0, 0, 1)
+test_text = "50"
 
 [editable path="AuxScene"]

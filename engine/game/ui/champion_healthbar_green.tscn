@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://ca4qwjje5i0ac"]
+
+[ext_resource type="PackedScene" uid="uid://b7kagvrpffj3o" path="res://engine/game/ui/champion_healthbar_blue.tscn" id="1_sd7ul"]
+[ext_resource type="Texture2D" uid="uid://r1chq47oi1km" path="res://data/ui/healthbars/green.webp" id="2_o8u70"]
+
+[node name="Healthbar" instance=ExtResource("1_sd7ul")]
+
+[node name="TextureRect" parent="." index="0"]
+offset_left = 27.0
+offset_right = 168.0
+texture = ExtResource("2_o8u70")
+
+[node name="LevelLabel" parent="." index="1"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 0.0
+offset_top = 7.99998
+offset_right = 19.0
+offset_bottom = 31.0
+grow_horizontal = 0

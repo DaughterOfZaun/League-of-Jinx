@@ -42,7 +42,7 @@ func _ready() -> void:
 @export var is_clone: bool
 @export var is_moving: bool
 
-@export var targetable_to_team: Dictionary[int, bool] = {
+@export var targetable_to_team: Dictionary[Enums.Team, bool] = {
 	Enums.Team.ORDER: true,
 	Enums.Team.CHAOS: true,
 	Enums.Team.NEUTRAL: true,

@@ -1,0 +1,170 @@
+[gd_scene load_steps=7 format=3 uid="uid://v01wdpqo2kmu"]
+
+[ext_resource type="Script" uid="uid://b70dtkkm0eqrf" path="res://engine/game/ui/font_emitter/font_render_tool.gd" id="1_3ee6c"]
+[ext_resource type="PackedScene" uid="uid://bkmt7jl6obfr7" path="res://engine/game/ui/font_emitter/font_emitter.tscn" id="1_pl7lx"]
+[ext_resource type="Shader" uid="uid://je1ffeltlm7f" path="res://engine/game/ui/font_emitter/process.gdshader" id="2_x16ov"]
+
+[sub_resource type="Curve" id="Curve_fypvc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gc0pc"]
+curve = SubResource("Curve_fypvc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iwufi"]
+shader = ExtResource("2_x16ov")
+shader_parameter/inherit_emitter_velocity_ratio = 0.0
+shader_parameter/alpha_curve = SubResource("CurveTexture_gc0pc")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GPUParticles3D" parent="." instance=ExtResource("1_pl7lx")]
+process_material = SubResource("ShaderMaterial_iwufi")
+letter_width_offset = -0.3
+test_scale = 1.0
+test_speed = 5.0
+test_color = Color(1, 1, 1, 1)
+test_text = ""
+test_offset = 0.0
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(175, 300)
+script = ExtResource("1_3ee6c")
+path = "uid://iwnwqxel47fi"
+lossy = true
+
+[node name="MarginContainer" type="MarginContainer" parent="SubViewport"]
+offset_right = 175.0
+offset_bottom = 307.0
+theme_override_constants/margin_left = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewport/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Label" type="Label" parent="SubViewport/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "0
+1
+2
+3
+4
+5
+6
+7
+8
+9"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="SubViewport/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "a
+b
+c
+d
+e
+f
+g
+h
+i
+j"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="SubViewport/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "k
+l
+m
+n
+o
+p
+q
+r
+s
+t"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="SubViewport/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "u
+v
+w
+x
+y
+z
+A
+B
+C
+D"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="SubViewport/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "E
+F
+G
+H
+I
+J
+K
+L
+M
+N"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="SubViewport/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "O
+P
+Q
+R
+S
+T
+U
+V
+W
+X"
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="SubViewport/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 20
+text = "Y
+Z
+!
++
+-
+.
+.
+.
+.
+ "
+horizontal_alignment = 1
