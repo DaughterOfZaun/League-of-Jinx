@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>WIKI | League-of-Jinx</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="WIKI" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(WIP) Planned: League of Legends MOBA clone in Godot Engine providing API similar to the old original scripts" />
+<meta property="og:description" content="(WIP) Planned: League of Legends MOBA clone in Godot Engine providing API similar to the old original scripts" />
+<link rel="canonical" href="https://daughterofzaun.github.io/League-of-Jinx/" />
+<meta property="og:url" content="https://daughterofzaun.github.io/League-of-Jinx/" />
+<meta property="og:site_name" content="League-of-Jinx" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="WIKI" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","description":"(WIP) Planned: League of Legends MOBA clone in Godot Engine providing API similar to the old original scripts","headline":"WIKI","name":"League-of-Jinx","url":"https://daughterofzaun.github.io/League-of-Jinx/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="style.css">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/League-of-Jinx/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1 id="wiki">WIKI</h1>
+
+<h2 id="leaguesandbox">LeagueSandbox <span style="opacity: 0.25">// The source of evil</span></h2>
+<p>old repo: <a href="https://github.com/LeagueSandbox/GameServer">GitHub/LeagueSandbox/GameServer</a><br />
+new repo: <a href="https://github.com/cabeca1143/GameServer">GitHub/cabeca1143/GameServer</a><br />
+discord: <a href="https://discord.gg/8HbHaVtf">League Sandbox Developers</a><br />
+discord: <a href="https://discord.gg/UKaMUg3Y">League Sandbox Public</a><br /></p>
+
+<h2 id="chronobreak">Chronobreak <span style="opacity: 0.25">// LeagueSandbox v2.0</span></h2>
+<p>forum post: <a href="https://forum.ragezone.com/threads/𝗥𝗘𝗟𝗘𝗔𝗦𝗘-𝗖𝗵𝗿𝗼𝗻𝗼𝗯𝗿𝗲𝗮𝗸-𝘁𝗵𝗲-𝗟𝗲𝗮𝗴𝘂𝗲-𝗼𝗳-𝗟𝗲𝗴𝗲𝗻𝗱𝘀-𝗽𝗿𝗶𝘃𝗮𝘁𝗲-𝘀𝗲𝗿𝘃𝗲𝗿.1231008">RaGEZONE</a><br />
+discord: <a href="https://discord.gg/aquQGUAXuW">League Sandstorm</a> (please note that this discord server is dedicated to LoL clones/custom-servers in general)<br />
+download link: <a href="magnet:?xt=urn:btih:e4043fdc210a896470d662933f7829ccf3ed781b&amp;xt=urn:btmh:1220cf9bfaba0f9653255ff5b19820ea4c01ac8484d0f8407b109ca358236d4f4abc&amp;dn=Chronobreak.GameServer.7z">magnet</a> (please help to seed)<br />
+download link: <a href="https://mega.nz/file/D35i0YaD#P08udvnbUByZHGBvCTbC1XDPkKdUGgp4xtravAlECbU">mega.nz</a> (won’t last forever)<br /></p>
+
+<p>The main difference from its predecessor (apart from the fact that many systems were improved, added or rewritten) was the transition from custom scripts (which had to be written by enthusiasts together with the server) to original scripts (supplied with the game up until version 1.0.0.133).<br />
+However, like its predecessor, it uses client version 4.20, so it suffers from a mismatch between the version of scripts used on the server side and the version of resources and configs on the client side.
+Therefore, only those <strong>champions and items that were added before 1.0.0.133 and did not change untill 4.20 work</strong>. Anything added or reworked after 1.0.0.132 - doesn’t work.<br />
+<small>There is a version that uses the old client, but it has not been released publicly.<br />An alternative solution would be to port resources from the old client to the new one.</small></p>
+
+<h3 id="faq">FAQ</h3>
+<details>
+<summary>
+  <h4 id="bots-for-chronobreak" style="display:inline">
+    Has anyone developed bots for Chronobreak?
+  </h4>
+</summary>
+Although it is technically possible to convert and use bot behavior trees leaked with version 1.0.0.142 of the game client, as of 12/20/2024 only Garen is publicly available (functionality not confirmed).
+</details>
+<details>
+<summary>
+  <h4 id="how-to-play-x" style="display:inline">
+    How to play X?
+  </h4>
+</summary>
+<ul>
+  <li>Download the server (Chronobreak (preferred) or LeagueSandbox) and client (4.20).</li>
+  <li>Compile the server.</li>
+  <li>Unzip the client.</li>
+  <li>Open <code>GameServer/GameServerConsole/bin/Debug/net8.0/Settings/GameInfo.json</code> file in any text editor</li>
+  <li>Replace <code>Ashe</code> in <code>"champion": "Ashe",</code> to the desired champion like <code>Udyr</code></li>
+  <li>Save changes and close the file</li>
+  <li>Launch the server</li>
+  <li>Launch the client</li>
+</details>
+<details>
+<summary>
+  <h4 id="how-to-enable-x" style="display:inline">
+    How to enable minions?
+  </h4>
+</summary>
+<li>Open <code>GameServer/GameServerConsole/bin/Debug/net8.0/Settings/GameInfo.json</code> file in any text editor</li>
+<li>Replace <code>false</code> in <code>"MINION_SPAWNS_ENABLED": false,</code> to <code>true</code></li>
+<li>Save changes and close the file</li>
+</details>
+
+<h3 id="running-the-server">Running the server</h3>
+<h4 id="prerequisites">Prerequisites</h4>
+<p>Install <a href="https://dotnet.microsoft.com/en-us/download">.NET 8 or newer</a></p>
+
+<h4 id="manual-setup-windows">Manual Setup (Windows)</h4>
+<p>If you have Microsoft Visual Studio 2019 or newer (Community Edition is fine too) installed, then open the GameServer Solution in VS, build and run GameServerConsole project.</p>
+
+<details>
+<summary>
+  <h4 id="manual-setup-linux" style="display:inline">
+    Manual Setup (Linux)
+  </h4>
+</summary>
+<pre>
+# Build:
+cd GameServer/GameServerConsole
+dotnet build .
+# Run:
+cd GameServerConsole/bin/Debug/net8.0
+./GameServerConsole
+# Build &amp; Run:
+cd GameServer/GameServerConsole
+dotnet run .
+</pre>
+</details>
+
+<h2 id="league-of-legends-420-game-client">League of Legends 4.20 game client</h2>
+<p>download link: <a href="magnet:?xt=urn:btih:4bb197635194f4242d9f937f0f9225851786a0a8&amp;dn=League%20of%20Legends_UNPACKED.7z">magnet</a> (please help to seed)<br />
+download link: <a href="mega.nz/file/Hr5XEAqT#veo2lfRWK7RrLUdFBBqRdUvxwr_gd8UyUL0f6b4pHJ0">mega.nz</a> (won’t last forever)<br /></p>
+
+<h3 id="running-the-game-client">Running the game client</h3>
+<h4 id="prerequisites-1">Prerequisites</h4>
+<p>Download and unpack the 4.20 version of League game client.</p>
+
+<h4 id="manual-launch-windows">Manually Launching from command line (Windows)</h4>
+<ul>
+  <li>Go to the <code>deploy</code> folder</li>
+  <li>Double-click to run <code>run.bat</code></li>
+</ul>
+
+<p>or</p>
+
+<ul>
+  <li>Go to the <code>deploy</code> folder</li>
+  <li>Create new text file</li>
+  <li>Put <code>start "" "League of Legends.exe" "" "" "" "127.0.0.1 5119 17BLOhi6KZsTtldTsizvHg== 1"</code> in it.</li>
+  <li>Rename it to something like <code>run.bat</code></li>
+  <li>Double-click to run <code>run.bat</code></li>
+</ul>
+
+<details>
+<summary>
+  <h4 id="manual-launch-linux" style="display:inline">
+    Manually Launching from command line (Linux)
+  </h4>
+</summary>
+<ul>
+  <li>Install <code>wine</code> and <code>winetricks</code> using your package manager.</li>
+  <li>Run <code>winetricks d3dx9</code> - without this you will get into the game, but your screen will be black.</li>
+  <li>Enter the directory containing the client  and run the game:</li>
+</ul>
+<pre>
+cd /path/to/your/League-of-Legends-4-20/RADS/solutions/lol_game_client_sln/releases/0.0.1.68/deploy
+wine "./League of Legends.exe" "" "" "" "127.0.0.1 5119 17BLOhi6KZsTtldTsizvHg== 1"
+</pre>
+</details>
+
+<details>
+<summary>
+  <h4 id="automatic-launch" style="display:inline">
+    Automatic launch from Visual Studio or GameServerConsole.exe
+  </h4>
+</summary>
+<ul>
+  <li>Open <code>GameServer\GameServerConsole\bin\Debug\net8.0\Settings\GameServerSettings.json</code> in any text editor</li>
+  <li>Replace <code>false</code> in <code>"autoStartClient": false</code> to <code>true</code></li>
+  <li>Set the path to your League of Legends' <code>deploy</code> folder (<code>Path\To\Your\League420\RADS\solutions\lol_game_client_sln\releases\0.0.1.68\deploy</code>), which shown by the example already in the file. Don't forget to replace all backslashes (<code>\</code>) with double backslashes (<code>\\</code>), i.e. in the end you should end up with somethig like <code>"clientLocation": "C:\\Users\\User\\Downloads\\League-of-Legends-4-20\\RADS\\solutions\\lol_game_client_sln\\releases\\0.0.1.68\\deploy"</code></li>
+  <li>Save changes and close the file</li>
+</ul>
+</details>
+
+<h2 id="userful-links">Userful links</h2>
+<p>It may be a good idea to save their contents to preserve.</p>
+
+<p>Old clients with debug data to reverse engineer: <br />
+<a href="https://archive.org/details/league-of-legends-0.9.22.14-beta">archive.org/league-of-legends-0.9.22.14-beta</a><br />
+<a href="https://archive.org/details/LOL-1.0.0.106">archive.org/LOL-1.0.0.106</a><br />
+<a href="https://archive.org/details/LOL-1.0.0.126">archive.org/LOL-1.0.0.126</a><br /></p>
+
+<p>1.0.0.131 client (solution 0.0.0.64):<br />
+<a href="magnet:?xt=urn:btih:eb6dd0165ac7216d6e87247102e79fcf7099dcb2&amp;xt=urn:btmh:12208e9e8d50ee6a8ebbfd7c8f69cd53ae48c4b6ba55fff736ea899eae68b79cc5dd&amp;dn=131.7z">magnet</a> (please help to seed)<br />
+<a href="https://mega.nz/file/jrZxwa5C#TVArHIw64R44tfI9FAjCYhD1qh64SqbfxObUZ2hdyHM">mega.nz</a> (won’t last forever)<br /></p>
+
+<p>1.0.0.131 up to 1.0.0.132 client (solution 0.0.0.70) patch:<br />
+<small>The last patch before the scripts were removed from the client</small><br />
+<a href="magnet:?xt=urn:btih:aa53c3407b8b63abd2afce85a73aa97057e288d8&amp;xt=urn:btmh:122078ae447d63e10a8657a8a2253d33d00aa01afe669ef4dda6e3bb4d2712002d11&amp;dn=0.0.0.65-70.7z">magnet</a> (please help to seed)<br />
+<a href="https://mega.nz/file/bywGwQ7T#QjlebplO2zyKDbKHdb2RTkuKZHYL1b-bhfu1UjLRFLI">mega.nz</a> (won’t last forever)<br /></p>
+
+<h2 id="chronoshift">Chronoshift <span style="opacity: 0.25">// Don’t even ask about it</span></h2>
+<p>Better check out the new old school MOBA from the same developers:<br />
+<strong>Syndicate of Souls</strong> <a href="https://www.syndicateofsouls.com">Site</a>
+<a href="https://store.steampowered.com/app/3327160/Syndicate_of_Souls">Steam</a></p>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>
