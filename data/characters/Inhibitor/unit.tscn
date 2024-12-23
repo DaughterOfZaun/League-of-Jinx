@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1g8y4l4o36ne"]
+[gd_scene load_steps=12 format=3 uid="uid://b1g8y4l4o36ne"]
 
 [ext_resource type="Script" uid="uid://18prmoole0oj" path="res://engine/level/dampener.gd" id="1_lfbuj"]
 [ext_resource type="Script" uid="uid://cupxcn0nv1r6i" path="res://engine/game/lights/light_2d.gd" id="2_4s6kg"]
@@ -9,12 +9,13 @@
 [ext_resource type="Script" uid="uid://dcvek1lhy4x2v" path="res://engine/stats.gd" id="5_8i050"]
 [ext_resource type="Script" uid="uid://wllpm0ictc2m" path="res://engine/status.gd" id="6_2a1vn"]
 [ext_resource type="Script" uid="uid://bhrdhvc35vhvc" path="res://data/characters/Turrets/Passive/CharScriptOrderTurretNormal.gd" id="7_gf3uc"]
+[ext_resource type="Script" uid="uid://dhorowytayhda" path="res://engine/game/range.gd" id="10_owmcq"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_3b3uc"]
 height = 2.85
 radius = 2.85
 
-[node name="Unit" type="StaticBody3D" node_paths=PackedStringArray("data")]
+[node name="Unit" type="Node3D" node_paths=PackedStringArray("data")]
 script = ExtResource("1_lfbuj")
 data = NodePath("Data")
 
@@ -56,11 +57,14 @@ script = ExtResource("7_gf3uc")
 
 [node name="AI" type="Node" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26965, 0)
-shape = SubResource("CylinderShape3D_3b3uc")
-
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
 radius = 2.85
 height = 2.85
 affect_navigation_mesh = true
+
+[node name="SelectionRange" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.425, 0)
+script = ExtResource("10_owmcq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionRange"]
+shape = SubResource("CylinderShape3D_3b3uc")

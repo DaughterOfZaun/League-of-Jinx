@@ -61,14 +61,6 @@ Therefore, only those <strong>champions and items that were added before 1.0.0.1
 <small>There is a version that uses the old client, but it has not been released publicly.<br />An alternative solution would be to port resources from the old client to the new one.</small></p>
 
 <h3 id="faq">FAQ</h3>
-<details>
-<summary>
-  <h4 id="bots-for-chronobreak" style="display:inline">
-    Has anyone developed bots for Chronobreak?
-  </h4>
-</summary>
-<p>Although it is technically possible to convert and use bot behavior trees leaked with version 1.0.0.142 of the game client, as of 12/20/2024 only Garen is publicly available and he is pretty useless scince and currently he is pretty useless, because he was reworked and his skills don't work properly.</p>
-</details>
 
 <details>
 <summary>
@@ -90,6 +82,19 @@ Therefore, only those <strong>champions and items that were added before 1.0.0.1
 
 <details>
   <summary>
+    <h4 id="how-to-enable-x" style="display:inline">
+      How to enable minions?
+    </h4>
+  </summary>
+  <ul>
+    <li>Open <code>GameServer/GameServerConsole/bin/Debug/net8.0/Settings/GameInfo.json</code> file in any text editor</li>
+    <li>Replace <code>false</code> in <code>"MINION_SPAWNS_ENABLED": false,</code> to <code>true</code></li>
+    <li>Save changes and close the file</li>
+  </ul>
+  </details>
+
+<details>
+  <summary>
     <h4 id="how-to-play-in-lan" style="display:inline">
       How to play with my friends in local network?
     </h4>
@@ -103,20 +108,7 @@ Therefore, only those <strong>champions and items that were added before 1.0.0.1
       How to play with bots?
     </h4>
   </summary>
-  The answer will be here later, but in the meantime you can ask on discord.
-</details>
-
-<details>
-<summary>
-  <h4 id="how-to-enable-x" style="display:inline">
-    How to enable minions?
-  </h4>
-</summary>
-<ul>
-  <li>Open <code>GameServer/GameServerConsole/bin/Debug/net8.0/Settings/GameInfo.json</code> file in any text editor</li>
-  <li>Replace <code>false</code> in <code>"MINION_SPAWNS_ENABLED": false,</code> to <code>true</code></li>
-  <li>Save changes and close the file</li>
-</ul>
+  Although it is technically possible to convert and use bot behavior trees leaked with version 1.0.0.142 of the game client, as of 12/20/2024 only Garen is publicly available and he is pretty useless scince and currently he is pretty useless, because he was reworked and his skills don't work properly.
 </details>
 
 <h3 id="running-the-server">Running the server</h3>

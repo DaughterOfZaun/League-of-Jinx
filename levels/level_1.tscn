@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=52 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" uid="uid://csrtiit658one" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
 [ext_resource type="Script" uid="uid://b7nriuublxfpo" path="res://engine/game/balancer.gd" id="1_xapae"]
@@ -73,6 +73,11 @@ resource_local_to_scene = true
 flip_faces = true
 size = Vector2(2, 2)
 
+[sub_resource type="Environment" id="Environment_xapae"]
+ambient_light_source = 1
+reflected_light_source = 1
+tonemap_mode = 2
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_xapae"]
 viewport_path = NodePath("SubViewport")
 
@@ -119,6 +124,7 @@ unique_name_in_owner = true
 disable_3d = true
 handle_input_locally = false
 use_taa = true
+scaling_3d_scale = 0.75
 sdf_oversize = 2
 sdf_scale = 0
 size = Vector2i(640, 640)
@@ -167,23 +173,27 @@ mesh = SubResource("QuadMesh_f4set")
 remote_path = NodePath("../SubViewportContainer/SubViewport/Camera3D")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Camera3/Camera"]
+z_index = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="Camera3/Camera/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
 scaling_3d_mode = 0
+scaling_3d_scale = 0.75
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Camera3/Camera/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0.746, 22.485, 16.213)
 cull_mask = 524288
+environment = SubResource("Environment_xapae")
 fov = 32.0
 
 [node name="Camera4" type="Node3D" parent="."]
