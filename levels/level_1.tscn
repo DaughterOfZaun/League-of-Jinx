@@ -156,10 +156,9 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 [node name="Camera" type="Camera3D" parent="Camera3" node_paths=PackedStringArray("target")]
 unique_name_in_owner = true
 cull_mask = 524287
+doppler_tracking = 2
 current = true
 fov = 32.0
-size = 0.1
-far = 8000.0
 script = ExtResource("25_obkvb")
 target = NodePath("../../Ahri")
 
@@ -186,7 +185,6 @@ stretch = true
 transparent_bg = true
 handle_input_locally = false
 scaling_3d_mode = 0
-scaling_3d_scale = 0.75
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
 

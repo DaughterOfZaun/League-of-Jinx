@@ -6,9 +6,8 @@
 
 [resource]
 resource_name = "NVRMaterial_river_center_b_"
-transparency = 3
-alpha_hash_scale = 1.0
-alpha_antialiasing_mode = 0
+render_priority = -1
+transparency = 1
 albedo_texture = ExtResource("1_yjuwm")
 normal_enabled = true
 normal_texture = ExtResource("2_wa5pd")

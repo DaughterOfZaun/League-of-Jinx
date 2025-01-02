@@ -6,9 +6,8 @@
 
 [resource]
 resource_name = "NVRMaterial_base_chasm3_"
-transparency = 3
-alpha_hash_scale = 1.0
-alpha_antialiasing_mode = 0
+render_priority = -15
+transparency = 1
 albedo_texture = ExtResource("1_auogg")
 normal_enabled = true
 normal_texture = ExtResource("2_4inbb")

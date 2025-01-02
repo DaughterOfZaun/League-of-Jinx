@@ -6,9 +6,8 @@
 
 [resource]
 resource_name = "NVRMaterial_lambert138"
-transparency = 3
-alpha_hash_scale = 1.0
-alpha_antialiasing_mode = 0
+render_priority = -13
+transparency = 1
 albedo_texture = ExtResource("1_owtwg")
 normal_enabled = true
 normal_texture = ExtResource("2_2wgjp")

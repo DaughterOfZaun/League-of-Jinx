@@ -187,10 +187,10 @@ func cast(
 	if has_missile:
 		var m: Missile
 		match data.cast_type:
-			Enums.CastType.TARGET_MISSILE: m = SpellTargetMissile.new(self, target)
-			Enums.CastType.CHAIN_MISSILE: m = SpellChainMissile.new(self, target)
-			Enums.CastType.CIRCLE_MISSILE: m = SpellCircleMissile.new(self, target, pos)
-			Enums.CastType.ARC_MISSILE: m = SpellLineMissile.new(self, target, pos)
+			Enums.CastType.TARGET_MISSILE: m = SpellTargetMissile.create(self, target)
+			Enums.CastType.CHAIN_MISSILE: m = SpellChainMissile.create(self, target)
+			Enums.CastType.CIRCLE_MISSILE: m = SpellCircleMissile.create(self, target, pos)
+			Enums.CastType.ARC_MISSILE: m = SpellLineMissile.create(self, target, pos)
 			_: assert(false)
 		get_tree().current_scene.add_child(m)
 	else:

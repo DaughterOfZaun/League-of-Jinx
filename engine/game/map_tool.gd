@@ -162,6 +162,19 @@ func area(p1: Vector2, p2: Vector2, p3: Vector2) -> float:
 	var v2: Vector2 = p2 - p3
 	return (v1.x * v2.y - v1.y * v2.x) / 2
 
+@export_tool_button("Fix Decals Transparency") var fix_decals_v2 := func() -> void:
+	for child in get_children(true):
+		var mi := child as MeshInstance3D
+		if mi == null: continue
+		assert(mi.mesh.get_surface_count() == 1)
+		var m := mi.mesh.surface_get_material(0) as StandardMaterial3D
+		var is_decal := m.albedo_texture in decals
+		if is_decal:
+			m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+			m.render_priority = decals.find(m.albedo_texture) - len(decals) + 2
+			mi.lod_bias = 1.0
+
 @export_group("")
 
 @export_group("Meshes")
@@ -269,7 +282,7 @@ const mi_dir := "res://data/levels/1/meshes"
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
-	replace_materials_at_runtime()
+	#replace_materials_at_runtime()
 
 @export var level_shader: Shader
 @export var level_decal_shader: Shader

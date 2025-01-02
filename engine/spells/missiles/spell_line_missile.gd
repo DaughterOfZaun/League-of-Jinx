@@ -1,5 +1,10 @@
 class_name SpellLineMissile extends Missile
 
+static func create(spell: Spell, target: Unit, target_position: Vector3) -> SpellLineMissile:
+	var m := SpellLineMissile.new()
+	m.init(spell, target, target_position)
+	return m
+
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	

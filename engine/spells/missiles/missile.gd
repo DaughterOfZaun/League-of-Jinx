@@ -3,7 +3,7 @@ class_name Missile extends Node3DExt
 var spell: Spell
 var target: Unit = null
 var target_position := Vector3.INF
-func _init(spell: Spell, target: Unit, target_position: Vector3 = Vector3.INF) -> void:
+func init(spell: Spell, target: Unit, target_position: Vector3 = Vector3.INF) -> void:
 	self.spell = spell
 	if target != null:
 		self.target = target

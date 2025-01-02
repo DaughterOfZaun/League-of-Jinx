@@ -6,9 +6,8 @@
 
 [resource]
 resource_name = "NVRMaterial_Order_seam_"
-transparency = 3
-alpha_hash_scale = 1.0
-alpha_antialiasing_mode = 0
+render_priority = -4
+transparency = 1
 albedo_texture = ExtResource("1_qh2xi")
 normal_enabled = true
 normal_texture = ExtResource("2_lxxpx")

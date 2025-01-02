@@ -1,5 +1,10 @@
 class_name SpellCircleMissile extends Missile
 
+static func create(spell: Spell, target: Unit, target_position: Vector3) -> SpellCircleMissile:
+	var m := SpellCircleMissile.new()
+	m.init(spell, target, target_position)
+	return m
+
 var angle := 0.0
 var radius := 0.0
 func _ready() -> void:

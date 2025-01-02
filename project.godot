@@ -143,6 +143,10 @@ ToggleFullscreen={
 rendering/root_node_auto_translate=false
 locale/translations=PackedStringArray("res://data/ui/lang/fontconfig.en.translation")
 
+[layer_names]
+
+3d_render/layer_20="particles"
+
 [physics]
 
 common/physics_jitter_fix=0.0
@@ -151,4 +155,3 @@ common/physics_interpolation=true
 [rendering]
 
 scaling_3d/mode=2
-scaling_3d/scale=0.75
