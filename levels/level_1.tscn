@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=49 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" uid="uid://csrtiit658one" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
 [ext_resource type="Script" uid="uid://b7nriuublxfpo" path="res://engine/game/balancer.gd" id="1_xapae"]
@@ -16,9 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://cmuj1g4sexvke" path="res://data/particles/cursor_moveto/Cursor_Moveto.tscn" id="8_toluw"]
 [ext_resource type="Script" uid="uid://bk2me5aywj65r" path="res://engine/game/camera.gd" id="25_obkvb"]
 [ext_resource type="PackedScene" uid="uid://dgxp55bfpc742" path="res://data/characters/Ahri/unit.tscn" id="27_0mdok"]
-[ext_resource type="Shader" uid="uid://b71ir7qq5o8g1" path="res://engine/game/level/level.gdshader" id="31_g1ghr"]
-[ext_resource type="Shader" uid="uid://brn8y2uveok2e" path="res://engine/game/level/level_decal.gdshader" id="32_m603r"]
-[ext_resource type="Shader" uid="uid://bi5ra3fdhirl8" path="res://engine/game/level/level_flora.gdshader" id="33_rqr2r"]
 [ext_resource type="Script" uid="uid://k4gr60bhcuy" path="res://data/levels/1/scripts/LevelScript.gd" id="35_3l20p"]
 [ext_resource type="Script" uid="uid://dso6iekfjnir4" path="res://data/levels/1/scripts/CreateLevelProps.gd" id="35_x1iow"]
 [ext_resource type="Script" uid="uid://bfbsma0i41itq" path="res://engine/level/constants.gd" id="36_dp1ib"]
@@ -203,9 +200,6 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 [node name="Map" parent="." instance=ExtResource("71_7skrr")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
-level_shader = ExtResource("31_g1ghr")
-level_decal_shader = ExtResource("32_m603r")
-level_flora_shader = ExtResource("33_rqr2r")
 viewport_texture = SubResource("ViewportTexture_xapae")
 object_cfg = "res://data/levels/1/ObjectCFG.cfg"
 create_level_props_script = ExtResource("35_x1iow")

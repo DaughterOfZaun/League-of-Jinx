@@ -1,12 +1,3 @@
-//shader_type spatial;
-//render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
-
-#ifdef REPEAT_DISABLE
-#define REPEAT_MODE repeat_disable
-#else
-#define REPEAT_MODE repeat_enable
-#endif
-
 uniform vec4 albedo : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, REPEAT_MODE;
 
@@ -75,7 +66,7 @@ void fragment() {
 	NORMAL_MAP = texture(texture_normal, base_uv).rgb;
 	NORMAL_MAP_DEPTH = normal_scale;
 
-	#if defined(ALPHA_SCISSOR_USED) || defined(ALPHA_HASH_USED)
+	#if defined(ALPHA_USED) || defined(ALPHA_SCISSOR_USED) || defined(ALPHA_HASH_USED)
 		ALPHA *= albedo.a * albedo_tex.a;
 		#if defined(ALPHA_SCISSOR_USED)
 			ALPHA_SCISSOR_THRESHOLD = alpha_scissor_threshold;

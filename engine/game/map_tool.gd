@@ -284,40 +284,72 @@ func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	#replace_materials_at_runtime()
 
-@export var level_shader: Shader
-@export var level_decal_shader: Shader
-@export var level_flora_shader: Shader
 @export var viewport_texture: ViewportTexture
-#@onready var viewport: SubViewportEx = $"/root/Node3D/SubViewport"
-#@export var shadow_of_war_overlay_material: ShaderMaterial
-var material_cache: Dictionary[StandardMaterial3D, ShaderMaterial] = {}
+@export var material_cache: Dictionary[StandardMaterial3D, ShaderMaterial] = {}
 func replace_materials_at_runtime() -> void:
-	#var viewport_texture: ViewportTexture = shadow_of_war_overlay_material.get("shader_parameter/density_texture")
+	
 	viewport_texture.set_viewport_path_in_scene("/root/Node3D/SubViewport")
-	#for child in get_children(true):
+
+	if Engine.is_editor_hint():
+		material_cache.clear()
+
 	for child in find_children("*", "MeshInstance3D", true):
+
 		var mesh_instance := child as MeshInstance3D
 		if mesh_instance == null: continue
-		#mesh_instance.material_overlay = shadow_of_war_overlay_material
+
 		var material := mesh_instance.mesh.surface_get_material(0) as StandardMaterial3D
 		if material == null: continue
+
 		var override_material: ShaderMaterial = material_cache.get(material, null)
-		if override_material == null:
+
+		if !Engine.is_editor_hint():
+			mesh_instance.material_override = override_material
+		
+		elif override_material == null:
 			override_material = ShaderMaterial.new()
 			material_cache[material] = override_material
+			
+			var code := "shader_type spatial;" + "\n"
+			code += "render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;" + "\n"
+			
+			if material.texture_repeat:
+				code += "#define REPEAT_MODE repeat_enable" + "\n"
+			else:
+				code += "#define REPEAT_MODE repeat_disable" + "\n"
+
 			if material.transparency == BaseMaterial3D.Transparency.TRANSPARENCY_DISABLED:
-				override_material.shader = level_shader
+				pass
+			if material.transparency == BaseMaterial3D.Transparency.TRANSPARENCY_ALPHA:
+				code += "#define ALPHA_USED" + "\n"
 			if material.transparency == BaseMaterial3D.Transparency.TRANSPARENCY_ALPHA_HASH:
-				override_material.shader = level_decal_shader
+				code += "#define ALPHA_HASH_USED" + "\n"
+			if material.transparency == BaseMaterial3D.Transparency.TRANSPARENCY_ALPHA_SCISSOR:
+				code += "#define ALPHA_SCISSOR_USED" + "\n"
+			
+			code += "#include \"level.gdshaderinc\"" + "\n"
+
+			var hash := code.sha256_text().substr(0, 12)
+			var res_path := "res://engine/game/cache/%s.gdshader" % hash
+			if !FileAccess.file_exists(res_path):
+				var fa := FileAccess.open(res_path, FileAccess.ModeFlags.WRITE)
+				fa.store_string(code)
+				fa.close()
+			override_material.shader = load(res_path)
+
+			if material.transparency == BaseMaterial3D.Transparency.TRANSPARENCY_ALPHA_HASH:
 				override_material.set_shader_parameter("alpha_hash_scale", material.alpha_hash_scale)
 			if material.transparency == BaseMaterial3D.Transparency.TRANSPARENCY_ALPHA_SCISSOR:
-				override_material.shader = level_flora_shader
 				override_material.set_shader_parameter("alpha_scissor_threshold", material.alpha_scissor_threshold)
+			
 			override_material.set_shader_parameter("density_texture", viewport_texture)
+
 			override_material.set_shader_parameter("texture_albedo", material.albedo_texture)
-			override_material.set_shader_parameter("texture_normal", material.normal_texture)
-			override_material.set_shader_parameter("texture_heightmap", material.heightmap_texture)
-		mesh_instance.material_override = override_material
+			if material.normal_enabled:
+				override_material.set_shader_parameter("texture_normal", material.normal_texture)
+			if material.heightmap_enabled:
+				override_material.set_shader_parameter("texture_heightmap", material.heightmap_texture)
+		
 
 #TODO: optimize
 #func _process(delta: float) -> void:
