@@ -1,5 +1,8 @@
-[gd_scene load_steps=64 format=3 uid="uid://cmuj1g4sexvke"]
+[gd_scene load_steps=67 format=3 uid="uid://cmuj1g4sexvke"]
 
+[ext_resource type="Shader" uid="uid://9a9a7526cf85" path="res://engine/game/cache/9a9a7526cf85.gdshader" id="Shader_3x4ug"]
+[ext_resource type="Shader" uid="uid://104e4c296c89" path="res://engine/game/cache/104e4c296c89.gdshader" id="Shader_r5w5x"]
+[ext_resource type="Shader" uid="uid://5036a254cade" path="res://engine/game/cache/5036a254cade.gdshader" id="Shader_g6sxb"]
 [ext_resource type="Script" uid="uid://w51dsm6maeuv" path="res://engine/effects/system.gd" id="1_oyhqx"]
 [ext_resource type="Script" uid="uid://bcqw6ydxjryuf" path="res://engine/effects/group.gd" id="2_kwdmc"]
 [ext_resource type="Texture2D" uid="uid://bbfc6oura0h0t" path="res://data/particles/cursor_moveto/movement_indicator.webp" id="3_l7sbp"]
@@ -11,15 +14,10 @@
 [ext_resource type="ArrayMesh" uid="uid://no88okv4d46k" path="res://data/particles/cursor_moveto/shockwavetrail.obj" id="9_f88oh"]
 [ext_resource type="Texture2D" uid="uid://vbjdu5g4h1cl" path="res://data/particles/cursor_moveto/line03.webp" id="10_474kf"]
 
-[sub_resource type="Shader" id="Shader_3x4ug"]
-code = "shader_type spatial;
-render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,unshaded,specular_disabled,ambient_light_disabled,fog_disabled;
-#include \"res://engine/effects/material.gdshaderinc\"
-"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l7sbp"]
 render_priority = 0
-shader = SubResource("Shader_3x4ug")
+shader = ExtResource("Shader_3x4ug")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("3_l7sbp")
 shader_parameter/uv_scale = Vector2(1, 1)
@@ -31,10 +29,6 @@ shader_parameter/num_frames = 1.0
 shader_parameter/frame_rate = 0.0
 shader_parameter/uv_scroll = Vector2(0, -2)
 
-[sub_resource type="Shader" id="Shader_r5w5x"]
-code = "shader_type particles;
-#include \"res://engine/effects/process.gdshaderinc\"
-"
 
 [sub_resource type="Curve" id="Curve_8dwmk"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -66,7 +60,7 @@ curve_y = SubResource("Curve_8dwmk")
 curve_z = SubResource("Curve_8dwmk")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_474kf"]
-shader = SubResource("Shader_r5w5x")
+shader = ExtResource("Shader_r5w5x")
 shader_parameter/amount = 1
 shader_parameter/p_life_i = 0.4
 shader_parameter/p_life_p = SubResource("CurveXYZTexture_msl5a")
@@ -85,15 +79,10 @@ shader_parameter/p_rotvel_i = Vector3(0, 0, 0)
 shader_parameter/p_rotvel_a_p = SubResource("CurveXYZTexture_1s48d")
 shader_parameter/p_vel_i = null
 
-[sub_resource type="Shader" id="Shader_g6sxb"]
-code = "shader_type spatial;
-render_mode blend_add,depth_draw_opaque,cull_back,diffuse_burley,unshaded,specular_disabled,ambient_light_disabled,fog_disabled;
-#include \"res://engine/effects/material.gdshaderinc\"
-"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_viu47"]
 render_priority = 0
-shader = SubResource("Shader_g6sxb")
+shader = ExtResource("Shader_g6sxb")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("7_1s48d")
 shader_parameter/uv_scale = Vector2(1, 1)
@@ -135,7 +124,7 @@ curve_y = SubResource("Curve_lh010")
 curve_z = SubResource("Curve_lh010")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r8k3y"]
-shader = SubResource("Shader_r5w5x")
+shader = ExtResource("Shader_r5w5x")
 shader_parameter/amount = 1
 shader_parameter/p_life_i = 0.4
 shader_parameter/p_life_p = SubResource("CurveXYZTexture_idswl")
@@ -156,7 +145,7 @@ shader_parameter/p_vel_i = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g6sxb"]
 render_priority = 0
-shader = SubResource("Shader_g6sxb")
+shader = ExtResource("Shader_g6sxb")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("7_1s48d")
 shader_parameter/uv_scale = Vector2(1, 1)
@@ -198,7 +187,7 @@ curve_y = SubResource("Curve_7f1ts")
 curve_z = SubResource("Curve_7f1ts")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7y62o"]
-shader = SubResource("Shader_r5w5x")
+shader = ExtResource("Shader_r5w5x")
 shader_parameter/amount = 1
 shader_parameter/p_life_i = 0.4
 shader_parameter/p_life_p = SubResource("CurveXYZTexture_ls76i")
@@ -219,7 +208,7 @@ shader_parameter/p_vel_i = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mqgas"]
 render_priority = 0
-shader = SubResource("Shader_g6sxb")
+shader = ExtResource("Shader_g6sxb")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("7_1s48d")
 shader_parameter/uv_scale = Vector2(1, 1)
@@ -261,7 +250,7 @@ curve_y = SubResource("Curve_00gpp")
 curve_z = SubResource("Curve_00gpp")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pvoyp"]
-shader = SubResource("Shader_r5w5x")
+shader = ExtResource("Shader_r5w5x")
 shader_parameter/amount = 1
 shader_parameter/p_life_i = 0.4
 shader_parameter/p_life_p = SubResource("CurveXYZTexture_vy6af")
@@ -282,7 +271,7 @@ shader_parameter/p_vel_i = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hitxm"]
 render_priority = 0
-shader = SubResource("Shader_g6sxb")
+shader = ExtResource("Shader_g6sxb")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("7_1s48d")
 shader_parameter/uv_scale = Vector2(1, 1)
@@ -324,7 +313,7 @@ curve_y = SubResource("Curve_78fj6")
 curve_z = SubResource("Curve_78fj6")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dmldq"]
-shader = SubResource("Shader_r5w5x")
+shader = ExtResource("Shader_r5w5x")
 shader_parameter/amount = 1
 shader_parameter/p_life_i = 0.4
 shader_parameter/p_life_p = SubResource("CurveXYZTexture_mkxdm")
@@ -353,7 +342,7 @@ point_count = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rxxao"]
 render_priority = 0
-shader = SubResource("Shader_g6sxb")
+shader = ExtResource("Shader_g6sxb")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("10_474kf")
 shader_parameter/uv_scale = Vector2(1, 1)
@@ -395,7 +384,7 @@ curve_y = SubResource("Curve_4ib61")
 curve_z = SubResource("Curve_4ib61")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b1iym"]
-shader = SubResource("Shader_r5w5x")
+shader = ExtResource("Shader_r5w5x")
 shader_parameter/amount = 1
 shader_parameter/p_life_i = 0.2
 shader_parameter/p_life_p = SubResource("CurveXYZTexture_xo6k7")

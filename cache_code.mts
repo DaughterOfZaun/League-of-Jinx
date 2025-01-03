@@ -12,7 +12,7 @@ function hash(s: string){
 // https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest
 async function sha256(message) {
     const msgUint8 = new TextEncoder().encode(message)
-    const hashBuffer = await window.crypto.subtle.digest("SHA-256", msgUint8)
+    const hashBuffer = await crypto.subtle.digest("SHA-256", msgUint8)
     const hashArray = Array.from(new Uint8Array(hashBuffer))
     const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("")
     return hashHex;
@@ -37,11 +37,27 @@ const walk = async (dir: string) => {
         if(dirent.isDirectory()){
             await walk(res)
         } else if(res.endsWith('.tscn')){
+            let ids: string[] = []
+            let exts: string[] = []
             let tscn = await fs.readFile(res, 'utf8')
-            tscn = await replaceAsync(tscn, /\[sub_resource type="Shader" id="(\w+)"\]\ncode = "((?:\\"|\n|.)*?)"/g, async (m, id, code) => {
-                let hash = (await sha256(code)).slice(12)
-                return `[ext_resource type="Shader" uid="uid://${hash}" path="res://engine/game/cache/${hash}.gdshader" id="${id}"]`
+            tscn = await replaceAsync(tscn, /\[sub_resource type="Shader" id="(\w+)"\]\ncode = "((?:\\"|\n|.)*?)"\n/g, async (m, id, code) => {
+                ids.push(id)
+                code = code.replaceAll('\\', '')
+                let hash = (await sha256(code)).slice(0, 12)
+                let res = `engine/game/cache/${hash}.gdshader`
+                /*await*/ fs.writeFile(res, code, 'utf8')
+                exts.push(`[ext_resource type="Shader" uid="uid://${hash}" path="res://${res}" id="${id}"]`)
+                return ''
             })
+            if(exts.length > 0){
+                for(let id of ids){
+                    tscn = tscn.replaceAll(`SubResource("${id}")`, `ExtResource("${id}")`)
+                }
+                tscn = tscn.replace(/\[gd_scene load_steps=(\d+) format=(\d+) uid="uid:\/\/(\w+)"\]\n/, (_, steps, format, uid) => {
+                    return `[gd_scene load_steps=${parseInt(steps) + exts.length} format=${format} uid="uid://${uid}"\]\n\n${exts.join('\n')}`
+                })
+                /*await*/ fs.writeFile(res, tscn, 'utf8')
+            }
         }
     }
 }
