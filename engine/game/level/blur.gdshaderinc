@@ -17,7 +17,7 @@ vec3 blur(sampler2D sp, vec2 uv, vec2 scale) {
 		for (int y = -samples / 2; y < samples / 2; ++y) {
 			offset = vec2(float(x), float(y));
 			weight = gaussian(offset);
-			col += texture(sp, uv + scale * offset).rgb * weight;
+			col += textureLod(sp, uv + scale * offset, 0).rgb * weight;
 			accum += weight;
 		}
 	}

@@ -282,16 +282,18 @@ const mi_dir := "res://data/levels/1/meshes"
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
-	#replace_materials_at_runtime()
+	replace_materials_at_runtime()
 
 @export var viewport_texture: ViewportTexture
 @export var material_cache: Dictionary[StandardMaterial3D, ShaderMaterial] = {}
+@export_tool_button("Cache Materials") var cache_materials := replace_materials_at_runtime
 func replace_materials_at_runtime() -> void:
 	
-	viewport_texture.set_viewport_path_in_scene("/root/Node3D/SubViewport")
+	if viewport_texture != null:
+		viewport_texture.set_viewport_path_in_scene("/root/Node3D/SubViewport")
 
 	if Engine.is_editor_hint():
-		material_cache.clear()
+		material_cache = {}
 
 	for child in find_children("*", "MeshInstance3D", true):
 
@@ -302,11 +304,7 @@ func replace_materials_at_runtime() -> void:
 		if material == null: continue
 
 		var override_material: ShaderMaterial = material_cache.get(material, null)
-
-		if !Engine.is_editor_hint():
-			mesh_instance.material_override = override_material
-		
-		elif override_material == null:
+		if override_material == null:
 			override_material = ShaderMaterial.new()
 			material_cache[material] = override_material
 			
@@ -327,7 +325,7 @@ func replace_materials_at_runtime() -> void:
 			if material.transparency == BaseMaterial3D.Transparency.TRANSPARENCY_ALPHA_SCISSOR:
 				code += "#define ALPHA_SCISSOR_USED" + "\n"
 			
-			code += "#include \"level.gdshaderinc\"" + "\n"
+			code += "#include \"res://engine/game/level/level.gdshaderinc\"" + "\n"
 
 			var hash := code.sha256_text().substr(0, 12)
 			var res_path := "res://engine/game/cache/%s.gdshader" % hash
@@ -349,7 +347,12 @@ func replace_materials_at_runtime() -> void:
 				override_material.set_shader_parameter("texture_normal", material.normal_texture)
 			if material.heightmap_enabled:
 				override_material.set_shader_parameter("texture_heightmap", material.heightmap_texture)
+
+			override_material.render_priority = material.render_priority
+			override_material.resource_local_to_scene = true
 		
+		if !Engine.is_editor_hint():
+			mesh_instance.material_override = override_material
 
 #TODO: optimize
 #func _process(delta: float) -> void:

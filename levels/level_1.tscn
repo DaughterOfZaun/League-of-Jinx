@@ -75,7 +75,7 @@ ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 2
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_xapae"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_vf0na"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xapae"]
@@ -120,11 +120,11 @@ cursor_moveto_effect = ExtResource("8_toluw")
 unique_name_in_owner = true
 disable_3d = true
 handle_input_locally = false
-use_taa = true
-scaling_3d_scale = 0.75
+scaling_3d_mode = 0
 sdf_oversize = 2
 sdf_scale = 0
 size = Vector2i(640, 640)
+render_target_update_mode = 4
 script = ExtResource("3_06ecp")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="SubViewport"]
@@ -200,7 +200,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 [node name="Map" parent="." instance=ExtResource("71_7skrr")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
-viewport_texture = SubResource("ViewportTexture_xapae")
+viewport_texture = SubResource("ViewportTexture_vf0na")
 object_cfg = "res://data/levels/1/ObjectCFG.cfg"
 create_level_props_script = ExtResource("35_x1iow")
 

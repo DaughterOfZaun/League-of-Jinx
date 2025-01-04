@@ -18,7 +18,7 @@ uint hash(uint x) {
 	return x;
 }
 
-#define GET_RAND_COLOR(tex_p) texture(tex_p, vec2(rand_from_seed(alt_seed), 1.0))
+#define GET_RAND_COLOR(tex_p) textureLod(tex_p, vec2(rand_from_seed(alt_seed), 1.0), 0)
 #define GET_RAND_FLOAT(tex_p) GET_RAND_COLOR(tex_p).r
 #define GET_RAND1_VEC3(tex_p) (GET_RAND_FLOAT(tex_p) * vec3(1, 1, 1))
 #define GET_RAND3_VEC3(tex_p) vec3(GET_RAND_COLOR(tex_p).r, GET_RAND_COLOR(tex_p).g, GET_RAND_COLOR(tex_p).b)
