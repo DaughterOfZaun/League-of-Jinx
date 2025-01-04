@@ -300,7 +300,8 @@ func replace_materials_at_runtime() -> void:
 		var mesh_instance := child as MeshInstance3D
 		if mesh_instance == null: continue
 
-		var material := mesh_instance.mesh.surface_get_material(0) as StandardMaterial3D
+		var material := mesh_instance.get_surface_override_material(0) as StandardMaterial3D
+		if material == null: material = mesh_instance.mesh.surface_get_material(0) as StandardMaterial3D
 		if material == null: continue
 
 		var override_material: ShaderMaterial = material_cache.get(material, null)
@@ -437,23 +438,27 @@ var create_level_props := func() -> void:
 				else:
 					char_prefab_path += "/" + skin_name
 				char_prefab_path += "/" + "unit.tscn"
-				var char_prefab: PackedScene = load(char_prefab_path)
-				#assert(char_prefab != null, char_prefab_path)
-				if char_prefab == null:
+
+				if !FileAccess.file_exists(char_prefab_path):
 					print("char %s not found. skipping" % skin_name)
 					continue
+
+				var char_prefab: PackedScene = load(char_prefab_path)
 				
 				char = char_prefab.instantiate()
 				add_child(char)
 				char.owner = root
 				char.name = nav_point_name
-				#char.global_position = nav_point.global_position
 		
 		if char != null:
+			
+			#char.global_position = nav_point.global_position
+			#char.rotation = Vector3.ZERO
+
 			for entry: Array in section:
 				var key_array: Array = entry[0]
 				var value: Variant = entry[1]
 				match key_array:
-					["Move"]: char.position += vec3_parse(value) * HW2GD
-					["Rot"]: char.rotation_degrees.y += vec3_parse(value).x
+					#["Move"]: char.position += vec3_parse(value) * HW2GD
+					#["Rot"]: char.rotation_degrees.y -= vec3_parse(value).x
 					_: char.data.set_from_ini_entry(key_array, value)
