@@ -1,6 +1,6 @@
 <p align="center">
-    <img alt="Logo" src="logo.webp" width="33%"/>
-    <img alt="The current state of the game" src="screenshot.webp" width="100%"/>
+    <img alt="Logo" src="docs/logo.webp" width="33%"/>
+    <img alt="The current state of the game" src="docs/screenshot.webp" width="100%"/>
 </p>
 <p align="center">
     <b>CONTRIBUTORS WANTED</b>

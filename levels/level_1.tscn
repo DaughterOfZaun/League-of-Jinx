@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://csrtiit658one" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
 [ext_resource type="Script" uid="uid://b7nriuublxfpo" path="res://engine/game/balancer.gd" id="1_xapae"]
-[ext_resource type="CompressedTexture3D" uid="uid://cw7h14f61vo0x" path="res://LUT2.webp" id="2_tb6ku"]
+[ext_resource type="CompressedTexture3D" uid="uid://cw7h14f61vo0x" path="res://engine/game/level/LUT.webp" id="2_tb6ku"]
 [ext_resource type="Script" uid="uid://bbmqg3c1pc7h3" path="res://engine/game/ui/minimap/subviewport.gd" id="3_06ecp"]
 [ext_resource type="Shader" uid="uid://tq1sju8pdr36" path="res://engine/game/lights/new_shader.gdshader" id="3_h7a1n"]
 [ext_resource type="Texture2D" uid="uid://dfu0y308f33rp" path="res://data/ui/cursor/Hand1.webp" id="3_rf48r"]
@@ -119,8 +119,6 @@ cursor_moveto_effect = ExtResource("8_toluw")
 unique_name_in_owner = true
 disable_3d = true
 handle_input_locally = false
-scaling_3d_mode = 0
-scaling_3d_scale = 1.0
 sdf_oversize = 2
 sdf_scale = 0
 size = Vector2i(640, 640)
@@ -181,8 +179,6 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="Camera3/Camera/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-scaling_3d_mode = 0
-scaling_3d_scale = 1.0
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
 

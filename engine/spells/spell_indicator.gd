@@ -10,9 +10,12 @@ class_name SpellIndicator extends Node3D
 
 func _ready() -> void:
 	visible = false
+	self.visibility_changed.connect(func () -> void:
+		self._physics_process(0)
+	)
 
 func _physics_process(delta: float) -> void:
-	if !spell: return
+	if !spell || !visible: return
 	if line_missile_indicator.visible:
 		#var range := spell.get_cast_range()
 		var range := spell.get_cast_range_display_override()

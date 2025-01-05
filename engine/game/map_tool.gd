@@ -284,6 +284,7 @@ func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	replace_materials_at_runtime()
 
+@export_group("Material Replacement")
 @export var viewport_texture: ViewportTexture
 @export var material_cache: Dictionary[StandardMaterial3D, ShaderMaterial] = {}
 @export_tool_button("Cache Materials") var cache_materials := replace_materials_at_runtime
@@ -355,6 +356,8 @@ func replace_materials_at_runtime() -> void:
 		if !Engine.is_editor_hint():
 			mesh_instance.material_override = override_material
 
+@export_group("")
+
 #TODO: optimize
 #func _process(delta: float) -> void:
 	#for material: ShaderMaterial in material_cache.values():
@@ -363,6 +366,7 @@ func replace_materials_at_runtime() -> void:
 		#material.set_shader_parameter('c', viewport.C)
 		#material.set_shader_parameter('d', viewport.D)
 
+@export_group("Object Placement")
 @export_global_dir var scene_dir: String
 var points_root: Node3D
 @export_tool_button("Import Points") var import_scene_obj_pos := func() -> void:
@@ -462,3 +466,4 @@ var create_level_props := func() -> void:
 					#["Move"]: char.position += vec3_parse(value) * HW2GD
 					#["Rot"]: char.rotation_degrees.y -= vec3_parse(value).x
 					_: char.data.set_from_ini_entry(key_array, value)
+@export_group("")

@@ -3,15 +3,15 @@
 importer="3d_texture"
 type="CompressedTexture3D"
 uid="uid://cw7h14f61vo0x"
-path="res://.godot/imported/LUT2.webp-cc3a1352d09eb39b2072bcd0ad0c6b11.ctex3d"
+path="res://.godot/imported/LUT.webp-6dd08a597ffb91d343207ec57db5b76c.ctex3d"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://LUT2.webp"
-dest_files=["res://.godot/imported/LUT2.webp-cc3a1352d09eb39b2072bcd0ad0c6b11.ctex3d"]
+source_file="res://engine/game/level/LUT.webp"
+dest_files=["res://.godot/imported/LUT.webp-6dd08a597ffb91d343207ec57db5b76c.ctex3d"]
 
 [params]
 
