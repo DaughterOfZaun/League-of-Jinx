@@ -172,7 +172,7 @@ func area(p1: Vector2, p2: Vector2, p3: Vector2) -> float:
 		if is_decal:
 			m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 			m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
-			m.render_priority = decals.find(m.albedo_texture) - len(decals) + 2
+			m.render_priority = decals.find(m.albedo_texture) - len(decals)
 			mi.lod_bias = 1.0
 
 @export_group("")

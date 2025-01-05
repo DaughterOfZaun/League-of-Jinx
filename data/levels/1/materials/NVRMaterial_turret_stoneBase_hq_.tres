@@ -6,7 +6,7 @@
 
 [resource]
 resource_name = "NVRMaterial_turret_stoneBase_hq_"
-render_priority = 1
+render_priority = -1
 transparency = 1
 albedo_texture = ExtResource("1_nq705")
 normal_enabled = true

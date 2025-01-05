@@ -6,7 +6,7 @@
 
 [resource]
 resource_name = "NVRMaterial_order_base_decal__mid_"
-render_priority = -8
+render_priority = -10
 transparency = 1
 albedo_texture = ExtResource("1_8kosw")
 normal_enabled = true

@@ -6,7 +6,7 @@
 
 [resource]
 resource_name = "NVRMaterial_order_tile_floor_border_"
-render_priority = -3
+render_priority = -5
 transparency = 1
 albedo_texture = ExtResource("1_qs7a4")
 normal_enabled = true

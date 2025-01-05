@@ -6,7 +6,7 @@
 
 [resource]
 resource_name = "NVRMaterial_order_ground_moss_patch1_"
-render_priority = -6
+render_priority = -8
 transparency = 1
 albedo_texture = ExtResource("1_06nxk")
 normal_enabled = true

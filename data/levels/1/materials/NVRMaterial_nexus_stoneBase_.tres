@@ -6,7 +6,7 @@
 
 [resource]
 resource_name = "NVRMaterial_nexus_stoneBase_"
-render_priority = -9
+render_priority = -11
 transparency = 1
 albedo_texture = ExtResource("1_wu150")
 normal_enabled = true
