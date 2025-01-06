@@ -7,7 +7,7 @@
 [resource]
 resource_name = "NVRMaterial_order_ground_mix2_"
 render_priority = -9
-transparency = 1
+transparency = 4
 albedo_texture = ExtResource("1_nd8pk")
 normal_enabled = true
 normal_texture = ExtResource("2_ishnf")

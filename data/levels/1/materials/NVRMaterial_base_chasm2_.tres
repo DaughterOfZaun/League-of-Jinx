@@ -7,7 +7,7 @@
 [resource]
 resource_name = "NVRMaterial_base_chasm2_"
 render_priority = -18
-transparency = 1
+transparency = 4
 albedo_texture = ExtResource("1_lwcyl")
 normal_enabled = true
 normal_texture = ExtResource("2_b56hk")

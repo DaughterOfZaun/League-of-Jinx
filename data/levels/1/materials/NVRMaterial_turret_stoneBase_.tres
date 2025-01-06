@@ -7,7 +7,7 @@
 [resource]
 resource_name = "NVRMaterial_turret_stoneBase_"
 render_priority = -2
-transparency = 1
+transparency = 4
 albedo_texture = ExtResource("1_sdaqx")
 normal_enabled = true
 normal_texture = ExtResource("2_n84kd")

@@ -13,7 +13,8 @@ config_version=5
 config/name="League of Jinx"
 run/main_scene="res://levels/level_1.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
-run/max_fps=60
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/fullsize=false
 config/icon="uid://dyq4equuali8e"
 
 [debug]
@@ -44,7 +45,10 @@ mouse_cursor/custom_image_hotspot=Vector2(8, 11)
 [editor]
 
 movie_writer/mix_rate=8000
+movie_writer/mjpeg_quality=1.0
 movie_writer/movie_file="movie.avi"
+movie_writer/disable_vsync=true
+movie_writer/fps=30
 
 [gui]
 
@@ -57,7 +61,7 @@ theme/default_font_generate_mipmaps=true
 [importer_defaults]
 
 wavefront_obj={
-&"scale_mesh": Vector3(0.014, 0.014, 0.014)
+&"scale_mesh": Vector3(0.0142857, 0.0142857, 0.0142857)
 }
 
 [input]
@@ -149,5 +153,14 @@ locale/translations=PackedStringArray("res://data/ui/lang/fontconfig.en.translat
 
 [physics]
 
+2d/run_on_separate_thread=true
+3d/run_on_separate_thread=true
 common/physics_jitter_fix=0.0
+3d/physics_engine="Jolt Physics"
 common/physics_interpolation=true
+
+[rendering]
+
+driver/threads/thread_model=2
+scaling_3d/scale=2.0
+vrs/texture="uid://ve1shittm6mk"

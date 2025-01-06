@@ -20,6 +20,6 @@ generate_lods=true
 generate_shadow_mesh=true
 generate_lightmap_uv2=false
 generate_lightmap_uv2_texel_size=0.2
-scale_mesh=Vector3(0.014, 0.014, 0.014)
+scale_mesh=Vector3(0.0142857, 0.0142857, 0.0142857)
 offset_mesh=Vector3(0.014, 0.014, 0.014)
 force_disable_mesh_compression=false

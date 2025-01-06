@@ -7,7 +7,7 @@
 [resource]
 resource_name = "NVRMaterial_new_stone_road_"
 render_priority = -12
-transparency = 1
+transparency = 4
 albedo_texture = ExtResource("1_jplpv")
 normal_enabled = true
 normal_texture = ExtResource("2_qe58h")

@@ -37,6 +37,7 @@ func create_child_turret(
 		char.name = nav_point_name
 
 	char.global_position = nav_point.global_position
+	char.rotation_degrees.y = 90
 	char.team = team
 	char.lane = lane
 	char.pos = pos

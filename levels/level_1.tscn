@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://diknhd1061r8r" path="res://engine/game/ui/ui.tscn" id="6_pnpm1"]
 [ext_resource type="Texture2D" uid="uid://bnu40pa7h3jgo" path="res://data/ui/cursor/Hover_Shop.webp" id="7_tqj1w"]
 [ext_resource type="PackedScene" uid="uid://cmuj1g4sexvke" path="res://data/particles/cursor_moveto/Cursor_Moveto.tscn" id="8_toluw"]
+[ext_resource type="PackedScene" uid="uid://bvwoa280vsi37" path="res://data/levels/1/map_inherited_v2.tscn" id="16_5t0se"]
 [ext_resource type="Script" uid="uid://bk2me5aywj65r" path="res://engine/game/camera.gd" id="25_obkvb"]
 [ext_resource type="PackedScene" uid="uid://dgxp55bfpc742" path="res://data/characters/Ahri/unit.tscn" id="27_0mdok"]
 [ext_resource type="Script" uid="uid://k4gr60bhcuy" path="res://data/levels/1/scripts/LevelScript.gd" id="35_3l20p"]
@@ -36,7 +37,6 @@
 [ext_resource type="PackedScene" uid="uid://dos4v7ypu3iol" path="res://data/characters/Turrets/HQ/Chaos/unit.tscn" id="44_yyq8c"]
 [ext_resource type="PackedScene" uid="uid://buonvrdcurdhv" path="res://data/characters/Turrets/Fountan/Order/unit.tscn" id="45_yik85"]
 [ext_resource type="PackedScene" uid="uid://b0j57eqkg1gad" path="res://data/characters/Turrets/Fountan/Chaos/unit.tscn" id="46_5vbbt"]
-[ext_resource type="PackedScene" uid="uid://7q5sw0yww3oo" path="res://data/levels/1/map_inherited.tscn" id="71_7skrr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8hxwk"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -154,6 +154,8 @@ cull_mask = 524287
 doppler_tracking = 2
 current = true
 fov = 32.0
+near = 5.0
+far = 150.0
 script = ExtResource("25_obkvb")
 target = NodePath("../../Ahri")
 
@@ -188,185 +190,187 @@ cull_mask = 524288
 environment = SubResource("Environment_xapae")
 fov = 32.0
 
+[node name="Camera6" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, 0.746, 15, 2)
+
 [node name="Camera4" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 114.801, 22.17, -140.402)
 
 [node name="Camera5" type="Node3D" parent="Camera4"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
-[node name="Map" parent="." instance=ExtResource("71_7skrr")]
+[node name="Map" parent="." instance=ExtResource("16_5t0se")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 viewport_texture = SubResource("ViewportTexture_5t0se")
 object_cfg = "res://data/levels/1/ObjectCFG.cfg"
 create_level_props_script = ExtResource("35_x1iow")
 
 [node name="Turret_T1_R_03" parent="Map" instance=ExtResource("36_dp7n3")]
-transform = Transform3D(0.951057, 0, 0.309017, 0, 1, 0, -0.309017, 0, 0.951057, 141.347, 0.578753, 11.3453)
+transform = Transform3D(0.309017, 0, 0.951056, 0, 1, 0, -0.951056, 0, 0.309017, 144.297, 0.590564, -11.5526)
 pos = 3
 team = 1
 
 [node name="Turret_T1_R_02" parent="Map" instance=ExtResource("38_mmvut")]
-transform = Transform3D(0.559193, 0, 0.829038, 0, 1, 0, -0.829038, 0, 0.559193, 91.1554, 0.606482, 17.6996)
+transform = Transform3D(0.829037, 0, 0.559193, 0, 1, 0, -0.559193, 0, 0.829037, 93.0815, 0.618859, -18.0366)
 pos = 2
 team = 1
 
 [node name="Turret_T1_C_07" parent="Map" instance=ExtResource("36_oe0ed")]
-transform = Transform3D(0.642788, 0, 0.766044, 0, 1, 0, -0.766044, 0, 0.642788, 52.4417, 1.34771, 14.5978)
+transform = Transform3D(0.766044, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766044, 53.5777, 1.37521, -14.8714)
 pos = 1
 team = 1
 
 [node name="Turret_T2_R_03" parent="Map" instance=ExtResource("39_qsin3")]
-transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 188.415, 0.573633, 60.0024)
+transform = Transform3D(-0.34202, 0, 0.939693, 0, 1, 0, -0.939693, 0, -0.34202, 192.326, 0.58534, -61.2027)
 pos = 3
 team = 2
 
 [node name="Turret_T2_R_02" parent="Map" instance=ExtResource("41_igafg")]
-transform = Transform3D(0.469472, 0, -0.882948, 0, 1, 0, 0.882948, 0, 0.469472, 180.871, 0.528861, 112.098)
+transform = Transform3D(-0.882948, 1.22316e-15, 0.469472, 0, 1, -2.6054e-15, -0.469472, -2.30043e-15, -0.882948, 184.628, 0.539654, -114.361)
 pos = 2
 team = 2
 
 [node name="Turret_T2_R_01" parent="Map" instance=ExtResource("38_bto7k")]
-transform = Transform3D(0.788011, 0, -0.615662, 0, 1, 0, 0.615662, 0, 0.788011, 184.861, 1.34064, 146.668)
+transform = Transform3D(-0.615661, 0, 0.788011, 0, 1, 0, -0.788011, 0, -0.615661, 188.7, 1.368, -149.637)
 pos = 1
 team = 2
 
 [node name="Turret_T1_C_05" parent="Map" instance=ExtResource("36_dp7n3")]
-transform = Transform3D(0.999391, 0, 0.0348996, 0, 1, 0, -0.0348996, 0, 0.999391, 76.1326, 0.617387, 86.4838)
+transform = Transform3D(0.0348995, 0, 0.999391, 0, 1, 0, -0.999391, 0, 0.0348995, 77.7521, 0.629987, -88.2245)
 lane = 1
 pos = 3
 team = 1
 
 [node name="Turret_T1_C_04" parent="Map" instance=ExtResource("38_mmvut")]
-transform = Transform3D(0.882948, 0, -0.469472, 0, 1, 0, 0.469472, 0, 0.882948, 64.9603, 0.609257, 64.3098)
+transform = Transform3D(-0.469472, -2.30043e-15, 0.882948, 0, 1, 2.6054e-15, -0.882948, 1.22316e-15, -0.469472, 66.3518, 0.621691, -65.598)
 lane = 1
 pos = 2
 team = 1
 
 [node name="Turret_T1_C_03" parent="Map" instance=ExtResource("36_oe0ed")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45.256, 1.34448, 48.2845)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 46.2454, 1.37192, -49.2456)
 lane = 1
 pos = 1
 team = 1
 
 [node name="Turret_T1_C_01" parent="Map" instance=ExtResource("43_vg3su")]
-transform = Transform3D(0.848048, 0, -0.529919, 0, 1, 0, 0.529919, 0, 0.848048, 18.7629, 1.37522, 28.4429)
+transform = Transform3D(-0.529919, 3.01287e-15, 0.848048, 0, 1, -3.55271e-15, -0.848048, -1.88265e-15, -0.529919, 19.2116, 1.40329, -28.9991)
 lane = 1
 pos = 5
 team = 1
 
 [node name="Turret_T1_C_02" parent="Map" instance=ExtResource("43_vg3su")]
-transform = Transform3D(0.882948, 0, 0.469471, 0, 1, 0, -0.469471, 0, 0.882948, 24.5155, 1.35062, 22.0563)
+transform = Transform3D(0.469472, -8.36427e-16, 0.882948, 0, 1, 9.47312e-16, -0.882948, -4.44736e-16, 0.469472, 25.0816, 1.37818, -22.4822)
 lane = 1
 pos = 4
 team = 1
 
 [node name="Turret_T2_C_05" parent="Map" instance=ExtResource("39_qsin3")]
-transform = Transform3D(0.978148, 0, 0.207912, 0, 1, 0, -0.207912, 0, 0.978148, 119.663, 0.620383, 116.076)
+transform = Transform3D(0.207912, 0, 0.978148, 0, 1, 0, -0.978148, 0, 0.207912, 122.171, 0.633044, -118.421)
 lane = 1
 pos = 3
 team = 2
 
 [node name="Turret_T2_C_04" parent="Map" instance=ExtResource("41_igafg")]
-transform = Transform3D(0.927184, 0, -0.374607, 0, 1, 0, 0.374607, 0, 0.927184, 131.035, 0.577531, 138.519)
+transform = Transform3D(-0.374607, -3.29402e-15, 0.927184, 0, 1, 3.55271e-15, -0.927184, 1.33087e-15, -0.374607, 133.775, 0.589317, -141.322)
 lane = 1
 pos = 2
 team = 2
 
 [node name="Turret_T2_C_03" parent="Map" instance=ExtResource("38_bto7k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 150.39, 1.35135, 154.164)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 153.525, 1.37893, -157.286)
 lane = 1
 pos = 1
 team = 2
 
 [node name="Turret_T2_C_01" parent="Map" instance=ExtResource("44_yyq8c")]
-transform = Transform3D(0.970296, 0, -0.241922, 0, 1, 0, 0.241922, 0, 0.970296, 177.255, 1.31557, 174.221)
+transform = Transform3D(-0.241922, 0, 0.970296, 0, 1, 0, -0.970296, 0, -0.241922, 180.938, 1.34242, -177.752)
 lane = 1
 pos = 5
 team = 2
 
 [node name="Turret_T2_C_02" parent="Map" instance=ExtResource("44_yyq8c")]
-transform = Transform3D(0.961262, 0, 0.275637, 0, 1, 0, -0.275637, 0, 0.961262, 169.634, 1.31459, 180.296)
+transform = Transform3D(0.275637, 1.70754e-15, 0.961262, 0, 1, -1.77636e-15, -0.961262, 4.8963e-16, 0.275637, 173.162, 1.34142, -183.951)
 lane = 1
 pos = 4
 team = 2
 
 [node name="Turret_OrderTurretShrine" parent="Map" instance=ExtResource("45_yik85")]
-transform = Transform3D(-0.927184, 0, -0.374607, 0, 1, 0, 0.374607, 0, -0.927184, -2.82765, 2.57228, -0.22645)
+transform = Transform3D(-0.374607, 0, -0.927184, 0, 1, 0, 0.927184, 0, -0.374607, -2.81955, 2.62478, 0.255337)
 lane = 1
 team = 1
 
 [node name="Turret_ChaosTurretShrine" parent="Map" instance=ExtResource("46_5vbbt")]
-transform = Transform3D(0.788011, 0, 0.615661, 0, 1, 0, -0.615661, 0, 0.788011, 198.676, 2.57228, 202.909)
+transform = Transform3D(0.615662, 2.79958e-15, 0.788011, 0, 1, -3.55272e-15, -0.788011, 2.18727e-15, 0.615662, 202.796, 2.62478, -207.026)
 lane = 1
 team = 2
 
 [node name="Turret_T1_L_03" parent="Map" instance=ExtResource("36_dp7n3")]
-transform = Transform3D(0.766044, 0, -0.642788, 0, 1, 0, 0.642788, 0, 0.766044, 8.0252, 0.375395, 143.11)
+transform = Transform3D(-0.642788, 0, 0.766044, 0, 1, 0, -0.766044, 0, -0.642788, 8.2548, 0.383056, -146.006)
 lane = 2
 pos = 3
 team = 1
 
 [node name="Turret_T1_L_02" parent="Map" instance=ExtResource("38_mmvut")]
-transform = Transform3D(0.406737, 0, -0.913545, 0, 1, 0, 0.913545, 0, 0.406737, 15.4677, 0.588895, 90.7233)
+transform = Transform3D(-0.913545, 1.05971e-15, 0.406737, 0, 1, -2.6054e-15, -0.406737, -2.38015e-15, -0.913545, 15.8492, 0.600913, -92.5505)
 lane = 2
 pos = 2
 team = 1
 
 [node name="Turret_T1_C_06" parent="Map" instance=ExtResource("36_oe0ed")]
-transform = Transform3D(0.669131, 0, -0.743145, 0, 1, 0, 0.743145, 0, 0.669131, 11.2148, 1.35435, 56.7516)
+transform = Transform3D(-0.743145, 3.0111e-15, 0.669131, 0, 1, -4.50002e-15, -0.669131, -3.34417e-15, -0.743145, 11.5095, 1.38199, -57.8855)
 lane = 2
 pos = 1
 team = 1
 
 [node name="Turret_T2_L_03" parent="Map" instance=ExtResource("39_qsin3")]
-transform = Transform3D(0.961262, 0, 0.275637, 0, 1, 0, -0.275637, 0, 0.961262, 54.7435, 0.183825, 191.19)
+transform = Transform3D(0.275637, 1.70754e-15, 0.961262, 0, 1, -1.77636e-15, -0.961262, 4.8963e-16, 0.275637, 55.9265, 0.187577, -195.068)
 lane = 2
 pos = 3
 team = 2
 
 [node name="Turret_T2_L_02" parent="Map" instance=ExtResource("41_igafg")]
-transform = Transform3D(0.5, 0, 0.866025, 0, 1, 0, -0.866025, 0, 0.5, 105.491, 0.548585, 184.695)
+transform = Transform3D(0.866025, -1.77636e-15, 0.5, 0, 1, 3.55272e-15, -0.5, -3.07674e-15, 0.866025, 107.71, 0.559781, -188.44)
 lane = 2
 pos = 2
 team = 2
 
 [node name="Turret_T2_L_01" parent="Map" instance=ExtResource("38_bto7k")]
-transform = Transform3D(0.559193, 0, 0.829038, 0, 1, 0, -0.829038, 0, 0.559193, 143.647, 1.33566, 188.545)
+transform = Transform3D(0.829037, 0, 0.559193, 0, 1, 0, -0.559193, 0, 0.829037, 146.644, 1.36292, -192.369)
 lane = 2
 pos = 1
 team = 2
 
 [node name="HQ_T1" parent="Map" instance=ExtResource("36_yik85")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.212, 1.38, 19.962)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.649, 1.4, -20.295)
 team = 1
 
 [node name="HQ_T2" parent="Map" instance=ExtResource("37_5vbbt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 175.159, 0.282547, 178.997)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 181.87, 1.4, -186.101)
 team = 2
 
 [node name="Barracks_T2_L1" parent="Map" instance=ExtResource("38_vsljp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 153.382, 1.2, 188.028)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 156.483, 1.2, -191.956)
 team = 2
 
 [node name="Barracks_T2_C1" parent="Map" instance=ExtResource("38_vsljp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 157.481, 1.2, 160.771)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 160.789, 1.2, -164.028)
 team = 2
 
 [node name="Barracks_T2_R1" parent="Map" instance=ExtResource("38_vsljp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 185.035, 1.2, 156.248)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 188.814, 1.2, -159.38)
 team = 2
 
 [node name="Barracks_T1_R1" parent="Map" instance=ExtResource("39_rx1pf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.338, 1.2, 14.467)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 43.266, 1.2, -14.654)
 team = 1
 
 [node name="Barracks_T1_C1" parent="Map" instance=ExtResource("39_rx1pf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.065, 1.2, 41.401)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 39.921, 1.2, -42.167)
 team = 1
 
 [node name="Barracks_T1_L1" parent="Map" instance=ExtResource("39_rx1pf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.024, 1.2, 46.902)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12.456, 1.2, -47.732)
 team = 1
 
 [node name="Level" type="Node" parent="."]
@@ -452,6 +456,9 @@ import_path = "res://data/levels/1/Constants.var"
 exp_curve = Array[int]([0, 0, 280, 670, 1170, 1780, 2500, 3330, 4270, 5320, 6480, 7750, 9130, 10620, 12220, 13930, 15750, 17680, 19720])
 import_exp_curve_path = "res://data/levels/1/ExpCurve.ini"
 metadata/_custom_type_script = ExtResource("36_dp1ib")
+
+[node name="SpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(-0.803857, 0, 0.594823, 0, 1, 0, -0.594823, 0, -0.803857, 0.746, 2.485, -3.787)
 
 [node name="Ahri" parent="." instance=ExtResource("27_0mdok")]
 transform = Transform3D(-0.803857, 0, 0.594823, 0, 1, 0, -0.594823, 0, -0.803857, 0.746, 2.485, -3.787)
