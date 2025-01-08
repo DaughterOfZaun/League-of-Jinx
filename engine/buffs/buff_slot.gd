@@ -1,6 +1,7 @@
 class_name BuffSlot
 
 var mngr: Buffs
+var max_stack := 0
 var stacks: Array[Buff] = []
 var time_remaining := 0.0
 
@@ -30,7 +31,9 @@ func add(buff: Buff, count := 1, continious := false) -> BuffSlot:
 	return self
 
 func sort_stacks() -> void:
-	stacks.sort_custom(func (a: Buff, b: Buff) -> bool: return a.duration_remaining > b.duration_remaining)
+	stacks.sort_custom(by_duration_remaining)
+func by_duration_remaining(a: Buff, b: Buff) -> bool:
+	return a.duration_remaining > b.duration_remaining
 
 func remove_stacks(count: int = len(stacks)) -> BuffSlot:
 	if count == 0 && len(stacks) == 0:

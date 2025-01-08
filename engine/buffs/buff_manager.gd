@@ -68,7 +68,6 @@ func add(
 	if can_mitigate_duration == null: can_mitigate_duration = buff.can_mitigate_duration
 	if is_hidden_on_client == null: is_hidden_on_client = buff.is_hidden_on_client
 
-	number_of_stacks = min(max_stack, number_of_stacks)
 	#match add_type:
 	#	Enums.BuffAddType.REPLACE_EXISTING,\
 	#	Enums.BuffAddType.RENEW_EXISTING\
@@ -90,14 +89,18 @@ func add(
 	buff.can_mitigate_duration = can_mitigate_duration
 	buff.is_hidden_on_client = is_hidden_on_client
 
+	if !stacks_exclusive:
+		attacker = null
+
 	var script: Script = buff.get_script()
-	var slot := get_slot(script, attacker if stacks_exclusive else null, true, buff)
+	var slot := get_slot(script, attacker, true, buff)
+	slot.max_stack = max_stack
 	buff.slot = slot
 
-	var min_count_to_rem := maxi(0, maxi(len(slot.stacks), number_of_stacks) - max_stack)
-	var max_count_to_rem := maxi(0, len(slot.stacks) + number_of_stacks - max_stack)
-	var min_count_to_add := maxi(0, number_of_stacks - len(slot.stacks))
-	var max_count_to_add := number_of_stacks
+	var min_count_to_rem := maxi(0, len(slot.stacks) - max_stack)
+	var min_count_to_add := mini(number_of_stacks, max_stack - len(slot.stacks))
+	var max_count_to_rem := mini(len(slot.stacks), number_of_stacks - min_count_to_add)
+	var max_count_to_add := mini(number_of_stacks, max_stack)
 
 	match add_type:
 		Enums.BuffAddType.RENEW_EXISTING, Enums.BuffAddType.STACKS_AND_RENEWS:

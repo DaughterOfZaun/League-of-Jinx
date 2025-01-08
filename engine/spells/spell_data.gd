@@ -247,6 +247,7 @@ var have_point_effect: bool
 
 #region Metadata
 @export_subgroup("Metadata")
+@export var is_death_recap_source: bool
 @export var casting_breaks_stealth: bool
 @export var doesnt_break_shields: bool
 @export var is_damaging_spell: bool

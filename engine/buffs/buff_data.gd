@@ -33,7 +33,7 @@ class_name BuffData extends Resource
 @export var non_dispellable := false
 @export var persists_through_death := false
 @export var is_pet_duration_buff := false
-@export var is_death_recap_source := false
+@export var is_death_recap_source := false #TODO: is this spell-only?
 @export_group("")
 #endregion
 

@@ -5,8 +5,10 @@ class_name UIBuff extends Control
 @export var count_label: Label
 @export var name_label: Label
 
+var slot: BuffSlot
 var top_buff: Buff
 func bind_to(slot: BuffSlot, buff: Buff) -> void:
+	self.slot = slot
 	self.top_buff = buff
 	slot.updated.connect(on_update)
 	var script: GDScript = buff.get_script()
@@ -22,5 +24,6 @@ func _process(delta: float) -> void:
 func on_update(count: int, top_buff: Buff) -> void:
 	self.top_buff = top_buff
 	visible = count > 0 && top_buff != null
+	count_label.visible = slot.max_stack > 1
 	count_label.text = str(count)
 	set_process(visible)

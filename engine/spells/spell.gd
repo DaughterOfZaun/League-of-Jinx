@@ -34,9 +34,11 @@ var icon: Texture2D:
 		#else: return null
 
 var level := 0
-var level_plus_one: int:
-	get:
-		return level + 1
+#	get:
+#		if level == 0: push_warning("level is 0")
+#		return max(1, level)
+#var level_plus_one: int:
+#	get: return level + 1
 
 var cost: float
 var cooldown_wait_time: float:
@@ -140,7 +142,7 @@ func cast(
 	target: Unit = null,
 	pos := Vector3.INF,
 	end_pos := Vector3.INF,
-	override_force_level := 0,
+	override_force_level := -1,
 	override_cool_down_check := false,
 	fire_without_casting := false,
 	use_auto_attack_spell := false,
@@ -178,6 +180,9 @@ func cast(
 	var cast_pos := host.position_3d
 	if override_cast_pos:
 		cast_pos = override_cast_pos
+
+	if override_force_level != -1:
+		level = override_force_level
 	#endregion
 
 	var cast_range_display_override := get_cast_range_display_override()
