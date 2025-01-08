@@ -25,13 +25,14 @@ func set_cursor_shape(shape: CursorShape) -> void:
 	#print(Engine.get_process_frames(), ' ', CursorShape.keys()[shape])
 
 func on_unit_clicked(event: InputEventMouseButton, char: Unit) -> void:
+	viewport.set_input_as_handled()
 	#if main_hero == null: return
 	if event.button_index == MOUSE_BUTTON_RIGHT:
-		if char.team != main_hero.team:
-			main_hero.order(Enums.OrderType.ATTACK_TO, char.position_3d, char)
-		else:
+		if char.team == main_hero.team:
 			on_ground_clicked_on_screen(event)
-	viewport.set_input_as_handled()
+		else:
+			await get_tree().physics_frame
+			main_hero.order(Enums.OrderType.ATTACK_TO, char.position_3d, char)
 
 var hovered_unit: Unit = null
 var hovered_pos: Vector3:
@@ -45,6 +46,9 @@ var hovered_pos: Vector3:
 		else: return Vector3.INF
 
 func on_unit_hovered(unit: Unit) -> void:
+	viewport.set_input_as_handled()
+	hovered_unit = unit
+
 	var shape: CursorShape
 	if unit.team == main_hero.team:
 		shape = CursorShape.HOVER_FRIENDLY
@@ -53,18 +57,18 @@ func on_unit_hovered(unit: Unit) -> void:
 	else:
 		shape = CursorShape.HOVER_ENEMY_DISABLED
 	set_cursor_shape(shape)
-	viewport.set_input_as_handled()
-	hovered_unit = unit
 
 func on_ground_hovered() -> void:
-	set_cursor_shape(CursorShape.DEFAULT)
 	viewport.set_input_as_handled()
 	hovered_unit = null
+
+	set_cursor_shape(CursorShape.DEFAULT)
 
 func _input(event: InputEvent) -> void:
 	#if main_hero == null: return
 	for letter in "qwerdfb":
 		if event.is_action(letter.to_upper()):
+			viewport.set_input_as_handled()
 			var spell: Spell = main_hero.spells[letter]
 			if event.is_pressed():
 				if spell.state == Spell.State.READY:
@@ -72,23 +76,27 @@ func _input(event: InputEvent) -> void:
 					spell.indicator.show()
 			elif event.is_released():
 				spell.indicator.hide()
+				await get_tree().physics_frame
 				main_hero.cast(letter, hovered_pos, hovered_unit)
-			return viewport.set_input_as_handled()
+			return
 	for emote_index: int in Enums.EmoteType.values():
 		if emote_index == Enums.EmoteType.NONE: continue
 		var emote_name := Enums.EmoteType_to_string(emote_index)
 		if event.is_action_pressed("Emote" + emote_name):
+			viewport.set_input_as_handled()
 			main_hero.emote(emote_index)
-			return viewport.set_input_as_handled()
+			return
 	if event.is_action_pressed("ToggleFullscreen"):
+		viewport.set_input_as_handled()
 		if window.mode != Window.MODE_EXCLUSIVE_FULLSCREEN:
 			window.mode = Window.MODE_EXCLUSIVE_FULLSCREEN
 		else:
 			window.mode = Window.MODE_WINDOWED
-		return viewport.set_input_as_handled()
+		return
 
 const RAY_LENGTH := 1000.0
 func on_ground_clicked_on_screen(event: InputEventMouseButton) -> void:
+	viewport.set_input_as_handled()
 	if event.button_index == MOUSE_BUTTON_RIGHT:
 		var origin := camera.project_ray_origin(event.position)
 		var normal := camera.project_ray_normal(event.position)
@@ -96,12 +104,13 @@ func on_ground_clicked_on_screen(event: InputEventMouseButton) -> void:
 			nav_map_rid, origin, origin + normal * RAY_LENGTH
 		)
 		order_move_to(nearest_reachable_point)
-	viewport.set_input_as_handled()
 
 func on_ground_clicked_on_minimap(world_position: Vector3) -> void:
-	var nearest_reachable_point := NavigationServer3D.map_get_closest_point(nav_map_rid, world_position)
-	order_move_to(nearest_reachable_point)
 	viewport.set_input_as_handled()
+	var nearest_reachable_point := NavigationServer3D.map_get_closest_point(
+		nav_map_rid, world_position
+	)
+	order_move_to(nearest_reachable_point)
 
 func order_move_to(nearest_reachable_point: Vector3) -> void:
 	
@@ -111,6 +120,7 @@ func order_move_to(nearest_reachable_point: Vector3) -> void:
 	effect.owner = root
 	effect.global_position = nearest_reachable_point
 
+	await get_tree().physics_frame
 	main_hero.order(Enums.OrderType.MOVE_TO, nearest_reachable_point * Data.GD2HW, null)
 
 func _ready() -> void:

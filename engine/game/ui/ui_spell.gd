@@ -31,5 +31,5 @@ func _process(delta: float) -> void:
 		else:
 			cooldown_label.text =\
 				str(ceili(cd / 60)) + ":" +\
-				str(ceili(fmod(cd, 60)))
+				str(ceili(fmod(cd, 60))).pad_zeros(2)
 	#level_label.text = str(spell.level)

@@ -9,7 +9,8 @@ class_name Spell extends Node
 @onready var attacker := me
 @onready var caster := me
 @onready var host := me # owner -> host
-@onready var vars := me.vars
+var vars: Vars:
+	get: return me.vars
 var spell := self
 
 var target: Unit
@@ -173,8 +174,15 @@ func cast(
 		assert(end_pos.is_finite())
 	else:
 		end_pos = Vector3.INF
-	var cast_pos := override_cast_pos if override_cast_position else pos
+	
+	var cast_pos := host.position_3d
+	if override_cast_pos:
+		cast_pos = override_cast_pos
 	#endregion
+
+	var cast_range_display_override := get_cast_range_display_override()
+	if data.targetting_type == Enums.TargetingType.LOCATION && data.line_width > 0 && cast_range_display_override > 0: # settings.enable_line_missile_display
+		pos = (pos - host.position_3d).normalized() * cast_range_display_override + host.position_3d
 
 	self.target = target
 	self.target_position = pos
@@ -194,6 +202,7 @@ func cast(
 			_: assert(false)
 		get_tree().current_scene.add_child(m)
 	else:
+		"""#TODO:
 		var targets: Array[Unit] = []
 		var cast_range := get_cast_range()
 		match data.targetting_type:
@@ -205,12 +214,13 @@ func cast(
 			)
 		for subtarget in targets:
 			_target_execute(subtarget, null)
-
+		"""
 var targets_hit := 0
 func _target_execute(target: Unit, missile: Missile) -> void:
 	targets_hit = targets_hit + 1
 	caster.spell_hit.emit(target, spell)
 	target.being_spell_hit.emit(caster, spell)
+	#TODO: data.apply_attack_damage
 	target_execute(target, missile)
 
 func put_on_cooldown(time_sec := get_cooldown()) -> void:

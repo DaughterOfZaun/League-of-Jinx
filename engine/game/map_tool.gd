@@ -108,13 +108,16 @@ class Point:
 		decals_root.owner = self
 		decals_root.name = "Decals"
 
+	var ds: Array[Decal] = []
+	
 	for child in decals_root.get_children(true):
 		var d := child as Decal
 		if d == null: continue
-		decals_root.remove_child(d)
-		d.queue_free()
+		#decals_root.remove_child(d)
+		#d.queue_free()
+		ds.append(d)
 	
-	var ds: Array[Decal] = []
+	"""
 	for child in get_children(true):
 		var mi := child as MeshInstance3D
 		if mi == null: continue
@@ -141,19 +144,41 @@ class Point:
 					d.size = Vector3(p.scale, 1, p.scale)
 					d.rotate(p.normal, p.angle)
 					ds.append(d)
+	"""
 
-	#ds.sort_custom(
-	#	func(mia: Decal, mib: Decal) -> bool:
-	#		return decals.find(mia.texture_albedo) < decals.find(mib.texture_albedo)
-	#)
+	ds.sort_custom(
+		func(mia: Decal, mib: Decal) -> bool:
+			return decals.find(mia.texture_albedo) < decals.find(mib.texture_albedo)
+	)
 	#ds.shuffle()
 
 	var levels := sort_to_levels(ds)
 	#levels.shuffle()
 	for i in range(len(levels)):
-		var level := levels[i]
-		for d: VisualInstance3D in level:
-			d.sorting_offset = i
+		for mia: VisualInstance3D in levels[i]:
+			var mia_aabb := get_aabb(mia)
+			var max_size_len := 0.0
+			for j in range(0, i):
+				for mib: VisualInstance3D in levels[j]:
+					var mib_aabb := get_aabb(mib)
+					if mib_aabb.intersects(mia_aabb):
+						var size_len := 0.0
+						#size_len = max(size_len, mia.position.distance_to(mib.position))
+						#size_len = max(size_len, mib_aabb.size.length())
+						size_len += mia.position.distance_to(mib.position)
+						size_len += mib_aabb.size.length()
+						size_len += mib.sorting_offset
+						max_size_len = max(max_size_len, size_len)
+			var d := mia as Decal
+			#d.size.y = (1.0 / len(levels)) * (i + 1)
+			d.size.y = 1
+			d.distance_fade_enabled = false
+			mia.sorting_offset = max_size_len + 10
+
+	var max_sorting_offset: float = ds.reduce(func(accum: float, d: Decal) -> float: return max(accum, d.sorting_offset), 0)
+	var min_sorting_offset: float = ds.reduce(func(accum: float, d: Decal) -> float: return min(accum, d.sorting_offset), 0)
+	for d in ds:
+		d.sorting_offset = d.sorting_offset - ((max_sorting_offset - min_sorting_offset) * 0.5)
 
 	print(len(levels), ' ', len(ds))
 

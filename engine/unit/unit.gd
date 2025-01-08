@@ -28,6 +28,7 @@ func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 
 	_physics_process_rotate(delta)
+	_physics_process_update_visibility(delta)
 
 	if Balancer.should_update_stats(self):
 		update_stats()
@@ -257,7 +258,8 @@ func apply_damage(
 	var can_take_damage := damage_data.source == Enums.DamageSource.INTERNALRAW || (
 		!target.status.invulnerable && (
 			(damage_data.type == Enums.DamageType.PHYSICAL && !target.status.physical_immune) ||\
-			(damage_data.type == Enums.DamageType.MAGICAL && !target.status.magic_immune)
+			(damage_data.type == Enums.DamageType.MAGICAL && !target.status.magic_immune) ||\
+			(damage_data.type == Enums.DamageType.TRUE)
 		)
 	)
 	if !(can_take_damage && damage_data.amount > 0): return
@@ -363,3 +365,38 @@ func get_nearest_passable_position(pos: Vector3) -> Vector3:
 
 func stop_channeling(condition: Enums.ChannelingStopCondition, souce: Enums.ChannelingStopSource) -> void:
 	push_warning("unimplemented")
+
+static var fow_subviewport: SubViewportEx
+static var static_init_completed := false
+func _ready() -> void:
+	if static_init_completed: return
+	else: static_init_completed = true
+	fow_subviewport = get_node("/root/Node3D/SubViewport")
+	RenderingServer.frame_pre_draw.connect(update_fow_image_if_needed)
+
+func get_visible_in_fow() -> bool:
+	return team != Enums.Team.CHAOS #HACK:
+
+static var fow_image: Image = null
+static var fow_image_frame: int
+static var current_frame := 0
+func update_fow_image_if_needed() -> void:
+	current_frame += 1
+	#var current_frame := Engine.get_physics_frames()
+	if current_frame != fow_image_frame && current_frame % 15 == 1: #TODO: Balancer
+		fow_image_frame = current_frame
+		#await RenderingServer.frame_post_draw
+		fow_image = fow_subviewport.get_texture().get_image()
+
+func _physics_process_update_visibility(delta: float) -> void:	
+	
+	if get_visible_in_fow(): return
+	
+	#update_fow_image_if_needed()
+
+	if fow_image == null: return
+	var canvas_position := fow_subviewport.to_canvas(global_position)
+	var canvas_position_rounded := Vector2i(roundi(canvas_position.x), roundi(canvas_position.y))
+	var pixel := fow_image.get_pixelv(canvas_position_rounded)
+	
+	visible = pixel.r > 0.5

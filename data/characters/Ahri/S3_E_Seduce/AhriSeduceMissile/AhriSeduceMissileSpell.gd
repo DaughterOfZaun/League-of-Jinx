@@ -1,10 +1,10 @@
 class_name AhriSeduceMissileSpell extends Spell
 
-var effect0: Array[float] = [ 60, 90, 120, 150, 180 ]
-var effect1: Array[float] = [ 1, 1.25, 1.5, 1.75, 2 ]
+const effect_0: Array[float] = [ 60, 90, 120, 150, 180 ]
+const effect_1: Array[float] = [ 1, 1.25, 1.5, 1.75, 2 ]
 func target_execute(target: Unit, missile: Missile) -> void:
-	var damage_amount := effect0[level - 1]
-	var taunt_length := effect1[level - 1]
+	var damage_amount := effect_0[level - 1]
+	var taunt_length := effect_1[level - 1]
 	
 	var slow_percent: float
 	if target.is_in_front(attacker):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cbfh3ax275136"]
+[gd_scene load_steps=16 format=3 uid="uid://cbfh3ax275136"]
 
 [ext_resource type="Script" uid="uid://0hod3dqe7m4i" path="res://engine/unit/unit.gd" id="1_y0p2c"]
 [ext_resource type="Script" uid="uid://xxukqtvfymt0" path="res://engine/unit/unit_data.gd" id="2_7grwr"]
@@ -10,6 +10,7 @@
 [ext_resource type="Material" uid="uid://tp62lsfqwj7b" path="res://data/characters/Dummy/Skin/target_dummy_chaos.tres" id="4_tp4xs"]
 [ext_resource type="Script" uid="uid://hps2qaay130q" path="res://engine/game/animation.gd" id="5_flmsy"]
 [ext_resource type="PackedScene" uid="uid://bkmt7jl6obfr7" path="res://engine/game/ui/font_emitter/font_emitter.tscn" id="10_tvrld"]
+[ext_resource type="Script" uid="uid://cfp7n61elnlki" path="res://engine/buffs/buff_manager.gd" id="11_luvnh"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_flmsy"]
 animation = &"Idle1_Base"
@@ -51,39 +52,21 @@ metadata/_custom_type_script = ExtResource("3_e45ik")
 
 [node name="Healthbar" parent="." instance=ExtResource("3_u7uog")]
 
-[node name="AuxScene" parent="." instance=ExtResource("3_7grwr")]
+[node name="SkinnedMesh" parent="." instance=ExtResource("3_7grwr")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="Node" parent="AuxScene" index="0"]
+[node name="Node" parent="SkinnedMesh" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="AuxScene/Node/Skeleton" index="0"]
-bones/0/position = Vector3(-0.000152588, 0, 0)
-bones/1/position = Vector3(0, 30.9004, 0)
-bones/2/position = Vector3(0, 53.8809, 0)
-bones/2/rotation = Quaternion(-0.00548068, 6.0536e-09, 0.000701922, 0.999985)
-bones/2/scale = Vector3(1, 1, 1)
-bones/3/position = Vector3(0, 34.2715, 0)
-bones/3/rotation = Quaternion(-0.00225078, -9.31323e-10, 1.5134e-09, 0.999998)
-bones/4/position = Vector3(0, 19.5605, 1.7207)
-bones/4/rotation = Quaternion(0.158996, 0.0184008, 0.00211816, 0.987106)
-bones/6/position = Vector3(20.8223, 9.05957, -3.82715)
-bones/6/rotation = Quaternion(-0.243578, 0.0713028, -0.230256, 0.939451)
-bones/6/scale = Vector3(1, 1, 1)
-bones/7/rotation = Quaternion(-0.30067, 0.131908, -0.860088, 0.390444)
-bones/7/scale = Vector3(1, 1, 1)
-bones/8/rotation = Quaternion(0.217966, -0.0804783, 0.232493, 0.944437)
-bones/8/scale = Vector3(1, 1, 1)
-bones/9/rotation = Quaternion(0.217966, -0.0804783, 0.232493, 0.944437)
-bones/9/scale = Vector3(1, 1, 1)
+[node name="Skeleton3D" parent="SkinnedMesh/Node/Skeleton" index="0"]
 
-[node name="mesh_0" parent="AuxScene/Node/Skeleton/Skeleton3D" index="0"]
+[node name="mesh_0" parent="SkinnedMesh/Node/Skeleton/Skeleton3D" index="0"]
 material_override = ExtResource("4_tp4xs")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../AuxScene")
+root_node = NodePath("../SkinnedMesh")
 tree_root = SubResource("AnimationNodeBlendTree_u7uog")
-anim_player = NodePath("../AuxScene/AnimationPlayer")
+anim_player = NodePath("../SkinnedMesh/AnimationPlayer")
 script = ExtResource("5_flmsy")
 metadata/_custom_type_script = ExtResource("5_flmsy")
 
@@ -112,4 +95,8 @@ metadata/_custom_type_script = ExtResource("3_tp4xs")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionRange"]
 shape = SubResource("CapsuleShape3D_tvrld")
 
-[editable path="AuxScene"]
+[node name="Buffs" type="Node" parent="."]
+script = ExtResource("11_luvnh")
+metadata/_custom_type_script = ExtResource("11_luvnh")
+
+[editable path="SkinnedMesh"]

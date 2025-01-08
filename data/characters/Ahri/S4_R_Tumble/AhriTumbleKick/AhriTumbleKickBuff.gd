@@ -33,9 +33,9 @@ func on_move_end() -> void:
 	var count := 3
 	var owner_pos := host.position_3d
 	var level := attacker.spells.r.level
-	for unit in API.get_closest_visible_units_in_area(host, host.position_3d, 700, Enums.SpellFlags.AFFECT_ENEMIES | Enums.SpellFlags.AFFECT_HEROES, 3, null, true):
+	for unit in API.get_closest_visible_units_in_area(host, host.position_3d, 700, Enums.SpellFlags.AFFECT_ENEMY_HEROES, 3, null, true):
 		(host.spells.extra[5] as AhriTumbleMissileSpell).cast(unit, Vector3.INF, Vector3.INF, level, true, true, false, true, false, true, owner_pos)
 		count -= 1
-	for unit in API.get_closest_visible_units_in_area(host, host.position_3d, 700, Enums.SpellFlags.AFFECT_ENEMIES | Enums.SpellFlags.AFFECT_NEUTRAL | Enums.SpellFlags.AFFECT_MINIONS, count, null, true):
+	for unit in API.get_closest_visible_units_in_area(host, host.position_3d, 700, Enums.SpellFlags.AFFECT_ENEMY_AND_NEUTRAL_MINIONS, count, null, true):
 		(host.spells.extra[5] as AhriTumbleMissileSpell).cast(unit, Vector3.INF, Vector3.INF, level, true, true, false, true, false, true, owner_pos)
 	host.buffs.clear(AhriTumbleKickBuff)

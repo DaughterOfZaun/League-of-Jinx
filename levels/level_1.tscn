@@ -122,6 +122,7 @@ handle_input_locally = false
 sdf_oversize = 2
 sdf_scale = 0
 size = Vector2i(640, 640)
+render_target_clear_mode = 1
 render_target_update_mode = 4
 script = ExtResource("3_06ecp")
 

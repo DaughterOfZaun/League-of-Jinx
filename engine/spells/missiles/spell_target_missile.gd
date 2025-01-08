@@ -8,9 +8,5 @@ static func create(spell: Spell, target: Unit) -> SpellTargetMissile:
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	if linear_movement(delta):
-		if spell.data.apply_attack_damage:
-			var attacker := spell.host
-			#attacker.spell_hit.emit(target, spell)
-			#target.being_spell_hit.emit(attacker, spell)
-			target.apply_damage(attacker, attacker.stats.get_attack_damage(), Enums.DamageType.PHYSICAL, Enums.DamageSource.ATTACK)
+		spell._target_execute(target, self)
 		destroy_self()

@@ -153,14 +153,10 @@ locale/translations=PackedStringArray("res://data/ui/lang/fontconfig.en.translat
 
 [physics]
 
-2d/run_on_separate_thread=true
-3d/run_on_separate_thread=true
 common/physics_jitter_fix=0.0
 3d/physics_engine="Jolt Physics"
 common/physics_interpolation=true
 
 [rendering]
 
-driver/threads/thread_model=2
-scaling_3d/scale=2.0
 vrs/texture="uid://ve1shittm6mk"
