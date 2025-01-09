@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=48 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" uid="uid://csrtiit658one" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
 [ext_resource type="Script" uid="uid://b7nriuublxfpo" path="res://engine/game/balancer.gd" id="1_xapae"]
@@ -29,7 +29,6 @@
 [ext_resource type="PackedScene" uid="uid://biov8lq32ueqn" path="res://data/characters/Turrets/Middle/Order/unit.tscn" id="38_mmvut"]
 [ext_resource type="Script" uid="uid://idwdrm8s2y1f" path="res://engine/game/ground.gd" id="38_tqj1w"]
 [ext_resource type="PackedScene" uid="uid://k3wk84ssvmbv" path="res://data/characters/Inhibitor/Chaos/unit.tscn" id="38_vsljp"]
-[ext_resource type="Script" uid="uid://fe57ycv6a1gi" path="res://engine/effects/particle.gd" id="39_gtrna"]
 [ext_resource type="PackedScene" uid="uid://b1rfde0af8ixp" path="res://data/characters/Turrets/Front/Chaos/unit.tscn" id="39_qsin3"]
 [ext_resource type="PackedScene" uid="uid://t0fwl3cknumm" path="res://data/characters/Inhibitor/Order/unit.tscn" id="39_rx1pf"]
 [ext_resource type="PackedScene" uid="uid://w234i42o5d2y" path="res://data/characters/Turrets/Middle/Chaos/unit.tscn" id="41_igafg"]
@@ -75,7 +74,7 @@ ambient_light_source = 1
 reflected_light_source = 1
 tonemap_mode = 2
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_5t0se"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_dp1ib"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xapae"]
 
@@ -202,7 +201,7 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 
 [node name="Map" parent="." instance=ExtResource("16_5t0se")]
 unique_name_in_owner = true
-viewport_texture = SubResource("ViewportTexture_5t0se")
+viewport_texture = SubResource("ViewportTexture_dp1ib")
 object_cfg = "res://data/levels/1/ObjectCFG.cfg"
 create_level_props_script = ExtResource("35_x1iow")
 
@@ -479,10 +478,6 @@ shape = SubResource("WorldBoundaryShape3D_xapae")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.085, 2.90684, -114.142)
-
-[node name="Particle" type="Node3D" parent="."]
-script = ExtResource("39_gtrna")
-metadata/_custom_type_script = ExtResource("39_gtrna")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("ViewportTexture_r0nt2")

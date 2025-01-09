@@ -23,7 +23,9 @@ func _process(delta: float) -> void:
 
 func on_update(count: int, top_buff: Buff) -> void:
 	self.top_buff = top_buff
-	visible = count > 0 && top_buff != null
+	visible = top_buff != null && count > 0
 	count_label.visible = slot.max_stack > 1
 	count_label.text = str(count)
-	set_process(visible)
+	var has_infinite_duration := top_buff != null && top_buff.wait_time >= 25000.0
+	lifetime_progress_bar.visible = !has_infinite_duration
+	set_process(visible && lifetime_progress_bar.visible)

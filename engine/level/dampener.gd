@@ -7,6 +7,7 @@ func enter_regeneration_state() -> void:
 	push_warning("Dampener.enter_regeneration_state is unimplemented")
 
 func _ready() -> void:
+	super._ready()
 	var ap: AnimationPlayer = find_child("AnimationPlayer", true)
 	ap.play(ap.get_animation_list()[0])
 

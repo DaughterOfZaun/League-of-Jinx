@@ -14,8 +14,8 @@
 [ext_resource type="Script" uid="uid://wllpm0ictc2m" path="res://engine/status.gd" id="15_4u6an"]
 [ext_resource type="Script" uid="uid://ca43nqrr7riix" path="res://engine/ai/ai_move_state.gd" id="15_eh8vk"]
 [ext_resource type="Script" uid="uid://xxukqtvfymt0" path="res://engine/unit/unit_data.gd" id="16_genta"]
+[ext_resource type="Script" uid="uid://d0jr4ewb618b0" path="res://data/characters/Ahri/Passive/CharScriptAhri.gd" id="16_rdujr"]
 [ext_resource type="Script" uid="uid://cfp7n61elnlki" path="res://engine/buffs/buff_manager.gd" id="16_su6i3"]
-[ext_resource type="Script" uid="uid://cxodj84eu1gx7" path="res://engine/passive/passive.gd" id="17_36pd6"]
 [ext_resource type="Script" uid="uid://dden2qlfk1e8g" path="res://engine/vars.gd" id="17_yee7n"]
 [ext_resource type="PackedScene" uid="uid://brt0fmysxvs5g" path="res://data/characters/Ahri/Skins/Base/Ahri.glb" id="18_x0hbm"]
 [ext_resource type="Script" uid="uid://cnkcmd8f7yv4q" path="res://engine/spells/spell_manager.gd" id="20_ecg27"]
@@ -224,7 +224,7 @@ platform_enabled = true
 import_path = "res://data/characters/Ahri/Ahri.ini"
 
 [node name="Passive" type="Node" parent="."]
-script = ExtResource("17_36pd6")
+script = ExtResource("16_rdujr")
 icon = "Ahri_SoulEater.webp"
 _name = "game_character_passiveName_Ahri"
 lua_name = "AhriSoulCrusherNumbers"

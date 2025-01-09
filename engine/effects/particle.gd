@@ -1,10 +1,6 @@
 class_name Particle
 extends Node3DExt
 
-static var root: Node
-func _ready() -> void:
-	root = get_tree().current_scene
-
 var bind_obj: Unit = null
 var bind_bone_idx := -1
 func _physics_process(delta: float) -> void:
@@ -16,6 +12,8 @@ func _physics_process(delta: float) -> void:
 
 static func create(effect: PackedScene = null, effect_for_other_team: PackedScene = null) -> Particle:
 	assert(effect != null || effect_for_other_team != null)
+	var tree: SceneTree = Engine.get_main_loop()
+	var root := tree.current_scene
 	var particle := Particle.new()
 	var system: System = effect.instantiate()
 	particle.add_child(system)

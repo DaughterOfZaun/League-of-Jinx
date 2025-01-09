@@ -28,6 +28,8 @@ var kills := 0
 				break
 
 func _ready() -> void:
+	super._ready()
+
 	exp = 0.0
 	level_script.register_champion(self)
 	

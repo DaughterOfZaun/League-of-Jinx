@@ -195,6 +195,8 @@ func cast(
 	self.drag_end_position = end_pos
 	self.targets_hit = 0
 
+	me.spell_cast.emit(self)
+	
 	self_execute()
 
 	if has_missile:

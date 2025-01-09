@@ -62,8 +62,9 @@ func _init() -> void:
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
-	timeout.connect(on_timeout)
 	start(self.delay + self.duration)
+	timeout.connect(on_timeout)
+	if !host.is_ready: await host.ready
 	host.connect_all(self)
 	on_activate()
 

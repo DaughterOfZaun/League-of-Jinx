@@ -48,7 +48,7 @@ func get_slot(script: GDScript, attacker: Unit, create := false, buff: Buff = nu
 func add(
 	attacker: Unit,
 	buff: Buff,
-	max_stack := 0,
+	max_stack := 1,
 	number_of_stacks := 1,
 	duration := 0.0,
 	add_type := Enums.BuffAddType.UNDEFINED,

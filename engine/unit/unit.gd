@@ -366,9 +366,11 @@ func get_nearest_passable_position(pos: Vector3) -> Vector3:
 func stop_channeling(condition: Enums.ChannelingStopCondition, souce: Enums.ChannelingStopSource) -> void:
 	push_warning("unimplemented")
 
+var is_ready := false
 static var fow_subviewport: SubViewportEx
 static var static_init_completed := false
 func _ready() -> void:
+	is_ready = true
 	if static_init_completed: return
 	else: static_init_completed = true
 	fow_subviewport = get_node("/root/Node3D/SubViewport")
