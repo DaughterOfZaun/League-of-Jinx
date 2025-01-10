@@ -35,7 +35,18 @@ func _ready() -> void:
 @export var suppress_call_for_help: bool
 @export var suppressed: bool
 @export var targetable: bool
-@export var taunted: bool
+var taunted_ref_count := 0
+@export var taunted: bool:
+	get: return taunted_ref_count > 0
+	set(value):
+		if value:
+			taunted_ref_count += 1
+			if taunted_ref_count == 1:
+				if me.ai != null: me.ai.on_taunt_begin()
+		elif taunted_ref_count > 0:
+			taunted_ref_count -= 1
+			if taunted_ref_count == 0:
+				if me.ai != null: me.ai.on_taunt_end()
 @export var immovable: bool
 @export var is_dead: bool
 @export var is_zombie: bool

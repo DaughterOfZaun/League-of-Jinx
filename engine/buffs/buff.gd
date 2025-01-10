@@ -9,9 +9,9 @@ var max_stack := 1
 var duration := 25000.0
 var add_type := Enums.BuffAddType.REPLACE_EXISTING
 var type := Enums.BuffType.INTERNAL
-var tick_rate := 0.0
+var tick_rate := 0.25
 var stacks_exclusive := true
-var can_mitigate_duration := false #TODO
+var can_mitigate_duration := false
 var is_hidden_on_client := false
 
 func copy(from: Buff) -> Buff:
@@ -36,8 +36,9 @@ func clone() -> Buff:
 var vars: Vars:
 	get: return host.vars
 
-var delay := 0.0
+var start_time: float
 
+var delay := 0.0
 var delay_remaining := 0.0:
 	get:
 		return maxf(0, self.time_left - self.duration)
@@ -52,13 +53,9 @@ var duration_remaining := 0.0:
 		self.duration = value
 		start(self.delay + self.duration)
 
-var time_remaining: float :
-	get:
-		return self.delay_remaining + self.duration_remaining
-
 func _init() -> void:
 	autostart = false
-	one_shot = !can_mitigate_duration
+	one_shot = true
 
 func _ready() -> void:
 	if Engine.is_editor_hint(): return

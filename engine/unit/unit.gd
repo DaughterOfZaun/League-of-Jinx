@@ -307,7 +307,7 @@ func reduce_shield(amount: float = 0, magic_shield: bool = false, physical_shiel
 func remove_shield(amount: float = 0, magic_shield: bool = false, physical_shield: bool = false) -> void:
 	push_warning("Unit.remove_shield is unimplemented")
 func break_spell_shields() -> void:
-	push_warning("Unit.break_spell_shields is unimplemented")
+	self.buffs.add(self, SpellShieldMarker.new(), 0, 1, 37037)
 #endregion
 #region CharData
 func push_character_data(skin_name: String, override_spells: bool) -> void:
@@ -352,12 +352,13 @@ func apply_assist_marker(source: Unit, duration: float) -> void:
 func can_see(target: Unit) -> bool:
 	push_warning("Unit.can_see is unimplemented")
 	return true
+
 func is_in_front(target: Unit) -> bool:
-	push_warning("Unit.is_in_front is unimplemented")
-	return true
+	var d := target.global_position - global_position
+	var a := Vector2(d.x, d.z).angle_to(direction)
+	return abs(a) <= 160
 func is_behind(target: Unit) -> bool:
-	push_warning("Unit.is_behind is unimplemented")
-	return false
+	return !is_in_front(target)
 
 @onready var nav_map_rid := get_world_3d().navigation_map
 func get_nearest_passable_position(pos: Vector3) -> Vector3:

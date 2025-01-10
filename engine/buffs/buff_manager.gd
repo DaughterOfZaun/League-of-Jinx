@@ -9,6 +9,10 @@ func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	me.buffs = self
 
+var time: float
+func _physics_process(delta: float) -> void:
+	time += delta
+
 var slots: Dictionary[GDScript, Dictionary] = {}
 var empty_Dictionary_Unit_BuffSlot: Dictionary[Unit, BuffSlot] = {} #HACK:
 func get_slot(script: GDScript, attacker: Unit, create := false, buff: Buff = null) -> BuffSlot:
@@ -48,7 +52,7 @@ func get_slot(script: GDScript, attacker: Unit, create := false, buff: Buff = nu
 func add(
 	attacker: Unit,
 	buff: Buff,
-	max_stack := 1,
+	max_stack := 0,
 	number_of_stacks := 1,
 	duration := 0.0,
 	add_type := Enums.BuffAddType.UNDEFINED,
@@ -179,10 +183,10 @@ func has(type: Enums.BuffType) -> bool:
 
 func count(script: GDScript, caster: Unit = null) -> int:
 	var slot := get_slot(script, caster)
-	if slot != null: return len(slot.stacks)
+	if slot != null: return slot.stacks.size()
 	return 0
 
 func get_remaining_duration(script: GDScript) -> float:
-	push_warning("Buffs.get_remaining_duration is unimplemented")
 	var slot := get_slot(script, null)
+	if slot != null: return slot.duration_remaining
 	return 0.0

@@ -27,6 +27,6 @@ func target_execute(target: Unit, missile: Missile) -> void:
 			target.apply_damage(attacker, damage_amount, Enums.DamageType.MAGICAL, Enums.DamageSource.SPELL, 1, 0.35, 1, false, false, attacker)
 		Particle.create(preload("Ahri_Charm_tar.tscn")).fow(host.team, 10).bind(target, "spine").target(host).more_flags(true)
 		target.buffs.add(attacker, AhriSeduceBuff.new(slow_percent), 1, 1, taunt_length, Enums.BuffAddType.REPLACE_EXISTING, Enums.BuffType.STUN)
-		target.buffs.add(attacker, TauntBuff.new(), 1, 1, taunt_length)
+		target.buffs.add(attacker, TauntBuff.new(), 0, 1, taunt_length)
 		missile.destroy()
 	#get_point_by_unit_facing_offset(host, 0, 0)
