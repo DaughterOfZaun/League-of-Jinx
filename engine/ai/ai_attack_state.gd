@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 
 	if !is_running: return
 
-	var cooldown_time := 1.0 / me.stats.get_attack_speed(spell.data.delay_total_time_percent)
+	var cooldown_time := 1.0 / me.stats_perm.get_attack_speed(spell.data.delay_total_time_percent)
 	var windup_percent := constants.gcd_attack_delay_cast_percent * (1.0 + spell.data.delay_cast_offset_percent)
 	var windup_time := cooldown_time * windup_percent
 

@@ -13,6 +13,8 @@ func _init() -> void:
 			var prop_name: String = prop['name']
 			var prop_type: Variant.Type = prop['type']
 			if prop_name not in [
+				'health_current', '_health_current',
+				'mana_current', '_mana_current',
 				'time_since_last_regen',
 			] && prop_type in [TYPE_FLOAT, TYPE_INT]:
 				if prop_name.ends_with("_temp"):
@@ -29,6 +31,7 @@ func _ready() -> void:
 		me.stats_temp = self
 	else:
 		me.stats = self
+		me.stats_perm = self
 		set_physics_process(false)
 		process_mode = Node.PROCESS_MODE_DISABLED
 
@@ -37,20 +40,24 @@ func _physics_process(delta: float) -> void:
 	time_since_last_regen += delta
 
 	if Balancer.should_reset_stats(self):
+		me.stats = me.stats_temp
+		
 		for prop in non_temp_property_list:
-			self[prop] = me.stats[prop]
+			self[prop] = me.stats_perm[prop]
 		for prop in temp_property_list:
 			self[prop] = 0.0
 
 	if Balancer.should_sync_stats(self):
+		me.stats = me.stats_perm
+
 		health_current = clampf(health_current + get_health_regen() * time_since_last_regen, 0, get_health())
 		mana_current = clampf(mana_current + get_mana_regen() * time_since_last_regen, 0, get_mana())
 		time_since_last_regen = 0
 
 		for prop in non_temp_property_list:
-			me.stats[prop] = self[prop]
+			me.stats_perm[prop] = self[prop]
 		for prop in temp_property_list:
-			me.stats[prop] = self[prop]
+			me.stats_perm[prop] = self[prop]
 
 
 @export var level := 1
@@ -151,7 +158,10 @@ var health_percent_temp: float
 func get_health() -> float:
 	return (health_base + growth(health_base_per_level) + health_flat + health_flat_temp)\
 		 * (1 + health_percent + health_percent_temp)
-@onready var health_current := get_health()
+@onready var _health_current := get_health()
+var health_current: float:
+	get: return me.stats_perm._health_current
+	set(value): me.stats_perm._health_current = value
 var health_current_percent: float:
 	get: return health_current / get_health()
 @export var health_regen_base: float
@@ -173,7 +183,10 @@ var mana_percent_temp: float
 func get_mana() -> float:
 	return (mana_base + growth(mana_base_per_level) + mana_flat + mana_flat_temp)\
 		 * (1 + mana_percent + mana_percent_temp)
-@onready var mana_current := get_mana()
+@onready var _mana_current := get_mana()
+var mana_current: float:
+	get: return me.stats_perm._mana_current
+	set(value): me.stats_perm._mana_current = value
 var mana_current_percent: float:
 	get: return mana_current / get_mana()
 @export var mana_regen_base: float

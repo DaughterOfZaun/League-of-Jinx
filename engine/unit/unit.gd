@@ -5,6 +5,7 @@ class_name Unit extends Node3DExt
 
 var stats: Stats
 var stats_temp: Stats
+var stats_perm: Stats
 var status: Status
 var buffs: Buffs
 var spells: Spells
@@ -272,7 +273,7 @@ func apply_damage(
 	if !(damage_data.amount > 0): return
 
 	target.pre_damage.emit(damage_data)
-	target.stats.health_current -= damage_data.amount
+	target.stats_perm.health_current -= damage_data.amount
 	font_emitter.emit_text(str(roundi(damage_data.amount)), 0.5, 2.5, Color.RED, 1.0)
 
 	target.take_damage.emit(attacker, damage_data)
@@ -369,12 +370,14 @@ func stop_channeling(condition: Enums.ChannelingStopCondition, souce: Enums.Chan
 
 var is_ready := false
 static var fow_subviewport: SubViewportEx
+static var fow_subviewport_texture: ViewportTexture
 static var static_init_completed := false
 func _ready() -> void:
 	is_ready = true
 	if static_init_completed: return
 	else: static_init_completed = true
 	fow_subviewport = get_node("/root/Node3D/SubViewport")
+	fow_subviewport_texture = fow_subviewport.get_texture()
 	RenderingServer.frame_pre_draw.connect(update_fow_image_if_needed)
 
 func get_visible_in_fow() -> bool:
@@ -386,10 +389,10 @@ static var current_frame := 0
 func update_fow_image_if_needed() -> void:
 	current_frame += 1
 	#var current_frame := Engine.get_physics_frames()
-	if current_frame != fow_image_frame && current_frame % 15 == 1: #TODO: Balancer
+	if current_frame - fow_image_frame >= 15: #TODO: Balancer
 		fow_image_frame = current_frame
 		#await RenderingServer.frame_post_draw
-		fow_image = fow_subviewport.get_texture().get_image()
+		fow_image = fow_subviewport_texture.get_image()
 
 func _physics_process_update_visibility(delta: float) -> void:	
 	

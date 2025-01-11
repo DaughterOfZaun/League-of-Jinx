@@ -286,4 +286,4 @@ func replace_with(script: Spell) -> void:
 	push_warning("Spell.replace_with is unimplemented")
 
 func is_enough_mana_to_cast() -> bool:
-	return me.stats.mana_current >= spell.get_mana_cost()
+	return me.stats_perm.mana_current >= spell.get_mana_cost()

@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 	if is_running: #and !navigation_agent.is_navigation_finished():
 		var next_path_position := navigation_agent.get_next_path_position()
 		var dir := me.global_position.direction_to(next_path_position)
-		speed = me.stats.get_movement_speed() * Data.HW2GD
+		speed = me.stats_perm.get_movement_speed() * Data.HW2GD
 		var new_velocity := dir * speed #* delta
 		if navigation_agent.avoidance_enabled:
 			navigation_agent.set_velocity(new_velocity)

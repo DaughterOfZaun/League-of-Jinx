@@ -75,7 +75,8 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 		current_spell = null
 
 	if !cancelled:
-		me.stats.mana_current -= max(0, spell.get_mana_cost())
+		var cost := maxf(0, spell.get_mana_cost())
+		me.stats_perm.mana_current -= cost
 		spell.cast(target, target_position)
 
 		if should_cancel:

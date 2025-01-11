@@ -12,8 +12,8 @@ class_name Healthbar extends Control
 
 func _process(delta: float) -> void:
 	global_position = camera.unproject_position(unit.global_position + Vector3.UP * height) - pivot_offset
-	health_range.value = unit.stats.health_current
-	health_range.max_value = unit.stats.get_health()
-	mana_range.value = unit.stats.mana_current
-	mana_range.max_value = unit.stats.get_mana()
-	level_label.text = str(unit.stats.level)
+	health_range.value = unit.stats_perm.health_current
+	health_range.max_value = unit.stats_perm.get_health()
+	mana_range.value = unit.stats_perm.mana_current
+	mana_range.max_value = unit.stats_perm.get_mana()
+	level_label.text = str(unit.stats_perm.level)

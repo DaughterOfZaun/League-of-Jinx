@@ -184,11 +184,6 @@ metadata/_custom_type_script = ExtResource("16_su6i3")
 
 [node name="Status" type="Node" parent="."]
 script = ExtResource("15_4u6an")
-can_attack = true
-can_cast = true
-can_move = true
-can_move_ever = true
-targetable = true
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 2.0
