@@ -20,7 +20,7 @@ func update() -> void:
 
 func add(buff: Buff, count := 1, continious := false) -> BuffSlot:
 	for i in range(count):
-		if i > 0: buff = buff.clone().copy(buff)
+		if i > 0: buff = buff.clone()
 		self.stacks.append(buff)
 		buff.start_time = mngr.time
 		adjust_duration_and_delay_for(buff)

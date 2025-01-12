@@ -457,8 +457,11 @@ exp_curve = Array[int]([0, 0, 280, 670, 1170, 1780, 2500, 3330, 4270, 5320, 6480
 import_exp_curve_path = "res://data/levels/1/ExpCurve.ini"
 metadata/_custom_type_script = ExtResource("36_dp1ib")
 
-[node name="SpawnPoint" type="Node3D" parent="."]
+[node name="SpawnPoint1" type="Node3D" parent="."]
 transform = Transform3D(-0.803857, 0, 0.594823, 0, 1, 0, -0.594823, 0, -0.803857, 0.746, 2.485, -3.787)
+
+[node name="SpawnPoint2" type="Node3D" parent="."]
+transform = Transform3D(-0.803857, 0, 0.594823, 0, 1, 0, -0.594823, 0, -0.803857, 199.472, 2.485, -202.911)
 
 [node name="Ahri" parent="." instance=ExtResource("27_0mdok")]
 transform = Transform3D(-0.803857, 0, 0.594823, 0, 1, 0, -0.594823, 0, -0.803857, 0.746, 2.485, -3.787)

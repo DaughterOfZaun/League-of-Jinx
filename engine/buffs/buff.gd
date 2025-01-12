@@ -31,7 +31,7 @@ func copy(from: Buff) -> Buff:
 	return self
 
 func clone() -> Buff:
-	return new()
+	return new().copy(self)
 
 var vars: Vars:
 	get: return host.vars
