@@ -5,22 +5,22 @@ class_name Stats extends Node
 static var temp_property_list: Array[StringName] = []
 static var non_temp_property_list: Array[StringName] = []
 
-static var reflected := false
-func _init() -> void:
-	if !reflected:
-		reflected = true
-		for prop in (get_script() as Script).get_script_property_list():
-			var prop_name: String = prop['name']
-			var prop_type: Variant.Type = prop['type']
-			if prop_name not in [
-				'health_current', '_health_current',
-				'mana_current', '_mana_current',
-				'time_since_last_regen',
-			] && prop_type in [TYPE_FLOAT, TYPE_INT]:
-				if prop_name.ends_with("_temp"):
-					temp_property_list.append(StringName(prop_name))
-				else:
-					non_temp_property_list.append(StringName(prop_name))
+#static var reflected := false
+#func _init() -> void:
+#	if !reflected:
+#		reflected = true
+#		for prop in (get_script() as Script).get_script_property_list():
+#			var prop_name: String = prop['name']
+#			var prop_type: Variant.Type = prop['type']
+#			if prop_name not in [
+#				'health_current', '_health_current',
+#				'mana_current', '_mana_current',
+#				'time_since_last_regen',
+#			] && prop_type in [TYPE_FLOAT, TYPE_INT]:
+#				if prop_name.ends_with("_temp"):
+#					temp_property_list.append(StringName(prop_name))
+#				else:
+#					non_temp_property_list.append(StringName(prop_name))
 
 @onready var me: Unit = get_parent()
 @onready var root := get_tree().current_scene
@@ -41,11 +41,133 @@ func _physics_process(delta: float) -> void:
 
 	if Balancer.should_reset_stats(self):
 		me.stats = me.stats_temp
-		
-		for prop in non_temp_property_list:
-			self[prop] = me.stats_perm[prop]
-		for prop in temp_property_list:
-			self[prop] = 0.0
+
+		var stats := me.stats_perm
+		#for prop in non_temp_property_list:
+		#	self[prop] = me.stats_perm[prop]
+		#for prop in temp_property_list:
+		#	self[prop] = 0.0
+
+		self.crit_damage_bonus = stats.crit_damage_bonus
+		self.scale_percent = stats.scale_percent
+		self.scale_percent_temp = 0
+		self.acquisition_range_flat = stats.acquisition_range_flat
+		self.acquisition_range_flat_temp = 0
+		self.armor_base = stats.armor_base
+		self.armor_base_per_level = stats.armor_base_per_level
+		self.armor_flat = stats.armor_flat
+		self.armor_flat_temp = 0
+		self.armor_percent = stats.armor_percent
+		self.armor_percent_temp = 0
+		self.armor_penetration_flat = stats.armor_penetration_flat
+		self.armor_penetration_flat_temp = 0
+		self.armor_penetration_percent = stats.armor_penetration_percent
+		self.armor_penetration_percent_temp = 0
+		self.attack_range_flat = stats.attack_range_flat
+		self.attack_range_flat_temp = 0
+		self.attack_speed_base = stats.attack_speed_base
+		self.attack_speed_base_per_level = stats.attack_speed_base_per_level
+		self.attack_speed_percent = stats.attack_speed_percent
+		self.attack_speed_percent_temp = 0
+		self.attack_speed_percent_multiplicative = stats.attack_speed_percent_multiplicative
+		self.attack_speed_percent_multiplicative_temp = 0
+		self.attack_damage_base = stats.attack_damage_base
+		self.attack_damage_base_per_level = stats.attack_damage_base_per_level
+		self.attack_damage_flat = stats.attack_damage_flat
+		self.attack_damage_flat_temp = 0
+		self.attack_damage_percent = stats.attack_damage_percent
+		self.attack_damage_percent_temp = 0
+		self.bubble_radius_flat = stats.bubble_radius_flat
+		self.bubble_radius_flat_temp = 0
+		self.bubble_radius_percent = stats.bubble_radius_percent
+		self.bubble_radius_percent_temp = 0
+		self.cooldown_percent = stats.cooldown_percent
+		self.cooldown_percent_temp = 0
+		self.crit_chance_base = stats.crit_chance_base
+		self.crit_chance_base_per_level = stats.crit_chance_base_per_level
+		self.crit_chance_flat = stats.crit_chance_flat
+		self.crit_chance_flat_temp = 0
+		self.gold_per10_flat = stats.gold_per10_flat
+		self.gold_per10_flat_temp = 0
+		self.health_base = stats.health_base
+		self.health_base_per_level = stats.health_base_per_level
+		self.health_flat = stats.health_flat
+		self.health_flat_temp = 0
+		self.health_percent = stats.health_percent
+		self.health_percent_temp = 0
+		#self.health_current = stats.health_current
+		self.health_current_percent = stats.health_current_percent
+		self.health_regen_base = stats.health_regen_base
+		self.health_regen_base_per_level = stats.health_regen_base_per_level
+		self.health_regen_flat = stats.health_regen_flat
+		self.health_regen_flat_temp = 0
+		self.health_regen_percent = stats.health_regen_percent
+		self.health_regen_percent_temp = 0
+		self.mana_base = stats.mana_base
+		self.mana_base_per_level = stats.mana_base_per_level
+		self.mana_flat = stats.mana_flat
+		self.mana_flat_temp = 0
+		self.mana_percent = stats.mana_percent
+		self.mana_percent_temp = 0
+		#self.mana_current = stats.mana_current
+		self.mana_current_percent = stats.mana_current_percent
+		self.mana_regen_base = stats.mana_regen_base
+		self.mana_regen_base_per_level = stats.mana_regen_base_per_level
+		self.mana_regen_flat = stats.mana_regen_flat
+		self.mana_regen_flat_temp = 0
+		self.mana_regen_percent = stats.mana_regen_percent
+		self.mana_regen_percent_temp = 0
+		self.life_steal_percent = stats.life_steal_percent
+		self.life_steal_percent_temp = 0
+		self.magic_damage_base = stats.magic_damage_base
+		self.magic_damage_base_per_level = stats.magic_damage_base_per_level
+		self.magic_damage_flat = stats.magic_damage_flat
+		self.magic_damage_flat_temp = 0
+		self.magic_damage_percent = stats.magic_damage_percent
+		self.magic_damage_percent_temp = 0
+		self.magic_penetration_flat = stats.magic_penetration_flat
+		self.magic_penetration_flat_temp = 0
+		self.magic_penetration_percent = stats.magic_penetration_percent
+		self.magic_penetration_percent_temp = 0
+		self.movement_speed_base = stats.movement_speed_base
+		self.movement_speed_flat = stats.movement_speed_flat
+		self.movement_speed_flat_temp = 0
+		self.movement_speed_percent = stats.movement_speed_percent
+		self.movement_speed_percent_temp = 0
+		self.movement_speed_percent_multiplicative = stats.movement_speed_percent_multiplicative
+		self.movement_speed_percent_multiplicative_temp = 0
+		self.movement_speed_floor = stats.movement_speed_floor
+		self.exp_reward_flat = stats.exp_reward_flat
+		self.exp_reward_flat_temp = 0
+		self.exp_reward_percent = stats.exp_reward_percent
+		self.exp_reward_percent_temp = 0
+		self.gold_reward_flat = stats.gold_reward_flat
+		self.gold_reward_flat_temp = 0
+		self.spell_block_base = stats.spell_block_base
+		self.spell_block_base_per_level = stats.spell_block_base_per_level
+		self.spell_block_flat = stats.spell_block_flat
+		self.spell_block_flat_temp = 0
+		self.spell_block_percent = stats.spell_block_percent
+		self.spell_block_percent_temp = 0
+		self.spell_vamp_percent = stats.spell_vamp_percent
+		self.spell_vamp_percent_temp = 0
+		self.magic_reduction_temp = 0
+		self.physical_reduction_flat = stats.physical_reduction_flat
+		self.physical_reduction_flat_temp = 0
+		self.physical_reduction_percent = stats.physical_reduction_percent
+		self.physical_reduction_percent_temp = 0
+		self.crit_damage_flat = stats.crit_damage_flat
+		self.crit_damage_flat_temp = 0
+		self.dodge_base = stats.dodge_base
+		self.dodge_base_per_level = stats.dodge_base_per_level
+		self.dodge_flat = stats.dodge_flat
+		self.dodge_flat_temp = 0
+		self.respawn_time_percent = stats.respawn_time_percent
+		self.respawn_time_percent_temp = 0
+		self.miss_chance_flat = stats.miss_chance_flat
+		self.miss_chance_flat_temp = 0
+		self.hardness_percent = stats.hardness_percent
+		self.hardness_percent_temp = 0
 
 	if Balancer.should_sync_stats(self):
 		me.stats = me.stats_perm
@@ -54,11 +176,132 @@ func _physics_process(delta: float) -> void:
 		mana_current = clampf(mana_current + get_mana_regen() * time_since_last_regen, 0, get_mana())
 		time_since_last_regen = 0
 
-		for prop in non_temp_property_list:
-			me.stats_perm[prop] = self[prop]
-		for prop in temp_property_list:
-			me.stats_perm[prop] = self[prop]
+		var stats := me.stats_perm
+		#for prop in non_temp_property_list:
+		#	me.stats_perm[prop] = self[prop]
+		#for prop in temp_property_list:
+		#	me.stats_perm[prop] = self[prop]
 
+		stats.crit_damage_bonus = self.crit_damage_bonus
+		stats.scale_percent = self.scale_percent
+		stats.scale_percent_temp = self.scale_percent_temp
+		stats.acquisition_range_flat = self.acquisition_range_flat
+		stats.acquisition_range_flat_temp = self.acquisition_range_flat_temp
+		stats.armor_base = self.armor_base
+		stats.armor_base_per_level = self.armor_base_per_level
+		stats.armor_flat = self.armor_flat
+		stats.armor_flat_temp = self.armor_flat_temp
+		stats.armor_percent = self.armor_percent
+		stats.armor_percent_temp = self.armor_percent_temp
+		stats.armor_penetration_flat = self.armor_penetration_flat
+		stats.armor_penetration_flat_temp = self.armor_penetration_flat_temp
+		stats.armor_penetration_percent = self.armor_penetration_percent
+		stats.armor_penetration_percent_temp = self.armor_penetration_percent_temp
+		stats.attack_range_flat = self.attack_range_flat
+		stats.attack_range_flat_temp = self.attack_range_flat_temp
+		stats.attack_speed_base = self.attack_speed_base
+		stats.attack_speed_base_per_level = self.attack_speed_base_per_level
+		stats.attack_speed_percent = self.attack_speed_percent
+		stats.attack_speed_percent_temp = self.attack_speed_percent_temp
+		stats.attack_speed_percent_multiplicative = self.attack_speed_percent_multiplicative
+		stats.attack_speed_percent_multiplicative_temp = self.attack_speed_percent_multiplicative_temp
+		stats.attack_damage_base = self.attack_damage_base
+		stats.attack_damage_base_per_level = self.attack_damage_base_per_level
+		stats.attack_damage_flat = self.attack_damage_flat
+		stats.attack_damage_flat_temp = self.attack_damage_flat_temp
+		stats.attack_damage_percent = self.attack_damage_percent
+		stats.attack_damage_percent_temp = self.attack_damage_percent_temp
+		stats.bubble_radius_flat = self.bubble_radius_flat
+		stats.bubble_radius_flat_temp = self.bubble_radius_flat_temp
+		stats.bubble_radius_percent = self.bubble_radius_percent
+		stats.bubble_radius_percent_temp = self.bubble_radius_percent_temp
+		stats.cooldown_percent = self.cooldown_percent
+		stats.cooldown_percent_temp = self.cooldown_percent_temp
+		stats.crit_chance_base = self.crit_chance_base
+		stats.crit_chance_base_per_level = self.crit_chance_base_per_level
+		stats.crit_chance_flat = self.crit_chance_flat
+		stats.crit_chance_flat_temp = self.crit_chance_flat_temp
+		stats.gold_per10_flat = self.gold_per10_flat
+		stats.gold_per10_flat_temp = self.gold_per10_flat_temp
+		stats.health_base = self.health_base
+		stats.health_base_per_level = self.health_base_per_level
+		stats.health_flat = self.health_flat
+		stats.health_flat_temp = self.health_flat_temp
+		stats.health_percent = self.health_percent
+		stats.health_percent_temp = self.health_percent_temp
+		#self.health_current = self.health_current
+		stats.health_current_percent = self.health_current_percent
+		stats.health_regen_base = self.health_regen_base
+		stats.health_regen_base_per_level = self.health_regen_base_per_level
+		stats.health_regen_flat = self.health_regen_flat
+		stats.health_regen_flat_temp = self.health_regen_flat_temp
+		stats.health_regen_percent = self.health_regen_percent
+		stats.health_regen_percent_temp = self.health_regen_percent_temp
+		stats.mana_base = self.mana_base
+		stats.mana_base_per_level = self.mana_base_per_level
+		stats.mana_flat = self.mana_flat
+		stats.mana_flat_temp = self.mana_flat_temp
+		stats.mana_percent = self.mana_percent
+		stats.mana_percent_temp = self.mana_percent_temp
+		#self.mana_current = self.mana_current
+		stats.mana_current_percent = self.mana_current_percent
+		stats.mana_regen_base = self.mana_regen_base
+		stats.mana_regen_base_per_level = self.mana_regen_base_per_level
+		stats.mana_regen_flat = self.mana_regen_flat
+		stats.mana_regen_flat_temp = self.mana_regen_flat_temp
+		stats.mana_regen_percent = self.mana_regen_percent
+		stats.mana_regen_percent_temp = self.mana_regen_percent_temp
+		stats.life_steal_percent = self.life_steal_percent
+		stats.life_steal_percent_temp = self.life_steal_percent_temp
+		stats.magic_damage_base = self.magic_damage_base
+		stats.magic_damage_base_per_level = self.magic_damage_base_per_level
+		stats.magic_damage_flat = self.magic_damage_flat
+		stats.magic_damage_flat_temp = self.magic_damage_flat_temp
+		stats.magic_damage_percent = self.magic_damage_percent
+		stats.magic_damage_percent_temp = self.magic_damage_percent_temp
+		stats.magic_penetration_flat = self.magic_penetration_flat
+		stats.magic_penetration_flat_temp = self.magic_penetration_flat_temp
+		stats.magic_penetration_percent = self.magic_penetration_percent
+		stats.magic_penetration_percent_temp = self.magic_penetration_percent_temp
+		stats.movement_speed_base = self.movement_speed_base
+		stats.movement_speed_flat = self.movement_speed_flat
+		stats.movement_speed_flat_temp = self.movement_speed_flat_temp
+		stats.movement_speed_percent = self.movement_speed_percent
+		stats.movement_speed_percent_temp = self.movement_speed_percent_temp
+		stats.movement_speed_percent_multiplicative = self.movement_speed_percent_multiplicative
+		stats.movement_speed_percent_multiplicative_temp = self.movement_speed_percent_multiplicative_temp
+		stats.movement_speed_floor = self.movement_speed_floor
+		stats.exp_reward_flat = self.exp_reward_flat
+		stats.exp_reward_flat_temp = self.exp_reward_flat_temp
+		stats.exp_reward_percent = self.exp_reward_percent
+		stats.exp_reward_percent_temp = self.exp_reward_percent_temp
+		stats.gold_reward_flat = self.gold_reward_flat
+		stats.gold_reward_flat_temp = self.gold_reward_flat_temp
+		stats.spell_block_base = self.spell_block_base
+		stats.spell_block_base_per_level = self.spell_block_base_per_level
+		stats.spell_block_flat = self.spell_block_flat
+		stats.spell_block_flat_temp = self.spell_block_flat_temp
+		stats.spell_block_percent = self.spell_block_percent
+		stats.spell_block_percent_temp = self.spell_block_percent_temp
+		stats.spell_vamp_percent = self.spell_vamp_percent
+		stats.spell_vamp_percent_temp = self.spell_vamp_percent_temp
+		stats.magic_reduction_temp = self.magic_reduction_temp
+		stats.physical_reduction_flat = self.physical_reduction_flat
+		stats.physical_reduction_flat_temp = self.physical_reduction_flat_temp
+		stats.physical_reduction_percent = self.physical_reduction_percent
+		stats.physical_reduction_percent_temp = self.physical_reduction_percent_temp
+		stats.crit_damage_flat = self.crit_damage_flat
+		stats.crit_damage_flat_temp = self.crit_damage_flat_temp
+		stats.dodge_base = self.dodge_base
+		stats.dodge_base_per_level = self.dodge_base_per_level
+		stats.dodge_flat = self.dodge_flat
+		stats.dodge_flat_temp = self.dodge_flat_temp
+		stats.respawn_time_percent = self.respawn_time_percent
+		stats.respawn_time_percent_temp = self.respawn_time_percent_temp
+		stats.miss_chance_flat = self.miss_chance_flat
+		stats.miss_chance_flat_temp = self.miss_chance_flat_temp
+		stats.hardness_percent = self.hardness_percent
+		stats.hardness_percent_temp = self.hardness_percent_temp
 
 @export var level := 1
 func growth(stat_per_level: float) -> float:
