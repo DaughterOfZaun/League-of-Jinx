@@ -3,9 +3,24 @@ class_name Unit extends Node3DExt
 @export var team: Enums.Team = 0
 @export var data: UnitData
 
-var stats: Stats
-var stats_temp: Stats
-var stats_perm: Stats
+var _stats: Stats
+var stats: Stats:
+	set(v): _stats = v
+	#get: return _stats
+	get:
+		if Balancer.should_update_stats(self):
+			return stats_temp
+		else:
+			return stats_perm
+var stats_temp: Stats:
+	get:
+		_stats.data_temp = _stats.data_temp_b
+		return _stats
+var stats_perm: Stats:
+	get:
+		_stats.data_temp = _stats.data_temp_a
+		return _stats
+
 var status: Status
 var buffs: Buffs
 var spells: Spells

@@ -41,13 +41,9 @@ metadata/_custom_type_script = ExtResource("2_7grwr")
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("3_e45ik")
+level = 1
 health_base = 1000.0
 health_regen_base = 1000.0
-metadata/_custom_type_script = ExtResource("3_e45ik")
-
-[node name="StatsTemp" type="Node" parent="."]
-script = ExtResource("3_e45ik")
-temp = true
 metadata/_custom_type_script = ExtResource("3_e45ik")
 
 [node name="Healthbar" parent="." instance=ExtResource("3_u7uog")]
@@ -72,7 +68,6 @@ metadata/_custom_type_script = ExtResource("5_flmsy")
 
 [node name="Status" type="Node" parent="."]
 script = ExtResource("4_rk3y8")
-targetable = true
 metadata/_custom_type_script = ExtResource("4_rk3y8")
 
 [node name="FontEmitter" parent="." instance=ExtResource("10_tvrld")]

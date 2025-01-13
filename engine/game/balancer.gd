@@ -45,7 +45,7 @@ var pp := &"_physics_process"
 var args := [ 1.0 / Engine.physics_ticks_per_second ]
 @onready var root := get_tree().current_scene
 func generate_frames() -> void:
-	for i in range(20):
+	for i in range(30):
 		#root.propagate_notification(NOTIFICATION_INTERNAL_PHYSICS_PROCESS)
 		#root.propagate_notification(NOTIFICATION_PHYSICS_PROCESS)
 		root.propagate_call(pp, args)

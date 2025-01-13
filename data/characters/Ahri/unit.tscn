@@ -156,6 +156,7 @@ metadata/_custom_type_script = ExtResource("15_eh8vk")
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("14_1rt8n")
+level = 1
 crit_damage_bonus = 2.0
 armor_base = 11.0
 armor_base_per_level = 3.5
@@ -173,10 +174,6 @@ mana_regen_base = 1.25
 mana_regen_base_per_level = 0.12
 movement_speed_base = 305.0
 spell_block_base = 30.0
-
-[node name="StatsTemp" type="Node" parent="."]
-script = ExtResource("14_1rt8n")
-temp = true
 
 [node name="Buffs" type="Node" parent="."]
 script = ExtResource("16_su6i3")
