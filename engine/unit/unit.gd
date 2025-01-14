@@ -52,14 +52,22 @@ func _physics_process(delta: float) -> void:
 		update_actions()
 
 #region Signals
+static var signals: Array[StringName] = []
+static var on_signals: Array[StringName] = []
+static var signals_init_completed := false
+func _init() -> void:
+	if signals_init_completed: return
+	signals_init_completed = true
+	for s in get_signal_list():
+		signals.append(StringName(s.name))
+		on_signals.append(StringName('on_' + s.name))
 
 func connect_all(to: Node) -> void:
-	var signals := get_signal_list()
-	for s in signals:
-		var sname: String = s.name
-		var mname: String = 'on_' + sname
-		if mname in to:
-			(self[sname] as Signal).connect(to[mname] as Callable)
+	for i in range(signals.size()):
+		var sname := signals[i]
+		var mname := on_signals[i]
+		var m: Variant = self.get(mname)
+		if m != null: (self[sname] as Signal).connect(m as Callable)
 
 signal allow_add(attacker: Unit, buff: Buff)
 
