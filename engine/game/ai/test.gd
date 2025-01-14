@@ -7,66 +7,71 @@ class MyAgent extends GOAP.Agent:
 	var exp := 0.0
 	var level := 1
 	var gold := 0.0
-	var mana_initial := 115.0
-	var mana := mana_initial
-	var health_initial := 380.0
-	var health := health_initial
+	var mana_max := 115.0
+	var mana := mana_max
+	var mana_regen_rate := 1.25
+	var health_max := 380.0
+	var health := health_max
+	var health_regen_rate := 1.1
 	var respawn_time := 10.0
 	var bounty := 300.0
 	var attack_damage := 50.0
 	var attack_interval := 1.6
 	var attack_range := 625.0
+	var move_speed := 305.0
 
-	var position_initial := Vector3(0.746, 2.485, -3.787) * Data.GD2HW
-	var position := position_initial
+	var position_spawn := Vector3(0.746, 2.485, -3.787) * Data.GD2HW
+	var position := position_spawn
 	
 	var team := Enums.Team.ORDER
 	
-	var target: UnitRepr
+	var target_i := -1
+	var target_range: float
 	var units: Array[UnitRepr]
 	class UnitRepr extends GOAP.Clonable:
+		var name: String
 		var team: Enums.Team
 		var health: float
+		var health_max: float
 		var position: Vector3
 		var invulnerable: bool
 		var is_charmed: bool
 		var is_visible: bool
-		func copy(unk: Clonable) -> UnitRepr:
-			var from: UnitRepr = unk
+		func copy(unk_from: Clonable) -> UnitRepr:
+			var from: UnitRepr = unk_from
+			name = from.name
 			team = from.team
 			health = from.health
+			health_max = health_max
 			position = from.position
 			invulnerable = from.invulnerable
 			is_charmed = from.is_charmed
 			is_visible = from.is_visible
 			return self
 	
-	var spell: SpellRepr
+	var spell_i := -1
 	var spells: Array[SpellRepr]
-	class SpellRepr extends EffectRepr:
+	class SpellRepr extends GOAP.Clonable:
+		var name: String
 		var mana_cost: float
+		var cast_duration: float
 		var channelling_duration: float
-		var cooldown_time: float
-		var last_cast_time: float
+		var cooldown_start_time: float
+		var cooldown_duration: float
 		var is_targeted: bool
 		var range: float
-		func copy(unk: Clonable) -> SpellRepr:
-			var from: SpellRepr = unk
+		var effect: Callable
+		func copy(unk_from: Clonable) -> SpellRepr:
+			var from: SpellRepr = unk_from
+			name = from.name
 			mana_cost = from.mana_cost
+			cast_duration = from.cast_duration
 			channelling_duration = from.channelling_duration
-			cooldown_time = from.cooldown_time
-			last_cast_time = from.last_cast_time
+			cooldown_start_time = from.cooldown_start_time
+			cooldown_duration = from.cooldown_duration
 			is_targeted = from.is_targeted
 			range = from.range
-			super.copy(unk)
-			return self
-	class EffectRepr extends GOAP.Clonable:
-		var effect: Callable
-		var effect_delay: float
-		func copy(unk: Clonable) -> EffectRepr:
-			var from: SpellRepr = unk
 			effect = from.effect
-			effect_delay = from.effect_delay
 			return self
 
 	var is_dead: bool:
@@ -78,12 +83,13 @@ class MyAgent extends GOAP.Agent:
 	var is_channeling := false
 	var is_charmed := false
 	
-	#var delayed_effects: Array[DelayedEffectRepr]
+	var delayed_effects: Array[DelayedEffectRepr]
 	class DelayedEffectRepr extends GOAP.Clonable:
 		var start_time: float
-		var effect: EffectRepr
-		func copy(unk: Clonable) -> DelayedEffectRepr:
-			var from: DelayedEffectRepr = unk
+		var effect_delay: float
+		var effect: Callable
+		func copy(unk_from: Clonable) -> DelayedEffectRepr:
+			var from: DelayedEffectRepr = unk_from
 			start_time = from.start_time
 			effect = from.effect
 			return self
@@ -96,168 +102,220 @@ class MyAgent extends GOAP.Agent:
 	func clone_array_element(e: Clonable) -> Clonable:
 		return e.clone() if e != null else e
 
-	func copy(unk: Clonable) -> MyAgent:
-		var from: MyAgent = unk
+	func copy(unk_from: Clonable) -> MyAgent:
+		var from: MyAgent = unk_from
 		time = from.time
 		exp = from.exp
 		level = from.level
 		gold = from.gold
-		mana_initial = from.mana_initial
+		mana_max = from.mana_max
 		mana = from.mana
-		health_initial = from.health_initial
+		mana_regen_rate = from.mana_regen_rate
+		health_max = from.health_max
 		health = from.health
+		health_regen_rate = from.health_regen_rate
 		respawn_time = from.respawn_time
 		bounty = from.bounty
 		attack_damage = from.attack_damage
 		attack_interval = from.attack_interval
 		attack_range = from.attack_range
-		position_initial = from.position_initial
+		position_spawn = from.position_spawn
 		position = from.position
 		team = from.team
 		units = clone_array(from.units)
-		target = self.units[from.units.find(from.target)] if from.target != null else null
+		target_i = from.target_i
+		target_range = from.target_range
 		spells = clone_array(from.spells)
-		spell = self.spells[from.spells.find(from.spell)] if from.spell != null else null
+		spell_i = from.spell_i
 		is_dead = from.is_dead
 		interruptable_action_start_time = from.interruptable_action_start_time
 		is_moving = from.is_moving
 		is_attacking = from.is_attacking
 		is_channeling = from.is_channeling
 		is_charmed = from.is_charmed
-		#delayed_effects = clone_array(from.delayed_effects)
+		delayed_effects = clone_array(from.delayed_effects)
 		return self
 
 	func init() -> Agent:
 		var enemy := UnitRepr.new()
+		enemy.name = "enemy"
 		enemy.team = Enums.Team.CHAOS
-		enemy.health = health_initial
+		enemy.health = health_max
+		enemy.health_max = health_max
 		enemy.position = Vector3(199.472, 2.485, -202.911) * Data.GD2HW
 		enemy.is_visible = true
 		units = [
 			enemy,
 		]
-		spells = []
+		var q := SpellRepr.new()
+		q.name = "q"
+		q.mana_cost = 70.0
+		q.cast_duration = 0.25
+		q.channelling_duration = 0
+		q.cooldown_start_time = -INF
+		q.cooldown_duration = 7.0
+		q.is_targeted = true
+		q.range = 880.0
+		q.effect = func(world: MyAgent, target_i: int) -> void:
+			var target := world.units[target_i]
+			target.health -= 40.0
+		spells = [ q ]
 		return self
-	
+
 	func get_actions() -> Array[Callable]:
-		#print('get_actions')
 		if is_charmed: return []
 		if is_dead: return [ respawn ]
 		if is_moving: return [ cancel_move, finish_move, ]
 		if is_attacking: return [ cancel_attack, finish_attack, ]
 		if is_channeling: return [ cancel_channel, finish_channel, ]
 		var res: Array[Callable] = []
-		for unit in units:
-			res.append(order_move.bind(unit))
+		for unit_i in range(units.size()):
+			var unit := units[unit_i]
+			res.append(order_move.bind(unit_i, attack_range))
 			if unit.team != team:
-				res.append(order_attack.bind(unit))
-				for spell in spells:
+				res.append(order_attack.bind(unit_i))
+				for spell_i in range(spells.size()):
+					var spell := spells[spell_i]
+					res.append(order_move.bind(unit_i, spell.range))
 					if spell.is_targeted:
-						res.append(order_cast.bind(spell, unit))
-		for spell in spells:
+						res.append(order_cast.bind(spell_i, unit_i))
+		for spell_i in range(spells.size()):
+			var spell := spells[spell_i]
 			if !spell.is_targeted:
-				res.append(order_cast.bind(spell, null))
+				res.append(order_cast.bind(spell_i, null))
 		return res
 	
 	func respawn() -> float:
-		#print('respawn')
 		time += respawn_time
-		mana = mana_initial
-		health = health_initial
-		position = position_initial
-		target = null
+		mana = mana_max
+		health = health_max
+		position = position_spawn
+		target_i = -1
 		is_moving = false
 		is_attacking = false
 		is_channeling = false
 		is_charmed = false
 		return 0
 
+	func base_action(unk_prev_world_state: Agent) -> float:
+		var prev_world_state: MyAgent = unk_prev_world_state
+		var time_passed := time - prev_world_state.time
+		var gold_spent := maxf(0, prev_world_state.gold - gold)
+		var mana_spent := maxf(0, prev_world_state.mana - mana)
+		var damage_taken := maxf(0, prev_world_state.health - health)
+		mana += time_passed * mana_regen_rate
+		health += time_passed * health_regen_rate
+		return weighted_cost(time_passed, gold_spent, mana_spent, damage_taken)
+
 	func weighted_cost(time := 0.0, gold := 0.0, mana := 0.0, health := 0.0) -> float:
 		return time * 1.3 + gold * 1 + mana * 1 + health * 2.62
 
-	func order_move(target: UnitRepr) -> float:
-		#print('order_move')
-		if target.position.distance_to(position) < 1: return INF
+	func order_move(target_i: int, target_range: float) -> float:
+		var target := units[target_i]
+		if !(target.position.distance_to(position) >= target_range): return INF
 		is_moving = true
-		self.target = target
+		self.target_i = target_i
+		self.target_range = target_range
 		interruptable_action_start_time = time
 		return 0
 	func cancel_move() -> float:
-		#print('cancel_move')
 		var time_passed := time - interruptable_action_start_time
 		if is_zero_approx(time_passed): return INF
+		var target := units[target_i]
+		var diff := target.position - position
+		var dir := diff.normalized()
+		position += dir * move_speed * time_passed
 		is_moving = false
-		return weighted_cost(time_passed)
+		return 0
 	func finish_move() -> float:
-		#print('finish_move')
 		is_moving = false
-		var travel_time := 60.0
+		var target := units[target_i]
+		var diff := target.position - position
+		var dist := diff.length()
+		var dir := diff.normalized()
+		var travel_time := maxf(0, dist - target_range) / move_speed
 		time += travel_time
-		position = target.position
-		return weighted_cost(travel_time)
+		position = target.position - dir * target_range
+		return 0
 	
-	func order_attack(target: UnitRepr) -> float:
-		#print('order_attack')
+	func order_attack(target_i: int) -> float:
+		var target := units[target_i]
 		if !(target.is_visible && target.health > 0 && !target.invulnerable):
 			return INF
 		if !(target.position.distance_to(position) <= attack_range):
 			return INF #TODO: return [ order_move, finish_move ]
 		interruptable_action_start_time = time
-		self.target = target
+		self.target_i = target_i
 		is_attacking = true
 		return 0
 	func cancel_attack() -> float:
-		#print('cancel_attack')
 		var time_passed := time - interruptable_action_start_time
 		if is_zero_approx(time_passed): return INF
 		is_attacking = false
-		return weighted_cost(time_passed)
+		return 0
 	func finish_attack() -> float:
-		#print('finish_attack')
 		is_attacking = false
 		time += attack_interval
+		var target := units[target_i]
 		target.health -= attack_damage
 		if target.health <= 0:
 			gold += bounty
-		return weighted_cost(attack_interval)
+		return 0
 	
-	func order_cast(spell: SpellRepr, target: UnitRepr = null) -> float:
-		#print('order_cast')
-		if target != null && target.position.distance_to(position) > spell.range:
+	func order_cast(spell_i: int, target_i := -1) -> float:
+		var spell := spells[spell_i]
+		var target := units[target_i] if target_i != -1 else null
+		if !(spell.mana_cost <= mana && (time - spell.cooldown_start_time) >= spell.cooldown_duration):
+			return INF
+		if !(!spell.is_targeted || target.position.distance_to(position) <= spell.range):
 			return INF #TODO: return [ order_move, finish_move ]
+		time += spell.cast_duration
 		if spell.channelling_duration > 0:
 			is_channeling = true
-			self.spell = spell
-			self.target = target
+			self.spell_i = spell_i
+			self.target_i = target_i
 			interruptable_action_start_time = time
 			return 0
-		spell.effect.call(target)
-		return weighted_cost(spell.mana_cost)
+		spell.cooldown_start_time = time
+		spell.effect.call(self, target_i)
+		mana -= spell.mana_cost
+		return 0
 	func cancel_channel() -> float:
-		#print('cancel_channel')
 		is_channeling = false
 		var time_passed := time - interruptable_action_start_time
-		return weighted_cost(time_passed)
+		var spell := spells[spell_i]
+		spell.cooldown_start_time = time
+		return 0
 	func finish_channel() -> float:
-		#print('finish_channel')
+		var spell := spells[spell_i]
 		time += spell.channelling_duration
+		spell.cooldown_start_time = time
+		spell.effect.call(self, target_i)
 		mana -= spell.mana_cost
 		is_channeling = false
-		return weighted_cost(spell.channelling_duration, 0, spell.mana_cost)
+		return 0
 
-class EarnGold extends GOAP.Goal:
-	var max_gold := 100_000
+class MyGoal extends GOAP.Goal:
 	func get_heuristic(unk_state: Agent) -> float:
 		var state: MyAgent = unk_state
-		return max_gold - state.gold
-
-class DoDamage extends GOAP.Goal:
-	func get_heuristic(unk_state: Agent) -> float:
-		return 0
+		var gold_max := 100_000
+		var health := 0.0
+		var health_max := 0.0
+		for unit in state.units:
+			health += unit.health
+			health_max += unit.health_max
+		return state.weighted_cost(0, gold_max - state.gold, health_max - health)
 
 func _ready() -> void:
 	var planner := GOAP.new()
-	var goal := EarnGold.new()
+	var goal := MyGoal.new()
 	var agent := MyAgent.new().init()
 	var plan := planner.get_plan(agent, goal)
-	print(plan)
+	for action in plan:
+		var args := action.get_bound_arguments()
+		for i in range(args.size()):
+			var arg: Variant = args[i]
+			if arg is MyAgent.UnitRepr\
+			or arg is MyAgent.SpellRepr:
+				args[i] = arg.name
+		print(action.get_method(), '(', ', '.join(args), ')')

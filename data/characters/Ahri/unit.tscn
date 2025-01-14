@@ -156,7 +156,6 @@ metadata/_custom_type_script = ExtResource("15_eh8vk")
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("14_1rt8n")
-level = 1
 crit_damage_bonus = 2.0
 armor_base = 11.0
 armor_base_per_level = 3.5

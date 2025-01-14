@@ -11,12 +11,14 @@ class Goal:
 		return 0
 
 class Clonable:
-	func clone() -> Agent:
+	func clone() -> Clonable:
 		return new().copy(self)
 	func copy(from: Clonable) -> Clonable:
 		return self
 
 class Agent extends Clonable:
+	func base_action(prev_world_state: Agent) -> float:
+		return 0
 	func get_actions() -> Array[Callable]:
 		return []
 
@@ -39,6 +41,7 @@ func _get_plan(agent: Agent, goal: Goal) -> ActionAndWorldState:
 	for iter in range(MAX_ITER):
 		var current_state := anws.world_state
 		if goal.is_reached(current_state): break
+		#anws.cost += current_state.base_action()
 		var actions := current_state.get_actions()
 		#if actions.is_empty(): continue
 		var current_state_clone: Agent
@@ -50,6 +53,7 @@ func _get_plan(agent: Agent, goal: Goal) -> ActionAndWorldState:
 			var dirty_state := current_state_clone
 			action_succeed = is_finite(action_cost)
 			if action_succeed:
+				var base_cost := dirty_state.base_action(current_state)
 				var new_anws := ActionAndWorldState.new()
 				new_anws.idx = anws.idx + 1
 				new_anws.prev = anws
@@ -57,10 +61,12 @@ func _get_plan(agent: Agent, goal: Goal) -> ActionAndWorldState:
 				else: new_anws.first = new_anws
 				new_anws.action = action
 				new_anws.world_state = dirty_state
-				new_anws.cost = anws.cost + action_cost
+				new_anws.cost = anws.cost + action_cost + base_cost
 				new_anws.heuristic = goal.get_heuristic(dirty_state)
 				open_list.insert(new_anws, new_anws.cost + new_anws.heuristic)
 		
+		anws.world_state = null
+
 		if open_list.is_empty(): break
 		anws = open_list.extract()
 	

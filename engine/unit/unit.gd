@@ -14,11 +14,11 @@ var stats: Stats:
 			return stats_perm
 var stats_temp: Stats:
 	get:
-		_stats.data_temp = _stats.data_temp_b
+		_stats.temp = _stats.temp_b
 		return _stats
 var stats_perm: Stats:
 	get:
-		_stats.data_temp = _stats.data_temp_a
+		_stats.temp = _stats.temp_a
 		return _stats
 
 var status: Status
