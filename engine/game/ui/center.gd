@@ -43,11 +43,11 @@ func bind_to(c: Champion) -> void:
 		ui_buff.bind_to(slot, buff)
 	)
 
-@onready var health_bar_label: Label = healthbar.find_child("Label", false)
-@onready var health_bar_range: Range = healthbar.find_child("TextureProgressBar", false)
+@onready var health_bar_label: Label = healthbar.find_child("Label", false, false)
+@onready var health_bar_range: Range = healthbar.find_child("TextureProgressBar", false, false)
 
-@onready var mana_bar_label: Label = manabar.find_child("Label", false)
-@onready var mana_bar_range: Range = manabar.find_child("TextureProgressBar", false)
+@onready var mana_bar_label: Label = manabar.find_child("Label", false, false)
+@onready var mana_bar_range: Range = manabar.find_child("TextureProgressBar", false, false)
 
 func _process(delta: float) -> void:
 	

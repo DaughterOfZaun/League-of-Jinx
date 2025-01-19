@@ -28,7 +28,7 @@ var zoom := 1.0:
 @export var screen_edge_thresold := 10
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 	offset_initial = self.global_position - target.global_position
 
 var move_dir := Vector3.ZERO

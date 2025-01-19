@@ -3,7 +3,7 @@ class_name Radius extends Area3D
 @onready var char := get_parent() as Unit
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 
 	monitoring = false
 	monitorable = false

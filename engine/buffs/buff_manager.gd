@@ -6,7 +6,7 @@ signal slot_created(slot: BuffSlot, buff: Buff)
 
 @onready var me := get_parent() as Unit
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 	me.buffs = self
 
 var time: float

@@ -2,7 +2,7 @@ class_name AI extends LuaScript
 
 @onready var me: Unit = get_parent()
 
-@onready var animation: AnimationController = me.find_child("AnimationTree")
+@onready var animation: AnimationController = me.find_child("AnimationTree", true, false)
 
 @onready var acquisition_range: Area3D = me.find_child('AcquisitionRange', false)
 @onready var attack_range: Area3D = me.find_child('AttackRange', false)
@@ -70,11 +70,11 @@ func set_state_and_move_internal(state: Enums.AIState, target: Unit, target_posi
 	set_target_and_target_position(target, target_position)
 	run_state.try_enter()
 
-@onready var run_state := find_child("AIRunState", false) as AIRunState
-@onready var idle_state := find_child("AIIdleState", false) as AIIdleState
-@onready var cast_state := find_child("AICastState", false) as AICastState
-@onready var attack_state := find_child("AIAttackState", false) as AIAttackState
-@onready var move_state := find_child("AIMoveState", false) as AIMoveState
+@onready var run_state := find_child("AIRunState", false, false) as AIRunState
+@onready var idle_state := find_child("AIIdleState", false, false) as AIIdleState
+@onready var cast_state := find_child("AICastState", false, false) as AICastState
+@onready var attack_state := find_child("AIAttackState", false, false) as AIAttackState
+@onready var move_state := find_child("AIMoveState", false, false) as AIMoveState
 
 var deffered_state: AIState = idle_state
 @onready var current_state: AIState = idle_state
@@ -95,7 +95,7 @@ func switch_to_deffered() -> void:
 		idle_state.enter()
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 	me.ai = self
 	on_init()
 

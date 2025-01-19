@@ -65,7 +65,7 @@ func timeout_or_canceled_emit() -> void:
 var missile_bone_idx := -1
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 
 	timer = Timer.new()
 	timer.one_shot = true
@@ -76,21 +76,14 @@ func _ready() -> void:
 	missile_bone_idx = me.get_bone_idx(data.missile_bone_name)
 
 func _physics_process(delta: float) -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 
-	if Balancer.should_update_actions(self):
-		on_update_actions()
-	if Balancer.should_update_stats(self):
-		on_update_stats()
-
-func on_update_stats() -> void:
 	if state == State.CHANNELING:
-		channeling_update_stats()
-		update_tooltip(slot)
-
-func on_update_actions() -> void:
-	if state == State.CHANNELING:
-		channeling_update_actions()
+		if Balancer.should_update_actions(self):
+			channeling_update_actions()
+		if Balancer.should_update_stats(self):
+			channeling_update_stats()
+			update_tooltip(slot)
 
 func get_by_level(a: Array) -> float:
 	return 0. if len(a) == 0 else a[clampi(level, 0, len(a) - 1)]

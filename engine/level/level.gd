@@ -1,7 +1,7 @@
 class_name Level extends LuaScript
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 	on_level_init()
 	on_post_level_load()
 	init_ambient(

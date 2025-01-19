@@ -409,7 +409,7 @@ func update_fields() -> void:
 	else: updating_fields += 1
 
 	if !p:
-		p = find_child("GPUParticles3D")
+		p = find_child("GPUParticles3D", true, false)
 	if !p:
 		p = GPUParticles3D.new()
 		add_child(p, true)

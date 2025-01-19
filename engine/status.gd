@@ -4,7 +4,7 @@ var null_callable := func() -> void: pass
 
 @onready var me: Unit = get_parent()
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 	me.status = self
 
 func set_ref(ref_count: int, value: bool) -> int:

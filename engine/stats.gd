@@ -19,7 +19,7 @@ func reset_data_b() -> void:
 @onready var root := get_tree().current_scene
 @onready var constants: Constants = root.get_node("%Constants")
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 	health_current = get_health()
 	mana_current = get_mana()
 	me.stats = self

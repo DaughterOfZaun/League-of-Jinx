@@ -40,12 +40,18 @@ func _physics_process(delta: float) -> void:
 	#call_deferred("generate_frames")
 	#generate_frames()
 	generated_frames = false
+	
+	#pack_scene()
 
 var pp := &"_physics_process"
 var args := [ 1.0 / Engine.physics_ticks_per_second ]
-@onready var root := get_tree().current_scene
+@onready var root := get_tree().current_scene.find_child("Ahri", false, false)
 func generate_frames() -> void:
-	for i in range(30):
+	for i in range(60):
 		#root.propagate_notification(NOTIFICATION_INTERNAL_PHYSICS_PROCESS)
 		#root.propagate_notification(NOTIFICATION_PHYSICS_PROCESS)
 		root.propagate_call(pp, args)
+
+var packed_scene := PackedScene.new()
+func pack_scene() -> void:
+	packed_scene.pack(root)

@@ -67,7 +67,7 @@ static func get_units_in_area(
 		results.append(unit)
 
 	var affect_friends := !!(flags & Enums.SpellFlags.AFFECT_FRIENDS)
-	#var gameplay_range: Area3D = attacker.find_child("GameplayRange")
+	#var gameplay_range: Area3D = attacker.find_child("GameplayRange", true, false)
 	#var collision_shape: CollisionShape3D = gameplay_range.get_child(0)
 	#var sphere_shape: SphereShape3D = collision_shape.shape
 	#var gameplay_collision_radius := sphere_shape.radius

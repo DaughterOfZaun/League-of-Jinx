@@ -13,7 +13,7 @@ var vars: Vars:
 	get: return me.vars
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 	if !host.is_ready: await host.ready
 	host.connect_all(self)
 	on_activate()

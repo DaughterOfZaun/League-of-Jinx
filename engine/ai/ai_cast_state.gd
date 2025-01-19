@@ -15,7 +15,7 @@ func timeout_or_canceled_emit(cancelled: bool) -> void:
 	timeout_or_canceled.emit()
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 	
 	timer = Timer.new()
 	timer.one_shot = true

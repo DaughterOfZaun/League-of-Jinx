@@ -29,7 +29,7 @@ var vars: Vars
 var ai: AI
 var animation: AnimationController
 
-@onready var font_emitter: FontEmitter = find_child("FontEmitter", false)
+@onready var font_emitter: FontEmitter = find_child("FontEmitter", false, false)
 
 func issue_order(order: Enums.OrderType, targetOfOrderPosition := Vector3.INF, targetOfOrder: Unit = null) -> void:
 	ai.order(order, targetOfOrderPosition, targetOfOrder)
@@ -41,15 +41,15 @@ func emote(type: Enums.EmoteType) -> void:
 	ai.emote(type)
 
 func _physics_process(delta: float) -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 
 	_physics_process_rotate(delta)
 	_physics_process_update_visibility(delta)
 
-	if Balancer.should_update_stats(self):
-		update_stats()
-	if Balancer.should_update_actions(self):
-		update_actions()
+	#if Balancer.should_update_stats(self):
+	#	update_stats()
+	#if Balancer.should_update_actions(self):
+	#	update_actions()
 
 #region Signals
 static var signals: Array[StringName] = []
@@ -66,16 +66,16 @@ func connect_all(to: Node) -> void:
 	for i in range(signals.size()):
 		var sname := signals[i]
 		var mname := on_signals[i]
-		var m: Variant = self.get(mname)
-		if m != null: (self[sname] as Signal).connect(m as Callable)
+		if mname in to:
+			(self[sname] as Signal).connect(to[mname] as Callable)
 
 signal allow_add(attacker: Unit, buff: Buff)
 
 # UPDATE
 #signal update_stats()
-func update_stats() -> void: pass
+#func update_stats() -> void: pass
 #signal update_actions()
-func update_actions() -> void: pass
+#func update_actions() -> void: pass
 
 signal dodge(attacker: Unit)
 signal being_dodged(target: Unit)
@@ -149,8 +149,8 @@ func _physics_process_rotate(delta: float) -> void:
 	var rot_delta := angle_difference(rotation.y, direction_angle)
 	rotation.y += sign(rot_delta) * min(abs(rot_delta), rot_speed * delta)
 
-@onready var skinned_mesh_root := find_child("SkinnedMesh", false)
-@onready var skeleton: Skeleton3D = skinned_mesh_root.find_child("Skeleton3D", true) if skinned_mesh_root else null
+@onready var skinned_mesh_root := find_child("SkinnedMesh", false, false)
+@onready var skeleton: Skeleton3D = skinned_mesh_root.find_child("Skeleton3D", true, false) if skinned_mesh_root else null
 func get_bone_global_position(bone_idx: int) -> Vector3:
 	return skeleton.to_global(skeleton.get_bone_global_pose(bone_idx).origin)
 func get_bone_idx(bone_name: StringName) -> int:
@@ -394,11 +394,11 @@ func stop_channeling(condition: Enums.ChannelingStopCondition, souce: Enums.Chan
 var is_ready := false
 static var fow_subviewport: SubViewportEx
 static var fow_subviewport_texture: ViewportTexture
-static var static_init_completed := false
+static var fow_init_completed := false
 func _ready() -> void:
 	is_ready = true
-	if static_init_completed: return
-	else: static_init_completed = true
+	if fow_init_completed: return
+	fow_init_completed = true
 	fow_subviewport = get_node("/root/Node3D/SubViewport")
 	fow_subviewport_texture = fow_subviewport.get_texture()
 	RenderingServer.frame_pre_draw.connect(update_fow_image_if_needed)

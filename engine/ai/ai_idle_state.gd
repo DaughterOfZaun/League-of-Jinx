@@ -2,7 +2,8 @@ class_name AIIdleState
 extends AIState
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
+	pass
 
 func try_enter(emote := Enums.EmoteType.NONE) -> void:
 	if current_state.can_cancel() && can_enter(): enter(emote)

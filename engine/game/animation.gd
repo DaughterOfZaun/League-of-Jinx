@@ -1,10 +1,10 @@
-@tool class_name AnimationController extends AnimationTree
+class_name AnimationController extends AnimationTree
 
 @onready var me: Unit = get_parent()
-@onready var anim_tree: AnimationTree = me.find_child("AnimationTree", false)
+@onready var anim_tree: AnimationTree = me.find_child("AnimationTree", false, false)
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 	me.animation = self
 
 var locked := false

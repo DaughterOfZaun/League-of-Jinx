@@ -14,8 +14,8 @@ func create_child_turret(
 ) -> void:
 
 	var root := EditorInterface.get_edited_scene_root()
-	var map := root.find_child("Map", false) #%Map
-	var points := map.find_child("Points", false) #%Map/Points
+	var map := root.find_child("Map", false, false) #%Map
+	var points := map.find_child("Points", false, false) #%Map/Points
 	assert(map != null && points != null)
 
 	var nav_point: Node3D = points.find_child(nav_point_name, false)

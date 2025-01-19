@@ -58,7 +58,7 @@ func _init() -> void:
 	one_shot = true
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 	start(self.delay + self.duration)
 	timeout.connect(on_timeout)
 	if !host.is_ready: await host.ready

@@ -1,16 +1,16 @@
 class_name AIRunState extends AIState
 
 @onready var character_body: CharacterBody3D = ai.get_parent()
-@onready var navigation_agent: NavigationAgent3D = me.find_child("NavigationAgent3D", false)
+@onready var navigation_agent: NavigationAgent3D = me.find_child("NavigationAgent3D", false, false)
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
 	navigation_agent.navigation_finished.connect(_on_navigation_finished)
 
 var speed: float
 func _physics_process(delta: float) -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 
 	if is_running: #and !navigation_agent.is_navigation_finished():
 		var next_path_position := navigation_agent.get_next_path_position()

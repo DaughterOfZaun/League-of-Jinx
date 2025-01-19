@@ -124,7 +124,7 @@ func order_move_to(nearest_reachable_point: Vector3) -> void:
 	main_hero.order(Enums.OrderType.MOVE_TO, nearest_reachable_point * Data.GD2HW, null)
 
 func _ready() -> void:
-	if Engine.is_editor_hint(): return
+	#if Engine.is_editor_hint(): return
 
 	#Input.use_accumulated_input = false
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
