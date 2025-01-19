@@ -190,3 +190,6 @@ func get_remaining_duration(script: GDScript) -> float:
 	var slot := get_slot(script, null)
 	if slot != null: return slot.duration_remaining
 	return 0.0
+
+func _validate_property(property: Dictionary) -> void:
+	property.usage |= PROPERTY_USAGE_STORAGE

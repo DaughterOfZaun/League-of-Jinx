@@ -86,3 +86,6 @@ func get_crit(name: String = "BaseSpell") -> Spell:
 		crit = spell
 	assign_name(spell, name)
 	return spell
+
+func _validate_property(property: Dictionary) -> void:
+	property.usage |= PROPERTY_USAGE_STORAGE

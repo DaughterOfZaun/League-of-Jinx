@@ -39,3 +39,6 @@ func can_cancel() -> bool:
 
 func on_exit() -> void:
 	pass
+
+func _validate_property(property: Dictionary) -> void:
+	property.usage |= PROPERTY_USAGE_STORAGE

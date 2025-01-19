@@ -414,3 +414,6 @@ enum {
 	HARDNESS_PERCENT = 45,
 	STATS_COUNT = 46,
 }
+
+func _validate_property(property: Dictionary) -> void:
+	property.usage |= PROPERTY_USAGE_STORAGE

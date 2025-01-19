@@ -19,3 +19,6 @@ func _ready() -> void:
 	on_activate()
 
 func on_activate() -> void: pass
+
+func _validate_property(property: Dictionary) -> void:
+	property.usage |= PROPERTY_USAGE_STORAGE

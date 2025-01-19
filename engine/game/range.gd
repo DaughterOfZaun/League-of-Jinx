@@ -34,3 +34,6 @@ func _input_event(camera: Camera3D, unknown_event: InputEvent, event_position: V
 
 func _mouse_enter() -> void:
 	input_manager.on_unit_hovered(char)
+
+func _validate_property(property: Dictionary) -> void:
+	property.usage |= PROPERTY_USAGE_STORAGE

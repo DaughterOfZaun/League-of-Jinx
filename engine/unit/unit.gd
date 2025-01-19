@@ -429,3 +429,6 @@ func _physics_process_update_visibility(delta: float) -> void:
 	var pixel := fow_image.get_pixelv(canvas_position_rounded)
 	
 	visible = pixel.r > 0.5
+
+func _validate_property(property: Dictionary) -> void:
+	property.usage |= PROPERTY_USAGE_STORAGE

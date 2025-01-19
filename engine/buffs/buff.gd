@@ -84,3 +84,6 @@ func renew(reset_duration: float) -> void:
 
 func get_data() -> BuffData:
 	return self[&'data'] if &'data' in self else null
+
+func _validate_property(property: Dictionary) -> void:
+	property.usage |= PROPERTY_USAGE_STORAGE

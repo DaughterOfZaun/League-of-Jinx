@@ -22,3 +22,6 @@ func stop_timer(callback: Callable) -> void:
 func reset_and_start_timer(callback: Callable) -> void:
 	var timer: Timer = timers.get(callback)
 	if timer != null: timer.start()
+
+func _validate_property(property: Dictionary) -> void:
+	property.usage |= PROPERTY_USAGE_STORAGE

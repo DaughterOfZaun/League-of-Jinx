@@ -280,3 +280,6 @@ func replace_with(script: Spell) -> void:
 
 func is_enough_mana_to_cast() -> bool:
 	return me.stats_perm.mana_current >= spell.get_mana_cost()
+
+func _validate_property(property: Dictionary) -> void:
+	property.usage |= PROPERTY_USAGE_STORAGE
