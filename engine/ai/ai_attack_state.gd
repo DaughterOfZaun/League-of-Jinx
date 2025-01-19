@@ -1,11 +1,13 @@
 class_name AIAttackState extends AIState
 
-@onready var root := get_tree().current_scene
+@onready var root: Node = get_tree().current_scene
 @onready var constants: Constants = root.get_node("%Constants")
 
 var spell: Spell
 var next_spell: Spell
 func _ready() -> void:
+	if SecondTest.is_clonning: return
+	
 	await me.ready
 	spell = me.spells.basic[0]
 	next_spell = me.spells.basic[1]
@@ -13,7 +15,7 @@ func _ready() -> void:
 func try_enter() -> void:
 	if current_state.can_cancel() && can_enter(): enter()
 
-var is_running := false
+var is_running: bool = false
 func enter() -> void:
 	switch_to_self()
 	is_running = true
@@ -21,7 +23,7 @@ func enter() -> void:
 	animation.switch_loop(&"Idle1")
 	me.face_direction(target.position_3d)
 
-var spell_i := 1
+var spell_i: int = 1
 func _animation_finished(anim_name: StringName) -> void:
 	spell = next_spell
 	animation.play(spell.data.animation_name)
@@ -31,12 +33,12 @@ func _animation_finished(anim_name: StringName) -> void:
 	else:
 		next_spell = me.spells.crit
 
-var current_time := 0.0
-var last_attack_time := 0.0
+var current_time: float = 0.0
+var last_attack_time: float = 0.0
 
-var just_entered_state := true
-var state_enter_time_point := 0.0
-var winding_up := false
+var just_entered_state: bool = true
+var state_enter_time_point: float = 0.0
+var winding_up: bool = false
 
 func _physics_process(delta: float) -> void:
 	current_time += delta

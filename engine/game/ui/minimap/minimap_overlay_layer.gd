@@ -1,14 +1,14 @@
 extends Control
 
-@export var line_width := 1.0
-@export var line_color := Color.WHITE
-@export var line_antialiased := false
+@export var line_width: float = 1.0
+@export var line_color: Color = Color.WHITE
+@export var line_antialiased: bool = false
 
-@onready var root := get_tree().current_scene
+@onready var root: Node = get_tree().current_scene
 @onready var camera: Camera = root.get_node("%Camera")
 @onready var viewport: SubViewportEx = root.get_node("%SubViewport")
 @onready var input_manager: InputManager = root.get_node("%InputManager")
-@onready var hero := input_manager.main_hero
+@onready var hero: Champion = input_manager.main_hero
 var navigation_agent: NavigationAgent3D
 func _ready() -> void:
 	await hero.ready
@@ -16,7 +16,7 @@ func _ready() -> void:
 	navigation_agent.path_changed.connect(on_path_changed)
 	navigation_agent.waypoint_reached.connect(on_waypoint_reached)
 
-var path_to_draw := PackedVector2Array([ z ])
+var path_to_draw: PackedVector2Array = PackedVector2Array([ z ])
 func on_path_changed() -> void:
 	var path := navigation_agent.get_current_navigation_path()
 	path_to_draw.resize(len(path) + 1)
@@ -30,7 +30,7 @@ func on_waypoint_reached(details: Dictionary) -> void:
 	queue_redraw()
 
 const z := Vector2.ZERO
-var rect_to_draw := PackedVector2Array([ z, z, z, z, ])
+var rect_to_draw: PackedVector2Array = PackedVector2Array([ z, z, z, z, ])
 var prev_camera_global_position: Vector3
 var prev_hero_global_position: Vector3
 func _process(delta: float) -> void:

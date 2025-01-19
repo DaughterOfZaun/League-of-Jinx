@@ -1,10 +1,10 @@
 class_name TimeTracker
 
-var time := 0.0
+var time: float = 0.0
 
-var time_between_executions := 0.0
-var execute_immediately := false
-var tick_time := 0.0
+var time_between_executions: float = 0.0
+var execute_immediately: bool = false
+var tick_time: float = 0.0
 
 func _init(
 	time_between_executions := 0.0,

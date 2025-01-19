@@ -1,6 +1,6 @@
 class_name AhriSoulCrusherBuff extends Buff
 
-var data := preload('AhriSoulCrusherBuff.tres')
+var data: BuffData = preload('AhriSoulCrusherBuff.tres')
 
 func on_activate() -> void:
 	host.buffs.add(host, AhriPassiveParticleBuff.new())

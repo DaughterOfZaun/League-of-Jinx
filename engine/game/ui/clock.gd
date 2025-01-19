@@ -1,8 +1,8 @@
 @tool extends TextureProgressBar
 
-@export var line_width := 1.0
-@export var line_color := Color.WHITE
-@export var line_antialiased := false
+@export var line_width: float = 1.0
+@export var line_color: Color = Color.WHITE
+@export var line_antialiased: bool = false
 
 func _draw() -> void:
 	var center := self.size * 0.5

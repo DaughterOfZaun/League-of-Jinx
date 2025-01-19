@@ -1,7 +1,7 @@
 class_name Hero
 extends AI
 
-var FEAR_WANDER_DISTANCE := 500
+var FEAR_WANDER_DISTANCE: float = 500
 
 func on_init() -> bool:
 	clear_target_pos_in_pos()

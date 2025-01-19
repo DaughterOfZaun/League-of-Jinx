@@ -9,7 +9,7 @@ func string_parse(from: String) -> String:
 
 var res_paths: Array[String] = []
 var res_cache: Dictionary[String, String] = {}
-var res_cache_is_null := true
+var res_cache_is_null: bool = true
 func get_from_cache(key: String) -> String:
 	if res_cache_is_null:
 		res_cache_is_null = false
@@ -69,7 +69,7 @@ func ivec2_parse(from: String) -> Vector2i:
 	assert(len(v) == 2, from)
 	return Vector2i(int_parse(v[0]), int_parse(v[1]))
 
-var regex_float := RegEx.create_from_string(r'^[+-]?[0-9.]*$')
+var regex_float: RegEx = RegEx.create_from_string(r'^[+-]?[0-9.]*$')
 func float_parse(from: String) -> float:
 	from = string_parse(from)
 	assert(regex_float.search(from), from)
@@ -156,8 +156,8 @@ func gradient_set(grad: Gradient, i: Variant, from: String) -> Gradient:
 	grad.add_point(float_parse(s[0]), color_parse(s[1]))
 	return grad
 
-var return_null := func() -> Object: return null
-var return_array := func() -> Array: return []
+var return_null: Callable = func() -> Object: return null
+var return_array: Callable = func() -> Array: return []
 
 func array_resize_to_fit(a: Array, i: Variant, f: Callable) -> void:
 	assert(typeof(i) == TYPE_INT)

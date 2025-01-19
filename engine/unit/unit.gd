@@ -132,8 +132,8 @@ signal spell_cast(spell: Spell)
 
 #endregion
 
-@onready var direction_angle := rotation.y
-@onready var direction := Vector2.from_angle(direction_angle)
+@onready var direction_angle: float = rotation.y
+@onready var direction: Vector2 = Vector2.from_angle(direction_angle)
 func face_direction(pos: Vector3) -> void:
 	face_dir(pos - self.position_3d)
 func face_dir(dir: Vector3) -> void:
@@ -144,12 +144,12 @@ func get_point_by_facing_offset(distance: float, offset_angle: float) -> Vector3
 	return position_3d + Vector3(v2.x, 0, v2.y)
 
 #var rot_speed := deg_to_rad(180. / ((0.08 + (0.01/3.))))
-var rot_speed := deg_to_rad(180 / 0.2)
+var rot_speed: float = deg_to_rad(180 / 0.2)
 func _physics_process_rotate(delta: float) -> void:
 	var rot_delta := angle_difference(rotation.y, direction_angle)
 	rotation.y += sign(rot_delta) * min(abs(rot_delta), rot_speed * delta)
 
-@onready var skinned_mesh_root := find_child("SkinnedMesh", false, false)
+@onready var skinned_mesh_root: Node = find_child("SkinnedMesh", false, false)
 @onready var skeleton: Skeleton3D = skinned_mesh_root.find_child("Skeleton3D", true, false) if skinned_mesh_root else null
 func get_bone_global_position(bone_idx: int) -> Vector3:
 	return skeleton.to_global(skeleton.get_bone_global_pose(bone_idx).origin)
@@ -384,18 +384,20 @@ func is_in_front(target: Unit) -> bool:
 func is_behind(target: Unit) -> bool:
 	return !is_in_front(target)
 
-@onready var nav_map_rid := get_world_3d().navigation_map
+@onready var nav_map_rid: RID = get_world_3d().navigation_map
 func get_nearest_passable_position(pos: Vector3) -> Vector3:
 	return NavigationServer3D.map_get_closest_point(nav_map_rid, pos * Data.HW2GD) * Data.GD2HW
 
 func stop_channeling(condition: Enums.ChannelingStopCondition, souce: Enums.ChannelingStopSource) -> void:
 	push_warning("unimplemented")
 
-var is_ready := false
+var is_ready: bool = false
 static var fow_subviewport: SubViewportEx
 static var fow_subviewport_texture: ViewportTexture
 static var fow_init_completed := false
 func _ready() -> void:
+	if SecondTest.is_clonning: return
+	
 	is_ready = true
 	if fow_init_completed: return
 	fow_init_completed = true
@@ -429,6 +431,3 @@ func _physics_process_update_visibility(delta: float) -> void:
 	var pixel := fow_image.get_pixelv(canvas_position_rounded)
 	
 	visible = pixel.r > 0.5
-
-func _validate_property(property: Dictionary) -> void:
-	property.usage |= PROPERTY_USAGE_STORAGE

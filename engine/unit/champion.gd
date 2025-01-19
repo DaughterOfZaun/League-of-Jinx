@@ -1,14 +1,14 @@
 class_name Champion extends Unit
 
-var level := 1
-var level_ups_avaible := 1
+var level: int = 1
+var level_ups_avaible: int = 1
 var exp_to_current_level: int
 var exp_to_next_level: int
-var assists := 0
-var deaths := 0
-var kills := 0
+var assists: int = 0
+var deaths: int = 0
+var kills: int = 0
 
-@onready var root := get_tree().current_scene
+@onready var root: Node = get_tree().current_scene
 @onready var constants: Constants = root.get_node("%Constants")
 @onready var gold: float = constants.ai_starting_gold
 @onready var level_script: Level = root.get_node("%Level")
@@ -28,6 +28,8 @@ var kills := 0
 				break
 
 func _ready() -> void:
+	if SecondTest.is_clonning: return
+	
 	super._ready()
 
 	exp = 0.0

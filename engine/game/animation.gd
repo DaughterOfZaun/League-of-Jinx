@@ -4,10 +4,11 @@ class_name AnimationController extends AnimationTree
 @onready var anim_tree: AnimationTree = me.find_child("AnimationTree", false, false)
 
 func _ready() -> void:
+	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	me.animation = self
 
-var locked := false
+var locked: bool = false
 # blend is currently ignored
 func unlock(blend := true) -> void:
 	locked = false

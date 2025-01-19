@@ -2,7 +2,7 @@ class_name Particle
 extends Node3DExt
 
 var bind_obj: Unit = null
-var bind_bone_idx := -1
+var bind_bone_idx: int = -1
 func _physics_process(delta: float) -> void:
 	if bind_obj != null:
 		if bind_bone_idx != -1:

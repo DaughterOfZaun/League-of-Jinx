@@ -1,6 +1,6 @@
 @tool class_name Group extends Effect
 
-var Curve_ONE := new_one()
+var Curve_ONE: Curve = new_one()
 func new_one() -> Curve:
 	var c := Curve.new()
 	c.add_point(Vector2(0, 1))
@@ -398,7 +398,7 @@ var particle_color_lookup_type: Vector2i:
 #func _set(_property, _value):
 #	update_fields()
 
-var updating_fields := 1
+var updating_fields: int = 1
 func _ready() -> void:
 	updating_fields -= 1
 	#update_fields()
@@ -566,7 +566,7 @@ class MyShader:
 			entry.hash = hash
 			cache[hash] = entry
 
-var material_shader := MaterialShader.new()
+var material_shader: MaterialShader = MaterialShader.new()
 class MaterialShader extends MyShader:
 	var blend_mode: BlendMode
 	var billboard_enabled: bool
@@ -596,7 +596,7 @@ class MaterialShader extends MyShader:
 		(define('BILLBOARD') if billboard_enabled else '') +\
 		include('res://engine/effects/material.gdshaderinc')
 
-var process_shader := ProcessShader.new()
+var process_shader: ProcessShader = ProcessShader.new()
 class ProcessShader extends MyShader:
 	func gen_code() -> String:
 		return \

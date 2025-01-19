@@ -1,7 +1,7 @@
 @tool class_name FontEmitter extends GPUParticles3D
 
-@export var letter_width_offset := -0.3
-var letters := """
+@export var letter_width_offset: float = -0.3
+var letters: String = """
  0 a k u E O Y
  1 b l v F P Z
  2 c m w G Q !
@@ -15,11 +15,11 @@ var letters := """
 """.replace("\n", "").replace(" ", "") + " "
 
 @export_group("Test", "test")
-@export var test_scale := 1.0
-@export var test_speed := 5.0
-@export var test_color := Color.WHITE
+@export var test_scale: float = 1.0
+@export var test_speed: float = 5.0
+@export var test_color: Color = Color.WHITE
 @export var test_text: String
-@export var test_offset := 0.0
+@export var test_offset: float = 0.0
 @export_tool_button("Test") var test := func() -> void:
 	emit_text(test_text, test_scale, test_speed, test_color, test_offset)
 

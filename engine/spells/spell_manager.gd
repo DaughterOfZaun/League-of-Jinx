@@ -14,6 +14,7 @@ class_name Spells extends Node
 
 @onready var me: Unit = get_parent()
 func _ready() -> void:
+	if SecondTest.is_clonning: return
 	if Engine.is_editor_hint(): return
 	me.spells = self
 
@@ -86,6 +87,3 @@ func get_crit(name: String = "BaseSpell") -> Spell:
 		crit = spell
 	assign_name(spell, name)
 	return spell
-
-func _validate_property(property: Dictionary) -> void:
-	property.usage |= PROPERTY_USAGE_STORAGE

@@ -1,7 +1,7 @@
 class_name Camera extends Node3DExt
 
 @onready var camera: Camera3D = self as Variant
-@onready var viewport := camera.get_viewport()
+@onready var viewport: Viewport = camera.get_viewport()
 
 @export var target: Unit
 var target_position := Vector3.ZERO:
@@ -9,29 +9,29 @@ var target_position := Vector3.ZERO:
 		if locked:
 			target_position = target.global_position
 		return target_position
-@export var lerp_speed := 3.0
-@export var move_speed := 27.0
-var offset_initial := Vector3.ZERO
-var offset := Vector3.ZERO
+@export var lerp_speed: float = 3.0
+@export var move_speed: float = 27.0
+var offset_initial: Vector3 = Vector3.ZERO
+var offset: Vector3 = Vector3.ZERO
 
-@export var max_zoom := 3.0
-@export var min_zoom := 0.4
+@export var max_zoom: float = 3.0
+@export var min_zoom: float = 0.4
 @export_range(0.05, 1.0) var zoom_speed := 0.09
 var zoom := 1.0:
 	get: return zoom
 	set(value): zoom = clamp(value, min_zoom, max_zoom)
 
-@export var locked := true
+@export var locked: bool = true
 
-@export var ground_height := 1.35
+@export var ground_height: float = 1.35
 
-@export var screen_edge_thresold := 10
+@export var screen_edge_thresold: float = 10
 
 func _ready() -> void:
 	#if Engine.is_editor_hint(): return
 	offset_initial = self.global_position - target.global_position
 
-var move_dir := Vector3.ZERO
+var move_dir: Vector3 = Vector3.ZERO
 func _input(unk_event: InputEvent) -> void:
 	if locked: return
 	if unk_event is InputEventMouseMotion:

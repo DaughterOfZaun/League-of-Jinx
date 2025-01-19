@@ -1,6 +1,6 @@
 class_name AhriFoxFireMissileBuff extends Buff
 
-var data := preload('AhriFoxFireMissileBuff.tres')
+var data: BuffData = preload('AhriFoxFireMissileBuff.tres')
 
 func on_deactivate(expired: bool) -> void:
 	if host.buffs.count(AhriFoxFireMissileBuff) <= 0:

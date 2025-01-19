@@ -1,6 +1,6 @@
 class_name AhriIdleParticleBuff extends Buff
 
-var data := preload('AhriIdleParticleBuff.tres')
+var data: BuffData = preload('AhriIdleParticleBuff.tres')
 
 var particle: Particle
 func on_activate() -> void:

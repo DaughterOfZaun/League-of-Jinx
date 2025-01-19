@@ -5,14 +5,14 @@ var attacker: Unit
 var caster: Unit
 var target: Unit
 var host: Unit
-var max_stack := 1
-var duration := 25000.0
-var add_type := Enums.BuffAddType.REPLACE_EXISTING
-var type := Enums.BuffType.INTERNAL
-var tick_rate := 0.25
-var stacks_exclusive := true
-var can_mitigate_duration := false
-var is_hidden_on_client := false
+var max_stack: int = 1
+var duration: float = 25000.0
+var add_type: Enums.BuffAddType = Enums.BuffAddType.REPLACE_EXISTING
+var type: Enums.BuffType = Enums.BuffType.INTERNAL
+var tick_rate: float = 0.25
+var stacks_exclusive: bool = true
+var can_mitigate_duration: bool = false
+var is_hidden_on_client: bool = false
 
 func copy(from: Buff) -> Buff:
 	slot = from.slot
@@ -38,7 +38,7 @@ var vars: Vars:
 
 var start_time: float
 
-var delay := 0.0
+var delay: float = 0.0
 var delay_remaining := 0.0:
 	get:
 		return maxf(0, self.time_left - self.duration)
@@ -58,6 +58,7 @@ func _init() -> void:
 	one_shot = true
 
 func _ready() -> void:
+	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	start(self.delay + self.duration)
 	timeout.connect(on_timeout)
@@ -68,7 +69,7 @@ func _ready() -> void:
 func remove_self() -> void:
 	slot.mngr.remove_by_instance(self)
 
-var expired := false
+var expired: bool = false
 func on_timeout() -> void:
 	expired = true
 	if !can_mitigate_duration:
@@ -84,6 +85,3 @@ func renew(reset_duration: float) -> void:
 
 func get_data() -> BuffData:
 	return self[&'data'] if &'data' in self else null
-
-func _validate_property(property: Dictionary) -> void:
-	property.usage |= PROPERTY_USAGE_STORAGE

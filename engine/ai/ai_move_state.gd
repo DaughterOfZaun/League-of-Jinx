@@ -40,7 +40,7 @@ var distance_inner: float
 func try_enter() -> void:
 	if current_state.can_cancel() && can_enter(): enter()
 
-var is_moving := false
+var is_moving: bool = false
 func enter() -> void:
 	switch_to_self()
 	is_moving = true

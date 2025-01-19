@@ -1,6 +1,6 @@
 class_name SpellIndicator extends Node3D
 
-@onready var root := get_tree().current_scene
+@onready var root: Node = get_tree().current_scene
 @onready var input_manager: InputManager = root.get_node("%InputManager")
 
 @onready var spell: Spell #= get_parent()
@@ -9,6 +9,7 @@ class_name SpellIndicator extends Node3D
 @onready var line_missile_indicator_target: Node3D = $LineMissile/Target
 
 func _ready() -> void:
+	if SecondTest.is_clonning: return
 	visible = false
 	self.visibility_changed.connect(func () -> void:
 		self._physics_process(0)

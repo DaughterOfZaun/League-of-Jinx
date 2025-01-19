@@ -7,7 +7,7 @@ signal timer_started()
 func timer_start(time_sec: float) -> void:
 	timer.start(time_sec)
 	timer_started.emit()
-var cancelled := false
+var cancelled: bool = false
 signal timeout_or_canceled()
 func timeout_or_canceled_emit(cancelled: bool) -> void:
 	timer.stop()
@@ -15,9 +15,11 @@ func timeout_or_canceled_emit(cancelled: bool) -> void:
 	timeout_or_canceled.emit()
 
 func _ready() -> void:
+	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	
 	timer = Timer.new()
+	timer.name = "Timer"
 	timer.one_shot = true
 	timer.timeout.connect(func() -> void: timeout_or_canceled.emit())
 	add_child(timer)

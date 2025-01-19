@@ -2,7 +2,7 @@ class_name Missile extends Node3DExt
 
 var spell: Spell
 var target: Unit = null
-var target_position := Vector3.INF
+var target_position: Vector3 = Vector3.INF
 func init(spell: Spell, target: Unit, target_position: Vector3 = Vector3.INF) -> void:
 	self.spell = spell
 	if target != null:
@@ -15,6 +15,8 @@ func init(spell: Spell, target: Unit, target_position: Vector3 = Vector3.INF) ->
 
 var effect: System = null
 func _ready() -> void:
+	if SecondTest.is_clonning: return
+	
 	var bone_name := spell.data.missile_bone_name
 	#TODO: bone_name == "root" or cast(override_cast_pos == true) ?
 	if bone_name.is_empty() || bone_name == "root":
@@ -25,7 +27,7 @@ func _ready() -> void:
 	effect = spell.data.missile_effect.instantiate()
 	add_child(effect)
 
-var time_elapsed := 0.0
+var time_elapsed: float = 0.0
 func _physics_process(delta: float) -> void:
 	time_elapsed += delta
 	var lifetime := spell.data.missile_lifetime
@@ -42,9 +44,9 @@ func calc_speed() -> float:
 	var speed := clampf(initial_speed + (accel * time_elapsed), min_speed, max_speed)
 	return speed
 
-var target_reached := false
-var last_dir_normalized := Vector3.ZERO
-var last_speed := 0.0
+var target_reached: bool = false
+var last_dir_normalized: Vector3 = Vector3.ZERO
+var last_speed: float = 0.0
 func linear_movement(delta: float, ends_at_target_point := true) -> bool:
 
 	var accel := spell.data.missile_accel

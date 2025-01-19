@@ -3,21 +3,21 @@ class_name Spell extends Node
 @export var data: SpellData
 @export var indicator: SpellIndicator
 
-@onready var me := (
+@onready var me: Unit = (
 	get_parent() #as Spells
-).get_parent() as Unit #HACK:
-@onready var attacker := me
-@onready var caster := me
-@onready var host := me # owner -> host
+).get_parent() #HACK:
+@onready var attacker: Unit = me
+@onready var caster: Unit = me
+@onready var host: Unit = me # owner -> host
 var vars: Vars:
 	get: return me.vars
-var spell := self
+var spell: Spell = self
 
 var target: Unit
 #var offset_target: Unit
-var cast_position := Vector3.INF
-var target_position := Vector3.INF
-var drag_end_position := Vector3.INF
+var cast_position: Vector3 = Vector3.INF
+var target_position: Vector3 = Vector3.INF
+var drag_end_position: Vector3 = Vector3.INF
 # var targets_hit: int
 var targets_hit_plus_one: int:
 	get:
@@ -25,15 +25,15 @@ var targets_hit_plus_one: int:
 var targeting_type: Enums.TargetingType
 
 var slot: SpellSlot
-var is_sealed := false
-var icon_index := 0
+var is_sealed: bool = false
+var icon_index: int = 0
 var icon: Texture2D:
 	get:
 		#if icon_index < len(data.inventory_icon):
 		return data.inventory_icon[icon_index]
 		#else: return null
 
-var level := 0
+var level: int = 0
 #	get:
 #		if level == 0: push_warning("level is 0")
 #		return max(1, level)
@@ -48,7 +48,7 @@ var cooldown_time_left: float:
 var cast_range: float
 var is_attack_override: bool
 
-var state := State.READY
+var state: State = State.READY
 enum State {
 	READY,
 	CASTING,
@@ -62,12 +62,14 @@ func timeout_or_canceled_emit() -> void:
 	timer.stop()
 	timeout_or_canceled.emit()
 
-var missile_bone_idx := -1
+var missile_bone_idx: int = -1
 
 func _ready() -> void:
+	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 
 	timer = Timer.new()
+	timer.name = "Timer"
 	timer.one_shot = true
 	timer.timeout.connect(func() -> void: timeout_or_canceled.emit())
 	add_child(timer)
@@ -215,7 +217,7 @@ func cast(
 		for subtarget in targets:
 			_target_execute(subtarget, null)
 		"""
-var targets_hit := 0
+var targets_hit: int = 0
 func _target_execute(target: Unit, missile: Missile) -> void:
 	targets_hit = targets_hit + 1
 	caster.spell_hit.emit(target, spell)
@@ -248,8 +250,8 @@ func update_tooltip(_slot: SpellSlot) -> void: pass
 func on_missile_update(_missile: Missile) -> void: pass
 func on_missile_end(_missile: Missile) -> void: pass
 
-var cost_inc := 0.0
-var cost_inc_multiplicative := 0.0
+var cost_inc: float = 0.0
+var cost_inc_multiplicative: float = 0.0
 func get_cost_inc(par_type: Enums.PARType) -> float:
 	return cost_inc if par_type == me.data.par_type else 0.0
 func set_cost_inc(cost: float, par_type: Enums.PARType) -> void:
@@ -280,6 +282,3 @@ func replace_with(script: Spell) -> void:
 
 func is_enough_mana_to_cast() -> bool:
 	return me.stats_perm.mana_current >= spell.get_mana_cost()
-
-func _validate_property(property: Dictionary) -> void:
-	property.usage |= PROPERTY_USAGE_STORAGE

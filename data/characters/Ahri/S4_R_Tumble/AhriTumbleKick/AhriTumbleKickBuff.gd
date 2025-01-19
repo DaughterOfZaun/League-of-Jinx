@@ -1,6 +1,6 @@
 class_name AhriTumbleKickBuff extends Buff
 
-var data := preload('AhriTumbleKickBuff.tres')
+var data: BuffData = preload('AhriTumbleKickBuff.tres')
 
 var target_pos: Vector3
 var distance: float

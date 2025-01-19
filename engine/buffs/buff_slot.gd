@@ -1,9 +1,9 @@
 class_name BuffSlot
 
 var mngr: Buffs
-var max_stack := 0
+var max_stack: int = 0
 var stacks: Array[Buff] = []
-var duration := 0.0
+var duration: float = 0.0
 var start_time: float
 var duration_remaining: float:
 	get: return start_time + duration - mngr.time

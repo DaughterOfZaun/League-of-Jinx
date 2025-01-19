@@ -9,7 +9,7 @@ const exp_given_radius = 1250.0
 const disable_minion_spawn_base_time = 300.0
 const disable_minion_spawn_mag_time = 0.0
 
-var caster_minion_spawn_frequency := 3
+var caster_minion_spawn_frequency: int = 3
 
 class G:
 	var exp_given := 0.0
@@ -101,15 +101,15 @@ var g: Dictionary[Enums.MinionType, G] = (
 		return g
 ).call()
 
-var last_wave := -1
-var special_minion_mode := SpecialMinionMode.NONE
+var last_wave: int = -1
+var special_minion_mode: SpecialMinionMode = SpecialMinionMode.NONE
 enum SpecialMinionMode {
 	NONE,
 	THREE_ARCHERS,
 	SPECIAL_POWER_MINION,
 	UNDEFINED,
 }
-var hq_turret_attackable := false
+var hq_turret_attackable: bool = false
 
 const CHAOS := Enums.Team.CHAOS
 const ORDER := Enums.Team.ORDER
@@ -130,7 +130,7 @@ var names: Dictionary[Enums.MinionType, Dictionary] = (
 		return names
 ).call()
 
-var spawn_table := SpawnTable.new()
+var spawn_table: SpawnTable = SpawnTable.new()
 class SpawnTable:
 	var wave_spawn_rate := 0
 	var num_of_minions_per_wave: Dictionary[Enums.MinionType, int] = {
@@ -410,7 +410,7 @@ func disable_barracks_spawn(lane: int, team: int) -> void:
 	c_lang_barracks.disable_minion_spawn(get_disable_minion_spawn_time(lane, team))
 	lua_barrack.num_of_spawn_disables += 1
 
-var bonuses_counter := 0
+var bonuses_counter: int = 0
 func apply_barracks_destruction_bonuses(team: int, barrack_lane: int) -> void:
 	bonuses_counter += 1
 	var opposing_team := opposite_team(team)
@@ -431,7 +431,7 @@ func apply_barracks_destruction_bonuses(team: int, barrack_lane: int) -> void:
 			total_number_of_barracks[opposing_team] -= 1
 			lua_barrack.will_spawn_super_minion = 1
 
-var reduction_counter := 0
+var reduction_counter: int = 0
 func apply_barracks_respawn_reductions(team: int, barrack_lane: int) -> void:
 	reduction_counter += 1
 	var opposing_team := opposite_team(team)
@@ -467,7 +467,7 @@ func apply_barracks_respawn_reductions(team: int, barrack_lane: int) -> void:
 				hq_turret_2.status.invulnerable = true
 				hq_turret_2.status.targetable = false
 
-var reactive_counter := 0
+var reactive_counter: int = 0
 func barrack_reactive_event(team: int, lane: int) -> void:
 	reactive_counter += 1
 	var dampener := get_dampener(team, lane)
@@ -475,7 +475,7 @@ func barrack_reactive_event(team: int, lane: int) -> void:
 	dampener.status.targetable = true
 	apply_barracks_respawn_reductions(opposite_team(team), lane)
 
-var disactivated_counter := 0
+var disactivated_counter: int = 0
 func handle_destroyed_object(unk_obj: Unit) -> void:
 	if unk_obj is HQ:
 		var obj := unk_obj as HQ

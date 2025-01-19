@@ -1,7 +1,7 @@
 class_name AIState extends Node
 
-@onready var ai := get_parent() as AI
-@onready var me := ai.get_parent() as Unit
+@onready var ai: AI = get_parent()
+@onready var me: Unit = ai.get_parent()
 
 # ai.gd stub
 var target: Unit:
@@ -39,6 +39,3 @@ func can_cancel() -> bool:
 
 func on_exit() -> void:
 	pass
-
-func _validate_property(property: Dictionary) -> void:
-	property.usage |= PROPERTY_USAGE_STORAGE

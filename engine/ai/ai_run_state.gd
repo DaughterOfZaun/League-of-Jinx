@@ -1,9 +1,10 @@
 class_name AIRunState extends AIState
 
-@onready var character_body: CharacterBody3D = ai.get_parent()
+@onready var character_body: CharacterBody3D = me.find_child("CharacterBody3D", false, false)
 @onready var navigation_agent: NavigationAgent3D = me.find_child("NavigationAgent3D", false, false)
 
 func _ready() -> void:
+	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
 	navigation_agent.navigation_finished.connect(_on_navigation_finished)
@@ -13,6 +14,9 @@ func _physics_process(delta: float) -> void:
 	#if Engine.is_editor_hint(): return
 
 	if is_running: #and !navigation_agent.is_navigation_finished():
+		
+		me.global_position = character_body.global_position
+		
 		var next_path_position := navigation_agent.get_next_path_position()
 		var dir := me.global_position.direction_to(next_path_position)
 		speed = me.stats_perm.get_movement_speed() * Data.HW2GD
@@ -37,16 +41,20 @@ func _on_navigation_finished() -> void:
 func try_enter() -> void:
 	if current_state.can_cancel() && can_enter(): enter()
 
-var is_running := false
+var is_running: bool = false
 func enter() -> void:
 	switch_to_self()
 	is_running = true
 	animation.switch_loop(&"Run")
 	animation.switch_to_loop()
+	character_body.top_level = true
+	character_body.global_position = me.global_position
 	navigation_agent.target_position = target_position * Data.HW2GD
 	navigation_agent.avoidance_priority = 0
 
 func on_exit() -> void:
 	is_running = false
+	character_body.top_level = false
+	character_body.global_position = me.global_position
 	navigation_agent.set_velocity(Vector3.ZERO)
 	navigation_agent.avoidance_priority = 1

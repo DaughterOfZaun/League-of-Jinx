@@ -1,6 +1,7 @@
 class_name Level extends LuaScript
 
 func _ready() -> void:
+	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	on_level_init()
 	on_post_level_load()
@@ -30,7 +31,7 @@ var champions: Array[Champion] = []
 func register_champion(champion: Champion) -> void:
 	champions.append(champion)
 
-@onready var root := get_tree().current_scene
+@onready var root: Node = get_tree().current_scene
 @onready var constants: Constants = root.get_node("%Constants")
 func init_ambient(
 	resource_name: String,

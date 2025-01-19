@@ -2,7 +2,7 @@ class_name SubViewportEx extends SubViewport
 
 const GD_3D_to_2D := (70. / 50.) * (512. / 294.)
 
-@onready var camera := get_camera_2d()
+@onready var camera: Camera2D = get_camera_2d()
 
 func vec2(pos: Variant) -> Vector2:
 	if pos is Vector2: return pos

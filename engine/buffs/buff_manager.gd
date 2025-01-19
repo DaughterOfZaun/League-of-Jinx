@@ -4,8 +4,9 @@ signal slot_created(slot: BuffSlot, buff: Buff)
 
 #TODO: Remove empty slots
 
-@onready var me := get_parent() as Unit
+@onready var me: Unit = get_parent()
 func _ready() -> void:
+	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	me.buffs = self
 
@@ -190,6 +191,3 @@ func get_remaining_duration(script: GDScript) -> float:
 	var slot := get_slot(script, null)
 	if slot != null: return slot.duration_remaining
 	return 0.0
-
-func _validate_property(property: Dictionary) -> void:
-	property.usage |= PROPERTY_USAGE_STORAGE

@@ -1,8 +1,9 @@
 class_name Radius extends Area3D
 
-@onready var char := get_parent() as Unit
+@onready var char: Unit = get_parent()
 
 func _ready() -> void:
+	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 
 	monitoring = false
@@ -24,7 +25,7 @@ func _ready() -> void:
 	if input_ray_pickable and collision_layer == 0:
 		collision_layer = 1
 
-@onready var root := get_tree().current_scene
+@onready var root: Node = get_tree().current_scene
 @onready var input_manager: InputManager = root.get_node("%InputManager")
 func _input_event(camera: Camera3D, unknown_event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if unknown_event is InputEventMouseButton:
@@ -34,6 +35,3 @@ func _input_event(camera: Camera3D, unknown_event: InputEvent, event_position: V
 
 func _mouse_enter() -> void:
 	input_manager.on_unit_hovered(char)
-
-func _validate_property(property: Dictionary) -> void:
-	property.usage |= PROPERTY_USAGE_STORAGE

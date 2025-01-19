@@ -1,3 +1,3 @@
 class_name AhriFoxFireMissileTagTwoBuff extends Buff
 
-var data := preload('AhriFoxFireMissileTagTwoBuff.tres')
+var data: BuffData = preload('AhriFoxFireMissileTagTwoBuff.tres')

@@ -10,7 +10,7 @@ class_name UITitanBar extends Control
 func bind_to(champion: Champion) -> void:
 	self.champion = champion
 
-var time := 0.0
+var time: float = 0.0
 func _physics_process(delta: float) -> void:
 	time = float(Engine.get_physics_frames()) / Engine.physics_ticks_per_second
 	#time += delta

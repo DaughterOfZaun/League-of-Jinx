@@ -25,8 +25,8 @@ static func should_sync_stats(obj: Node) -> bool:
 static func should_update_actions(obj: Node) -> bool:
 	return frame == 3
 
-var first_frame := true
-var generated_frames := false
+var first_frame: bool = true
+var generated_frames: bool = false
 func _physics_process(delta: float) -> void:
 	#frame = (Engine.get_physics_frames() - 1) % 15
 	frame = (frame + 1) % 15
@@ -43,15 +43,15 @@ func _physics_process(delta: float) -> void:
 	
 	#pack_scene()
 
-var pp := &"_physics_process"
-var args := [ 1.0 / Engine.physics_ticks_per_second ]
-@onready var root := get_tree().current_scene.find_child("Ahri", false, false)
+var pp: StringName = &"_physics_process"
+var args: Array[Variant] = [ 1.0 / Engine.physics_ticks_per_second ]
+@onready var root: Node = get_tree().current_scene.find_child("Ahri", false, false)
 func generate_frames() -> void:
 	for i in range(60):
 		#root.propagate_notification(NOTIFICATION_INTERNAL_PHYSICS_PROCESS)
 		#root.propagate_notification(NOTIFICATION_PHYSICS_PROCESS)
 		root.propagate_call(pp, args)
 
-var packed_scene := PackedScene.new()
+var packed_scene: PackedScene = PackedScene.new()
 func pack_scene() -> void:
 	packed_scene.pack(root)

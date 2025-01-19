@@ -1,11 +1,11 @@
 class_name InputManager extends Node3D
 
 @export var main_hero: Champion
-@onready var heroes := get_parent().find_children("*", "Champion", false)
-@onready var nav_map_rid := get_world_3d().navigation_map
+#@onready var heroes: Array[Node] = get_parent().find_children("*", "Champion", false)
+@onready var nav_map_rid: RID = get_world_3d().navigation_map
 @onready var camera: Camera3D = %Camera
-@onready var viewport := get_viewport()
-@onready var window := get_tree().get_root()
+@onready var viewport: Viewport = get_viewport()
+@onready var window: Window = get_tree().get_root()
 
 enum CursorShape {
 	DEFAULT, HOVER_ENEMY, HOVER_ENEMY_DISABLED, HOVER_FRIENDLY, HOVER_SHOP

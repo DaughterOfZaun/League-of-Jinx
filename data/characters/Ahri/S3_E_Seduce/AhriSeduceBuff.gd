@@ -1,6 +1,6 @@
 class_name AhriSeduceBuff extends Buff
 
-var data := preload('AhriSeduceBuff.tres')
+var data: BuffData = preload('AhriSeduceBuff.tres')
 
 var slow_percent: float
 var particle1: Particle

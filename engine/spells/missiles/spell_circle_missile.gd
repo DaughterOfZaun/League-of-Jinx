@@ -5,9 +5,11 @@ static func create(spell: Spell, target: Unit, target_position: Vector3) -> Spel
 	m.init(spell, target, target_position)
 	return m
 
-var angle := 0.0
-var radius := 0.0
+var angle: float = 0.0
+var radius: float = 0.0
 func _ready() -> void:
+	if SecondTest.is_clonning: return
+	
 	super._ready()
 
 	var cast_position := spell.cast_position

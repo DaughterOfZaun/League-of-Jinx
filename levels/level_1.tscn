@@ -1,6 +1,7 @@
 [gd_scene load_steps=49 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" uid="uid://csrtiit658one" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
+[ext_resource type="Script" uid="uid://b83u6lwbxlgff" path="res://engine/game/ai/thrid_test.gd" id="1_5t0se"]
 [ext_resource type="Script" uid="uid://b7nriuublxfpo" path="res://engine/game/balancer.gd" id="1_xapae"]
 [ext_resource type="CompressedTexture3D" uid="uid://cw7h14f61vo0x" path="res://engine/game/level/LUT.webp" id="2_tb6ku"]
 [ext_resource type="Script" uid="uid://bbmqg3c1pc7h3" path="res://engine/game/ui/minimap/subviewport.gd" id="3_06ecp"]
@@ -25,7 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://c03dkhsata3gj" path="res://data/characters/Nexus/Order/unit.tscn" id="36_yik85"]
 [ext_resource type="PackedScene" uid="uid://cbfh3ax275136" path="res://data/characters/Dummy/unit.tscn" id="37_5t0se"]
 [ext_resource type="PackedScene" uid="uid://dwtgxxdqtsfyo" path="res://data/characters/Nexus/Chaos/unit.tscn" id="37_5vbbt"]
-[ext_resource type="Script" uid="uid://c23fix57ri8nb" path="res://engine/game/ai/second_test.gd" id="37_tqj1w"]
 [ext_resource type="PackedScene" uid="uid://btacpjtg4pcad" path="res://data/characters/Turrets/Back/Chaos/unit.tscn" id="38_bto7k"]
 [ext_resource type="PackedScene" uid="uid://biov8lq32ueqn" path="res://data/characters/Turrets/Middle/Order/unit.tscn" id="38_mmvut"]
 [ext_resource type="Script" uid="uid://idwdrm8s2y1f" path="res://engine/game/ground.gd" id="38_tqj1w"]
@@ -83,6 +83,9 @@ tonemap_mode = 2
 viewport_path = NodePath("Camera3/Camera/SubViewportContainer/SubViewport")
 
 [node name="Node3D" type="Node3D"]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("1_5t0se")
 
 [node name="Balancer" type="Node" parent="."]
 script = ExtResource("1_xapae")
@@ -490,8 +493,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.085, 2.90684, -114.142)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("ViewportTexture_r0nt2")
 centered = false
-
-[node name="Node" type="Node" parent="." node_paths=PackedStringArray("player", "enemy")]
-script = ExtResource("37_tqj1w")
-player = NodePath("../Ahri")
-enemy = NodePath("../AhriBot")

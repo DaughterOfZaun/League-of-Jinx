@@ -51,7 +51,7 @@ func get_lost_target_if_visible() -> Unit:
 func clear_target_pos_in_pos() -> void: pass #pos = Vector3.INF
 func assign_target_pos_in_pos(position: Vector3) -> void: pass #pos = target.position_3d
 
-var state := Enums.AIState.IDLE
+var state: Enums.AIState = Enums.AIState.IDLE
 func get_state() -> Enums.AIState: return state
 func net_set_state(to: Enums.AIState) -> void: set_state(to)
 func set_state(to: Enums.AIState) -> void:
@@ -70,11 +70,11 @@ func set_state_and_move_internal(state: Enums.AIState, target: Unit, target_posi
 	set_target_and_target_position(target, target_position)
 	run_state.try_enter()
 
-@onready var run_state := find_child("AIRunState", false, false) as AIRunState
-@onready var idle_state := find_child("AIIdleState", false, false) as AIIdleState
-@onready var cast_state := find_child("AICastState", false, false) as AICastState
-@onready var attack_state := find_child("AIAttackState", false, false) as AIAttackState
-@onready var move_state := find_child("AIMoveState", false, false) as AIMoveState
+@onready var run_state: AIRunState = find_child("AIRunState", false, false)
+@onready var idle_state: AIIdleState = find_child("AIIdleState", false, false)
+@onready var cast_state: AICastState = find_child("AICastState", false, false)
+@onready var attack_state: AIAttackState = find_child("AIAttackState", false, false)
+@onready var move_state: AIMoveState = find_child("AIMoveState", false, false)
 
 var deffered_state: AIState = idle_state
 @onready var current_state: AIState = idle_state
@@ -95,11 +95,12 @@ func switch_to_deffered() -> void:
 		idle_state.enter()
 
 func _ready() -> void:
+	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	me.ai = self
 	on_init()
 
-var last_order := Enums.OrderType.NONE
+var last_order: Enums.OrderType = Enums.OrderType.NONE
 func order(order_type: Enums.OrderType, target_position: Vector3, target_unit: Unit) -> void:
 	if order_type != last_order || target_unit != self.target || target_position != self.target_position:
 		var target_unit_name := str(target_unit.name) if target_unit else "null"

@@ -1,7 +1,7 @@
 class_name CustomLight2D extends Node
 
-@export var enabled := true
-@export var range := 1000.0
+@export var enabled: bool = true
+@export var range: float = 1000.0
 
 var host: Unit:
 	get: return get_parent()

@@ -1,12 +1,12 @@
 class_name Healthbar extends Control
 
-@export var height := 2.5
+@export var height: float = 2.5
 @export var level_label: Label
 @export var health_range: Range
 @export var mana_range: Range
 @export var name_label: Label
 
-@onready var root := get_tree().current_scene
+@onready var root: Node = get_tree().current_scene
 @onready var camera: Camera3D = root.get_node("%Camera")
 @onready var unit: Unit = get_parent()
 

@@ -16,15 +16,16 @@ func reset_data_b() -> void:
 	temp_b.resize(STATS_COUNT)
 
 @onready var me: Unit = get_parent()
-@onready var root := get_tree().current_scene
+@onready var root: Node = get_tree().current_scene
 @onready var constants: Constants = root.get_node("%Constants")
 func _ready() -> void:
+	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	health_current = get_health()
 	mana_current = get_mana()
 	me.stats = self
 
-var time_since_last_regen := 0.0
+var time_since_last_regen: float = 0.0
 func _physics_process(delta: float) -> void:
 	time_since_last_regen += delta
 
@@ -38,7 +39,7 @@ func _physics_process(delta: float) -> void:
 		mana_current = clampf(mana_current + get_mana_regen() * time_since_last_regen, 0, get_mana())
 		time_since_last_regen = 0
 
-@export var level := 1
+@export var level: int = 1
 func growth(stat_per_level: float) -> float:
 	return stat_per_level * (level - 1)
 
@@ -414,6 +415,3 @@ enum {
 	HARDNESS_PERCENT = 45,
 	STATS_COUNT = 46,
 }
-
-func _validate_property(property: Dictionary) -> void:
-	property.usage |= PROPERTY_USAGE_STORAGE
