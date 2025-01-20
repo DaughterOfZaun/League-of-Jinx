@@ -4,20 +4,29 @@ func _init() -> void:
 	var gds: Array[GDScript] = []
 	#var files := get_all_files("res://", "gd")
 	var files: Array[String] = [
-		"res://engine/unit/unit.gd",
+		#"res://engine/unit/unit.gd",
 		#"res://engine/unit/champion.gd",
 	]
 	for path in files:
-		var gd: GDScript = ResourceLoader.load(path)
-		gds.append(gd)
-	for gd in gds:
-		script_path = gd.resource_path
+		if path == "res:///engine/game/ai/thrid_test.gd":
+			continue
+		script_path = path
 		print("Patching %s." % script_path)
-		gd.source_code = preprocess(gd.source_code)
-	for gd in gds:
-		var error := gd.reload()
+		
+		#var gd := GDScript.new()
+		#var fa := FileAccess.open(script_path, FileAccess.READ)
+		#var source_code := fa.get_as_text(); fa.close()
+		var gd: GDScript = ResourceLoader.load(script_path)
+		var source_code := gd.source_code
+		
+		source_code = preprocess(source_code)
+		gd.source_code = source_code
+		
+		var error := gd.reload(true)
 		if error != Error.OK:
 			print(gd.resource_path, ': ', error_string(error))
+		
+		#gd.take_over_path(path)
 
 const save_state_method_name = &"save_state"
 @onready var root: Node = get_tree().current_scene #.find_child("Ahri", false, false)
@@ -66,7 +75,16 @@ func preprocess(code: String) -> String:
 		init_code += "static func _static_init($1) -> void:\n"
 		init_code += "\t_static_vars.resize(" + str(static_var_i) + ")\n"
 		for i in range(static_var_i):
-			init_code += "\t_static_vars[" + str(i) + "] = " + static_values[i].replace("$", "$$") + "\n"
+			var initial_value := static_values[i].replace("$", "$$")
+			# var split := initial_value.rsplit(" as ", false, 2)
+			# if split.size() == 2:
+			# 	var value := split[0]
+			# 	var type := split[1]
+			# 	if type.begins_with("Array") || type.begins_with("Dictionary"):
+			# 		var key := "tmp_" + str(i)
+			# 		init_code += "\tvar " + key + ": " + type + " = " + split[0] + "\n"
+			# 		initial_value = key
+			init_code += "\t_static_vars[" + str(i) + "] = " + initial_value + "\n"
 		code = static_init_or_eof_regex.sub(code, init_code, false)
 
 	var_i = initial_values.size()
@@ -76,7 +94,16 @@ func preprocess(code: String) -> String:
 		init_code += "func _init($1) -> void:\n"
 		init_code += "\t_vars.resize(" + str(var_i) + ")\n"
 		for i in range(var_i):
-			init_code += "\t_vars[" + str(i) + "] = " + initial_values[i].replace("$", "$$") + "\n"
+			var initial_value := initial_values[i].replace("$", "$$")
+			# var split := initial_value.rsplit(" as ", false, 2)
+			# if split.size() == 2:
+			# 	var value := split[0]
+			# 	var type := split[1]
+			# 	if type.begins_with("Array") || type.begins_with("Dictionary"):
+			# 		var key := "tmp_" + str(i)
+			# 		init_code += "\tvar " + key + ": " + type + " = " + split[0] + "\n"
+			# 		initial_value = key
+			init_code += "\t_vars[" + str(i) + "] = " + initial_value + "\n"
 		code = init_or_eof_regex.sub(code, init_code, false)
 
 	if !onready_values.is_empty():
@@ -88,8 +115,8 @@ func preprocess(code: String) -> String:
 
 	code = str_replace(code, replaced_string_regex, restore_str)
 	
-	if code.begins_with("class_name Unit extends Node3DExt"):
-		breakpoint
+	#if code.begins_with("class_name Hero"):
+	#	breakpoint
 	
 	return code
 
@@ -114,7 +141,7 @@ func preprocess_var(match: RegExMatch) -> String:
 	assert(var_type, script_path + ':' + var_name)
 	#if !var_type: var_type = "Variant"
 	
-	if var_mod == "onready":
+	if var_mod == "onready" && var_value != "":
 		onready_values[var_i] = var_value
 		var_value = ""
 
@@ -123,7 +150,8 @@ func preprocess_var(match: RegExMatch) -> String:
 	elif var_type: initial_value = get_initial_value(var_type)
 	
 	if var_type.begins_with("Array") || var_type.begins_with("Dictionary"):
-		initial_value = initial_value + " as " + var_type
+		if initial_value != "null":
+			initial_value = initial_value + " as " + var_type
 	
 	if var_mod == "static":
 		static_values.append(initial_value)
