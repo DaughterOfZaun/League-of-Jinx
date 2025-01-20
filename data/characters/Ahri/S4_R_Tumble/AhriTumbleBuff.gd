@@ -1,6 +1,6 @@
 class_name AhriTumbleBuff extends Buff
 
-var data: BuffData = preload('AhriTumbleBuff.tres')
+const data: BuffData = preload('AhriTumbleBuff.tres')
 
 const effect_0: Array[float] = [ 90, 80, 70, 0, 0 ]
 func on_deactivate(expired: bool) -> void:

@@ -1,8 +1,8 @@
 class_name Data
 extends Node
 
-static var GD2HW := 70.
-static var HW2GD := 1. / GD2HW #0.014285714
+static var GD2HW: float = 70.
+static var HW2GD: float = 1. / GD2HW #0.014285714
 
 func string_parse(from: String) -> String:
 	return from

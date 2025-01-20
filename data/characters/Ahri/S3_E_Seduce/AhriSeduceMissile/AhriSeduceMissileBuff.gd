@@ -1,6 +1,6 @@
 class_name AhriSeduceMissileBuff extends Buff
 
-var data: BuffData = preload('AhriSeduceMissileBuff.tres')
+const data: BuffData = preload('AhriSeduceMissileBuff.tres')
 
 func on_activate() -> void:
 	host.status.can_attack = false

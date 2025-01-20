@@ -1,6 +1,6 @@
 class_name AhriPassiveParticleBuff extends Buff
 
-var data: BuffData = preload('AhriPassiveParticleBuff.tres')
+const data: BuffData = preload('AhriPassiveParticleBuff.tres')
 
 var particle_alive: bool
 var particle1: Particle

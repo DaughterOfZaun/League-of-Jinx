@@ -9,7 +9,7 @@ func _ready() -> void:
 var first_frame: bool = true
 var player_clone: Champion
 var enemy_clone: Champion
-static var is_clonning := false
+static var is_clonning: bool = false
 func _physics_process(delta: float) -> void:
 	if first_frame:
 		first_frame = false

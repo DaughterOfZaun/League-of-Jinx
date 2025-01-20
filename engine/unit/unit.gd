@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 #region Signals
 static var signals: Array[StringName] = []
 static var on_signals: Array[StringName] = []
-static var signals_init_completed := false
+static var signals_init_completed: bool = false
 func _init() -> void:
 	if signals_init_completed: return
 	signals_init_completed = true
@@ -394,7 +394,7 @@ func stop_channeling(condition: Enums.ChannelingStopCondition, souce: Enums.Chan
 var is_ready: bool = false
 static var fow_subviewport: SubViewportEx
 static var fow_subviewport_texture: ViewportTexture
-static var fow_init_completed := false
+static var fow_init_completed: bool = false
 func _ready() -> void:
 	if SecondTest.is_clonning: return
 	
@@ -410,7 +410,7 @@ func get_visible_in_fow() -> bool:
 
 static var fow_image: Image = null
 static var fow_image_frame: int
-static var current_frame := 0
+static var current_frame: int = 0
 func update_fow_image_if_needed() -> void:
 	current_frame += 1
 	#var current_frame := Engine.get_physics_frames()

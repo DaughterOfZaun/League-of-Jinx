@@ -15,7 +15,7 @@ static func register(obj: Node) -> void:
 static func unregister(obj: Node) -> void:
 	pass
 
-static var frame := -1
+static var frame: int = -1
 static func should_reset_stats(obj: Node) -> bool:
 	return frame == 0
 static func should_update_stats(obj: Node) -> bool:

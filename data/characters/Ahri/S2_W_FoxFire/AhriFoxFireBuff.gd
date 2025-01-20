@@ -1,6 +1,6 @@
 class_name AhriFoxFireBuff extends Buff
 
-var data: BuffData = preload('AhriFoxFireBuff.tres')
+const data: BuffData = preload('AhriFoxFireBuff.tres')
 
 func on_activate() -> void:
 	host.spells.w.set_cooldown(0, false)

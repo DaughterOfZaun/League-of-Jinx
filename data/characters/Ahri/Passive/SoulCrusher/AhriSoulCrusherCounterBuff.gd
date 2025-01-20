@@ -1,6 +1,6 @@
 class_name AhriSoulCrusherCounterBuff extends Buff
 
-var data: BuffData = preload('AhriSoulCrusherCounterBuff.tres')
+const data: BuffData = preload('AhriSoulCrusherCounterBuff.tres')
 
 func on_activate() -> void:
 	if host.buffs.count(AhriSoulCrusherCounterBuff, host) >= 9:

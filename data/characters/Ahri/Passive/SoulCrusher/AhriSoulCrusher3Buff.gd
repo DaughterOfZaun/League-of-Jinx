@@ -1,6 +1,6 @@
 class_name AhriSoulCrusher3Buff extends Buff
 
-var data: BuffData = preload('AhriSoulCrusher3Buff.tres')
+const data: BuffData = preload('AhriSoulCrusher3Buff.tres')
 
 var last_time_executed: TimeTracker
 func on_deactivate(expired: bool) -> void:

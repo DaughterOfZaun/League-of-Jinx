@@ -8,9 +8,9 @@ static func create(spell: Spell, target: Unit, target_position: Vector3) -> Spel
 var angle: float = 0.0
 var radius: float = 0.0
 func _ready() -> void:
-	if SecondTest.is_clonning: return
-	
 	super._ready()
+	
+	if SecondTest.is_clonning: return
 
 	var cast_position := spell.cast_position
 	var dir := cast_position - target.position_3d
