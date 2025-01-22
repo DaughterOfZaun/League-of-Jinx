@@ -401,7 +401,7 @@ func replace_materials_at_runtime() -> void:
 			code += "#include \"res://engine/game/level/level.gdshaderinc\"" + "\n"
 
 			var hash := code.sha256_text().substr(0, 12)
-			var res_path := "res://engine/game/cache/%s.gdshader" % hash
+			var res_path := "res://engine/game/cache/shaders/%s.gdshader" % hash
 			if !FileAccess.file_exists(res_path):
 				var fa := FileAccess.open(res_path, FileAccess.ModeFlags.WRITE)
 				fa.store_string(code)

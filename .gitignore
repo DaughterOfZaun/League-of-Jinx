@@ -2,7 +2,10 @@
 .godot/
 /android/
 
+# Text editor files
 .vscode/
+
+# Original and reference files
 *.skn
 *.skl
 *.tga
@@ -22,6 +25,12 @@
 *.glsl
 *.glsl.import
 
+# JS/TS files
 node_modules/
 bun.lockb
+
+# TODO and log files
 *.txt
+
+# Game cache files
+engine/game/cache/

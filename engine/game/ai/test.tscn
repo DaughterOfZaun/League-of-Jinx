@@ -1,6 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhmnu8aiq5tpf"]
-
-[ext_resource type="Script" uid="uid://b83u6lwbxlgff" path="res://engine/game/ai/thrid_test.gd" id="1_n6phd"]
+[gd_scene format=3 uid="uid://bhmnu8aiq5tpf"]
 
 [node name="Node" type="Node"]
-script = ExtResource("1_n6phd")

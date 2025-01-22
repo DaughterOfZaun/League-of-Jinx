@@ -1,37 +1,93 @@
-class_name ThridTest extends Node
+@tool class_name Preprocessor extends EditorPlugin
 
-func _init() -> void:
-	var gds: Array[GDScript] = []
-	#var files := get_all_files("res://", "gd")
-	var files: Array[String] = [
-		#"res://engine/unit/unit.gd",
-		#"res://engine/unit/champion.gd",
-	]
-	for path in files:
-		if path == "res:///engine/game/ai/thrid_test.gd":
-			continue
-		script_path = path
-		print("Patching %s." % script_path)
-		
-		#var gd := GDScript.new()
-		#var fa := FileAccess.open(script_path, FileAccess.READ)
-		#var source_code := fa.get_as_text(); fa.close()
-		var gd: GDScript = ResourceLoader.load(script_path)
-		var source_code := gd.source_code
-		
-		source_code = preprocess(source_code)
-		gd.source_code = source_code
-		
-		var error := gd.reload(true)
-		if error != Error.OK:
-			print(gd.resource_path, ': ', error_string(error))
-		
-		#gd.take_over_path(path)
+func _build() -> bool:
+	
+	var in_files := get_all_files("res://", "gd")
+	var size := in_files.size()
+	
+	print('reading...')
+	var codes: PackedStringArray = []; codes.resize(size)
+	for i in size:
+		var fa := FileAccess.open(in_files[i], FileAccess.READ)
+		codes[i] = fa.get_as_text()
+		fa.close()
+	var codes_orig := codes.duplicate()
 
-const save_state_method_name = &"save_state"
-@onready var root: Node = get_tree().current_scene #.find_child("Ahri", false, false)
-func _physics_process(delta: float) -> void:
-	root.propagate_call(save_state_method_name)
+	print('preprocessing...')
+	for i in size:
+		codes[i] = preprocess(codes[i])
+	var codes_preprocessed := codes.duplicate()
+	
+	print('(1/3) processing...')
+	var changed: PackedByteArray = []; changed.resize(size)
+	for i in size:
+		script_path = in_files[i]
+		codes[i] = process_0(codes[i])
+		#changed[i] = codes[i] != codes_orig[i]
+	print('(2/3) processing...')
+	for i in size:
+		codes[i] = process_1(codes[i], changed[i])
+		#changed[i] = codes[i] != codes_orig[i]
+	print('(3/3) processing...')
+	for i in size:
+		codes[i] = process_2(codes[i], changed[i])
+		#changed[i] = codes[i] != codes_orig[i]
+
+	print('postprocessing...')
+	for i in size:
+		#if !changed[i]: continue
+		codes[i] = postprocess(codes[i])
+
+	print('writing...')
+	var out_files: PackedStringArray = []; out_files.resize(size)
+	for i in size:
+		#if !changed[i]: continue
+		out_files[i] = in_files[i].replace("res://", "res://engine/game/cache/scripts")
+		DirAccess.make_dir_recursive_absolute(out_files[i].substr(0, out_files[i].rfind("/")))
+		var fa := FileAccess.open(out_files[i], FileAccess.WRITE)
+		if fa == null:
+			push_error(out_files[i] + ": " + error_string(FileAccess.get_open_error()))
+			return false
+		fa.store_string(codes[i])
+		fa.close()
+
+	return false
+		
+	#print("Patching %s." % script_path)
+
+	#for i in size:
+	#	var gd: GDScript = ResourceLoader.load(out_files[i])
+	#	gd.source_code = codes[i]
+	#	var error := gd.reload()
+	#	if error != Error.OK:
+	#		print(gd.resource_path, ': ', error_string(error))
+	#	gd.take_over_path(in_files[i])
+
+var strings: Array[String]
+var string_or_comment_regex: RegEx = RegEx.create_from_string(r"('|\"|\"\"\")(?:\\.|.|\n)*?\1|\n?[\t ]*#.*")
+var linebreak_regex: RegEx = RegEx.create_from_string(r"\\\n[\t ]*")
+var bracket_regex: RegEx = RegEx.create_from_string(r"([(\[])\n[\t ]*|[\t ]*\n([\])])")
+var comma_regex: RegEx = RegEx.create_from_string(r"(,)\n[\t ]*")
+func preprocess(code: String) -> String:
+	code = str_replace(code, string_or_comment_regex, replace_str)
+	code = linebreak_regex.sub(code, " ", true)
+	code = bracket_regex.sub(code, "$1$2", true)
+	code = comma_regex.sub(code, "$1 ", true)
+	return code
+func replace_str(match: RegExMatch) -> String:
+	if !match.strings[1]: return ''
+	var key := "STRING_" + str(strings.size())
+	var value := match.strings[0]
+	strings.append(value)
+	return key
+
+var replaced_string_regex: RegEx = RegEx.create_from_string(r"STRING_(\d+)")
+func postprocess(code: String) -> String:
+	code = str_replace(code, replaced_string_regex, restore_str)
+	return code
+func restore_str(match: RegExMatch) -> String:
+	var key := int(match.strings[1])
+	return strings[key]
 
 var var_i: int
 var static_var_i: int
@@ -39,33 +95,20 @@ var script_path: String
 var initial_values: Array[String]
 var onready_values: Dictionary[int, String]
 var static_values: Array[String]
-var strings: Array[String]
-
-var string_or_comment_regex: RegEx = RegEx.create_from_string(r"('|\"|\"\"\")(?:\\.|.|\n)*?\1|\n?[\t ]*#.*")
-var linebreak_regex: RegEx = RegEx.create_from_string(r"\\\n[\t ]*")
-var bracket_regex: RegEx = RegEx.create_from_string(r"([(\[])\n[\t ]*|[\t ]*\n([\])])")
-var comma_regex: RegEx = RegEx.create_from_string(r"(,)\n[\t ]*")
 var var_regex: RegEx = RegEx.create_from_string(r"(?<=^|\n)(?:@?(onready|export|static) )?var (\w+)(?:: ([\w.\[,\]]+))?(?: :?= (.*))?(?<!:)(?=\n|$)")
 var init_or_eof_regex_src: String = r"(?<=^|\n)func _init\((.*?)\) -> void:(?=\n)|$"
 var init_or_eof_regex: RegEx = RegEx.create_from_string(init_or_eof_regex_src)
 var ready_or_eof_regex: RegEx = RegEx.create_from_string(init_or_eof_regex_src.replace("_init", "_ready"))
 var static_init_or_eof_regex: RegEx = RegEx.create_from_string(init_or_eof_regex_src.replace("func _init", "static func _static_init"))
-var replaced_string_regex: RegEx = RegEx.create_from_string(r"STRING_(\d+)")
-
-func preprocess(code: String) -> String:
+func process_0(code: String) -> String:
 	
 	var_i = 0
 	static_var_i = 0
 	initial_values = []
 	onready_values = {}
 	static_values = []
-	strings = []
 
-	code = str_replace(code, string_or_comment_regex, replace_str)
-	code = linebreak_regex.sub(code, " ", true)
-	code = bracket_regex.sub(code, "$1$2", true)
-	code = comma_regex.sub(code, "$1 ", true)
-	code = str_replace(code, var_regex, preprocess_var)
+	code = str_replace(code, var_regex, process_var)
 	#if !code.ends_with("\n"): code += "\n"
 
 	static_var_i = static_values.size()
@@ -76,14 +119,6 @@ func preprocess(code: String) -> String:
 		init_code += "\t_static_vars.resize(" + str(static_var_i) + ")\n"
 		for i in range(static_var_i):
 			var initial_value := static_values[i].replace("$", "$$")
-			# var split := initial_value.rsplit(" as ", false, 2)
-			# if split.size() == 2:
-			# 	var value := split[0]
-			# 	var type := split[1]
-			# 	if type.begins_with("Array") || type.begins_with("Dictionary"):
-			# 		var key := "tmp_" + str(i)
-			# 		init_code += "\tvar " + key + ": " + type + " = " + split[0] + "\n"
-			# 		initial_value = key
 			init_code += "\t_static_vars[" + str(i) + "] = " + initial_value + "\n"
 		code = static_init_or_eof_regex.sub(code, init_code, false)
 
@@ -95,14 +130,6 @@ func preprocess(code: String) -> String:
 		init_code += "\t_vars.resize(" + str(var_i) + ")\n"
 		for i in range(var_i):
 			var initial_value := initial_values[i].replace("$", "$$")
-			# var split := initial_value.rsplit(" as ", false, 2)
-			# if split.size() == 2:
-			# 	var value := split[0]
-			# 	var type := split[1]
-			# 	if type.begins_with("Array") || type.begins_with("Dictionary"):
-			# 		var key := "tmp_" + str(i)
-			# 		init_code += "\tvar " + key + ": " + type + " = " + split[0] + "\n"
-			# 		initial_value = key
 			init_code += "\t_vars[" + str(i) + "] = " + initial_value + "\n"
 		code = init_or_eof_regex.sub(code, init_code, false)
 
@@ -113,25 +140,12 @@ func preprocess(code: String) -> String:
 			init_code += "\t_vars[" + str(i) + "] = " + onready_values[i].replace("$", "$$") + "\n"
 		code = ready_or_eof_regex.sub(code, init_code, false)
 
-	code = str_replace(code, replaced_string_regex, restore_str)
-	
 	#if code.begins_with("class_name Unit"):
 	#	breakpoint
 	
 	return code
 
-func replace_str(match: RegExMatch) -> String:
-	if !match.strings[1]: return ''
-	var key := "STRING_" + str(strings.size())
-	var value := match.strings[0]
-	strings.append(value)
-	return key
-
-func restore_str(match: RegExMatch) -> String:
-	var key := int(match.strings[1])
-	return strings[key]
-
-func preprocess_var(match: RegExMatch) -> String:
+func process_var(match: RegExMatch) -> String:
 	var var_decl := match.strings[0]
 	var var_mod := match.strings[1]
 	var var_name := match.strings[2]
@@ -185,6 +199,29 @@ func get_initial_value(var_type: String) -> String:
 	elif var_type == "float": initial_value = "0.0"
 	return initial_value
 
+var rgxs: Array[RegEx] = []
+var new_cls_names: Array[String] = []
+var class_name_regex: RegEx = RegEx.create_from_string(r"^(?:@(tool)[\n ])?class_name (\w+)")
+func process_1(code: String, changed: bool) -> String:
+	rgxs.clear()
+	new_cls_names.clear()
+	var match := class_name_regex.search(code)
+	if match != null:
+		var cls_decl := match.strings[0]
+		var cls_mod := match.strings[1]
+		var cls_name := match.strings[2]
+		var rgx := RegEx.create_from_string(r"\b" + cls_name + r"\b")
+		var new_cls_name := cls_name + "Preprocessed"
+		new_cls_names.append(new_cls_name)
+		rgxs.append(rgx)
+	return code
+func process_2(code: String, changed: bool) -> String:
+	for i in rgxs.size():
+		var rgx := rgxs[i]
+		var new_cls_name := new_cls_names[i]
+		code = rgx.sub(code, new_cls_name, true)
+	return code
+
 # https://gamedev.stackexchange.com/a/206584
 func str_replace(target: String, regex: RegEx, cb: Callable) -> String:
 	var out := ""
@@ -198,7 +235,7 @@ func str_replace(target: String, regex: RegEx, cb: Callable) -> String:
 	return out
 
 # https://gist.github.com/hiulit/772b8784436898fd7f942750ad99e33e?permalink_comment_id=5196503#gistcomment-5196503
-func get_all_files(path: String, file_ext := "", files : Array[String] = []) -> Array[String]:
+func get_all_files(path: String, file_ext := "", files : PackedStringArray = []) -> PackedStringArray:
 	var dir := DirAccess.open(path)
 	#if file_ext.begins_with("."):
 	#	file_ext = file_ext.substr(1, file_ext.length() - 1)
