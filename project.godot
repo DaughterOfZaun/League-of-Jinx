@@ -50,6 +50,10 @@ movie_writer/movie_file="movie.avi"
 movie_writer/disable_vsync=true
 movie_writer/fps=30
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/preprocessor/plugin.cfg")
+
 [gui]
 
 theme/default_font_antialiasing=2

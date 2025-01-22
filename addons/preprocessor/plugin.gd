@@ -115,7 +115,7 @@ func preprocess(code: String) -> String:
 
 	code = str_replace(code, replaced_string_regex, restore_str)
 	
-	#if code.begins_with("class_name Hero"):
+	#if code.begins_with("class_name Unit"):
 	#	breakpoint
 	
 	return code
