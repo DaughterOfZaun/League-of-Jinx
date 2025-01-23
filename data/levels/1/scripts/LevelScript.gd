@@ -479,7 +479,8 @@ var disactivated_counter: int = 0
 func handle_destroyed_object(unk_obj: Unit) -> void:
 	if unk_obj is HQ:
 		var obj := unk_obj as HQ
-		preload("res://data/scripts/EndOfGame.gd").new().end_of_game_ceremony(opposite_team(obj.team), obj)
+		#preload("res://data/scripts/EndOfGame.gd").new()
+		EndOfGame.new().end_of_game_ceremony(opposite_team(obj.team), obj)
 
 	elif unk_obj is Dampener:
 		var obj := unk_obj as Dampener
