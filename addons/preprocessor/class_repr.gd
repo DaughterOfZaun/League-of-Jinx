@@ -3,8 +3,8 @@ class_name ClassRepr
 var name: String
 var parent_name: String
 var parent: ClassRepr = null
+var tags: PackedStringArray
 
-var ignore: bool
 var own_vars_count: int
 var own_static_vars_count: int
 func get_parent_vars_count() -> int:

@@ -31,7 +31,8 @@ func process_class(cls: ClassRepr) -> void:
 	
 	var parent_var_i := cls.get_parent_vars_count()
 	var parent_static_var_i := cls.get_parent_static_vars_count()
-	#if cls.name == "Unit":
+	
+	if cls.in_path.begins_with("res://data/") || cls.tags.has("rollback"):\
 	code = Utils.str_replace(code, var_regex, func process_var(match: RegExMatch) -> String:
 		var var_decl := match.strings[0]
 		var var_mod := match.strings[1]
