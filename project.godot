@@ -23,6 +23,7 @@ Loader="*res://engine/game/loader.gd"
 
 [debug]
 
+gdscript/warnings/exclude_addons=false
 gdscript/warnings/unused_variable=0
 gdscript/warnings/unused_local_constant=0
 gdscript/warnings/unused_private_class_variable=0
@@ -31,11 +32,11 @@ gdscript/warnings/unused_signal=0
 gdscript/warnings/shadowed_variable=0
 gdscript/warnings/shadowed_variable_base_class=0
 gdscript/warnings/shadowed_global_identifier=0
+gdscript/warnings/incompatible_ternary=0
 gdscript/warnings/untyped_declaration=2
 gdscript/warnings/unsafe_property_access=2
 gdscript/warnings/unsafe_method_access=2
 gdscript/warnings/int_as_enum_without_cast=0
-gdscript/warnings/empty_file=0
 
 [display]
 

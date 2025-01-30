@@ -6,7 +6,7 @@ static func vec2(vec3: Vector3) -> Vector2:
 static func get_v3(fa: FileAccess) -> Vector3:
 	return Vector3(fa.get_float(), fa.get_float(), fa.get_float())
 
-static func surface_get_material(mi: MeshInstance3D, idx: int = 0) -> StandardMaterial3D:
+static func surface_get_material(mi: MeshInstance3D) -> StandardMaterial3D:
 	var m := mi.get_surface_override_material(0) as StandardMaterial3D
 	if m == null:
 		m = mi.mesh.surface_get_material(0) as StandardMaterial3D
@@ -52,21 +52,20 @@ func set_visible_if_texture_in(array: Array[Texture2D], value: bool) -> void:
 	for i in range(len(mis)):
 		var mi := mis[i]
 		mi.position.y = 0.01 + i * 0.01
-	return
+	
+	#mis.sort_custom(
+	#	func(mia: MeshInstance3D, mib: MeshInstance3D) -> bool:
+	#		var miam := surface_get_material(mia)
+	#		var mibm := surface_get_material(mib)
+	#		return decals.find(miam.albedo_texture) < decals.find(mibm.albedo_texture)
+	#)
 
-	mis.sort_custom(
-		func(mia: MeshInstance3D, mib: MeshInstance3D) -> bool:
-			var miam := surface_get_material(mia)
-			var mibm := surface_get_material(mib)
-			return decals.find(miam.albedo_texture) < decals.find(mibm.albedo_texture)
-	)
-
-	var levels := sort_to_levels(mis)
-	levels.shuffle()
-	for i in range(len(levels)):
-		var level := levels[i]
-		for mi: MeshInstance3D in level:
-			mi.position.y = 0.001 + i * 0.001
+	#var levels := sort_to_levels(mis)
+	#levels.shuffle()
+	#for i in range(len(levels)):
+	#	var level := levels[i]
+	#	for mi: MeshInstance3D in level:
+	#		mi.position.y = 0.001 + i * 0.001
 
 static func get_aabb(vis: VisualInstance3D) -> AABB:
 	var d := vis as Decal

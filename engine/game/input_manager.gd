@@ -126,8 +126,7 @@ func order_move_to(nearest_reachable_point: Vector3) -> void:
 func _ready() -> void:
 	#if Engine.is_editor_hint(): return
 
-	#Input.use_accumulated_input = false
-	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+	#Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 
 	#ProjectSettings.set_setting("display/mouse_cursor/custom_image", cursor_textures[CursorShape.DEFAULT])
 	var hotspot: Vector2 = ProjectSettings.get_setting("display/mouse_cursor/custom_image_hotspot")
