@@ -1,4 +1,4 @@
-class_name Buffs extends Node
+class_name Buffs extends Node #@rollback
 
 signal slot_created(slot: BuffSlot, buff: Buff)
 

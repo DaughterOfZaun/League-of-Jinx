@@ -1,4 +1,4 @@
-class_name Missile extends Node3DExt
+class_name Missile extends Node3DExt #@rollback
 
 var spell: Spell
 var target: Unit = null

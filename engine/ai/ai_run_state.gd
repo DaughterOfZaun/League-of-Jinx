@@ -1,4 +1,4 @@
-class_name AIRunState extends AIState
+class_name AIRunState extends AIState #@rollback
 
 @onready var character_body: CharacterBody3D = me.find_child("CharacterBody3D", false, false)
 @onready var navigation_agent: NavigationAgent3D = me.find_child("NavigationAgent3D", false, false)

@@ -1,4 +1,4 @@
-class_name Passive extends PassiveData
+class_name Passive extends PassiveData #@rollback
 
 @onready var me: Unit = get_parent()
 var host: Unit:

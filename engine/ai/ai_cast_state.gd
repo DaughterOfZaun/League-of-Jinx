@@ -1,4 +1,4 @@
-class_name AICastState extends AIState
+class_name AICastState extends AIState #@rollback
 
 var current_spell: Spell = null
 

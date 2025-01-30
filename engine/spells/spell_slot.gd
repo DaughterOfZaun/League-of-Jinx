@@ -1,1 +1,1 @@
-class_name SpellSlot
+class_name SpellSlot #@rollback

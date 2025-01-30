@@ -1,4 +1,4 @@
-class_name AIMoveState extends AIState
+class_name AIMoveState extends AIState #@rollback
 
 var move_target: Unit
 var move_target_position: Vector3:

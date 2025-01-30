@@ -1,4 +1,4 @@
-class_name SpellTargetMissile extends Missile
+class_name SpellTargetMissile extends Missile #@rollback
 
 static func create(spell: Spell, target: Unit) -> SpellTargetMissile:
 	var m := SpellTargetMissile.new()

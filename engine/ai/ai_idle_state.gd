@@ -1,5 +1,4 @@
-class_name AIIdleState
-extends AIState
+class_name AIIdleState extends AIState #@rollback
 
 func _ready() -> void:
 	if SecondTest.is_clonning: return

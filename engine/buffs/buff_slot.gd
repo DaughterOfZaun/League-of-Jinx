@@ -1,4 +1,4 @@
-class_name BuffSlot
+class_name BuffSlot #@rollback
 
 var mngr: Buffs
 var max_stack: int = 0

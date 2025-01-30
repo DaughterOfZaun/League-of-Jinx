@@ -1,4 +1,4 @@
-class_name Turret extends Unit
+class_name Turret extends Unit #@rollback
 
 @export var lane: Enums.Lane
 @export var pos: Enums.Pos

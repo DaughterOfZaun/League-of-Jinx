@@ -1,4 +1,4 @@
-class_name Spells extends Node
+class_name Spells extends Node #@rollback
 
 @export var q: Spell
 @export var w: Spell

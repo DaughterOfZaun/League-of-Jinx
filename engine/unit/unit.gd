@@ -1,4 +1,4 @@
-class_name Unit extends Node3DExt
+class_name Unit extends Node3DExt #@rollback
 
 @export var team: Enums.Team = 0
 @export var data: UnitData

@@ -1,4 +1,4 @@
-class_name Buff extends Timer
+class_name Buff extends Timer #@rollback
 
 var slot: BuffSlot
 var attacker: Unit

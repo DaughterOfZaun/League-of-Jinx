@@ -1,4 +1,4 @@
-class_name AIState extends Node
+class_name AIState extends Node #@rollback
 
 @onready var ai: AI = get_parent()
 @onready var me: Unit = ai.get_parent()

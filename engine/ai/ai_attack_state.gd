@@ -1,4 +1,4 @@
-class_name AIAttackState extends AIState
+class_name AIAttackState extends AIState #@rollback
 
 @onready var root: Node = get_tree().current_scene
 @onready var constants: Constants = root.get_node("%Constants")

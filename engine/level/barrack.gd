@@ -1,4 +1,4 @@
-class_name Barrack extends Node3D
+class_name Barrack extends Node3D #@rollback
 
 var team: Enums.Team
 

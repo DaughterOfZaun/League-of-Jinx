@@ -1,4 +1,4 @@
-class_name Stats extends Node
+class_name Stats extends Node #@rollback
 
 var temp: PackedFloat32Array
 var temp_a: PackedFloat32Array

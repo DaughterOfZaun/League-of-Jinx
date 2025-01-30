@@ -1,4 +1,4 @@
-class_name Level extends LuaScript
+class_name Level extends LuaScript #@rollback
 
 func _ready() -> void:
 	if SecondTest.is_clonning: return

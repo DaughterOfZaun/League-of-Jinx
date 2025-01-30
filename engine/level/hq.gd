@@ -1,4 +1,4 @@
-class_name HQ extends Unit
+class_name HQ extends Unit #@rollback
 
 func _ready() -> void:
 	super._ready()

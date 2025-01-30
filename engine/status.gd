@@ -1,4 +1,4 @@
-class_name Status extends Node
+class_name Status extends Node #@rollback
 
 var null_callable: Callable = func() -> void: pass
 
