@@ -45,7 +45,7 @@ func _physics_process(delta: float) -> void:
 
 	_physics_process_rotate(delta)
 	_physics_process_update_visibility(delta)
-	_physics_process_sync_char_body_pos(delta)
+	#_physics_process_sync_char_body_pos(delta)
 
 	#if Balancer.should_update_stats(self):
 	#	update_stats()
@@ -431,15 +431,41 @@ func _physics_process_update_visibility(delta: float) -> void:
 	
 	visible = pixel.r > 0.5
 
-
-func _physics_process_sync_char_body_pos(delta: float) -> void:
-	pass
+#var prev_transform: Transform3D = Transform3D.IDENTITY
+#@onready var character_body: CharacterBody3D = self as Variant #find_child("CharacterBody3D", false, false)
+#@onready var navigation_agent: NavigationAgent3D = find_child("NavigationAgent3D", false, false)
+#func _physics_process_sync_char_body_pos(delta: float) -> void:
+#	if character_body == null: return
+#	if transform != prev_transform:
+#		character_body.transform = transform
+#	else:
+#		transform = character_body.transform
+#	prev_transform = transform
 
 var _visible: bool = false
 var _transform: Transform3D = Transform3D.IDENTITY
+#var _character_body_velocity: Vector3 = Vector3.ZERO
+#var _navigation_agent_avoidance_enabled: bool = false
+#var _navigation_agent_velocity: Vector3 = Vector3.ZERO
+#var _navigation_agent_target_position: Vector3 = Vector3.ZERO
+#var _navigation_agent_avoidance_priority: float = 0.0
 func _save() -> void:
 	_visible = visible
 	_transform = transform
+	# if character_body != null:
+	# 	_character_body_velocity = character_body.velocity
+	# if navigation_agent != null:
+	# 	_navigation_agent_avoidance_enabled = navigation_agent.avoidance_enabled
+	# 	_navigation_agent_velocity = navigation_agent.velocity
+	# 	_navigation_agent_target_position = navigation_agent.target_position
+	# 	_navigation_agent_avoidance_priority = navigation_agent.avoidance_priority
 func _load() -> void:
 	visible = _visible
 	transform = _transform
+	# if character_body != null:
+	# 	character_body.velocity = _character_body_velocity
+	# if navigation_agent != null:
+	# 	navigation_agent.avoidance_enabled = _navigation_agent_avoidance_enabled
+	# 	navigation_agent.velocity = _navigation_agent_velocity
+	# 	navigation_agent.target_position = _navigation_agent_target_position
+	# 	navigation_agent.avoidance_priority = _navigation_agent_avoidance_priority

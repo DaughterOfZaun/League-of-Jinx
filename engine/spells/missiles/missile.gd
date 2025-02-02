@@ -114,3 +114,9 @@ func destroy() -> void:
 	#if effect != null:
 	#	for particle: GPUParticles3D in effect.find_children("*", "GPUParticles3D", true):
 	#		particle.emitting = false
+
+var _transform: Transform3D = Transform3D.IDENTITY
+func _save() -> void:
+	_transform = transform
+func _load() -> void:
+	transform = _transform

@@ -119,7 +119,7 @@ radius = 7.5
 [sub_resource type="SphereShape3D" id="SphereShape3D_hvbg6"]
 radius = 7.5
 
-[node name="Unit" type="Node3D" node_paths=PackedStringArray("data")]
+[node name="Unit" type="CharacterBody3D" node_paths=PackedStringArray("data")]
 top_level = true
 script = ExtResource("1_7i6v8")
 data = NodePath("Data")
@@ -222,13 +222,11 @@ _name = "game_character_passiveName_Ahri"
 lua_name = "AhriSoulCrusherNumbers"
 desc = "game_character_passiveDescription_Ahri"
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_s7c4n")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
 visible = false
 mesh = SubResource("CapsuleMesh_gl51m")
 

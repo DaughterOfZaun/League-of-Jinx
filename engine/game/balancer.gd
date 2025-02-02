@@ -42,32 +42,17 @@ func _physics_process(delta: float) -> void:
 	generated_frames = false
 	
 	#pack_scene()
-	
-	# total_frames += 1
-	# match total_frames:
-		
-	# 	15:
-	# 		print('before')
-	# 		var scene := PackedScene.new()
-	# 		scene.pack(root)
-	# 		ResourceSaver.save(scene, "res://engine/game/cache/before.tscn")
-	# 		save_state()
-		
-	# 	255:
-	# 		print('after')
-	# 		load_state()
-	# 		var scene := PackedScene.new()
-	# 		scene.pack(root)
-	# 		ResourceSaver.save(scene, "res://engine/game/cache/after.tscn")
-
-	# print(total_frames)
 
 	if history_slice_to_override < 0:
 		history_slice_to_override = 0
+		root.propagate_call(&"set_physics_process", [true], true)
+		self.set_physics_process(true)
 		print('forward')
 		time_dir = true
 	if history_slice_to_override > history_slices_count - 1:
 		history_slice_to_override = history_slices_count - 1
+		root.propagate_call(&"set_physics_process", [false], true)
+		self.set_physics_process(true)
 		print('backward')
 		time_dir = false
 
@@ -78,7 +63,6 @@ func _physics_process(delta: float) -> void:
 	else: history_slice_to_override -= 1
 
 var time_dir := true
-var total_frames := 0
 
 var pp: StringName = &"_physics_process"
 var args: Array[Variant] = [ 1.0 / Engine.physics_ticks_per_second ]
