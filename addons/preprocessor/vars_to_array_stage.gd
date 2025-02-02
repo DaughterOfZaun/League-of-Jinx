@@ -1,10 +1,15 @@
 @tool class_name VarsToArrayStage extends PreprocessorStage
 
+# Current limitations:
+# - #@rollback class must be a Node in the SceneTree
+# - no nested containers (Arrays/Dictionaries) allowed
+
 var var_regex: RegEx = RegEx.create_from_string(r"(?<=^|\n)(?:@?(onready|export|static) )?var (\w+)(?:: ([\w.\[,\]]+))?(?: :?= (.*))?(?<!:)(?=\n|$)")
 var init_or_eof_regex_src: String = r"(?<=^|\n)func _init\((.*?)\) -> void:\n(?:\tsuper\._init\((.*?)\)(?=\n|$))?|$"
 var init_or_eof_regex: RegEx = RegEx.create_from_string(init_or_eof_regex_src)
 var ready_or_eof_regex: RegEx = RegEx.create_from_string(init_or_eof_regex_src.replace("_init", "_ready"))
 var static_init_or_eof_regex: RegEx = RegEx.create_from_string(init_or_eof_regex_src.replace("func _init", "static func _static_init"))
+#var enter_tree_or_eof_regex: RegEx = RegEx.create_from_string(init_or_eof_regex_src.replace("_init", "_enter_tree"))
 
 func get_initial_value(var_type: String) -> String:
 	var initial_value := "null"
@@ -110,6 +115,14 @@ func process_class(cls: ClassRepr) -> void:
 			"_static_vars", static_var_i, parent_static_var_i, static_values,
 			"static", "_static_init", parent_has_static_init,
 		))
+
+	#var has_enter_tree := code.contains("func _enter_tree")
+	#var parent_has_enter_tree := cls.parent.code.contains("func _enter_tree") if cls.parent else false
+	#if (var_i + static_var_i + parent_var_i + parent_static_var_i) > 0 || has_enter_tree && parent_has_enter_tree:
+	#	code = Utils.str_replace_once(code, enter_tree_or_eof_regex, process_func.bind(
+	#		"", 0, 0, [],
+	#		"", "_enter_tree", parent_has_enter_tree,
+	#	))
 	
 	cls.code = code
 
@@ -123,7 +136,8 @@ func process_func(
 	var out_args := match.strings[2]
 
 	var init_code := "\n\n"
-	if var_i > 0 && parent_var_i == 0:
+
+	if func_name in ["_init", "_static_init"] && var_i > 0 && parent_var_i == 0:
 		if func_mod: init_code += func_mod + " "
 		init_code += "var " + vars_name + ": Array[Variant] = []\n"
 	
@@ -132,9 +146,18 @@ func process_func(
 	
 	if parent_has_func:
 		init_code += "	super." + func_name + "(" + out_args + ")\n"
-	if var_i > 0:
-		init_code += "	" + vars_name + ".resize(" + str(parent_var_i + var_i) + ")\n"
 	
+	if func_name in ["_init", "_static_init"]:
+
+		if func_name == "_init":
+			init_code += "	add_to_group(&\"rollback\")\n"
+
+		if var_i > 0:
+			init_code += "	" + vars_name + ".resize(" + str(parent_var_i + var_i) + ")\n"
+
+	#elif func_name == "_enter_tree":
+	#	pass
+
 	var keys: Variant
 	match typeof(vars):
 		TYPE_ARRAY: keys = (vars as Array).size()

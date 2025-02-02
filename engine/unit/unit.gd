@@ -45,6 +45,7 @@ func _physics_process(delta: float) -> void:
 
 	_physics_process_rotate(delta)
 	_physics_process_update_visibility(delta)
+	_physics_process_sync_char_body_pos(delta)
 
 	#if Balancer.should_update_stats(self):
 	#	update_stats()
@@ -431,3 +432,16 @@ func _physics_process_update_visibility(delta: float) -> void:
 	var pixel := fow_image.get_pixelv(canvas_position_rounded)
 	
 	visible = pixel.r > 0.5
+
+
+func _physics_process_sync_char_body_pos(delta: float) -> void:
+	pass
+
+var _visible: bool = false
+var _transform: Transform3D = Transform3D.IDENTITY
+func _save() -> void:
+	_visible = visible
+	_transform = transform
+func _load() -> void:
+	visible = _visible
+	transform = _transform

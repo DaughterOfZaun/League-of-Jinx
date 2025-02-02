@@ -42,6 +42,7 @@ func get_slot(script: GDScript, attacker: Unit, create := false, buff: Buff = nu
 			slot = BuffSlot.new(self)
 			slots_with_script[attacker] = slot
 			slot_created.emit(slot, buff)
+			add_child(slot)
 		else:
 			return null
 
@@ -177,8 +178,9 @@ func remove_by_instance(buff: Buff) -> void:
 	buff.slot.update()
 
 func has(type: Enums.BuffType) -> bool:
-	for buff: Buff in get_children():
-		if (type & buff.type) != 0:
+	for child in get_children():
+		var buff := child as Buff
+		if buff && (type & buff.type) != 0:
 			return true
 	return false
 

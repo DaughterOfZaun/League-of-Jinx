@@ -110,7 +110,7 @@ func destroy_self() -> void:
 
 #var is_being_destroyed := false
 func destroy() -> void:
-	queue_free()
+	if self.is_inside_tree(): get_parent().remove_child(self) #self.queue_free()
 	#if is_being_destroyed: return
 	#is_being_destroyed = true
 	#if effect != null:

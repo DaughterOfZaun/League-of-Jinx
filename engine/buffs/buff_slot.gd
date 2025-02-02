@@ -1,4 +1,4 @@
-class_name BuffSlot #@rollback
+class_name BuffSlot extends Node #@rollback
 
 var mngr: Buffs
 var max_stack: int = 0
@@ -45,7 +45,7 @@ func remove_stacks(count: int = len(stacks)) -> BuffSlot:
 	for i in range(count):
 		var buff: Buff = stacks.pop_back()
 		buff.on_deactivate(buff.expired) #TODO: Protect stacks from modification during iteration
-		buff.queue_free()
+		if buff.is_inside_tree(): get_parent().remove_child(buff) #buff.queue_free()
 	adjust_duration_and_delays()
 	return self
 
@@ -54,13 +54,13 @@ func remove(buff: Buff) -> void:
 	self.stacks.erase(buff)
 	buff.on_deactivate(buff.expired)
 	adjust_duration_and_delays()
-	buff.queue_free()
+	if buff.is_inside_tree(): get_parent().remove_child(buff) #buff.queue_free()
 
 func clear() -> BuffSlot:
 	for i in len(stacks):
 		var buff: Buff = stacks.pop_back()
 		buff.on_deactivate(buff.expired)
-		buff.queue_free()
+		if buff.is_inside_tree(): get_parent().remove_child(buff) #buff.queue_free()
 	return self
 
 func adjust_duration_and_delays() -> void:

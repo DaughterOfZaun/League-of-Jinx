@@ -21,7 +21,7 @@ static func create(effect: PackedScene = null, effect_for_other_team: PackedScen
 	return particle
 
 func remove() -> void:
-	queue_free()
+	if self.is_inside_tree(): get_parent().remove_child(self) #self.queue_free()
 
 func fow(fow_team := Enums.Team.UNKNOWN, fow_visibility_radius := 0.0) -> Particle:
 	return self

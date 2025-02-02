@@ -125,7 +125,7 @@ func parse_class_declaration(cls: ClassRepr, named_classes: Dictionary[String, C
 	if cls_parent:
 		cls.parent_name = cls_parent
 	cls.tags = cls_tags.substr(2).strip_edges(false, true).split(" #@", false)
-	print("class_name ", cls.name, " extends ", cls.parent_name, " #@" + " #@".join(cls.tags))
+	#print("class_name ", cls.name, " extends ", cls.parent_name, " #@" + " #@".join(cls.tags))
 
 func set_class_parent(cls: ClassRepr, named_classes: Dictionary[String, ClassRepr]) -> void:
 	if cls.parent_name:
