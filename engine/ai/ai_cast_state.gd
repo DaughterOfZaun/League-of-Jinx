@@ -15,7 +15,6 @@ func timeout_or_canceled_emit(cancelled: bool) -> void:
 	timeout_or_canceled.emit()
 
 func _ready() -> void:
-	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	
 	timer = Timer.new()

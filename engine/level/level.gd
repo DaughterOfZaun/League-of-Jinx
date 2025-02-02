@@ -1,7 +1,6 @@
 class_name Level extends LuaScript #@rollback
 
 func _ready() -> void:
-	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	on_level_init()
 	on_post_level_load()

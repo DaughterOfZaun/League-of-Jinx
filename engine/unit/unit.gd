@@ -397,8 +397,6 @@ static var fow_subviewport: SubViewportEx
 static var fow_subviewport_texture: ViewportTexture
 static var fow_init_completed: bool = false
 func _ready() -> void:
-	if SecondTest.is_clonning: return
-	
 	is_ready = true
 	if fow_init_completed: return
 	fow_init_completed = true

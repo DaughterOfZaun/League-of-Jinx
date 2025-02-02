@@ -6,8 +6,6 @@ class_name AIAttackState extends AIState #@rollback
 var spell: Spell
 var next_spell: Spell
 func _ready() -> void:
-	if SecondTest.is_clonning: return
-	
 	await me.ready
 	spell = me.spells.basic[0]
 	next_spell = me.spells.basic[1]

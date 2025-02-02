@@ -15,8 +15,6 @@ func init(spell: Spell, target: Unit, target_position: Vector3 = Vector3.INF) ->
 
 var effect: System = null
 func _ready() -> void:
-	if SecondTest.is_clonning: return
-	
 	var bone_name := spell.data.missile_bone_name
 	#TODO: bone_name == "root" or cast(override_cast_pos == true) ?
 	if bone_name.is_empty() || bone_name == "root":

@@ -29,9 +29,6 @@ var kills: int = 0
 
 func _ready() -> void:
 	super._ready()
-	
-	if SecondTest.is_clonning: return
-
 	exp = 0.0
 	level_script.register_champion(self)
 	

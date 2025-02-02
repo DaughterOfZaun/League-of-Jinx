@@ -9,9 +9,6 @@ var angle: float = 0.0
 var radius: float = 0.0
 func _ready() -> void:
 	super._ready()
-	
-	if SecondTest.is_clonning: return
-
 	var cast_position := spell.cast_position
 	var dir := cast_position - target.position_3d
 	angle = atan2(dir.z, dir.x)

@@ -95,7 +95,6 @@ func switch_to_deffered() -> void:
 		idle_state.enter()
 
 func _ready() -> void:
-	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	me.ai = self
 	on_init()

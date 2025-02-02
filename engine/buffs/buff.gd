@@ -58,7 +58,6 @@ func _init() -> void:
 	one_shot = true
 
 func _ready() -> void:
-	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	start(self.delay + self.duration)
 	timeout.connect(on_timeout)

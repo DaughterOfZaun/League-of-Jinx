@@ -65,7 +65,6 @@ func timeout_or_canceled_emit() -> void:
 var missile_bone_idx: int = -1
 
 func _ready() -> void:
-	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 
 	timer = Timer.new()

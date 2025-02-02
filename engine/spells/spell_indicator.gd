@@ -9,7 +9,6 @@ class_name SpellIndicator extends Node3D
 @onready var line_missile_indicator_target: Node3D = $LineMissile/Target
 
 func _ready() -> void:
-	if SecondTest.is_clonning: return
 	visible = false
 	self.visibility_changed.connect(func () -> void:
 		self._physics_process(0)

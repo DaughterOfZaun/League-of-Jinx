@@ -6,7 +6,6 @@ signal slot_created(slot: BuffSlot, buff: Buff)
 
 @onready var me: Unit = get_parent()
 func _ready() -> void:
-	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	me.buffs = self
 

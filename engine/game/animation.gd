@@ -4,7 +4,6 @@ class_name AnimationController extends AnimationTree
 @onready var anim_tree: AnimationTree = me.find_child("AnimationTree", false, false)
 
 func _ready() -> void:
-	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	me.animation = self
 

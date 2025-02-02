@@ -4,7 +4,6 @@ class_name AIRunState extends AIState #@rollback
 @onready var navigation_agent: NavigationAgent3D = me.find_child("NavigationAgent3D", false, false)
 
 func _ready() -> void:
-	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
 	navigation_agent.navigation_finished.connect(_on_navigation_finished)

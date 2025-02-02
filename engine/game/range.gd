@@ -3,7 +3,6 @@ class_name Radius extends Area3D
 @onready var char: Unit = get_parent()
 
 func _ready() -> void:
-	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 
 	monitoring = false

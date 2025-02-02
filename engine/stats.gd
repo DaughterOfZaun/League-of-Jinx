@@ -19,7 +19,6 @@ func reset_data_b() -> void:
 @onready var root: Node = get_tree().current_scene
 @onready var constants: Constants = root.get_node("%Constants")
 func _ready() -> void:
-	if SecondTest.is_clonning: return
 	#if Engine.is_editor_hint(): return
 	health_current = get_health()
 	mana_current = get_mana()
