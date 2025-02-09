@@ -40,7 +40,7 @@ func bind_to(c: Champion) -> void:
 @onready var mana_bar_label: Label = manabar.find_child("Label", false, false)
 @onready var mana_bar_range: Range = manabar.find_child("TextureProgressBar", false, false)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	var health := champion.stats_perm.health_current
 	var max_health := champion.stats_perm.get_health()
@@ -54,11 +54,11 @@ func _process(delta: float) -> void:
 	mana_bar_range.value = mana
 	mana_bar_range.max_value = max_mana
 
-	var timer := champion.ai.cast_state.timer
 	var current_spell := champion.ai.cast_state.current_spell
 	if current_spell != null:
 		channel_bar_label.text = current_spell.data.display_name
 
+		var timer := current_spell
 		var timer_time_passed := timer.wait_time - timer.time_left
 		channel_bar_range.value = (timer_time_passed / timer.wait_time) * 100
 		#channel_bar_range.max_value = timer.wait_time
