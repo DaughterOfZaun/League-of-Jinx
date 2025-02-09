@@ -2,25 +2,13 @@ class_name AICastState extends AIState #@rollback
 
 var current_spell: Spell = null
 
-var timer: Timer
-signal timer_started()
-func timer_start(time_sec: float) -> void:
-	timer.start(time_sec)
-	timer_started.emit()
-var cancelled: bool = false
-signal timeout_or_canceled()
-func timeout_or_canceled_emit(cancelled: bool) -> void:
-	timer.stop()
-	self.cancelled = cancelled
-	timeout_or_canceled.emit()
+var timer: TimerEx
 
 func _ready() -> void:
 	#if Engine.is_editor_hint(): return
 	
-	timer = Timer.new()
+	timer = TimerEx.new()
 	timer.name = "Timer"
-	timer.one_shot = true
-	timer.timeout.connect(func() -> void: timeout_or_canceled.emit())
 	add_child(timer)
 
 func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
@@ -30,7 +18,7 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 	var instant_cast := (spell.data.flags & Enums.SpellFlags.INSTANT_CAST) != 0
 	var has_cast := !instant_cast && cast_time > 0
 	var has_channel := !instant_cast && channel_duration > 0
-	instant_cast = instant_cast || (!has_cast && !has_channel)
+	#instant_cast = instant_cast || (!has_cast && !has_channel)
 	var has_animation := false\
 	|| !spell.data.animation_name.is_empty()\
 	|| !spell.data.animation_loop_name.is_empty()\
@@ -55,19 +43,19 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 	if !spell.data.animation_name.is_empty():
 		animation.play(spell.data.animation_name)
 
-	cancelled = false
+	timer.cancelled = false
 
-	if !cancelled && has_cast:
+	if !timer.cancelled && has_cast:
 		spell.state = Spell.State.CASTING
-		timer_start(cast_time)
-		await timeout_or_canceled
+		timer.start(cast_time)
+		await timer.timeout_or_canceled
 
-	if !cancelled && has_channel:
+	if !timer.cancelled && has_channel:
 		spell.state = Spell.State.CHANNELING
-		timer_start(channel_duration)
+		timer.start(channel_duration)
 		spell.channeling_start()
-		await timeout_or_canceled
-		if cancelled: spell.channeling_cancel_stop()
+		await timer.timeout_or_canceled
+		if timer.cancelled: spell.channeling_cancel_stop()
 		else: spell.channeling_success_stop()
 		spell.channeling_stop()
 
@@ -75,7 +63,7 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 	if should_cancel:
 		current_spell = null
 
-	if !cancelled:
+	if !timer.cancelled:
 		var cost := maxf(0, spell.get_mana_cost())
 		me.stats_perm.mana_current -= cost
 		spell.cast(target, target_position)
@@ -92,7 +80,7 @@ func can_cancel() -> bool:
 
 func on_exit() -> void:
 	if current_spell != null && current_spell.state in [Spell.State.CASTING, Spell.State.CHANNELING]:
-		timeout_or_canceled_emit(true)
+		timer.cancel()
 
 func can_cast(spell: Spell, target: Unit = null) -> bool:
 	var status := me.status

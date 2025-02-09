@@ -1,4 +1,4 @@
-class_name Buff extends Timer #@rollback
+class_name Buff extends Node #@rollback
 
 var slot: BuffSlot
 var attacker: Unit
@@ -36,7 +36,11 @@ func clone() -> Buff:
 var vars: Vars:
 	get: return host.vars
 
+var wait_time: float
 var start_time: float
+var time_left: float:
+	get:
+		return wait_time - (slot.mngr.time - start_time)
 
 var delay: float = 0.0
 var delay_remaining := 0.0:
@@ -44,23 +48,19 @@ var delay_remaining := 0.0:
 		return maxf(0, self.time_left - self.duration)
 	set(value):
 		self.delay = value
-		start(self.delay + self.duration)
+		self.wait_time = self.delay + self.duration
 
 var duration_remaining := 0.0:
 	get:
 		return minf(self.duration, self.time_left)
 	set(value):
 		self.duration = value
-		start(self.delay + self.duration)
-
-func _init() -> void:
-	autostart = false
-	one_shot = true
+		self.wait_time = self.delay + self.duration
 
 func _ready() -> void:
 	#if Engine.is_editor_hint(): return
-	start(self.delay + self.duration)
-	timeout.connect(on_timeout)
+	self.wait_time = self.delay + self.duration
+	self.start_time = slot.mngr.time
 	if !host.is_ready: await host.ready
 	host.connect_all(self)
 	on_activate()
@@ -69,10 +69,11 @@ func remove_self() -> void:
 	slot.mngr.remove_by_instance(self)
 
 var expired: bool = false
-func on_timeout() -> void:
-	expired = true
-	if !can_mitigate_duration:
-		remove_self()
+func _physics_process(delta: float) -> void:
+	if self.time_left <= 0:
+		expired = true
+		if !can_mitigate_duration:
+			remove_self()
 
 func on_activate() -> void: pass
 func on_deactivate(_expired: bool) -> void: pass
@@ -80,7 +81,8 @@ func on_deactivate(_expired: bool) -> void: pass
 func renew(reset_duration: float) -> void:
 	self.delay = 0
 	self.duration = reset_duration
-	self.start(reset_duration)
+	self.wait_time = reset_duration
+	self.start_time = slot.mngr.time
 
 func get_data() -> BuffData:
 	return self[&'data'] if &'data' in self else null

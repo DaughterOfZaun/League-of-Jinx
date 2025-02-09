@@ -6,7 +6,7 @@ var stacks: Array[Buff] = []
 var duration: float = 0.0
 var start_time: float
 var duration_remaining: float:
-	get: return start_time + duration - mngr.time
+	get: return duration - (mngr.time - start_time)
 
 func _init(buffs: Buffs) -> void:
 	self.mngr = buffs

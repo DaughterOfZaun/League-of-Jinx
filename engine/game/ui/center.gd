@@ -25,15 +25,6 @@ func bind_to(c: Champion) -> void:
 	for letter in "qwerdfb":
 		var spell: UISpell = self[letter]
 		spell.bind_to(letter, c.spells[letter])
-	c.ai.cast_state.timer_started.connect(func() -> void:
-		channel_bar_label.text = c.ai.cast_state.current_spell.data.display_name
-		#channel_bar_range.max_value = c.ai.cast_state.timer.wait_time
-		channel_bar_range.value = 0
-		channel_bar.visible = true
-	)
-	c.ai.cast_state.timeout_or_canceled.connect(func() -> void:
-		channel_bar.visible = false
-	)
 	c.buffs.slot_created.connect(func (slot: BuffSlot, buff: Buff) -> void:
 		if buff.is_hidden_on_client ||\
 		   buff.type in [ Enums.BuffType.UNDEFINED, Enums.BuffType.INTERNAL ] ||\
@@ -63,8 +54,16 @@ func _process(delta: float) -> void:
 	mana_bar_range.value = mana
 	mana_bar_range.max_value = max_mana
 
-	if channel_bar.visible:
-		var timer := champion.ai.cast_state.timer
+	var timer := champion.ai.cast_state.timer
+	var current_spell := champion.ai.cast_state.current_spell
+	if current_spell != null:
+		channel_bar_label.text = current_spell.data.display_name
+
 		var timer_time_passed := timer.wait_time - timer.time_left
-		#channel_bar_range.value = timer_time_passed
 		channel_bar_range.value = (timer_time_passed / timer.wait_time) * 100
+		#channel_bar_range.max_value = timer.wait_time
+		#channel_bar_range.value = timer_time_passed
+		
+		channel_bar.visible = true
+	else:
+		channel_bar.visible = false

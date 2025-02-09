@@ -1,4 +1,4 @@
-class_name Spell extends Node #@rollback
+class_name Spell extends TimerEx #@rollback
 
 @export var data: SpellData
 @export var indicator: SpellIndicator
@@ -42,9 +42,9 @@ var level: int = 0
 
 var cost: float
 var cooldown_wait_time: float:
-	get: return timer.wait_time if state == State.COOLDOWN else 0.0
+	get: return self.wait_time if state == State.COOLDOWN else 0.0
 var cooldown_time_left: float:
-	get: return timer.time_left if state == State.COOLDOWN else 0.0
+	get: return self.time_left if state == State.COOLDOWN else 0.0
 var cast_range: float
 var is_attack_override: bool
 
@@ -56,28 +56,17 @@ enum State {
 	COOLDOWN,
 }
 
-var timer: Timer
-signal timeout_or_canceled()
-func timeout_or_canceled_emit() -> void:
-	timer.stop()
-	timeout_or_canceled.emit()
-
 var missile_bone_idx: int = -1
 
 func _ready() -> void:
 	#if Engine.is_editor_hint(): return
-
-	timer = Timer.new()
-	timer.name = "Timer"
-	timer.one_shot = true
-	timer.timeout.connect(func() -> void: timeout_or_canceled.emit())
-	add_child(timer)
 
 	await me.ready
 	missile_bone_idx = me.get_bone_idx(data.missile_bone_name)
 
 func _physics_process(delta: float) -> void:
 	#if Engine.is_editor_hint(): return
+	super._physics_process(delta)
 
 	if state == State.CHANNELING:
 		if Balancer.should_update_actions(self):
@@ -227,7 +216,7 @@ func _target_execute(target: Unit, missile: Missile) -> void:
 func put_on_cooldown(time_sec := get_cooldown()) -> void:
 	if !is_zero_approx(time_sec):
 		state = State.COOLDOWN
-		timer.start(time_sec)
+		self.start(time_sec)
 		await timeout_or_canceled
 	state = State.READY
 
@@ -265,9 +254,9 @@ func set_cooldown(src: float, broadcast_event := false) -> void:
 		put_on_cooldown(src)
 	elif state == State.COOLDOWN:
 		if is_zero_approx(src):
-			timeout_or_canceled_emit()
+			self.cancel()
 		else:
-			timer.start(src)
+			self.start(src)
 	else:
 		# Should I cancel the cast/channel
 		# or just use a different cooldown later?
