@@ -19,6 +19,7 @@ func cancel() -> void:
 	timeout_or_canceled.emit()
 
 func _physics_process(delta: float) -> void:
+	time_passed += delta
 	if self.time_left <= 0:
 		timeout_or_canceled.emit()
 		timeout.emit()

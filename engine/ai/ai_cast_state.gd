@@ -9,7 +9,18 @@ func _ready() -> void:
 	
 	timer = TimerEx.new()
 	timer.name = "Timer"
+	timer.timeout_or_canceled.connect(try_enter_async)
 	add_child(timer)
+
+var tea_spell: Spell
+var tea_target_position: Vector3
+var tea_target: Unit
+
+var tev_has_cast: bool
+var tev_cast_time: float
+var tev_has_channel: bool
+var tev_channel_duration: float
+var tev_should_cancel: bool
 
 func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 	var cast_time := spell.get_cast_time()
@@ -45,31 +56,65 @@ func try_enter(spell: Spell, target_position: Vector3, target: Unit) -> void:
 
 	timer.cancelled = false
 
-	if !timer.cancelled && has_cast:
-		spell.state = Spell.State.CASTING
-		timer.start(cast_time)
-		await timer.timeout_or_canceled
+	self.tea_spell = spell
+	self.tea_target_position = target_position
+	self.tea_target = target
+	self.tev_has_cast = has_cast
+	self.tev_cast_time = cast_time
+	self.tev_has_channel = has_channel
+	self.tev_channel_duration = channel_duration
+	self.tev_should_cancel = should_cancel
 
-	if !timer.cancelled && has_channel:
-		spell.state = Spell.State.CHANNELING
-		timer.start(channel_duration)
-		spell.channeling_start()
-		await timer.timeout_or_canceled
-		if timer.cancelled: spell.channeling_cancel_stop()
-		else: spell.channeling_success_stop()
-		spell.channeling_stop()
+	assert(label == -1); label = 0; try_enter_async()
 
-	spell.put_on_cooldown()
-	if should_cancel:
-		current_spell = null
+var label: int = -1
+func try_enter_async() -> void:
+	
+	var spell := self.tea_spell
+	var target_position := self.tea_target_position
+	var target := self.tea_target
+	var has_cast := self.tev_has_cast
+	var cast_time := self.tev_cast_time
+	var has_channel := self.tev_has_channel
+	var channel_duration := self.tev_channel_duration
+	var should_cancel := self.tev_should_cancel
 
-	if !timer.cancelled:
-		var cost := maxf(0, spell.get_mana_cost())
-		me.stats_perm.mana_current -= cost
-		spell.cast(target, target_position)
+	while true:
+		match label:
+			0:
+				if !timer.cancelled && has_cast:
+					spell.state = Spell.State.CASTING
+					timer.start(tev_cast_time)
+					#await timer.timeout_or_canceled
+					label = 1; break
+				label = 1; continue
+			1:
+				if !timer.cancelled && tev_has_channel:
+					spell.state = Spell.State.CHANNELING
+					timer.start(tev_channel_duration)
+					spell.channeling_start()
+					#await timer.timeout_or_canceled
+					label = 2; break
+				label = 3; continue
+			2:
+				if timer.cancelled: spell.channeling_cancel_stop()
+				else: spell.channeling_success_stop()
+				spell.channeling_stop()
+				label = 3; continue
+			3:
+				spell.put_on_cooldown()
+				if tev_should_cancel:
+					current_spell = null
 
-		if should_cancel:
-			switch_to_deffered()
+				if !timer.cancelled:
+					var cost := maxf(0, spell.get_mana_cost())
+					me.stats_perm.mana_current -= cost
+					spell.cast(target, target_position)
+
+					if tev_should_cancel:
+						switch_to_deffered()
+		
+		label = -1; break
 
 func can_cancel() -> bool:
 	return (

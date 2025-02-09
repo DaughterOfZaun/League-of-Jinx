@@ -3,6 +3,8 @@
 # Current limitations:
 # - #@rollback class must be a Node in the SceneTree
 # - no nested containers (Arrays/Dictionaries) allowed
+# - no oneshot signals
+# - no await
 
 var var_regex: RegEx = RegEx.create_from_string(r"(?<=^|\n)(?:@?(onready|export|static) )?var (\w+)(?:: ([\w.\[,\]]+))?(?: :?= (.*))?(?<!:)(?=\n|$)")
 var init_or_eof_regex_src: String = r"(?<=^|\n)func _init\((.*?)\) -> void:\n(?:\tsuper\._init\((.*?)\)(?=\n|$))?|$"
