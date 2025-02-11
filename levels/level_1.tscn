@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://c4eq6ck01x7ao"]
+[gd_scene load_steps=47 format=3 uid="uid://c4eq6ck01x7ao"]
 
 [ext_resource type="Script" uid="uid://csrtiit658one" path="res://engine/game/input_manager.gd" id="1_4aqfu"]
 [ext_resource type="Script" uid="uid://b7nriuublxfpo" path="res://engine/game/balancer.gd" id="1_xapae"]
@@ -77,9 +77,6 @@ tonemap_mode = 2
 [sub_resource type="ViewportTexture" id="ViewportTexture_dp1ib"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_xapae"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_r0nt2"]
-viewport_path = NodePath("Camera3/Camera/SubViewportContainer/SubViewport")
 
 [node name="Node3D" type="Node3D"]
 
@@ -485,7 +482,3 @@ shape = SubResource("WorldBoundaryShape3D_xapae")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.085, 2.90684, -114.142)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("ViewportTexture_r0nt2")
-centered = false

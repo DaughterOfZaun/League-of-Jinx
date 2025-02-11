@@ -112,19 +112,25 @@ func on_ground_clicked_on_minimap(world_position: Vector3) -> void:
 	)
 	order_move_to(nearest_reachable_point)
 
-func order_move_to(nearest_reachable_point: Vector3) -> void:
-	
+var cursor_moveto_effect_instance: System
+func setup_order_move_to_effect() -> void:
 	var root := get_tree().current_scene
-	var effect: Node3D = cursor_moveto_effect.instantiate()
+	var effect: System = cursor_moveto_effect.instantiate()
+	cursor_moveto_effect_instance = effect
 	root.add_child(effect)
 	effect.owner = root
-	effect.global_position = nearest_reachable_point
+	#effect.global_position = nearest_reachable_point
+
+func order_move_to(nearest_reachable_point: Vector3) -> void:
+	cursor_moveto_effect_instance.emit(nearest_reachable_point)
 
 	await get_tree().physics_frame
 	main_hero.order(Enums.OrderType.MOVE_TO, nearest_reachable_point * Data.GD2HW, null)
 
 func _ready() -> void:
 	#if Engine.is_editor_hint(): return
+
+	setup_order_move_to_effect.call_deferred()
 
 	#Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 

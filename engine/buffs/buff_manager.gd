@@ -14,7 +14,7 @@ func _physics_process(delta: float) -> void:
 	time += delta
 
 var slots: Dictionary[GDScript, Dictionary] = {}
-var empty_Dictionary_Unit_BuffSlot: Dictionary[Unit, BuffSlot] = {} #HACK:
+const empty_Dictionary_Unit_BuffSlot: Dictionary[Unit, BuffSlot] = {} #HACK:
 func get_slot(script: GDScript, attacker: Unit, create := false, buff: Buff = null) -> BuffSlot:
 	var slot: BuffSlot = null
 	var slots_with_script: Dictionary[Unit, BuffSlot] = slots.get(script, empty_Dictionary_Unit_BuffSlot)
@@ -192,3 +192,12 @@ func get_remaining_duration(script: GDScript) -> float:
 	var slot := get_slot(script, null)
 	if slot != null: return slot.duration_remaining
 	return 0.0
+
+var children: Array[Node]
+func _save() -> void:
+	children = get_children()
+func _load() -> void:
+	for child in get_children():
+		remove_child(child)
+	for child in children:
+		add_child(child)

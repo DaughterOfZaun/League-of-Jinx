@@ -348,11 +348,11 @@ func _target_execute(target: Unit, missile: Missile) -> void:
 	target_execute(target, missile)
 
 func put_on_cooldown(time_sec := get_cooldown()) -> void:
-	if is_zero_approx(time_sec):
-		state = State.READY
-	else:
-		state = State.COOLDOWN
+	state = State.COOLDOWN
+	if !is_zero_approx(time_sec):
 		self.start(time_sec)
+	else:
+		_on_timeout_or_canceled()
 
 func self_execute() -> void: pass
 func target_execute(_target: Unit, _missile: Missile) -> void: pass

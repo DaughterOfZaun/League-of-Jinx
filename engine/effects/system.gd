@@ -87,6 +87,13 @@ func recreate_groups(ini: Dictionary[String, Array]) -> void:
 		group.updating_fields -= 1
 		group.update_fields()
 
+@onready var particles: Array = find_children("*", "GPUParticles3D", true)
 func _ready() -> void:
-	for child: GPUParticles3D in find_children("*", "GPUParticles3D", true):
+	for child: GPUParticles3D in particles:
 		child.emitting = true
+
+func emit(pos: Vector3) -> void:
+	var xfrom := Transform3D.IDENTITY.translated(pos)
+	for child: GPUParticles3D in particles:
+		var flags := GPUParticles3D.EmitFlags.EMIT_FLAG_POSITION | GPUParticles3D.EmitFlags.EMIT_FLAG_ROTATION_SCALE
+		child.emit_particle(xfrom, Vector3.ZERO, Color.WHITE, Color(0, 0, 0, 0), flags)

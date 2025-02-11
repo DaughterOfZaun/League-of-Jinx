@@ -63,3 +63,7 @@ func more_flags(
 	return self
 func orient(orient_towards: Unit = null) -> Particle:
 	return self
+
+func emit(pos: Vector3) -> void:
+	var system: System = get_child(0)
+	system.emit(pos)
