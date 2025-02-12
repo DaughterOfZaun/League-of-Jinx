@@ -6,20 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>WIKI | League-of-Jinx</title>
+<title>WIKI | League Sandstorm</title>
 <meta name="generator" content="Jekyll v3.10.0" />
 <meta property="og:title" content="WIKI" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="(WIP) Planned: League of Legends MOBA clone in Godot Engine providing API similar to the old original scripts" />
-<meta property="og:description" content="(WIP) Planned: League of Legends MOBA clone in Godot Engine providing API similar to the old original scripts" />
+<meta name="description" content="The knowledge base of the old and open League of Legends" />
+<meta property="og:description" content="The knowledge base of the old and open League of Legends" />
 <link rel="canonical" href="https://daughterofzaun.github.io/League-of-Jinx/" />
 <meta property="og:url" content="https://daughterofzaun.github.io/League-of-Jinx/" />
-<meta property="og:site_name" content="League-of-Jinx" />
+<meta property="og:site_name" content="League Sandstorm" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="WIKI" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"(WIP) Planned: League of Legends MOBA clone in Godot Engine providing API similar to the old original scripts","headline":"WIKI","name":"League-of-Jinx","url":"https://daughterofzaun.github.io/League-of-Jinx/"}</script>
+{"@context":"https://schema.org","@type":"WebSite","description":"The knowledge base of the old and open League of Legends","headline":"WIKI","name":"League Sandstorm","url":"https://daughterofzaun.github.io/League-of-Jinx/"}</script>
 <!-- End Jekyll SEO tag -->
 
     <link rel="stylesheet" href="style.css">
@@ -96,11 +96,174 @@ Therefore, only those <strong>champions and items that were added before 1.0.0.1
 
 <details>
   <summary>
-    <h4 id="how-to-play-in-lan" style="display:inline">
-      How to play with my friends in local network?
+    <h4 id="how-to-private-server-using-hamachi-or-radmin" style="display:inline">
+      How to Connect to a Private Server Using Hamachi or Radmin?
     </h4>
   </summary>
-  The answer will be here later, but in the meantime you can ask on discord.
+  <ul>
+    <li>
+      <p><strong>Download and Install Hamachi/Radmin</strong></p>
+      <ul>
+        <li>Go to <a href="https://www.vpn.net/">LogMeIn Hamachi&#39;s website</a> or <a href="https://www.radmin-vpn.com/">Radmin&#39;s website</a> and download the application. </li>
+        <li>Install Hamachi/Radmin on your computer. </li>
+      </ul>
+    </li>
+    <li>
+      <details>
+        <summary>
+          <h5 id="how-to-host" style="display:inline">
+            If You&#39;re Hosting (Creating the Hamachi Network and the Game Server)
+          </h5>
+        </summary>
+        <ol>
+          <li>
+            <p><strong>Create a Hamachi/Radmin Network</strong> </p>
+            <ul>
+              <li>Open Hamachi/Radmin and log in (or sign up if you don’t have an account). </li>
+              <li>Click <strong>“Network”</strong> &gt; <strong>“Create a new network”</strong>. </li>
+              <li>Choose a <strong>Network ID</strong> (something simple) and set a <strong>Password</strong>. </li>
+              <li>Share the <strong>Network ID</strong> and <strong>Password</strong> with the players who want to join. </li>
+            </ul>
+            <blockquote>
+              <p><strong>Note:</strong> While the creator of the Hamachi network typically hosts the game server for simplicity, anyone in the network can host. The game server host, not the Hamachi network creator, controls the game info and configuration.</p>
+            </blockquote>
+          </li>
+          <li>
+            <p><strong>Assign Player Info</strong> </p>
+            <ul>
+              <li>
+                <p>As the host, you are responsible for assigning and configuring the following for each player: </p>
+                <ul>
+                  <li><strong>Player ID</strong>: A unique identifier for the player. </li>
+                  <li><strong>Champion</strong>: Choose the champion the player will use. </li>
+                  <li><strong>Player Name</strong>: Assign the player&#39;s in-game name. </li>
+                  <li><strong>Team</strong>: Customize the team the player is on (Blue/Purple).</li>
+                </ul>
+              </li>
+              <li>
+                <p>Ensure that all this information is added to the server&#39;s <strong>GameInfo.json</strong>.</p>
+              </li>
+              <li>The location of GameInfo.json is <code>GameServer\GameServerConsole\bin\Debug\net8.0\Settings</code></li>
+              <li>Make sure you&#39;re <strong>NOT</strong> editing the template file.</li>
+              <li><a href="GameInfo.json">Download Example GameInfo.json with multiple players</a></li>
+              <li>Once assigned, share the <strong>Player ID</strong> with each player so they can include it in their connection line (.bat file). </li>
+            </ul>
+            <p><strong>Important:</strong> As the host, ensure that the server terminal (such as cmd) shows <strong>“Game is ready, players can connect”</strong> before informing players to run their <code>.bat</code> files. If the terminal shows <strong>“All players disconnected”</strong>, the server is down, and players will not be able to connect.</p>
+          </li>
+          <li>
+            <p><strong>Run the Game Server</strong></p>
+            <ul>
+              <li>Run <strong>without debugging</strong> in Visual Studio (or use the <code>./GameServerConsole</code> command, or run the <code>GameServerConsole.exe</code>). A terminal should pop up, initializing the game server. If <code>autoStartClient</code> is set to <code>true</code> in your <code>GameServerSettings.json</code>, the game should launch automatically (to avoid problems with this, make sure your <code>playerID</code> is <code>1</code>). Once the terminal shows that the game is ready, you can tell the other players to join by running their .bat files.</li>
+              <li>
+                <p><strong>Optional:</strong> use <code>autoStartClient = false</code> in <code>GameServerSettings.json</code></p>
+                Do it if you want to have control over your playerID and autolaunch.
+                <ul>
+                  <li>Open your <code>GameServerSettings.json</code> file (directory is the same as <code>GameInfo.json</code>) and check the <code>autostart</code> value: </li>
+                  <li>If <code>autostart = true</code>: The server will automatically launch the game client with <strong>Player ID 1</strong>. This is fine if you (the host) intend to play as <strong>Player ID 1</strong>.</li>
+                  <li>If you do <strong>not</strong> want to use <strong>Player ID 1</strong> (or prefer manual control), set <code>autostart = false</code>. Then, you will need to connect to the server manually using a <code>.bat</code> file as a regular player.</li>
+                </ul>
+              </li>
+              <li><strong>Important:</strong> Always run the server normally (not in debug mode in Visual Studio), because debugging can break multiplayer functionality.</li>
+            </ul>
+          </li>
+        </ol>
+      </details>
+    </li>
+    <li>
+      <details>
+        <summary>
+          <h5 id="how-to-join" style="display:inline">
+            If You’re Joining a Hamachi/Radmin Network and Game Server
+          </h5>
+        </summary>
+        <ol>
+          <li>
+            <p><strong>Join the Hamachi/Radmin Network</strong></p>
+            <ul>
+              <li>Open Hamachi/Radmin and log in (or sign up if you don’t have an account).</li>
+              <li>Click <strong>“Network”</strong> &gt; <strong>“Join an existing network”</strong>.</li>
+              <li>Enter the <strong>Network ID</strong> and <strong>Password</strong> provided by the host.</li>
+            </ul>
+          </li>
+          <li>
+            <p><strong>Obtain the Host’s IPv4 Address</strong></p>
+            <ul>
+              <li>Once you’ve joined the network, <strong>right-click on the host’s name</strong> in Hamachi and select <strong>“Copy IPv4 Address”</strong>.</li>
+              <li>This is the IP address you’ll use to connect to the server. </li>
+            </ul>
+          </li>
+          <li>
+            <p><strong>Create a .bat File to Connect</strong></p>
+            <ul>
+              <li>To connect to the server, create a <code>.bat</code> file (batch file) to launch the client in the
+                <code>League-of-Legends-4-20\RADS\solutions\lol_game_client_sln\releases\0.0.1.68\deploy</code> directory.</li>
+              <li>
+                <p>Open <strong>Notepad (or any other text editor)</strong> and create a new file with the following content (replace <code>&lt;host_ip&gt;</code> and <code>&lt;player_id&gt;</code> as directed below): </p>
+                <pre>start "" "League of Legends.exe" "" "" "" "&lt;host_ip&gt; 5119 17BLOhi6KZsTtldTsizvHg== &lt;player_id&gt;"</pre>
+                <ul>
+                  <li>Replace <code>&lt;host_ip&gt;</code> with the host’s IPv4 address (copied from Hamachi/Radmin).</li>
+                  <li>Replace <code>&lt;player_id&gt;</code> with the <strong>Player ID</strong> provided to you by the host.</li>
+                </ul>
+              </li>
+              <li>
+                <p>Save the file with a <code>.bat</code> extension (e.g., <code>connect_to_server.bat</code>).</p>
+              </li>
+              <li>Ensure the <strong>Player ID</strong> and <strong>Host IP</strong> placeholders are replaced with the exact values given by the host.</li>
+            </ul>
+            <p><strong>Important:</strong> Only run the <code>.bat</code> file when the host confirms that the server terminal says <strong>“Game is ready, players can connect”</strong>. If the server terminal shows <strong>“All players disconnected”</strong>, the server is offline, and attempting to connect will fail.</p>
+          </li>
+        </ol>
+      </details>
+    </li>
+    <li>
+      <h4 id="troubleshooting">Troubleshooting tips</h4>
+      <details>
+        <summary>
+          <h5 id="players-can-t-connect-even-if-the-server-is-up" style="display:inline">
+            Players can&#39;t connect even if the server is up
+          </h5>
+        </summary>
+        <ol>
+          <li>
+            <p><strong>Ping Each Other on Hamachi</strong></p>
+            <ul>
+              <li>Right-click another player’s name in Hamachi and select <strong>“Ping”</strong>. </li>
+              <li>If the ping fails or shows <strong>timed-out errors</strong>, there’s likely a firewall issue. </li>
+            </ul>
+          </li>
+          <li>
+            <p><strong>Adjust Windows Firewall Settings</strong></p>
+            <ul>
+              <li>Open <strong>Windows Security</strong> &gt; <strong>Firewall &amp; Network Protection</strong>. </li>
+            <li>Click <strong>“Advanced Settings”</strong> on the bottom-right. </li>
+            <li>Select <strong>Windows defender properties</strong>. </li>
+            <li>Check each profile domain (<strong>Domain, Private, Public</strong>), choose <strong>“Protected network connections”</strong>, and ensure that <strong>Radmin/Hamachi</strong> is unchecked for all profiles.</li>
+            <li>Check if <strong>inbound</strong> or <strong>outbound</strong> connections are blocked by any domain, and allow them if any of them is blocked. </li>
+            </ul>
+          </li>
+          <li>
+            <p><strong>Check Server Status</strong></p>
+            <ul>
+              <li>Ensure the server terminal says <strong>“Game is ready, players can connect”</strong>. If the terminal says <strong>“All players disconnected”</strong>, the server is offline. Restart the server and try again. </li>
+            </ul>
+          </li>
+        </ol>
+      </details>
+
+      <details>
+        <summary>
+          <h5 id="it-is-so-laggy" style="display:inline">
+            It&#39;s so laggy!
+          </h5>
+        </summary>
+          <p>The server is unoptimized, and a VPN isn&#39;t an efficient way to play multiplayer, so it will lag. However, there are options:</p>
+          <ul>
+            <li>Try a VPS (costs money)</li>
+            <li>Try port forwarding (it can cost money, depends on the provider)</li>
+          </ul>
+        </details>
+    </li>
+  </ul>
 </details>
 
 <details>
@@ -196,7 +359,7 @@ wine "./League of Legends.exe" "" "" "" "127.0.0.1 5119 17BLOhi6KZsTtldTsizvHg==
 </ul>
 </details>
 
-<h2 id="userful-links">Userful links</h2>
+<h2 id="useful-links">Useful links</h2>
 <p>It may be a good idea to save their contents to preserve.</p>
 
 <p>Old clients with debug data to reverse engineer: <br />
