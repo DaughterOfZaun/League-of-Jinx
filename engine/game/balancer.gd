@@ -36,42 +36,69 @@ func _physics_process(delta: float) -> void:
 		return
 
 	if generated_frames: return
-	generated_frames = true
 	#call_deferred("generate_frames")
 	#generate_frames()
-	generated_frames = false
 	
 	#pack_scene()
 
-	if history_slice_to_override < 0:
-		history_slice_to_override = 0
-		root.propagate_call(&"set_physics_process", [true], true)
-		self.set_physics_process(true)
-		print('forward')
-		time_dir = true
 	if history_slice_to_override > history_slices_count - 1:
-		history_slice_to_override = history_slices_count - 1
-		root.propagate_call(&"set_physics_process", [false], true)
-		self.set_physics_process(true)
-		print('backward')
-		time_dir = false
+		history_slice_to_override = 120
+		load_state()
+		generate_frames()
+		history_slice_to_override = 0
 
-	if time_dir: save_state()
-	else: load_state()
+	#const MAX_INT := (1 << 31) - 1
+	#if history_slice_to_override > history_slices_count - 1:
+	#	if !is_ff:
+	#		history_slice_to_override = 120
+	#		load_state()
+	#		Engine.physics_ticks_per_second = MAX_INT
+	#		Engine.max_physics_steps_per_frame = 128
+	#		is_ff = true
+	#		ff_start_frame = Engine.get_process_frames()
+	#	else:
+	#		history_slice_to_override = 0
+	#		Engine.physics_ticks_per_second = 60
+	#		Engine.max_physics_steps_per_frame = 8
+	#		is_ff = false
+	#		print(Engine.get_process_frames() - ff_start_frame)
+	#	print(is_ff)
+	
+	if !is_ff: save_state()
+
+	#if history_slice_to_override < 0:
+	#	history_slice_to_override = 0
+	#	root.propagate_call(&"set_physics_process", [true], true)
+	#	self.set_physics_process(true)
+	#	print('forward')
+	#	time_dir = true
+	#if history_slice_to_override > history_slices_count - 1:
+	#	history_slice_to_override = history_slices_count - 1
+	#	root.propagate_call(&"set_physics_process", [false], true)
+	#	self.set_physics_process(true)
+	#	print('backward')
+	#	time_dir = false
+
+	#if time_dir: save_state()
+	#else: load_state()
 
 	if time_dir: history_slice_to_override += 1
 	else: history_slice_to_override -= 1
 
 var time_dir := true
+var is_ff := false
+var ff_start_frame := 0
 
 var pp: StringName = &"_physics_process"
 var args: Array[Variant] = [ 1.0 / Engine.physics_ticks_per_second ]
 @onready var root: Node = get_tree().current_scene #.find_child("Ahri", false, false)
 func generate_frames() -> void:
-	for i in range(60):
-		#root.propagate_notification(NOTIFICATION_INTERNAL_PHYSICS_PROCESS)
-		#root.propagate_notification(NOTIFICATION_PHYSICS_PROCESS)
-		root.propagate_call(pp, args)
+	generated_frames = true
+	for i in range(120):
+		root.propagate_notification(NOTIFICATION_INTERNAL_PHYSICS_PROCESS)
+		root.propagate_notification(NOTIFICATION_PHYSICS_PROCESS)
+		#root.propagate_call(pp, args)
+	generated_frames = false
 
 var packed_scene: PackedScene = PackedScene.new()
 func pack_scene() -> void:

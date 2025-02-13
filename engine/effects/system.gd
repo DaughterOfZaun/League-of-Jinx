@@ -95,5 +95,5 @@ func _ready() -> void:
 func emit(pos: Vector3) -> void:
 	var xfrom := Transform3D.IDENTITY.translated(pos)
 	for child: GPUParticles3D in particles:
-		var flags := GPUParticles3D.EmitFlags.EMIT_FLAG_POSITION | GPUParticles3D.EmitFlags.EMIT_FLAG_ROTATION_SCALE
+		var flags := GPUParticles3D.EmitFlags.EMIT_FLAG_POSITION
 		child.emit_particle(xfrom, Vector3.ZERO, Color.WHITE, Color(0, 0, 0, 0), flags)
