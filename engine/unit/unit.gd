@@ -148,6 +148,7 @@ func get_point_by_facing_offset(distance: float, offset_angle: float) -> Vector3
 var rot_speed: float = deg_to_rad(180 / 0.2)
 func _physics_process_rotate(delta: float) -> void:
 	var rot_delta := angle_difference(rotation.y, direction_angle)
+	if is_zero_approx(rot_delta): return
 	rotation.y += sign(rot_delta) * min(abs(rot_delta), rot_speed * delta)
 
 @onready var skinned_mesh_root: Node = find_child("SkinnedMesh", false, false)
@@ -402,7 +403,7 @@ func _ready() -> void:
 	fow_init_completed = true
 	fow_subviewport = get_node("/root/Node3D/SubViewport")
 	fow_subviewport_texture = fow_subviewport.get_texture()
-	RenderingServer.frame_pre_draw.connect(update_fow_image_if_needed)
+	#RenderingServer.frame_pre_draw.connect(update_fow_image_if_needed)
 
 func get_visible_in_fow() -> bool:
 	return team != Enums.Team.CHAOS #HACK:

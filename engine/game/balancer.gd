@@ -41,29 +41,42 @@ func _physics_process(delta: float) -> void:
 	
 	#pack_scene()
 
-	if history_slice_to_override > history_slices_count - 1:
-		history_slice_to_override = 120
-		load_state()
-		generate_frames()
-		history_slice_to_override = 0
-
-	#const MAX_INT := (1 << 31) - 1
 	#if history_slice_to_override > history_slices_count - 1:
-	#	if !is_ff:
-	#		history_slice_to_override = 120
-	#		load_state()
-	#		Engine.physics_ticks_per_second = MAX_INT
-	#		Engine.max_physics_steps_per_frame = 128
-	#		is_ff = true
-	#		ff_start_frame = Engine.get_process_frames()
-	#	else:
-	#		history_slice_to_override = 0
-	#		Engine.physics_ticks_per_second = 60
-	#		Engine.max_physics_steps_per_frame = 8
-	#		is_ff = false
-	#		print(Engine.get_process_frames() - ff_start_frame)
-	#	print(is_ff)
+	#	history_slice_to_override = 120
+	#	load_state()
+	#	generate_frames()
+	#	history_slice_to_override = 0
+
+	const MAX_INT := (1 << 31) - 1
+	const travel_frames := 7
+	const multiplier := 1000000
+	const target_fps := 30
+	if history_slice_to_override > history_slices_count - 1:
+		if !is_ff:
+			history_slice_to_override = history_slices_count - travel_frames
+			is_loaded = false
+			#load_state()
+			Engine.max_physics_steps_per_frame = travel_frames #+ 1
+			Engine.physics_ticks_per_second = target_fps * multiplier
+			Engine.time_scale = multiplier
+			is_ff = true
+			#ff_start_frame = Engine.get_process_frames()
+			ff_start_frame = Engine.get_physics_frames()
+		else:
+			history_slice_to_override = 0
+			Engine.max_physics_steps_per_frame = 1
+			Engine.physics_ticks_per_second = target_fps
+			Engine.time_scale = 1
+			is_ff = false
+			#print(Engine.get_process_frames() - ff_start_frame)
+			print(Engine.get_physics_frames() - ff_start_frame)
+		print(is_ff)
 	
+	if is_ff && Engine.get_process_frames() != ff_start_frame && !is_loaded:
+		history_slice_to_override = history_slices_count - travel_frames
+		is_loaded = true
+		load_state()
+
 	if !is_ff: save_state()
 
 	#if history_slice_to_override < 0:
@@ -88,6 +101,7 @@ func _physics_process(delta: float) -> void:
 var time_dir := true
 var is_ff := false
 var ff_start_frame := 0
+var is_loaded := false
 
 var pp: StringName = &"_physics_process"
 var args: Array[Variant] = [ 1.0 / Engine.physics_ticks_per_second ]
