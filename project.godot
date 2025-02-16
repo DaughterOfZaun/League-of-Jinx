@@ -24,6 +24,11 @@ Loader="*res://engine/game/loader.gd"
 [debug]
 
 gdscript/warnings/exclude_addons=false
+gdscript/warnings/unused_variable=0
+gdscript/warnings/unused_local_constant=0
+gdscript/warnings/unused_private_class_variable=0
+gdscript/warnings/unused_parameter=0
+gdscript/warnings/unused_signal=0
 gdscript/warnings/shadowed_variable=0
 gdscript/warnings/shadowed_variable_base_class=0
 gdscript/warnings/shadowed_global_identifier=0
@@ -157,9 +162,10 @@ locale/translations=PackedStringArray("res://data/ui/lang/fontconfig.en.translat
 
 [physics]
 
+common/physics_ticks_per_second=480
+common/max_physics_steps_per_frame=100
 common/physics_jitter_fix=0.0
 3d/physics_engine="Jolt Physics"
-common/physics_interpolation=true
 
 [rendering]
 

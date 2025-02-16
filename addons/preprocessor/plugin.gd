@@ -6,6 +6,7 @@ func _build() -> bool:
 	var named_classes: Dictionary[String, ClassRepr] = {}
 	var stages: Array[PreprocessorStage] = [
 		VarsToArrayStage.new(),
+		SkipSomeFramesStage.new(),
 	]
 	
 	var in_files := Utils.get_all_files("res://", "gd", [])
