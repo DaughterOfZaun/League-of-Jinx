@@ -69,10 +69,14 @@ func _physics_process(delta: float) -> void:
 	#if Engine.is_editor_hint(): return
 	super._physics_process(delta)
 
-	if state == State.CHANNELING:
-		if Balancer.should_update_actions(self):
+	if Balancer.should_update_actions(self):
+	#func _update_actions() -> void:
+		if state == State.CHANNELING:
 			channeling_update_actions()
-		if Balancer.should_update_stats(self):
+
+	if Balancer.should_update_stats(self):
+	#func _update_stats() -> void:
+		if state == State.CHANNELING:
 			channeling_update_stats()
 			update_tooltip(slot)
 

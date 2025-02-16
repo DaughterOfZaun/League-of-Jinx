@@ -29,9 +29,11 @@ func _physics_process(delta: float) -> void:
 	time_since_last_regen += delta
 
 	if Balancer.should_reset_stats(self):
+	#func _reset_stats() -> void:
 		reset_data_b()
 	
 	if Balancer.should_sync_stats(self):
+	#func _sync_stats() -> void:
 		swap_temps()
 
 		health_current = clampf(health_current + get_health_regen() * time_since_last_regen, 0, get_health())

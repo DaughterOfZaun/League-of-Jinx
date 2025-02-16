@@ -9,49 +9,57 @@ class_name Balancer extends Node
 #func _exit_tree() -> void:
 #	Balancer.unregister(self)
 
-static func register(obj: Node) -> void:
-	pass
+static var objs: Array[Variant] = [ null ]
+static var vars: Array[Variant] = [ null ]
+static var free_ids: Array[int] = []
+static func register(obj: Object) -> void:
+	var id: Variant = free_ids.pop_back()
+	@warning_ignore("unsafe_property_access")
+	var obj_vars: Array[Variant] = obj._vars
+	if id == null:
+		id = objs.size()
+		objs.push_back(obj)
+		vars.push_back(obj_vars)
+	else:
+		objs[id] = obj
+		vars[id] = obj_vars
+	obj.set_meta(&"id", id)
 
-static func unregister(obj: Node) -> void:
-	pass
+static func unregister(obj: Object) -> void:
+	var id: Variant = obj.get_meta(&"id")
+	if id != null:
+		obj.set_meta(&"id", null)
+		free_ids.push_back(id)
+		vars[id] = null
+		objs[id] = null
 
 static var frame: int = -1
-static func should_reset_stats(obj: Node) -> bool:
+static func should_reset_stats(obj: Object) -> bool:
 	return frame == 0
-static func should_update_stats(obj: Node) -> bool:
+static func should_update_stats(obj: Object) -> bool:
 	return frame == 1
-static func should_sync_stats(obj: Node) -> bool:
+static func should_sync_stats(obj: Object) -> bool:
 	return frame == 2
-static func should_update_actions(obj: Node) -> bool:
+static func should_update_actions(obj: Object) -> bool:
 	return frame == 3
 
 static var is_ff := false
+#static var is_updating_stats: bool = false
 func _physics_process(delta: float) -> void:
 	#frame = (Engine.get_physics_frames() - 1) % 15
-	frame = (frame + 1) % 15
-
-	const multiplier = 16
-	const travel_frames = 8
-	if history_slice_to_override > history_slices_count - 1:
-		if !is_ff:
-			history_slice_to_override = history_slices_count - travel_frames
-			load_state()
-			Engine.time_scale = multiplier
-			is_ff = true
-		else:
-			#root.propagate_call(&"reset_physics_interpolation")
-			history_slice_to_override = 0
-			Engine.time_scale = 1
-			is_ff = false
-		print(is_ff)
-
-	if is_ff:
-		print(Engine.get_process_frames())
-		history_slice_to_override += 1
+	frame = (frame + 1) % 4
 	
-	elif Engine.get_physics_frames() % multiplier == 1:
-		save_state()
-		history_slice_to_override += 1
+	#is_updating_stats = true
+	#root.propagate_call(&"_reset_stats")
+	#root.propagate_call(&"_update_stats")
+	#root.propagate_call(&"_sync_stats")
+	#is_updating_stats = false
+	#root.propagate_call(&"_update_actions")
+
+	save_state()
+	current_moment = (current_moment + 1) % history_length
+
+	#pack_scene()
 
 var generated_frames: bool = false
 var pp: StringName = &"_physics_process"
@@ -71,79 +79,77 @@ func pack_scene() -> void:
 
 const fps := 60
 const ekko_r_afterimage_delay_sec := 4
-const history_slices_count := ekko_r_afterimage_delay_sec * fps
-const max_objs_count := 1000
-const max_obj_props_count := 30
+const history_length := ekko_r_afterimage_delay_sec * fps
 
-var history_nodes: Array[Array] = []
-var history_vars: Array[Array] = []
-var history_slice_to_override := 0
+var history_of_objs: Array[Array] = []
+var history_of_vars: Array[Array] = []
+var current_moment: int = 0
 func _init() -> void:
-	history_nodes.resize(history_slices_count)
-	history_vars.resize(history_slices_count)
-	for i in range(history_slices_count):
-		var a := []; a.resize(max_objs_count)
-		history_vars[i] = a
-		#for j in range(max_objs_count):
-		#	var b := []; b.resize(max_obj_props_count)
-		#	a[j] = b
+	history_of_objs.resize(history_length)
+	history_of_vars.resize(history_length)
+
+	#var args := PackedStringArray()
+	#var pid := OS.create_instance(args)
+	#print(pid)
+
+func _not_ready() -> void:
+	var path := OS.get_executable_path()
+	#var args := OS.get_cmdline_args()
+	var args := PackedStringArray()
+
+	var user_args := OS.get_cmdline_user_args()
+	if user_args.has("--second"): return
+	
+	#args.append("--headless")
+	
+	#var loop: SceneTree = Engine.get_main_loop()
+	#var res_scene_path := tree.current_scene.scene_file_path
+	var res_scene_path := "res://"
+	var global_scene_path := ProjectSettings.globalize_path(res_scene_path)
+	
+	args.append("--path")
+	args.append(global_scene_path)
+	
+	args.append("--")
+	args.append("--second")
+
+	var pipe := OS.execute_with_pipe(path, args, true)
+	print('OS.execute_with_pipe(', path, ', ', args, ', ', true, ') -> ', pipe)
+	var stdio: FileAccess = pipe["stdio"]
+	var stderr: FileAccess = pipe["stderr"]
+	var pid: int = pipe["pid"]
+
+	process_io = stdio
+	var thread := Thread.new()
+	thread.start(read_process_output)
+
+var process_io: FileAccess
+func read_process_output() -> void:
+	while process_io.is_open() and process_io.get_error() == OK:
+		print("STDIO: ", process_io.get_line())
 
 @onready var tree := get_tree()
-const rollback_group_name := &"rollback"
+#const rollback_group_name := &"rollback"
 const save_method_name := &"_save"
 const load_method_name := &"_load"
+
 func save_state() -> void:
-	
-	tree.call_group(rollback_group_name, save_method_name)
-
-	var nodes := tree.get_nodes_in_group(rollback_group_name)
-	var history_slice: Array = history_vars[history_slice_to_override]
-	
-	history_nodes[history_slice_to_override] = nodes
-	#history_slice_to_override = (history_slice_to_override + 1) % history_vars.size()
-	
-	for i in nodes.size():
-		var node := nodes[i]
-		@warning_ignore("unsafe_property_access")
-		var node_vars: Array[Variant] = node._vars
-		
-		history_slice[i] = node_vars.duplicate(true)
-
-		#var saved_vars: Array = history_slice[i]
-		#saved_vars.assign(node_vars)
-		
-		#saved_vars.resize(node_vars.size())
-		#for j in node_vars.size():
-		#	var v: Variant = node_vars[j]
-		#	match typeof(v):
-		#		TYPE_ARRAY: saved_vars[j] = (v as Array).duplicate()
-		#		TYPE_DICTIONARY: saved_vars[j] = (v as Dictionary).duplicate()
-		#		_: saved_vars[j] = v
+	#tree.call_group(rollback_group_name, save_method_name)
+	for obj: Object in objs:
+		if obj == null: continue
+		@warning_ignore("unsafe_method_access")
+		obj._save()
+	history_of_objs[current_moment] = objs.duplicate(false)
+	history_of_vars[current_moment] = vars.duplicate(true)
 
 func load_state() -> void:
-	
-	var nodes := history_nodes[history_slice_to_override]
-	var history_slice := history_vars[history_slice_to_override]
-
-	#history_slice_to_override = (history_slice_to_override - 1) % history_vars.size()
-
-	for i in nodes.size():
-		var node: Node = nodes[i]
-		#@warning_ignore("unsafe_property_access")
-		#var node_vars: Array[Variant] = node._vars
-		var saved_vars: Array = history_slice[i]
-		
+	objs = history_of_objs[current_moment]
+	vars = history_of_vars[current_moment]
+	for i in objs.size():
+		var obj: Object = objs[i]
+		if obj == null: continue
 		@warning_ignore("unsafe_property_access")
-		node._vars = saved_vars.duplicate(true)
-
-		#node_vars.assign(saved_vars)
-		
-		#node_vars.resize(saved_vars.size())
-		#for j in saved_vars.size():
-		#	var v: Variant = saved_vars[j]
-		#	match typeof(v):
-		#		TYPE_ARRAY: (node_vars[j] as Array).assign(v)
-		#		TYPE_DICTIONARY: (node_vars[j] as Dictionary).assign(v)
-		#		_: node_vars[j] = v
-
-	tree.call_group(rollback_group_name, load_method_name)
+		obj._vars = vars[i]
+		@warning_ignore("unsafe_method_access")
+		obj._load()
+	#tree.call_group(rollback_group_name, load_method_name)

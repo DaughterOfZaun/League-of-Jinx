@@ -6,7 +6,7 @@ func _build() -> bool:
 	var named_classes: Dictionary[String, ClassRepr] = {}
 	var stages: Array[PreprocessorStage] = [
 		VarsToArrayStage.new(),
-		SkipSomeFramesStage.new(),
+		#SkipSomeFramesStage.new(),
 	]
 	
 	var in_files := Utils.get_all_files("res://", "gd", [])
@@ -33,7 +33,7 @@ func _build() -> bool:
 	
 	for i in stages.size():
 		print('(%d/%d) processing...' % [ i + 1, stages.size() ])
-		stages[i].process(classes)
+		stages[i].process(classes, named_classes)
 	
 	print('postprocessing...')
 	for cls in classes:
@@ -126,6 +126,7 @@ func parse_class_declaration(cls: ClassRepr, named_classes: Dictionary[String, C
 	if cls_parent:
 		cls.parent_name = cls_parent
 	cls.tags = cls_tags.substr(2).strip_edges(false, true).split(" #@", false)
+	cls.is_rollback = cls.tags.has("rollback") || cls.in_path.begins_with("res://data/")
 	#print("class_name ", cls.name, " extends ", cls.parent_name, " #@" + " #@".join(cls.tags))
 
 func set_class_parent(cls: ClassRepr, named_classes: Dictionary[String, ClassRepr]) -> void:

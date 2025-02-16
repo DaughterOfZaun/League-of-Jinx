@@ -11,6 +11,9 @@ func get_parent_vars_count() -> int:
 	return (parent.get_parent_vars_count() + parent.own_vars_count) if parent else 0
 func get_parent_static_vars_count() -> int:
 	return (parent.get_parent_static_vars_count() + parent.own_static_vars_count) if parent else 0
+func contains(what: String) -> bool:
+	return code.contains(what) || (parent != null && parent.contains(what))
+var is_rollback: bool
 
 var code: String
 var code_after_preprocessing: String

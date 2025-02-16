@@ -9,6 +9,7 @@ var stats: Stats:
 	#get: return _stats
 	get:
 		if Balancer.should_update_stats(self):
+		#if Balancer.is_updating_stats:
 			return stats_temp
 		else:
 			return stats_perm
@@ -47,11 +48,6 @@ func _physics_process(delta: float) -> void:
 	_physics_process_update_visibility(delta)
 	#_physics_process_sync_char_body_pos(delta)
 
-	#if Balancer.should_update_stats(self):
-	#	update_stats()
-	#if Balancer.should_update_actions(self):
-	#	update_actions()
-
 #region Signals
 static var signals: Array[StringName] = []
 static var on_signals: Array[StringName] = []
@@ -72,12 +68,6 @@ func connect_all(to: Node) -> void:
 
 signal allow_add(attacker: Unit, buff: Buff)
 
-# UPDATE
-#signal update_stats()
-#func update_stats() -> void: pass
-#signal update_actions()
-#func update_actions() -> void: pass
-
 signal dodge(attacker: Unit)
 signal being_dodged(target: Unit)
 
@@ -88,6 +78,7 @@ signal spell_hit(target: Unit, spell: Spell)
 signal being_spell_hit(attacker: Unit, spell: Spell)
 signal miss(target: Unit)
 
+# DASH
 signal move_end()
 signal move_failure()
 signal move_success()
