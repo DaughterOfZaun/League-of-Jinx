@@ -9,29 +9,54 @@ class_name Balancer extends Node
 #func _exit_tree() -> void:
 #	Balancer.unregister(self)
 
-static var objs: Array[Variant] = [ null ]
-static var vars: Array[Variant] = [ null ]
 static var free_ids: Array[int] = []
-static func register(obj: Object) -> void:
-	var id: Variant = free_ids.pop_back()
+static var _objs: Array[Variant] = [ null ]
+static var _vars: Array[Variant] = [ null ]
+static var static_free_ids: Array[int] = []
+static var _static_objs: Array[Variant] = [ null ]
+static var _static_vars: Array[Variant] = [ null ]
+
+static func register(obj: Object, obj_vars_size: int = 0) -> void:
 	@warning_ignore("unsafe_property_access")
-	var obj_vars: Array[Variant] = obj._vars
-	if id == null:
+	obj._id = _register(obj, obj_vars_size, obj._id, free_ids, _objs, _vars)
+
+static func register_static(obj: Object, obj_vars_size: int = 0) -> void:
+	@warning_ignore("unsafe_property_access")
+	obj._static_id = _register(obj, obj_vars_size, obj._static_id, static_free_ids, _static_objs, _static_vars)
+
+static func _register(obj: Object, obj_vars_size: int, id: int, free_ids: Array[int], objs: Array, vars: Array) -> int:
+	if id != 0: return id
+
+	var obj_vars: Array[Variant] = []
+	obj_vars.resize(obj_vars_size)
+	if free_ids.size() == 0:
 		id = objs.size()
 		objs.push_back(obj)
 		vars.push_back(obj_vars)
 	else:
+		id = free_ids.pop_back()
 		objs[id] = obj
 		vars[id] = obj_vars
-	obj.set_meta(&"id", id)
+	
+	if save_method_name in obj:
+		instance.save.connect(obj[save_method_name])
+	if load_method_name in obj:
+		instance.load.connect(obj[load_method_name])
+
+	return id
 
 static func unregister(obj: Object) -> void:
-	var id: Variant = obj.get_meta(&"id")
-	if id != null:
-		obj.set_meta(&"id", null)
-		free_ids.push_back(id)
-		vars[id] = null
-		objs[id] = null
+
+	@warning_ignore("unsafe_property_access")
+	var id: Variant = obj._id
+	if id == 0: return
+
+	@warning_ignore("unsafe_property_access")
+	obj._id = 0
+	
+	free_ids.push_back(id)
+	_vars[id] = null
+	_objs[id] = null
 
 static var frame: int = -1
 static func should_reset_stats(obj: Object) -> bool:
@@ -81,12 +106,15 @@ const fps := 60
 const ekko_r_afterimage_delay_sec := 4
 const history_length := ekko_r_afterimage_delay_sec * fps
 
+static var instance: Balancer
+
 var history_of_objs: Array[Array] = []
 var history_of_vars: Array[Array] = []
 var current_moment: int = 0
 func _init() -> void:
 	history_of_objs.resize(history_length)
 	history_of_vars.resize(history_length)
+	instance = self
 
 	#var args := PackedStringArray()
 	#var pid := OS.create_instance(args)
@@ -130,26 +158,15 @@ func read_process_output() -> void:
 
 @onready var tree := get_tree()
 #const rollback_group_name := &"rollback"
-const save_method_name := &"_save"
-const load_method_name := &"_load"
+signal save(); const save_method_name := &"_save"
+signal load(); const load_method_name := &"_load"
 
 func save_state() -> void:
-	#tree.call_group(rollback_group_name, save_method_name)
-	for obj: Object in objs:
-		if obj == null: continue
-		@warning_ignore("unsafe_method_access")
-		obj._save()
-	history_of_objs[current_moment] = objs.duplicate(false)
-	history_of_vars[current_moment] = vars.duplicate(true)
+	save.emit()
+	history_of_objs[current_moment] = _objs.duplicate(false)
+	history_of_vars[current_moment] = _vars.duplicate(true)
 
 func load_state() -> void:
-	objs = history_of_objs[current_moment]
-	vars = history_of_vars[current_moment]
-	for i in objs.size():
-		var obj: Object = objs[i]
-		if obj == null: continue
-		@warning_ignore("unsafe_property_access")
-		obj._vars = vars[i]
-		@warning_ignore("unsafe_method_access")
-		obj._load()
-	#tree.call_group(rollback_group_name, load_method_name)
+	_objs = history_of_objs[current_moment]
+	_vars = history_of_vars[current_moment]
+	load.emit()

@@ -101,17 +101,20 @@ func process_class(cls: ClassRepr) -> void:
 
 		var i := 0
 		var vars_name := ""
+		var id_name := ""
 		if var_mod == "static":
 			static_values.append(initial_value)
 			static_names.append(var_name)
 			i = parent_static_var_i + static_var_i
 			vars_name = "_static_vars"
+			id_name = "_static_id"
 			static_var_i += 1
 		else:
 			initial_values.append(initial_value)
 			initial_names.append(var_name)
 			i = parent_var_i + var_i
 			vars_name = "_vars"
+			id_name = "_id"
 			var_i += 1
 
 		var_decl = ""
@@ -124,12 +127,12 @@ func process_class(cls: ClassRepr) -> void:
 			var_decl += var_mod + " "
 		
 		var_decl += "var " + var_name + ": " + var_type + ":\n"
-		if named_class != null && named_class.is_rollback:
-			var_decl += "	get: return Balancer.objs[" + vars_name + "[" + str(i) + "]]\n"
-			var_decl += "	set(v): " + vars_name + "[" + str(i) + "] = v.get_meta(&\"id\") if v else 0\n"
-		else:
-			var_decl += "	get: return " + vars_name + "[" + str(i) + "]\n"
-			var_decl += "	set(v): " + vars_name + "[" + str(i) + "] = v\n"
+		#if named_class != null && named_class.is_rollback:
+		#	var_decl += "	get: return Balancer.objs[" + vars_name + "[" + str(i) + "]]\n"
+		#	var_decl += "	set(v): " + vars_name + "[" + str(i) + "] = v.get_meta(&\"id\") if v else 0\n"
+		#else:
+		var_decl += "	get: return Balancer." + vars_name + "[" + id_name + "][" + str(i) + "]\n"
+		var_decl += "	set(v): Balancer." + vars_name + "[" + id_name + "][" + str(i) + "] = v\n"
 
 		return var_decl
 	)
@@ -140,16 +143,18 @@ func process_class(cls: ClassRepr) -> void:
 	var parent_has_init := cls.parent.code.contains("func _init") if cls.parent else false
 	if var_i > 0 || has_init && parent_has_init:
 		code = Utils.str_replace_once(code, init_or_eof_regex, process_func.bind(
-			"_vars", var_i, parent_var_i, initial_values, initial_names,
+			"_vars", "_id", var_i, parent_var_i, initial_values, initial_names,
 			"", "_init", parent_has_init,
+			cls,
 		))
 		
 	var has_ready := code.contains("func _ready")
 	var parent_has_ready := cls.parent.code.contains("func _ready") if cls.parent else false
 	if var_i > 0 && !onready_values.is_empty() || has_ready && parent_has_ready:
 		code = Utils.str_replace_once(code, ready_or_eof_regex, process_func.bind(
-			"_vars", 0, parent_var_i, onready_values, initial_names,
+			"_vars", "_id", 0, parent_var_i, onready_values, initial_names,
 			"", "_ready", parent_has_ready,
+			cls,
 		))
 
 	static_var_i = static_values.size()
@@ -158,8 +163,9 @@ func process_class(cls: ClassRepr) -> void:
 	var parent_has_static_init := cls.parent.code.contains("static func _static_init") if cls.parent else false
 	if static_var_i > 0 || has_static_init && parent_has_static_init:
 		code = Utils.str_replace_once(code, static_init_or_eof_regex, process_func.bind(
-			"_static_vars", static_var_i, parent_static_var_i, static_values, static_names,
+			"_static_vars", "_static_id", static_var_i, parent_static_var_i, static_values, static_names,
 			"static", "_static_init", parent_has_static_init,
+			cls,
 		))
 
 	if cls.is_rollback && !cls.contains("func _save"):
@@ -176,8 +182,11 @@ func process_class(cls: ClassRepr) -> void:
 
 func process_func(
 	match: RegExMatch,
-	vars_name: String, var_i: int, parent_var_i: int, vars: Variant, names: Array[String],
+	vars_name: String, id_name: String,
+	var_i: int, parent_var_i: int,
+	vars: Variant, names: Array[String],
 	func_mod: String, func_name: String, parent_has_func: bool,
+	cls: ClassRepr,
 ) -> String:
 
 	var in_args := match.strings[1]
@@ -189,23 +198,24 @@ func process_func(
 		#if func_mod != "static":
 		#	init_code += "@export "
 		if func_mod: init_code += func_mod + " "
-		init_code += "var " + vars_name + ": Array[Variant] = []\n"
+		#init_code += "var " + vars_name + ": Array[Variant] = []\n"
+		init_code += "var " + id_name + ": int = 0\n"
 	
 	if func_mod: init_code += func_mod + " "
 	init_code += "func " + func_name + "(" + in_args + ") -> void:\n"
 	
+	#if func_name in ["_init", "_static_init"]:	
+	#	if var_i > 0:
+	#		init_code += "	" + vars_name + ".resize(" + str(parent_var_i + var_i) + ")\n"
+
+	if func_name == "_init":
+		init_code += "	Balancer.register(self, " + str(parent_var_i + var_i) + ")\n"
+	elif func_name == "_static_init":
+		init_code += "	Balancer.register_static(" + cls.name + ", " + str(parent_var_i + var_i) + ")\n"
+
 	if parent_has_func:
 		init_code += "	super." + func_name + "(" + out_args + ")\n"
 	
-	if func_name in ["_init", "_static_init"]:
-
-		if func_name == "_init":
-			#init_code += "	add_to_group(&\"rollback\")\n"
-			init_code += "	Balancer.register(self)\n"
-
-		if var_i > 0:
-			init_code += "	" + vars_name + ".resize(" + str(parent_var_i + var_i) + ")\n"
-
 	var keys: Variant
 	match typeof(vars):
 		TYPE_ARRAY: keys = (vars as Array).size()
