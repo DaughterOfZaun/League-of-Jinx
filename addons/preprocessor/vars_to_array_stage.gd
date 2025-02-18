@@ -106,7 +106,7 @@ func process_class(cls: ClassRepr) -> void:
 			static_values.append(initial_value)
 			static_names.append(var_name)
 			i = parent_static_var_i + static_var_i
-			vars_name = "_static_vars"
+			vars_name = "_vars"
 			id_name = "_static_id"
 			static_var_i += 1
 		else:
@@ -163,7 +163,7 @@ func process_class(cls: ClassRepr) -> void:
 	var parent_has_static_init := cls.parent.code.contains("static func _static_init") if cls.parent else false
 	if static_var_i > 0 || has_static_init && parent_has_static_init:
 		code = Utils.str_replace_once(code, static_init_or_eof_regex, process_func.bind(
-			"_static_vars", "_static_id", static_var_i, parent_static_var_i, static_values, static_names,
+			"_vars", "_static_id", static_var_i, parent_static_var_i, static_values, static_names,
 			"static", "_static_init", parent_has_static_init,
 			cls,
 		))

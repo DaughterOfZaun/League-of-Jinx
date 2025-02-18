@@ -29,9 +29,9 @@ var is_sealed: bool = false
 var icon_index: int = 0
 var icon: Texture2D:
 	get:
-		#if icon_index < len(data.inventory_icon):
-		return data.inventory_icon[icon_index]
-		#else: return null
+		if icon_index < data.inventory_icon.size():
+			return data.inventory_icon[icon_index]
+		else: return null
 
 var level: int = 0
 #	get:

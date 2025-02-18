@@ -12,9 +12,6 @@ class_name Balancer extends Node
 static var free_ids: Array[int] = []
 static var _objs: Array[Variant] = [ null ]
 static var _vars: Array[Variant] = [ null ]
-static var static_free_ids: Array[int] = []
-static var _static_objs: Array[Variant] = [ null ]
-static var _static_vars: Array[Variant] = [ null ]
 
 static func register(obj: Object, obj_vars_size: int = 0) -> void:
 	@warning_ignore("unsafe_property_access")
@@ -22,7 +19,7 @@ static func register(obj: Object, obj_vars_size: int = 0) -> void:
 
 static func register_static(obj: Object, obj_vars_size: int = 0) -> void:
 	@warning_ignore("unsafe_property_access")
-	obj._static_id = _register(obj, obj_vars_size, obj._static_id, static_free_ids, _static_objs, _static_vars)
+	obj._static_id = _register(obj, obj_vars_size, obj._static_id, free_ids, _objs, _vars)
 
 static func _register(obj: Object, obj_vars_size: int, id: int, free_ids: Array[int], objs: Array, vars: Array) -> int:
 	if id != 0: return id
@@ -81,8 +78,13 @@ func _physics_process(delta: float) -> void:
 	#is_updating_stats = false
 	#root.propagate_call(&"_update_actions")
 
-	save_state()
-	current_moment = (current_moment + 1) % history_length
+	if Engine.get_physics_frames() == 10:
+		var fa := FileAccess.open("res://engine/game/cache/dump.txt", FileAccess.WRITE)
+		fa.store_string(var_to_str(bytes_to_var(var_to_bytes(_vars))))
+		fa.close()
+
+	#save_state()
+	#current_moment = (current_moment + 1) % history_length
 
 	#pack_scene()
 
@@ -109,7 +111,7 @@ const history_length := ekko_r_afterimage_delay_sec * fps
 static var instance: Balancer
 
 var history_of_objs: Array[Array] = []
-var history_of_vars: Array[Array] = []
+var history_of_vars: Array[Variant] = []
 var current_moment: int = 0
 func _init() -> void:
 	history_of_objs.resize(history_length)
@@ -163,10 +165,14 @@ signal load(); const load_method_name := &"_load"
 
 func save_state() -> void:
 	save.emit()
-	history_of_objs[current_moment] = _objs.duplicate(false)
-	history_of_vars[current_moment] = _vars.duplicate(true)
+	history_of_objs[current_moment] = _objs
+	#history_of_objs[current_moment].assign(_objs)
+	history_of_vars[current_moment] = var_to_bytes(_vars)
+	#history_of_vars[current_moment] = _vars.duplicate(true)
 
 func load_state() -> void:
 	_objs = history_of_objs[current_moment]
-	_vars = history_of_vars[current_moment]
+	#_objs.assign(history_of_objs[current_moment])
+	_vars = bytes_to_var(history_of_vars[current_moment])
+	#_vars = history_of_vars[current_moment]
 	load.emit()

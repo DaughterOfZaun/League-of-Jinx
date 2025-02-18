@@ -207,7 +207,7 @@ enum PARType {
 @export_group("")
 
 @export_group("Import", "import_")
-var target: Unit
+@onready var target: Unit = get_parent()
 @export_file("*.ini") var import_path: String
 @export_tool_button("Import") var import := func() -> void:
 	print("importing...")
