@@ -1,14 +1,5 @@
 class_name Balancer extends Node
 
-#var tick_rate: float = 0.25
-#var physics_fps: int = Engine.physics_ticks_per_second
-#var target_frame: int = max(2, floor(physics_fps * tick_rate))
-
-#func _enter_tree() -> void:
-#	Balancer.register(self)
-#func _exit_tree() -> void:
-#	Balancer.unregister(self)
-
 static var free_ids: Array[int] = []
 static var _objs: Array[Variant] = [ null ]
 static var _vars: Array[Variant] = [ null ]
@@ -56,18 +47,13 @@ static func unregister(obj: Object) -> void:
 	_objs[id] = null
 
 func _process(delta: float) -> void:
-	if state_state:
-		load_state()
-		state_state = false
+	pass
 
-var state_state := false
 var frame := 0
 static var is_updating_stats: bool = false
 func _physics_process(delta: float) -> void:
-	if !state_state:
-		load_state()
-		state_state = true
-
+	frame += 1
+	
 	is_updating_stats = true
 	#root.propagate_call(&"_reset_stats")
 	#root.propagate_call(&"_update_stats")
@@ -80,10 +66,9 @@ func _physics_process(delta: float) -> void:
 	#	fa.store_string(var_to_str(bytes_to_var(var_to_bytes(_vars))))
 	#	fa.close()
 
-	frame += 1
-	if frame % 8 == 0:
-		#save_state.call_deferred()
-		save_state()
+	#if frame % 8 == 0:
+	#save_state.call_deferred()
+	#save_state()
 
 	#pack_scene()
 
@@ -103,7 +88,7 @@ var packed_scene: PackedScene = PackedScene.new()
 func pack_scene() -> void:
 	packed_scene.pack(root)
 
-const fps := 60
+const fps := 30
 const ekko_r_afterimage_delay_sec := 4
 const history_length := ekko_r_afterimage_delay_sec * fps
 
@@ -112,6 +97,7 @@ static var instance: Balancer
 var history_of_objs: Array[Array] = []
 var history_of_vars: Array[Array] = []
 var current_moment: int = -1
+static var is_in_thread := false
 func _init() -> void:
 	history_of_objs.resize(history_length)
 	history_of_vars.resize(history_length)
@@ -120,6 +106,15 @@ func _init() -> void:
 	#var args := PackedStringArray()
 	#var pid := OS.create_instance(args)
 	#print(pid)
+
+	#if !is_in_thread:
+	#	is_in_thread = true
+	#	var packed_scene: PackedScene = preload("res://levels/level_1.tscn")
+	#	var scene := packed_scene.instantiate()
+	#	#scene.propagate_notification(NOTIFICATION_ENTER_TREE)
+	#	#scene.propagate_notification(NOTIFICATION_POST_ENTER_TREE)
+	#	#scene.propagate_notification(NOTIFICATION_READY)
+	#	scene.propagate_call(&"_ready")
 
 func _not_ready() -> void:
 	var path := OS.get_executable_path()

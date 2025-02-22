@@ -52,7 +52,6 @@ mouse_cursor/custom_image_hotspot=Vector2(8, 11)
 movie_writer/mix_rate=8000
 movie_writer/mjpeg_quality=1.0
 movie_writer/movie_file="movie.avi"
-movie_writer/disable_vsync=true
 movie_writer/fps=30
 
 [editor_plugins]
@@ -167,10 +166,8 @@ locale/translations=PackedStringArray("res://data/ui/lang/fontconfig.en.translat
 common/physics_ticks_per_second=30
 common/max_physics_steps_per_frame=4
 common/physics_jitter_fix=0.0
-3d/physics_engine="Jolt Physics"
 common/physics_interpolation=true
 
 [rendering]
 
-driver/threads/thread_model=2
 vrs/texture="uid://ve1shittm6mk"

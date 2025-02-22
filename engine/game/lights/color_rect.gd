@@ -11,7 +11,6 @@ func _init() -> void:
 	light_pos.resize(200)
 	light_rng.resize(200)
 
-@onready var camera: Camera2D = %Camera2D
 func _process(delta: float) -> void:
 	var light_n := len(lights)
 	for i in light_n:
@@ -19,6 +18,6 @@ func _process(delta: float) -> void:
 		light_pos[i] = Vector2(l_pos.x, l_pos.z) * GD_3D_to_2D
 		light_rng[i] = lights[i].range * HW_3D_to_GD_2D
 	var m: ShaderMaterial = material
-	m.set_shader_parameter("light_n", light_n)
-	m.set_shader_parameter("light_pos", light_pos)
-	m.set_shader_parameter("light_rng", light_rng)
+	m.set_shader_parameter(&"light_n", light_n)
+	m.set_shader_parameter(&"light_pos", light_pos)
+	m.set_shader_parameter(&"light_rng", light_rng)
