@@ -12,6 +12,7 @@ func swap_temps() -> void:
 	temp_a = temp_b
 	temp_b = c
 func reset_data_b() -> void:
+	#temp_b.fill(0)
 	temp_b.resize(0)
 	temp_b.resize(STATS_COUNT)
 
@@ -28,17 +29,17 @@ var time_since_last_regen: float = 0.0
 func _physics_process(delta: float) -> void:
 	time_since_last_regen += delta
 
-	if Balancer.should_reset_stats(self):
+	#if Balancer.should_reset_stats(self):
 	#func _reset_stats() -> void:
-		reset_data_b()
+	reset_data_b()
 	
-	if Balancer.should_sync_stats(self):
+	#if Balancer.should_sync_stats(self):
 	#func _sync_stats() -> void:
-		swap_temps()
+	swap_temps()
 
-		health_current = clampf(health_current + get_health_regen() * time_since_last_regen, 0, get_health())
-		mana_current = clampf(mana_current + get_mana_regen() * time_since_last_regen, 0, get_mana())
-		time_since_last_regen = 0
+	health_current = clampf(health_current + get_health_regen() * time_since_last_regen, 0, get_health())
+	mana_current = clampf(mana_current + get_mana_regen() * time_since_last_regen, 0, get_mana())
+	time_since_last_regen = 0
 
 @export var level: int = 1
 func growth(stat_per_level: float) -> float:
@@ -171,9 +172,15 @@ var health_flat_temp: float:
 var health_percent_temp: float:
 	get: return temp[HEALTH_PERCENT]
 	set(v): temp[HEALTH_PERCENT] = v
+var health: float
+var health_is_dirty: bool
 func get_health() -> float:
-	return (health_base + growth(health_base_per_level) + health_flat + temp[HEALTH_FLAT])\
-		 * (1 + health_percent + temp[HEALTH_PERCENT])
+	if health_is_dirty:
+		health = (
+			health_base + growth(health_base_per_level) +
+			health_flat + temp[HEALTH_FLAT]
+		) * (1 + health_percent + temp[HEALTH_PERCENT])
+	return health
 var health_current: float
 var health_current_percent: float:
 	get: return health_current / get_health()
@@ -187,9 +194,15 @@ var health_regen_flat_temp: float:
 var health_regen_percent_temp: float:
 	get: return temp[HEALTH_REGEN_PERCENT]
 	set(v): temp[HEALTH_REGEN_PERCENT] = v
+var health_regen: float
+var health_regen_is_dirty: bool
 func get_health_regen() -> float:
-	return (health_regen_base + growth(health_regen_base_per_level) + health_regen_flat + temp[HEALTH_REGEN_FLAT])\
-		 * (1 + health_regen_percent + temp[HEALTH_REGEN_PERCENT])
+	if health_regen_is_dirty:
+		health_regen = (
+			health_regen_base + growth(health_regen_base_per_level) +
+			health_regen_flat + temp[HEALTH_REGEN_FLAT]
+		) * (1 + health_regen_percent + temp[HEALTH_REGEN_PERCENT])
+	return health_regen
 @export_group('Mana', 'mana_')
 @export var mana_base: float
 @export var mana_base_per_level: float
@@ -201,9 +214,15 @@ var mana_flat_temp: float:
 var mana_percent_temp: float:
 	get: return temp[MANA_PERCENT]
 	set(v): temp[MANA_PERCENT] = v
+var mana: float
+var mana_is_dirty: bool
 func get_mana() -> float:
-	return (mana_base + growth(mana_base_per_level) + mana_flat + temp[MANA_FLAT])\
-		 * (1 + mana_percent + temp[MANA_PERCENT])
+	if mana_is_dirty:
+		mana = (
+			mana_base + growth(mana_base_per_level) +
+			mana_flat + temp[MANA_FLAT]
+		) * (1 + mana_percent + temp[MANA_PERCENT])
+	return mana
 var mana_current: float
 var mana_current_percent: float:
 	get: return mana_current / get_mana()
@@ -217,9 +236,15 @@ var mana_regen_flat_temp: float:
 var mana_regen_percent_temp: float:
 	get: return temp[MANA_REGEN_PERCENT]
 	set(v): temp[MANA_REGEN_PERCENT] = v
+var mana_regen: float
+var mana_regen_is_dirty: bool
 func get_mana_regen() -> float:
-	return (mana_regen_base + growth(mana_regen_base_per_level) + mana_regen_flat + temp[MANA_REGEN_FLAT])\
-		 * (1 + mana_regen_percent + temp[MANA_REGEN_PERCENT])
+	if mana_regen_is_dirty:
+		mana_regen = (
+			mana_regen_base + growth(mana_regen_base_per_level) +
+			mana_regen_flat + temp[MANA_REGEN_FLAT]
+		) * (1 + mana_regen_percent + temp[MANA_REGEN_PERCENT])
+	return mana_regen
 @export_group('Life steal', 'life_steal_')
 @export var life_steal_percent: float
 var life_steal_percent_temp: float:

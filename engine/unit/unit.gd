@@ -8,8 +8,8 @@ var stats: Stats:
 	set(v): _stats = v
 	#get: return _stats
 	get:
-		if Balancer.should_update_stats(self):
-		#if Balancer.is_updating_stats:
+		#if Balancer.should_update_stats(self):
+		if Balancer.is_updating_stats:
 			return stats_temp
 		else:
 			return stats_perm

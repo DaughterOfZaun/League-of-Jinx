@@ -55,36 +55,35 @@ static func unregister(obj: Object) -> void:
 	_vars[id] = null
 	_objs[id] = null
 
-static var frame: int = -1
-static func should_reset_stats(obj: Object) -> bool:
-	return frame == 0
-static func should_update_stats(obj: Object) -> bool:
-	return frame == 1
-static func should_sync_stats(obj: Object) -> bool:
-	return frame == 2
-static func should_update_actions(obj: Object) -> bool:
-	return frame == 3
+func _process(delta: float) -> void:
+	if state_state:
+		load_state()
+		state_state = false
 
-static var is_ff := false
-#static var is_updating_stats: bool = false
+var state_state := false
+var frame := 0
+static var is_updating_stats: bool = false
 func _physics_process(delta: float) -> void:
-	#frame = (Engine.get_physics_frames() - 1) % 15
-	frame = (frame + 1) % 4
-	
-	#is_updating_stats = true
+	if !state_state:
+		load_state()
+		state_state = true
+
+	is_updating_stats = true
 	#root.propagate_call(&"_reset_stats")
 	#root.propagate_call(&"_update_stats")
 	#root.propagate_call(&"_sync_stats")
-	#is_updating_stats = false
+	is_updating_stats = false
 	#root.propagate_call(&"_update_actions")
 
-	if Engine.get_physics_frames() == 10:
-		var fa := FileAccess.open("res://engine/game/cache/dump.txt", FileAccess.WRITE)
-		fa.store_string(var_to_str(bytes_to_var(var_to_bytes(_vars))))
-		fa.close()
+	#if Engine.get_physics_frames() == 10:
+	#	var fa := FileAccess.open("res://engine/game/cache/dump.txt", FileAccess.WRITE)
+	#	fa.store_string(var_to_str(bytes_to_var(var_to_bytes(_vars))))
+	#	fa.close()
 
-	#save_state()
-	#current_moment = (current_moment + 1) % history_length
+	frame += 1
+	if frame % 8 == 0:
+		#save_state.call_deferred()
+		save_state()
 
 	#pack_scene()
 
@@ -111,8 +110,8 @@ const history_length := ekko_r_afterimage_delay_sec * fps
 static var instance: Balancer
 
 var history_of_objs: Array[Array] = []
-var history_of_vars: Array[Variant] = []
-var current_moment: int = 0
+var history_of_vars: Array[Array] = []
+var current_moment: int = -1
 func _init() -> void:
 	history_of_objs.resize(history_length)
 	history_of_vars.resize(history_length)
@@ -164,15 +163,23 @@ signal save(); const save_method_name := &"_save"
 signal load(); const load_method_name := &"_load"
 
 func save_state() -> void:
+
+	current_moment = (current_moment + 1) % history_length
+	
 	save.emit()
 	history_of_objs[current_moment] = _objs
 	#history_of_objs[current_moment].assign(_objs)
-	history_of_vars[current_moment] = var_to_bytes(_vars)
-	#history_of_vars[current_moment] = _vars.duplicate(true)
+	#history_of_vars[current_moment] = var_to_bytes(_vars)
+	history_of_vars[current_moment] = _vars.duplicate(true)
+	#history_of_vars[current_moment].assign(_vars)
 
 func load_state() -> void:
+	
+	if current_moment == -1: return
+
 	_objs = history_of_objs[current_moment]
 	#_objs.assign(history_of_objs[current_moment])
-	_vars = bytes_to_var(history_of_vars[current_moment])
-	#_vars = history_of_vars[current_moment]
+	#_vars = bytes_to_var(history_of_vars[current_moment])
+	_vars = history_of_vars[current_moment]
+	#_vars.assign(history_of_vars[current_moment])
 	load.emit()

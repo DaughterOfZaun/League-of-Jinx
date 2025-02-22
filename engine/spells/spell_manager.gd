@@ -29,7 +29,7 @@ func append_node(target: Node, node: Node, node_name: String) -> Node:
 	target.add_child(node)
 	node.name = node_name
 	if Engine.is_editor_hint():
-		node.owner = EditorInterface.get_edited_scene_root()
+		node.owner = null # = EditorInterface.get_edited_scene_root()
 	return node
 
 func array_get(a: Array[Variant], i: int) -> Variant:

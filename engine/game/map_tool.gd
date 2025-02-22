@@ -484,7 +484,7 @@ func spawn_point_from_file(fname: String) -> Node3D:
 @export_tool_button("Create Level Props")
 var create_level_props := func() -> void:
 	(create_level_props_script.new() as CreateLevelProps).create_level_props()
-	var root := EditorInterface.get_edited_scene_root()
+	var root: Node = null #EditorInterface.get_edited_scene_root()
 	var points := find_child("Points", false, false)
 	var ini := ini_load(object_cfg)
 	for section_name: String in ini:

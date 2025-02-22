@@ -162,12 +162,15 @@ locale/translations=PackedStringArray("res://data/ui/lang/fontconfig.en.translat
 
 [physics]
 
-common/physics_ticks_per_second=120
-common/max_physics_steps_per_frame=16
+2d/run_on_separate_thread=true
+3d/run_on_separate_thread=true
+common/physics_ticks_per_second=30
+common/max_physics_steps_per_frame=4
 common/physics_jitter_fix=0.0
 3d/physics_engine="Jolt Physics"
 common/physics_interpolation=true
 
 [rendering]
 
+driver/threads/thread_model=2
 vrs/texture="uid://ve1shittm6mk"

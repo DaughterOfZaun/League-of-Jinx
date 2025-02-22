@@ -258,7 +258,7 @@ func get_target_child(type: GDScript, name: String) -> Variant:
 		target.add_child(child)
 		child.name = name
 		if Engine.is_editor_hint():
-			child.owner = EditorInterface.get_edited_scene_root()
+			child.owner = null # = EditorInterface.get_edited_scene_root()
 	return child
 
 func get_target_spells() -> Spells:

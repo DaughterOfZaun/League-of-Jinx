@@ -13,7 +13,7 @@ func create_child_turret(
 	lane: Enums.Lane
 ) -> void:
 
-	var root := EditorInterface.get_edited_scene_root()
+	var root: Node = null # := EditorInterface.get_edited_scene_root()
 	var map := root.find_child("Map", false, false) #%Map
 	var points := map.find_child("Points", false, false) #%Map/Points
 	assert(map != null && points != null)

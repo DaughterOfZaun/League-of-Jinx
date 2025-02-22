@@ -168,10 +168,10 @@ func process_class(cls: ClassRepr) -> void:
 			cls,
 		))
 
-	if cls.is_rollback && !cls.contains("func _save"):
-		code += "\n\nfunc _save() -> void: pass"
-	if cls.is_rollback && !cls.contains("func _load"):
-		code += "\n\nfunc _load() -> void: pass"
+	#if cls.is_rollback && !cls.contains("func _save"):
+	#	code += "\n\nfunc _save() -> void: pass"
+	#if cls.is_rollback && !cls.contains("func _load"):
+	#	code += "\n\nfunc _load() -> void: pass"
 	
 	#code += "\n\n"
 	#code += "func _notification(what: int) -> void:\n"
