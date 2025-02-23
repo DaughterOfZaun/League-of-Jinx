@@ -1,7 +1,7 @@
 class_name AIState extends Node #@rollback
 
-@onready var ai: AI = get_parent()
-@onready var me: Unit = ai.get_parent()
+@onready var ai: AI = get_parent() #@ignore
+@onready var me: Unit = ai.get_parent() #@ignore
 
 # ai.gd stub
 var target: Unit:

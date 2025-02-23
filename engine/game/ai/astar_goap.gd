@@ -4,13 +4,13 @@ class_name GOAP
 const MAX_ITER = 10_000
 const UNSAFE = false
 
-class Goal:
+class Goal extends RefCounted:
 	func is_reached(state: Agent) -> bool:
 		return false
 	func get_heuristic(state: Agent) -> float:
 		return 0
 
-class Clonable:
+class Clonable extends RefCounted:
 	func clone() -> Clonable:
 		return new().copy(self)
 	func copy(from: Clonable) -> Clonable:
@@ -22,7 +22,7 @@ class Agent extends Clonable:
 	func get_actions() -> Array[Callable]:
 		return []
 
-class ActionAndWorldState:
+class ActionAndWorldState extends RefCounted:
 	var idx: int
 	var prev: ActionAndWorldState
 	var first: ActionAndWorldState

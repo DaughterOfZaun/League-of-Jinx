@@ -2,7 +2,7 @@ class_name Status extends Node #@rollback
 
 var null_callable: Callable = func() -> void: pass
 
-@onready var me: Unit = get_parent()
+@onready var me: Unit = get_parent() #@ignore
 func _ready() -> void:
 	#if Engine.is_editor_hint(): return
 	me.status = self

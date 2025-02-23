@@ -518,11 +518,11 @@ func update_fields() -> void:
 
 	updating_fields -= 1
 
-class MyShader:
+class MyShader extends RefCounted:
 
 	static var cache: Dictionary[int, ShaderAndUsage] = {}
 	var entry: ShaderAndUsage
-	class ShaderAndUsage:
+	class ShaderAndUsage extends RefCounted:
 		var shader: Shader = null
 		var users: int = 1
 		var hash: int = 0

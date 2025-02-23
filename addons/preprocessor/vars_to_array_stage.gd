@@ -6,11 +6,15 @@
 # - no oneshot signals
 # - no await
 
-var var_regex: RegEx = RegEx.create_from_string(r"(?<=^|\n)(?:@?(onready|export|static) )?var (\w+)(?:: ([\w.\[, \]]+))?(?: :?= (.*))?(?=\n|$)(?<!:)")
+var var_regex: RegEx = RegEx.create_from_string(r"(?<=^|\n)(?:@?(onready|export|static) )?var (\w+)(?:: ([\w.\[, \]]+))?(?: :?= (.*?))?((?: #@\w+)*)(?=\n|$)(?<!:)")
 var init_or_eof_regex_src: String = r"(?<=^|\n)func _init\((.*?)\) -> void:\n(?:\tsuper\._init\((.*?)\)(?=\n|$))?|$"
 var init_or_eof_regex: RegEx = RegEx.create_from_string(init_or_eof_regex_src)
 var ready_or_eof_regex: RegEx = RegEx.create_from_string(init_or_eof_regex_src.replace("_init", "_ready"))
 var static_init_or_eof_regex: RegEx = RegEx.create_from_string(init_or_eof_regex_src.replace("func _init", "static func _static_init"))
+#var process_regex: RegEx = RegEx.create_from_string(r"func _process\((\w+)(?:: float)?\)( -> void)?:\n")
+#var physics_process_regex: RegEx = RegEx.create_from_string(r"func _physics_process\((\w+)(?:: float)?\)( -> void)?:\n")
+var self_var_regex: RegEx = RegEx.create_from_string(r"(?<!\.)\bself\.(\w+)( [+\-*/=]?= )?")
+var growth_regex: RegEx = RegEx.create_from_string(r"(?<!func )\bgrowth\((.*?)\)")
 
 func get_initial_value(var_type: String) -> String:
 	var initial_value := "null"
@@ -61,9 +65,11 @@ func process_class(cls: ClassRepr) -> void:
 	var script_path := cls.in_path
 	var initial_values: Array[String] = []
 	var initial_names: Array[String] = []
+	var initial_types: Array[String] = []
 	var onready_values: Dictionary[int, String] = {}
 	var static_values: Array[String] = []
 	var static_names: Array[String] = []
+	var static_types: Array[String] = []
 	
 	var parent_var_i := cls.get_parent_vars_count()
 	var parent_static_var_i := cls.get_parent_static_vars_count()
@@ -75,6 +81,9 @@ func process_class(cls: ClassRepr) -> void:
 		var var_name := match.strings[2]
 		var var_type := match.strings[3]
 		var var_value := match.strings[4]
+		var var_tags := match.strings[5]
+
+		if Utils.split_tags(var_tags).has("ignore"): return match.strings[0]
 
 		assert(var_type, script_path + ':' + var_name)
 		#if !var_type: var_type = "Variant"
@@ -105,6 +114,7 @@ func process_class(cls: ClassRepr) -> void:
 		if var_mod == "static":
 			static_values.append(initial_value)
 			static_names.append(var_name)
+			static_types.append(var_type)
 			i = parent_static_var_i + static_var_i
 			vars_name = "_vars"
 			id_name = "_static_id"
@@ -112,6 +122,7 @@ func process_class(cls: ClassRepr) -> void:
 		else:
 			initial_values.append(initial_value)
 			initial_names.append(var_name)
+			initial_types.append(var_type)
 			i = parent_var_i + var_i
 			vars_name = "_vars"
 			id_name = "_id"
@@ -136,8 +147,41 @@ func process_class(cls: ClassRepr) -> void:
 
 		return var_decl
 	)
-		
+
 	var_i = initial_values.size()
+	static_var_i = static_values.size()
+	
+	code = growth_regex.sub(code, "(($1) * (self.level - 1))", true)
+
+	if var_i + static_var_i > 0:\
+	code = Utils.str_replace(code, self_var_regex, func(match: RegExMatch) -> String:
+		var var_name := match.strings[1]
+		var op := match.strings[2]
+
+		var i := -1
+		i = initial_names.find(var_name)
+		var vars_name := "_vars"
+		var id_name := "_id"
+		var var_type: String
+		if i != -1:
+			var_type = initial_types[i]
+			i += parent_var_i
+		if i == -1:
+			i = static_names.find(var_name)
+			vars_name = "_static_vars"
+			id_name = "_static_id"
+			if i != -1:
+				var_type = static_types[i]
+				i += static_var_i
+		if i == -1:
+			return match.strings[0]
+		var replacement := "Balancer." + vars_name + "[" + id_name + "][" + str(i) + "]"
+		if op.is_empty():
+			return "(" + replacement + " as " + var_type + ")"
+		else:
+			return replacement + " " + op
+	)
+	
 	cls.own_vars_count = var_i
 	var has_init := code.contains("func _init")
 	var parent_has_init := cls.parent.code.contains("func _init") if cls.parent else false
@@ -157,7 +201,6 @@ func process_class(cls: ClassRepr) -> void:
 			cls,
 		))
 
-	static_var_i = static_values.size()
 	cls.own_static_vars_count = static_var_i
 	var has_static_init := code.contains("static func _static_init")
 	var parent_has_static_init := cls.parent.code.contains("static func _static_init") if cls.parent else false
@@ -167,6 +210,10 @@ func process_class(cls: ClassRepr) -> void:
 			"static", "_static_init", parent_has_static_init,
 			cls,
 		))
+
+	#if cls.is_rollback:
+	#	code = process_regex.sub(code, "$0\treturn\n")
+	#	code = physics_process_regex.sub(code, "$0\treturn\n")
 
 	#if cls.is_rollback && !cls.contains("func _save"):
 	#	code += "\n\nfunc _save() -> void: pass"

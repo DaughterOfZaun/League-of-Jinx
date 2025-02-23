@@ -18,7 +18,7 @@ func cancel() -> void:
 	self.cancelled = true
 	self._on_timeout_or_canceled()
 
-func _physics_process(delta: float) -> void:
+func _network_process(delta: float) -> void:
 	if is_running:
 		time_passed += delta
 		if self.time_left <= 0:

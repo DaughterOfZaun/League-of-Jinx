@@ -91,7 +91,7 @@ func sort_to_levels(mis: Array[Variant]) -> Array[Array]:
 			levels[i].append(mia)
 	return levels
 
-class Point:
+class Point extends RefCounted:
 	var scale: float
 	var angle: float
 	var normal: Vector3

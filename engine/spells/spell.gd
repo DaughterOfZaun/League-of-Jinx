@@ -1,17 +1,15 @@
 class_name Spell extends TimerEx #@rollback
 
-@export var data: SpellData
-@export var indicator: SpellIndicator
+@export var data: SpellData #@ignore
+@export var indicator: SpellIndicator #@ignore
 
-@onready var me: Unit = (
-	get_parent() #as Spells
-).get_parent() #HACK:
-@onready var attacker: Unit = me
-@onready var caster: Unit = me
-@onready var host: Unit = me # owner -> host
+@onready var me: Unit = (get_parent() as Spells).get_parent() #@ignore
+@onready var attacker: Unit = me #@ignore
+@onready var caster: Unit = me #@ignore
+@onready var host: Unit = me #@ignore # owner -> host
 var vars: Vars:
 	get: return me.vars
-var spell: Spell = self
+var spell: Spell = self #@ignore
 
 var target: Unit
 #var offset_target: Unit
@@ -65,9 +63,9 @@ func _ready() -> void:
 	await me.ready
 	missile_bone_idx = me.get_bone_idx(data.missile_bone_name)
 
-func _physics_process(delta: float) -> void:
+func _network_process(delta: float) -> void:
 	#if Engine.is_editor_hint(): return
-	super._physics_process(delta)
+	super._network_process(delta)
 
 #if Balancer.should_update_actions(self):
 func _update_actions() -> void:
@@ -205,14 +203,14 @@ var tev_should_cancel: bool
 func _on_timeout_or_canceled() -> void:
 	var timer := self
 
-	var target_position := self.tea_target_position
-	var target := self.tea_target
+	var target_position: Vector3 = self.tea_target_position
+	var target: Unit = self.tea_target
 
-	var has_cast := self.tev_has_cast
-	var cast_time := self.tev_cast_time
-	var has_channel := self.tev_has_channel
-	var channel_duration := self.tev_channel_duration
-	var should_cancel := self.tev_should_cancel
+	var has_cast: bool = self.tev_has_cast
+	var cast_time: float = self.tev_cast_time
+	var has_channel: bool = self.tev_has_channel
+	var channel_duration: float = self.tev_channel_duration
+	var should_cancel: bool = self.tev_should_cancel
 
 	match state:
 		

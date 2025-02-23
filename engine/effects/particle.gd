@@ -1,8 +1,9 @@
-class_name Particle
-extends Node3DExt
+class_name Particle extends Node3DExt #@rollback
 
-var bind_obj: Unit = null
-var bind_bone_idx: int = -1
+var _hack: int #HACK:
+
+var bind_obj: Unit = null #@ignore
+var bind_bone_idx: int = -1 #@ignore
 func _physics_process(delta: float) -> void:
 	if bind_obj != null:
 		if bind_bone_idx != -1:
@@ -21,7 +22,8 @@ static func create(effect: PackedScene = null, effect_for_other_team: PackedScen
 	return particle
 
 func remove() -> void:
-	if self.is_inside_tree(): get_parent().remove_child(self) #self.queue_free()
+	#self.queue_free()
+	Balancer.unregister(self)
 
 func fow(fow_team := Enums.Team.UNKNOWN, fow_visibility_radius := 0.0) -> Particle:
 	return self

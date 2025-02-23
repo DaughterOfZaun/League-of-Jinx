@@ -1,12 +1,12 @@
 class_name AI extends LuaScript #@rollback
 
-@onready var me: Unit = get_parent()
+@onready var me: Unit = get_parent() #@ignore
 
-@onready var animation: AnimationController = me.find_child("AnimationTree", true, false)
+@onready var animation: AnimationController = me.find_child("AnimationTree", true, false) #@ignore
 
-@onready var acquisition_range: Area3D = me.find_child('AcquisitionRange', false)
-@onready var attack_range: Area3D = me.find_child('AttackRange', false)
-@onready var cancel_attack_range: Area3D = me.find_child('CancelAttackRange', false)
+@onready var acquisition_range: Area3D = me.find_child('AcquisitionRange', false) #@ignore
+@onready var attack_range: Area3D = me.find_child('AttackRange', false) #@ignore
+@onready var cancel_attack_range: Area3D = me.find_child('CancelAttackRange', false) #@ignore
 
 var target: Unit = null
 var target_position := Vector3.INF:
@@ -70,11 +70,11 @@ func set_state_and_move_internal(state: Enums.AIState, target: Unit, target_posi
 	set_target_and_target_position(target, target_position)
 	run_state.try_enter()
 
-@onready var run_state: AIRunState = find_child("AIRunState", false, false)
-@onready var idle_state: AIIdleState = find_child("AIIdleState", false, false)
-@onready var cast_state: AICastState = find_child("AICastState", false, false)
-@onready var attack_state: AIAttackState = find_child("AIAttackState", false, false)
-@onready var move_state: AIMoveState = find_child("AIMoveState", false, false)
+@onready var run_state: AIRunState = find_child("AIRunState", false, false) #@ignore
+@onready var idle_state: AIIdleState = find_child("AIIdleState", false, false) #@ignore
+@onready var cast_state: AICastState = find_child("AICastState", false, false) #@ignore
+@onready var attack_state: AIAttackState = find_child("AIAttackState", false, false) #@ignore
+@onready var move_state: AIMoveState = find_child("AIMoveState", false, false) #@ignore
 
 var deffered_state: AIState = idle_state
 @onready var current_state: AIState = idle_state
@@ -87,7 +87,7 @@ func switch_to(state: AIState) -> void:
 	current_state = state
 
 func switch_to_deffered() -> void:
-	var cached_current_state := self.current_state
+	var cached_current_state: AIState = self.current_state
 	match deffered_state:
 		run_state: run_state.try_enter()
 		attack_state: attack_state.try_enter()

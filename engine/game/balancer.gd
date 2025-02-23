@@ -4,56 +4,77 @@ static var free_ids: Array[int] = []
 static var _objs: Array[Variant] = [ null ]
 static var _vars: Array[Variant] = [ null ]
 
+signal save();
+const save_method_name := &"_save"
+signal load();
+const load_method_name := &"_load"
+signal process(delta: float);
+const process_method_name := &"_network_process"
+
 static func register(obj: Object, obj_vars_size: int = 0) -> void:
 	@warning_ignore("unsafe_property_access")
-	obj._id = _register(obj, obj_vars_size, obj._id, free_ids, _objs, _vars)
+	obj._id = _register(obj, obj_vars_size, obj._id)
 
 static func register_static(obj: Object, obj_vars_size: int = 0) -> void:
 	@warning_ignore("unsafe_property_access")
-	obj._static_id = _register(obj, obj_vars_size, obj._static_id, free_ids, _objs, _vars)
+	obj._static_id = _register(obj, obj_vars_size, obj._static_id)
 
-static func _register(obj: Object, obj_vars_size: int, id: int, free_ids: Array[int], objs: Array, vars: Array) -> int:
+static func _register(obj: Object, obj_vars_size: int, id: int) -> int:
 	if id != 0: return id
 
 	var obj_vars: Array[Variant] = []
 	obj_vars.resize(obj_vars_size)
 	if free_ids.size() == 0:
-		id = objs.size()
-		objs.push_back(obj)
-		vars.push_back(obj_vars)
+		id = _objs.size()
+		_objs.push_back(obj)
+		_vars.push_back(obj_vars)
 	else:
 		id = free_ids.pop_back()
-		objs[id] = obj
-		vars[id] = obj_vars
+		_objs[id] = obj
+		_vars[id] = obj_vars
 	
-	if save_method_name in obj:
-		instance.save.connect(obj[save_method_name])
-	if load_method_name in obj:
-		instance.load.connect(obj[load_method_name])
+	#if obj.has_method(save_method_name):
+	#	instance.save.connect(obj[save_method_name])
+	#if obj.has_method(load_method_name):
+	#	instance.load.connect(obj[load_method_name])
+	#if obj.has_method(process_method_name):
+	#	instance.process.connect(obj[process_method_name])
 
 	return id
 
 static func unregister(obj: Object) -> void:
 
-	@warning_ignore("unsafe_property_access")
-	var id: Variant = obj._id
-	if id == 0: return
+	#@warning_ignore("unsafe_property_access")
+	#var id: Variant = obj._id
+	#if id == 0: return
 
-	@warning_ignore("unsafe_property_access")
-	obj._id = 0
+	var node := obj as Node
+	if node:
+		#if node.is_inside_tree():
+		#	node.get_parent().remove_child(node)
+		node.queue_free()
+
+	#if obj.has_method(save_method_name):
+	#	instance.save.disconnect(obj[save_method_name])
+	#if obj.has_method(load_method_name):
+	#	instance.load.disconnect(obj[load_method_name])
+	#if obj.has_method(process_method_name):
+	#	instance.process.disconnect(obj[process_method_name])
+
+	#@warning_ignore("unsafe_property_access")
+	#obj._id = 0
 	
-	free_ids.push_back(id)
-	_vars[id] = null
-	_objs[id] = null
-
-func _process(delta: float) -> void:
-	pass
+	#free_ids.push_back(id)
+	#_vars[id] = null
+	#_objs[id] = null
 
 var frame := 0
 static var is_updating_stats: bool = false
 func _physics_process(delta: float) -> void:
 	frame += 1
-	
+
+	generate_frames()
+
 	is_updating_stats = true
 	#root.propagate_call(&"_reset_stats")
 	#root.propagate_call(&"_update_stats")
@@ -73,15 +94,18 @@ func _physics_process(delta: float) -> void:
 	#pack_scene()
 
 var generated_frames: bool = false
-var pp: StringName = &"_physics_process"
-var args: Array[Variant] = [ 1.0 / Engine.physics_ticks_per_second ]
+
+var fixed_delta: float = 1.0 / fps
+var process_args: Array[Variant] = [ fixed_delta ]
 @onready var root: Node = get_tree().current_scene #.find_child("Ahri", false, false)
 func generate_frames() -> void:
 	generated_frames = true
-	for i in range(120):
-		root.propagate_notification(NOTIFICATION_INTERNAL_PHYSICS_PROCESS)
-		root.propagate_notification(NOTIFICATION_PHYSICS_PROCESS)
-		#root.propagate_call(pp, args)
+	for i in range(1):
+		#root.propagate_notification(NOTIFICATION_INTERNAL_PHYSICS_PROCESS)
+		#root.propagate_notification(NOTIFICATION_PHYSICS_PROCESS)
+		#tree.call_group(&"rollback", process_method_name, fixed_delta)
+		root.propagate_call(process_method_name, process_args)
+		#process.emit(fixed_delta)
 	generated_frames = false
 
 var packed_scene: PackedScene = PackedScene.new()
@@ -96,6 +120,7 @@ static var instance: Balancer
 
 var history_of_objs: Array[Array] = []
 var history_of_vars: Array[Array] = []
+#var history_of_vars: Array[PackedByteArray] = []
 var current_moment: int = -1
 static var is_in_thread := false
 func _init() -> void:
@@ -103,59 +128,8 @@ func _init() -> void:
 	history_of_vars.resize(history_length)
 	instance = self
 
-	#var args := PackedStringArray()
-	#var pid := OS.create_instance(args)
-	#print(pid)
-
-	#if !is_in_thread:
-	#	is_in_thread = true
-	#	var packed_scene: PackedScene = preload("res://levels/level_1.tscn")
-	#	var scene := packed_scene.instantiate()
-	#	#scene.propagate_notification(NOTIFICATION_ENTER_TREE)
-	#	#scene.propagate_notification(NOTIFICATION_POST_ENTER_TREE)
-	#	#scene.propagate_notification(NOTIFICATION_READY)
-	#	scene.propagate_call(&"_ready")
-
-func _not_ready() -> void:
-	var path := OS.get_executable_path()
-	#var args := OS.get_cmdline_args()
-	var args := PackedStringArray()
-
-	var user_args := OS.get_cmdline_user_args()
-	if user_args.has("--second"): return
-	
-	#args.append("--headless")
-	
-	#var loop: SceneTree = Engine.get_main_loop()
-	#var res_scene_path := tree.current_scene.scene_file_path
-	var res_scene_path := "res://"
-	var global_scene_path := ProjectSettings.globalize_path(res_scene_path)
-	
-	args.append("--path")
-	args.append(global_scene_path)
-	
-	args.append("--")
-	args.append("--second")
-
-	var pipe := OS.execute_with_pipe(path, args, true)
-	print('OS.execute_with_pipe(', path, ', ', args, ', ', true, ') -> ', pipe)
-	var stdio: FileAccess = pipe["stdio"]
-	var stderr: FileAccess = pipe["stderr"]
-	var pid: int = pipe["pid"]
-
-	process_io = stdio
-	var thread := Thread.new()
-	thread.start(read_process_output)
-
-var process_io: FileAccess
-func read_process_output() -> void:
-	while process_io.is_open() and process_io.get_error() == OK:
-		print("STDIO: ", process_io.get_line())
-
 @onready var tree := get_tree()
 #const rollback_group_name := &"rollback"
-signal save(); const save_method_name := &"_save"
-signal load(); const load_method_name := &"_load"
 
 func save_state() -> void:
 

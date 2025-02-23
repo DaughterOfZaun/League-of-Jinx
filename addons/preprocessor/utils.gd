@@ -1,5 +1,8 @@
 class_name Utils
 
+static func split_tags(tags: String) -> PackedStringArray:
+	return tags.strip_edges().substr(2).split(" #@", false)
+
 # https://gamedev.stackexchange.com/a/206584
 static func str_replace(target: String, regex: RegEx, cb: Callable) -> String:
 	var out := ""

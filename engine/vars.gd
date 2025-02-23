@@ -1,6 +1,6 @@
 class_name Vars extends Node #@rollback
 
-@onready var me: Unit = get_parent()
+@onready var me: Unit = get_parent() #@ignore
 func _ready() -> void:
 	#if Engine.is_editor_hint(): return
 	me.vars = self

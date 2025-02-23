@@ -1,4 +1,4 @@
-class_name TimeTracker #@rollback
+class_name TimeTracker extends RefCounted #@rollback
 
 var time: float = 0.0
 

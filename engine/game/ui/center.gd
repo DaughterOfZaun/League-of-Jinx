@@ -43,13 +43,13 @@ func bind_to(c: Champion) -> void:
 func _process(_delta: float) -> void:
 	
 	var health := champion.stats_perm.health_current
-	var max_health := champion.stats_perm.get_health()
+	var max_health := champion.stats_perm.health
 	health_bar_label.text = "%d / %d" % [ roundi(health), roundi(max_health) ]
 	health_bar_range.value = health
 	health_bar_range.max_value = max_health
 
 	var mana := champion.stats_perm.mana_current
-	var max_mana := champion.stats_perm.get_mana()
+	var max_mana := champion.stats_perm.mana
 	mana_bar_label.text = "%d / %d" % [ roundi(mana), roundi(max_mana) ]
 	mana_bar_range.value = mana
 	mana_bar_range.max_value = max_mana

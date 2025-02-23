@@ -1,18 +1,18 @@
 class_name Spells extends Node #@rollback
 
-@export var q: Spell
-@export var w: Spell
-@export var e: Spell
-@export var r: Spell
-@export var d: Spell
-@export var f: Spell
-@export var b: Spell
-@export var extra: Array[Spell] = []
+@export var q: Spell #@ignore
+@export var w: Spell #@ignore
+@export var e: Spell #@ignore
+@export var r: Spell #@ignore
+@export var d: Spell #@ignore
+@export var f: Spell #@ignore
+@export var b: Spell #@ignore
+@export var extra: Array[Spell] = [] #@ignore
 
-@export var crit: CritAttack
-@export var basic: Array[BasicAttack] = []
+@export var crit: CritAttack #@ignore
+@export var basic: Array[BasicAttack] = [] #@ignore
 
-@onready var me: Unit = get_parent()
+@onready var me: Unit = get_parent() #@ignore
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	me.spells = self

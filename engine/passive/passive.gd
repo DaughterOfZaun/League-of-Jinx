@@ -1,6 +1,6 @@
 class_name Passive extends PassiveData #@rollback
 
-@onready var me: Unit = get_parent()
+@onready var me: Unit = get_parent() #@ignore
 var host: Unit:
 	get: return me
 var attacker: Unit:

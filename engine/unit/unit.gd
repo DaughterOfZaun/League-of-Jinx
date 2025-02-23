@@ -22,15 +22,15 @@ var stats_perm: Stats:
 		_stats.temp = _stats.temp_a
 		return _stats
 
-var status: Status
-var buffs: Buffs
-var spells: Spells
-var passive: Passive
-var vars: Vars
-var ai: AI
-var animation: AnimationController
+var status: Status #@ignore
+var buffs: Buffs #@ignore
+var spells: Spells #@ignore
+var passive: Passive #@ignore
+var vars: Vars #@ignore
+var ai: AI #@ignore
+var animation: AnimationController #@ignore
 
-@onready var font_emitter: FontEmitter = find_child("FontEmitter", false, false)
+@onready var font_emitter: FontEmitter = find_child("FontEmitter", false, false) #@ignore
 
 func issue_order(order: Enums.OrderType, targetOfOrderPosition := Vector3.INF, targetOfOrder: Unit = null) -> void:
 	ai.order(order, targetOfOrderPosition, targetOfOrder)
@@ -41,25 +41,28 @@ func cast(letter: String, pos: Vector3, unit: Unit) -> void:
 func emote(type: Enums.EmoteType) -> void:
 	ai.emote(type)
 
-func _physics_process(delta: float) -> void:
+func _network_process(delta: float) -> void:
 	#if Engine.is_editor_hint(): return
 
-	_physics_process_rotate(delta)
-	_physics_process_update_visibility(delta)
-	#_physics_process_sync_char_body_pos(delta)
+	_network_process_rotate(delta)
+	_network_process_update_visibility(delta)
+	#_network_process_sync_char_body_pos(delta)
 
 #region Signals
 static var signals: Array[StringName] = []
 static var on_signals: Array[StringName] = []
 static var signals_init_completed: bool = false
 func _init() -> void:
+
+	#self.process_thread_group = Node.PROCESS_THREAD_GROUP_SUB_THREAD
+
 	if signals_init_completed: return
 	signals_init_completed = true
 	for s in get_signal_list():
 		signals.append(StringName(s.name))
 		on_signals.append(StringName('on_' + s.name))
 
-func connect_all(to: Node) -> void:
+func connect_all(to: Object) -> void:
 	for i in range(signals.size()):
 		var sname := signals[i]
 		var mname := on_signals[i]
@@ -137,13 +140,13 @@ func get_point_by_facing_offset(distance: float, offset_angle: float) -> Vector3
 
 #var rot_speed := deg_to_rad(180. / ((0.08 + (0.01/3.))))
 var rot_speed: float = deg_to_rad(180 / 0.2)
-func _physics_process_rotate(delta: float) -> void:
+func _network_process_rotate(delta: float) -> void:
 	var rot_delta := angle_difference(rotation.y, direction_angle)
 	if is_zero_approx(rot_delta): return
 	rotation.y += sign(rot_delta) * min(abs(rot_delta), rot_speed * delta)
 
-@onready var skinned_mesh_root: Node = find_child("SkinnedMesh", false, false)
-@onready var skeleton: Skeleton3D = skinned_mesh_root.find_child("Skeleton3D", true, false) if skinned_mesh_root else null
+@onready var skinned_mesh_root: Node = find_child("SkinnedMesh", false, false) #@ignore
+@onready var skeleton: Skeleton3D = skinned_mesh_root.find_child("Skeleton3D", true, false) if skinned_mesh_root else null #@ignore
 func get_bone_global_position(bone_idx: int) -> Vector3:
 	return skeleton.to_global(skeleton.get_bone_global_pose(bone_idx).origin)
 func get_bone_idx(bone_name: StringName) -> int:
@@ -335,7 +338,7 @@ func pop_all_character_data() -> void:
 	push_warning("Unit.pop_all_character_data is unimplemented")
 #endregion
 #region Fade
-class Fade: pass
+class Fade extends RefCounted: pass
 func push_fade(fade_amount: float, fade_time: float, id: Fade = null) -> Fade:
 	push_warning("Unit.push_fade is unimplemented")
 	return null
@@ -377,7 +380,7 @@ func is_in_front(target: Unit) -> bool:
 func is_behind(target: Unit) -> bool:
 	return !is_in_front(target)
 
-@onready var nav_map_rid: RID = get_world_3d().navigation_map
+@onready var nav_map_rid: RID = get_world_3d().navigation_map #@ignore
 func get_nearest_passable_position(pos: Vector3) -> Vector3:
 	return NavigationServer3D.map_get_closest_point(nav_map_rid, pos * Data.HW2GD) * Data.GD2HW
 
@@ -410,7 +413,7 @@ func update_fow_image_if_needed() -> void:
 		#await RenderingServer.frame_post_draw
 		fow_image = fow_subviewport_texture.get_image()
 
-func _physics_process_update_visibility(delta: float) -> void:	
+func _network_process_update_visibility(delta: float) -> void:	
 	
 	if get_visible_in_fow(): return
 	
@@ -424,9 +427,9 @@ func _physics_process_update_visibility(delta: float) -> void:
 	visible = pixel.r > 0.5
 
 #var prev_transform: Transform3D = Transform3D.IDENTITY
-#@onready var character_body: CharacterBody3D = self as Variant #find_child("CharacterBody3D", false, false)
-#@onready var navigation_agent: NavigationAgent3D = find_child("NavigationAgent3D", false, false)
-#func _physics_process_sync_char_body_pos(delta: float) -> void:
+#@onready var character_body: CharacterBody3D = self as Variant #find_child("CharacterBody3D", false, false) #@ignore
+#@onready var navigation_agent: NavigationAgent3D = find_child("NavigationAgent3D", false, false) #@ignore
+#func _network_process_sync_char_body_pos(delta: float) -> void:
 #	if character_body == null: return
 #	if transform != prev_transform:
 #		character_body.transform = transform

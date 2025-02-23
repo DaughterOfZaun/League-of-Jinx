@@ -8,10 +8,10 @@ var assists: int = 0
 var deaths: int = 0
 var kills: int = 0
 
-@onready var root: Node = get_tree().current_scene
-@onready var constants: Constants = root.get_node("%Constants")
-@onready var gold: float = constants.ai_starting_gold
-@onready var level_script: Level = root.get_node("%Level")
+@onready var root: Node = get_tree().current_scene #@ignore
+@onready var constants: Constants = root.get_node("%Constants") #@ignore
+@onready var gold: float = constants.ai_starting_gold #@ignore
+@onready var level_script: Level = root.get_node("%Level") #@ignore
 @onready var exp := 0.0:
 	get: return exp
 	set(value):

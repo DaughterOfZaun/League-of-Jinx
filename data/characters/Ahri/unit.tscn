@@ -120,7 +120,6 @@ radius = 7.5
 radius = 7.5
 
 [node name="Unit" type="CharacterBody3D" node_paths=PackedStringArray("data")]
-top_level = true
 script = ExtResource("1_7i6v8")
 data = NodePath("Data")
 
@@ -153,7 +152,7 @@ script = ExtResource("13_aca3q")
 
 [node name="AIMoveState" type="Node" parent="AI"]
 script = ExtResource("15_eh8vk")
-metadata/_custom_type_script = ExtResource("15_eh8vk")
+metadata/_custom_type_script = "uid://ca43nqrr7riix"
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource("14_1rt8n")
@@ -177,7 +176,7 @@ spell_block_base = 30.0
 
 [node name="Buffs" type="Node" parent="."]
 script = ExtResource("16_su6i3")
-metadata/_custom_type_script = ExtResource("16_su6i3")
+metadata/_custom_type_script = "uid://cfp7n61elnlki"
 
 [node name="Status" type="Node" parent="."]
 script = ExtResource("15_4u6an")
@@ -258,7 +257,7 @@ script = ExtResource("22_rdujr")
 [node name="Indicator" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("31_gseyn")
-metadata/_custom_type_script = ExtResource("31_gseyn")
+metadata/_custom_type_script = "uid://cbabw0i45oo2w"
 
 [node name="CircularRange" type="MeshInstance3D" parent="Indicator"]
 transform = Transform3D(25.143, 0, 0, 0, 1, 0, 0, 0, 25.143, 0, 0, 0)
@@ -1164,4 +1163,4 @@ shape = SubResource("SphereShape3D_hvbg6")
 
 [node name="Vars" type="Node" parent="."]
 script = ExtResource("17_yee7n")
-metadata/_custom_type_script = ExtResource("17_yee7n")
+metadata/_custom_type_script = "uid://dden2qlfk1e8g"

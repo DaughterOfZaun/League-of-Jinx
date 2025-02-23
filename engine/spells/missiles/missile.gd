@@ -26,7 +26,7 @@ func _ready() -> void:
 	add_child(effect)
 
 var time_elapsed: float = 0.0
-func _physics_process(delta: float) -> void:
+func _network_process(delta: float) -> void:
 	time_elapsed += delta
 	var lifetime := spell.data.missile_lifetime
 	if is_zero_approx(lifetime): lifetime = INF
@@ -55,7 +55,7 @@ func linear_movement(delta: float, ends_at_target_point := true) -> bool:
 
 		#TODO: spell.data.line_missile_target_height_augment
 		var target_height_augment := spell.data.missile_target_height_augment
-		var target_position := self.target_position
+		var target_position: Vector3 = self.target_position
 		if target_height_augment != 0:
 			target_position.y += target_height_augment
 		else:
@@ -108,7 +108,9 @@ func destroy_self() -> void:
 
 #var is_being_destroyed := false
 func destroy() -> void:
-	if self.is_inside_tree(): self.get_parent().remove_child(self) #self.queue_free()
+	#self.queue_free()
+	Balancer.unregister(self)
+
 	#if is_being_destroyed: return
 	#is_being_destroyed = true
 	#if effect != null:

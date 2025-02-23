@@ -1,1 +1,1 @@
-class_name SpellSlot #@rollback
+class_name SpellSlot extends RefCounted #@rollback

@@ -5,8 +5,8 @@ static func create(spell: Spell, target: Unit) -> SpellTargetMissile:
 	m.init(spell, target)
 	return m
 
-func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
+func _network_process(delta: float) -> void:
+	super._network_process(delta)
 	if linear_movement(delta):
 		spell._target_execute(target, self)
 		destroy_self()

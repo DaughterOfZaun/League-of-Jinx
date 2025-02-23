@@ -1,7 +1,7 @@
 class_name AIAttackState extends AIState #@rollback
 
-@onready var root: Node = get_tree().current_scene
-@onready var constants: Constants = root.get_node("%Constants")
+@onready var root: Node = get_tree().current_scene #@ignore
+@onready var constants: Constants = root.get_node("%Constants") #@ignore
 
 var spell: Spell
 var next_spell: Spell
@@ -38,7 +38,7 @@ var just_entered_state: bool = true
 var state_enter_time_point: float = 0.0
 var winding_up: bool = false
 
-func _physics_process(delta: float) -> void:
+func _network_process(delta: float) -> void:
 	current_time += delta
 
 	if !is_running: return

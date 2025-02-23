@@ -22,8 +22,8 @@ static func create(spell: Spell, target: Unit, target_position: Vector3) -> Spel
 	m.add_child(a)
 	return m
 
-func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
+func _network_process(delta: float) -> void:
+	super._network_process(delta)
 	
 	var track_units := spell.data.line_missile_track_units
 	if track_units && target != null:

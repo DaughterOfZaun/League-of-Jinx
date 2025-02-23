@@ -1,5 +1,4 @@
-@tool
-extends SubViewport
+@tool extends SubViewport
 
 @export_file("*.webp") var path: String
 @export var lossy: bool = false

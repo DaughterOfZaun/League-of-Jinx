@@ -1,17 +1,23 @@
 class_name Buffs extends Node #@rollback
 
-signal slot_created(slot: BuffSlot, buff: Buff)
+signal slot_created(slot: BuffSlot, buff: Buff) #TODO: deprecate
 
 #TODO: Remove empty slots
 
-@onready var me: Unit = get_parent()
+@onready var me: Unit = get_parent() #@ignore
 func _ready() -> void:
 	#if Engine.is_editor_hint(): return
 	me.buffs = self
 
 var time: float
-func _physics_process(delta: float) -> void:
+func _network_process(delta: float) -> void:
 	time += delta
+
+	#TODO: optimize
+	for d: Dictionary[Unit, BuffSlot] in slots.values():
+		for slot: BuffSlot in d.values():
+			for buff: Buff in slot.stacks:
+				buff._network_process(delta)
 
 var slots: Dictionary[GDScript, Dictionary] = {}
 const empty_Dictionary_Unit_BuffSlot: Dictionary[Unit, BuffSlot] = {} #HACK:
@@ -41,7 +47,7 @@ func get_slot(script: GDScript, attacker: Unit, create := false, buff: Buff = nu
 			slot = BuffSlot.new(self)
 			slots_with_script[attacker] = slot
 			slot_created.emit(slot, buff)
-			add_child(slot)
+			#add_child(slot)
 		else:
 			return null
 
@@ -177,10 +183,11 @@ func remove_by_instance(buff: Buff) -> void:
 	buff.slot.update()
 
 func has(type: Enums.BuffType) -> bool:
-	for child in get_children():
-		var buff := child as Buff
-		if buff && (type & buff.type) != 0:
-			return true
+	for d: Dictionary[Unit, BuffSlot] in slots.values():
+		for slot: BuffSlot in d.values():
+			for buff: Buff in slot.stacks:
+				if buff && (type & buff.type) != 0:
+					return true
 	return false
 
 func count(script: GDScript, caster: Unit = null) -> int:
@@ -193,11 +200,11 @@ func get_remaining_duration(script: GDScript) -> float:
 	if slot != null: return slot.duration_remaining
 	return 0.0
 
-var children: Array[Node]
-func _save() -> void:
-	children = get_children()
-func _load() -> void:
-	for child in get_children():
-		remove_child(child)
-	for child in children:
-		add_child(child)
+#var children: Array[Node]
+#func _save() -> void:
+#	children = get_children()
+#func _load() -> void:
+#	for child in get_children():
+#		remove_child(child)
+#	for child in children:
+#		add_child(child)

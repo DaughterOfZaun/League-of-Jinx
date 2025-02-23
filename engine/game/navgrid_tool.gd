@@ -254,7 +254,7 @@ enum NavigationGridCellFlags {
 	HAS_ANTI_BRUSH = 256
 }
 
-class NavigationGrid:
+class NavigationGrid extends RefCounted:
 	var min_grid_position: Vector3
 	var max_grid_position: Vector3
 	var cell_size: float
@@ -307,7 +307,7 @@ class NavigationGrid:
 		#MapHeight := MaxGridPosition.z + MinGridPosition.z
 		#MiddleOfMap := Vector2(MapWidth * 0.5, MapHeight * 0.5)
 
-class NavigationGridCell:
+class NavigationGridCell extends RefCounted:
 	var flags: NavigationGridCellFlags
 	var center_height: float
 	var session_id: int
@@ -361,7 +361,7 @@ class NavigationGridCell:
 	func SetFlags(flags: NavigationGridCellFlags) -> void:
 		self.flags = self.flags | flags
 
-class NavigationRegionTagTableGroupTag:
+class NavigationRegionTagTableGroupTag extends RefCounted:
 	var name: int
 	var values: Array[Array]
 	func _init(fa: FileAccess) -> void:
@@ -370,7 +370,7 @@ class NavigationRegionTagTableGroupTag:
 		for i in range(len(values)):
 			values[i] = [fa.get_32(), fa.get_32()]
 
-class NavigationHintNode:
+class NavigationHintNode extends RefCounted:
 	var locator: Vector2i
 	var distances: Array[float]
 	func _init(fa: FileAccess) -> void:

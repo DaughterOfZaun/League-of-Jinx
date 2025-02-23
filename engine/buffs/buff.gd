@@ -1,4 +1,4 @@
-class_name Buff extends Node #@rollback
+class_name Buff extends RefCounted #@rollback
 
 var slot: BuffSlot
 var attacker: Unit
@@ -69,7 +69,7 @@ func remove_self() -> void:
 	slot.mngr.remove_by_instance(self)
 
 var expired: bool = false
-func _physics_process(delta: float) -> void:
+func _network_process(delta: float) -> void:
 	if self.time_left <= 0:
 		expired = true
 		if !can_mitigate_duration:

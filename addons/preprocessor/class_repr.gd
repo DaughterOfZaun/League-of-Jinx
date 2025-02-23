@@ -1,4 +1,4 @@
-class_name ClassRepr
+class_name ClassRepr extends RefCounted
 
 var name: String
 var parent_name: String

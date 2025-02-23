@@ -30,8 +30,8 @@ var champions: Array[Champion] = []
 func register_champion(champion: Champion) -> void:
 	champions.append(champion)
 
-@onready var root: Node = get_tree().current_scene
-@onready var constants: Constants = root.get_node("%Constants")
+@onready var root: Node = get_tree().current_scene #@ignore
+@onready var constants: Constants = root.get_node("%Constants") #@ignore
 func init_ambient(
 	resource_name: String,
 	amount: float,

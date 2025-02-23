@@ -15,14 +15,14 @@ func _ready() -> void:
 	radius = Vector2(dir.x, dir.z).length()
 	position_3d = cast_position
 
-func _physics_process(delta: float) -> void:
-	super._physics_process(delta)
+func _network_process(delta: float) -> void:
+	super._network_process(delta)
 
 	if target != null:
 		target_position = target.position_3d
 
 	var target_height_augment := spell.data.missile_target_height_augment
-	var target_position_augmented := self.target_position
+	var target_position_augmented: Vector3 = self.target_position
 	if target_height_augment != 0:
 		target_position_augmented.y += target_height_augment
 	else:

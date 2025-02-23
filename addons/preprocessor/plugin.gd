@@ -78,7 +78,7 @@ func _build() -> bool:
 	return true
 
 var strings: Array[StringRepr]
-class StringRepr:
+class StringRepr extends RefCounted:
 	var quote: String
 	var value: String
 	func _init(quote: String, value: String) -> void:
@@ -125,7 +125,7 @@ func parse_class_declaration(cls: ClassRepr, named_classes: Dictionary[String, C
 		named_classes[cls_name] = cls
 	if cls_parent:
 		cls.parent_name = cls_parent
-	cls.tags = cls_tags.substr(2).strip_edges(false, true).split(" #@", false)
+	cls.tags = Utils.split_tags(cls_tags)
 	cls.is_rollback = cls.tags.has("rollback") || cls.in_path.begins_with("res://data/")
 	#print("class_name ", cls.name, " extends ", cls.parent_name, " #@" + " #@".join(cls.tags))
 
