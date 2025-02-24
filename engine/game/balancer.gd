@@ -22,16 +22,20 @@ static func register_static(obj: Object, obj_vars_size: int = 0) -> void:
 static func _register(obj: Object, obj_vars_size: int, id: int) -> int:
 	if id != 0: return id
 
-	var obj_vars: Array[Variant] = []
-	obj_vars.resize(obj_vars_size)
-	if free_ids.size() == 0:
-		id = _objs.size()
-		_objs.push_back(obj)
-		_vars.push_back(obj_vars)
-	else:
-		id = free_ids.pop_back()
-		_objs[id] = obj
-		_vars[id] = obj_vars
+	#var obj_vars: Array[Variant] = []
+	#obj_vars.resize(obj_vars_size)
+	#if free_ids.size() == 0:
+	#	id = _objs.size()
+	#	_objs.push_back(obj)
+	#	_vars.push_back(obj_vars)
+	#else:
+	#	id = free_ids.pop_back()
+	#	_objs[id] = obj
+	#	_vars[id] = obj_vars
+
+	id = _vars.size()
+	_objs.push_back(obj)
+	_vars.resize(id + obj_vars_size)
 	
 	#if obj.has_method(save_method_name):
 	#	instance.save.connect(obj[save_method_name])
@@ -98,14 +102,26 @@ var generated_frames: bool = false
 var fixed_delta: float = 1.0 / fps
 var process_args: Array[Variant] = [ fixed_delta ]
 @onready var root: Node = get_tree().current_scene #.find_child("Ahri", false, false)
+
+func _enter_tree() -> void:
+	var tree: SceneTree = get_tree()
+	tree.node_added.connect(func(obj: Node) -> void:
+		if obj.has_method(process_method_name):
+			instance.process.connect(obj[process_method_name])
+	)
+	tree.node_removed.connect(func(obj: Node) -> void:
+		if obj.has_method(process_method_name):
+			instance.process.disconnect(obj[process_method_name])
+	)
+
 func generate_frames() -> void:
 	generated_frames = true
-	for i in range(1):
+	for i in range(4):
 		#root.propagate_notification(NOTIFICATION_INTERNAL_PHYSICS_PROCESS)
 		#root.propagate_notification(NOTIFICATION_PHYSICS_PROCESS)
 		#tree.call_group(&"rollback", process_method_name, fixed_delta)
-		root.propagate_call(process_method_name, process_args)
-		#process.emit(fixed_delta)
+		#root.propagate_call(process_method_name, process_args)
+		process.emit(fixed_delta)
 	generated_frames = false
 
 var packed_scene: PackedScene = PackedScene.new()
@@ -128,7 +144,7 @@ func _init() -> void:
 	history_of_vars.resize(history_length)
 	instance = self
 
-@onready var tree := get_tree()
+#@onready var tree := get_tree()
 #const rollback_group_name := &"rollback"
 
 func save_state() -> void:

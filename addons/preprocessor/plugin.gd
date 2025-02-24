@@ -59,21 +59,21 @@ func _build() -> bool:
 		fa.store_string(cls.code)
 		fa.close()
 
-	#var packer := PCKPacker.new()
-	#packer.pck_start(cache_path + "scripts.pck")
-	#for cls in classes:
-	#	if !cls.changed: continue
-	#	packer.add_file(cls.in_path, cls.out_path)
-	#packer.flush()
-
-	var packer := ZIPPacker.new()
-	packer.open(cache_path + "scripts.zip")
+	var pck_packer := PCKPacker.new()
+	pck_packer.pck_start(cache_path + "scripts.pck")
 	for cls in classes:
 		if !cls.changed: continue
-		packer.start_file(cls.out_path.replace(temp_path, ""))
-		packer.write_file(cls.code.to_utf8_buffer())
-		packer.close_file()
-	packer.close()
+		pck_packer.add_file(cls.in_path, cls.out_path)
+	pck_packer.flush()
+
+	var zip_packer := ZIPPacker.new()
+	zip_packer.open(cache_path + "scripts.zip")
+	for cls in classes:
+		if !cls.changed: continue
+		zip_packer.start_file(cls.out_path.replace(temp_path, ""))
+		zip_packer.write_file(cls.code.to_utf8_buffer())
+		zip_packer.close_file()
+	zip_packer.close()
 	
 	return true
 

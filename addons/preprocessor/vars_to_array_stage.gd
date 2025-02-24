@@ -142,8 +142,8 @@ func process_class(cls: ClassRepr) -> void:
 		#	var_decl += "	get: return Balancer.objs[" + vars_name + "[" + str(i) + "]]\n"
 		#	var_decl += "	set(v): " + vars_name + "[" + str(i) + "] = v.get_meta(&\"id\") if v else 0\n"
 		#else:
-		var_decl += "	get: return Balancer." + vars_name + "[" + id_name + "][" + str(i) + "]\n"
-		var_decl += "	set(v): Balancer." + vars_name + "[" + id_name + "][" + str(i) + "] = v\n"
+		var_decl += "	get: return Balancer." + vars_name + "[" + id_name + " + " + str(i) + "]\n"
+		var_decl += "	set(v): Balancer." + vars_name + "[" + id_name + " + " + str(i) + "] = v\n"
 
 		return var_decl
 	)
@@ -175,9 +175,12 @@ func process_class(cls: ClassRepr) -> void:
 				i += static_var_i
 		if i == -1:
 			return match.strings[0]
-		var replacement := "Balancer." + vars_name + "[" + id_name + "][" + str(i) + "]"
+		var replacement := "Balancer." + vars_name + "[" + id_name + " + " + str(i) + "]"
 		if op.is_empty():
-			return "(" + replacement + " as " + var_type + ")"
+			if var_type in ["float", "int"]:
+				return var_type + "(" + replacement + ")"
+			else:
+				return "(" + replacement + " as " + var_type + ")"
 		else:
 			return replacement + " " + op
 	)
@@ -210,6 +213,13 @@ func process_class(cls: ClassRepr) -> void:
 			"static", "_static_init", parent_has_static_init,
 			cls,
 		))
+
+	#if cls.is_rollback && cls.contains("func _network_process"):
+	#	code += "\n\n"
+	#	code += "func _enter_tree() -> void:\n"
+	#	code += "	Balancer.process.connect(self._network_process)\n"
+	#	code += "func _exit_tree() -> void:\n"
+	#	code += "	Balancer.process.disconnect(self._network_process)\n"
 
 	#if cls.is_rollback:
 	#	code = process_regex.sub(code, "$0\treturn\n")
