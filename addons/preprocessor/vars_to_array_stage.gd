@@ -32,11 +32,11 @@ func get_initial_value(var_type: String) -> String:
 		"Color": initial_value = "Color.BLACK"
 		"StringName": initial_value = "&\"\""
 		
+		#"Object",\
 		"Plane",\
 		"AABB",\
 		"NodePath",\
 		"RID",\
-		#"Object",\
 		"Callable",\
 		"Signal",\
 		"PackedByteArray", "PackedInt32Array", "PackedInt64Array",\

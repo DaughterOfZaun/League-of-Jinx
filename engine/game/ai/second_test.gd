@@ -37,10 +37,9 @@ const DUPLICATE_FROM_EDITOR = 16
 const DUPLICATE_ALL = 0 \
 	| DUPLICATE_SIGNALS \
 	| DUPLICATE_GROUPS \
-	| DUPLICATE_SCRIPTS \
+	| DUPLICATE_SCRIPTS
 	#| DUPLICATE_USE_INSTANTIATION \
 	#| DUPLICATE_FROM_EDITOR \
-	| 0
 
 func should_skip_obj(node: Node) -> bool:
 	return node is UnitData \

@@ -48,18 +48,20 @@ func vec3_parse(from: String, u := VectorUsage.UNDEFINED) -> Vector3:
 	from = string_parse(from)
 	var v := from.split(' ')
 	assert(len(v) == 3 || (len(v) == 1 && u != VectorUsage.UNDEFINED), from)
-	if len(v) == 1: match u:
-		VectorUsage.SCALE: return Vector3.ONE * float_parse(v[0])
-		VectorUsage.ROTATION: return Vector3.BACK * float_parse(v[0])
+	if len(v) == 1:
+		match u:
+			VectorUsage.SCALE: return Vector3.ONE * float_parse(v[0])
+			VectorUsage.ROTATION: return Vector3.BACK * float_parse(v[0])
 	return Vector3(float_parse(v[0]), float_parse(v[1]), float_parse(v[2]))
 
 func vec2_parse(from: String, u := VectorUsage.UNDEFINED) -> Vector2:
 	from = string_parse(from)
 	var v := from.split(' ')
 	assert(len(v) == 2 || (len(v) == 1 && u != VectorUsage.UNDEFINED), from)
-	if len(v) == 1: match u:
-		VectorUsage.SCALE: return Vector2.ONE * float_parse(v[0])
-		VectorUsage.ROTATION: return Vector2.DOWN * float_parse(v[0])
+	if len(v) == 1:
+		match u:
+			VectorUsage.SCALE: return Vector2.ONE * float_parse(v[0])
+			VectorUsage.ROTATION: return Vector2.DOWN * float_parse(v[0])
 	return Vector2(float_parse(v[0]), float_parse(v[1]))
 
 func ivec2_parse(from: String) -> Vector2i:
