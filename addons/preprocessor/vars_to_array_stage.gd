@@ -55,6 +55,10 @@ func get_initial_value(var_type: String) -> String:
 
 	return initial_value
 
+func access(vars_name: String, id_name: String, i: int) -> String:
+	#return "Balancer." + vars_name + "[" + id_name + " + " + str(i) + "]"
+	return vars_name + "[" + str(i) + "]"
+
 var var_i: int
 var static_var_i: int
 func process_class(cls: ClassRepr) -> void:
@@ -116,7 +120,7 @@ func process_class(cls: ClassRepr) -> void:
 			static_names.append(var_name)
 			static_types.append(var_type)
 			i = parent_static_var_i + static_var_i
-			vars_name = "_vars"
+			vars_name = "_static_vars"
 			id_name = "_static_id"
 			static_var_i += 1
 		else:
@@ -142,8 +146,8 @@ func process_class(cls: ClassRepr) -> void:
 		#	var_decl += "	get: return Balancer.objs[" + vars_name + "[" + str(i) + "]]\n"
 		#	var_decl += "	set(v): " + vars_name + "[" + str(i) + "] = v.get_meta(&\"id\") if v else 0\n"
 		#else:
-		var_decl += "	get: return Balancer." + vars_name + "[" + id_name + " + " + str(i) + "]\n"
-		var_decl += "	set(v): Balancer." + vars_name + "[" + id_name + " + " + str(i) + "] = v\n"
+		var_decl += "	get: return " + access(vars_name, id_name, i) + "\n"
+		var_decl += "	set(v): " + access(vars_name, id_name, i) + " = v\n"
 
 		return var_decl
 	)
@@ -175,7 +179,7 @@ func process_class(cls: ClassRepr) -> void:
 				i += static_var_i
 		if i == -1:
 			return match.strings[0]
-		var replacement := "Balancer." + vars_name + "[" + id_name + " + " + str(i) + "]"
+		var replacement := access(vars_name, id_name, i)
 		if op.is_empty():
 			if var_type in ["float", "int"]:
 				return var_type + "(" + replacement + ")"
@@ -209,7 +213,7 @@ func process_class(cls: ClassRepr) -> void:
 	var parent_has_static_init := cls.parent.code.contains("static func _static_init") if cls.parent else false
 	if static_var_i > 0 || has_static_init && parent_has_static_init:
 		code = Utils.str_replace_once(code, static_init_or_eof_regex, process_func.bind(
-			"_vars", "_static_id", static_var_i, parent_static_var_i, static_values, static_names,
+			"_static_vars", "_static_id", static_var_i, parent_static_var_i, static_values, static_names,
 			"static", "_static_init", parent_has_static_init,
 			cls,
 		))
@@ -255,7 +259,8 @@ func process_func(
 		#if func_mod != "static":
 		#	init_code += "@export "
 		if func_mod: init_code += func_mod + " "
-		#init_code += "var " + vars_name + ": Array[Variant] = []\n"
+		init_code += "var " + vars_name + ": Array[Variant] = []\n"
+		if func_mod: init_code += func_mod + " "
 		init_code += "var " + id_name + ": int = 0\n"
 	
 	if func_mod: init_code += func_mod + " "
@@ -280,7 +285,7 @@ func process_func(
 		_: assert(false)
 
 	for i: int in keys:
-		#init_code += "	" + vars_name + "[" + str(parent_var_i + i) + "] = " + vars[i] + "\n"
-		init_code += "	" + names[i] + " = " + vars[i] + "\n"
+		init_code += "	" + access(vars_name, id_name, parent_var_i + i) + " = " + vars[i] + "\n"
+		#init_code += "	self." + names[i] + " = " + vars[i] + "\n"
 
 	return init_code

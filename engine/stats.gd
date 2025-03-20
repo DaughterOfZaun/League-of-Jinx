@@ -41,9 +41,7 @@ func _network_process(delta: float) -> void:
 	self.mana_current = clampf(self.mana_current + self.mana_regen * time_since_last_regen, 0, self.mana)
 	#time_since_last_regen = 0
 
-@export var level: int = 1
-func growth(stat_per_level: float) -> float:
-	return stat_per_level * (level - 1)
+@export var level: float = 1
 
 #TODO: Group by offense, defense...
 
@@ -71,7 +69,7 @@ var armor_percent_temp: float:
 	get: return temp[ARMOR_PERCENT]
 	set(v): temp[ARMOR_PERCENT] = v
 func get_armor() -> float:
-	return (armor_base + growth(armor_base_per_level) + armor_flat + temp[ARMOR_FLAT])\
+	return (armor_base + armor_base_per_level * level + armor_flat + temp[ARMOR_FLAT])\
 		 * (1 + armor_percent + temp[ARMOR_PERCENT])
 @export_group('Armor penetration', 'armor_penetration_')
 @export var armor_penetration_flat: float
@@ -106,7 +104,7 @@ var attack_speed_percent_multiplicative_temp: float:
 func get_attack_speed(delay_offset_percent: float = 0) -> float:
 	var base_delay := constants.gcd_attack_delay * (1.0 + delay_offset_percent)
 	var base := 1.0 / base_delay
-	var base_percent := (attack_speed_base + growth(attack_speed_base_per_level)) * 0.01
+	var base_percent := (attack_speed_base + attack_speed_base_per_level * level) * 0.01
 	var bonus_percent := attack_speed_percent + temp[ATTACK_SPEED_PERCENT]
 	#TODO: var bonus_percent_multiplicative := attack_speed_percent_multiplicative + temp[ATTACK_SPEED_PERCENT_MULTIPLICATIVE]
 	return base + base_percent + bonus_percent #TODO: (1 + bonus_percent_multiplicative)
@@ -122,7 +120,7 @@ var attack_damage_percent_temp: float:
 	get: return temp[ATTACK_DAMAGE_PERCENT]
 	set(v): temp[ATTACK_DAMAGE_PERCENT] = v
 func get_attack_damage() -> float:
-	return (attack_damage_base + growth(attack_damage_base_per_level) + attack_damage_flat + temp[ATTACK_DAMAGE_FLAT])\
+	return (attack_damage_base + attack_damage_base_per_level * level + attack_damage_flat + temp[ATTACK_DAMAGE_FLAT])\
 		 * (1 + attack_damage_percent + temp[ATTACK_DAMAGE_PERCENT])
 @export_group('Bubble radius', 'bubble_radius_')
 @export var bubble_radius_flat: float
@@ -153,7 +151,7 @@ var crit_chance_flat_temp: float:
 	get: return temp[CRIT_CHANCE_FLAT]
 	set(v): temp[CRIT_CHANCE_FLAT] = v
 func get_crit_chance() -> float:
-	return (crit_chance_base + growth(crit_chance_base_per_level) + crit_chance_flat + temp[CRIT_CHANCE_FLAT])
+	return (crit_chance_base + crit_chance_base_per_level * level + crit_chance_flat + temp[CRIT_CHANCE_FLAT])
 @export_group('Gold', 'gold_per10_')
 @export var gold_per10_flat: float
 var gold_per10_flat_temp: float:
@@ -178,7 +176,7 @@ var health: float:
 	#if health_is_dirty:
 	#	health = (
 	get: return (
-			self.health_base + growth(self.health_base_per_level) +
+			self.health_base + self.health_base_per_level * self.level +
 			self.health_flat + self.temp[HEALTH_FLAT]
 		) * (1 + self.health_percent + self.temp[HEALTH_PERCENT])
 	#return health
@@ -201,7 +199,7 @@ var health_regen: float:
 	#if health_regen_is_dirty:
 	#	health_regen = (
 	get: return (
-			self.health_regen_base + growth(self.health_regen_base_per_level) +
+			self.health_regen_base + self.health_regen_base_per_level * self.level +
 			self.health_regen_flat + self.temp[HEALTH_REGEN_FLAT]
 		) * (1 + self.health_regen_percent + self.temp[HEALTH_REGEN_PERCENT])
 	#return health_regen
@@ -222,7 +220,7 @@ var mana: float:
 	#if mana_is_dirty:
 	#	mana = (
 	get: return (
-			self.mana_base + growth(self.mana_base_per_level) +
+			self.mana_base + self.mana_base_per_level * self.level +
 			self.mana_flat + self.temp[MANA_FLAT]
 		) * (1 + self.mana_percent + self.temp[MANA_PERCENT])
 	#return mana
@@ -245,7 +243,7 @@ var mana_regen: float:
 	#if mana_regen_is_dirty:
 	#	mana_regen = (
 	get: return (
-			self.mana_regen_base + growth(self.mana_regen_base_per_level) +
+			self.mana_regen_base + self.mana_regen_base_per_level * self.level +
 			self.mana_regen_flat + self.temp[MANA_REGEN_FLAT]
 		) * (1 + self.mana_regen_percent + self.temp[MANA_REGEN_PERCENT])
 	#return mana_regen
@@ -270,7 +268,7 @@ var magic_damage_percent_temp: float:
 func get_magic_damage_flat() -> float:
 	return magic_damage_flat + temp[MAGIC_DAMAGE_FLAT]
 func get_magic_damage() -> float:
-	return (magic_damage_base + growth(magic_damage_base_per_level) + magic_damage_flat + temp[MAGIC_DAMAGE_FLAT])\
+	return (magic_damage_base + magic_damage_base_per_level * level + magic_damage_flat + temp[MAGIC_DAMAGE_FLAT])\
 		 * (1 + magic_damage_percent + temp[MAGIC_DAMAGE_PERCENT])
 @export_group('Magic penetration', 'magic_penetration_')
 @export var magic_penetration_flat: float
@@ -334,7 +332,7 @@ var spell_block_percent_temp: float:
 	get: return temp[SPELL_BLOCK_PERCENT]
 	set(v): temp[SPELL_BLOCK_PERCENT] = v
 func get_spell_block() -> float:
-	return (spell_block_base + growth(spell_block_base_per_level) + spell_block_flat + temp[SPELL_BLOCK_FLAT])\
+	return (spell_block_base + spell_block_base_per_level * level + spell_block_flat + temp[SPELL_BLOCK_FLAT])\
 		 * (1 + spell_block_percent + temp[SPELL_BLOCK_PERCENT])
 @export_group('Spell vamp', 'spell_vamp_')
 @export var spell_vamp_percent: float
@@ -373,7 +371,7 @@ var dodge_flat_temp: float:
 	get: return temp[DODGE_FLAT]
 	set(v): temp[DODGE_FLAT] = v
 func get_dodge() -> float:
-	return (dodge_base + growth(dodge_base_per_level) + dodge_flat + temp[DODGE_FLAT])
+	return (dodge_base + dodge_base_per_level * level + dodge_flat + temp[DODGE_FLAT])
 @export_group('Respawn time', 'respawn_time_')
 @export var respawn_time_percent: float
 var respawn_time_percent_temp: float:

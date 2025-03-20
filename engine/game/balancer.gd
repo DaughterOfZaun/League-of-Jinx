@@ -14,28 +14,32 @@ const process_method_name := &"_network_process"
 static func register(obj: Object, obj_vars_size: int = 0) -> void:
 	@warning_ignore("unsafe_property_access")
 	obj._id = _register(obj, obj_vars_size, obj._id)
+	@warning_ignore("unsafe_property_access")
+	obj._vars = _vars[obj._id]
 
 static func register_static(obj: Object, obj_vars_size: int = 0) -> void:
 	@warning_ignore("unsafe_property_access")
 	obj._static_id = _register(obj, obj_vars_size, obj._static_id)
+	@warning_ignore("unsafe_property_access")
+	obj._static_vars = _vars[obj._static_id]
 
 static func _register(obj: Object, obj_vars_size: int, id: int) -> int:
 	if id != 0: return id
 
-	#var obj_vars: Array[Variant] = []
-	#obj_vars.resize(obj_vars_size)
+	var obj_vars: Array[Variant] = []
+	obj_vars.resize(obj_vars_size)
 	#if free_ids.size() == 0:
-	#	id = _objs.size()
-	#	_objs.push_back(obj)
-	#	_vars.push_back(obj_vars)
+	id = _objs.size()
+	_objs.push_back(obj)
+	_vars.push_back(obj_vars)
 	#else:
 	#	id = free_ids.pop_back()
 	#	_objs[id] = obj
 	#	_vars[id] = obj_vars
 
-	id = _vars.size()
-	_objs.push_back(obj)
-	_vars.resize(id + obj_vars_size)
+	#id = _vars.size()
+	#_objs.push_back(obj)
+	#_vars.resize(id + obj_vars_size)
 	
 	#if obj.has_method(save_method_name):
 	#	instance.save.connect(obj[save_method_name])
@@ -116,7 +120,7 @@ func _enter_tree() -> void:
 
 func generate_frames() -> void:
 	generated_frames = true
-	for i in range(4):
+	for i in range(8):
 		#root.propagate_notification(NOTIFICATION_INTERNAL_PHYSICS_PROCESS)
 		#root.propagate_notification(NOTIFICATION_PHYSICS_PROCESS)
 		#tree.call_group(&"rollback", process_method_name, fixed_delta)
