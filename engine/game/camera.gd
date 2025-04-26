@@ -4,7 +4,7 @@ class_name Camera extends Node3DExt
 @onready var viewport: Viewport = camera.get_viewport()
 
 @export var target: Unit
-var target_position := Vector3.ZERO:
+var target_position: Vector3 = Vector3.ZERO:
 	get:
 		if locked:
 			target_position = target.global_position
@@ -16,8 +16,8 @@ var offset: Vector3 = Vector3.ZERO
 
 @export var max_zoom: float = 3.0
 @export var min_zoom: float = 0.4
-@export_range(0.05, 1.0) var zoom_speed := 0.09
-var zoom := 1.0:
+@export_range(0.05, 1.0) var zoom_speed: float = 0.09
+var zoom: float = 1.0:
 	get: return zoom
 	set(value): zoom = clamp(value, min_zoom, max_zoom)
 

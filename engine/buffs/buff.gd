@@ -43,14 +43,14 @@ var time_left: float:
 		return wait_time - (slot.mngr.time - start_time)
 
 var delay: float = 0.0
-var delay_remaining := 0.0:
+var delay_remaining: float = 0.0:
 	get:
 		return maxf(0, self.time_left - self.duration)
 	set(value):
 		self.delay = value
 		self.wait_time = self.delay + self.duration
 
-var duration_remaining := 0.0:
+var duration_remaining: float = 0.0:
 	get:
 		return minf(self.duration, self.time_left)
 	set(value):

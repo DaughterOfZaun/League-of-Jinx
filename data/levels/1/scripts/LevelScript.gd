@@ -26,10 +26,10 @@ class G:
 	var exp_inhibitor := 0.0
 	var maximum_gold_bonus := 0.0
 
-const MELEE := Enums.MinionType.MELEE
-const ARCHER := Enums.MinionType.ARCHER
-const CASTER := Enums.MinionType.CASTER
-const SUPER := Enums.MinionType.SUPER
+const MELEE: Enums.MinionType = Enums.MinionType.MELEE
+const ARCHER: Enums.MinionType = Enums.MinionType.ARCHER
+const CASTER: Enums.MinionType = Enums.MinionType.CASTER
+const SUPER: Enums.MinionType = Enums.MinionType.SUPER
 
 var g: Dictionary[Enums.MinionType, G] = (
 	func() -> Dictionary[Enums.MinionType, G]:
@@ -111,8 +111,8 @@ enum SpecialMinionMode {
 }
 var hq_turret_attackable: bool = false
 
-const CHAOS := Enums.Team.CHAOS
-const ORDER := Enums.Team.ORDER
+const CHAOS: Enums.Team = Enums.Team.CHAOS
+const ORDER: Enums.Team = Enums.Team.ORDER
 
 var names: Dictionary[Enums.MinionType, Dictionary] = (
 	func() -> Dictionary[Enums.MinionType, Dictionary]:
@@ -176,9 +176,9 @@ class LuaBarrack:
 			l[type].exp_given = g[type].exp_given
 			l[type].exp_given = g[type].gold_given
 
-const RIGHT := Enums.Lane.RIGHT
-const CENTER := Enums.Lane.CENTER
-const LEFT := Enums.Lane.LEFT
+const RIGHT: Enums.Lane = Enums.Lane.RIGHT
+const CENTER: Enums.Lane = Enums.Lane.CENTER
+const LEFT: Enums.Lane = Enums.Lane.LEFT
 
 var building_status: Dictionary[Enums.Team, BuildingStatus] = {
 	ORDER: BuildingStatus.new(),
@@ -255,11 +255,11 @@ func upgrade_minion_timer() -> void:
 				l.gold_given = l.gold_bonus + g[type].gold_given
 				l.exp_given = l.exp_bonus + g[type].exp_given
 
-const BACK := Enums.Pos.BACK
-const MIDDLE := Enums.Pos.MIDDLE
-const FRONT := Enums.Pos.FRONT
-const HQ_TOWER_1 := Enums.Pos.HQ_TOWER_1
-const HQ_TOWER_2 := Enums.Pos.HQ_TOWER_2
+const BACK: Enums.Pos = Enums.Pos.BACK
+const MIDDLE: Enums.Pos = Enums.Pos.MIDDLE
+const FRONT: Enums.Pos = Enums.Pos.FRONT
+const HQ_TOWER_1: Enums.Pos = Enums.Pos.HQ_TOWER_1
+const HQ_TOWER_2: Enums.Pos = Enums.Pos.HQ_TOWER_2
 
 func allow_damage_on_buildings() -> void:
 	for lane: Enums.Lane in [RIGHT, CENTER, LEFT]:

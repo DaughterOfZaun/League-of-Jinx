@@ -45,7 +45,7 @@ func calc_speed() -> float:
 var target_reached: bool = false
 var last_dir_normalized: Vector3 = Vector3.ZERO
 var last_speed: float = 0.0
-func linear_movement(delta: float, ends_at_target_point := true) -> bool:
+func linear_movement(delta: float, ends_at_target_point: bool = true) -> bool:
 
 	var accel := spell.data.missile_accel
 	var fixed_travel_time := spell.data.missile_fixed_travel_time
@@ -106,7 +106,7 @@ func destroy_self() -> void:
 	spell.on_missile_end(self)
 	self.destroy()
 
-#var is_being_destroyed := false
+#var is_being_destroyed: bool = false
 func destroy() -> void:
 	#self.queue_free()
 	Balancer.unregister(self)

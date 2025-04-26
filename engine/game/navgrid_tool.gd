@@ -1,7 +1,7 @@
 @tool class_name NGT extends Node2D
 
-const HW2GD := 1. / 70.
-const GD_3D_to_2D := (70. / 50.) * (512. / 294.)
+const HW2GD: float = 1. / 70.
+const GD_3D_to_2D: float = (70. / 50.) * (512. / 294.)
 
 const null_array_of_array: Array[Array] = []
 const null_array_of_vector2: Array[Vector2] = []
@@ -16,7 +16,7 @@ static func get_v2i_16(fa: FileAccess) -> Vector2i:
 	return Vector2i(fa.get_16(), fa.get_16())
 
 @export_file("*.aimesh_ngrid") var import_path: String
-@export_tool_button("Import") var import := func() -> void:
+@export_tool_button("Import") var import: Callable = func() -> void:
 	var fa := FileAccess.open(import_path, FileAccess.ModeFlags.READ)
 	var ng := NavigationGrid.new(fa)
 
@@ -82,8 +82,8 @@ func occludes_light(cell: NavigationGridCell) -> bool:
 func find_contours(
 	image: Array[Array],
 	level: float,
-	fully_connected := false,
-	positive_orientation := false,
+	fully_connected: bool = false,
+	positive_orientation: bool = false,
 	mask: Array[Array] = null_array_of_array
 ) -> Array[Array]:
 	var segments := _get_contour_segments(image, level, fully_connected, mask)

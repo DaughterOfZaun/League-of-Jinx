@@ -1,7 +1,7 @@
 class_name BluePillBuff extends Buff
 
 var will_remove: bool
-func _init(will_remove := false) -> void:
+func _init(will_remove: bool = false) -> void:
 	self.will_remove = will_remove
 
 func on_activate() -> void:

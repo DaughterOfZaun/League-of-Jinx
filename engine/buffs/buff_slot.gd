@@ -18,7 +18,7 @@ func update() -> void:
 		first_buff = get_first_expiring_buff()
 	updated.emit(len(stacks), first_buff)
 
-func add(buff: Buff, count := 1, continious := false) -> BuffSlot:
+func add(buff: Buff, count: int = 1, continious: bool = false) -> BuffSlot:
 	for i in range(count):
 		if i > 0: buff = buff.clone()
 		self.stacks.append(buff)

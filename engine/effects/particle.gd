@@ -25,21 +25,21 @@ func remove() -> void:
 	#self.queue_free()
 	Balancer.unregister(self)
 
-func fow(fow_team := Enums.Team.UNKNOWN, fow_visibility_radius := 0.0) -> Particle:
+func fow(fow_team: Enums.Team = Enums.Team.UNKNOWN, fow_visibility_radius: float = 0.0) -> Particle:
 	return self
-func flags(flags := 0) -> Particle:
+func flags(flags: int = 0) -> Particle:
 	return self
 func specific(
-	specific_team_only := Enums.Team.UNKNOWN,
-	specific_team_only_override := Enums.Team.UNKNOWN,
+	specific_team_only: Enums.Team = Enums.Team.UNKNOWN,
+	specific_team_only_override: Enums.Team = Enums.Team.UNKNOWN,
 	specific_unit_only: Unit = null,
-	use_specific_unit := false
+	use_specific_unit: bool = false
 ) -> Particle:
 	return self
 func bind(
 	bind_object: Unit = null,
 	bone_name: StringName = "",
-	pos := Vector3.INF,
+	pos: Vector3 = Vector3.INF,
 ) -> Particle:
 	assert(bind_object != null || pos != Vector3.INF)
 	if pos.is_finite():
@@ -52,15 +52,15 @@ func bind(
 func target(
 	target_object: Unit = null,
 	target_bone_name: StringName = "",
-	target_pos := Vector3.INF,
+	target_pos: Vector3 = Vector3.INF,
 ) -> Particle:
 	return self
 func more_flags(
-	send_if_on_screen_or_discard := false,
-	persists_through_reconnect := false,
-	bind_flex_to_owner_par := false,
-	follows_ground_tilt := false,
-	faces_target := false,
+	send_if_on_screen_or_discard: bool = false,
+	persists_through_reconnect: bool = false,
+	bind_flex_to_owner_par: bool = false,
+	follows_ground_tilt: bool = false,
+	faces_target: bool = false,
 ) -> Particle:
 	return self
 func orient(orient_towards: Unit = null) -> Particle:

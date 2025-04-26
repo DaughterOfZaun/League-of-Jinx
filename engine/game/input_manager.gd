@@ -94,7 +94,7 @@ func _input(event: InputEvent) -> void:
 			window.mode = Window.MODE_WINDOWED
 		return
 
-const RAY_LENGTH := 1000.0
+const RAY_LENGTH: float = 1000.0
 func on_ground_clicked_on_screen(event: InputEventMouseButton) -> void:
 	viewport.set_input_as_handled()
 	if event.button_index == MOUSE_BUTTON_RIGHT:

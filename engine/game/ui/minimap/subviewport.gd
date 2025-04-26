@@ -1,6 +1,6 @@
 class_name SubViewportEx extends SubViewport
 
-const GD_3D_to_2D := (70. / 50.) * (512. / 294.)
+const GD_3D_to_2D: float = (70. / 50.) * (512. / 294.)
 
 @onready var camera: Camera2D = get_camera_2d()
 

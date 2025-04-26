@@ -6,7 +6,7 @@ var slow_percent: float
 var particle1: Particle
 var particle2: Particle
 var particle3: Particle
-func _init(slow_percent := 0.0) -> void:
+func _init(slow_percent: float = 0.0) -> void:
 	self.slow_percent = slow_percent
 func clone() -> Buff:
 	return new(slow_percent)

@@ -28,7 +28,7 @@ static func str_replace_once(target: String, regex: RegEx, cb: Callable) -> Stri
 	return out
 
 # https://gist.github.com/hiulit/772b8784436898fd7f942750ad99e33e?permalink_comment_id=5196503#gistcomment-5196503
-static func get_all_files(path: String, file_ext := "", files : PackedStringArray = []) -> PackedStringArray:
+static func get_all_files(path: String, file_ext: String = "", files : PackedStringArray = []) -> PackedStringArray:
 	var dir := DirAccess.open(path)
 	#if file_ext.begins_with("."):
 	#	file_ext = file_ext.substr(1, file_ext.length() - 1)

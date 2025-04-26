@@ -21,7 +21,7 @@ func _network_process(delta: float) -> void:
 
 var slots: Dictionary[GDScript, Dictionary] = {}
 const empty_Dictionary_Unit_BuffSlot: Dictionary[Unit, BuffSlot] = {} #HACK:
-func get_slot(script: GDScript, attacker: Unit, create := false, buff: Buff = null) -> BuffSlot:
+func get_slot(script: GDScript, attacker: Unit, create: bool = false, buff: Buff = null) -> BuffSlot:
 	var slot: BuffSlot = null
 	var slots_with_script: Dictionary[Unit, BuffSlot] = slots.get(script, empty_Dictionary_Unit_BuffSlot)
 	if slots_with_script == empty_Dictionary_Unit_BuffSlot:
@@ -59,12 +59,12 @@ func get_slot(script: GDScript, attacker: Unit, create := false, buff: Buff = nu
 func add(
 	attacker: Unit,
 	buff: Buff,
-	max_stack := 0,
-	number_of_stacks := 1,
-	duration := 0.0,
-	add_type := Enums.BuffAddType.UNDEFINED,
-	type := Enums.BuffType.UNDEFINED,
-	tick_rate := 0.0,
+	max_stack: int = 0,
+	number_of_stacks: int = 1,
+	duration: float = 0.0,
+	add_type: Enums.BuffAddType = Enums.BuffAddType.UNDEFINED,
+	type: Enums.BuffType = Enums.BuffType.UNDEFINED,
+	tick_rate: float = 0.0,
 	stacks_exclusive: Variant = null,
 	can_mitigate_duration: Variant = null,
 	is_hidden_on_client: Variant = null

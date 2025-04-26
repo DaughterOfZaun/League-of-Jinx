@@ -32,7 +32,7 @@ var animation: AnimationController #@ignore
 
 @onready var font_emitter: FontEmitter = find_child("FontEmitter", false, false) #@ignore
 
-func issue_order(order: Enums.OrderType, targetOfOrderPosition := Vector3.INF, targetOfOrder: Unit = null) -> void:
+func issue_order(order: Enums.OrderType, targetOfOrderPosition: Vector3 = Vector3.INF, targetOfOrder: Unit = null) -> void:
 	ai.order(order, targetOfOrderPosition, targetOfOrder)
 func order(type: Enums.OrderType, pos: Vector3, unit: Unit) -> void:
 	ai.order(type, pos, unit)
@@ -138,7 +138,7 @@ func get_point_by_facing_offset(distance: float, offset_angle: float) -> Vector3
 	var v2 := direction.rotated(deg_to_rad(offset_angle)) * distance
 	return position_3d + Vector3(v2.x, 0, v2.y)
 
-#var rot_speed := deg_to_rad(180. / ((0.08 + (0.01/3.))))
+#var rot_speed: float = deg_to_rad(180. / ((0.08 + (0.01/3.))))
 var rot_speed: float = deg_to_rad(180 / 0.2)
 func _network_process_rotate(delta: float) -> void:
 	var rot_delta := angle_difference(rotation.y, direction_angle)
@@ -236,7 +236,7 @@ func stop_move_block() -> void:
 #endregion
 
 #region Health&Life
-func inc_par(delta: float, par_type := Enums.PARType.MANA) -> void:
+func inc_par(delta: float, par_type: Enums.PARType = Enums.PARType.MANA) -> void:
 	push_warning("Unit.inc_par is unimplemented")
 
 func inc_health(delta: float, healer: Unit = null) -> void:

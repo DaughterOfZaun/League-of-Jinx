@@ -26,11 +26,11 @@ func get_from_cache(key: String) -> String:
 					res_cache[fname_lc] = res_path + '/' + fname
 	return res_cache[key]
 
-const tex_ext := ".webp"
+const tex_ext: String = ".webp"
 func tex_parse(from: String) -> Texture2D:
 	return res_parse(from, ".dds", ".tga", tex_ext) as Texture2D
 
-const mesh_ext := ".obj"
+const mesh_ext: String = ".obj"
 func mesh_parse(from: String) -> Mesh:
 	return res_parse(from, ".scb", ".sco", mesh_ext) as Mesh
 
@@ -44,7 +44,7 @@ func res_parse(from: String, bin_ext: String, txt_ext: String, out_ext: String) 
 	return load(get_from_cache(from))
 
 enum VectorUsage { UNDEFINED, SCALE, ROTATION }
-func vec3_parse(from: String, u := VectorUsage.UNDEFINED) -> Vector3:
+func vec3_parse(from: String, u: VectorUsage = VectorUsage.UNDEFINED) -> Vector3:
 	from = string_parse(from)
 	var v := from.split(' ')
 	assert(len(v) == 3 || (len(v) == 1 && u != VectorUsage.UNDEFINED), from)
@@ -54,7 +54,7 @@ func vec3_parse(from: String, u := VectorUsage.UNDEFINED) -> Vector3:
 			VectorUsage.ROTATION: return Vector3.BACK * float_parse(v[0])
 	return Vector3(float_parse(v[0]), float_parse(v[1]), float_parse(v[2]))
 
-func vec2_parse(from: String, u := VectorUsage.UNDEFINED) -> Vector2:
+func vec2_parse(from: String, u: VectorUsage = VectorUsage.UNDEFINED) -> Vector2:
 	from = string_parse(from)
 	var v := from.split(' ')
 	assert(len(v) == 2 || (len(v) == 1 && u != VectorUsage.UNDEFINED), from)
@@ -76,7 +76,7 @@ func float_parse(from: String) -> float:
 	assert(regex_float.search(from), from)
 	return float(from)
 
-func bool_parse(from: String, strict := true) -> bool:
+func bool_parse(from: String, strict: bool = true) -> bool:
 	from = string_parse(from).to_lower()
 	if from == "yes": return true
 	elif from == "no": return false
@@ -126,7 +126,7 @@ func curve_set(curve: Curve, i: Variant, from: String) -> Curve:
 func vec3_to_color(v: Vector3) -> Color:
 	return Color(v.x, v.y, v.z)
 
-func curve3d_set(curve: PackedVector4Array, i: Variant, from: String, u := VectorUsage.UNDEFINED) -> PackedVector4Array:
+func curve3d_set(curve: PackedVector4Array, i: Variant, from: String, u: VectorUsage = VectorUsage.UNDEFINED) -> PackedVector4Array:
 	assert(typeof(i) == TYPE_INT)
 	from = string_parse(from)
 	if !curve: curve = PackedVector4Array()
@@ -137,7 +137,7 @@ func curve3d_set(curve: PackedVector4Array, i: Variant, from: String, u := Vecto
 	curve.append(Vector4(v.x, v.y, v.z, t))
 	return curve
 
-func curve2d_set(curve: PackedVector3Array, i: Variant, from: String, u := VectorUsage.UNDEFINED) -> PackedVector3Array:
+func curve2d_set(curve: PackedVector3Array, i: Variant, from: String, u: VectorUsage = VectorUsage.UNDEFINED) -> PackedVector3Array:
 	assert(typeof(i) == TYPE_INT)
 	from = string_parse(from)
 	if !curve: curve = PackedVector3Array()
@@ -168,7 +168,7 @@ func array_resize_to_fit(a: Array, i: Variant, f: Callable) -> void:
 		if f != return_null:
 			for j in range(len_a, i + 1): a[j] = f.call()
 
-func array_get(a: Array[Variant], i: Variant, f := return_null) -> Variant:
+func array_get(a: Array[Variant], i: Variant, f: Callable = return_null) -> Variant:
 	assert(a != null)
 	assert(typeof(i) == TYPE_INT)
 	array_resize_to_fit(a, i, f)
@@ -178,7 +178,7 @@ func array_get(a: Array[Variant], i: Variant, f := return_null) -> Variant:
 		a[i] = res
 	return res
 
-func array_set(a: Array, i: Variant, v: Variant, f := return_null) -> Array:
+func array_set(a: Array, i: Variant, v: Variant, f: Callable = return_null) -> Array:
 	assert(i >= 0)
 	assert(typeof(i) == TYPE_INT)
 	if a == null: a = []
@@ -194,7 +194,7 @@ func set_from_ini_section(section: Array) -> void:
 
 func set_from_ini_entry(key_array: Array, value: String) -> void: pass
 
-func ini_load(import_path: String, strip_semicolons := false) -> Dictionary[String, Array]:
+func ini_load(import_path: String, strip_semicolons: bool = false) -> Dictionary[String, Array]:
 	var section: Array[Array] = []
 	var section_name: String = "Default"
 	var result: Dictionary[String, Array] = { "Default": section }

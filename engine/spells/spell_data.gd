@@ -278,7 +278,7 @@ var doesnt_trigger_spell_casts: bool:
 var target: Spell
 @export_group("Import", "import_")
 @export_file("*.ini") var import_path: String
-@export_tool_button("Import") var import := func() -> void:
+@export_tool_button("Import") var import: Callable = func() -> void:
 	print("importing...")
 	target = get_parent()
 	target.data = self

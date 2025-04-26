@@ -1,9 +1,9 @@
 class_name AhriOrbDamageBuff extends Buff
 
-const effect_0 := [ 40, 65, 90, 115, 140 ]
+const effect_0: Array[int] = [ 40, 65, 90, 115, 140 ]
 
 var orb_of_deception_is_active: int
-func _init(orb_of_deception_is_active := 0) -> void:
+func _init(orb_of_deception_is_active: int = 0) -> void:
 	self.orb_of_deception_is_active = orb_of_deception_is_active
 func clone() -> Buff:
 	return new(orb_of_deception_is_active)

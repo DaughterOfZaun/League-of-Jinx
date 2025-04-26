@@ -20,10 +20,10 @@ var letters: String = """
 @export var test_color: Color = Color.WHITE
 @export var test_text: String
 @export var test_offset: float = 0.0
-@export_tool_button("Test") var test := func() -> void:
+@export_tool_button("Test") var test: Callable = func() -> void:
 	emit_text(test_text, test_scale, test_speed, test_color, test_offset)
 
-func emit_text(text: String, scale := 1.0, speed := 0.0, color := Color.WHITE, offset := 0.0) -> void:
+func emit_text(text: String, scale: float = 1.0, speed: int = 0.0, color: Color = Color.WHITE, offset: float = 0.0) -> void:
 	var initial_transform := self.global_transform.scaled_local(Vector3.ONE * test_scale).translated(Vector3.UP * offset)
 	var i := 0
 	for letter in text:

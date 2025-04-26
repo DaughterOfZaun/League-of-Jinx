@@ -207,7 +207,7 @@ class MyAgent extends GOAP.Agent:
 		health += time_passed * health_regen_rate
 		return weighted_cost(time_passed, gold_spent, mana_spent, damage_taken)
 
-	func weighted_cost(time := 0.0, gold := 0.0, mana := 0.0, health := 0.0) -> float:
+	func weighted_cost(time: float = 0.0, gold: float = 0.0, mana: float = 0.0, health: float = 0.0) -> float:
 		return time * 1.3 + gold * 1 + mana * 1 + health * 2.62
 
 	func order_move(target_i: int, target_range: float) -> float:
@@ -262,7 +262,7 @@ class MyAgent extends GOAP.Agent:
 			gold += bounty
 		return 0
 	
-	func order_cast(spell_i: int, target_i := -1) -> float:
+	func order_cast(spell_i: int, target_i: int = -1) -> float:
 		var spell := spells[spell_i]
 		var target := units[target_i] if target_i != -1 else null
 		if !(spell.mana_cost <= mana && (time - spell.cooldown_start_time) >= spell.cooldown_duration):

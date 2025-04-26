@@ -259,16 +259,16 @@ func _on_timeout_or_canceled() -> void:
 
 func cast(
 	target: Unit = null,
-	pos := Vector3.INF,
-	end_pos := Vector3.INF,
-	override_force_level := -1,
-	override_cool_down_check := false,
-	fire_without_casting := false,
-	use_auto_attack_spell := false,
-	force_casting_or_channelling := false,
-	update_auto_attack_timer := false,
-	override_cast_position := false,
-	override_cast_pos := Vector3.INF
+	pos: Vector3 = Vector3.INF,
+	end_pos: Vector3 = Vector3.INF,
+	override_force_level: int = -1,
+	override_cool_down_check: bool = false,
+	fire_without_casting: bool = false,
+	use_auto_attack_spell: bool = false,
+	force_casting_or_channelling: bool = false,
+	update_auto_attack_timer: bool = false,
+	override_cast_position: bool = false,
+	override_cast_pos: Vector3 = Vector3.INF
 ) -> void:
 
 	#region process params
@@ -349,7 +349,7 @@ func _target_execute(target: Unit, missile: Missile) -> void:
 	#TODO: data.apply_attack_damage
 	target_execute(target, missile)
 
-func put_on_cooldown(time_sec := get_cooldown()) -> void:
+func put_on_cooldown(time_sec: float = get_cooldown()) -> void:
 	state = State.COOLDOWN
 	if !is_zero_approx(time_sec):
 		self.start(time_sec)
@@ -385,7 +385,7 @@ func get_cost_inc_multiplicative(par_type: Enums.PARType) -> float:
 func set_cost_inc_multiplicative(cost: float, par_type: Enums.PARType) -> void:
 	if par_type == me.data.par_type: cost_inc_multiplicative = cost
 
-func set_cooldown(src: float, broadcast_event := false) -> void:
+func set_cooldown(src: float, broadcast_event: bool = false) -> void:
 	if state == State.READY:
 		put_on_cooldown(src)
 	elif state == State.COOLDOWN:

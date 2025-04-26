@@ -150,7 +150,7 @@
 
 @export_group("Import", "import_")
 @export_file("*.var") var import_path: String
-@export_tool_button("Import") var import := func() -> void:
+@export_tool_button("Import") var import: Callable = func() -> void:
 	var ini := ini_load(import_path, true)
 	set_from_ini_section(ini["Default"])
 
@@ -158,7 +158,7 @@
 @export var exp_curve: Array[int] = []
 @export_group("Import", "import_exp_curve_")
 @export_file("*.ini") var import_exp_curve_path: String
-@export_tool_button("Import") var import_exp_curve := func() -> void:
+@export_tool_button("Import") var import_exp_curve: Callable = func() -> void:
 	var ini := ini_load(import_exp_curve_path, true)
 	var section := ini["EXP"]
 	for entry: Array in section:

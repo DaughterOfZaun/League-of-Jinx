@@ -29,7 +29,7 @@ func on_waypoint_reached(details: Dictionary) -> void:
 	path_to_draw.remove_at(1)
 	queue_redraw()
 
-const z := Vector2.ZERO
+const z: Vector2 = Vector2.ZERO
 var rect_to_draw: PackedVector2Array = PackedVector2Array([ z, z, z, z, ])
 var prev_camera_global_position: Vector3
 var prev_hero_global_position: Vector3

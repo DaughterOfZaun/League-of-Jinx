@@ -1,6 +1,6 @@
 @tool class_name UnitData extends Data
 
-#@export var asset_category := "obj"
+#@export var asset_category: String = "obj"
 
 @export_group("Info")
 @export var champion_id: int
@@ -209,14 +209,14 @@ enum PARType {
 @export_group("Import", "import_")
 @onready var target: Unit = get_parent()
 @export_file("*.ini") var import_path: String
-@export_tool_button("Import") var import := func() -> void:
+@export_tool_button("Import") var import: Callable = func() -> void:
 	print("importing...")
 	target = get_parent()
 	target.data = self
 	var ini := ini_load(import_path)
 	set_from_ini_section(ini["Data"])
 	print("imported")
-#@export_tool_button("Export to Stats") var import_to_stats := func() -> void:
+#@export_tool_button("Export to Stats") var import_to_stats: Callable = func() -> void:
 #	target = get_parent()
 
 	#stats.armor_base = armor

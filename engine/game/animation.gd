@@ -9,7 +9,7 @@ func _ready() -> void:
 
 var locked: bool = false
 # blend is currently ignored
-func unlock(blend := true) -> void:
+func unlock(blend: bool = true) -> void:
 	locked = false
 
 func switch_loop(anim_name: StringName) -> void:
@@ -28,7 +28,7 @@ func set_time_scale(anim_name: StringName, time_scale: float) -> void:
 	anim_tree.set("parameters/" + str(anim_name) + "TimeScale/scale", time_scale)
 
 # blend and loop are currently ignored 
-func play(anim_name: StringName, time_scale := 1.0, loop := false, blend := true, lock := false) -> void:
+func play(anim_name: StringName, time_scale: float = 1.0, loop: bool = false, blend: bool = true, lock: bool = false) -> void:
 	if locked: return
 	locked = lock
 	
@@ -45,7 +45,7 @@ func override(to_override_anim: StringName, override_anim: StringName) -> void:
 	push_warning("unimplemented")
 
 # blend is currently ignored
-func stop_current_override(anim_name: StringName, blend := true) -> void:
+func stop_current_override(anim_name: StringName, blend: bool = true) -> void:
 	push_warning("unimplemented")
 
 func clear_override(to_override_anim: StringName) -> void:

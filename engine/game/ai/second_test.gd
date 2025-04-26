@@ -61,8 +61,8 @@ func should_skip_prop(prop: Dictionary) -> bool:
 		|| (prop.name == script_property_name || prop.name == owner_property_name) \
 		|| (prop.usage & PROPERTY_USAGE_SCRIPT_VARIABLE == 0)
 
-const should_skip_meta_name := &"should_skip_obj"
-const props_to_duplicate_meta_name := &"props_to_duplicate"
+const should_skip_meta_name: StringName = &"should_skip_obj"
+const props_to_duplicate_meta_name: StringName = &"props_to_duplicate"
 func annotate(from: Node) -> void:
 	var skip := should_skip_obj(from)
 	from.set_meta(should_skip_meta_name, skip)
@@ -75,7 +75,7 @@ func annotate(from: Node) -> void:
 	for i in range(from.get_child_count()):
 		annotate(from.get_child(i))
 
-const cloned_from_meta_name := &"cloned_from"
+const cloned_from_meta_name: StringName = &"cloned_from"
 func _duplicate(from: Node) -> Node:
 	#return node.duplicate(DUPLICATE_ALL)
 	var node: Node

@@ -24,10 +24,10 @@ static func get_units_in_area(
 	attacker: Unit,
 	center: Vector3,
 	range: float,
-	flags := Enums.SpellFlags.NONE,
+	flags: Enums.SpellFlags = Enums.SpellFlags.NONE,
 	buff_type_filter: GDScript = null,
-	inclusiveBuffFilter := false,
-	maximum_units_to_pick := 32
+	inclusiveBuffFilter: bool = false,
+	maximum_units_to_pick: int = 32
 ) -> Array[Unit]:
 	var affect_self := !!(flags & Enums.SpellFlags.ALWAYS_SELF)
 	var not_affect_self := !!(flags & Enums.SpellFlags.NOT_AFFECT_SELF)

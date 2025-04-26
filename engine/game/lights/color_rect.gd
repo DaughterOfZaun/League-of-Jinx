@@ -1,7 +1,7 @@
 class_name CustomTextureRect extends CanvasItem
 
-const GD_3D_to_2D := (70. / 50.) * (512. / 294.)
-const HW_3D_to_GD_2D := (1. / 50.) * (512. / 294.)
+const GD_3D_to_2D: float = (70. / 50.) * (512. / 294.)
+const HW_3D_to_GD_2D: float = (1. / 50.) * (512. / 294.)
 
 var lights: Array[CustomLight2D] = []
 var light_pos: Array[Vector2] = []

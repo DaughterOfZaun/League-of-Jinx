@@ -5,11 +5,11 @@ static var _objs: Array[Variant] = [ null ]
 static var _vars: Array[Variant] = [ null ]
 
 signal save();
-const save_method_name := &"_save"
+const save_method_name: StringName = &"_save"
 signal load();
-const load_method_name := &"_load"
+const load_method_name: StringName = &"_load"
 signal process(delta: float);
-const process_method_name := &"_network_process"
+const process_method_name: StringName = &"_network_process"
 
 static func register(obj: Object, obj_vars_size: int = 0) -> void:
 	@warning_ignore("unsafe_property_access")
@@ -76,7 +76,7 @@ static func unregister(obj: Object) -> void:
 	#_vars[id] = null
 	#_objs[id] = null
 
-var frame := 0
+var frame: int = 0
 static var is_updating_stats: bool = false
 func _physics_process(delta: float) -> void:
 	frame += 1
@@ -132,9 +132,9 @@ var packed_scene: PackedScene = PackedScene.new()
 func pack_scene() -> void:
 	packed_scene.pack(root)
 
-const fps := 30
-const ekko_r_afterimage_delay_sec := 4
-const history_length := ekko_r_afterimage_delay_sec * fps
+const fps: int = 30
+const ekko_r_afterimage_delay_sec: int = 4
+const history_length: int = ekko_r_afterimage_delay_sec * fps
 
 static var instance: Balancer
 
@@ -142,14 +142,14 @@ var history_of_objs: Array[Array] = []
 var history_of_vars: Array[Array] = []
 #var history_of_vars: Array[PackedByteArray] = []
 var current_moment: int = -1
-static var is_in_thread := false
+static var is_in_thread: bool = false
 func _init() -> void:
 	history_of_objs.resize(history_length)
 	history_of_vars.resize(history_length)
 	instance = self
 
-#@onready var tree := get_tree()
-#const rollback_group_name := &"rollback"
+#@onready var tree: SceneTree = get_tree()
+#const rollback_group_name: StringName = &"rollback"
 
 func save_state() -> void:
 

@@ -7,7 +7,7 @@ var distance: float
 var dash_speed: float
 var self_particle: Particle
 #var will_remove: bool # UNUSED
-func _init(target_pos := Vector3.INF, distance := 0.0, dash_speed := 0.0) -> void:
+func _init(target_pos: Vector3 = Vector3.INF, distance: float = 0.0, dash_speed: int = 0.0) -> void:
 	self.target_pos = target_pos
 	self.distance = distance
 	self.dash_speed = dash_speed

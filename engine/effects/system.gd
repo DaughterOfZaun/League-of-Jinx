@@ -25,7 +25,7 @@
 @export_dir var import_res_path_3: String
 @export_dir var import_res_path_4: String
 @export_dir var import_res_path_5: String
-@export_tool_button("Import") var import := func() -> void:
+@export_tool_button("Import") var import: Callable = func() -> void:
 	var ini := ini_load(import_path)
 	res_paths = [
 		'/'.join(import_path.split('/').slice(0, -1)),

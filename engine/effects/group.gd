@@ -36,7 +36,7 @@ func set_shader_parameter_curve3d(m: ShaderMaterial, key: String, value: PackedV
 	set(value): group_importance = value; update_fields()
 
 @export_group("Emitter", "emitter_")
-@export var emitter_enabled := true:
+@export var emitter_enabled: bool = true:
 	set(value): emitter_enabled = value; update_fields()
 
 @export_subgroup("Time", "emitter_")
@@ -48,7 +48,7 @@ func set_shader_parameter_curve3d(m: ShaderMaterial, key: String, value: PackedV
 	set(value): emitter_time_active_during_period = value; update_fields()
 @export var emitter_lifetime: float: #e-life
 	set(value): emitter_lifetime = value; update_fields()
-@export var emitter_life_is_infinite := false: #e-life == -1
+@export var emitter_life_is_infinite: bool = false: #e-life == -1
 	set(value): emitter_life_is_infinite = value; update_fields()
 @export var emitter_does_lifetime_scale: bool:
 	set(value): emitter_does_lifetime_scale = value; update_fields()
@@ -152,9 +152,9 @@ func set_shader_parameter_curve3d(m: ShaderMaterial, key: String, value: PackedV
 @export var particle_color_lookup_texture_name: String
 @export var particle_color_lookup_texture: Texture2D: #p-rgba
 	set(value): particle_color_lookup_texture = value; update_fields()
-@export var particle_color_lookup_type_x := ColorLookupType.LIFETIME: #p-colortype
+@export var particle_color_lookup_type_x: ColorLookupType = ColorLookupType.LIFETIME: #p-colortype
 	set(value): particle_color_lookup_type_x = value; update_fields()
-@export var particle_color_lookup_type_y := ColorLookupType.LIFETIME: #p-colortype
+@export var particle_color_lookup_type_y: ColorLookupType = ColorLookupType.LIFETIME: #p-colortype
 	set(value): particle_color_lookup_type_y = value; update_fields()
 var particle_color_lookup_type: Vector2i:
 	get:

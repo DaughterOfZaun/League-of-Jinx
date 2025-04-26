@@ -31,8 +31,10 @@ gdscript/warnings/unused_parameter=0
 gdscript/warnings/unused_signal=0
 gdscript/warnings/incompatible_ternary=0
 gdscript/warnings/untyped_declaration=2
+gdscript/warnings/inferred_declaration=1
 gdscript/warnings/unsafe_property_access=2
 gdscript/warnings/unsafe_method_access=2
+gdscript/warnings/return_value_discarded=1
 gdscript/warnings/int_as_enum_without_cast=0
 
 [display]

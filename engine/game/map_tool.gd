@@ -14,7 +14,7 @@ static func surface_get_material(mi: MeshInstance3D) -> StandardMaterial3D:
 
 @export_group("Decals")
 @export var decals: Array[Texture2D] = []
-@export var show_decals := true:
+@export var show_decals: bool = true:
 	get: return show_decals
 	set(value):
 		show_decals = value
@@ -29,12 +29,12 @@ func set_visible_if_texture_in(array: Array[Texture2D], value: bool) -> void:
 		if m.albedo_texture in array:
 			mi.visible = value
 @export var ground: Array[Texture2D] = []
-@export var show_ground := true:
+@export var show_ground: bool = true:
 	get: return show_ground
 	set(value):
 		show_ground = value
 		set_visible_if_texture_in(ground, value)
-@export_tool_button("Fix Decals (Simple)") var fix_decals_simple := func() -> void:
+@export_tool_button("Fix Decals (Simple)") var fix_decals_simple: Callable = func() -> void:
 	var mis: Array[MeshInstance3D] = []
 	for child in get_children(true):
 		var mi := child as MeshInstance3D
@@ -97,7 +97,7 @@ class Point extends RefCounted:
 	var normal: Vector3
 	var global_position: Vector3
 
-@export_tool_button("Fix Decals (Advanced)") var fix_decals_advanced := func() -> void:
+@export_tool_button("Fix Decals (Advanced)") var fix_decals_advanced: Callable = func() -> void:
 	
 	var decals_root := $Decals
 	if decals_root == null:
@@ -181,7 +181,7 @@ class Point extends RefCounted:
 
 	print(len(levels), ' ', len(ds))
 
-func uv_to_3d(mi: MeshInstance3D, uv := Vector2(0.5, 0.5)) -> Array[Point]:
+func uv_to_3d(mi: MeshInstance3D, uv: Vector2 = Vector2(0.5, 0.5)) -> Array[Point]:
 	var mdt := MeshDataTool.new()
 	mdt.create_from_surface(mi.mesh, 0)
 	var points: Array[Point] = []
@@ -229,7 +229,7 @@ func area(p1: Vector2, p2: Vector2, p3: Vector2) -> float:
 	var v2: Vector2 = p2 - p3
 	return (v1.x * v2.y - v1.y * v2.x) / 2
 
-@export_tool_button("Fix Decals Transparency") var fix_decals_v2 := func() -> void:
+@export_tool_button("Fix Decals Transparency") var fix_decals_v2: Callable = func() -> void:
 	for child in get_children(true):
 		var mi := child as MeshInstance3D
 		if mi == null: continue
@@ -246,8 +246,8 @@ func area(p1: Vector2, p2: Vector2, p3: Vector2) -> float:
 @export_group("")
 
 @export_group("Meshes")
-const mi_dir := "res://data/levels/1/meshes"
-@export_tool_button("Save Meshes") var save_meshes := func() -> void:
+const mi_dir: String = "res://data/levels/1/meshes"
+@export_tool_button("Save Meshes") var save_meshes: Callable = func() -> void:
 	for child in get_children(true):
 		var mi := child as MeshInstance3D
 		if mi == null: continue
@@ -255,7 +255,7 @@ const mi_dir := "res://data/levels/1/meshes"
 		var file := FileAccess.open(path, FileAccess.ModeFlags.WRITE)
 		file.store_var(mi.mesh)
 		mi.mesh.take_over_path(path)
-@export_tool_button("Instantiate Meshes") var spawn_meshes := func() -> void:
+@export_tool_button("Instantiate Meshes") var spawn_meshes: Callable = func() -> void:
 	for file_name in DirAccess.get_files_at(mi_dir):
 		if !file_name.ends_with(".tres"): continue
 		var mi_name := file_name.replace(".tres", "")
@@ -268,7 +268,7 @@ const mi_dir := "res://data/levels/1/meshes"
 		mi.mesh = mi_mesh
 		add_child(mi)
 		mi.owner = self
-@export_tool_button("Remove LODs and Shadow Meshes") var remove_LODs_and_SMs := func() -> void:
+@export_tool_button("Remove LODs and Shadow Meshes") var remove_LODs_and_SMs: Callable = func() -> void:
 	for child in get_children(true):
 		var mi := child as MeshInstance3D
 		if mi == null: continue
@@ -280,7 +280,7 @@ const mi_dir := "res://data/levels/1/meshes"
 @export_group("NavMesh")
 @export var imported: NavigationMesh
 @export_file("*.aimesh") var import_path: String
-@export_tool_button("Import") var import := func() -> void:
+@export_tool_button("Import") var import: Callable = func() -> void:
 	var nm := imported
 	var file := FileAccess.open(import_path, FileAccess.ModeFlags.READ)
 	var magic := file.get_buffer(8)
@@ -318,7 +318,7 @@ const mi_dir := "res://data/levels/1/meshes"
 @export_group("")
 
 @export_group("Materials")
-@export_tool_button("Replace materials") var replace_materials := func() -> void:
+@export_tool_button("Replace materials") var replace_materials: Callable = func() -> void:
 	for child in get_children(true):
 		var mi := child as MeshInstance3D
 		if mi == null: continue
@@ -329,7 +329,7 @@ const mi_dir := "res://data/levels/1/meshes"
 		#mi.mesh.surface_set_material(0, new_material)
 		mi.set_surface_override_material(0, new_material)
 
-@export_tool_button("Enable Normal Maps") var enable_normal_maps := func() -> void:
+@export_tool_button("Enable Normal Maps") var enable_normal_maps: Callable = func() -> void:
 	for child in get_children(true):
 		var mi := child as MeshInstance3D
 		if mi == null: continue
@@ -337,7 +337,7 @@ const mi_dir := "res://data/levels/1/meshes"
 		var m := surface_get_material(mi)
 		m.normal_enabled = true
 		m.normal_texture = load(m.albedo_texture.resource_path.replace(".webp", ".normal.webp"))
-@export_tool_button("Enable Height Maps") var enable_height_maps := func() -> void:
+@export_tool_button("Enable Height Maps") var enable_height_maps: Callable = func() -> void:
 	for child in get_children(true):
 		var mi := child as MeshInstance3D
 		if mi == null: continue
@@ -347,7 +347,7 @@ const mi_dir := "res://data/levels/1/meshes"
 		m.heightmap_texture = load(m.albedo_texture.resource_path.replace(".webp", ".height.webp"))
 @export_group("")
 
-@export_tool_button("TEST") var test := func() -> void:
+@export_tool_button("TEST") var test: Callable = func() -> void:
 	pass
 
 func _ready() -> void:
@@ -357,7 +357,7 @@ func _ready() -> void:
 @export_group("Material Replacement")
 @export var viewport_texture: ViewportTexture
 @export var material_cache: Dictionary[StandardMaterial3D, ShaderMaterial] = {}
-@export_tool_button("Cache Materials") var cache_materials := replace_materials_at_runtime
+@export_tool_button("Cache Materials") var cache_materials: Callable = replace_materials_at_runtime
 func replace_materials_at_runtime() -> void:
 	
 	if viewport_texture != null:
@@ -442,7 +442,7 @@ func replace_materials_at_runtime() -> void:
 @export_group("Object Placement")
 @export_global_dir var scene_dir: String
 var points_root: Node3D
-@export_tool_button("Import Points") var import_scene_obj_pos := func() -> void:
+@export_tool_button("Import Points") var import_scene_obj_pos: Callable = func() -> void:
 	points_root = $Points
 	if points_root == null:
 		points_root = Node3D.new()
@@ -482,7 +482,7 @@ func spawn_point_from_file(fname: String) -> Node3D:
 @export_file("*.cfg") var object_cfg: String
 @export var create_level_props_script: GDScript
 @export_tool_button("Create Level Props")
-var create_level_props := func() -> void:
+var create_level_props: Callable = func() -> void:
 	(create_level_props_script.new() as CreateLevelProps).create_level_props()
 	var root: Node = null #EditorInterface.get_edited_scene_root()
 	var points := find_child("Points", false, false)

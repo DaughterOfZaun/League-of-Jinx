@@ -12,7 +12,7 @@ var kills: int = 0
 @onready var constants: Constants = root.get_node("%Constants") #@ignore
 @onready var gold: float = constants.ai_starting_gold #@ignore
 @onready var level_script: Level = root.get_node("%Level") #@ignore
-@onready var exp := 0.0:
+@onready var exp: float = 0.0:
 	get: return exp
 	set(value):
 		assert(value >= exp)

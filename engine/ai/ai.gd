@@ -9,7 +9,7 @@ class_name AI extends LuaScript #@rollback
 @onready var cancel_attack_range: Area3D = me.find_child('CancelAttackRange', false) #@ignore
 
 var target: Unit = null
-var target_position := Vector3.INF:
+var target_position: Vector3 = Vector3.INF:
 	get:
 		if target != null: return target.position_3d
 		else: return target_position
@@ -47,7 +47,7 @@ func is_target_lost() -> bool:
 func get_lost_target_if_visible() -> Unit:
 	return null
 
-#var pos := Vector3.INF
+#var pos: Vector3 = Vector3.INF
 func clear_target_pos_in_pos() -> void: pass #pos = Vector3.INF
 func assign_target_pos_in_pos(position: Vector3) -> void: pass #pos = target.position_3d
 
@@ -137,7 +137,7 @@ func turn_on_auto_attack(target: Unit) -> void:
 	print("turn_on_auto_attack", ' ', target_unit_name)
 	attack_state.try_enter()
 
-func turn_off_auto_attack(reason := Enums.ReasonToTurnOffAA.IMMEDIATELY) -> void:
+func turn_off_auto_attack(reason: Enums.ReasonToTurnOffAA = Enums.ReasonToTurnOffAA.IMMEDIATELY) -> void:
 	if current_state != attack_state: return
 	print("turn_off_auto_attack", ' ', Enums.ReasonToTurnOffAA.keys()[reason])
 	run_state.try_enter() #TODO: deffered.try_enter()

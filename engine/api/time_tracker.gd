@@ -7,9 +7,9 @@ var execute_immediately: bool = false
 var tick_time: float = 0.0
 
 func _init(
-	time_between_executions := 0.0,
-	execute_immediately := false,
-	tick_time := 0.0
+	time_between_executions: float = 0.0,
+	execute_immediately: bool = false,
+	tick_time: float = 0.0
 ) -> void:
 	self.time_between_executions = time_between_executions
 	self.execute_immediately = execute_immediately
